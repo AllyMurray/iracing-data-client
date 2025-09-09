@@ -2,6 +2,33 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export interface SeasonListResponse {
+  seasonQuarter: number; // maps from: season_quarter
+  seasons: any[];
+  seasonYear: number; // maps from: season_year
+}
+
+export interface SeasonRaceGuideResponse {
+  subscribed: boolean;
+  sessions: any[];
+  blockBeginTime: string; // maps from: block_begin_time
+  blockEndTime: string; // maps from: block_end_time
+  success: boolean;
+}
+
+export interface SeasonSpectatorSubsessionidsResponse {
+  eventTypes: number[]; // maps from: event_types
+  success: boolean;
+  subsessionIds: number[]; // maps from: subsession_ids
+}
+
+export interface SeasonSpectatorSubsessionidsDetailResponse {
+  success: boolean;
+  seasonIds: number[]; // maps from: season_ids
+  eventTypes: number[]; // maps from: event_types
+  subsessions: any[];
+}
+
 // ---- Parameter Schemas ----
 
 const SeasonListParamsSchema = z.object({

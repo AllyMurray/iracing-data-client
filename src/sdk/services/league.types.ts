@@ -2,6 +2,101 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export interface LeagueCustLeagueSessionsResponse {
+  mine: boolean;
+  subscribed: boolean;
+  sequence: number;
+  sessions: any[];
+  success: boolean;
+}
+
+export interface LeagueDirectoryResponse {
+  resultsPage: any[]; // maps from: results_page
+  success: boolean;
+  lowerbound: number;
+  upperbound: number;
+  rowCount: number; // maps from: row_count
+}
+
+export interface LeagueGetResponse {
+  leagueId: number; // maps from: league_id
+  ownerId: number; // maps from: owner_id
+  leagueName: string; // maps from: league_name
+  created: string;
+  hidden: boolean;
+  message: string;
+  about: string;
+  recruiting: boolean;
+  privateWall: boolean; // maps from: private_wall
+  privateRoster: boolean; // maps from: private_roster
+  privateSchedule: boolean; // maps from: private_schedule
+  privateResults: boolean; // maps from: private_results
+  isOwner: boolean; // maps from: is_owner
+  isAdmin: boolean; // maps from: is_admin
+  rosterCount: number; // maps from: roster_count
+  owner: any;
+  image: any;
+  tags: any;
+  leagueApplications: any[]; // maps from: league_applications
+  pendingRequests: any[]; // maps from: pending_requests
+  isMember: boolean; // maps from: is_member
+  isApplicant: boolean; // maps from: is_applicant
+  isInvite: boolean; // maps from: is_invite
+  isIgnored: boolean; // maps from: is_ignored
+  roster: any[];
+}
+
+export interface LeagueGetPointsSystemsResponse {
+  subscribed: boolean;
+  success: boolean;
+  pointsSystems: any[]; // maps from: points_systems
+  leagueId: number; // maps from: league_id
+}
+
+export interface LeagueMembershipItem {
+  leagueId: number; // maps from: league_id
+  leagueName: string; // maps from: league_name
+  owner: boolean;
+  admin: boolean;
+  leagueMailOptOut: boolean; // maps from: league_mail_opt_out
+  leaguePmOptOut: boolean; // maps from: league_pm_opt_out
+  carNumber: string; // maps from: car_number
+  nickName: string; // maps from: nick_name
+}
+
+export type LeagueMembershipResponse = LeagueMembershipItem[];
+
+export interface LeagueRosterResponse {
+  type: string;
+  data: any;
+  dataUrl: string; // maps from: data_url
+}
+
+export interface LeagueSeasonsResponse {
+  subscribed: boolean;
+  seasons: any[];
+  success: boolean;
+  retired: boolean;
+  leagueId: number; // maps from: league_id
+}
+
+export interface LeagueSeasonStandingsResponse {
+  carClassId: number; // maps from: car_class_id
+  success: boolean;
+  seasonId: number; // maps from: season_id
+  carId: number; // maps from: car_id
+  standings: any;
+  leagueId: number; // maps from: league_id
+}
+
+export interface LeagueSeasonSessionsResponse {
+  success: boolean;
+  subscribed: boolean;
+  leagueId: number; // maps from: league_id
+  seasonId: number; // maps from: season_id
+  sessions: any[];
+}
+
 // ---- Parameter Schemas ----
 
 const LeagueCustLeagueSessionsParamsSchema = z.object({

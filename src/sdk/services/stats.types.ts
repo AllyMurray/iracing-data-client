@@ -2,6 +2,46 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export interface StatsMemberBestsResponse {
+  carsDriven: any[]; // maps from: cars_driven
+  bests: any[];
+  custId: number; // maps from: cust_id
+  carId: number; // maps from: car_id
+}
+
+export interface StatsMemberCareerResponse {
+  stats: any[];
+  custId: number; // maps from: cust_id
+}
+
+export interface StatsMemberRecapResponse {
+  year: number;
+  stats: any;
+  success: boolean;
+  season: null;
+  custId: number; // maps from: cust_id
+}
+
+export interface StatsMemberRecentRacesResponse {
+  races: any[];
+  custId: number; // maps from: cust_id
+}
+
+export interface StatsMemberSummaryResponse {
+  thisYear: any; // maps from: this_year
+  custId: number; // maps from: cust_id
+}
+
+export interface StatsMemberYearlyResponse {
+  stats: any[];
+  custId: number; // maps from: cust_id
+}
+
+export interface StatsWorldRecordsResponse {
+  type: string;
+  data: any;
+}
+
 // ---- Parameter Schemas ----
 
 const StatsMemberBestsParamsSchema = z.object({

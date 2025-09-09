@@ -2,6 +2,19 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export interface HostedCombinedSessionsResponse {
+  subscribed: boolean;
+  sequence: number;
+  sessions: any[];
+  success: boolean;
+}
+
+export interface HostedSessionsResponse {
+  subscribed: boolean;
+  sessions: any[];
+  success: boolean;
+}
+
 // ---- Parameter Schemas ----
 
 const HostedCombinedSessionsParamsSchema = z.object({

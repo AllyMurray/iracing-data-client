@@ -2,6 +2,16 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export interface TeamMembershipItem {
+  teamId: number; // maps from: team_id
+  teamName: string; // maps from: team_name
+  owner: boolean;
+  admin: boolean;
+  defaultTeam: boolean; // maps from: default_team
+}
+
+export type TeamMembershipResponse = TeamMembershipItem[];
+
 // ---- Parameter Schemas ----
 
 const TeamGetParamsSchema = z.object({

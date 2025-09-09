@@ -2,6 +2,8 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export type TimeAttackMemberSeasonResultsResponse = any[];
+
 // ---- Parameter Schemas ----
 
 const TimeAttackMemberSeasonResultsParamsSchema = z.object({

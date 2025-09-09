@@ -2,6 +2,27 @@ import { z } from "zod-mini";
 
 // ---- Response Types ----
 
+export interface ConstantsCategoriesItem {
+  label: string;
+  value: number;
+}
+
+export type ConstantsCategoriesResponse = ConstantsCategoriesItem[];
+
+export interface ConstantsDivisionsItem {
+  label: string;
+  value: number;
+}
+
+export type ConstantsDivisionsResponse = ConstantsDivisionsItem[];
+
+export interface ConstantsEventTypesItem {
+  label: string;
+  value: number;
+}
+
+export type ConstantsEventTypesResponse = ConstantsEventTypesItem[];
+
 // ---- Parameter Schemas ----
 
 const ConstantsCategoriesParamsSchema = z.object({

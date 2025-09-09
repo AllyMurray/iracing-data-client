@@ -92,45 +92,133 @@ async function generateTypesFromSample(samplePath: string, typeName: string): Pr
 }`;
     }
     
+    // Use quicktype properly
     const jsonInput = new InputData();
     const jsonString = JSON.stringify(sampleData);
     
-    // Use the newer API
-    const source = { name: typeName, samples: [jsonString] };
-    await jsonInput.addSource("json", source, () => undefined);
+    // Add the JSON source properly
+    await jsonInput.addSource("json", {
+      name: typeName,
+      samples: [jsonString],
+    }, () => undefined as any);
 
     const result = await quicktype({
       inputData: jsonInput,
       lang: "typescript",
       rendererOptions: {
-        "just-types": "true",
-        "nice-property-names": "true",
-        "prefer-unions": "true",
+        "just-types": true,
+        "nice-property-names": true,
+        "prefer-unions": true,
+        "explicit-unions": true,
       },
     });
 
+    // Process the generated code
     let typeCode = result.lines.join("\n");
     
-    // Clean up the generated code - ensure we use the right type name
-    const lines = typeCode.split("\n");
-    const processedLines: string[] = [];
-    let foundMainType = false;
+    // Remove converter functions and clean up
+    typeCode = typeCode
+      .split("\n")
+      .filter(line => !line.includes("Convert") && !line.includes("convert"))
+      .join("\n");
     
-    for (const line of lines) {
-      if (line.startsWith("export interface") && !foundMainType) {
-        // Replace the first interface with our desired name
-        processedLines.push(`export interface ${typeName} {`);
-        foundMainType = true;
-      } else if (line.trim() && !line.includes("Convert")) {
-        // Skip any converter function definitions
-        processedLines.push(line);
-      }
+    // Ensure the main interface uses our desired name
+    if (!typeCode.includes(`export interface ${typeName}`)) {
+      typeCode = typeCode.replace(/export interface \w+/, `export interface ${typeName}`);
     }
     
-    return processedLines.join("\n");
+    return typeCode;
   } catch (error) {
     console.error(`Failed to generate types for ${samplePath}: ${error}`);
-    return null;
+    // Fall back to simple generation
+    try {
+      const sampleData = JSON.parse(fs.readFileSync(samplePath, "utf8"));
+      return generateTypeFromJson(sampleData, typeName);
+    } catch {
+      return null;
+    }
+  }
+}
+
+/** ---- Generate TypeScript interface from JSON object ---- */
+function generateTypeFromJson(obj: any, typeName: string, indent: string = ""): string {
+  const lines: string[] = [];
+  
+  if (Array.isArray(obj)) {
+    // Handle arrays
+    if (obj.length > 0) {
+      const firstItem = obj[0];
+      if (typeof firstItem === "object" && firstItem !== null) {
+        // Array of objects - generate interface for the item
+        const itemTypeName = typeName.replace(/Response$/, "") + "Item";
+        const itemType = generateTypeFromJson(firstItem, itemTypeName, "");
+        return `${itemType}\n\nexport type ${typeName} = ${itemTypeName}[];`;
+      } else {
+        // Array of primitives
+        const itemType = getTypeForValue(firstItem);
+        return `export type ${typeName} = ${itemType}[];`;
+      }
+    }
+    return `export type ${typeName} = any[];`;
+  }
+  
+  // Check if it's a dictionary (object with numeric or similar keys)
+  const keys = Object.keys(obj);
+  if (keys.length > 0 && keys.every(k => /^\d+$/.test(k))) {
+    // It's a dictionary with numeric keys
+    const firstValue = obj[keys[0]];
+    if (typeof firstValue === "object" && firstValue !== null) {
+      const itemTypeName = typeName.replace(/Response$/, "") + "Item";
+      const itemType = generateTypeFromJson(firstValue, itemTypeName, "");
+      return `${itemType}\n\nexport interface ${typeName} {
+  [key: string]: ${itemTypeName};
+}`;
+    }
+  }
+  
+  // Regular object - generate interface
+  lines.push(`export interface ${typeName} {`);
+  
+  for (const [key, value] of Object.entries(obj)) {
+    const propName = toCamelCase(key);
+    const typeStr = getTypeForValue(value);
+    
+    if (propName !== key) {
+      lines.push(`  ${propName}: ${typeStr}; // maps from: ${key}`);
+    } else {
+      lines.push(`  ${propName}: ${typeStr};`);
+    }
+  }
+  
+  lines.push(`}`);
+  return lines.join("\n");
+}
+
+/** ---- Get TypeScript type for a value ---- */
+function getTypeForValue(value: any): string {
+  if (value === null) return "null";
+  if (value === undefined) return "undefined";
+  
+  const type = typeof value;
+  
+  switch (type) {
+    case "string":
+      return "string";
+    case "number":
+      return "number";
+    case "boolean":
+      return "boolean";
+    case "object":
+      if (Array.isArray(value)) {
+        if (value.length > 0) {
+          const itemType = getTypeForValue(value[0]);
+          return `${itemType}[]`;
+        }
+        return "any[]";
+      }
+      return "any";
+    default:
+      return "any";
   }
 }
 
