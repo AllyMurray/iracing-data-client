@@ -32,6 +32,31 @@ interface S3Response {
 
 type CacheEntry = { data: unknown; expiresAt: number };
 
+export class IRacingError extends Error {
+  constructor(
+    message: string,
+    public readonly status?: number,
+    public readonly statusText?: string,
+    public readonly responseData?: any
+  ) {
+    super(message);
+    this.name = 'IRacingError';
+  }
+
+  get isMaintenanceMode(): boolean {
+    return this.status === 503 && 
+           this.responseData?.error === 'Site Maintenance';
+  }
+
+  get isRateLimited(): boolean {
+    return this.status === 429;
+  }
+
+  get isUnauthorized(): boolean {
+    return this.status === 401;
+  }
+}
+
 export class IRacingClient {
   private baseUrl = 'https://members-ng.iracing.com';
   private fetchFn: FetchLike;
@@ -163,7 +188,52 @@ export class IRacingClient {
 
     if (!response.ok) {
       const text = await response.text().catch(() => "");
-      throw new Error(`Request failed: ${response.status} ${response.statusText} - ${text}`);
+      let responseData: any = null;
+      
+      // Try to parse JSON error response
+      try {
+        responseData = JSON.parse(text);
+      } catch {
+        // Not JSON, use raw text
+      }
+      
+      // Handle maintenance mode specifically
+      if (response.status === 503 && responseData?.error === 'Site Maintenance') {
+        throw new IRacingError(
+          `iRacing is currently in maintenance mode: ${responseData.message || 'Service temporarily unavailable'}`,
+          response.status,
+          response.statusText,
+          responseData
+        );
+      }
+      
+      // Handle other specific errors
+      if (response.status === 429) {
+        throw new IRacingError(
+          'Rate limit exceeded. Please wait before making more requests.',
+          response.status,
+          response.statusText,
+          responseData
+        );
+      }
+      
+      if (response.status === 401) {
+        throw new IRacingError(
+          'Authentication failed. Please check your credentials.',
+          response.status,
+          response.statusText,
+          responseData
+        );
+      }
+      
+      // Generic error
+      const errorMessage = responseData?.message || responseData?.error || text || response.statusText;
+      throw new IRacingError(
+        `Request failed: ${errorMessage}`,
+        response.status,
+        response.statusText,
+        responseData
+      );
     }
 
     const contentType = response.headers.get("content-type") || "";

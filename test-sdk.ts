@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 import * as dotenv from "dotenv";
-import { IRacingSDK } from "./src/sdk/index.js";
+import { IRacingSDK, IRacingError } from "./src/sdk/index.ts";
 
 // Load environment variables
 dotenv.config();
@@ -57,7 +57,23 @@ async function testSDK() {
     console.log("\n🎉 SDK test completed successfully!");
 
   } catch (error) {
-    console.error("💥 Test failed:", error);
+    if (error instanceof IRacingError) {
+      if (error.isMaintenanceMode) {
+        console.log("🔧 iRacing is in maintenance mode");
+        console.log(`   ${error.message}`);
+        console.log("   ⏰ Try again later when maintenance is complete");
+        return; // Don't exit with error for maintenance
+      } else if (error.isRateLimited) {
+        console.error("🚫 Rate limited:", error.message);
+      } else if (error.isUnauthorized) {
+        console.error("🔒 Authentication failed:", error.message);
+      } else {
+        console.error("❌ iRacing API Error:", error.message);
+        console.error(`   Status: ${error.status} ${error.statusText}`);
+      }
+    } else {
+      console.error("💥 Unexpected error:", error);
+    }
     process.exit(1);
   }
 }

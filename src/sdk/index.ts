@@ -1,6 +1,6 @@
 /* AUTO-GENERATED — do not edit */
 
-import { IRacingClient, type IRacingClientOptions } from "./client";
+import { IRacingClient, IRacingError, type IRacingClientOptions } from "./client";
 import { CarService } from "./services/car.service";
 import { CarclassService } from "./services/carclass.service";
 import { ConstantsService } from "./services/constants.service";
@@ -17,7 +17,7 @@ import { TeamService } from "./services/team.service";
 import { TimeAttackService } from "./services/time-attack.service";
 import { TrackService } from "./services/track.service";
 
-export { IRacingClient, type IRacingClientOptions };
+export { IRacingClient, IRacingError, type IRacingClientOptions };
 
 export * from "./services/car.types";
 export * from "./services/carclass.types";
