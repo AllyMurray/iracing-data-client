@@ -225,7 +225,7 @@ function generateTypeFromJson(obj: any, typeName: string, indent: string = ""): 
 
 /** ---- Generate Zod schema from JSON sample ---- */
 function generateZodSchemaFromSample(sample: any, schemaName: string): string {
-  function getZodTypeForValue(value: any): string {
+  function getZodTypeForValue(value: any, depth: number = 0): string {
     if (value === null) return "z.null()";
     if (value === undefined) return "z.undefined()";
     
@@ -245,27 +245,63 @@ function generateZodSchemaFromSample(sample: any, schemaName: string): string {
       case "object":
         if (Array.isArray(value)) {
           if (value.length > 0) {
-            const itemType = getZodTypeForValue(value[0]);
+            const itemType = getZodTypeForValue(value[0], depth);
             return `z.array(${itemType})`;
           }
           return "z.array(z.unknown())";
         }
         // For objects, generate a proper object schema
-        return generateZodObjectSchema(value);
+        return generateZodObjectSchema(value, depth);
       default:
         return "z.unknown()";
     }
   }
   
-  function generateZodObjectSchema(obj: any): string {
+  function generateZodObjectSchema(obj: any, depth: number = 0): string {
     if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
       return "z.unknown()";
     }
     
+    const indent = '  '.repeat(depth + 1);
+    const objIndent = '  '.repeat(depth);
+    
+    // Check for known object patterns and return specific schemas
+    const keys = Object.keys(obj);
+    
+    // Track map layers structure
+    if (keys.includes("background") && keys.includes("inactive") && keys.includes("active") && keys.includes("pitroad")) {
+      return `z.object({
+${indent}background: z.string(),
+${indent}inactive: z.string(),
+${indent}active: z.string(),
+${indent}pitroad: z.string(),
+${indent}startFinish: z.string(),
+${indent}turns: z.string()
+${objIndent}})`;
+    }
+    
+    // Car type structure  
+    if (keys.includes("car_type") && keys.length === 1) {
+      return `z.object({
+${indent}carType: z.string()
+${objIndent}})`;
+    }
+    
+    // Cars in class structure (only for simple objects with exactly these 4 keys)
+    if (keys.includes("car_dirpath") && keys.includes("car_id") && keys.includes("rain_enabled") && keys.includes("retired") && keys.length === 4) {
+      return `z.object({
+${indent}carDirpath: z.string(),
+${indent}carId: z.number(),
+${indent}rainEnabled: z.boolean(),
+${indent}retired: z.boolean()
+${objIndent}})`;
+    }
+    
+    // Generic object schema generation for everything else
     const properties: string[] = [];
     for (const [key, value] of Object.entries(obj)) {
       const camelKey = toCamelCase(key);
-      let zodType = getZodTypeForValue(value);
+      let zodType = getZodTypeForValue(value, depth + 1);
       
       // Make commonly problematic fields handle null/undefined values
       const problematicFields = ['logo', 'sponsorLogo', 'galleryImages', 'forumUrl', 'priceDisplay', 'groupImage', 'groupName', 'galleryPrefix', 'templatePath'];
@@ -280,15 +316,15 @@ function generateZodSchemaFromSample(sample: any, schemaName: string): string {
         }
       }
       
-      properties.push(`  ${camelKey}: ${zodType}`);
+      properties.push(`${indent}${camelKey}: ${zodType}`);
     }
     
-    return `z.object({\n${properties.join(',\n')}\n})`;
+    return `z.object({\n${properties.join(',\n')}\n${objIndent}})`;
   }
 
   if (Array.isArray(sample)) {
     if (sample.length > 0) {
-      const itemType = getZodTypeForValue(sample[0]);
+      const itemType = getZodTypeForValue(sample[0], 0);
       return `const ${schemaName} = z.array(${itemType});`;
     }
     return `const ${schemaName} = z.array(z.unknown());`;
@@ -299,16 +335,16 @@ function generateZodSchemaFromSample(sample: any, schemaName: string): string {
     const keys = Object.keys(sample);
     if (keys.length > 0 && keys.every(k => /^\d+$/.test(k))) {
       const firstValue = sample[keys[0]];
-      const valueType = getZodTypeForValue(firstValue);
+      const valueType = getZodTypeForValue(firstValue, 0);
       return `const ${schemaName} = z.record(z.string(), ${valueType});`;
     }
     
     // For regular objects, generate a proper object schema
-    const zodObjectSchema = generateZodObjectSchema(sample);
+    const zodObjectSchema = generateZodObjectSchema(sample, 0);
     return `const ${schemaName} = ${zodObjectSchema};`;
   }
   
-  return `const ${schemaName} = ${getZodTypeForValue(sample)};`;
+  return `const ${schemaName} = ${getZodTypeForValue(sample, 0)};`;
 }
 
 /** ---- Get TypeScript type for a value ---- */
@@ -331,12 +367,87 @@ function getTypeForValue(value: any): string {
           const itemType = getTypeForValue(value[0]);
           return `Array<${itemType}>`;
         }
-        return "Array<any>";
+        return "Array<unknown>";
       }
-      return "any";
+      return getSpecificObjectType(value);
     default:
       return "any";
   }
+}
+
+function getSpecificObjectType(obj: any): string {
+  if (!obj || typeof obj !== 'object') {
+    return "any";
+  }
+  
+  // Check for known object structures and return specific types
+  const keys = Object.keys(obj);
+  
+  // Track map layers structure
+  if (keys.includes("background") && keys.includes("inactive") && keys.includes("active") && keys.includes("pitroad")) {
+    return "TrackMapLayers";
+  }
+  
+  // Car type structure  
+  if (keys.includes("car_type") && keys.length === 1) {
+    return "{ carType: string }";
+  }
+  
+  // Member account structure (only in member context)
+  if (keys.includes("ir_dollars") && keys.includes("ir_credits") && keys.includes("status")) {
+    return "{ irDollars: number; irCredits: number; status: string; countryRules?: string | null }";
+  }
+  
+  // Helmet structure (only in member context)
+  if (keys.includes("pattern") && keys.includes("color1") && keys.includes("helmet_type")) {
+    return "{ pattern: number; color1: string; color2: string; color3: string; faceType: number; helmetType: number }";
+  }
+  
+  // Suit structure (only in member context)  
+  if (keys.includes("pattern") && keys.includes("color1") && keys.includes("body_type")) {
+    return "{ pattern: number; color1: string; color2: string; color3: string; bodyType: number }";
+  }
+  
+  // License structure (simplified to avoid conflicts)
+  if (keys.includes("category_id") && keys.includes("safety_rating") && keys.includes("irating")) {
+    return "Record<string, unknown>";
+  }
+  
+  // Cars in class structure (only for simple objects with exactly these 4 keys)
+  if (keys.includes("car_dirpath") && keys.includes("car_id") && keys.includes("rain_enabled") && keys.includes("retired") && keys.length === 4) {
+    return "CarInClass";
+  }
+  
+  // Generic fallback
+  return "Record<string, unknown>";
+}
+
+function getCommonSchemasForSection(sectionName: string): string[] {
+  const commonSchemas: string[] = [];
+  
+  // Track map layers schema (for track section)
+  if (sectionName === "track") {
+    commonSchemas.push(`const TrackMapLayersSchema = z.object({
+  background: z.string(),
+  inactive: z.string(),
+  active: z.string(),
+  pitroad: z.string(),
+  startFinish: z.string(), // maps from: start-finish
+  turns: z.string()
+});`);
+  }
+  
+  // Car class specific schemas
+  if (sectionName === "carclass") {
+    commonSchemas.push(`const CarInClassSchema = z.object({
+  carDirpath: z.string(), // maps from: car_dirpath
+  carId: z.number(), // maps from: car_id
+  rainEnabled: z.boolean(), // maps from: rain_enabled
+  retired: z.boolean()
+});`);
+  }
+  
+  return commonSchemas;
 }
 
 /** ---- Generate section types file ---- */
@@ -345,55 +456,131 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
   
   lines.push(`import * as z from "zod/mini";`);
   lines.push(``);
-  lines.push(`// ---- Response Types ----`);
-  lines.push(``);
   
-  // Generate response types from samples
-  const responseTypes: string[] = [];
+  // Add common schema definitions based on section
+  const commonSchemas = getCommonSchemasForSection(sectionName);
+  if (commonSchemas.length > 0) {
+    lines.push("// ---- Common Schemas ----");
+    lines.push("");
+    lines.push(...commonSchemas);
+    lines.push("");
+  }
+  
+  // Generate schemas from samples (primary source of truth)
+  const responseSchemas: string[] = [];
   for (const ep of endpoints) {
-    if (ep.samplePath && ep.responseType) {
-      const types = await generateTypesFromSample(ep.samplePath, ep.responseType);
-      if (types) {
-        responseTypes.push(types);
+    if (ep.samplePath) {
+      try {
+        // Try to load multiple sample variations if they exist
+        const sampleFiles = findSampleVariations(ep.samplePath);
+        let mergedSampleData = null;
+        
+        for (const sampleFile of sampleFiles) {
+          try {
+            const sampleData = JSON.parse(fs.readFileSync(sampleFile, "utf8"));
+            if (mergedSampleData === null) {
+              mergedSampleData = sampleData;
+            } else {
+              // Merge sample data to get richer type information
+              mergedSampleData = mergeSampleData(mergedSampleData, sampleData);
+            }
+          } catch (fileError) {
+            console.warn(`Failed to load sample ${sampleFile}:`, fileError);
+          }
+        }
+        
+        if (mergedSampleData !== null) {
+          const schemaName = `${toPascal(ep.method)}Schema`;
+          const zodSchema = generateZodSchemaFromSample(mergedSampleData, schemaName);
+          responseSchemas.push(zodSchema);
+        } else {
+          throw new Error("No valid sample data found");
+        }
+      } catch (error) {
+        console.warn(`Failed to generate schema from ${ep.samplePath}:`, error);
+        // Fallback to generic schema
+        const schemaName = `${toPascal(ep.method)}Schema`;
+        responseSchemas.push(`const ${schemaName} = z.unknown();`);
       }
     }
   }
   
-  if (responseTypes.length > 0) {
-    lines.push(responseTypes.join("\n\n"));
-    lines.push(``);
+  /** ---- Helper to find sample variation files ---- */
+  function findSampleVariations(baseSamplePath: string): string[] {
+    const sampleFiles: string[] = [];
+    
+    // Always include the base sample if it exists
+    if (fs.existsSync(baseSamplePath)) {
+      sampleFiles.push(baseSamplePath);
+    }
+    
+    // Look for variation files (ending with _var2.json, _var3.json, etc.)
+    const baseDir = path.dirname(baseSamplePath);
+    const baseName = path.basename(baseSamplePath, '.json');
+    
+    try {
+      const files = fs.readdirSync(baseDir);
+      for (const file of files) {
+        if (file.startsWith(`${baseName}_var`) && file.endsWith('.json')) {
+          sampleFiles.push(path.join(baseDir, file));
+        }
+      }
+    } catch (error) {
+      // Directory doesn't exist or can't be read
+    }
+    
+    return sampleFiles;
+  }
+  
+  /** ---- Helper to merge sample data for richer schemas ---- */
+  function mergeSampleData(base: any, additional: any): any {
+    if (Array.isArray(base) && Array.isArray(additional)) {
+      // For arrays, combine all unique items by structure
+      const merged = [...base];
+      for (const item of additional) {
+        // Add items that have different structures (more fields, etc.)
+        const hasMatchingStructure = merged.some(existing => 
+          Object.keys(existing).length === Object.keys(item).length &&
+          Object.keys(existing).every(key => key in item)
+        );
+        if (!hasMatchingStructure) {
+          merged.push(item);
+        }
+      }
+      return merged;
+    } else if (typeof base === 'object' && base !== null && typeof additional === 'object' && additional !== null) {
+      // For objects, merge all properties
+      const merged = { ...base };
+      for (const [key, value] of Object.entries(additional)) {
+        if (!(key in merged)) {
+          merged[key] = value;
+        } else if (typeof merged[key] === 'object' && typeof value === 'object') {
+          merged[key] = mergeSampleData(merged[key], value);
+        }
+      }
+      return merged;
+    }
+    
+    // For primitives, return the base value
+    return base;
   }
   
   lines.push(`// ---- Response Schemas ----`);
   lines.push(``);
+  lines.push(...responseSchemas);
+  lines.push(``);
   
-  // Generate response schemas from TypeScript interfaces
+  // Generate TypeScript types from schemas
+  lines.push(`// ---- Response Types (inferred from schemas) ----`);
+  lines.push(``);
   for (const ep of endpoints) {
-    if (ep.responseType) {
-      const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
-      
-      // Generate a basic Zod schema - this could be enhanced to be more specific
-      if (ep.responseType.endsWith('Response')) {
-        if (ep.samplePath) {
-          // Try to infer schema structure from sample data
-          try {
-            const sampleData = JSON.parse(fs.readFileSync(ep.samplePath, "utf8"));
-            const zodSchema = generateZodSchemaFromSample(sampleData, schemaName);
-            lines.push(zodSchema);
-            lines.push(``);
-          } catch (error) {
-            // Fallback to generic schema
-            lines.push(`const ${schemaName} = z.unknown();`);
-            lines.push(``);
-          }
-        } else {
-          // Generic schema
-          lines.push(`const ${schemaName} = z.unknown();`);
-          lines.push(``);
-        }
-      }
+    if (ep.samplePath) {
+      const schemaName = `${toPascal(ep.method)}Schema`;
+      const typeName = `${toPascal(ep.method)}Response`;
+      lines.push(`export type ${typeName} = z.infer<typeof ${schemaName}>;`);
     }
   }
+  lines.push(``);
   
   lines.push(`// ---- Parameter Schemas ----`);
   lines.push(``);

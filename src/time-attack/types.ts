@@ -1,12 +1,12 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
-export type TimeAttackMemberSeasonResultsResponse = Array<any>;
-
 // ---- Response Schemas ----
 
 const TimeAttackMemberSeasonResultsSchema = z.array(z.unknown());
+
+// ---- Response Types (inferred from schemas) ----
+
+export type TimeAttackMemberSeasonResultsResponse = z.infer<typeof TimeAttackMemberSeasonResultsSchema>;
 
 // ---- Parameter Schemas ----
 

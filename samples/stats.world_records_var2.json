@@ -1,0 +1,12 @@
+{
+  "type": "stats_world_records",
+  "data": {
+    "success": true,
+    "car_id": 23,
+    "track_id": 14,
+    "season_year": 2025,
+    "season_quarter": 3,
+    "chunk_info": null,
+    "last_updated": "2025-09-09T22:16:27Z"
+  }
+}

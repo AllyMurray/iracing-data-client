@@ -1,0 +1,17 @@
+{
+  "blackout": false,
+  "category_id": 3,
+  "chart_type": 1,
+  "data": [
+    {
+      "when": "2023-08-01",
+      "value": 1350
+    },
+    {
+      "when": "2024-09-30",
+      "value": 1350
+    }
+  ],
+  "success": true,
+  "cust_id": 926270
+}

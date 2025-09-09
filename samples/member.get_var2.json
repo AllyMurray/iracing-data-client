@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "cust_ids": [
+    123456,
+    926270
+  ],
+  "members": [
+    {
+      "cust_id": 926270,
+      "display_name": "Alistair Murray",
+      "helmet": {
+        "pattern": 12,
+        "color1": "0018f0",
+        "color2": "e2f222",
+        "color3": "0a0a0a",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "last_login": "2025-09-09T20:33:11.488261382Z",
+      "member_since": "2023-07-31",
+      "flair_id": 237,
+      "flair_name": "Scotland",
+      "flair_shortname": "SCT",
+      "ai": false
+    }
+  ]
+}

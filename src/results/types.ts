@@ -1,8 +1,10 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
 // ---- Response Schemas ----
+
+
+// ---- Response Types (inferred from schemas) ----
+
 
 // ---- Parameter Schemas ----
 

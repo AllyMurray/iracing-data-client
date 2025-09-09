@@ -6,6 +6,8 @@
   "scripts": {
     "sdk:generate": "npx tsx scripts/generate-sdk.ts",
     "sdk:test": "npx tsx test-sdk.ts",
+    "samples:scrape": "npx tsx scripts/scrape-api-samples.ts",
+    "samples:scrape-force": "npx tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
     "docs:dev": "cd docs-site && pnpm dev",
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",

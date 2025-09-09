@@ -1,43 +1,5 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
-export interface DriverStatsByCategoryOvalResponse {
-  _contentType: "csv";
-  _rawData: string;
-  _note: string;
-}
-
-export interface DriverStatsByCategorySportsCarResponse {
-  _contentType: "csv";
-  _rawData: string;
-  _note: string;
-}
-
-export interface DriverStatsByCategoryFormulaCarResponse {
-  _contentType: "csv";
-  _rawData: string;
-  _note: string;
-}
-
-export interface DriverStatsByCategoryRoadResponse {
-  _contentType: "csv";
-  _rawData: string;
-  _note: string;
-}
-
-export interface DriverStatsByCategoryDirtOvalResponse {
-  _contentType: "csv";
-  _rawData: string;
-  _note: string;
-}
-
-export interface DriverStatsByCategoryDirtRoadResponse {
-  _contentType: "csv";
-  _rawData: string;
-  _note: string;
-}
-
 // ---- Response Schemas ----
 
 const DriverStatsByCategoryOvalSchema = z.object({
@@ -45,36 +7,40 @@ const DriverStatsByCategoryOvalSchema = z.object({
   _rawData: z.string(),
   _note: z.string()
 });
-
 const DriverStatsByCategorySportsCarSchema = z.object({
   _contentType: z.literal("csv"),
   _rawData: z.string(),
   _note: z.string()
 });
-
 const DriverStatsByCategoryFormulaCarSchema = z.object({
   _contentType: z.literal("csv"),
   _rawData: z.string(),
   _note: z.string()
 });
-
 const DriverStatsByCategoryRoadSchema = z.object({
   _contentType: z.literal("csv"),
   _rawData: z.string(),
   _note: z.string()
 });
-
 const DriverStatsByCategoryDirtOvalSchema = z.object({
   _contentType: z.literal("csv"),
   _rawData: z.string(),
   _note: z.string()
 });
-
 const DriverStatsByCategoryDirtRoadSchema = z.object({
   _contentType: z.literal("csv"),
   _rawData: z.string(),
   _note: z.string()
 });
+
+// ---- Response Types (inferred from schemas) ----
+
+export type DriverStatsByCategoryOvalResponse = z.infer<typeof DriverStatsByCategoryOvalSchema>;
+export type DriverStatsByCategorySportsCarResponse = z.infer<typeof DriverStatsByCategorySportsCarSchema>;
+export type DriverStatsByCategoryFormulaCarResponse = z.infer<typeof DriverStatsByCategoryFormulaCarSchema>;
+export type DriverStatsByCategoryRoadResponse = z.infer<typeof DriverStatsByCategoryRoadSchema>;
+export type DriverStatsByCategoryDirtOvalResponse = z.infer<typeof DriverStatsByCategoryDirtOvalSchema>;
+export type DriverStatsByCategoryDirtRoadResponse = z.infer<typeof DriverStatsByCategoryDirtRoadSchema>;
 
 // ---- Parameter Schemas ----
 

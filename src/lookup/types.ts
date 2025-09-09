@@ -1,74 +1,33 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
-export interface LookupCountriesItem {
-  countryName: string; // maps from: country_name
-  countryCode: string; // maps from: country_code
-}
-
-export type LookupCountriesResponse = Array<LookupCountriesItem>;
-
-export interface LookupDriversItem {
-  custId: number; // maps from: cust_id
-  displayName: string; // maps from: display_name
-  helmet: any;
-  profileDisabled: boolean; // maps from: profile_disabled
-}
-
-export type LookupDriversResponse = Array<LookupDriversItem>;
-
-export interface LookupFlairsResponse {
-  flairs: Array<any>;
-  success: boolean;
-}
-
-export type LookupGetResponse = Array<any>;
-
-export interface LookupLicensesItem {
-  licenseGroup: number; // maps from: license_group
-  groupName?: string | null; // maps from: group_name
-  minNumRaces: number; // maps from: min_num_races
-  participationCredits: number; // maps from: participation_credits
-  minSrToFastTrack: number; // maps from: min_sr_to_fast_track
-  levels: Array<any>;
-  minNumTt: number; // maps from: min_num_tt
-}
-
-export type LookupLicensesResponse = Array<LookupLicensesItem>;
-
 // ---- Response Schemas ----
 
 const LookupCountriesSchema = z.array(z.object({
   countryName: z.string(),
   countryCode: z.string()
 }));
-
 const LookupDriversSchema = z.array(z.object({
   custId: z.number(),
   displayName: z.string(),
   helmet: z.object({
-  pattern: z.number(),
-  color1: z.string(),
-  color2: z.string(),
-  color3: z.string(),
-  faceType: z.number(),
-  helmetType: z.number()
-}),
+    pattern: z.number(),
+    color1: z.string(),
+    color2: z.string(),
+    color3: z.string(),
+    faceType: z.number(),
+    helmetType: z.number()
+  }),
   profileDisabled: z.boolean()
 }));
-
 const LookupFlairsSchema = z.object({
   flairs: z.array(z.object({
-  flairId: z.number(),
-  flairName: z.string(),
-  seq: z.number()
-})),
+    flairId: z.number(),
+    flairName: z.string(),
+    seq: z.number()
+  })),
   success: z.boolean()
 });
-
 const LookupGetSchema = z.array(z.unknown());
-
 const LookupLicensesSchema = z.array(z.object({
   licenseGroup: z.number(),
   groupName: z.optional(z.union([z.string(), z.null()])),
@@ -76,15 +35,23 @@ const LookupLicensesSchema = z.array(z.object({
   participationCredits: z.number(),
   minSrToFastTrack: z.number(),
   levels: z.array(z.object({
-  licenseId: z.number(),
-  licenseGroup: z.number(),
-  license: z.string(),
-  shortName: z.string(),
-  licenseLetter: z.string(),
-  color: z.string()
-})),
+    licenseId: z.number(),
+    licenseGroup: z.number(),
+    license: z.string(),
+    shortName: z.string(),
+    licenseLetter: z.string(),
+    color: z.string()
+  })),
   minNumTt: z.number()
 }));
+
+// ---- Response Types (inferred from schemas) ----
+
+export type LookupCountriesResponse = z.infer<typeof LookupCountriesSchema>;
+export type LookupDriversResponse = z.infer<typeof LookupDriversSchema>;
+export type LookupFlairsResponse = z.infer<typeof LookupFlairsSchema>;
+export type LookupGetResponse = z.infer<typeof LookupGetSchema>;
+export type LookupLicensesResponse = z.infer<typeof LookupLicensesSchema>;
 
 // ---- Parameter Schemas ----
 

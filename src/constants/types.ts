@@ -1,44 +1,25 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
-export interface ConstantsCategoriesItem {
-  label: string;
-  value: number;
-}
-
-export type ConstantsCategoriesResponse = Array<ConstantsCategoriesItem>;
-
-export interface ConstantsDivisionsItem {
-  label: string;
-  value: number;
-}
-
-export type ConstantsDivisionsResponse = Array<ConstantsDivisionsItem>;
-
-export interface ConstantsEventTypesItem {
-  label: string;
-  value: number;
-}
-
-export type ConstantsEventTypesResponse = Array<ConstantsEventTypesItem>;
-
 // ---- Response Schemas ----
 
 const ConstantsCategoriesSchema = z.array(z.object({
   label: z.string(),
   value: z.number()
 }));
-
 const ConstantsDivisionsSchema = z.array(z.object({
   label: z.string(),
   value: z.number()
 }));
-
 const ConstantsEventTypesSchema = z.array(z.object({
   label: z.string(),
   value: z.number()
 }));
+
+// ---- Response Types (inferred from schemas) ----
+
+export type ConstantsCategoriesResponse = z.infer<typeof ConstantsCategoriesSchema>;
+export type ConstantsDivisionsResponse = z.infer<typeof ConstantsDivisionsSchema>;
+export type ConstantsEventTypesResponse = z.infer<typeof ConstantsEventTypesSchema>;
 
 // ---- Parameter Schemas ----
 

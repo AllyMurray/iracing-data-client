@@ -1,17 +1,5 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
-export interface TeamMembershipItem {
-  teamId: number; // maps from: team_id
-  teamName: string; // maps from: team_name
-  owner: boolean;
-  admin: boolean;
-  defaultTeam: boolean; // maps from: default_team
-}
-
-export type TeamMembershipResponse = Array<TeamMembershipItem>;
-
 // ---- Response Schemas ----
 
 const TeamMembershipSchema = z.array(z.object({
@@ -21,6 +9,10 @@ const TeamMembershipSchema = z.array(z.object({
   admin: z.boolean(),
   defaultTeam: z.boolean()
 }));
+
+// ---- Response Types (inferred from schemas) ----
+
+export type TeamMembershipResponse = z.infer<typeof TeamMembershipSchema>;
 
 // ---- Parameter Schemas ----
 

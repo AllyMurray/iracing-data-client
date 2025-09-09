@@ -1,0 +1,1333 @@
+{
+  "success": true,
+  "series": {
+    "series_id": 306,
+    "series_name": "DIRTcar Pro Late Model Series",
+    "series_short_name": "DIRTcar Pro Late Model Series",
+    "category_id": 3,
+    "category": "dirt_oval",
+    "active": false,
+    "official": true,
+    "fixed_setup": false,
+    "search_filters": "dirtoval",
+    "logo": "dirtcarprolatemodelseries-logo.png",
+    "license_group": 3,
+    "license_group_types": [
+      {
+        "license_group_type": 3
+      }
+    ],
+    "allowed_licenses": [
+      {
+        "group_name": "Class D",
+        "license_group": 2,
+        "max_license_level": 8,
+        "min_license_level": 8,
+        "parent_id": 306
+      },
+      {
+        "group_name": "Class C",
+        "license_group": 3,
+        "max_license_level": 12,
+        "min_license_level": 9,
+        "parent_id": 306
+      },
+      {
+        "group_name": "Class B",
+        "license_group": 4,
+        "max_license_level": 16,
+        "min_license_level": 13,
+        "parent_id": 306
+      },
+      {
+        "group_name": "Class A",
+        "license_group": 5,
+        "max_license_level": 20,
+        "min_license_level": 17,
+        "parent_id": 306
+      },
+      {
+        "group_name": "Pro",
+        "license_group": 6,
+        "max_license_level": 24,
+        "min_license_level": 21,
+        "parent_id": 306
+      },
+      {
+        "group_name": "Pro/WC",
+        "license_group": 7,
+        "max_license_level": 28,
+        "min_license_level": 25,
+        "parent_id": 306
+      }
+    ],
+    "seasons": [
+      {
+        "season_id": 5666,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2025 Season 3",
+        "season_short_name": "2025 Season 3",
+        "season_year": 2025,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 5666,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 387,
+              "track_name": "Cedar Lake Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 5496,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2025 Season 2",
+        "season_short_name": "2025 Season 2",
+        "season_year": 2025,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 5496,
+            "race_week_num": 5,
+            "track": {
+              "config_name": "Tires in",
+              "track_id": 320,
+              "track_name": "Kokomo Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 5307,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2025 Season 1",
+        "season_short_name": "2025 Season 1",
+        "season_year": 2025,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 5307,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 274,
+              "track_name": "Williams Grove Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 5132,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2024 Season 4",
+        "season_short_name": "2024 Season 4",
+        "season_year": 2024,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 5132,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 351,
+              "track_name": "Lernerville Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4967,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2024 Season 3",
+        "season_short_name": "2024 Season 3",
+        "season_year": 2024,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4967,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 344,
+              "track_name": "Fairbury Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4799,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2024 Season 2",
+        "season_short_name": "2024 Season 2",
+        "season_year": 2024,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4799,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 344,
+              "track_name": "Fairbury Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4645,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2024 Season 1",
+        "season_short_name": "2024 Season 1",
+        "season_year": 2024,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4645,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Tires in",
+              "track_id": 320,
+              "track_name": "Kokomo Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4480,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2023 Season 4",
+        "season_short_name": "2023 Season 4",
+        "season_year": 2023,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4480,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 438,
+              "track_name": "Federated Auto Parts Raceway at I-55"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4337,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2023 Season 3",
+        "season_short_name": "2023 Season 3",
+        "season_year": 2023,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4337,
+            "race_week_num": 1,
+            "track": {
+              "track_id": 446,
+              "track_name": "Port Royal Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4199,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2023 Season 2",
+        "season_short_name": "2023 Season 2",
+        "season_year": 2023,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4199,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 462,
+              "track_name": "Lincoln Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 4056,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2023 Season 1",
+        "season_short_name": "2023 Season 1",
+        "season_year": 2023,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 4056,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 462,
+              "track_name": "Lincoln Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3924,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2022 Season 4",
+        "season_short_name": "2022 Season 4",
+        "season_year": 2022,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3924,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 314,
+              "track_name": "The Dirt Track at Charlotte"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3800,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2022 Season 3",
+        "season_short_name": "2022 Season 3",
+        "season_year": 2022,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3800,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 314,
+              "track_name": "The Dirt Track at Charlotte"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3672,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2022 Season 2",
+        "season_short_name": "2022 Season 2",
+        "season_year": 2022,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3672,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 314,
+              "track_name": "The Dirt Track at Charlotte"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3544,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2022 Season 1",
+        "season_short_name": "2022 Season 1",
+        "season_year": 2022,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3544,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 279,
+              "track_name": "Volusia Speedway Park"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3424,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2021 Season 4",
+        "season_short_name": "2021 Season 4",
+        "season_year": 2021,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3424,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 279,
+              "track_name": "Volusia Speedway Park"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3188,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2021 Season 2",
+        "season_short_name": "2021 Season 2",
+        "season_year": 2021,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3188,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 274,
+              "track_name": "Williams Grove Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 3081,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2021 Season 1",
+        "season_short_name": "2021 Season 1",
+        "season_year": 2021,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 3081,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 288,
+              "track_name": "Lanier National Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2976,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2020 Season 4",
+        "season_short_name": "2020 Season 4",
+        "season_year": 2020,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2976,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 288,
+              "track_name": "Lanier National Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2880,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2020 Season 3",
+        "season_short_name": "2020 Season 3",
+        "season_year": 2020,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2880,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 288,
+              "track_name": "Lanier National Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2778,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2020 Season 2",
+        "season_short_name": "2020 Season 2",
+        "season_year": 2020,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2778,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 275,
+              "track_name": "USA International Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2679,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2020 Season 1",
+        "season_short_name": "2020 Season 1",
+        "season_year": 2020,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2679,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 288,
+              "track_name": "Lanier National Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2591,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2019 Season 4",
+        "season_short_name": "2019 Season 4",
+        "season_year": 2019,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2591,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 275,
+              "track_name": "USA International Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2501,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2019 Season 3",
+        "season_short_name": "2019 Season 3",
+        "season_year": 2019,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2501,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 305,
+              "track_name": "Knoxville Raceway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2408,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2019 Season 2",
+        "season_short_name": "2019 Season 2",
+        "season_year": 2019,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2408,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 305,
+              "track_name": "Knoxville Raceway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2324,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2019 Season 1",
+        "season_short_name": "2019 Season 1",
+        "season_year": 2019,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2324,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 303,
+              "track_name": "Limaland Motorsports Park"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2246,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2018 Season 4",
+        "season_short_name": "2018 Season 4",
+        "season_year": 2018,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2246,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 275,
+              "track_name": "USA International Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2164,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2018 Season 3",
+        "season_short_name": "2018 Season 3",
+        "season_year": 2018,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2164,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 274,
+              "track_name": "Williams Grove Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 2084,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2018 Season 2",
+        "season_short_name": "2018 Season 2",
+        "season_year": 2018,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 2084,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 303,
+              "track_name": "Limaland Motorsports Park"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 1999,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2018 Season 1",
+        "season_short_name": "2018 Season 1",
+        "season_year": 2018,
+        "season_quarter": 1,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 1999,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Dirt",
+              "track_id": 288,
+              "track_name": "Lanier National Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 1929,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2017 Season 4",
+        "season_short_name": "2017 Season 4",
+        "season_year": 2017,
+        "season_quarter": 4,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 1929,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 273,
+              "track_name": "Eldora Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 1863,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2017 Season 3",
+        "season_short_name": "2017 Season 3",
+        "season_year": 2017,
+        "season_quarter": 3,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 1863,
+            "race_week_num": 0,
+            "track": {
+              "track_id": 274,
+              "track_name": "Williams Grove Speedway"
+            }
+          }
+        ]
+      },
+      {
+        "season_id": 1810,
+        "series_id": 306,
+        "season_name": "DIRTcar Pro Late Model Series - 2017 Season 2",
+        "season_short_name": "2017 Season 2",
+        "season_year": 2017,
+        "season_quarter": 2,
+        "active": false,
+        "official": true,
+        "driver_changes": false,
+        "fixed_setup": false,
+        "license_group": 3,
+        "has_supersessions": false,
+        "car_switching": false,
+        "license_group_types": [
+          {
+            "license_group_type": 3
+          }
+        ],
+        "car_classes": [
+          {
+            "car_class_id": 90,
+            "short_name": "DLM Pro",
+            "name": "Dirt Late Model - Pro",
+            "relative_speed": 70
+          }
+        ],
+        "race_weeks": [
+          {
+            "season_id": 1810,
+            "race_week_num": 0,
+            "track": {
+              "config_name": "Asphalt",
+              "track_id": 16,
+              "track_name": "USA International Speedway"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "series_id": 306
+}

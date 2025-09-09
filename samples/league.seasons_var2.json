@@ -1,0 +1,295 @@
+{
+  "subscribed": false,
+  "seasons": [
+    {
+      "league_id": 7058,
+      "season_id": 97901,
+      "points_system_id": 1,
+      "season_name": "S12",
+      "active": true,
+      "hidden": false,
+      "num_drops": 0,
+      "no_drops_on_or_after_race_num": -1,
+      "points_cars": [
+        {
+          "car_id": 67,
+          "car_name": "Global Mazda MX-5 Cup"
+        }
+      ],
+      "driver_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            },
+            {
+              "car_id": 67,
+              "car_name": "Global Mazda MX-5 Cup"
+            }
+          ]
+        }
+      ],
+      "team_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            }
+          ]
+        }
+      ],
+      "points_system_name": "None",
+      "points_system_desc": "No points will be awarded.  The league administrator will assign points at a later date."
+    },
+    {
+      "league_id": 7058,
+      "season_id": 97900,
+      "points_system_id": 1,
+      "season_name": "S12 Media Day",
+      "active": true,
+      "hidden": false,
+      "num_drops": 0,
+      "no_drops_on_or_after_race_num": -1,
+      "points_cars": [
+        {
+          "car_id": 67,
+          "car_name": "Global Mazda MX-5 Cup"
+        }
+      ],
+      "driver_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            },
+            {
+              "car_id": 67,
+              "car_name": "Global Mazda MX-5 Cup"
+            }
+          ]
+        }
+      ],
+      "team_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            }
+          ]
+        }
+      ],
+      "points_system_name": "None",
+      "points_system_desc": "No points will be awarded.  The league administrator will assign points at a later date."
+    },
+    {
+      "league_id": 7058,
+      "season_id": 113498,
+      "points_system_id": 1,
+      "season_name": "S13",
+      "active": true,
+      "hidden": false,
+      "num_drops": 0,
+      "no_drops_on_or_after_race_num": -1,
+      "points_cars": [
+        {
+          "car_id": 150,
+          "car_name": "Aston Martin Vantage GT4"
+        },
+        {
+          "car_id": 122,
+          "car_name": "BMW M4 F82 GT4 - 2018"
+        },
+        {
+          "car_id": 189,
+          "car_name": "BMW M4 G82 GT4 Evo"
+        },
+        {
+          "car_id": 135,
+          "car_name": "McLaren 570S GT4"
+        },
+        {
+          "car_id": 157,
+          "car_name": "Mercedes-AMG GT4"
+        },
+        {
+          "car_id": 119,
+          "car_name": "Porsche 718 Cayman GT4 Clubsport MR"
+        }
+      ],
+      "driver_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 189,
+              "car_name": "BMW M4 G82 GT4 Evo"
+            },
+            {
+              "car_id": 157,
+              "car_name": "Mercedes-AMG GT4"
+            },
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            },
+            {
+              "car_id": 150,
+              "car_name": "Aston Martin Vantage GT4"
+            },
+            {
+              "car_id": 135,
+              "car_name": "McLaren 570S GT4"
+            },
+            {
+              "car_id": 119,
+              "car_name": "Porsche 718 Cayman GT4 Clubsport MR"
+            },
+            {
+              "car_id": 122,
+              "car_name": "BMW M4 F82 GT4 - 2018"
+            }
+          ]
+        }
+      ],
+      "team_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            }
+          ]
+        }
+      ],
+      "points_system_name": "None",
+      "points_system_desc": "No points will be awarded.  The league administrator will assign points at a later date."
+    },
+    {
+      "league_id": 7058,
+      "season_id": 124867,
+      "points_system_id": 1,
+      "season_name": "S14 - Legends",
+      "active": true,
+      "hidden": false,
+      "num_drops": 0,
+      "no_drops_on_or_after_race_num": -1,
+      "points_cars": [],
+      "driver_points_car_classes": [],
+      "team_points_car_classes": [],
+      "points_system_name": "None",
+      "points_system_desc": "No points will be awarded.  The league administrator will assign points at a later date."
+    },
+    {
+      "league_id": 7058,
+      "season_id": 96690,
+      "points_system_id": 1,
+      "season_name": "WTEC Winter Series 2023",
+      "active": true,
+      "hidden": false,
+      "num_drops": 0,
+      "no_drops_on_or_after_race_num": -1,
+      "points_cars": [
+        {
+          "car_id": 112,
+          "car_name": "Audi RS 3 LMS TCR"
+        },
+        {
+          "car_id": 82,
+          "car_name": "Dirt Legends Ford '34 Coupe"
+        },
+        {
+          "car_id": 147,
+          "car_name": "Honda Civic Type R TCR"
+        },
+        {
+          "car_id": 146,
+          "car_name": "Hyundai Elantra N TCR"
+        },
+        {
+          "car_id": 153,
+          "car_name": "Hyundai Veloster N TCR"
+        },
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe"
+        },
+        {
+          "car_id": 163,
+          "car_name": "Ray FF1600"
+        }
+      ],
+      "driver_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            },
+            {
+              "car_id": 112,
+              "car_name": "Audi RS 3 LMS TCR"
+            },
+            {
+              "car_id": 82,
+              "car_name": "Dirt Legends Ford '34 Coupe"
+            },
+            {
+              "car_id": 146,
+              "car_name": "Hyundai Elantra N TCR"
+            },
+            {
+              "car_id": 147,
+              "car_name": "Honda Civic Type R TCR"
+            },
+            {
+              "car_id": 163,
+              "car_name": "Ray FF1600"
+            },
+            {
+              "car_id": 5,
+              "car_name": "Legends Ford '34 Coupe"
+            },
+            {
+              "car_id": 153,
+              "car_name": "Hyundai Veloster N TCR"
+            }
+          ]
+        }
+      ],
+      "team_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            }
+          ]
+        }
+      ],
+      "points_system_name": "None",
+      "points_system_desc": "No points will be awarded.  The league administrator will assign points at a later date."
+    }
+  ],
+  "success": true,
+  "retired": false,
+  "league_id": 7058
+}

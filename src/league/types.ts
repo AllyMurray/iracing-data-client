@@ -1,102 +1,5 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
-
-export interface LeagueCustLeagueSessionsResponse {
-  mine: boolean;
-  subscribed: boolean;
-  sequence: number;
-  sessions: Array<any>;
-  success: boolean;
-}
-
-export interface LeagueDirectoryResponse {
-  resultsPage: Array<any>; // maps from: results_page
-  success: boolean;
-  lowerbound: number;
-  upperbound: number;
-  rowCount: number; // maps from: row_count
-}
-
-export interface LeagueGetResponse {
-  leagueId: number; // maps from: league_id
-  ownerId: number; // maps from: owner_id
-  leagueName: string; // maps from: league_name
-  created: string;
-  hidden: boolean;
-  message: string;
-  about: string;
-  recruiting: boolean;
-  privateWall: boolean; // maps from: private_wall
-  privateRoster: boolean; // maps from: private_roster
-  privateSchedule: boolean; // maps from: private_schedule
-  privateResults: boolean; // maps from: private_results
-  isOwner: boolean; // maps from: is_owner
-  isAdmin: boolean; // maps from: is_admin
-  rosterCount: number; // maps from: roster_count
-  owner: any;
-  image: any;
-  tags: any;
-  leagueApplications: Array<any>; // maps from: league_applications
-  pendingRequests: Array<any>; // maps from: pending_requests
-  isMember: boolean; // maps from: is_member
-  isApplicant: boolean; // maps from: is_applicant
-  isInvite: boolean; // maps from: is_invite
-  isIgnored: boolean; // maps from: is_ignored
-  roster: Array<any>;
-}
-
-export interface LeagueGetPointsSystemsResponse {
-  subscribed: boolean;
-  success: boolean;
-  pointsSystems: Array<any>; // maps from: points_systems
-  leagueId: number; // maps from: league_id
-}
-
-export interface LeagueMembershipItem {
-  leagueId: number; // maps from: league_id
-  leagueName: string; // maps from: league_name
-  owner: boolean;
-  admin: boolean;
-  leagueMailOptOut: boolean; // maps from: league_mail_opt_out
-  leaguePmOptOut: boolean; // maps from: league_pm_opt_out
-  carNumber: string; // maps from: car_number
-  nickName: string; // maps from: nick_name
-}
-
-export type LeagueMembershipResponse = Array<LeagueMembershipItem>;
-
-export interface LeagueRosterResponse {
-  type: string;
-  data: any;
-  dataUrl: string; // maps from: data_url
-}
-
-export interface LeagueSeasonsResponse {
-  subscribed: boolean;
-  seasons: Array<any>;
-  success: boolean;
-  retired: boolean;
-  leagueId: number; // maps from: league_id
-}
-
-export interface LeagueSeasonStandingsResponse {
-  carClassId: number; // maps from: car_class_id
-  success: boolean;
-  seasonId: number; // maps from: season_id
-  carId: number; // maps from: car_id
-  standings: any;
-  leagueId: number; // maps from: league_id
-}
-
-export interface LeagueSeasonSessionsResponse {
-  success: boolean;
-  subscribed: boolean;
-  leagueId: number; // maps from: league_id
-  seasonId: number; // maps from: season_id
-  sessions: Array<any>;
-}
-
 // ---- Response Schemas ----
 
 const LeagueCustLeagueSessionsSchema = z.object({
@@ -104,327 +7,326 @@ const LeagueCustLeagueSessionsSchema = z.object({
   subscribed: z.boolean(),
   sequence: z.number(),
   sessions: z.array(z.object({
-  numDrivers: z.number(),
-  numSpotters: z.number(),
-  numSpectators: z.number(),
-  numBroadcasters: z.number(),
-  availableReservedBroadcasterSlots: z.number(),
-  numSpectatorSlots: z.number(),
-  availableSpectatorSlots: z.number(),
-  canBroadcast: z.boolean(),
-  canWatch: z.boolean(),
-  canSpot: z.boolean(),
-  elig: z.object({
-  sessionFull: z.boolean(),
-  canSpot: z.boolean(),
-  canWatch: z.boolean(),
-  canDrive: z.boolean(),
-  hasSessPassword: z.boolean(),
-  needsPurchase: z.boolean(),
-  ownCar: z.boolean(),
-  ownTrack: z.boolean(),
-  purchaseSkus: z.array(z.number()),
-  registered: z.boolean()
-}),
-  driverChanges: z.boolean(),
-  restrictViewing: z.boolean(),
-  maxUsers: z.number(),
-  privateSessionId: z.number(),
-  sessionId: z.number(),
-  subsessionId: z.number(),
-  passwordProtected: z.boolean(),
-  sessionName: z.string(),
-  openRegExpires: z.string(),
-  launchAt: z.string(),
-  fullCourseCautions: z.boolean(),
-  numFastTows: z.number(),
-  rollingStarts: z.boolean(),
-  restarts: z.number(),
-  multiclassType: z.number(),
-  pitsInUse: z.number(),
-  carsLeft: z.number(),
-  maxDrivers: z.number(),
-  hardcoreLevel: z.number(),
-  practiceLength: z.number(),
-  loneQualify: z.boolean(),
-  qualifyLaps: z.number(),
-  qualifyLength: z.number(),
-  warmupLength: z.number(),
-  raceLaps: z.number(),
-  raceLength: z.number(),
-  timeLimit: z.number(),
-  restrictResults: z.boolean(),
-  incidentLimit: z.number(),
-  incidentWarnMode: z.number(),
-  incidentWarnParam1: z.number(),
-  incidentWarnParam2: z.number(),
-  unsportConductRuleMode: z.number(),
-  connectionBlackFlag: z.boolean(),
-  luckyDog: z.boolean(),
-  minTeamDrivers: z.number(),
-  maxTeamDrivers: z.number(),
-  qualifierMustStartRace: z.boolean(),
-  driverChangeRule: z.number(),
-  fixedSetup: z.boolean(),
-  entryCount: z.number(),
-  leagueId: z.number(),
-  leagueName: z.string(),
-  leagueSeasonId: z.number(),
-  leagueSeasonName: z.string(),
-  sessionType: z.number(),
-  orderId: z.number(),
-  minLicenseLevel: z.number(),
-  maxLicenseLevel: z.number(),
-  status: z.number(),
-  paceCarId: z.optional(z.union([z.string(), z.null()])),
-  paceCarClassId: z.optional(z.union([z.string(), z.null()])),
-  numOptLaps: z.number(),
-  damageModel: z.number(),
-  doNotPaintCars: z.boolean(),
-  greenWhiteCheckeredLimit: z.number(),
-  doNotCountCautionLaps: z.boolean(),
-  consecCautionsSingleFile: z.boolean(),
-  consecCautionWithinNlaps: z.number(),
-  noLapperWaveArounds: z.boolean(),
-  shortParadeLap: z.boolean(),
-  startOnQualTire: z.boolean(),
-  telemetryRestriction: z.number(),
-  telemetryForceToDisk: z.number(),
-  maxAiDrivers: z.number(),
-  aiAvoidPlayers: z.boolean(),
-  adaptiveAiEnabled: z.boolean(),
-  adaptiveAiDifficulty: z.number(),
-  mustUseDiffTireTypesInRace: z.boolean(),
-  startZone: z.boolean(),
-  enablePitlaneCollisions: z.boolean(),
-  disallowVirtualMirror: z.boolean(),
-  maxVisorTearoffs: z.number(),
-  categoryId: z.number(),
-  category: z.string(),
-  sessionFull: z.boolean(),
-  host: z.object({
-  custId: z.number(),
-  displayName: z.string(),
-  helmet: z.object({
-  pattern: z.number(),
-  color1: z.string(),
-  color2: z.string(),
-  color3: z.string(),
-  faceType: z.number(),
-  helmetType: z.number()
-})
-}),
-  track: z.object({
-  categoryId: z.number(),
-  configName: z.string(),
-  trackId: z.number(),
-  trackName: z.string()
-}),
-  weather: z.object({
-  allowFog: z.boolean(),
-  forecastOptions: z.object({
-  forecastType: z.number(),
-  precipitation: z.number(),
-  skies: z.number(),
-  stopPrecip: z.number(),
-  temperature: z.number(),
-  weatherSeed: z.number(),
-  windDir: z.number(),
-  windSpeed: z.number()
-}),
-  precipOption: z.number(),
-  relHumidity: z.number(),
-  simulatedStartTime: z.string(),
-  simulatedTimeMultiplier: z.number(),
-  simulatedTimeOffsets: z.array(z.number()),
-  skies: z.number(),
-  tempUnits: z.number(),
-  tempValue: z.number(),
-  timeOfDay: z.number(),
-  trackWater: z.number(),
-  version: z.number(),
-  weatherSummary: z.object({
-  maxPrecipRate: z.number(),
-  maxPrecipRateDesc: z.string(),
-  precipChance: z.number(),
-  skiesHigh: z.number(),
-  skiesLow: z.number(),
-  tempHigh: z.number(),
-  tempLow: z.number(),
-  tempUnits: z.number(),
-  windDir: z.number(),
-  windHigh: z.number(),
-  windLow: z.number(),
-  windUnits: z.number()
-}),
-  weatherUrl: z.string(),
-  windDir: z.number(),
-  windUnits: z.number(),
-  windValue: z.number()
-}),
-  trackState: z.object({
-  leaveMarbles: z.boolean(),
-  practiceRubber: z.number(),
-  qualifyRubber: z.number(),
-  raceRubber: z.number(),
-  warmupRubber: z.number()
-}),
-  farm: z.object({
-  farmId: z.number(),
-  displayName: z.string(),
-  imagePath: z.string(),
-  displayed: z.boolean()
-}),
-  admins: z.array(z.object({
-  custId: z.number(),
-  displayName: z.string(),
-  helmet: z.object({
-  pattern: z.number(),
-  color1: z.string(),
-  color2: z.string(),
-  color3: z.string(),
-  faceType: z.number(),
-  helmetType: z.number()
-})
-})),
-  allowedTeams: z.array(z.unknown()),
-  allowedLeagues: z.array(z.number()),
-  cars: z.array(z.object({
-  carId: z.number(),
-  carName: z.string(),
-  carClassId: z.number(),
-  carClassName: z.string(),
-  maxPctFuelFill: z.number(),
-  weightPenaltyKg: z.number(),
-  powerAdjustPct: z.number(),
-  maxDryTireSets: z.number(),
-  qualSetupId: z.number(),
-  qualSetupFilename: z.string(),
-  raceSetupId: z.number(),
-  raceSetupFilename: z.string(),
+    numDrivers: z.number(),
+    numSpotters: z.number(),
+    numSpectators: z.number(),
+    numBroadcasters: z.number(),
+    availableReservedBroadcasterSlots: z.number(),
+    numSpectatorSlots: z.number(),
+    availableSpectatorSlots: z.number(),
+    canBroadcast: z.boolean(),
+    canWatch: z.boolean(),
+    canSpot: z.boolean(),
+    elig: z.object({
+      sessionFull: z.boolean(),
+      canSpot: z.boolean(),
+      canWatch: z.boolean(),
+      canDrive: z.boolean(),
+      hasSessPassword: z.boolean(),
+      needsPurchase: z.boolean(),
+      ownCar: z.boolean(),
+      ownTrack: z.boolean(),
+      purchaseSkus: z.array(z.number()),
+      registered: z.boolean()
+    }),
+    driverChanges: z.boolean(),
+    restrictViewing: z.boolean(),
+    maxUsers: z.number(),
+    privateSessionId: z.number(),
+    sessionId: z.number(),
+    subsessionId: z.number(),
+    passwordProtected: z.boolean(),
+    sessionName: z.string(),
+    openRegExpires: z.string(),
+    launchAt: z.string(),
+    fullCourseCautions: z.boolean(),
+    numFastTows: z.number(),
+    rollingStarts: z.boolean(),
+    restarts: z.number(),
+    multiclassType: z.number(),
+    pitsInUse: z.number(),
+    carsLeft: z.number(),
+    maxDrivers: z.number(),
+    hardcoreLevel: z.number(),
+    practiceLength: z.number(),
+    loneQualify: z.boolean(),
+    qualifyLaps: z.number(),
+    qualifyLength: z.number(),
+    warmupLength: z.number(),
+    raceLaps: z.number(),
+    raceLength: z.number(),
+    timeLimit: z.number(),
+    restrictResults: z.boolean(),
+    incidentLimit: z.number(),
+    incidentWarnMode: z.number(),
+    incidentWarnParam1: z.number(),
+    incidentWarnParam2: z.number(),
+    unsportConductRuleMode: z.number(),
+    connectionBlackFlag: z.boolean(),
+    luckyDog: z.boolean(),
+    minTeamDrivers: z.number(),
+    maxTeamDrivers: z.number(),
+    qualifierMustStartRace: z.boolean(),
+    driverChangeRule: z.number(),
+    fixedSetup: z.boolean(),
+    entryCount: z.number(),
+    leagueId: z.number(),
+    leagueName: z.string(),
+    leagueSeasonId: z.number(),
+    leagueSeasonName: z.string(),
+    sessionType: z.number(),
+    orderId: z.number(),
+    minLicenseLevel: z.number(),
+    maxLicenseLevel: z.number(),
+    status: z.number(),
+    paceCarId: z.optional(z.union([z.string(), z.null()])),
+    paceCarClassId: z.optional(z.union([z.string(), z.null()])),
+    numOptLaps: z.number(),
+    damageModel: z.number(),
+    doNotPaintCars: z.boolean(),
+    greenWhiteCheckeredLimit: z.number(),
+    doNotCountCautionLaps: z.boolean(),
+    consecCautionsSingleFile: z.boolean(),
+    consecCautionWithinNlaps: z.number(),
+    noLapperWaveArounds: z.boolean(),
+    shortParadeLap: z.boolean(),
+    startOnQualTire: z.boolean(),
+    telemetryRestriction: z.number(),
+    telemetryForceToDisk: z.number(),
+    maxAiDrivers: z.number(),
+    aiAvoidPlayers: z.boolean(),
+    adaptiveAiEnabled: z.boolean(),
+    adaptiveAiDifficulty: z.number(),
+    mustUseDiffTireTypesInRace: z.boolean(),
+    startZone: z.boolean(),
+    enablePitlaneCollisions: z.boolean(),
+    disallowVirtualMirror: z.boolean(),
+    maxVisorTearoffs: z.number(),
+    categoryId: z.number(),
+    category: z.string(),
+    sessionFull: z.boolean(),
+    host: z.object({
+      custId: z.number(),
+      displayName: z.string(),
+      helmet: z.object({
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+        faceType: z.number(),
+        helmetType: z.number()
+      })
+    }),
+    track: z.object({
+      categoryId: z.number(),
+      configName: z.string(),
+      trackId: z.number(),
+      trackName: z.string()
+    }),
+    weather: z.object({
+      allowFog: z.boolean(),
+      forecastOptions: z.object({
+        forecastType: z.number(),
+        precipitation: z.number(),
+        skies: z.number(),
+        stopPrecip: z.number(),
+        temperature: z.number(),
+        weatherSeed: z.number(),
+        windDir: z.number(),
+        windSpeed: z.number()
+      }),
+      precipOption: z.number(),
+      relHumidity: z.number(),
+      simulatedStartTime: z.string(),
+      simulatedTimeMultiplier: z.number(),
+      simulatedTimeOffsets: z.array(z.number()),
+      skies: z.number(),
+      tempUnits: z.number(),
+      tempValue: z.number(),
+      timeOfDay: z.number(),
+      trackWater: z.number(),
+      version: z.number(),
+      weatherSummary: z.object({
+        maxPrecipRate: z.number(),
+        maxPrecipRateDesc: z.string(),
+        precipChance: z.number(),
+        skiesHigh: z.number(),
+        skiesLow: z.number(),
+        tempHigh: z.number(),
+        tempLow: z.number(),
+        tempUnits: z.number(),
+        windDir: z.number(),
+        windHigh: z.number(),
+        windLow: z.number(),
+        windUnits: z.number()
+      }),
+      weatherUrl: z.string(),
+      windDir: z.number(),
+      windUnits: z.number(),
+      windValue: z.number()
+    }),
+    trackState: z.object({
+      leaveMarbles: z.boolean(),
+      practiceRubber: z.number(),
+      qualifyRubber: z.number(),
+      raceRubber: z.number(),
+      warmupRubber: z.number()
+    }),
+    farm: z.object({
+      farmId: z.number(),
+      displayName: z.string(),
+      imagePath: z.string(),
+      displayed: z.boolean()
+    }),
+    admins: z.array(z.object({
+      custId: z.number(),
+      displayName: z.string(),
+      helmet: z.object({
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+        faceType: z.number(),
+        helmetType: z.number()
+      })
+    })),
+    allowedTeams: z.array(z.unknown()),
+    allowedLeagues: z.array(z.number()),
+    cars: z.array(z.object({
+      carId: z.number(),
+      carName: z.string(),
+      carClassId: z.number(),
+      carClassName: z.string(),
+      maxPctFuelFill: z.number(),
+      weightPenaltyKg: z.number(),
+      powerAdjustPct: z.number(),
+      maxDryTireSets: z.number(),
+      qualSetupId: z.number(),
+      qualSetupFilename: z.string(),
+      raceSetupId: z.number(),
+      raceSetupFilename: z.string(),
+      packageId: z.number()
+    })),
+    heatSesInfo: z.object({
+      consolationDeltaMaxFieldSize: z.number(),
+      consolationDeltaSessionLaps: z.number(),
+      consolationDeltaSessionLengthMinutes: z.number(),
+      consolationFirstMaxFieldSize: z.number(),
+      consolationFirstSessionLaps: z.number(),
+      consolationFirstSessionLengthMinutes: z.number(),
+      consolationNumPositionToInvert: z.number(),
+      consolationNumToConsolation: z.number(),
+      consolationNumToMain: z.number(),
+      consolationRunAlways: z.boolean(),
+      consolationScoresChampPoints: z.boolean(),
+      created: z.string(),
+      custId: z.number(),
+      description: z.string(),
+      heatCautionType: z.number(),
+      heatInfoId: z.number(),
+      heatInfoName: z.string(),
+      heatLaps: z.number(),
+      heatLengthMinutes: z.number(),
+      heatMaxFieldSize: z.number(),
+      heatNumFromEachToMain: z.number(),
+      heatNumPositionToInvert: z.number(),
+      heatScoresChampPoints: z.boolean(),
+      heatSessionMinutesEstimate: z.number(),
+      hidden: z.boolean(),
+      mainLaps: z.number(),
+      mainLengthMinutes: z.number(),
+      mainMaxFieldSize: z.number(),
+      mainNumPositionToInvert: z.number(),
+      maxEntrants: z.number(),
+      openPractice: z.boolean(),
+      preMainPracticeLengthMinutes: z.number(),
+      preQualNumToMain: z.number(),
+      preQualPracticeLengthMinutes: z.number(),
+      qualCautionType: z.number(),
+      qualLaps: z.number(),
+      qualLengthMinutes: z.number(),
+      qualNumToMain: z.number(),
+      qualOpenDelaySeconds: z.number(),
+      qualScoresChampPoints: z.boolean(),
+      qualScoring: z.number(),
+      qualStyle: z.number(),
+      raceStyle: z.number()
+    }),
+    countByCarId: z.object({
+      203: z.number()
+    }),
+    countByCarClassId: z.object({
+      0: z.number()
+    }),
+    carTypes: z.array(z.object({
+      carType: z.string()
+    })),
+    trackTypes: z.array(z.object({
+      trackType: z.string()
+    })),
+    licenseGroupTypes: z.array(z.object({
+      licenseGroupType: z.number()
+    })),
+    eventTypes: z.array(z.object({
+      eventType: z.number()
+    })),
+    sessionTypes: z.array(z.object({
+      sessionType: z.number()
+    })),
+    canJoin: z.boolean(),
+    image: z.object({
+      smallLogo: z.string(),
+      largeLogo: z.string()
+    }),
+    owner: z.boolean(),
+    admin: z.boolean(),
+    friends: z.array(z.unknown()),
+    watched: z.array(z.unknown()),
+    endTime: z.string(),
+    populated: z.boolean(),
+    teamEntryCount: z.number(),
+    isHeatRacing: z.boolean(),
+    broadcaster: z.boolean(),
+    minIr: z.number(),
+    maxIr: z.number()
+  })),
+  success: z.boolean(),
   packageId: z.number()
-})),
-  heatSesInfo: z.object({
-  consolationDeltaMaxFieldSize: z.number(),
-  consolationDeltaSessionLaps: z.number(),
-  consolationDeltaSessionLengthMinutes: z.number(),
-  consolationFirstMaxFieldSize: z.number(),
-  consolationFirstSessionLaps: z.number(),
-  consolationFirstSessionLengthMinutes: z.number(),
-  consolationNumPositionToInvert: z.number(),
-  consolationNumToConsolation: z.number(),
-  consolationNumToMain: z.number(),
-  consolationRunAlways: z.boolean(),
-  consolationScoresChampPoints: z.boolean(),
-  created: z.string(),
-  custId: z.number(),
-  description: z.string(),
-  heatCautionType: z.number(),
-  heatInfoId: z.number(),
-  heatInfoName: z.string(),
-  heatLaps: z.number(),
-  heatLengthMinutes: z.number(),
-  heatMaxFieldSize: z.number(),
-  heatNumFromEachToMain: z.number(),
-  heatNumPositionToInvert: z.number(),
-  heatScoresChampPoints: z.boolean(),
-  heatSessionMinutesEstimate: z.number(),
-  hidden: z.boolean(),
-  mainLaps: z.number(),
-  mainLengthMinutes: z.number(),
-  mainMaxFieldSize: z.number(),
-  mainNumPositionToInvert: z.number(),
-  maxEntrants: z.number(),
-  openPractice: z.boolean(),
-  preMainPracticeLengthMinutes: z.number(),
-  preQualNumToMain: z.number(),
-  preQualPracticeLengthMinutes: z.number(),
-  qualCautionType: z.number(),
-  qualLaps: z.number(),
-  qualLengthMinutes: z.number(),
-  qualNumToMain: z.number(),
-  qualOpenDelaySeconds: z.number(),
-  qualScoresChampPoints: z.boolean(),
-  qualScoring: z.number(),
-  qualStyle: z.number(),
-  raceStyle: z.number()
-}),
-  countByCarId: z.object({
-  203: z.number()
-}),
-  countByCarClassId: z.object({
-  0: z.number()
-}),
-  carTypes: z.array(z.object({
-  carType: z.string()
-})),
-  trackTypes: z.array(z.object({
-  trackType: z.string()
-})),
-  licenseGroupTypes: z.array(z.object({
-  licenseGroupType: z.number()
-})),
-  eventTypes: z.array(z.object({
-  eventType: z.number()
-})),
-  sessionTypes: z.array(z.object({
-  sessionType: z.number()
-})),
-  canJoin: z.boolean(),
-  image: z.object({
-  smallLogo: z.string(),
-  largeLogo: z.string()
-}),
-  owner: z.boolean(),
-  admin: z.boolean(),
-  friends: z.array(z.unknown()),
-  watched: z.array(z.unknown()),
-  endTime: z.string(),
-  populated: z.boolean(),
-  teamEntryCount: z.number(),
-  isHeatRacing: z.boolean(),
-  broadcaster: z.boolean(),
-  minIr: z.number(),
-  maxIr: z.number()
-})),
-  success: z.boolean()
 });
-
 const LeagueDirectorySchema = z.object({
   resultsPage: z.array(z.object({
-  leagueId: z.number(),
-  ownerId: z.number(),
-  leagueName: z.string(),
-  created: z.string(),
-  about: z.string(),
-  url: z.string(),
-  rosterCount: z.number(),
-  recruiting: z.boolean(),
-  isAdmin: z.boolean(),
-  isMember: z.boolean(),
-  pendingApplication: z.boolean(),
-  pendingInvitation: z.boolean(),
-  owner: z.object({
-  custId: z.number(),
-  displayName: z.string(),
-  helmet: z.object({
-  pattern: z.number(),
-  color1: z.string(),
-  color2: z.string(),
-  color3: z.string(),
-  faceType: z.number(),
-  helmetType: z.number()
-}),
-  carNumber: z.optional(z.union([z.string(), z.null()])),
-  nickName: z.optional(z.union([z.string(), z.null()]))
-})
-})),
+    leagueId: z.number(),
+    ownerId: z.number(),
+    leagueName: z.string(),
+    created: z.string(),
+    about: z.string(),
+    url: z.string(),
+    rosterCount: z.number(),
+    recruiting: z.boolean(),
+    isAdmin: z.boolean(),
+    isMember: z.boolean(),
+    pendingApplication: z.boolean(),
+    pendingInvitation: z.boolean(),
+    owner: z.object({
+      custId: z.number(),
+      displayName: z.string(),
+      helmet: z.object({
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+        faceType: z.number(),
+        helmetType: z.number()
+      }),
+      carNumber: z.optional(z.union([z.string(), z.null()])),
+      nickName: z.optional(z.union([z.string(), z.null()]))
+    })
+  })),
   success: z.boolean(),
   lowerbound: z.number(),
   upperbound: z.number(),
   rowCount: z.number()
 });
-
 const LeagueGetSchema = z.object({
   leagueId: z.number(),
   ownerId: z.number(),
@@ -442,35 +344,35 @@ const LeagueGetSchema = z.object({
   isAdmin: z.boolean(),
   rosterCount: z.number(),
   owner: z.object({
-  custId: z.number(),
-  displayName: z.string(),
-  helmet: z.object({
-  pattern: z.number(),
-  color1: z.string(),
-  color2: z.string(),
-  color3: z.string(),
-  faceType: z.number(),
-  helmetType: z.number()
-}),
-  carNumber: z.optional(z.union([z.string(), z.null()])),
-  nickName: z.optional(z.union([z.string(), z.null()]))
-}),
+    custId: z.number(),
+    displayName: z.string(),
+    helmet: z.object({
+      pattern: z.number(),
+      color1: z.string(),
+      color2: z.string(),
+      color3: z.string(),
+      faceType: z.number(),
+      helmetType: z.number()
+    }),
+    carNumber: z.optional(z.union([z.string(), z.null()])),
+    nickName: z.optional(z.union([z.string(), z.null()]))
+  }),
   image: z.object({
-  smallLogo: z.optional(z.union([z.string(), z.null()])),
-  largeLogo: z.optional(z.union([z.string(), z.null()]))
-}),
+    smallLogo: z.optional(z.union([z.string(), z.null()])),
+    largeLogo: z.optional(z.union([z.string(), z.null()]))
+  }),
   tags: z.object({
-  categorized: z.array(z.object({
-  categoryId: z.number(),
-  name: z.string(),
-  limit: z.optional(z.union([z.string(), z.null()])),
-  tags: z.array(z.object({
-  tagId: z.number(),
-  tagName: z.string()
-}))
-})),
-  notCategorized: z.array(z.unknown())
-}),
+    categorized: z.array(z.object({
+      categoryId: z.number(),
+      name: z.string(),
+      limit: z.optional(z.union([z.string(), z.null()])),
+      tags: z.array(z.object({
+        tagId: z.number(),
+        tagName: z.string()
+      }))
+    })),
+    notCategorized: z.array(z.unknown())
+  }),
   leagueApplications: z.array(z.unknown()),
   pendingRequests: z.array(z.unknown()),
   isMember: z.boolean(),
@@ -478,40 +380,39 @@ const LeagueGetSchema = z.object({
   isInvite: z.boolean(),
   isIgnored: z.boolean(),
   roster: z.array(z.object({
-  custId: z.number(),
-  displayName: z.string(),
-  helmet: z.object({
-  pattern: z.number(),
-  color1: z.string(),
-  color2: z.string(),
-  color3: z.string(),
-  faceType: z.number(),
-  helmetType: z.number()
-}),
-  owner: z.boolean(),
-  admin: z.boolean(),
-  leagueMailOptOut: z.boolean(),
-  leaguePmOptOut: z.boolean(),
-  leagueMemberSince: z.string(),
-  carNumber: z.string(),
-  nickName: z.string()
-}))
+    custId: z.number(),
+    displayName: z.string(),
+    helmet: z.object({
+      pattern: z.number(),
+      color1: z.string(),
+      color2: z.string(),
+      color3: z.string(),
+      faceType: z.number(),
+      helmetType: z.number()
+    }),
+    owner: z.boolean(),
+    admin: z.boolean(),
+    leagueMailOptOut: z.boolean(),
+    leaguePmOptOut: z.boolean(),
+    leagueMemberSince: z.string(),
+    carNumber: z.string(),
+    nickName: z.string()
+  }))
 });
-
 const LeagueGetPointsSystemsSchema = z.object({
   subscribed: z.boolean(),
   success: z.boolean(),
   pointsSystems: z.array(z.object({
-  pointsSystemId: z.number(),
-  name: z.string(),
-  description: z.string(),
+    pointsSystemId: z.number(),
+    name: z.string(),
+    description: z.string(),
+    leagueId: z.number(),
+    retired: z.boolean(),
+    iracingSystem: z.boolean()
+  })),
   leagueId: z.number(),
-  retired: z.boolean(),
-  iracingSystem: z.boolean()
-})),
-  leagueId: z.number()
+  seasonId: z.number()
 });
-
 const LeagueMembershipSchema = z.array(z.object({
   leagueId: z.number(),
   leagueName: z.string(),
@@ -522,40 +423,67 @@ const LeagueMembershipSchema = z.array(z.object({
   carNumber: z.string(),
   nickName: z.string()
 }));
-
 const LeagueRosterSchema = z.object({
   type: z.string(),
   data: z.object({
-  subscribed: z.boolean(),
-  success: z.boolean(),
-  rosterCount: z.number(),
-  leagueId: z.number()
-}),
+    subscribed: z.boolean(),
+    success: z.boolean(),
+    rosterCount: z.number(),
+    leagueId: z.number()
+  }),
   dataUrl: z.string()
 });
-
 const LeagueSeasonsSchema = z.object({
   subscribed: z.boolean(),
-  seasons: z.array(z.unknown()),
+  seasons: z.array(z.object({
+    leagueId: z.number(),
+    seasonId: z.number(),
+    pointsSystemId: z.number(),
+    seasonName: z.string(),
+    active: z.boolean(),
+    hidden: z.boolean(),
+    numDrops: z.number(),
+    noDropsOnOrAfterRaceNum: z.number(),
+    pointsCars: z.array(z.object({
+      carId: z.number(),
+      carName: z.string()
+    })),
+    driverPointsCarClasses: z.array(z.object({
+      carClassId: z.number(),
+      name: z.string(),
+      carsInClass: z.array(z.object({
+        carId: z.number(),
+        carName: z.string()
+      }))
+    })),
+    teamPointsCarClasses: z.array(z.object({
+      carClassId: z.number(),
+      name: z.string(),
+      carsInClass: z.array(z.object({
+        carId: z.number(),
+        carName: z.string()
+      }))
+    })),
+    pointsSystemName: z.string(),
+    pointsSystemDesc: z.string()
+  })),
   success: z.boolean(),
   retired: z.boolean(),
   leagueId: z.number()
 });
-
 const LeagueSeasonStandingsSchema = z.object({
   carClassId: z.number(),
   success: z.boolean(),
   seasonId: z.number(),
   carId: z.number(),
   standings: z.object({
-  driverStandings: z.array(z.unknown()),
-  teamStandings: z.array(z.unknown()),
-  driverStandingsCsvUrl: z.string(),
-  teamStandingsCsvUrl: z.string()
-}),
+    driverStandings: z.array(z.unknown()),
+    teamStandings: z.array(z.unknown()),
+    driverStandingsCsvUrl: z.string(),
+    teamStandingsCsvUrl: z.string()
+  }),
   leagueId: z.number()
 });
-
 const LeagueSeasonSessionsSchema = z.object({
   success: z.boolean(),
   subscribed: z.boolean(),
@@ -563,6 +491,18 @@ const LeagueSeasonSessionsSchema = z.object({
   seasonId: z.number(),
   sessions: z.array(z.unknown())
 });
+
+// ---- Response Types (inferred from schemas) ----
+
+export type LeagueCustLeagueSessionsResponse = z.infer<typeof LeagueCustLeagueSessionsSchema>;
+export type LeagueDirectoryResponse = z.infer<typeof LeagueDirectorySchema>;
+export type LeagueGetResponse = z.infer<typeof LeagueGetSchema>;
+export type LeagueGetPointsSystemsResponse = z.infer<typeof LeagueGetPointsSystemsSchema>;
+export type LeagueMembershipResponse = z.infer<typeof LeagueMembershipSchema>;
+export type LeagueRosterResponse = z.infer<typeof LeagueRosterSchema>;
+export type LeagueSeasonsResponse = z.infer<typeof LeagueSeasonsSchema>;
+export type LeagueSeasonStandingsResponse = z.infer<typeof LeagueSeasonStandingsSchema>;
+export type LeagueSeasonSessionsResponse = z.infer<typeof LeagueSeasonSessionsSchema>;
 
 // ---- Parameter Schemas ----
 

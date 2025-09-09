@@ -1,12 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { SeriesService } from "./service";
 import type { IRacingClient } from "../client";
-import type { SeriesAssetsResponse, SeriesGetResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./types";
-import { SeriesAssetsSchema, SeriesGetSchema, SeriesSeasonsSchema, SeriesSeasonListSchema, SeriesStatsSeriesSchema } from "./types";
+import type { SeriesAssetsResponse, SeriesGetResponse, SeriesPastSeasonsResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./types";
+import { SeriesAssetsSchema, SeriesGetSchema, SeriesPastSeasonsSchema, SeriesSeasonsSchema, SeriesSeasonListSchema, SeriesStatsSeriesSchema } from "./types";
 
 // Import sample data
 import seriesassetsSample from "../../samples/series.assets.json";
 import seriesgetSample from "../../samples/series.get.json";
+import seriespastseasonsSample from "../../samples/series.past_seasons.json";
 import seriesseasonsSample from "../../samples/series.seasons.json";
 import seriesseasonlistSample from "../../samples/series.season_list.json";
 import seriesstatsseriesSample from "../../samples/series.stats_series.json";
@@ -97,15 +98,44 @@ describe("SeriesService", () => {
   });
 
   describe("pastSeasons()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
+    it("should call client.get with correct URL and return transformed data", async () => {
+      // Transform sample data to camelCase as our client would
+      const transformData = (data: any): any => {
+        if (Array.isArray(data)) {
+          return data.map(item => transformData(item));
+        }
+        if (typeof data === 'object' && data !== null) {
+          return Object.fromEntries(
+            Object.entries(data).map(([key, value]) => [
+              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
+              transformData(value)
+            ])
+          );
+        }
+        return data;
+      };
+
+      const expectedTransformedData = transformData(seriespastseasonsSample);
+      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+
+      const testParams = {
+  seriesId: 123
+      };
+      const result = await seriesService.pastSeasons(testParams);
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/past_seasons", { params: testParams, schema: SeriesPastSeasonsSchema });
+      expect(result).toEqual(expectedTransformedData);
+    });
+
+    it("should return data matching SeriesPastSeasonsResponse type structure", async () => {
+      const mockData = {} as SeriesPastSeasonsResponse; // Mock with appropriate structure
       mockClient.get = vi.fn().mockResolvedValue(mockData);
 
       const testParams = {
   seriesId: 123
       };
-      await seriesService.pastSeasons(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/past_seasons", { params: testParams });
+      const result = await seriesService.pastSeasons(testParams);
+      expect(result).toBeDefined();
+      // Add specific type structure assertions here
     });
   });
 

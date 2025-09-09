@@ -1,0 +1,10 @@
+{
+  "type": "league_roster",
+  "data": {
+    "subscribed": false,
+    "success": true,
+    "roster_count": 19,
+    "league_id": 7058
+  },
+  "data_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/long_lived/league-roster/leagueid_7058/roster.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T221450Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=900&X-Amz-Signature=8ade0d3fbe925f04103122c710a9f7d722896c69038cf8b38fbf215f1eb014d1"
+}

@@ -1,35 +1,34 @@
 import * as z from "zod/mini";
 
-// ---- Response Types ----
+// ---- Common Schemas ----
 
-export interface CarclassGetItem {
-  carClassId: number; // maps from: car_class_id
-  carsInClass: Array<any>; // maps from: cars_in_class
-  custId: number; // maps from: cust_id
-  name: string;
-  rainEnabled: boolean; // maps from: rain_enabled
-  relativeSpeed: number; // maps from: relative_speed
-  shortName: string; // maps from: short_name
-}
-
-export type CarclassGetResponse = Array<CarclassGetItem>;
+const CarInClassSchema = z.object({
+  carDirpath: z.string(), // maps from: car_dirpath
+  carId: z.number(), // maps from: car_id
+  rainEnabled: z.boolean(), // maps from: rain_enabled
+  retired: z.boolean()
+});
 
 // ---- Response Schemas ----
 
 const CarclassGetSchema = z.array(z.object({
   carClassId: z.number(),
   carsInClass: z.array(z.object({
-  carDirpath: z.string(),
-  carId: z.number(),
-  rainEnabled: z.boolean(),
-  retired: z.boolean()
-})),
+    carDirpath: z.string(),
+    carId: z.number(),
+    rainEnabled: z.boolean(),
+    retired: z.boolean()
+  })),
   custId: z.number(),
   name: z.string(),
   rainEnabled: z.boolean(),
   relativeSpeed: z.number(),
   shortName: z.string()
 }));
+
+// ---- Response Types (inferred from schemas) ----
+
+export type CarclassGetResponse = z.infer<typeof CarclassGetSchema>;
 
 // ---- Parameter Schemas ----
 
