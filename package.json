@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test-sdk": "npx tsx test-sdk.ts"
   },
   "keywords": [
     "iracing",
