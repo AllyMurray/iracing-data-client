@@ -4,10 +4,10 @@
   "description": "HTTP client for the IRacing data API",
   "main": "index.js",
   "scripts": {
+    "sdk:generate": "npx tsx scripts/generate-sdk.ts",
+    "sdk:test": "npx tsx test-sdk.ts",
     "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "test-sdk": "npx tsx test-sdk.ts",
-    "gen-sdk": "npx tsx scripts/gen-sdk.ts"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "iracing",
