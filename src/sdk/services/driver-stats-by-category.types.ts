@@ -1,5 +1,43 @@
 import { z } from "zod-mini";
 
+// ---- Response Types ----
+
+export interface DriverStatsByCategoryOvalResponse {
+  _contentType: "csv";
+  _rawData: string;
+  _note: string;
+}
+
+export interface DriverStatsByCategorySportsCarResponse {
+  _contentType: "csv";
+  _rawData: string;
+  _note: string;
+}
+
+export interface DriverStatsByCategoryFormulaCarResponse {
+  _contentType: "csv";
+  _rawData: string;
+  _note: string;
+}
+
+export interface DriverStatsByCategoryRoadResponse {
+  _contentType: "csv";
+  _rawData: string;
+  _note: string;
+}
+
+export interface DriverStatsByCategoryDirtOvalResponse {
+  _contentType: "csv";
+  _rawData: string;
+  _note: string;
+}
+
+export interface DriverStatsByCategoryDirtRoadResponse {
+  _contentType: "csv";
+  _rawData: string;
+  _note: string;
+}
+
 // ---- Parameter Schemas ----
 
 const DriverStatsByCategoryOvalParamsSchema = z.object({
@@ -20,7 +58,7 @@ const DriverStatsByCategoryDirtOvalParamsSchema = z.object({
 const DriverStatsByCategoryDirtRoadParamsSchema = z.object({
 });
 
-// ---- Exported Types ----
+// ---- Exported Parameter Types ----
 
 export type DriverStatsByCategoryOvalParams = z.infer<typeof DriverStatsByCategoryOvalParamsSchema>;
 export type DriverStatsByCategorySportsCarParams = z.infer<typeof DriverStatsByCategorySportsCarParamsSchema>;

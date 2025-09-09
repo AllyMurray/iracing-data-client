@@ -1,15 +1,17 @@
 import { z } from "zod-mini";
 
+// ---- Response Types ----
+
 // ---- Parameter Schemas ----
 
 const HostedCombinedSessionsParamsSchema = z.object({
-  package_id: z.number().optional(), // If set, return only sessions using this car or track package ID.
+  packageId: z.number().optional(), // If set, return only sessions using this car or track package ID. // maps to: package_id
 });
 
 const HostedSessionsParamsSchema = z.object({
 });
 
-// ---- Exported Types ----
+// ---- Exported Parameter Types ----
 
 export type HostedCombinedSessionsParams = z.infer<typeof HostedCombinedSessionsParamsSchema>;
 export type HostedSessionsParams = z.infer<typeof HostedSessionsParamsSchema>;

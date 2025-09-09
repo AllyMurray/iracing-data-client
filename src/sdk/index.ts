@@ -41,7 +41,7 @@ export class IRacingSDK {
   public car: CarService;
   public carclass: CarclassService;
   public constants: ConstantsService;
-  public driverstatsbycategory: DriverStatsByCategoryService;
+  public driverStatsByCategory: DriverStatsByCategoryService;
   public hosted: HostedService;
   public league: LeagueService;
   public lookup: LookupService;
@@ -51,7 +51,7 @@ export class IRacingSDK {
   public series: SeriesService;
   public stats: StatsService;
   public team: TeamService;
-  public timeattack: TimeAttackService;
+  public timeAttack: TimeAttackService;
   public track: TrackService;
 
   constructor(opts: IRacingClientOptions = {}) {
@@ -60,7 +60,7 @@ export class IRacingSDK {
     this.car = new CarService(this.client);
     this.carclass = new CarclassService(this.client);
     this.constants = new ConstantsService(this.client);
-    this.driverstatsbycategory = new DriverStatsByCategoryService(this.client);
+    this.driverStatsByCategory = new DriverStatsByCategoryService(this.client);
     this.hosted = new HostedService(this.client);
     this.league = new LeagueService(this.client);
     this.lookup = new LookupService(this.client);
@@ -70,7 +70,7 @@ export class IRacingSDK {
     this.series = new SeriesService(this.client);
     this.stats = new StatsService(this.client);
     this.team = new TeamService(this.client);
-    this.timeattack = new TimeAttackService(this.client);
+    this.timeAttack = new TimeAttackService(this.client);
     this.track = new TrackService(this.client);
   }
 }

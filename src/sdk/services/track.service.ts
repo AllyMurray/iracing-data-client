@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { TrackAssetsParams, TrackGetParams } from "./track.types";
+import type { TrackAssetsParams, TrackGetParams, TrackAssetsResponse, TrackGetResponse } from "./track.types";
 
 export class TrackService {
   constructor(private client: IRacingClient) {}
@@ -7,17 +7,19 @@ export class TrackService {
   /**
    * assets
    * @see https://members-ng.iracing.com/data/track/assets
+   * @sample track.assets.json
    */
-  async assets(): Promise<unknown> {
-    return this.client.get("https://members-ng.iracing.com/data/track/assets");
+  async assets(): Promise<TrackAssetsResponse> {
+    return this.client.get<TrackAssetsResponse>("https://members-ng.iracing.com/data/track/assets");
   }
 
   /**
    * get
    * @see https://members-ng.iracing.com/data/track/get
+   * @sample track.get.json
    */
-  async get(): Promise<unknown> {
-    return this.client.get("https://members-ng.iracing.com/data/track/get");
+  async get(): Promise<TrackGetResponse> {
+    return this.client.get<TrackGetResponse>("https://members-ng.iracing.com/data/track/get");
   }
 
 }

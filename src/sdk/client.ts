@@ -35,7 +35,9 @@ export class IRacingClient {
   }
 
   async get<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
-    const q = this.toQuery(params || {});
+    // Convert camelCase params back to snake_case for the API
+    const apiParams = this.mapParamsToApi(params);
+    const q = this.toQuery(apiParams || {});
     const res = await this.fetchFn(url + q, { headers: this.headers });
     if (!res.ok) {
       const text = await res.text().catch(() => "");
@@ -45,9 +47,21 @@ export class IRacingClient {
     if (ct.includes("application/json")) return res.json() as Promise<T>;
     return res.text() as unknown as T;
   }
+  
+  private mapParamsToApi(params?: Record<string, any>): Record<string, any> | undefined {
+    if (!params) return undefined;
+    const mapped: Record<string, any> = {};
+    for (const [key, value] of Object.entries(params)) {
+      // Convert camelCase to snake_case
+      const snakeKey = key.replace(/[A-Z]/g, m => "_" + m.toLowerCase());
+      mapped[snakeKey] = value;
+    }
+    return mapped;
+  }
 
   private async getExpiring<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
-    const cacheKey = url + this.toQuery(params || {});
+    const apiParams = this.mapParamsToApi(params);
+    const cacheKey = url + this.toQuery(apiParams || {});
     const cached = this.expiringCache.get(cacheKey);
     if (cached && cached.expiresAt > Date.now()) {
       return cached.data as T;

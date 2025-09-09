@@ -1,16 +1,18 @@
 import { z } from "zod-mini";
 
+// ---- Response Types ----
+
 // ---- Parameter Schemas ----
 
 const TeamGetParamsSchema = z.object({
-  team_id: z.number(),
-  include_licenses: z.boolean().optional(), // For faster responses, only request when necessary.
+  teamId: z.number(), // maps to: team_id
+  includeLicenses: z.boolean().optional(), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
 const TeamMembershipParamsSchema = z.object({
 });
 
-// ---- Exported Types ----
+// ---- Exported Parameter Types ----
 
 export type TeamGetParams = z.infer<typeof TeamGetParamsSchema>;
 export type TeamMembershipParams = z.infer<typeof TeamMembershipParamsSchema>;

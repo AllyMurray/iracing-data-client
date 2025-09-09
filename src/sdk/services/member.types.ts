@@ -1,25 +1,27 @@
 import { z } from "zod-mini";
 
+// ---- Response Types ----
+
 // ---- Parameter Schemas ----
 
 const MemberAwardsParamsSchema = z.object({
-  cust_id: z.number().optional(), // Defaults to the authenticated member.
+  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 const MemberAwardInstancesParamsSchema = z.object({
-  cust_id: z.number().optional(), // Defaults to the authenticated member.
-  award_id: z.number(),
+  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  awardId: z.number(), // maps to: award_id
 });
 
 const MemberChartDataParamsSchema = z.object({
-  cust_id: z.number().optional(), // Defaults to the authenticated member.
-  category_id: z.number(), // 1 - Oval; 2 - Road; 3 - Dirt oval; 4 - Dirt road
-  chart_type: z.number(), // 1 - iRating; 2 - TT Rating; 3 - License/SR
+  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  categoryId: z.number(), // 1 - Oval; 2 - Road; 3 - Dirt oval; 4 - Dirt road // maps to: category_id
+  chartType: z.number(), // 1 - iRating; 2 - TT Rating; 3 - License/SR // maps to: chart_type
 });
 
 const MemberGetParamsSchema = z.object({
-  cust_ids: z.array(z.number()), // ?cust_ids=2,3,4
-  include_licenses: z.boolean().optional(),
+  custIds: z.array(z.number()), // ?cust_ids=2,3,4 // maps to: cust_ids
+  includeLicenses: z.boolean().optional(), // maps to: include_licenses
 });
 
 const MemberInfoParamsSchema = z.object({
@@ -29,10 +31,10 @@ const MemberParticipationCreditsParamsSchema = z.object({
 });
 
 const MemberProfileParamsSchema = z.object({
-  cust_id: z.number().optional(), // Defaults to the authenticated member.
+  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
 });
 
-// ---- Exported Types ----
+// ---- Exported Parameter Types ----
 
 export type MemberAwardsParams = z.infer<typeof MemberAwardsParamsSchema>;
 export type MemberAwardInstancesParams = z.infer<typeof MemberAwardInstancesParamsSchema>;

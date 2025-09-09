@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { CarAssetsParams, CarGetParams } from "./car.types";
+import type { CarAssetsParams, CarGetParams, CarAssetsResponse, CarGetResponse } from "./car.types";
 
 export class CarService {
   constructor(private client: IRacingClient) {}
@@ -7,17 +7,19 @@ export class CarService {
   /**
    * assets
    * @see https://members-ng.iracing.com/data/car/assets
+   * @sample car.assets.json
    */
-  async assets(): Promise<unknown> {
-    return this.client.get("https://members-ng.iracing.com/data/car/assets");
+  async assets(): Promise<CarAssetsResponse> {
+    return this.client.get<CarAssetsResponse>("https://members-ng.iracing.com/data/car/assets");
   }
 
   /**
    * get
    * @see https://members-ng.iracing.com/data/car/get
+   * @sample car.get.json
    */
-  async get(): Promise<unknown> {
-    return this.client.get("https://members-ng.iracing.com/data/car/get");
+  async get(): Promise<CarGetResponse> {
+    return this.client.get<CarGetResponse>("https://members-ng.iracing.com/data/car/get");
   }
 
 }
