@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 import * as dotenv from "dotenv";
-import { IRacingSDK, IRacingError } from "./src/sdk/index.ts";
+import { IRacingSDK, IRacingError } from "./src/index.ts";
 
 // Load environment variables
 dotenv.config();

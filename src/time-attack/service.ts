@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { TimeAttackMemberSeasonResultsParams, TimeAttackMemberSeasonResultsResponse } from "./time-attack.types";
+import type { TimeAttackMemberSeasonResultsParams, TimeAttackMemberSeasonResultsResponse } from "./types";
 
 export class TimeAttackService {
   constructor(private client: IRacingClient) {}

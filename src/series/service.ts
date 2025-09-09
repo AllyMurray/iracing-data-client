@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { SeriesAssetsParams, SeriesGetParams, SeriesPastSeasonsParams, SeriesSeasonsParams, SeriesSeasonListParams, SeriesSeasonScheduleParams, SeriesStatsSeriesParams, SeriesAssetsResponse, SeriesGetResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./series.types";
+import type { SeriesAssetsParams, SeriesGetParams, SeriesPastSeasonsParams, SeriesSeasonsParams, SeriesSeasonListParams, SeriesSeasonScheduleParams, SeriesStatsSeriesParams, SeriesAssetsResponse, SeriesGetResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./types";
 
 export class SeriesService {
   constructor(private client: IRacingClient) {}

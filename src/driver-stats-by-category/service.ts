@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { DriverStatsByCategoryOvalParams, DriverStatsByCategorySportsCarParams, DriverStatsByCategoryFormulaCarParams, DriverStatsByCategoryRoadParams, DriverStatsByCategoryDirtOvalParams, DriverStatsByCategoryDirtRoadParams, DriverStatsByCategoryOvalResponse, DriverStatsByCategorySportsCarResponse, DriverStatsByCategoryFormulaCarResponse, DriverStatsByCategoryRoadResponse, DriverStatsByCategoryDirtOvalResponse, DriverStatsByCategoryDirtRoadResponse } from "./driver-stats-by-category.types";
+import type { DriverStatsByCategoryOvalParams, DriverStatsByCategorySportsCarParams, DriverStatsByCategoryFormulaCarParams, DriverStatsByCategoryRoadParams, DriverStatsByCategoryDirtOvalParams, DriverStatsByCategoryDirtRoadParams, DriverStatsByCategoryOvalResponse, DriverStatsByCategorySportsCarResponse, DriverStatsByCategoryFormulaCarResponse, DriverStatsByCategoryRoadResponse, DriverStatsByCategoryDirtOvalResponse, DriverStatsByCategoryDirtRoadResponse } from "./types";
 
 export class DriverStatsByCategoryService {
   constructor(private client: IRacingClient) {}

@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { MemberAwardsParams, MemberAwardInstancesParams, MemberChartDataParams, MemberGetParams, MemberInfoParams, MemberParticipationCreditsParams, MemberProfileParams, MemberAwardsResponse, MemberAwardInstancesResponse, MemberChartDataResponse, MemberGetResponse, MemberInfoResponse, MemberParticipationCreditsResponse, MemberProfileResponse } from "./member.types";
+import type { MemberAwardsParams, MemberAwardInstancesParams, MemberChartDataParams, MemberGetParams, MemberInfoParams, MemberParticipationCreditsParams, MemberProfileParams, MemberAwardsResponse, MemberAwardInstancesResponse, MemberChartDataResponse, MemberGetResponse, MemberInfoResponse, MemberParticipationCreditsResponse, MemberProfileResponse } from "./types";
 
 export class MemberService {
   constructor(private client: IRacingClient) {}

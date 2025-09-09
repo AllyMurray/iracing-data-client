@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { HostedCombinedSessionsParams, HostedSessionsParams, HostedCombinedSessionsResponse, HostedSessionsResponse } from "./hosted.types";
+import type { HostedCombinedSessionsParams, HostedSessionsParams, HostedCombinedSessionsResponse, HostedSessionsResponse } from "./types";
 
 export class HostedService {
   constructor(private client: IRacingClient) {}

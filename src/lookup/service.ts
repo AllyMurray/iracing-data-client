@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { LookupCountriesParams, LookupDriversParams, LookupFlairsParams, LookupGetParams, LookupLicensesParams, LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./lookup.types";
+import type { LookupCountriesParams, LookupDriversParams, LookupFlairsParams, LookupGetParams, LookupLicensesParams, LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
 
 export class LookupService {
   constructor(private client: IRacingClient) {}

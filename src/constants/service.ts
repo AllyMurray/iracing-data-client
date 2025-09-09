@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { ConstantsCategoriesParams, ConstantsDivisionsParams, ConstantsEventTypesParams, ConstantsCategoriesResponse, ConstantsDivisionsResponse, ConstantsEventTypesResponse } from "./constants.types";
+import type { ConstantsCategoriesParams, ConstantsDivisionsParams, ConstantsEventTypesParams, ConstantsCategoriesResponse, ConstantsDivisionsResponse, ConstantsEventTypesResponse } from "./types";
 
 export class ConstantsService {
   constructor(private client: IRacingClient) {}

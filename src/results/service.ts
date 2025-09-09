@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { ResultsGetParams, ResultsEventLogParams, ResultsLapChartDataParams, ResultsLapDataParams, ResultsSearchHostedParams, ResultsSearchSeriesParams, ResultsSeasonResultsParams } from "./results.types";
+import type { ResultsGetParams, ResultsEventLogParams, ResultsLapChartDataParams, ResultsLapDataParams, ResultsSearchHostedParams, ResultsSearchSeriesParams, ResultsSeasonResultsParams } from "./types";
 
 export class ResultsService {
   constructor(private client: IRacingClient) {}

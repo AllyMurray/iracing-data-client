@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { TeamGetParams, TeamMembershipParams, TeamMembershipResponse } from "./team.types";
+import type { TeamGetParams, TeamMembershipParams, TeamMembershipResponse } from "./types";
 
 export class TeamService {
   constructor(private client: IRacingClient) {}

@@ -1,39 +1,39 @@
 /* AUTO-GENERATED — do not edit */
 
 import { IRacingClient, IRacingError, type IRacingClientOptions } from "./client";
-import { CarService } from "./services/car.service";
-import { CarclassService } from "./services/carclass.service";
-import { ConstantsService } from "./services/constants.service";
-import { DriverStatsByCategoryService } from "./services/driver-stats-by-category.service";
-import { HostedService } from "./services/hosted.service";
-import { LeagueService } from "./services/league.service";
-import { LookupService } from "./services/lookup.service";
-import { MemberService } from "./services/member.service";
-import { ResultsService } from "./services/results.service";
-import { SeasonService } from "./services/season.service";
-import { SeriesService } from "./services/series.service";
-import { StatsService } from "./services/stats.service";
-import { TeamService } from "./services/team.service";
-import { TimeAttackService } from "./services/time-attack.service";
-import { TrackService } from "./services/track.service";
+import { CarService } from "./car/service";
+import { CarclassService } from "./carclass/service";
+import { ConstantsService } from "./constants/service";
+import { DriverStatsByCategoryService } from "./driver-stats-by-category/service";
+import { HostedService } from "./hosted/service";
+import { LeagueService } from "./league/service";
+import { LookupService } from "./lookup/service";
+import { MemberService } from "./member/service";
+import { ResultsService } from "./results/service";
+import { SeasonService } from "./season/service";
+import { SeriesService } from "./series/service";
+import { StatsService } from "./stats/service";
+import { TeamService } from "./team/service";
+import { TimeAttackService } from "./time-attack/service";
+import { TrackService } from "./track/service";
 
 export { IRacingClient, IRacingError, type IRacingClientOptions };
 
-export * from "./services/car.types";
-export * from "./services/carclass.types";
-export * from "./services/constants.types";
-export * from "./services/driver-stats-by-category.types";
-export * from "./services/hosted.types";
-export * from "./services/league.types";
-export * from "./services/lookup.types";
-export * from "./services/member.types";
-export * from "./services/results.types";
-export * from "./services/season.types";
-export * from "./services/series.types";
-export * from "./services/stats.types";
-export * from "./services/team.types";
-export * from "./services/time-attack.types";
-export * from "./services/track.types";
+export * from "./car/types";
+export * from "./carclass/types";
+export * from "./constants/types";
+export * from "./driver-stats-by-category/types";
+export * from "./hosted/types";
+export * from "./league/types";
+export * from "./lookup/types";
+export * from "./member/types";
+export * from "./results/types";
+export * from "./season/types";
+export * from "./series/types";
+export * from "./stats/types";
+export * from "./team/types";
+export * from "./time-attack/types";
+export * from "./track/types";
 
 export class IRacingSDK {
   private client: IRacingClient;

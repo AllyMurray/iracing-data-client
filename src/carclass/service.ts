@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { CarclassGetParams, CarclassGetResponse } from "./carclass.types";
+import type { CarclassGetParams, CarclassGetResponse } from "./types";
 
 export class CarclassService {
   constructor(private client: IRacingClient) {}

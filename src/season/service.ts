@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { SeasonListParams, SeasonRaceGuideParams, SeasonSpectatorSubsessionidsParams, SeasonSpectatorSubsessionidsDetailParams, SeasonListResponse, SeasonRaceGuideResponse, SeasonSpectatorSubsessionidsResponse, SeasonSpectatorSubsessionidsDetailResponse } from "./season.types";
+import type { SeasonListParams, SeasonRaceGuideParams, SeasonSpectatorSubsessionidsParams, SeasonSpectatorSubsessionidsDetailParams, SeasonListResponse, SeasonRaceGuideResponse, SeasonSpectatorSubsessionidsResponse, SeasonSpectatorSubsessionidsDetailResponse } from "./types";
 
 export class SeasonService {
   constructor(private client: IRacingClient) {}

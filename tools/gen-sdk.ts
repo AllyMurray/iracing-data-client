@@ -12,7 +12,7 @@ type Root = Record<string, Section>;
 
 /** ---- CLI args ---- */
 const INPUT = process.argv[2] ?? "docs/api/index.json";
-const OUT_DIR = process.argv[3] ?? "src/sdk";
+const OUT_DIR = process.argv[3] ?? "src";
 const SAMPLES_DIR = process.argv[4] ?? "samples";
 
 const index: Root = JSON.parse(fs.readFileSync(INPUT, "utf8"));
@@ -320,7 +320,7 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
 function generateSectionService(sectionName: string, endpoints: Flat[]): string {
   const lines: string[] = [];
   const className = toPascal(sectionName) + "Service";
-  const typesFile = `./${toKebab(sectionName)}.types`;
+  const typesFile = `./types`;
   
   lines.push(`import type { IRacingClient } from "../client";`);
   
@@ -668,8 +668,8 @@ function generateMainSDK(sections: string[]): string {
   // Import all service classes
   for (const section of sections) {
     const className = toPascal(section) + "Service";
-    const fileName = toKebab(section);
-    lines.push(`import { ${className} } from "./services/${fileName}.service";`);
+    const dirName = toKebab(section);
+    lines.push(`import { ${className} } from "./${dirName}/service";`);
   }
   
   lines.push(``);
@@ -678,8 +678,8 @@ function generateMainSDK(sections: string[]): string {
   
   // Export all types
   for (const section of sections) {
-    const fileName = toKebab(section);
-    lines.push(`export * from "./services/${fileName}.types";`);
+    const dirName = toKebab(section);
+    lines.push(`export * from "./${dirName}/types";`);
   }
   
   lines.push(``);
@@ -725,7 +725,6 @@ async function generateSDK() {
 
   // Create output directories
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  fs.mkdirSync(path.join(OUT_DIR, "services"), { recursive: true });
 
   // Generate client base
   fs.writeFileSync(path.join(OUT_DIR, "client.ts"), generateClientBase(), "utf8");
@@ -736,14 +735,20 @@ async function generateSDK() {
   for (const [section, eps] of bySection) {
     sections.push(section);
     
+    const dirName = toKebab(section);
+    const sectionDir = path.join(OUT_DIR, dirName);
+    
+    // Create directory for this service
+    fs.mkdirSync(sectionDir, { recursive: true });
+    
     // Generate types file
-    const typesFile = path.join(OUT_DIR, "services", `${toKebab(section)}.types.ts`);
+    const typesFile = path.join(sectionDir, "types.ts");
     const typesContent = await generateSectionTypes(section, eps);
     fs.writeFileSync(typesFile, typesContent, "utf8");
     console.log(`Generated ${typesFile} with ${eps.length} endpoints`);
     
     // Generate service file
-    const serviceFile = path.join(OUT_DIR, "services", `${toKebab(section)}.service.ts`);
+    const serviceFile = path.join(sectionDir, "service.ts");
     fs.writeFileSync(serviceFile, generateSectionService(section, eps), "utf8");
     console.log(`Generated ${serviceFile}`);
   }
