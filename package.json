@@ -6,6 +6,9 @@
   "scripts": {
     "sdk:generate": "npx tsx scripts/generate-sdk.ts",
     "sdk:test": "npx tsx test-sdk.ts",
+    "docs:dev": "cd docs-site && pnpm dev",
+    "docs:build": "cd docs-site && pnpm build",
+    "docs:preview": "cd docs-site && pnpm preview",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
