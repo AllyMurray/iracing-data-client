@@ -2,6 +2,8 @@ import * as z from "zod/mini";
 
 // ---- Response Types ----
 
+// ---- Response Schemas ----
+
 // ---- Parameter Schemas ----
 
 const ResultsGetParamsSchema = z.object({

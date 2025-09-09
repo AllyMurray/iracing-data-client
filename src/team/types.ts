@@ -12,6 +12,16 @@ export interface TeamMembershipItem {
 
 export type TeamMembershipResponse = TeamMembershipItem[];
 
+// ---- Response Schemas ----
+
+const TeamMembershipSchema = z.array(z.object({
+  teamId: z.number(),
+  teamName: z.string(),
+  owner: z.boolean(),
+  admin: z.boolean(),
+  defaultTeam: z.boolean()
+}));
+
 // ---- Parameter Schemas ----
 
 const TeamGetParamsSchema = z.object({
@@ -32,4 +42,5 @@ export type TeamMembershipParams = z.infer<typeof TeamMembershipParamsSchema>;
 export {
   TeamGetParamsSchema,
   TeamMembershipParamsSchema,
+  TeamMembershipSchema,
 };

@@ -23,6 +23,23 @@ export interface ConstantsEventTypesItem {
 
 export type ConstantsEventTypesResponse = ConstantsEventTypesItem[];
 
+// ---- Response Schemas ----
+
+const ConstantsCategoriesSchema = z.array(z.object({
+  label: z.string(),
+  value: z.number()
+}));
+
+const ConstantsDivisionsSchema = z.array(z.object({
+  label: z.string(),
+  value: z.number()
+}));
+
+const ConstantsEventTypesSchema = z.array(z.object({
+  label: z.string(),
+  value: z.number()
+}));
+
 // ---- Parameter Schemas ----
 
 const ConstantsCategoriesParamsSchema = z.object({
@@ -46,4 +63,7 @@ export {
   ConstantsCategoriesParamsSchema,
   ConstantsDivisionsParamsSchema,
   ConstantsEventTypesParamsSchema,
+  ConstantsCategoriesSchema,
+  ConstantsDivisionsSchema,
+  ConstantsEventTypesSchema,
 };

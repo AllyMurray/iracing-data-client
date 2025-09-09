@@ -38,6 +38,44 @@ export interface DriverStatsByCategoryDirtRoadResponse {
   _note: string;
 }
 
+// ---- Response Schemas ----
+
+const DriverStatsByCategoryOvalSchema = z.object({
+  _contentType: z.literal("csv"),
+  _rawData: z.string(),
+  _note: z.string()
+});
+
+const DriverStatsByCategorySportsCarSchema = z.object({
+  _contentType: z.literal("csv"),
+  _rawData: z.string(),
+  _note: z.string()
+});
+
+const DriverStatsByCategoryFormulaCarSchema = z.object({
+  _contentType: z.literal("csv"),
+  _rawData: z.string(),
+  _note: z.string()
+});
+
+const DriverStatsByCategoryRoadSchema = z.object({
+  _contentType: z.literal("csv"),
+  _rawData: z.string(),
+  _note: z.string()
+});
+
+const DriverStatsByCategoryDirtOvalSchema = z.object({
+  _contentType: z.literal("csv"),
+  _rawData: z.string(),
+  _note: z.string()
+});
+
+const DriverStatsByCategoryDirtRoadSchema = z.object({
+  _contentType: z.literal("csv"),
+  _rawData: z.string(),
+  _note: z.string()
+});
+
 // ---- Parameter Schemas ----
 
 const DriverStatsByCategoryOvalParamsSchema = z.object({
@@ -76,4 +114,10 @@ export {
   DriverStatsByCategoryRoadParamsSchema,
   DriverStatsByCategoryDirtOvalParamsSchema,
   DriverStatsByCategoryDirtRoadParamsSchema,
+  DriverStatsByCategoryOvalSchema,
+  DriverStatsByCategorySportsCarSchema,
+  DriverStatsByCategoryFormulaCarSchema,
+  DriverStatsByCategoryRoadSchema,
+  DriverStatsByCategoryDirtOvalSchema,
+  DriverStatsByCategoryDirtRoadSchema,
 };

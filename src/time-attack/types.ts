@@ -4,6 +4,10 @@ import * as z from "zod/mini";
 
 export type TimeAttackMemberSeasonResultsResponse = any[];
 
+// ---- Response Schemas ----
+
+const TimeAttackMemberSeasonResultsSchema = z.array(z.unknown());
+
 // ---- Parameter Schemas ----
 
 const TimeAttackMemberSeasonResultsParamsSchema = z.object({
@@ -18,4 +22,5 @@ export type TimeAttackMemberSeasonResultsParams = z.infer<typeof TimeAttackMembe
 
 export {
   TimeAttackMemberSeasonResultsParamsSchema,
+  TimeAttackMemberSeasonResultsSchema,
 };

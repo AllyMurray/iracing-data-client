@@ -37,6 +37,55 @@ export interface LookupLicensesItem {
 
 export type LookupLicensesResponse = LookupLicensesItem[];
 
+// ---- Response Schemas ----
+
+const LookupCountriesSchema = z.array(z.object({
+  countryName: z.string(),
+  countryCode: z.string()
+}));
+
+const LookupDriversSchema = z.array(z.object({
+  custId: z.number(),
+  displayName: z.string(),
+  helmet: z.object({
+  pattern: z.number(),
+  color1: z.string(),
+  color2: z.string(),
+  color3: z.string(),
+  faceType: z.number(),
+  helmetType: z.number()
+}),
+  profileDisabled: z.boolean()
+}));
+
+const LookupFlairsSchema = z.object({
+  flairs: z.array(z.object({
+  flairId: z.number(),
+  flairName: z.string(),
+  seq: z.number()
+})),
+  success: z.boolean()
+});
+
+const LookupGetSchema = z.array(z.unknown());
+
+const LookupLicensesSchema = z.array(z.object({
+  licenseGroup: z.number(),
+  groupName: z.union([z.string(), z.literal("")]),
+  minNumRaces: z.number(),
+  participationCredits: z.number(),
+  minSrToFastTrack: z.number(),
+  levels: z.array(z.object({
+  licenseId: z.number(),
+  licenseGroup: z.number(),
+  license: z.string(),
+  shortName: z.string(),
+  licenseLetter: z.string(),
+  color: z.string()
+})),
+  minNumTt: z.number()
+}));
+
 // ---- Parameter Schemas ----
 
 const LookupCountriesParamsSchema = z.object({
@@ -72,4 +121,9 @@ export {
   LookupFlairsParamsSchema,
   LookupGetParamsSchema,
   LookupLicensesParamsSchema,
+  LookupCountriesSchema,
+  LookupDriversSchema,
+  LookupFlairsSchema,
+  LookupGetSchema,
+  LookupLicensesSchema,
 };

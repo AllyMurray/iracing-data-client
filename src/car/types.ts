@@ -69,6 +69,71 @@ export interface CarGetItem {
 
 export type CarGetResponse = CarGetItem[];
 
+// ---- Response Schemas ----
+
+const CarAssetsSchema = z.record(z.string(), z.object({
+  carId: z.number(),
+  carRules: z.array(z.unknown()),
+  detailCopy: z.string(),
+  detailScreenShotImages: z.string(),
+  detailTechspecsCopy: z.string(),
+  folder: z.string(),
+  galleryImages: z.union([z.string(), z.literal("")]),
+  galleryPrefix: z.union([z.string(), z.literal(""), z.null()]),
+  groupImage: z.union([z.string(), z.literal(""), z.null()]),
+  groupName: z.union([z.string(), z.literal(""), z.null()]),
+  largeImage: z.string(),
+  logo: z.union([z.string(), z.literal("")]),
+  smallImage: z.string(),
+  sponsorLogo: z.union([z.string(), z.literal(""), z.null()]),
+  templatePath: z.union([z.string(), z.literal("")])
+}));
+
+const CarGetSchema = z.array(z.object({
+  aiEnabled: z.boolean(),
+  allowNumberColors: z.boolean(),
+  allowNumberFont: z.boolean(),
+  allowSponsor1: z.boolean(),
+  allowSponsor2: z.boolean(),
+  allowWheelColor: z.boolean(),
+  awardExempt: z.boolean(),
+  carConfigDefs: z.array(z.unknown()),
+  carConfigs: z.array(z.unknown()),
+  carDirpath: z.string(),
+  carId: z.number(),
+  carName: z.string(),
+  carNameAbbreviated: z.string(),
+  carTypes: z.array(z.object({
+  carType: z.string()
+})),
+  carWeight: z.number(),
+  categories: z.array(z.string()),
+  created: z.string(),
+  firstSale: z.string(),
+  folder: z.string(),
+  forumUrl: z.union([z.string(), z.literal("")]),
+  freeWithSubscription: z.boolean(),
+  hasHeadlights: z.boolean(),
+  hasMultipleDryTireTypes: z.boolean(),
+  hasRainCapableTireTypes: z.boolean(),
+  hp: z.number(),
+  isPsPurchasable: z.boolean(),
+  logo: z.union([z.string(), z.literal("")]),
+  maxPowerAdjustPct: z.number(),
+  maxWeightPenaltyKg: z.number(),
+  minPowerAdjustPct: z.number(),
+  packageId: z.number(),
+  patterns: z.number(),
+  price: z.number(),
+  priceDisplay: z.union([z.string(), z.literal("")]),
+  rainEnabled: z.boolean(),
+  retired: z.boolean(),
+  searchFilters: z.string(),
+  sku: z.number(),
+  smallImage: z.string(),
+  sponsorLogo: z.union([z.string(), z.literal(""), z.null()])
+}));
+
 // ---- Parameter Schemas ----
 
 const CarAssetsParamsSchema = z.object({
@@ -87,4 +152,6 @@ export type CarGetParams = z.infer<typeof CarGetParamsSchema>;
 export {
   CarAssetsParamsSchema,
   CarGetParamsSchema,
+  CarAssetsSchema,
+  CarGetSchema,
 };

@@ -181,11 +181,11 @@ export class IRacingClient {
   }
 
 
-  async get<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
+  async get<T = unknown>(url: string, options?: { params?: Record<string, any>; schema?: z.ZodMiniType<T> }): Promise<T> {
     await this.ensureAuthenticated();
 
     // Convert camelCase params back to snake_case for the API
-    const apiParams = this.mapParamsToApi(params);
+    const apiParams = this.mapParamsToApi(options?.params);
     
     const headers: Record<string, string> = {};
     
@@ -283,10 +283,22 @@ export class IRacingClient {
         }
         
         const s3Data = await s3Response.json();
-        return this.mapResponseFromApi(s3Data) as T;
+        const mappedData = this.mapResponseFromApi(s3Data);
+        
+        if (options?.schema) {
+          return options.schema.parse(mappedData);
+        }
+        
+        return mappedData as T;
       }
       
-      return this.mapResponseFromApi(data) as T;
+      const mappedData = this.mapResponseFromApi(data);
+      
+      if (options?.schema) {
+        return options.schema.parse(mappedData);
+      }
+      
+      return mappedData as T;
     }
 
     throw new Error(`Unexpected content type: ${contentType}`);

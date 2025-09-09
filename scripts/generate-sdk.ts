@@ -69,6 +69,18 @@ function toPascal(s: string): string {
 }
 
 function toCamelCase(s: string): string {
+  // Preserve leading underscores for special properties like _contentType
+  if (s.startsWith('_')) {
+    const rest = s.slice(1);
+    // If the rest is already camelCase (like contentType), keep it as is
+    if (rest.includes('_') || rest.includes('-') || rest.includes('.')) {
+      const parts = rest.split(/[_\-\.]/);
+      return '_' + parts[0].toLowerCase() + parts.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join("");
+    } else {
+      return s; // Keep the original string if it's already in the right format
+    }
+  }
+  
   const parts = s.split(/[_\-\.]/);
   return parts[0].toLowerCase() + parts.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join("");
 }
@@ -194,6 +206,94 @@ function generateTypeFromJson(obj: any, typeName: string, indent: string = ""): 
   return lines.join("\n");
 }
 
+/** ---- Generate Zod schema from JSON sample ---- */
+function generateZodSchemaFromSample(sample: any, schemaName: string): string {
+  function getZodTypeForValue(value: any): string {
+    if (value === null) return "z.null()";
+    if (value === undefined) return "z.undefined()";
+    
+    const type = typeof value;
+    
+    switch (type) {
+      case "string":
+        // For specific string literals like "csv", use z.literal
+        if (value === "csv") {
+          return 'z.literal("csv")';
+        }
+        return "z.string()";
+      case "number":
+        return "z.number()";
+      case "boolean":
+        return "z.boolean()";
+      case "object":
+        if (Array.isArray(value)) {
+          if (value.length > 0) {
+            const itemType = getZodTypeForValue(value[0]);
+            return `z.array(${itemType})`;
+          }
+          return "z.array(z.unknown())";
+        }
+        // For objects, generate a proper object schema
+        return generateZodObjectSchema(value);
+      default:
+        return "z.unknown()";
+    }
+  }
+  
+  function generateZodObjectSchema(obj: any): string {
+    if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+      return "z.unknown()";
+    }
+    
+    const properties: string[] = [];
+    for (const [key, value] of Object.entries(obj)) {
+      const camelKey = toCamelCase(key);
+      let zodType = getZodTypeForValue(value);
+      
+      // Make commonly problematic fields more flexible - they can be undefined, null, empty string, or their expected type
+      const problematicFields = ['logo', 'sponsorLogo', 'galleryImages', 'forumUrl', 'priceDisplay', 'groupImage', 'groupName', 'galleryPrefix', 'templatePath'];
+      if (problematicFields.includes(camelKey) || value === null || value === undefined || value === "") {
+        // These fields can be empty string, null, or string - use union type
+        if (zodType === "z.null()") {
+          zodType = "z.union([z.string(), z.literal(\"\"), z.null()])";
+        } else if (zodType === "z.string()") {
+          zodType = "z.union([z.string(), z.literal(\"\")])";
+        } else {
+          zodType = `z.optional(${zodType})`;
+        }
+      }
+      
+      properties.push(`  ${camelKey}: ${zodType}`);
+    }
+    
+    return `z.object({\n${properties.join(',\n')}\n})`;
+  }
+
+  if (Array.isArray(sample)) {
+    if (sample.length > 0) {
+      const itemType = getZodTypeForValue(sample[0]);
+      return `const ${schemaName} = z.array(${itemType});`;
+    }
+    return `const ${schemaName} = z.array(z.unknown());`;
+  }
+  
+  if (typeof sample === 'object' && sample !== null) {
+    // For dictionary-like objects (like car assets with numeric keys)
+    const keys = Object.keys(sample);
+    if (keys.length > 0 && keys.every(k => /^\d+$/.test(k))) {
+      const firstValue = sample[keys[0]];
+      const valueType = getZodTypeForValue(firstValue);
+      return `const ${schemaName} = z.record(z.string(), ${valueType});`;
+    }
+    
+    // For regular objects, generate a proper object schema
+    const zodObjectSchema = generateZodObjectSchema(sample);
+    return `const ${schemaName} = ${zodObjectSchema};`;
+  }
+  
+  return `const ${schemaName} = ${getZodTypeForValue(sample)};`;
+}
+
 /** ---- Get TypeScript type for a value ---- */
 function getTypeForValue(value: any): string {
   if (value === null) return "null";
@@ -245,6 +345,37 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
   if (responseTypes.length > 0) {
     lines.push(responseTypes.join("\n\n"));
     lines.push(``);
+  }
+  
+  lines.push(`// ---- Response Schemas ----`);
+  lines.push(``);
+  
+  // Generate response schemas from TypeScript interfaces
+  for (const ep of endpoints) {
+    if (ep.responseType) {
+      const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+      
+      // Generate a basic Zod schema - this could be enhanced to be more specific
+      if (ep.responseType.endsWith('Response')) {
+        if (ep.samplePath) {
+          // Try to infer schema structure from sample data
+          try {
+            const sampleData = JSON.parse(fs.readFileSync(ep.samplePath, "utf8"));
+            const zodSchema = generateZodSchemaFromSample(sampleData, schemaName);
+            lines.push(zodSchema);
+            lines.push(``);
+          } catch (error) {
+            // Fallback to generic schema
+            lines.push(`const ${schemaName} = z.unknown();`);
+            lines.push(``);
+          }
+        } else {
+          // Generic schema
+          lines.push(`const ${schemaName} = z.unknown();`);
+          lines.push(``);
+        }
+      }
+    }
   }
   
   lines.push(`// ---- Parameter Schemas ----`);
@@ -307,11 +438,240 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
   lines.push(`// ---- Exported Schemas ----`);
   lines.push(``);
   lines.push(`export {`);
+  
+  // Export parameter schemas
   for (const ep of endpoints) {
     const schemaName = `${toPascal(ep.method)}ParamsSchema`;
     lines.push(`  ${schemaName},`);
   }
+  
+  // Export response schemas
+  for (const ep of endpoints) {
+    if (ep.responseType) {
+      const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+      lines.push(`  ${schemaName},`);
+    }
+  }
+  
   lines.push(`};`);
+  
+  return lines.join("\n");
+}
+
+/** ---- Generate mock test parameters from parameter definitions ---- */
+function generateMockParams(params: Record<string, any>): string {
+  const mockValues: string[] = [];
+  
+  for (const [paramName, paramDef] of Object.entries(params)) {
+    const camelParamName = toCamelCase(paramName);
+    let mockValue: string;
+    
+    switch (paramDef.type) {
+      case "string":
+        mockValue = '"test"';
+        break;
+      case "number":
+        mockValue = '123';
+        break;
+      case "boolean":
+        mockValue = 'true';
+        break;
+      case "numbers":
+        mockValue = '[123, 456]';
+        break;
+      default:
+        mockValue = '"test"';
+    }
+    
+    mockValues.push(`  ${camelParamName}: ${mockValue}`);
+  }
+  
+  if (mockValues.length === 0) {
+    return '{}';
+  }
+  
+  return `{\n${mockValues.join(',\n')}\n      }`;
+}
+
+/** ---- Generate unit test for a section ---- */
+function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
+  const lines: string[] = [];
+  const className = toPascal(sectionName) + "Service";
+  const servicePath = "./service";
+  const typesPath = "./types";
+  
+  lines.push(`import { describe, it, expect, vi, beforeEach } from "vitest";`);
+  lines.push(`import { ${className} } from "${servicePath}";`);
+  lines.push(`import type { IRacingClient } from "../client";`);
+  
+  // Import types for endpoints that have samples
+  const responseImports = endpoints
+    .filter(ep => ep.responseType)
+    .map(ep => ep.responseType!)
+    .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
+  
+  if (responseImports.length > 0) {
+    lines.push(`import type { ${responseImports.join(", ")} } from "${typesPath}";`);
+  }
+  
+  // Import schemas for endpoints that have responses
+  const schemaImports = endpoints
+    .filter(ep => ep.responseType)
+    .map(ep => `${ep.responseType!.replace('Response', '')}Schema`)
+    .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
+  
+  if (schemaImports.length > 0) {
+    lines.push(`import { ${schemaImports.join(", ")} } from "${typesPath}";`);
+  }
+  
+  lines.push(``);
+  
+  // Import sample data for endpoints that have samples
+  const sampleImports: string[] = [];
+  for (const ep of endpoints) {
+    if (ep.samplePath) {
+      const importName = toCamelCase(ep.method) + "Sample";
+      const relativePath = `../../${ep.samplePath}`;
+      sampleImports.push(`import ${importName} from "${relativePath}";`);
+    }
+  }
+  
+  if (sampleImports.length > 0) {
+    lines.push(`// Import sample data`);
+    lines.push(...sampleImports);
+    lines.push(``);
+  }
+  
+  lines.push(`describe("${className}", () => {`);
+  lines.push(`  let mockClient: IRacingClient;`);
+  lines.push(`  let ${toCamelCase(sectionName)}Service: ${className};`);
+  lines.push(``);
+  lines.push(`  beforeEach(() => {`);
+  lines.push(`    // Create a mock client`);
+  lines.push(`    mockClient = {`);
+  lines.push(`      get: vi.fn(),`);
+  lines.push(`    } as any;`);
+  lines.push(``);
+  lines.push(`    ${toCamelCase(sectionName)}Service = new ${className}(mockClient);`);
+  lines.push(`  });`);
+  lines.push(``);
+  
+  // Generate test for each endpoint
+  for (const ep of endpoints) {
+    const methodName = toCamelCase(ep.name.replace(/\./g, "_"));
+    const hasParams = Object.keys(ep.params).length > 0;
+    const sampleName = toCamelCase(ep.method) + "Sample";
+    
+    lines.push(`  describe("${methodName}()", () => {`);
+    
+    if (ep.samplePath) {
+      lines.push(`    it("should call client.get with correct URL and return transformed data", async () => {`);
+      
+      // Generate transformation logic based on sample data structure
+      if (ep.responseType?.endsWith("Response")) {
+        // Check if it's an array or object response
+        lines.push(`      // Transform sample data to camelCase as our client would`);
+        lines.push(`      const transformData = (data: any): any => {`);
+        lines.push(`        if (Array.isArray(data)) {`);
+        lines.push(`          return data.map(item => transformData(item));`);
+        lines.push(`        }`);
+        lines.push(`        if (typeof data === 'object' && data !== null) {`);
+        lines.push(`          return Object.fromEntries(`);
+        lines.push(`            Object.entries(data).map(([key, value]) => [`);
+        lines.push(`              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),`);
+        lines.push(`              transformData(value)`);
+        lines.push(`            ])`);
+        lines.push(`          );`);
+        lines.push(`        }`);
+        lines.push(`        return data;`);
+        lines.push(`      };`);
+        lines.push(``);
+        lines.push(`      const expectedTransformedData = transformData(${sampleName});`);
+      } else {
+        lines.push(`      const expectedTransformedData = ${sampleName};`);
+      }
+      
+      lines.push(`      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);`);
+      lines.push(``);
+      
+      if (hasParams) {
+        const mockParams = generateMockParams(ep.params);
+        lines.push(`      const testParams = ${mockParams};`);
+        lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
+        if (ep.responseType) {
+          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams, schema: ${schemaName} });`);
+        } else {
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams });`);
+        }
+      } else {
+        lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}();`);
+        if (ep.responseType) {
+          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { schema: ${schemaName} });`);
+        } else {
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}");`);
+        }
+      }
+      
+      lines.push(`      expect(result).toEqual(expectedTransformedData);`);
+      lines.push(`    });`);
+      lines.push(``);
+      
+      // Generate type structure test if we have a response type
+      if (ep.responseType) {
+        lines.push(`    it("should return data matching ${ep.responseType} type structure", async () => {`);
+        lines.push(`      const mockData = {} as ${ep.responseType}; // Mock with appropriate structure`);
+        lines.push(`      mockClient.get = vi.fn().mockResolvedValue(mockData);`);
+        lines.push(``);
+        
+        if (hasParams) {
+          const mockParams = generateMockParams(ep.params);
+          lines.push(`      const testParams = ${mockParams};`);
+          lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
+        } else {
+          lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}();`);
+        }
+        
+        lines.push(`      expect(result).toBeDefined();`);
+        lines.push(`      // Add specific type structure assertions here`);
+        lines.push(`    });`);
+      }
+    } else {
+      // No sample data - generate basic test
+      lines.push(`    it("should call client.get with correct URL", async () => {`);
+      lines.push(`      const mockData = {}; // Add mock response data`);
+      lines.push(`      mockClient.get = vi.fn().mockResolvedValue(mockData);`);
+      lines.push(``);
+      
+      if (hasParams) {
+        const mockParams = generateMockParams(ep.params);
+        lines.push(`      const testParams = ${mockParams};`);
+        lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
+        if (ep.responseType) {
+          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams, schema: ${schemaName} });`);
+        } else {
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams });`);
+        }
+      } else {
+        lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}();`);
+        if (ep.responseType) {
+          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { schema: ${schemaName} });`);
+        } else {
+          lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}");`);
+        }
+      }
+      
+      lines.push(`    });`);
+    }
+    
+    lines.push(`  });`);
+    lines.push(``);
+  }
+  
+  lines.push(`});`);
   
   return lines.join("\n");
 }
@@ -332,6 +692,15 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
   
   const allImports = [...paramImports, ...responseImports].join(", ");
   lines.push(`import type { ${allImports} } from "${typesFile}";`);
+  
+  // Import schemas
+  const schemaImports = endpoints
+    .filter(ep => ep.responseType)
+    .map(ep => `${ep.responseType!.replace('Response', '')}Schema`);
+  
+  if (schemaImports.length > 0) {
+    lines.push(`import { ${schemaImports.join(", ")} } from "${typesFile}";`);
+  }
   lines.push(``);
   
   // Generate service class
@@ -356,10 +725,20 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
     
     if (hasParams) {
       lines.push(`  async ${methodName}(params: ${paramsType}): Promise<${returnType}> {`);
-      lines.push(`    return this.client.get<${returnType}>("${ep.url}", params);`);
+      if (ep.responseType) {
+        const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+        lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params, schema: ${schemaName} as any });`);
+      } else {
+        lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params });`);
+      }
     } else {
       lines.push(`  async ${methodName}(): Promise<${returnType}> {`);
-      lines.push(`    return this.client.get<${returnType}>("${ep.url}");`);
+      if (ep.responseType) {
+        const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+        lines.push(`    return this.client.get<${returnType}>("${ep.url}", { schema: ${schemaName} });`);
+      } else {
+        lines.push(`    return this.client.get<${returnType}>("${ep.url}");`);
+      }
     }
     
     lines.push(`  }`);
@@ -556,11 +935,11 @@ export class IRacingClient {
   }
 
 
-  async get<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
+  async get<T = unknown>(url: string, options?: { params?: Record<string, any>; schema?: z.ZodMiniType<T> }): Promise<T> {
     await this.ensureAuthenticated();
 
     // Convert camelCase params back to snake_case for the API
-    const apiParams = this.mapParamsToApi(params);
+    const apiParams = this.mapParamsToApi(options?.params);
     
     const headers: Record<string, string> = {};
     
@@ -658,10 +1037,22 @@ export class IRacingClient {
         }
         
         const s3Data = await s3Response.json();
-        return this.mapResponseFromApi(s3Data) as T;
+        const mappedData = this.mapResponseFromApi(s3Data);
+        
+        if (options?.schema) {
+          return options.schema.parse(mappedData);
+        }
+        
+        return mappedData as T;
       }
       
-      return this.mapResponseFromApi(data) as T;
+      const mappedData = this.mapResponseFromApi(data);
+      
+      if (options?.schema) {
+        return options.schema.parse(mappedData);
+      }
+      
+      return mappedData as T;
     }
 
     throw new Error(\`Unexpected content type: \${contentType}\`);
@@ -772,6 +1163,11 @@ async function generateSDK() {
     const serviceFile = path.join(sectionDir, "service.ts");
     fs.writeFileSync(serviceFile, generateSectionService(section, eps), "utf8");
     console.log(`Generated ${serviceFile}`);
+    
+    // Generate test file
+    const testFile = path.join(sectionDir, "service.test.ts");
+    fs.writeFileSync(testFile, generateSectionTest(section, eps), "utf8");
+    console.log(`Generated ${testFile}`);
   }
 
   // Generate main SDK file

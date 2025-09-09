@@ -14,6 +14,23 @@ export interface CarclassGetItem {
 
 export type CarclassGetResponse = CarclassGetItem[];
 
+// ---- Response Schemas ----
+
+const CarclassGetSchema = z.array(z.object({
+  carClassId: z.number(),
+  carsInClass: z.array(z.object({
+  carDirpath: z.string(),
+  carId: z.number(),
+  rainEnabled: z.boolean(),
+  retired: z.boolean()
+})),
+  custId: z.number(),
+  name: z.string(),
+  rainEnabled: z.boolean(),
+  relativeSpeed: z.number(),
+  shortName: z.string()
+}));
+
 // ---- Parameter Schemas ----
 
 const CarclassGetParamsSchema = z.object({
@@ -27,4 +44,5 @@ export type CarclassGetParams = z.infer<typeof CarclassGetParamsSchema>;
 
 export {
   CarclassGetParamsSchema,
+  CarclassGetSchema,
 };

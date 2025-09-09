@@ -1,5 +1,6 @@
 import type { IRacingClient } from "../client";
 import type { SeriesAssetsParams, SeriesGetParams, SeriesPastSeasonsParams, SeriesSeasonsParams, SeriesSeasonListParams, SeriesSeasonScheduleParams, SeriesStatsSeriesParams, SeriesAssetsResponse, SeriesGetResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./types";
+import { SeriesAssetsSchema, SeriesGetSchema, SeriesSeasonsSchema, SeriesSeasonListSchema, SeriesStatsSeriesSchema } from "./types";
 
 export class SeriesService {
   constructor(private client: IRacingClient) {}
@@ -10,7 +11,7 @@ export class SeriesService {
    * @sample series.assets.json
    */
   async assets(): Promise<SeriesAssetsResponse> {
-    return this.client.get<SeriesAssetsResponse>("https://members-ng.iracing.com/data/series/assets");
+    return this.client.get<SeriesAssetsResponse>("https://members-ng.iracing.com/data/series/assets", { schema: SeriesAssetsSchema });
   }
 
   /**
@@ -19,7 +20,7 @@ export class SeriesService {
    * @sample series.get.json
    */
   async get(): Promise<SeriesGetResponse> {
-    return this.client.get<SeriesGetResponse>("https://members-ng.iracing.com/data/series/get");
+    return this.client.get<SeriesGetResponse>("https://members-ng.iracing.com/data/series/get", { schema: SeriesGetSchema });
   }
 
   /**
@@ -27,7 +28,7 @@ export class SeriesService {
    * @see https://members-ng.iracing.com/data/series/past_seasons
    */
   async pastSeasons(params: SeriesPastSeasonsParams): Promise<unknown> {
-    return this.client.get<unknown>("https://members-ng.iracing.com/data/series/past_seasons", params);
+    return this.client.get<unknown>("https://members-ng.iracing.com/data/series/past_seasons", { params });
   }
 
   /**
@@ -36,7 +37,7 @@ export class SeriesService {
    * @sample series.seasons.json
    */
   async seasons(params: SeriesSeasonsParams): Promise<SeriesSeasonsResponse> {
-    return this.client.get<SeriesSeasonsResponse>("https://members-ng.iracing.com/data/series/seasons", params);
+    return this.client.get<SeriesSeasonsResponse>("https://members-ng.iracing.com/data/series/seasons", { params, schema: SeriesSeasonsSchema as any });
   }
 
   /**
@@ -45,7 +46,7 @@ export class SeriesService {
    * @sample series.season_list.json
    */
   async seasonList(params: SeriesSeasonListParams): Promise<SeriesSeasonListResponse> {
-    return this.client.get<SeriesSeasonListResponse>("https://members-ng.iracing.com/data/series/season_list", params);
+    return this.client.get<SeriesSeasonListResponse>("https://members-ng.iracing.com/data/series/season_list", { params, schema: SeriesSeasonListSchema as any });
   }
 
   /**
@@ -53,7 +54,7 @@ export class SeriesService {
    * @see https://members-ng.iracing.com/data/series/season_schedule
    */
   async seasonSchedule(params: SeriesSeasonScheduleParams): Promise<unknown> {
-    return this.client.get<unknown>("https://members-ng.iracing.com/data/series/season_schedule", params);
+    return this.client.get<unknown>("https://members-ng.iracing.com/data/series/season_schedule", { params });
   }
 
   /**
@@ -62,7 +63,7 @@ export class SeriesService {
    * @sample series.stats_series.json
    */
   async statsSeries(): Promise<SeriesStatsSeriesResponse> {
-    return this.client.get<SeriesStatsSeriesResponse>("https://members-ng.iracing.com/data/series/stats_series");
+    return this.client.get<SeriesStatsSeriesResponse>("https://members-ng.iracing.com/data/series/stats_series", { schema: SeriesStatsSeriesSchema });
   }
 
 }

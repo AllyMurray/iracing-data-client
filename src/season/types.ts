@@ -29,6 +29,62 @@ export interface SeasonSpectatorSubsessionidsDetailResponse {
   subsessions: any[];
 }
 
+// ---- Response Schemas ----
+
+const SeasonListSchema = z.object({
+  seasonQuarter: z.number(),
+  seasons: z.array(z.object({
+  seasonId: z.number(),
+  seriesId: z.number(),
+  seasonName: z.string(),
+  seriesName: z.string(),
+  official: z.boolean(),
+  seasonYear: z.number(),
+  seasonQuarter: z.number(),
+  licenseGroup: z.number(),
+  fixedSetup: z.boolean(),
+  driverChanges: z.boolean()
+})),
+  seasonYear: z.number()
+});
+
+const SeasonRaceGuideSchema = z.object({
+  subscribed: z.boolean(),
+  sessions: z.array(z.object({
+  seasonId: z.number(),
+  startTime: z.string(),
+  superSession: z.boolean(),
+  seriesId: z.number(),
+  raceWeekNum: z.number(),
+  endTime: z.string(),
+  sessionId: z.number(),
+  entryCount: z.number()
+})),
+  blockBeginTime: z.string(),
+  blockEndTime: z.string(),
+  success: z.boolean()
+});
+
+const SeasonSpectatorSubsessionidsSchema = z.object({
+  eventTypes: z.array(z.number()),
+  success: z.boolean(),
+  subsessionIds: z.array(z.number())
+});
+
+const SeasonSpectatorSubsessionidsDetailSchema = z.object({
+  success: z.boolean(),
+  seasonIds: z.array(z.number()),
+  eventTypes: z.array(z.number()),
+  subsessions: z.array(z.object({
+  subsessionId: z.number(),
+  sessionId: z.number(),
+  seasonId: z.number(),
+  startTime: z.string(),
+  raceWeekNum: z.number(),
+  eventType: z.number()
+}))
+});
+
 // ---- Parameter Schemas ----
 
 const SeasonListParamsSchema = z.object({
@@ -64,4 +120,8 @@ export {
   SeasonRaceGuideParamsSchema,
   SeasonSpectatorSubsessionidsParamsSchema,
   SeasonSpectatorSubsessionidsDetailParamsSchema,
+  SeasonListSchema,
+  SeasonRaceGuideSchema,
+  SeasonSpectatorSubsessionidsSchema,
+  SeasonSpectatorSubsessionidsDetailSchema,
 };

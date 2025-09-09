@@ -100,6 +100,324 @@ export interface MemberProfileResponse {
   followCounts: any; // maps from: follow_counts
 }
 
+// ---- Response Schemas ----
+
+const MemberAwardsSchema = z.object({
+  type: z.string(),
+  data: z.object({
+  success: z.boolean(),
+  custId: z.number(),
+  awardCount: z.number()
+}),
+  dataUrl: z.string()
+});
+
+const MemberAwardInstancesSchema = z.object({
+  type: z.string(),
+  data: z.object({
+  success: z.boolean(),
+  custId: z.number(),
+  awardId: z.number(),
+  awardCount: z.number()
+}),
+  dataUrl: z.string()
+});
+
+const MemberChartDataSchema = z.object({
+  blackout: z.boolean(),
+  categoryId: z.number(),
+  chartType: z.number(),
+  data: z.array(z.object({
+  when: z.string(),
+  value: z.number()
+})),
+  success: z.boolean(),
+  custId: z.number()
+});
+
+const MemberGetSchema = z.object({
+  success: z.boolean(),
+  custIds: z.array(z.number()),
+  members: z.array(z.unknown())
+});
+
+const MemberInfoSchema = z.object({
+  custId: z.number(),
+  displayName: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  onCarName: z.string(),
+  memberSince: z.string(),
+  flairId: z.number(),
+  flairName: z.string(),
+  flairShortname: z.string(),
+  flairCountryCode: z.string(),
+  lastLogin: z.string(),
+  readTc: z.string(),
+  readPp: z.string(),
+  readCompRules: z.string(),
+  flags: z.number(),
+  connectionType: z.string(),
+  downloadServer: z.string(),
+  account: z.object({
+  irDollars: z.number(),
+  irCredits: z.number(),
+  status: z.string(),
+  countryRules: z.union([z.string(), z.literal(""), z.null()])
+}),
+  helmet: z.object({
+  pattern: z.number(),
+  color1: z.string(),
+  color2: z.string(),
+  color3: z.string(),
+  faceType: z.number(),
+  helmetType: z.number()
+}),
+  suit: z.object({
+  pattern: z.number(),
+  color1: z.string(),
+  color2: z.string(),
+  color3: z.string(),
+  bodyType: z.number()
+}),
+  licenses: z.object({
+  oval: z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  mprNumRaces: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  proPromotable: z.boolean(),
+  seq: z.number(),
+  mprNumTts: z.number()
+}),
+  sportsCar: z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  mprNumRaces: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  proPromotable: z.boolean(),
+  seq: z.number(),
+  mprNumTts: z.number()
+}),
+  formulaCar: z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  mprNumRaces: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  proPromotable: z.boolean(),
+  seq: z.number(),
+  mprNumTts: z.number()
+}),
+  dirtOval: z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  mprNumRaces: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  proPromotable: z.boolean(),
+  seq: z.number(),
+  mprNumTts: z.number()
+}),
+  dirtRoad: z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  mprNumRaces: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  proPromotable: z.boolean(),
+  seq: z.number(),
+  mprNumTts: z.number()
+})
+}),
+  carPackages: z.array(z.object({
+  packageId: z.number(),
+  contentIds: z.array(z.number())
+})),
+  trackPackages: z.array(z.object({
+  packageId: z.number(),
+  contentIds: z.array(z.number())
+})),
+  otherOwnedPackages: z.array(z.number()),
+  dev: z.boolean(),
+  alphaTester: z.boolean(),
+  rainTester: z.boolean(),
+  broadcaster: z.boolean(),
+  restrictions: z.object({
+
+}),
+  hasReadCompRules: z.boolean(),
+  hasReadNda: z.boolean(),
+  flagsHex: z.string(),
+  hundredPctClub: z.boolean(),
+  twentyPctDiscount: z.boolean(),
+  lastSeason: z.number(),
+  hasAdditionalContent: z.boolean(),
+  hasReadTc: z.boolean(),
+  hasReadPp: z.boolean()
+});
+
+const MemberParticipationCreditsSchema = z.array(z.object({
+  custId: z.number(),
+  seasonId: z.number(),
+  seriesId: z.number(),
+  seriesName: z.string(),
+  licenseGroup: z.number(),
+  licenseGroupName: z.string(),
+  participationCredits: z.number(),
+  minWeeks: z.number(),
+  weeks: z.number(),
+  earnedCredits: z.number(),
+  totalCredits: z.number()
+}));
+
+const MemberProfileSchema = z.object({
+  recentAwards: z.array(z.object({
+  memberAwardId: z.number(),
+  awardId: z.number(),
+  achievement: z.boolean(),
+  awardCount: z.number(),
+  awardDate: z.string(),
+  awardOrder: z.number(),
+  awardedDescription: z.string(),
+  description: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  hasPdf: z.boolean(),
+  iconUrlLarge: z.string(),
+  iconUrlSmall: z.string(),
+  iconUrlUnawarded: z.string(),
+  name: z.string(),
+  progress: z.number(),
+  progressLabel: z.string(),
+  threshold: z.number(),
+  viewed: z.boolean(),
+  weight: z.number()
+})),
+  activity: z.object({
+  recent30daysCount: z.number(),
+  prev30daysCount: z.number(),
+  consecutiveWeeks: z.number(),
+  mostConsecutiveWeeks: z.number()
+}),
+  success: z.boolean(),
+  imageUrl: z.string(),
+  memberInfo: z.object({
+  ai: z.boolean(),
+  country: z.union([z.string(), z.literal("")]),
+  countryCode: z.string(),
+  custId: z.number(),
+  displayName: z.string(),
+  flairId: z.number(),
+  flairName: z.string(),
+  flairShortname: z.string(),
+  helmet: z.object({
+  pattern: z.number(),
+  color1: z.string(),
+  color2: z.string(),
+  color3: z.string(),
+  faceType: z.number(),
+  helmetType: z.number()
+}),
+  lastLogin: z.string(),
+  licenses: z.array(z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  mprNumRaces: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  proPromotable: z.boolean(),
+  seq: z.number(),
+  mprNumTts: z.number()
+})),
+  memberSince: z.string()
+}),
+  disabled: z.boolean(),
+  licenseHistory: z.array(z.object({
+  categoryId: z.number(),
+  category: z.string(),
+  categoryName: z.string(),
+  licenseLevel: z.number(),
+  safetyRating: z.number(),
+  cpi: z.number(),
+  irating: z.number(),
+  ttRating: z.number(),
+  color: z.string(),
+  groupName: z.union([z.string(), z.literal("")]),
+  groupId: z.number(),
+  seq: z.number()
+})),
+  recentEvents: z.array(z.object({
+  eventType: z.string(),
+  subsessionId: z.number(),
+  startTime: z.string(),
+  eventId: z.number(),
+  eventName: z.string(),
+  simsessionType: z.number(),
+  startingPosition: z.number(),
+  finishPosition: z.number(),
+  bestLapTime: z.number(),
+  percentRank: z.number(),
+  carId: z.number(),
+  carName: z.string(),
+  logoUrl: z.union([z.string(), z.literal(""), z.null()]),
+  track: z.object({
+  configName: z.string(),
+  trackId: z.number(),
+  trackName: z.string()
+})
+})),
+  custId: z.number(),
+  isGenericImage: z.boolean(),
+  followCounts: z.object({
+  followers: z.number(),
+  follows: z.number()
+})
+});
+
 // ---- Parameter Schemas ----
 
 const MemberAwardsParamsSchema = z.object({
@@ -152,4 +470,11 @@ export {
   MemberInfoParamsSchema,
   MemberParticipationCreditsParamsSchema,
   MemberProfileParamsSchema,
+  MemberAwardsSchema,
+  MemberAwardInstancesSchema,
+  MemberChartDataSchema,
+  MemberGetSchema,
+  MemberInfoSchema,
+  MemberParticipationCreditsSchema,
+  MemberProfileSchema,
 };

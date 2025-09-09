@@ -1,5 +1,6 @@
 import type { IRacingClient } from "../client";
 import type { LeagueCustLeagueSessionsParams, LeagueDirectoryParams, LeagueGetParams, LeagueGetPointsSystemsParams, LeagueMembershipParams, LeagueRosterParams, LeagueSeasonsParams, LeagueSeasonStandingsParams, LeagueSeasonSessionsParams, LeagueCustLeagueSessionsResponse, LeagueDirectoryResponse, LeagueGetResponse, LeagueGetPointsSystemsResponse, LeagueMembershipResponse, LeagueRosterResponse, LeagueSeasonsResponse, LeagueSeasonStandingsResponse, LeagueSeasonSessionsResponse } from "./types";
+import { LeagueCustLeagueSessionsSchema, LeagueDirectorySchema, LeagueGetSchema, LeagueGetPointsSystemsSchema, LeagueMembershipSchema, LeagueRosterSchema, LeagueSeasonsSchema, LeagueSeasonStandingsSchema, LeagueSeasonSessionsSchema } from "./types";
 
 export class LeagueService {
   constructor(private client: IRacingClient) {}
@@ -10,7 +11,7 @@ export class LeagueService {
    * @sample league.cust_league_sessions.json
    */
   async custLeagueSessions(params: LeagueCustLeagueSessionsParams): Promise<LeagueCustLeagueSessionsResponse> {
-    return this.client.get<LeagueCustLeagueSessionsResponse>("https://members-ng.iracing.com/data/league/cust_league_sessions", params);
+    return this.client.get<LeagueCustLeagueSessionsResponse>("https://members-ng.iracing.com/data/league/cust_league_sessions", { params, schema: LeagueCustLeagueSessionsSchema as any });
   }
 
   /**
@@ -19,7 +20,7 @@ export class LeagueService {
    * @sample league.directory.json
    */
   async directory(params: LeagueDirectoryParams): Promise<LeagueDirectoryResponse> {
-    return this.client.get<LeagueDirectoryResponse>("https://members-ng.iracing.com/data/league/directory", params);
+    return this.client.get<LeagueDirectoryResponse>("https://members-ng.iracing.com/data/league/directory", { params, schema: LeagueDirectorySchema as any });
   }
 
   /**
@@ -28,7 +29,7 @@ export class LeagueService {
    * @sample league.get.json
    */
   async get(params: LeagueGetParams): Promise<LeagueGetResponse> {
-    return this.client.get<LeagueGetResponse>("https://members-ng.iracing.com/data/league/get", params);
+    return this.client.get<LeagueGetResponse>("https://members-ng.iracing.com/data/league/get", { params, schema: LeagueGetSchema as any });
   }
 
   /**
@@ -37,7 +38,7 @@ export class LeagueService {
    * @sample league.get_points_systems.json
    */
   async getPointsSystems(params: LeagueGetPointsSystemsParams): Promise<LeagueGetPointsSystemsResponse> {
-    return this.client.get<LeagueGetPointsSystemsResponse>("https://members-ng.iracing.com/data/league/get_points_systems", params);
+    return this.client.get<LeagueGetPointsSystemsResponse>("https://members-ng.iracing.com/data/league/get_points_systems", { params, schema: LeagueGetPointsSystemsSchema as any });
   }
 
   /**
@@ -46,7 +47,7 @@ export class LeagueService {
    * @sample league.membership.json
    */
   async membership(params: LeagueMembershipParams): Promise<LeagueMembershipResponse> {
-    return this.client.get<LeagueMembershipResponse>("https://members-ng.iracing.com/data/league/membership", params);
+    return this.client.get<LeagueMembershipResponse>("https://members-ng.iracing.com/data/league/membership", { params, schema: LeagueMembershipSchema as any });
   }
 
   /**
@@ -55,7 +56,7 @@ export class LeagueService {
    * @sample league.roster.json
    */
   async roster(params: LeagueRosterParams): Promise<LeagueRosterResponse> {
-    return this.client.get<LeagueRosterResponse>("https://members-ng.iracing.com/data/league/roster", params);
+    return this.client.get<LeagueRosterResponse>("https://members-ng.iracing.com/data/league/roster", { params, schema: LeagueRosterSchema as any });
   }
 
   /**
@@ -64,7 +65,7 @@ export class LeagueService {
    * @sample league.seasons.json
    */
   async seasons(params: LeagueSeasonsParams): Promise<LeagueSeasonsResponse> {
-    return this.client.get<LeagueSeasonsResponse>("https://members-ng.iracing.com/data/league/seasons", params);
+    return this.client.get<LeagueSeasonsResponse>("https://members-ng.iracing.com/data/league/seasons", { params, schema: LeagueSeasonsSchema as any });
   }
 
   /**
@@ -73,7 +74,7 @@ export class LeagueService {
    * @sample league.season_standings.json
    */
   async seasonStandings(params: LeagueSeasonStandingsParams): Promise<LeagueSeasonStandingsResponse> {
-    return this.client.get<LeagueSeasonStandingsResponse>("https://members-ng.iracing.com/data/league/season_standings", params);
+    return this.client.get<LeagueSeasonStandingsResponse>("https://members-ng.iracing.com/data/league/season_standings", { params, schema: LeagueSeasonStandingsSchema as any });
   }
 
   /**
@@ -82,7 +83,7 @@ export class LeagueService {
    * @sample league.season_sessions.json
    */
   async seasonSessions(params: LeagueSeasonSessionsParams): Promise<LeagueSeasonSessionsResponse> {
-    return this.client.get<LeagueSeasonSessionsResponse>("https://members-ng.iracing.com/data/league/season_sessions", params);
+    return this.client.get<LeagueSeasonSessionsResponse>("https://members-ng.iracing.com/data/league/season_sessions", { params, schema: LeagueSeasonSessionsSchema as any });
   }
 
 }
