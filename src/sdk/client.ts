@@ -1,53 +1,125 @@
-import { z } from "zod-mini";
+import * as z from "zod/mini";
 
 /** Lightweight client with presigned-link following and caching */
 export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
-export interface IRacingClientOptions {
-  headers?: Record<string, string>; // e.g. Cookie for iRacing
-  fetchFn?: FetchLike;              // uses global fetch by default
+const IRacingClientOptionsSchema = z.object({
+  email: z.optional(z.string()),
+  password: z.optional(z.string()),
+  headers: z.optional(z.record(z.string())),
+  fetchFn: z.optional(z.function()),
+  validateParams: z.default(z.boolean(), true),
+});
+
+export type IRacingClientOptions = z.infer<typeof IRacingClientOptionsSchema>;
+
+interface AuthResponse {
+  authcode: string;
+  autoLoginSeries: null | string;
+  autoLoginToken: null | string;
+  custId: number;
+  email: string;
+  ssoCookieDomain: string;
+  ssoCookieName: string;
+  ssoCookiePath: string;
+  ssoCookieValue: string;
 }
 
-type ExpiringLink = { link: string; expires?: string };
+interface S3Response {
+  link: string;
+  expires: string;
+}
+
 type CacheEntry = { data: unknown; expiresAt: number };
 
 export class IRacingClient {
+  private baseUrl = 'https://members-ng.iracing.com';
   private fetchFn: FetchLike;
-  private headers?: Record<string, string>;
+  private authData: AuthResponse | null = null;
+  private cookies: Record<string, string> | null = null;
+  private email?: string;
+  private password?: string;
+  private presetHeaders?: Record<string, string>;
+  private validateParams: boolean;
   private expiringCache = new Map<string, CacheEntry>();
 
   constructor(opts: IRacingClientOptions = {}) {
-    this.fetchFn = opts.fetchFn ?? (globalThis as any).fetch;
+    const validatedOpts = IRacingClientOptionsSchema.parse(opts);
+    
+    this.fetchFn = validatedOpts.fetchFn ?? (globalThis as any).fetch;
     if (!this.fetchFn) throw new Error("No fetch available. Pass fetchFn in IRacingClientOptions.");
-    this.headers = opts.headers;
+    
+    this.email = validatedOpts.email;
+    this.password = validatedOpts.password;
+    this.presetHeaders = validatedOpts.headers;
+    this.validateParams = validatedOpts.validateParams;
+    
+    if (!this.email && !this.password && !this.presetHeaders) {
+      throw new Error("Must provide either email/password or headers for authentication");
+    }
   }
 
-  private toQuery(params: Record<string, any>) {
-    const usp = new URLSearchParams();
-    for (const [k, v] of Object.entries(params || {})) {
-      if (v == null) continue;
-      if (Array.isArray(v)) usp.set(k, v.join(","));
-      else if (typeof v === "boolean") usp.set(k, v ? "true" : "false");
-      else usp.set(k, String(v));
+  private buildUrl(endpoint: string, params?: Record<string, any>): string {
+    const url = new URL(endpoint.startsWith("http") ? endpoint : `${this.baseUrl}${endpoint}`);
+    
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (Array.isArray(value)) {
+            url.searchParams.append(key, value.join(","));
+          } else if (typeof value === "boolean") {
+            url.searchParams.append(key, value ? "true" : "false");
+          } else {
+            url.searchParams.append(key, String(value));
+          }
+        }
+      });
     }
-    const s = usp.toString();
-    return s ? "?" + s : "";
+    
+    return url.toString();
   }
 
-  async get<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
-    // Convert camelCase params back to snake_case for the API
-    const apiParams = this.mapParamsToApi(params);
-    const q = this.toQuery(apiParams || {});
-    const res = await this.fetchFn(url + q, { headers: this.headers });
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      throw new Error(`HTTP ${res.status} ${res.statusText} — ${text}`);
+  private async ensureAuthenticated(): Promise<void> {
+    if (this.presetHeaders) {
+      // Using preset headers, no authentication needed
+      return;
     }
-    const ct = res.headers.get("content-type") || "";
-    if (ct.includes("application/json")) return res.json() as Promise<T>;
-    return res.text() as unknown as T;
+    
+    if (!this.authData && this.email && this.password) {
+      await this.authenticate();
+    }
   }
-  
+
+  private async authenticate(): Promise<void> {
+    if (!this.email || !this.password) {
+      throw new Error("Email and password required for authentication");
+    }
+
+    const response = await this.fetchFn(`${this.baseUrl}/auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        email: this.email, 
+        password: this.password 
+      }),
+    });
+
+    if (!response.ok) {
+      const text = await response.text().catch(() => "");
+      throw new Error(`Authentication failed: ${response.statusText} - ${text}`);
+    }
+
+    this.authData = await response.json();
+    
+    // Parse and store cookies
+    this.cookies = {
+      'irsso_membersv2': this.authData.ssoCookieValue,
+      'authtoken_members': `%7B%22authtoken%22%3A%7B%22authcode%22%3A%22${this.authData.authcode}%22%2C%22email%22%3A%22${encodeURIComponent(this.authData.email)}%22%7D%7D`
+    };
+  }
+
   private mapParamsToApi(params?: Record<string, any>): Record<string, any> | undefined {
     if (!params) return undefined;
     const mapped: Record<string, any> = {};
@@ -59,24 +131,77 @@ export class IRacingClient {
     return mapped;
   }
 
-  private async getExpiring<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
+
+  async get<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
+    await this.ensureAuthenticated();
+
+    // Convert camelCase params back to snake_case for the API
     const apiParams = this.mapParamsToApi(params);
-    const cacheKey = url + this.toQuery(apiParams || {});
-    const cached = this.expiringCache.get(cacheKey);
-    if (cached && cached.expiresAt > Date.now()) {
-      return cached.data as T;
+    
+    const headers: Record<string, string> = {};
+    
+    if (this.presetHeaders) {
+      // Use preset headers (like cookies from manual auth)
+      Object.assign(headers, this.presetHeaders);
+    } else if (this.cookies) {
+      // Use authenticated cookies
+      const cookieString = Object.entries(this.cookies)
+        .map(([name, value]) => `${name}=${value}`)
+        .join('; ');
+      headers['Cookie'] = cookieString;
+    } else {
+      throw new Error('No authentication available');
     }
 
-    const linkData = await this.get<ExpiringLink>(url, params);
-    if (!linkData?.link) throw new Error("No presigned link received");
+    const response = await this.fetchFn(this.buildUrl(url, apiParams), {
+      headers,
+    });
 
-    const data = await this.get<T>(linkData.link);
-    
-    if (linkData.expires) {
-      const exp = new Date(linkData.expires).getTime() - 60_000;
-      this.expiringCache.set(cacheKey, { data, expiresAt: exp });
+    if (!response.ok) {
+      const text = await response.text().catch(() => "");
+      throw new Error(`Request failed: ${response.status} ${response.statusText} - ${text}`);
     }
+
+    const contentType = response.headers.get("content-type") || "";
     
-    return data;
+    // Check if this is a direct JSON response (some endpoints don't use S3)
+    if (contentType.includes("application/json")) {
+      const data = await response.json();
+      
+      // Check if it's an S3 link response
+      if (data.link && data.expires) {
+        // Fetch the actual data from S3
+        const s3Response = await this.fetchFn(data.link);
+        if (!s3Response.ok) {
+          throw new Error(`Failed to fetch from S3: ${s3Response.statusText}`);
+        }
+        
+        // Check content type of S3 response
+        const s3ContentType = s3Response.headers.get("content-type") || "";
+        if (s3ContentType.includes("text/csv") || s3ContentType.includes("text/plain")) {
+          // Return CSV as raw text wrapped in an object
+          const csvText = await s3Response.text();
+          return { 
+            _contentType: "csv", 
+            _rawData: csvText,
+            _note: "This endpoint returns CSV data, not JSON" 
+          } as T;
+        }
+        
+        return s3Response.json() as Promise<T>;
+      }
+      
+      return data;
+    }
+
+    throw new Error(`Unexpected content type: ${contentType}`);
+  }
+
+  isAuthenticated(): boolean {
+    return this.authData !== null || !!this.presetHeaders;
+  }
+
+  getCustomerId(): number | null {
+    return this.authData?.custId ?? null;
   }
 }

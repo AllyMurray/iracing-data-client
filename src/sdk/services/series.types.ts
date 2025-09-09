@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -136,15 +136,15 @@ const SeriesPastSeasonsParamsSchema = z.object({
 });
 
 const SeriesSeasonsParamsSchema = z.object({
-  includeSeries: z.boolean().optional(), // maps to: include_series
-  seasonYear: z.number().optional(), // To look up past seasons use both a season_year and season_quarter.  Without both, the active seasons are returned. // maps to: season_year
-  seasonQuarter: z.number().optional(), // To look up past seasons use both a season_year and season_quarter.  Without both, the active seasons are returned. // maps to: season_quarter
+  includeSeries: z.optional(z.boolean()), // maps to: include_series
+  seasonYear: z.optional(z.number()), // To look up past seasons use both a season_year and season_quarter.  Without both, the active seasons are returned. // maps to: season_year
+  seasonQuarter: z.optional(z.number()), // To look up past seasons use both a season_year and season_quarter.  Without both, the active seasons are returned. // maps to: season_quarter
 });
 
 const SeriesSeasonListParamsSchema = z.object({
-  includeSeries: z.boolean().optional(), // maps to: include_series
-  seasonYear: z.number().optional(), // maps to: season_year
-  seasonQuarter: z.number().optional(), // maps to: season_quarter
+  includeSeries: z.optional(z.boolean()), // maps to: include_series
+  seasonYear: z.optional(z.number()), // maps to: season_year
+  seasonQuarter: z.optional(z.number()), // maps to: season_quarter
 });
 
 const SeriesSeasonScheduleParamsSchema = z.object({

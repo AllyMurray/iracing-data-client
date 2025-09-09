@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -100,61 +100,61 @@ export interface LeagueSeasonSessionsResponse {
 // ---- Parameter Schemas ----
 
 const LeagueCustLeagueSessionsParamsSchema = z.object({
-  mine: z.boolean().optional(), // If true, return only sessions created by this user.
-  packageId: z.number().optional(), // If set, return only sessions using this car or track package ID. // maps to: package_id
+  mine: z.optional(z.boolean()), // If true, return only sessions created by this user.
+  packageId: z.optional(z.number()), // If set, return only sessions using this car or track package ID. // maps to: package_id
 });
 
 const LeagueDirectoryParamsSchema = z.object({
-  search: z.string().optional(), // Will search against league name, description, owner, and league ID.
-  tag: z.string().optional(), // One or more tags, comma-separated.
-  restrictToMember: z.boolean().optional(), // If true include only leagues for which customer is a member. // maps to: restrict_to_member
-  restrictToRecruiting: z.boolean().optional(), // If true include only leagues which are recruiting. // maps to: restrict_to_recruiting
-  restrictToFriends: z.boolean().optional(), // If true include only leagues owned by a friend. // maps to: restrict_to_friends
-  restrictToWatched: z.boolean().optional(), // If true include only leagues owned by a watched member. // maps to: restrict_to_watched
-  minimumRosterCount: z.number().optional(), // If set include leagues with at least this number of members. // maps to: minimum_roster_count
-  maximumRosterCount: z.number().optional(), // If set include leagues with no more than this number of members. // maps to: maximum_roster_count
-  lowerbound: z.number().optional(), // First row of results to return.  Defaults to 1.
-  upperbound: z.number().optional(), // Last row of results to return. Defaults to lowerbound + 39.
-  sort: z.string().optional(), // One of relevance, leaguename, displayname, rostercount. displayname is owners's name. Defaults to relevance.
-  order: z.string().optional(), // One of asc or desc.  Defaults to asc.
+  search: z.optional(z.string()), // Will search against league name, description, owner, and league ID.
+  tag: z.optional(z.string()), // One or more tags, comma-separated.
+  restrictToMember: z.optional(z.boolean()), // If true include only leagues for which customer is a member. // maps to: restrict_to_member
+  restrictToRecruiting: z.optional(z.boolean()), // If true include only leagues which are recruiting. // maps to: restrict_to_recruiting
+  restrictToFriends: z.optional(z.boolean()), // If true include only leagues owned by a friend. // maps to: restrict_to_friends
+  restrictToWatched: z.optional(z.boolean()), // If true include only leagues owned by a watched member. // maps to: restrict_to_watched
+  minimumRosterCount: z.optional(z.number()), // If set include leagues with at least this number of members. // maps to: minimum_roster_count
+  maximumRosterCount: z.optional(z.number()), // If set include leagues with no more than this number of members. // maps to: maximum_roster_count
+  lowerbound: z.optional(z.number()), // First row of results to return.  Defaults to 1.
+  upperbound: z.optional(z.number()), // Last row of results to return. Defaults to lowerbound + 39.
+  sort: z.optional(z.string()), // One of relevance, leaguename, displayname, rostercount. displayname is owners's name. Defaults to relevance.
+  order: z.optional(z.string()), // One of asc or desc.  Defaults to asc.
 });
 
 const LeagueGetParamsSchema = z.object({
   leagueId: z.number(), // maps to: league_id
-  includeLicenses: z.boolean().optional(), // For faster responses, only request when necessary. // maps to: include_licenses
+  includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
 const LeagueGetPointsSystemsParamsSchema = z.object({
   leagueId: z.number(), // maps to: league_id
-  seasonId: z.number().optional(), // If included and the season is using custom points (points_system_id:2) then the custom points option is included in the returned list. Otherwise the custom points option is not returned. // maps to: season_id
+  seasonId: z.optional(z.number()), // If included and the season is using custom points (points_system_id:2) then the custom points option is included in the returned list. Otherwise the custom points option is not returned. // maps to: season_id
 });
 
 const LeagueMembershipParamsSchema = z.object({
-  custId: z.number().optional(), // If different from the authenticated member, the following restrictions apply: - Caller cannot be on requested customer's block list or an empty list will result; - Requested customer cannot have their online activity preference set to hidden or an empty list will result; - Only leagues for which the requested customer is an admin and the league roster is not private are returned. // maps to: cust_id
-  includeLeague: z.boolean().optional(), // maps to: include_league
+  custId: z.optional(z.number()), // If different from the authenticated member, the following restrictions apply: - Caller cannot be on requested customer's block list or an empty list will result; - Requested customer cannot have their online activity preference set to hidden or an empty list will result; - Only leagues for which the requested customer is an admin and the league roster is not private are returned. // maps to: cust_id
+  includeLeague: z.optional(z.boolean()), // maps to: include_league
 });
 
 const LeagueRosterParamsSchema = z.object({
   leagueId: z.number(), // maps to: league_id
-  includeLicenses: z.boolean().optional(), // For faster responses, only request when necessary. // maps to: include_licenses
+  includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
 const LeagueSeasonsParamsSchema = z.object({
   leagueId: z.number(), // maps to: league_id
-  retired: z.boolean().optional(), // If true include seasons which are no longer active.
+  retired: z.optional(z.boolean()), // If true include seasons which are no longer active.
 });
 
 const LeagueSeasonStandingsParamsSchema = z.object({
   leagueId: z.number(), // maps to: league_id
   seasonId: z.number(), // maps to: season_id
-  carClassId: z.number().optional(), // maps to: car_class_id
-  carId: z.number().optional(), // If car_class_id is included then the standings are for the car in that car class, otherwise they are for the car across car classes. // maps to: car_id
+  carClassId: z.optional(z.number()), // maps to: car_class_id
+  carId: z.optional(z.number()), // If car_class_id is included then the standings are for the car in that car class, otherwise they are for the car across car classes. // maps to: car_id
 });
 
 const LeagueSeasonSessionsParamsSchema = z.object({
   leagueId: z.number(), // maps to: league_id
   seasonId: z.number(), // maps to: season_id
-  resultsOnly: z.boolean().optional(), // If true include only sessions for which results are available. // maps to: results_only
+  resultsOnly: z.optional(z.boolean()), // If true include only sessions for which results are available. // maps to: results_only
 });
 
 // ---- Exported Parameter Types ----

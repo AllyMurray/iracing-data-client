@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -44,7 +44,7 @@ const LookupCountriesParamsSchema = z.object({
 
 const LookupDriversParamsSchema = z.object({
   searchTerm: z.string(), // A cust_id or partial name for which to search. // maps to: search_term
-  leagueId: z.number().optional(), // Narrow the search to the roster of the given league. // maps to: league_id
+  leagueId: z.optional(z.number()), // Narrow the search to the roster of the given league. // maps to: league_id
 });
 
 const LookupFlairsParamsSchema = z.object({

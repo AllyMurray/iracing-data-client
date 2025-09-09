@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -103,23 +103,23 @@ export interface MemberProfileResponse {
 // ---- Parameter Schemas ----
 
 const MemberAwardsParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 const MemberAwardInstancesParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
   awardId: z.number(), // maps to: award_id
 });
 
 const MemberChartDataParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
   categoryId: z.number(), // 1 - Oval; 2 - Road; 3 - Dirt oval; 4 - Dirt road // maps to: category_id
   chartType: z.number(), // 1 - iRating; 2 - TT Rating; 3 - License/SR // maps to: chart_type
 });
 
 const MemberGetParamsSchema = z.object({
   custIds: z.array(z.number()), // ?cust_ids=2,3,4 // maps to: cust_ids
-  includeLicenses: z.boolean().optional(), // maps to: include_licenses
+  includeLicenses: z.optional(z.boolean()), // maps to: include_licenses
 });
 
 const MemberInfoParamsSchema = z.object({
@@ -129,7 +129,7 @@ const MemberParticipationCreditsParamsSchema = z.object({
 });
 
 const MemberProfileParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 // ---- Exported Parameter Types ----

@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      zod-mini:
-        specifier: ^0.0.1
-        version: 0.0.1
+      zod:
+        specifier: ^4.1.5
+        version: 4.1.5
     devDependencies:
       dotenv:
         specifier: ^17.2.2
@@ -319,8 +319,8 @@ packages:
     engines: {node: '>= 14.6'}
     hasBin: true
 
-  zod-mini@0.0.1:
-    resolution: {integrity: sha512-C63FvV2EkahDCV5rHOmcvdfN0F1nH/JAT79HMxDEmlDv1FcttYoP95ngps2e9rzL+hrQlk6ezWxbSZzHmoZWKQ==}
+  zod@4.1.5:
+    resolution: {integrity: sha512-rcUUZqlLJgBC33IT3PNMgsCq6TzLQEG/Ei/KTCU0PedSWRMAXoOUN+4t/0H+Q8bdnLPdqUYnvboJT0bn/229qg==}
 
 snapshots:
 
@@ -558,4 +558,4 @@ snapshots:
 
   yaml@2.8.1: {}
 
-  zod-mini@0.0.1: {}
+  zod@4.1.5: {}

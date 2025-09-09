@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -18,7 +18,7 @@ export interface HostedSessionsResponse {
 // ---- Parameter Schemas ----
 
 const HostedCombinedSessionsParamsSchema = z.object({
-  packageId: z.number().optional(), // If set, return only sessions using this car or track package ID. // maps to: package_id
+  packageId: z.optional(z.number()), // If set, return only sessions using this car or track package ID. // maps to: package_id
 });
 
 const HostedSessionsParamsSchema = z.object({

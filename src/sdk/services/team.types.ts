@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -16,7 +16,7 @@ export type TeamMembershipResponse = TeamMembershipItem[];
 
 const TeamGetParamsSchema = z.object({
   teamId: z.number(), // maps to: team_id
-  includeLicenses: z.boolean().optional(), // For faster responses, only request when necessary. // maps to: include_licenses
+  includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
 const TeamMembershipParamsSchema = z.object({

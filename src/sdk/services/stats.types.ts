@@ -1,4 +1,4 @@
-import { z } from "zod-mini";
+import * as z from "zod-mini";
 
 // ---- Response Types ----
 
@@ -45,12 +45,12 @@ export interface StatsWorldRecordsResponse {
 // ---- Parameter Schemas ----
 
 const StatsMemberBestsParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
-  carId: z.number().optional(), // First call should exclude car_id; use cars_driven list in return for subsequent calls. // maps to: car_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
+  carId: z.optional(z.number()), // First call should exclude car_id; use cars_driven list in return for subsequent calls. // maps to: car_id
 });
 
 const StatsMemberCareerParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 const StatsMemberDivisionParamsSchema = z.object({
@@ -59,69 +59,69 @@ const StatsMemberDivisionParamsSchema = z.object({
 });
 
 const StatsMemberRecapParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
-  year: z.number().optional(), // Season year; if not supplied the current calendar year (UTC) is used.
-  season: z.number().optional(), // Season (quarter) within the year; if not supplied the recap will be fore the entire year.
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
+  year: z.optional(z.number()), // Season year; if not supplied the current calendar year (UTC) is used.
+  season: z.optional(z.number()), // Season (quarter) within the year; if not supplied the recap will be fore the entire year.
 });
 
 const StatsMemberRecentRacesParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 const StatsMemberSummaryParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 const StatsMemberYearlyParamsSchema = z.object({
-  custId: z.number().optional(), // Defaults to the authenticated member. // maps to: cust_id
+  custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 const StatsSeasonDriverStandingsParamsSchema = z.object({
   seasonId: z.number(), // maps to: season_id
   carClassId: z.number(), // maps to: car_class_id
-  division: z.number().optional(), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
-  raceWeekNum: z.number().optional(), // The first race week of a season is 0. // maps to: race_week_num
+  division: z.optional(z.number()), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
+  raceWeekNum: z.optional(z.number()), // The first race week of a season is 0. // maps to: race_week_num
 });
 
 const StatsSeasonSupersessionStandingsParamsSchema = z.object({
   seasonId: z.number(), // maps to: season_id
   carClassId: z.number(), // maps to: car_class_id
-  division: z.number().optional(), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
-  raceWeekNum: z.number().optional(), // The first race week of a season is 0. // maps to: race_week_num
+  division: z.optional(z.number()), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
+  raceWeekNum: z.optional(z.number()), // The first race week of a season is 0. // maps to: race_week_num
 });
 
 const StatsSeasonTeamStandingsParamsSchema = z.object({
   seasonId: z.number(), // maps to: season_id
   carClassId: z.number(), // maps to: car_class_id
-  raceWeekNum: z.number().optional(), // The first race week of a season is 0. // maps to: race_week_num
+  raceWeekNum: z.optional(z.number()), // The first race week of a season is 0. // maps to: race_week_num
 });
 
 const StatsSeasonTtStandingsParamsSchema = z.object({
   seasonId: z.number(), // maps to: season_id
   carClassId: z.number(), // maps to: car_class_id
-  division: z.number().optional(), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
-  raceWeekNum: z.number().optional(), // The first race week of a season is 0. // maps to: race_week_num
+  division: z.optional(z.number()), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
+  raceWeekNum: z.optional(z.number()), // The first race week of a season is 0. // maps to: race_week_num
 });
 
 const StatsSeasonTtResultsParamsSchema = z.object({
   seasonId: z.number(), // maps to: season_id
   carClassId: z.number(), // maps to: car_class_id
   raceWeekNum: z.number(), // The first race week of a season is 0. // maps to: race_week_num
-  division: z.number().optional(), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
+  division: z.optional(z.number()), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
 });
 
 const StatsSeasonQualifyResultsParamsSchema = z.object({
   seasonId: z.number(), // maps to: season_id
   carClassId: z.number(), // maps to: car_class_id
   raceWeekNum: z.number(), // The first race week of a season is 0. // maps to: race_week_num
-  division: z.number().optional(), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
+  division: z.optional(z.number()), // Divisions are 0-based: 0 is Division 1, 10 is Rookie. See /data/constants/divisons for more information. Defaults to all.
 });
 
 const StatsWorldRecordsParamsSchema = z.object({
   carId: z.number(), // maps to: car_id
   trackId: z.number(), // maps to: track_id
-  seasonYear: z.number().optional(), // Limit best times to a given year. // maps to: season_year
-  seasonQuarter: z.number().optional(), // Limit best times to a given quarter; only applicable when year is used. // maps to: season_quarter
+  seasonYear: z.optional(z.number()), // Limit best times to a given year. // maps to: season_year
+  seasonQuarter: z.optional(z.number()), // Limit best times to a given quarter; only applicable when year is used. // maps to: season_quarter
 });
 
 // ---- Exported Parameter Types ----
