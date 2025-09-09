@@ -535,6 +535,26 @@ export class IRacingClient {
     return mapped;
   }
 
+  private mapResponseFromApi(data: any): any {
+    if (data === null || data === undefined) return data;
+    
+    if (Array.isArray(data)) {
+      return data.map(item => this.mapResponseFromApi(item));
+    }
+    
+    if (typeof data === 'object') {
+      const mapped: Record<string, any> = {};
+      for (const [key, value] of Object.entries(data)) {
+        // Convert snake_case to camelCase
+        const camelKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+        mapped[camelKey] = this.mapResponseFromApi(value);
+      }
+      return mapped;
+    }
+    
+    return data;
+  }
+
 
   async get<T = unknown>(url: string, params?: Record<string, any>): Promise<T> {
     await this.ensureAuthenticated();
@@ -637,10 +657,11 @@ export class IRacingClient {
           } as T;
         }
         
-        return s3Response.json() as Promise<T>;
+        const s3Data = await s3Response.json();
+        return this.mapResponseFromApi(s3Data) as T;
       }
       
-      return data;
+      return this.mapResponseFromApi(data) as T;
     }
 
     throw new Error(\`Unexpected content type: \${contentType}\`);
