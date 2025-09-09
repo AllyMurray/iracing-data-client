@@ -1,0 +1,13 @@
+{
+  "car_class_id": 0,
+  "success": true,
+  "season_id": 1,
+  "car_id": 0,
+  "standings": {
+    "driver_standings": [],
+    "team_standings": [],
+    "driver_standings_csv_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/short_lived/league-standings/leagueid_7058_driver_standings.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115417Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=5bd5ed921408807ffb306fd7a61ac661aafa5313b9361465f7b653e4005ab78e",
+    "team_standings_csv_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/short_lived/league-standings/leagueid_7058_team_standings.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115417Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=ff02a8faa04592e54ae691d4b02112b0ee9049ca9b50635d799c9dd41b1a4fb8"
+  },
+  "league_id": 7058
+}

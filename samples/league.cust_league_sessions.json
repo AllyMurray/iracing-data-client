@@ -1,0 +1,4001 @@
+{
+  "mine": false,
+  "subscribed": false,
+  "sequence": 17178,
+  "sessions": [
+    {
+      "num_drivers": 8,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 20,
+      "num_spectator_slots": 55,
+      "available_spectator_slots": 55,
+      "can_broadcast": false,
+      "can_watch": true,
+      "can_spot": true,
+      "elig": {
+        "session_full": true,
+        "can_spot": true,
+        "can_watch": true,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": true,
+        "own_car": false,
+        "own_track": false,
+        "purchase_skus": [
+          10568,
+          10603
+        ],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 495,
+      "private_session_id": 4598677,
+      "session_id": 285744192,
+      "subsession_id": 79770017,
+      "password_protected": false,
+      "session_name": "The Gentlemen's Sim Racing Club Inc",
+      "open_reg_expires": "2025-09-09T10:16:25Z",
+      "launch_at": "2025-09-09T09:45:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 3,
+      "multiclass_type": 0,
+      "pits_in_use": 0,
+      "cars_left": 0,
+      "max_drivers": 60,
+      "hardcore_level": 0,
+      "practice_length": 29,
+      "lone_qualify": true,
+      "qualify_laps": 5,
+      "qualify_length": 10,
+      "warmup_length": 2,
+      "race_laps": 35,
+      "race_length": 35,
+      "time_limit": 120,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 20,
+      "incident_warn_param2": 10,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": true,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": true,
+      "entry_count": 8,
+      "league_id": 3143,
+      "league_name": "The Gentlemen's Sim Racing Club Inc",
+      "league_season_id": 122497,
+      "league_season_name": "2025C Ferrari 296 Super Sprint Challenge",
+      "session_type": 5,
+      "order_id": 42886179,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 2,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": true,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": true,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 5,
+      "category": "sports_car",
+      "session_full": true,
+      "host": {
+        "cust_id": 753258,
+        "display_name": "Ben M Woods",
+        "helmet": {
+          "pattern": 18,
+          "color1": "6fdb83",
+          "color2": "b897f1",
+          "color3": "b897f1",
+          "face_type": 8,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 5,
+        "config_name": "Grand Prix",
+        "track_id": 498,
+        "track_name": "Autodromo Internazionale del Mugello"
+      },
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 3020362212539643,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-08-30T08:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          60,
+          90,
+          555,
+          1440,
+          1485
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 3,
+          "skies_low": 1,
+          "temp_high": 24.4,
+          "temp_low": 20.5,
+          "temp_units": 1,
+          "wind_dir": 6,
+          "wind_high": 10.4,
+          "wind_low": 6.3,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/hosted/4598677.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T113840Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=960&X-Amz-Signature=f3268420b8fea881e00dfcff3837675164dee57284fdac286aafe8615e1f0f6d",
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": false,
+        "practice_rubber": 0,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 9,
+        "display_name": "AU-Syd",
+        "image_path": "/member_images/flags/au.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 75681,
+          "display_name": "Paul Wood2",
+          "helmet": {
+            "pattern": 9,
+            "color1": "ffffff",
+            "color2": "1a20bc",
+            "color3": "d50a12",
+            "face_type": 6,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 753258,
+          "display_name": "Ben M Woods",
+          "helmet": {
+            "pattern": 18,
+            "color1": "6fdb83",
+            "color2": "b897f1",
+            "color3": "b897f1",
+            "face_type": 8,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 750249,
+          "display_name": "Sam Chapman2",
+          "helmet": {
+            "pattern": 22,
+            "color1": "971717",
+            "color2": "ffffff",
+            "color3": "111111",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 880719,
+          "display_name": "Liam Haycock",
+          "helmet": {
+            "pattern": 53,
+            "color1": "00ffff",
+            "color2": "000000",
+            "color3": "ef00ac",
+            "face_type": 6,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 795503,
+          "display_name": "Blake Fitz",
+          "helmet": {
+            "pattern": 1,
+            "color1": "5481fc",
+            "color2": "ffffff",
+            "color3": "111111",
+            "face_type": 4,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 63397,
+          "display_name": "Neil deBruyn",
+          "helmet": {
+            "pattern": 68,
+            "color1": "0061ff",
+            "color2": "40ffff",
+            "color3": "ffffff",
+            "face_type": 4,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 423491,
+          "display_name": "Sam Stride",
+          "helmet": {
+            "pattern": 24,
+            "color1": "1a85e9",
+            "color2": "000105",
+            "color3": "0ef111",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 989384,
+          "display_name": "Hayden Garland",
+          "helmet": {
+            "pattern": 19,
+            "color1": "fffdd0",
+            "color2": "ff0000",
+            "color3": "ffff00",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 468974,
+          "display_name": "Adam Laves",
+          "helmet": {
+            "pattern": 28,
+            "color1": "00981d",
+            "color2": "000000",
+            "color3": "bfbfbf",
+            "face_type": 6,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 1022724,
+          "display_name": "Jaydon Wilcox",
+          "helmet": {
+            "pattern": 24,
+            "color1": "ffffff",
+            "color2": "ff7300",
+            "color3": "00fff7",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 560612,
+          "display_name": "Tomas Cole",
+          "helmet": {
+            "pattern": 7,
+            "color1": "f000df",
+            "color2": "000000",
+            "color3": "ffffff",
+            "face_type": 3,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 113103,
+          "display_name": "Joe Baldwin",
+          "helmet": {
+            "pattern": 56,
+            "color1": "000000",
+            "color2": "000000",
+            "color3": "000000",
+            "face_type": 8,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 524391,
+          "display_name": "Scott Jordison",
+          "helmet": {
+            "pattern": 11,
+            "color1": "7b653f",
+            "color2": "060606",
+            "color3": "563737",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 673861,
+          "display_name": "Greg Heaney",
+          "helmet": {
+            "pattern": 65,
+            "color1": "fff200",
+            "color2": "19468d",
+            "color3": "000000",
+            "face_type": 4,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 249138,
+          "display_name": "Tristan Koch",
+          "helmet": {
+            "pattern": 49,
+            "color1": "9e18e2",
+            "color2": "1cf2e9",
+            "color3": "004a5f",
+            "face_type": 4,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 708472,
+          "display_name": "Joshua Zuino",
+          "helmet": {
+            "pattern": 1,
+            "color1": "284a94",
+            "color2": "ffffff",
+            "color3": "111111",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 34006,
+          "display_name": "Nick Photiadis",
+          "helmet": {
+            "pattern": 19,
+            "color1": "1200f5",
+            "color2": "fffb3d",
+            "color3": "ff050f",
+            "face_type": 10,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 638047,
+          "display_name": "Gwakkle Eastwood",
+          "helmet": {
+            "pattern": 20,
+            "color1": "b30261",
+            "color2": "000000",
+            "color3": "ffffff",
+            "face_type": 7,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 150037,
+          "display_name": "Matt Schmitke",
+          "helmet": {
+            "pattern": 31,
+            "color1": "006cf9",
+            "color2": "ffbf00",
+            "color3": "000000",
+            "face_type": 8,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 405882,
+          "display_name": "John Simpson2",
+          "helmet": {
+            "pattern": 55,
+            "color1": "3000f1",
+            "color2": "111111",
+            "color3": "ff005c",
+            "face_type": 4,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 494106,
+          "display_name": "Greg Favelle",
+          "helmet": {
+            "pattern": 68,
+            "color1": "000000",
+            "color2": "6a6a6a",
+            "color3": "9f8000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 518008,
+          "display_name": "Glen Arnott",
+          "helmet": {
+            "pattern": 63,
+            "color1": "000000",
+            "color2": "1f4fca",
+            "color3": "bd0e1d",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        3143
+      ],
+      "cars": [
+        {
+          "car_id": 203,
+          "car_name": "Ferrari 296 Challenge",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "qual_setup_id": 268382,
+          "qual_setup_filename": "GSRCFixedQv2.sto",
+          "race_setup_id": 268874,
+          "race_setup_filename": "GSRCFixedv3.sto",
+          "package_id": 518
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 60,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 20,
+        "consolation_num_position_to_invert": 10,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-08-23T10:02:05Z",
+        "cust_id": 753258,
+        "description": "GSRC Fez Challenge",
+        "heat_caution_type": 0,
+        "heat_info_id": 199351,
+        "heat_info_name": "GSRC Fez Challengev1",
+        "heat_laps": 15,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 60,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 0,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 120,
+        "hidden": false,
+        "main_laps": 35,
+        "main_length_minutes": 35,
+        "main_max_field_size": 60,
+        "main_num_position_to_invert": 15,
+        "max_entrants": 60,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 2,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 29,
+        "qual_caution_type": 2,
+        "qual_laps": 5,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 1,
+        "race_style": 1
+      },
+      "count_by_car_id": {
+        "203": 8
+      },
+      "count_by_car_class_id": {
+        "0": 8
+      },
+      "car_types": [
+        {
+          "car_type": "challenge"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "sportscar"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "image": {
+        "small_logo": "https://members-leagueimages.iracing.com/3143/gsrc2.png",
+        "large_logo": "https://members-leagueimages.iracing.com/3143/tgsrcibanner5.png"
+      },
+      "owner": false,
+      "admin": false,
+      "friends": [],
+      "watched": [],
+      "end_time": "2025-09-09T11:45:00Z",
+      "populated": true,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 11,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 20,
+      "num_spectator_slots": 55,
+      "available_spectator_slots": 55,
+      "can_broadcast": false,
+      "can_watch": true,
+      "can_spot": true,
+      "elig": {
+        "session_full": true,
+        "can_spot": true,
+        "can_watch": true,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 495,
+      "private_session_id": 4708744,
+      "session_id": 285744227,
+      "subsession_id": 79770067,
+      "password_protected": false,
+      "session_name": "Mazda MX-5 Club Vic Tas iRacing Cup",
+      "open_reg_expires": "2025-09-09T10:52:24Z",
+      "launch_at": "2025-09-09T09:55:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "pits_in_use": 0,
+      "cars_left": 0,
+      "max_drivers": 26,
+      "hardcore_level": 0,
+      "practice_length": 55,
+      "lone_qualify": true,
+      "qualify_laps": 5,
+      "qualify_length": 15,
+      "warmup_length": 5,
+      "race_laps": 28,
+      "race_length": 20,
+      "time_limit": 120,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": true,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": true,
+      "entry_count": 11,
+      "league_id": 10429,
+      "league_name": "Mazda MX-5 Club Vic Tas iRacing Cup",
+      "league_season_id": 123200,
+      "league_season_name": "NC Cup 2025",
+      "session_type": 5,
+      "order_id": 44089707,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 2,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 5,
+      "category": "sports_car",
+      "session_full": true,
+      "host": {
+        "cust_id": 933721,
+        "display_name": "Simon Acfield",
+        "helmet": {
+          "pattern": 25,
+          "color1": "ffffff",
+          "color2": "fce65d",
+          "color3": "c5140e",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 5,
+        "track_id": 144,
+        "track_name": "Canadian Tire Motorsports Park"
+      },
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "forecast_type": 1,
+          "precipitation": 3,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 3822672413786347,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-07-13T10:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          65,
+          90,
+          120,
+          135
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 2.6,
+          "max_precip_rate_desc": "Light",
+          "precip_chance": 65,
+          "skies_high": 3,
+          "skies_low": 0,
+          "temp_high": 20.3,
+          "temp_low": 20.3,
+          "temp_units": 1,
+          "wind_dir": 6,
+          "wind_high": 22.2,
+          "wind_low": 19.3,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/hosted/4708744.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T113840Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=1560&X-Amz-Signature=b55d9c50f58a7917e360b78968ed97bfb468b5ef1894a1ec9848e7a4b9c095c7",
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": false,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 9,
+        "display_name": "AU-Syd",
+        "image_path": "/member_images/flags/au.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 1054451,
+          "display_name": "Kutay Dal",
+          "helmet": {
+            "pattern": 59,
+            "color1": "e01e3a",
+            "color2": "000000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 933721,
+          "display_name": "Simon Acfield",
+          "helmet": {
+            "pattern": 25,
+            "color1": "ffffff",
+            "color2": "fce65d",
+            "color3": "c5140e",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 990867,
+          "display_name": "Robert Howlett",
+          "helmet": {
+            "pattern": 68,
+            "color1": "111111",
+            "color2": "fc0706",
+            "color3": "ffffff",
+            "face_type": 8,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        10429
+      ],
+      "cars": [
+        {
+          "car_id": 67,
+          "car_name": "Global Mazda MX-5 Cup",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "qual_setup_id": 261206,
+          "qual_setup_filename": "MX5VicTas_fixed.sto",
+          "race_setup_id": 261206,
+          "race_setup_filename": "MX5VicTas_fixed.sto",
+          "package_id": 182
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 0,
+        "consolation_first_session_laps": 0,
+        "consolation_first_session_length_minutes": 0,
+        "consolation_num_position_to_invert": 0,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 0,
+        "consolation_run_always": false,
+        "consolation_scores_champ_points": false,
+        "created": "2025-04-24T03:50:57Z",
+        "cust_id": 933721,
+        "description": "55 Min Practice\n15 Min Qualifying\n15 Min Race #1\n20 Min Race #2",
+        "heat_caution_type": 2,
+        "heat_info_id": 190491,
+        "heat_info_name": "MX-5 Club Heat | L Qual 15 min",
+        "heat_laps": 19,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 26,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 0,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 117,
+        "hidden": false,
+        "main_laps": 28,
+        "main_length_minutes": 20,
+        "main_max_field_size": 26,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 26,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 55,
+        "qual_caution_type": 2,
+        "qual_laps": 5,
+        "qual_length_minutes": 15,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": true,
+        "qual_scoring": 0,
+        "qual_style": 1,
+        "race_style": 1
+      },
+      "count_by_car_id": {
+        "67": 11
+      },
+      "count_by_car_class_id": {
+        "0": 11
+      },
+      "car_types": [
+        {
+          "car_type": "miata"
+        },
+        {
+          "car_type": "mx5"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "sportscar"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "image": {
+        "small_logo": "https://members-leagueimages.iracing.com/10429/mazdamx5motorsportchaptersmall.jpeg",
+        "large_logo": "https://members-leagueimages.iracing.com/10429/mazdamx5clubvictas.png"
+      },
+      "owner": false,
+      "admin": false,
+      "friends": [],
+      "watched": [],
+      "end_time": "2025-09-09T11:55:00Z",
+      "populated": true,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 2,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 20,
+      "num_spectator_slots": 55,
+      "available_spectator_slots": 55,
+      "can_broadcast": false,
+      "can_watch": true,
+      "can_spot": true,
+      "elig": {
+        "session_full": false,
+        "can_spot": true,
+        "can_watch": true,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": true,
+        "own_car": false,
+        "own_track": true,
+        "purchase_skus": [
+          10585,
+          10587
+        ],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 495,
+      "private_session_id": 4701114,
+      "session_id": 285743282,
+      "subsession_id": 79769158,
+      "password_protected": false,
+      "session_name": "Alliance Enduro simracing",
+      "open_reg_expires": "2025-09-09T13:00:30Z",
+      "launch_at": "2025-09-09T06:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": 1,
+      "rolling_starts": false,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "pits_in_use": 0,
+      "cars_left": 51,
+      "max_drivers": 62,
+      "hardcore_level": 1,
+      "practice_length": 420,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 0,
+      "warmup_length": 0,
+      "race_laps": 0,
+      "race_length": 0,
+      "time_limit": 420,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 10,
+      "unsport_conduct_rule_mode": 3,
+      "connection_black_flag": true,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": true,
+      "entry_count": 2,
+      "league_id": 12237,
+      "league_name": "Alliance Enduro simracing",
+      "league_season_id": 118426,
+      "league_season_name": "ASR Enduro Series Season 1",
+      "session_type": 1,
+      "order_id": 44015465,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 2,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": true,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 5,
+      "category": "sports_car",
+      "session_full": false,
+      "host": {
+        "cust_id": 17760,
+        "display_name": "Matt van der Kraan",
+        "helmet": {
+          "pattern": 63,
+          "color1": "15054c",
+          "color2": "cccccc",
+          "color3": "feec04",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 5,
+        "track_id": 219,
+        "track_name": "Mount Panorama Circuit"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 0,
+        "simulated_start_time": "2025-11-15T07:36:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          105
+        ],
+        "skies": 0,
+        "temp_units": 1,
+        "temp_value": 18,
+        "time_of_day": 1,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 2
+      },
+      "track_state": {
+        "leave_marbles": false,
+        "practice_rubber": 100,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 9,
+        "display_name": "AU-Syd",
+        "image_path": "/member_images/flags/au.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 17760,
+          "display_name": "Matt van der Kraan",
+          "helmet": {
+            "pattern": 63,
+            "color1": "15054c",
+            "color2": "cccccc",
+            "color3": "feec04",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 1067813,
+          "display_name": "James Hardy5",
+          "helmet": {
+            "pattern": 35,
+            "color1": "eea2d8",
+            "color2": "ca8db7",
+            "color3": "e0a7de",
+            "face_type": 6,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 451742,
+          "display_name": "Tim Nicol",
+          "helmet": {
+            "pattern": 43,
+            "color1": "0d00ff",
+            "color2": "fffc00",
+            "color3": "ff6300",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 182792,
+          "display_name": "Jonathon Hancock",
+          "helmet": {
+            "pattern": 57,
+            "color1": "00f53a",
+            "color2": "000000",
+            "color3": "00ff25",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 919090,
+          "display_name": "Tim Lawson2",
+          "helmet": {
+            "pattern": 62,
+            "color1": "5a82c5",
+            "color2": "7ec3d8",
+            "color3": "2f53be",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 494170,
+          "display_name": "Troy Sipple",
+          "helmet": {
+            "pattern": 5,
+            "color1": "191a19",
+            "color2": "e71313",
+            "color3": "d1d3d5",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 482537,
+          "display_name": "Rick Vigar",
+          "helmet": {
+            "pattern": 7,
+            "color1": "ccff00",
+            "color2": "111111",
+            "color3": "391c83",
+            "face_type": 8,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        12237
+      ],
+      "cars": [
+        {
+          "car_id": 192,
+          "car_name": "Supercars Chevrolet Camaro Gen 3",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "qual_setup_id": 270094,
+          "qual_setup_filename": "AOSC_Endurance_Rd3_Bathurst_JMcK.sto",
+          "race_setup_id": 270094,
+          "race_setup_filename": "AOSC_Endurance_Rd3_Bathurst_JMcK.sto",
+          "package_id": 492
+        },
+        {
+          "car_id": 190,
+          "car_name": "Supercars Ford Mustang Gen 3",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "qual_setup_id": 270093,
+          "qual_setup_filename": "Bathurst\\AOSC_Endurance_Rd3_Bathurst_JMcK.sto",
+          "race_setup_id": 270093,
+          "race_setup_filename": "Bathurst\\AOSC_Endurance_Rd3_Bathurst_JMcK.sto",
+          "package_id": 488
+        }
+      ],
+      "count_by_car_id": {
+        "190": 1,
+        "192": 1
+      },
+      "count_by_car_class_id": {
+        "0": 2
+      },
+      "car_types": [
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "supercars"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 2
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 1
+        }
+      ],
+      "can_join": false,
+      "image": {
+        "small_logo": "https://members-leagueimages.iracing.com/12237/leaguelogo450x215endurancelogov2.png",
+        "large_logo": "https://members-leagueimages.iracing.com/12237/asrv1leaguebanner960x240.png"
+      },
+      "owner": false,
+      "admin": false,
+      "friends": [],
+      "watched": [],
+      "end_time": "2025-09-09T13:00:00Z",
+      "populated": true,
+      "team_entry_count": 0,
+      "is_heat_racing": false,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 1,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 20,
+      "num_spectator_slots": 55,
+      "available_spectator_slots": 55,
+      "can_broadcast": false,
+      "can_watch": true,
+      "can_spot": true,
+      "elig": {
+        "session_full": false,
+        "can_spot": true,
+        "can_watch": true,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": true,
+        "own_car": false,
+        "own_track": true,
+        "purchase_skus": [
+          10452
+        ],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 495,
+      "private_session_id": 4701354,
+      "session_id": 285736203,
+      "subsession_id": 79763760,
+      "password_protected": false,
+      "session_name": "Power FM Racing – Time Attack",
+      "session_desc": "Round #4 \n 0x Only, best lap.",
+      "open_reg_expires": "2025-09-09T22:00:23Z",
+      "launch_at": "2025-09-08T22:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": false,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "pits_in_use": 1,
+      "cars_left": 59,
+      "max_drivers": 25,
+      "hardcore_level": 3,
+      "practice_length": 0,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 1440,
+      "warmup_length": 0,
+      "race_laps": 0,
+      "race_length": 0,
+      "time_limit": 1440,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 1,
+      "league_id": 12984,
+      "league_name": "Power FM Racing – Time Attack",
+      "league_season_id": 123486,
+      "league_season_name": "PowerFM Time Attack 2025",
+      "session_type": 12,
+      "order_id": 44018278,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 2,
+      "pace_car_id": 90,
+      "pace_car_class_id": 11,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": true,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 5,
+      "category": "sports_car",
+      "session_full": false,
+      "host": {
+        "cust_id": 373495,
+        "display_name": "Ali Guvendiren",
+        "helmet": {
+          "pattern": 54,
+          "color1": "ff5f1f",
+          "color2": "103173",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 5,
+        "config_name": "Grand Prix Pits",
+        "track_id": 523,
+        "track_name": "Circuit de Spa-Francorchamps"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T12:00:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          30,
+          60
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 4,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 373495,
+          "display_name": "Ali Guvendiren",
+          "helmet": {
+            "pattern": 54,
+            "color1": "ff5f1f",
+            "color2": "103173",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        12984
+      ],
+      "cars": [
+        {
+          "car_id": 106,
+          "car_name": "Dallara F3",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 274
+        }
+      ],
+      "count_by_car_id": {
+        "106": 1
+      },
+      "count_by_car_class_id": {
+        "0": 1
+      },
+      "car_types": [
+        {
+          "car_type": "formula3"
+        },
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 3
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 12
+        }
+      ],
+      "can_join": false,
+      "image": {
+        "small_logo": "https://members-leagueimages.iracing.com/12984/powerfm100_300x215.png",
+        "large_logo": null
+      },
+      "owner": false,
+      "admin": false,
+      "friends": [],
+      "watched": [],
+      "end_time": "2025-09-09T22:00:00Z",
+      "populated": true,
+      "team_entry_count": 0,
+      "is_heat_racing": false,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": false,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707108,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-09-18T18:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074840,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "National",
+        "track_id": 343,
+        "track_name": "Silverstone Circuit"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T13:39:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-09-18T21:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": true,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707109,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-09-25T18:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074855,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "Asphalt",
+        "track_id": 16,
+        "track_name": "USA International Speedway"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T15:39:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-09-25T21:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": true,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707110,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-10-02T18:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074867,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "Legends RC Long - 2018",
+        "track_id": 336,
+        "track_name": "Charlotte Motor Speedway"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T15:25:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          120,
+          180,
+          195
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-10-02T21:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": false,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707114,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-10-09T18:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": false,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074887,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "2000 Full",
+        "track_id": 324,
+        "track_name": "Tsukuba Circuit"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T13:40:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          120,
+          180,
+          195
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-10-09T21:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": false,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707116,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-10-16T18:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074903,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "Summit Point Raceway",
+        "track_id": 9,
+        "track_name": "Summit Point Raceway"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T15:04:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          120,
+          180,
+          195
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-10-16T21:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": false,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707118,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-10-23T18:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074909,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "Indy",
+        "track_id": 146,
+        "track_name": "Brands Hatch Circuit"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T13:26:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          120,
+          180,
+          195
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-10-23T21:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": true,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707121,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-10-30T19:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074915,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "Fosters",
+        "track_id": 181,
+        "track_name": "Oulton Park Circuit"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T13:44:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          120,
+          180,
+          195
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-10-30T22:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    },
+    {
+      "num_drivers": 0,
+      "num_spotters": 0,
+      "num_spectators": 0,
+      "num_broadcasters": 0,
+      "available_reserved_broadcaster_slots": 0,
+      "num_spectator_slots": 0,
+      "available_spectator_slots": 0,
+      "can_broadcast": false,
+      "can_watch": false,
+      "can_spot": false,
+      "elig": {
+        "session_full": true,
+        "can_spot": false,
+        "can_watch": false,
+        "can_drive": false,
+        "has_sess_password": false,
+        "needs_purchase": false,
+        "own_car": true,
+        "own_track": true,
+        "purchase_skus": [],
+        "registered": false
+      },
+      "driver_changes": false,
+      "restrict_viewing": false,
+      "max_users": 0,
+      "private_session_id": 4707122,
+      "password_protected": false,
+      "session_name": "WTEC Championship",
+      "launch_at": "2025-11-06T19:00:00Z",
+      "full_course_cautions": false,
+      "num_fast_tows": -1,
+      "rolling_starts": true,
+      "restarts": 2,
+      "multiclass_type": 0,
+      "max_drivers": 30,
+      "hardcore_level": 0,
+      "practice_length": 15,
+      "lone_qualify": false,
+      "qualify_laps": 0,
+      "qualify_length": 15,
+      "warmup_length": 15,
+      "race_laps": 0,
+      "race_length": 15,
+      "time_limit": 180,
+      "restrict_results": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "unsport_conduct_rule_mode": 0,
+      "connection_black_flag": false,
+      "lucky_dog": false,
+      "min_team_drivers": 1,
+      "max_team_drivers": 1,
+      "qualifier_must_start_race": false,
+      "driver_change_rule": 0,
+      "fixed_setup": false,
+      "entry_count": 0,
+      "league_id": 7058,
+      "league_name": "WTEC Championship",
+      "league_season_id": 124867,
+      "league_season_name": "S14 - Legends",
+      "session_type": 5,
+      "race_length_type": 2,
+      "order_id": 44074922,
+      "min_license_level": 1,
+      "max_license_level": 28,
+      "status": 1,
+      "pace_car_id": null,
+      "pace_car_class_id": null,
+      "num_opt_laps": 0,
+      "damage_model": 0,
+      "do_not_paint_cars": false,
+      "green_white_checkered_limit": 0,
+      "do_not_count_caution_laps": false,
+      "consec_cautions_single_file": false,
+      "consec_caution_within_nlaps": 2,
+      "no_lapper_wave_arounds": false,
+      "short_parade_lap": false,
+      "start_on_qual_tire": false,
+      "telemetry_restriction": 0,
+      "telemetry_force_to_disk": 0,
+      "max_ai_drivers": 0,
+      "ai_avoid_players": false,
+      "adaptive_ai_enabled": false,
+      "adaptive_ai_difficulty": 4,
+      "must_use_diff_tire_types_in_race": false,
+      "start_zone": false,
+      "enable_pitlane_collisions": false,
+      "disallow_virtual_mirror": false,
+      "max_visor_tearoffs": -1,
+      "category_id": 1,
+      "category": "oval",
+      "host": {
+        "cust_id": 749272,
+        "display_name": "Bevan Thomson",
+        "helmet": {
+          "pattern": 37,
+          "color1": "ff4747",
+          "color2": "001e6b",
+          "color3": "ffffff",
+          "face_type": 0,
+          "helmet_type": 0
+        }
+      },
+      "track": {
+        "category_id": 1,
+        "config_name": "Short",
+        "track_id": 167,
+        "track_name": "Okayama International Circuit"
+      },
+      "weather": {
+        "allow_fog": false,
+        "fog": 0,
+        "precip_option": 0,
+        "rel_humidity": 45,
+        "simulated_start_time": "2025-05-15T14:05:00",
+        "simulated_time_multiplier": 0,
+        "simulated_time_offsets": [
+          70,
+          90,
+          120,
+          180,
+          195
+        ],
+        "skies": 1,
+        "temp_units": 1,
+        "temp_value": 26,
+        "time_of_day": 0,
+        "track_water": 0,
+        "type": 0,
+        "version": 2,
+        "wind_dir": 0,
+        "wind_units": 1,
+        "wind_value": 3
+      },
+      "track_state": {
+        "leave_marbles": true,
+        "practice_rubber": -1,
+        "qualify_rubber": -1,
+        "race_rubber": -1,
+        "warmup_rubber": -1
+      },
+      "farm": {
+        "farm_id": 11,
+        "display_name": "DE-Fra",
+        "image_path": "/member_images/flags/de.png",
+        "displayed": true
+      },
+      "admins": [
+        {
+          "cust_id": 749272,
+          "display_name": "Bevan Thomson",
+          "helmet": {
+            "pattern": 37,
+            "color1": "ff4747",
+            "color2": "001e6b",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 234679,
+          "display_name": "Adam S Robinson",
+          "helmet": {
+            "pattern": 28,
+            "color1": "000000",
+            "color2": "ff0000",
+            "color3": "000000",
+            "face_type": 0,
+            "helmet_type": 0
+          }
+        },
+        {
+          "cust_id": 599890,
+          "display_name": "Alex Williams8",
+          "helmet": {
+            "pattern": 41,
+            "color1": "ffffff",
+            "color2": "000000",
+            "color3": "0500f0",
+            "face_type": 5,
+            "helmet_type": 0
+          }
+        }
+      ],
+      "allowed_teams": [],
+      "allowed_leagues": [
+        7058
+      ],
+      "cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe",
+          "car_class_id": 0,
+          "car_class_name": "Hosted All Cars Class",
+          "max_pct_fuel_fill": 100,
+          "weight_penalty_kg": 0,
+          "power_adjust_pct": 0,
+          "max_dry_tire_sets": 0,
+          "package_id": 22
+        }
+      ],
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 30,
+        "consolation_first_session_laps": 20,
+        "consolation_first_session_length_minutes": 15,
+        "consolation_num_position_to_invert": 6,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": true,
+        "consolation_scores_champ_points": true,
+        "created": "2025-09-07T09:31:32Z",
+        "cust_id": 749272,
+        "heat_caution_type": 0,
+        "heat_info_id": 200338,
+        "heat_info_name": "WTEC 60P 10OQ 15/15/15 Invert6",
+        "heat_laps": 20,
+        "heat_length_minutes": 15,
+        "heat_max_field_size": 30,
+        "heat_num_from_each_to_main": 0,
+        "heat_num_position_to_invert": 6,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 129,
+        "hidden": false,
+        "main_laps": 20,
+        "main_length_minutes": 15,
+        "main_max_field_size": 30,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 5,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 60,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 10,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 2,
+        "race_style": 1
+      },
+      "car_types": [
+        {
+          "car_type": "legends"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "track_types": [
+        {
+          "track_type": "road"
+        }
+      ],
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        },
+        {
+          "license_group_type": 2
+        },
+        {
+          "license_group_type": 3
+        },
+        {
+          "license_group_type": 4
+        },
+        {
+          "license_group_type": 5
+        },
+        {
+          "license_group_type": 6
+        },
+        {
+          "license_group_type": 7
+        }
+      ],
+      "event_types": [
+        {
+          "event_type": 5
+        }
+      ],
+      "session_types": [
+        {
+          "session_type": 5
+        }
+      ],
+      "can_join": false,
+      "owner": false,
+      "admin": false,
+      "end_time": "2025-11-06T22:00:00Z",
+      "populated": false,
+      "team_entry_count": 0,
+      "is_heat_racing": true,
+      "broadcaster": false,
+      "min_ir": -1,
+      "max_ir": -1
+    }
+  ],
+  "success": true
+}

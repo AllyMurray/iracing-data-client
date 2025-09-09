@@ -1,0 +1,42 @@
+[
+  {
+    "league_id": 6296,
+    "league_name": "UK SimRacing Community - GT3 League",
+    "owner": false,
+    "admin": false,
+    "league_mail_opt_out": false,
+    "league_pm_opt_out": false,
+    "car_number": "157",
+    "nick_name": "[R] Alistair Murray"
+  },
+  {
+    "league_id": 7891,
+    "league_name": "UK SimRacing Community - MX5 League Season 8",
+    "owner": false,
+    "admin": false,
+    "league_mail_opt_out": false,
+    "league_pm_opt_out": false,
+    "car_number": "15",
+    "nick_name": null
+  },
+  {
+    "league_id": 6871,
+    "league_name": "UK SimRacing Community - Weekly Practice Sessions",
+    "owner": false,
+    "admin": false,
+    "league_mail_opt_out": false,
+    "league_pm_opt_out": false,
+    "car_number": null,
+    "nick_name": null
+  },
+  {
+    "league_id": 7058,
+    "league_name": "WTEC Championship",
+    "owner": false,
+    "admin": false,
+    "league_mail_opt_out": false,
+    "league_pm_opt_out": false,
+    "car_number": "19",
+    "nick_name": "Ally M"
+  }
+]

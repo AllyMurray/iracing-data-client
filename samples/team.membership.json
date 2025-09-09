@@ -1,0 +1,30 @@
+[
+  {
+    "team_id": -361230,
+    "team_name": "Team Alistair Murray",
+    "owner": true,
+    "admin": true,
+    "default_team": true
+  },
+  {
+    "team_id": -318499,
+    "team_name": "WTEC Tide",
+    "owner": false,
+    "admin": false,
+    "default_team": false
+  },
+  {
+    "team_id": -322598,
+    "team_name": "Team Kyle Reid3",
+    "owner": false,
+    "admin": true,
+    "default_team": true
+  },
+  {
+    "team_id": -301167,
+    "team_name": "BH / SCK Motorsport",
+    "owner": false,
+    "admin": false,
+    "default_team": true
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "type": "stats_world_records",
+  "data": {
+    "success": true,
+    "car_id": 1,
+    "track_id": 1,
+    "chunk_info": {
+      "chunk_size": 2000,
+      "num_chunks": 17,
+      "rows": 32567,
+      "base_download_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/short_lived/worldrecords/carid_1/trackid_1/year_all/quarter_all/",
+      "chunk_file_names": [
+        "596430bd1dffbfa1d0cf8d337bf2c86b2a31ce7677099219b1abbaa8534ee0d6.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=2068b09669392d8de491be569b58e118a6d986a7dc0dce124315cac143928f35",
+        "078e3e392cc824e077fc1bba58ad094d6354572cfe83429d8d0e52fe1f99f00d.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=b28d4abbb50e72138b99ddc4720ea48a9b347123cf418d8d5e8acbaaa7759e04",
+        "bb77dabdcfda682ef359a2362f19d89306b16d2f03c4f8ecc10e2e5c6ee92ec6.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=465e4e351014f31b59d3c3b8666fc86f5f3b63ef4d94e2a365d32aee1808aaae",
+        "7fee15d3fb9fee39d8e5413e6408c43137006755ffb9ca793a31b232d5ab55bf.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=617fd77475205d04c72bc59d51ec3238ce88692ac94a62eb78f554fe6bbc8b2d",
+        "624bce8ec23dbd91a8f35c59dce18c8745776f4d478f2e3ef81db631db63943a.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=9c68b3111ecbdc1c6b9ce579e9dffa37c3f950274759af96113e7c6b4da6bfde",
+        "58edffa624dddb99a390371a4b36c04643c01a1c18d4c151650d838c6ad16f0f.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=4a3659a31166da322e4655c8d4f4664cafeab207d6b96df8b4fe539c4c6f2b5e",
+        "a33d1ba24742129c6019f84dedcbb7a81dbd6717b31af083e5915ee36a9d477a.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=4e1f11882c9dc73c146f4b2568f639639a010c263cd694cc3655ae5e5c5eaf0f",
+        "5dc36b33c24c9dbe8553ec3f5c0bc1fde33f12894e2c0af4d9e6b47ff2cda4c1.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=cb80e476602bebaebf546a6c513ec4d7dc96e1b0786d19fe44d3c2ff980fd9f1",
+        "f74d10400c5747ae36568e13de3e0eedcd76198887912544557485982e9c2361.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=756576a2ab93c1f2ed5e27146166bf00220465456a0baa61f977c676d253b140",
+        "b0e6f37d5f6caa3a30ef3b28023755571ad9f3ac17266b6d69ea876516a886d7.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=5c5f44a37056217438948c97bb2fa7931d1fe2717eea9cbfd7ab3897e7a085c2",
+        "ee6236aa383e5497569c27218bea37aa9aa551761e01ea9c65dc5874d86228d3.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=4c39b9ca7c0f3f5bcfeeef1d5982daf9d84d6a0b93038cb98da650c95e67af78",
+        "e23407bda78e45a3fc981c06ea187eecfc09addee6df4f2815ab863bc0ba05aa.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=957f277651c8e9a441942c9e00d5324bbe0ad3c659c4e17d643d49b71d6c839d",
+        "f3da6380a92fe5aa9babadd9aafdbc5c74a26bcedb921de30b6f60291326d005.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=4f7e9c20f1229cde1c68a67aef1524369da2f82876d12cc991998250988f0802",
+        "7b723eaaa3a58a40650e03bf118956d8a880a5865b082ce69129b58d54eb285c.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=0b5bf78623433e160424d85d4a1449b3718886236062c8bf3e212ebfdfd452d4",
+        "9fe5a9d45a62452306dee2b3de8fc223344d5a12d316e37c3de723f067d69fd0.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=6debaef2eee759ae1f3b2e8221da999c574482bfd8c8b107bf9f2fd7e3d723d4",
+        "6a84917977161ea1c0012f4485d53fa516b3acf548ab3df271db78f63c2af448.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=7a127db4f454d0c95e739284a9ec64db5d605e8b18418a13f9ca98f85685870f",
+        "56aef5c4401c075e1281194de960a3f8691c593d3e26928a7ea4db6bfaadabc4.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115500Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=8c14faf077754ea7f2c4f28f03398f1d78373539d69aa86c9fed0d41c69ef7a0"
+      ]
+    },
+    "last_updated": "2025-09-09T11:55:00Z"
+  }
+}

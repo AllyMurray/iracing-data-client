@@ -1,0 +1,1225 @@
+{
+  "subscribed": false,
+  "sessions": [
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:24:00Z",
+      "session_id": 285744493,
+      "entry_count": 46
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:24:00Z",
+      "session_id": 285744494,
+      "entry_count": 34
+    },
+    {
+      "season_id": 5880,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 528,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:19:00Z",
+      "session_id": 285744501,
+      "entry_count": 15
+    },
+    {
+      "season_id": 5377,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 62,
+      "race_week_num": 30,
+      "end_time": "2025-09-09T13:19:00Z",
+      "session_id": 285744490,
+      "entry_count": 10
+    },
+    {
+      "season_id": 5869,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 323,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:38:00Z",
+      "session_id": 285744497,
+      "entry_count": 9
+    },
+    {
+      "season_id": 5871,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 585,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:12:00Z",
+      "session_id": 285744498,
+      "entry_count": 9
+    },
+    {
+      "season_id": 5866,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 341,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:21:00Z",
+      "session_id": 285744495,
+      "entry_count": 8
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:23:00Z",
+      "session_id": 285744492,
+      "entry_count": 7
+    },
+    {
+      "season_id": 5624,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 471,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T12:26:00Z",
+      "session_id": 285744491,
+      "entry_count": 1
+    },
+    {
+      "season_id": 5867,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 396,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:29:00Z",
+      "session_id": 285744496,
+      "entry_count": 1
+    },
+    {
+      "season_id": 5878,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 381,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:22:00Z",
+      "session_id": 285744499,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5879,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 344,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:09:34Z",
+      "session_id": 285744500,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5882,
+      "start_time": "2025-09-09T12:00:00Z",
+      "super_session": false,
+      "series_id": 382,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:14:53Z",
+      "session_id": 285744502,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5876,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 250,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:44:00Z",
+      "session_id": 285744542,
+      "entry_count": 8
+    },
+    {
+      "season_id": 5877,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 544,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:41:00Z",
+      "session_id": 285744543,
+      "entry_count": 8
+    },
+    {
+      "season_id": 5868,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 324,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:33:00Z",
+      "session_id": 285744538,
+      "entry_count": 1
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:38:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:39:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:39:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5870,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 470,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:20:36Z",
+      "session_id": 285744539,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5874,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 245,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:22:58Z",
+      "session_id": 285744540,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5875,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 242,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:29:32Z",
+      "session_id": 285744541,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5881,
+      "start_time": "2025-09-09T12:15:00Z",
+      "super_session": false,
+      "series_id": 345,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:33:00Z",
+      "session_id": 285744544,
+      "entry_count": 0
+    },
+    {
+      "season_id": 5625,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 259,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T12:50:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:53:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:54:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:54:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5866,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 341,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:51:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5867,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 396,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:59:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5871,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 585,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:42:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5878,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 381,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:52:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5879,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 344,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:52:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5880,
+      "start_time": "2025-09-09T12:30:00Z",
+      "super_session": false,
+      "series_id": 528,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T12:49:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5376,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 47,
+      "race_week_num": 30,
+      "end_time": "2025-09-09T13:59:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5626,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 116,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T13:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:08:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5868,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 324,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:03:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5870,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 470,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:04:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5874,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 245,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:06:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5875,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 242,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:12:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5876,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 250,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:14:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5877,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 544,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:11:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5881,
+      "start_time": "2025-09-09T12:45:00Z",
+      "super_session": false,
+      "series_id": 345,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:03:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5624,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 471,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T13:26:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:23:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:24:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:24:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5866,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 341,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:21:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5867,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 396,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:29:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5869,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 323,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:46:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5871,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 585,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:12:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5878,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 381,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:22:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5879,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 344,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:22:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5880,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 528,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:19:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5882,
+      "start_time": "2025-09-09T13:00:00Z",
+      "super_session": false,
+      "series_id": 382,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:26:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:38:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:39:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:39:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5868,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 324,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:33:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5870,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 470,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:34:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5874,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 245,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:36:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5875,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 242,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:42:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5876,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 250,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:44:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5877,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 544,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:41:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5881,
+      "start_time": "2025-09-09T13:15:00Z",
+      "super_session": false,
+      "series_id": 345,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:33:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5625,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 259,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T13:50:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:53:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:54:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:54:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5866,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 341,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:51:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5867,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 396,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:59:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5871,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 585,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:42:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5878,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 381,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:52:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5879,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 344,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:52:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5880,
+      "start_time": "2025-09-09T13:30:00Z",
+      "super_session": false,
+      "series_id": 528,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T13:49:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5626,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 116,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T14:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:08:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5868,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 324,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:03:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5870,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 470,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:04:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5874,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 245,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:06:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5875,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 242,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:12:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5876,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 250,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:14:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5877,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 544,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:11:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5881,
+      "start_time": "2025-09-09T13:45:00Z",
+      "super_session": false,
+      "series_id": 345,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:03:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5377,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 62,
+      "race_week_num": 30,
+      "end_time": "2025-09-09T15:19:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5624,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 471,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T14:26:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:23:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:24:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:24:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5866,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 341,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:21:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5867,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 396,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:29:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5869,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 323,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:46:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5871,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 585,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:12:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5878,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 381,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:22:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5879,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 344,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:22:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5880,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 528,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:19:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5882,
+      "start_time": "2025-09-09T14:00:00Z",
+      "super_session": false,
+      "series_id": 382,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:26:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:38:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:39:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:39:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5868,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 324,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:33:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5870,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 470,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:34:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5874,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 245,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:36:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5875,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 242,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:42:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5876,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 250,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:44:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5877,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 544,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:41:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5881,
+      "start_time": "2025-09-09T14:15:00Z",
+      "super_session": false,
+      "series_id": 345,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:33:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5625,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 259,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T14:50:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:53:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:54:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:54:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5866,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 341,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:51:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5867,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 396,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:59:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5871,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 585,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:42:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5878,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 381,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:52:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5879,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 344,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:52:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5880,
+      "start_time": "2025-09-09T14:30:00Z",
+      "super_session": false,
+      "series_id": 528,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T14:49:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5376,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 47,
+      "race_week_num": 30,
+      "end_time": "2025-09-09T15:59:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5626,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 116,
+      "race_week_num": 12,
+      "end_time": "2025-09-09T15:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5860,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 134,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:08:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5862,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 135,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5865,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 568,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:09:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5868,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 324,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:03:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5870,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 470,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:04:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5874,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 245,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:06:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5875,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 242,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:12:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5876,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 250,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:14:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5877,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 544,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:11:00Z",
+      "entry_count": 0
+    },
+    {
+      "season_id": 5881,
+      "start_time": "2025-09-09T14:45:00Z",
+      "super_session": false,
+      "series_id": 345,
+      "race_week_num": 0,
+      "end_time": "2025-09-09T15:03:00Z",
+      "entry_count": 0
+    }
+  ],
+  "block_begin_time": "2025-09-09T11:54:00Z",
+  "block_end_time": "2025-09-09T14:54:00Z",
+  "success": true
+}

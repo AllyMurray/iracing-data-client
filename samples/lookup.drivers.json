@@ -1,0 +1,587 @@
+[
+  {
+    "cust_id": 896852,
+    "display_name": "Alex Sample",
+    "helmet": {
+      "pattern": 57,
+      "color1": "ffffff",
+      "color2": "000000",
+      "color3": "929292",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 961859,
+    "display_name": "Alex Sample2",
+    "helmet": {
+      "pattern": 11,
+      "color1": "00f0ff",
+      "color2": "ffffff",
+      "color3": "ff0000",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 630106,
+    "display_name": "Austin Sampley",
+    "helmet": {
+      "pattern": 12,
+      "color1": "000000",
+      "color2": "ff5c00",
+      "color3": "ffffff",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 143944,
+    "display_name": "Bill Samples",
+    "helmet": {
+      "pattern": 50,
+      "color1": "f58ab3",
+      "color2": "a5fa00",
+      "color3": "8e0fc7",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1060684,
+    "display_name": "Brandon Samples",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffee47",
+      "color2": "0300c2",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 481228,
+    "display_name": "Brayden Samples",
+    "helmet": {
+      "pattern": 19,
+      "color1": "050505",
+      "color2": "EEF1EF",
+      "color3": "E32626",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 672768,
+    "display_name": "Brayden Samples2",
+    "helmet": {
+      "pattern": 1,
+      "color1": "0300c2",
+      "color2": "ffee47",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1188951,
+    "display_name": "Brayden Samples3",
+    "helmet": {
+      "pattern": 1,
+      "color1": "0a0a0a",
+      "color2": "d7592a",
+      "color3": "71419",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 788029,
+    "display_name": "Brendan Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "111111",
+      "color3": "5481fc",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 788034,
+    "display_name": "Brendan Sample2",
+    "helmet": {
+      "pattern": 68,
+      "color1": "0037d9",
+      "color2": "111111",
+      "color3": "ffffff",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 685086,
+    "display_name": "Charles Samples",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ed2129",
+      "color2": "2a3795",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 722110,
+    "display_name": "Codi Samples",
+    "helmet": {
+      "pattern": 6,
+      "color1": "000000",
+      "color2": "0002fa",
+      "color3": "23fa00",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1288193,
+    "display_name": "Cody Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "000000",
+      "color2": "CE181E",
+      "color3": "194BA0",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 192540,
+    "display_name": "Daniel Sample",
+    "helmet": {
+      "pattern": 68,
+      "color1": "000000",
+      "color2": "000000",
+      "color3": "FF0FCA",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 452216,
+    "display_name": "David Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "111111",
+      "color2": "fc0706",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1206647,
+    "display_name": "Dylan Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "313237",
+      "color2": "000000",
+      "color3": "49fd00",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1320636,
+    "display_name": "Erica Samples",
+    "helmet": {
+      "pattern": 30,
+      "color1": "000000",
+      "color2": "7800ff",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 821149,
+    "display_name": "Ethan Sampley",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "1f2892",
+      "color3": "7de54c",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 711345,
+    "display_name": "Frederick Sample",
+    "helmet": {
+      "pattern": 54,
+      "color1": "f02b00",
+      "color2": "f7f2f0",
+      "color3": "2709de",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 796727,
+    "display_name": "Geoffrey Samples",
+    "helmet": {
+      "pattern": 1,
+      "color1": "111111",
+      "color2": "b82f37",
+      "color3": "284a94",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 965594,
+    "display_name": "Geoffrey Samples2",
+    "helmet": {
+      "pattern": 1,
+      "color1": "2a3795",
+      "color2": "ed2129",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1171693,
+    "display_name": "George Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "2646ef",
+      "color3": "dd3527",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 769770,
+    "display_name": "Jackson Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "00aeef",
+      "color2": "0a0a0a",
+      "color3": "f26522",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 618527,
+    "display_name": "Jacob Sampler",
+    "helmet": {
+      "pattern": 1,
+      "color1": "f26522",
+      "color2": "00aeef",
+      "color3": "0a0a0a",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 73054,
+    "display_name": "James Sample",
+    "helmet": {
+      "pattern": 22,
+      "color1": "ffffff",
+      "color2": "ED2129",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 150804,
+    "display_name": "James Sample2",
+    "helmet": {
+      "pattern": 4,
+      "color1": "ffee47",
+      "color2": "0300c2",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 453035,
+    "display_name": "James Sample3",
+    "helmet": {
+      "pattern": 20,
+      "color1": "bd0e0e",
+      "color2": "080808",
+      "color3": "a10402",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 578052,
+    "display_name": "james Samples II",
+    "helmet": {
+      "pattern": 1,
+      "color1": "013990",
+      "color2": "4bd3fd",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1190363,
+    "display_name": "James Samples Ii2",
+    "helmet": {
+      "pattern": 1,
+      "color1": "0a0a0a",
+      "color2": "ffffff",
+      "color3": "ed1b29",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 916186,
+    "display_name": "James Sampley",
+    "helmet": {
+      "pattern": 1,
+      "color1": "f06e34",
+      "color2": "111111",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 191577,
+    "display_name": "Jeffrey Samples",
+    "helmet": {
+      "pattern": 2,
+      "color1": "0a0000",
+      "color2": "f6eb37",
+      "color3": "421cf2",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 194939,
+    "display_name": "Jeremiah Samples",
+    "helmet": {
+      "pattern": 27,
+      "color1": "49ba45",
+      "color2": "e4d111",
+      "color3": "ce1212",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 329130,
+    "display_name": "Jonathan Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "ee3442",
+      "color3": "447ac0",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 648536,
+    "display_name": "Logan Samples",
+    "helmet": {
+      "pattern": 20,
+      "color1": "0040ff",
+      "color2": "fcf7f7",
+      "color3": "ff9900",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 431548,
+    "display_name": "Matthew Sample",
+    "helmet": {
+      "pattern": 67,
+      "color1": "FFFFFF",
+      "color2": "111111",
+      "color3": "2A3795",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 795683,
+    "display_name": "Michael Samples",
+    "helmet": {
+      "pattern": 1,
+      "color1": "111111",
+      "color2": "ffffff",
+      "color3": "f06e34",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 820217,
+    "display_name": "Nathen Sample",
+    "helmet": {
+      "pattern": 1,
+      "color1": "111111",
+      "color2": "ffee47",
+      "color3": "0300c2",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 294437,
+    "display_name": "Nicholas Sample",
+    "helmet": {
+      "pattern": 14,
+      "color1": "000000",
+      "color2": "000000",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 279975,
+    "display_name": "Noah Samples",
+    "helmet": {
+      "pattern": 35,
+      "color1": "F2E40D",
+      "color2": "111111",
+      "color3": "FF4500",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 30446,
+    "display_name": "Randy Sample",
+    "helmet": {
+      "pattern": 28,
+      "color1": "bdff00",
+      "color2": "ffffff",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 348524,
+    "display_name": "Spencer Sample",
+    "helmet": {
+      "pattern": 57,
+      "color1": "669cf1",
+      "color2": "f0a500",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 709429,
+    "display_name": "Spencer Samples",
+    "helmet": {
+      "pattern": 20,
+      "color1": "100062",
+      "color2": "680000",
+      "color3": "eed300",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 861594,
+    "display_name": "Steven Sampleton",
+    "helmet": {
+      "pattern": 8,
+      "color1": "fa9209",
+      "color2": "ffffff",
+      "color3": "000000",
+      "face_type": 10,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 68941,
+    "display_name": "Timothy Samples",
+    "helmet": {
+      "pattern": 35,
+      "color1": "fc0706",
+      "color2": "06ff0b",
+      "color3": "00c702",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 959746,
+    "display_name": "William Samples",
+    "helmet": {
+      "pattern": 3,
+      "color1": "000000",
+      "color2": "ffffff",
+      "color3": "ed2129",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  }
+]

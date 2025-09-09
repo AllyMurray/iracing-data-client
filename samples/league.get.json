@@ -1,0 +1,431 @@
+{
+  "league_id": 7058,
+  "owner_id": 599890,
+  "league_name": "WTEC Championship",
+  "created": "2021-06-10T18:24:57Z",
+  "hidden": false,
+  "message": "IDK man I think something broke...",
+  "about": "Yes",
+  "recruiting": true,
+  "private_wall": false,
+  "private_roster": false,
+  "private_schedule": false,
+  "private_results": false,
+  "is_owner": false,
+  "is_admin": false,
+  "roster_count": 19,
+  "owner": {
+    "cust_id": 599890,
+    "display_name": "Alex Williams8",
+    "helmet": {
+      "pattern": 41,
+      "color1": "ffffff",
+      "color2": "000000",
+      "color3": "0500f0",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "car_number": null,
+    "nick_name": null
+  },
+  "image": {
+    "small_logo": null,
+    "large_logo": null
+  },
+  "tags": {
+    "categorized": [
+      {
+        "category_id": 2,
+        "name": "Type of Racing",
+        "limit": null,
+        "tags": [
+          {
+            "tag_id": 8,
+            "tag_name": "Road"
+          }
+        ]
+      },
+      {
+        "category_id": 4,
+        "name": "Size of League",
+        "limit": 1,
+        "tags": [
+          {
+            "tag_id": 14,
+            "tag_name": "10-20"
+          }
+        ]
+      }
+    ],
+    "not_categorized": []
+  },
+  "league_applications": [],
+  "pending_requests": [],
+  "is_member": true,
+  "is_applicant": false,
+  "is_invite": false,
+  "is_ignored": false,
+  "roster": [
+    {
+      "cust_id": 599890,
+      "display_name": "Alex Williams8",
+      "helmet": {
+        "pattern": 41,
+        "color1": "ffffff",
+        "color2": "000000",
+        "color3": "0500f0",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": true,
+      "admin": true,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2021-06-10T18:24:57Z",
+      "car_number": "69",
+      "nick_name": "Alex W"
+    },
+    {
+      "cust_id": 234679,
+      "display_name": "Adam S Robinson",
+      "helmet": {
+        "pattern": 28,
+        "color1": "000000",
+        "color2": "ff0000",
+        "color3": "000000",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": true,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2024-01-18T18:37:00Z",
+      "car_number": "64",
+      "nick_name": "Adam R"
+    },
+    {
+      "cust_id": 749272,
+      "display_name": "Bevan Thomson",
+      "helmet": {
+        "pattern": 37,
+        "color1": "ff4747",
+        "color2": "001e6b",
+        "color3": "ffffff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": true,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2025-01-07T20:30:03Z",
+      "car_number": "72",
+      "nick_name": "Bevan T"
+    },
+    {
+      "cust_id": 926270,
+      "display_name": "Alistair Murray",
+      "helmet": {
+        "pattern": 12,
+        "color1": "0018f0",
+        "color2": "e2f222",
+        "color3": "0a0a0a",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2024-12-15T18:22:30Z",
+      "car_number": "19",
+      "nick_name": "Ally M"
+    },
+    {
+      "cust_id": 595176,
+      "display_name": "Christopher Rowe3",
+      "helmet": {
+        "pattern": 68,
+        "color1": "000000",
+        "color2": "ff00f5",
+        "color3": "00f0ff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2025-02-03T17:09:02Z",
+      "car_number": "55",
+      "nick_name": "Chris R"
+    },
+    {
+      "cust_id": 810929,
+      "display_name": "Ernie Jettson",
+      "helmet": {
+        "pattern": 22,
+        "color1": "57a1ae",
+        "color2": "ef9fff",
+        "color3": "ffffff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2022-08-09T18:38:42Z",
+      "car_number": "96",
+      "nick_name": "Ernie J"
+    },
+    {
+      "cust_id": 754213,
+      "display_name": "Harry Pickard2",
+      "helmet": {
+        "pattern": 3,
+        "color1": "0019ff",
+        "color2": "ffffff",
+        "color3": "ff0000",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2024-01-18T18:54:03Z",
+      "car_number": "24",
+      "nick_name": "Harry P"
+    },
+    {
+      "cust_id": 534062,
+      "display_name": "Ian Joyner",
+      "helmet": {
+        "pattern": 1,
+        "color1": "0b63d9",
+        "color2": "ffffff",
+        "color3": "ffffff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2023-05-23T18:36:05Z",
+      "car_number": "8",
+      "nick_name": "Ian J"
+    },
+    {
+      "cust_id": 606006,
+      "display_name": "Jomi Scott",
+      "helmet": {
+        "pattern": 22,
+        "color1": "000000",
+        "color2": "ffffff",
+        "color3": "f57a31",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2023-10-19T08:40:51Z",
+      "car_number": "272",
+      "nick_name": "Jomi S"
+    },
+    {
+      "cust_id": 68662,
+      "display_name": "Karl McGuirk",
+      "helmet": {
+        "pattern": 67,
+        "color1": "000000",
+        "color2": "f34600",
+        "color3": "f34600",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2024-02-29T19:39:44Z",
+      "car_number": "97",
+      "nick_name": "Karl McG"
+    },
+    {
+      "cust_id": 546790,
+      "display_name": "Keith Dalton",
+      "helmet": {
+        "pattern": 14,
+        "color1": "fcfcfc",
+        "color2": "19f7dd",
+        "color3": "fafafa",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2023-05-23T18:24:08Z",
+      "car_number": "711",
+      "nick_name": "Keith D"
+    },
+    {
+      "cust_id": 567276,
+      "display_name": "Luke Grundmann",
+      "helmet": {
+        "pattern": 36,
+        "color1": "000000",
+        "color2": "ffffff",
+        "color3": "4f4f4f",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2024-12-05T20:22:03Z",
+      "car_number": "4",
+      "nick_name": "Luke G"
+    },
+    {
+      "cust_id": 479509,
+      "display_name": "Marcus Adams3",
+      "helmet": {
+        "pattern": 28,
+        "color1": "60a4c3",
+        "color2": "111010",
+        "color3": "f0ec6d",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2023-05-30T18:51:34Z",
+      "car_number": "13",
+      "nick_name": "Marcus A"
+    },
+    {
+      "cust_id": 769198,
+      "display_name": "Matt Williams7",
+      "helmet": {
+        "pattern": 63,
+        "color1": "ffffff",
+        "color2": "ffffff",
+        "color3": "ee7c06",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2022-04-17T16:31:02Z",
+      "car_number": "7",
+      "nick_name": "Matt W"
+    },
+    {
+      "cust_id": 534219,
+      "display_name": "Michael Coomber",
+      "helmet": {
+        "pattern": 22,
+        "color1": "ee1302",
+        "color2": "ccff00",
+        "color3": "0578ff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2023-06-07T10:26:05Z",
+      "car_number": "9",
+      "nick_name": "Michael C"
+    },
+    {
+      "cust_id": 701628,
+      "display_name": "Michael Paffett",
+      "helmet": {
+        "pattern": 20,
+        "color1": "faff00",
+        "color2": "ff0000",
+        "color3": "8000ff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2021-11-29T20:42:37Z",
+      "car_number": "6",
+      "nick_name": "M Paffet"
+    },
+    {
+      "cust_id": 554947,
+      "display_name": "Oli Pimley",
+      "helmet": {
+        "pattern": 31,
+        "color1": "fcae00",
+        "color2": "000000",
+        "color3": "000000",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2024-12-16T17:03:12Z",
+      "car_number": null,
+      "nick_name": "Oli P"
+    },
+    {
+      "cust_id": 524991,
+      "display_name": "Richard Harwood",
+      "helmet": {
+        "pattern": 63,
+        "color1": "000000",
+        "color2": "ff1700",
+        "color3": "ffffff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2023-05-23T18:30:45Z",
+      "car_number": "712",
+      "nick_name": "Richard H"
+    },
+    {
+      "cust_id": 724067,
+      "display_name": "Thomas Barczak",
+      "helmet": {
+        "pattern": 5,
+        "color1": "ffffff",
+        "color2": "fc0706",
+        "color3": "111111",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2025-01-06T22:08:16Z",
+      "car_number": "16",
+      "nick_name": "Thomas B"
+    }
+  ]
+}

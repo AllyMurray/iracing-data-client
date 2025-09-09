@@ -1,0 +1,26 @@
+{
+  "year": 2025,
+  "stats": {
+    "starts": 24,
+    "wins": 1,
+    "top5": 5,
+    "avg_start_position": 13,
+    "avg_finish_position": 14,
+    "laps": 604,
+    "laps_led": 5,
+    "favorite_car": {
+      "car_id": 156,
+      "car_name": "Mercedes-AMG GT3 2020",
+      "car_image": "https://images-static.iracing.com/img/cars/mercedesamgevogt3/mercedesamgevogt3-small.jpg"
+    },
+    "favorite_track": {
+      "config_name": "Gesamtstrecke 24h",
+      "track_id": 252,
+      "track_logo": "https://images-static.iracing.com/img/logos/tracks/nurburgring-logo.png",
+      "track_name": "Nürburgring Combined"
+    }
+  },
+  "success": true,
+  "season": null,
+  "cust_id": 926270
+}

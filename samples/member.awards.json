@@ -1,0 +1,9 @@
+{
+  "type": "member_awards",
+  "data": {
+    "success": true,
+    "cust_id": 926270,
+    "award_count": 168
+  },
+  "data_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/short_lived/awards/926270.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250909T115425Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=60&X-Amz-Signature=2f81dd0d1a0529e724951ed5f15928536dafb731e4c4fd453004dcc46a2f9a2b"
+}

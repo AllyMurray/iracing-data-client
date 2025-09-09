@@ -1,0 +1,4377 @@
+{
+  "seasons": [
+    {
+      "season_id": 5376,
+      "season_name": "NASCAR iRacing Class C Series Series - 2025 Season",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        71
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "craftsman"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "truck"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": true,
+      "current_week_sched": {
+        "race_week_num": 30,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Single Pit Roads",
+          "track_id": 365,
+          "track_name": "Bristol Motor Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 111,
+            "max_dry_tire_sets": 6,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 123,
+            "max_dry_tire_sets": 6,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 155,
+            "max_dry_tire_sets": 6,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 150,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 7,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 3,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 25,
+      "incident_warn_mode": 1,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": true,
+      "max_team_drivers": 1,
+      "max_weeks": 38,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 30,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 3,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races 45 past every 2 hours",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 47,
+      "short_parade_lap": false,
+      "start_date": "2025-02-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5377,
+      "season_name": "NASCAR iRacing Class B Series Series - 2025 Season",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        1455
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "classb"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "nationwide"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "xfinity"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": true,
+      "current_week_sched": {
+        "race_week_num": 30,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Single Pit Roads",
+          "track_id": 365,
+          "track_name": "Bristol Motor Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 114,
+            "max_dry_tire_sets": 6,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 115,
+            "max_dry_tire_sets": 6,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 116,
+            "max_dry_tire_sets": 6,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 160,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 7,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 3,
+      "grid_by_class": false,
+      "hardcore_level": 0,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 25,
+      "incident_warn_mode": 1,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 4,
+      "license_group_types": [
+        {
+          "license_group_type": 4
+        }
+      ],
+      "lucky_dog": true,
+      "max_team_drivers": 1,
+      "max_weeks": 38,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 30,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 15,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 2 hours on the hour",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 62,
+      "short_parade_lap": false,
+      "start_date": "2025-02-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 4
+    },
+    {
+      "season_id": 5378,
+      "season_name": "NASCAR iRacing Series - 2025 Season Open",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        2978
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "cupcar"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": true,
+      "current_week_sched": {
+        "race_week_num": 28,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Single Pit Roads",
+          "track_id": 365,
+          "track_name": "Bristol Motor Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 139,
+            "max_dry_tire_sets": 14,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 140,
+            "max_dry_tire_sets": 14,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 141,
+            "max_dry_tire_sets": 14,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 500,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 6,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 3,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 25,
+      "incident_warn_mode": 1,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": true,
+      "max_team_drivers": 1,
+      "max_weeks": 36,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 28,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "4 Timeslots Per Week",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 229,
+      "short_parade_lap": false,
+      "start_date": "2025-02-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5379,
+      "season_name": "NASCAR iRacing Series - 2025 Season Fixed",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        2978
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "cupcar"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": true,
+      "current_week_sched": {
+        "race_week_num": 28,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Single Pit Roads",
+          "track_id": 365,
+          "track_name": "Bristol Motor Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 139,
+            "max_dry_tire_sets": 14,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264598,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 140,
+            "max_dry_tire_sets": 14,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264682,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 141,
+            "max_dry_tire_sets": 14,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264775,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 500,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 6,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 3,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 25,
+      "incident_warn_mode": 1,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": true,
+      "max_team_drivers": 1,
+      "max_weeks": 36,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 28,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 6,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "4 Timeslots Per Week",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 207,
+      "short_parade_lap": false,
+      "start_date": "2025-02-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5380,
+      "season_name": "Super Late Model Tour - 2025 Season Fixed",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        60
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "slm"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": true,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 16,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Asphalt Track",
+          "track_id": 493,
+          "track_name": "Kevin Harvick's Kern Raceway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 54,
+            "max_dry_tire_sets": 3,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 244300,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 250,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 6,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 3,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 25,
+      "incident_warn_mode": 1,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": true,
+      "max_team_drivers": 1,
+      "max_weeks": 23,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 16,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "4 Timeslots Per Week",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 574,
+      "short_parade_lap": false,
+      "start_date": "2025-02-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5381,
+      "season_name": "NASCAR Modified Tour - 2025 Season Fixed",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        29
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "mod"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "tour mod"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": true,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 15,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Oval",
+          "track_id": 131,
+          "track_name": "New Hampshire Motor Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 31,
+            "max_dry_tire_sets": 3,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 231086,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 100,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 6,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 3,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 25,
+      "incident_warn_mode": 1,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": true,
+      "max_team_drivers": 1,
+      "max_weeks": 21,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 15,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "4 Timeslots Per Week",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 575,
+      "short_parade_lap": false,
+      "start_date": "2025-02-04T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5382,
+      "season_name": "Dirt 410 Sprint Car Tour - 2025 Season Fixed",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        93
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        },
+        {
+          "car_type": "wingedsprintcar"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 29,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "track_id": 273,
+          "track_name": "Eldora Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 86,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "qual_setup_id": 257448,
+            "race_setup_id": 257447,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 40,
+        "race_time_limit": 60,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 6,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 9,
+        "consolation_first_session_laps": 10,
+        "consolation_first_session_length_minutes": 10,
+        "consolation_num_position_to_invert": 0,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": false,
+        "consolation_scores_champ_points": false,
+        "created": "2025-01-06T17:38:41Z",
+        "cust_id": 0,
+        "description": "30 Entries - 5 Minute Practice\r\n2 Lap, 2 Minute Qualifying \r\n3, 10 lap heat races\r\n1, 10 lap consolation race\r\nFeature - 24 Cars Cautions DNC",
+        "heat_caution_type": 0,
+        "heat_info_id": 180238,
+        "heat_info_name": "2025 Dirt Sprint Car Tour",
+        "heat_laps": 10,
+        "heat_length_minutes": 10,
+        "heat_max_field_size": 10,
+        "heat_num_from_each_to_main": 7,
+        "heat_num_position_to_invert": 0,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 120,
+        "hidden": false,
+        "main_laps": 35,
+        "main_length_minutes": 60,
+        "main_max_field_size": 24,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 0,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 5,
+        "qual_caution_type": 0,
+        "qual_laps": 2,
+        "qual_length_minutes": 2,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": true,
+        "qual_scoring": 0,
+        "qual_style": 1,
+        "race_style": 1
+      },
+      "ignore_license_for_practice": true,
+      "incident_limit": 12,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": true,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 37,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 29,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Four timeslots per race week",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 501,
+      "short_parade_lap": false,
+      "start_date": "2025-02-04T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5383,
+      "season_name": "Dirt Super Late Model Tour - 2025 Season Fixed",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        91
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        },
+        {
+          "car_type": "dlm"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 31,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "track_id": 305,
+          "track_name": "Knoxville Raceway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 84,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 257411,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 100,
+        "race_time_limit": 60,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 6,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 9,
+        "consolation_first_session_laps": 8,
+        "consolation_first_session_length_minutes": 8,
+        "consolation_num_position_to_invert": 0,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": false,
+        "consolation_scores_champ_points": false,
+        "created": "2025-01-06T17:39:12Z",
+        "cust_id": 0,
+        "description": "30 Entries - 5 Minute Practice\r\n2 Lap, 2 Minute Qualifying \r\n3, 8 lap heat races\r\n1, 8 lap consolation race\r\nFeature - 24 Cars Cautions DNC",
+        "heat_caution_type": 0,
+        "heat_info_id": 180239,
+        "heat_info_name": "2025 Dirt Late Model Tour",
+        "heat_laps": 8,
+        "heat_length_minutes": 8,
+        "heat_max_field_size": 10,
+        "heat_num_from_each_to_main": 7,
+        "heat_num_position_to_invert": 0,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 112,
+        "hidden": false,
+        "main_laps": 60,
+        "main_length_minutes": 60,
+        "main_max_field_size": 24,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 30,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 0,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 5,
+        "qual_caution_type": 0,
+        "qual_laps": 2,
+        "qual_length_minutes": 2,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": true,
+        "qual_scoring": 0,
+        "qual_style": 1,
+        "race_style": 1
+      },
+      "ignore_license_for_practice": true,
+      "incident_limit": 18,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": true,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 39,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 31,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Four timeslots per race week",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 500,
+      "short_parade_lap": false,
+      "start_date": "2025-01-21T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5516,
+      "season_name": "Nurburgring Endurance Championship - 2025 Season",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        3104,
+        4083,
+        4084,
+        4085,
+        4073
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "aienabled"
+        },
+        {
+          "car_type": "audi"
+        },
+        {
+          "car_type": "gs"
+        },
+        {
+          "car_type": "gt"
+        },
+        {
+          "car_type": "gt3"
+        },
+        {
+          "car_type": "gt4"
+        },
+        {
+          "car_type": "gtd"
+        },
+        {
+          "car_type": "huracan"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "sports"
+        },
+        {
+          "car_type": "sportscar"
+        },
+        {
+          "car_type": "tcr"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 6,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Gesamtstrecke VLN",
+          "track_id": 262,
+          "track_name": "Nürburgring Combined"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": null,
+        "race_time_limit": 240,
+        "precip_chance": 15,
+        "start_type": "Rolling",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 2,
+      "driver_changes": true,
+      "drops": 2,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": true,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 50,
+      "incident_warn_param2": 20,
+      "is_heat_racing": false,
+      "license_group": 2,
+      "license_group_types": [
+        {
+          "license_group_type": 2
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 16,
+      "max_weeks": 9,
+      "min_team_drivers": 1,
+      "multiclass": true,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 6,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races on Saturday at 7 & 17:00 GMT & Sunday at 0 & 13 GMT",
+      "season_quarter": 2,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 275,
+      "short_parade_lap": false,
+      "start_date": "2025-04-01T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 1
+    },
+    {
+      "season_id": 5517,
+      "season_name": "Creventic Endurance Series - 2025 Season",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        3104,
+        2708,
+        2268
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "aienabled"
+        },
+        {
+          "car_type": "audi"
+        },
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "gs"
+        },
+        {
+          "car_type": "gt"
+        },
+        {
+          "car_type": "gt3"
+        },
+        {
+          "car_type": "gt4"
+        },
+        {
+          "car_type": "gtd"
+        },
+        {
+          "car_type": "huracan"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "sports"
+        },
+        {
+          "car_type": "sportscar"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 4,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Historic",
+          "track_id": 349,
+          "track_name": "Circuit de Barcelona Catalunya"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": null,
+        "race_time_limit": 1440,
+        "precip_chance": 18,
+        "start_type": "Rolling",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 2,
+      "driver_changes": true,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": true,
+      "hardcore_level": 0,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 50,
+      "incident_warn_param2": 20,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 16,
+      "max_weeks": 5,
+      "min_team_drivers": 2,
+      "multiclass": true,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 4,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races on Saturday at 1 & 13 GMT",
+      "season_quarter": 2,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 451,
+      "short_parade_lap": false,
+      "start_date": "2025-03-25T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5518,
+      "season_name": "INDYCAR iRacing Series - 2025 Season",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        117
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": true,
+      "current_week_sched": {
+        "race_week_num": 2,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "track_id": 179,
+          "track_name": "Long Beach Street Circuit"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 90,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 6
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 3,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 0,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 8,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 16,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": true,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 2,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "4 timeslots per raceweek",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 374,
+      "short_parade_lap": false,
+      "start_date": "2025-02-25T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "formula_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 3
+    },
+    {
+      "season_id": 5519,
+      "season_name": "Formula A - Grand Prix Tour - Fixed - 2025 Season ",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4013
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "amg"
+        },
+        {
+          "car_type": "f1"
+        },
+        {
+          "car_type": "formula"
+        },
+        {
+          "car_type": "formula1"
+        },
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "w12"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 16,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Grand Prix",
+          "track_id": 475,
+          "track_name": "MotorLand Aragón"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 161,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "qual_setup_id": 237305,
+            "race_setup_id": 237304,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 58,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 6
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 4,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 0,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 8,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 24,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": true,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 16,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races Thur & Sat at 10, 19 GMT & Fri & Sun at 1,4 GMT",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season ",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 496,
+      "short_parade_lap": false,
+      "start_date": "2025-03-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "formula_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 4
+    },
+    {
+      "season_id": 5520,
+      "season_name": "iRacing Formula A - Grand Prix Tour - 2025 Season ",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4013
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "amg"
+        },
+        {
+          "car_type": "f1"
+        },
+        {
+          "car_type": "formula"
+        },
+        {
+          "car_type": "formula1"
+        },
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "w12"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 16,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Grand Prix",
+          "track_id": 475,
+          "track_name": "MotorLand Aragón"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 58,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 6
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 4,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 0,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 8,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 24,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": true,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 16,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 0,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races Fri & Sun at 10, 19 GMT & Sat & Mon at 1, 4 GMT",
+      "season_quarter": 1,
+      "season_short_name": "2025 Season ",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 495,
+      "short_parade_lap": false,
+      "start_date": "2025-03-11T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "formula_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 4
+    },
+    {
+      "season_id": 5522,
+      "season_name": "Vintage Grand Prix Tour - 2025 Season ",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        22
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "f1"
+        },
+        {
+          "car_type": "formula1"
+        },
+        {
+          "car_type": "formulaone"
+        },
+        {
+          "car_type": "l79"
+        },
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 11,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Grand Prix",
+          "track_id": 485,
+          "track_name": "Circuit Zandvoort"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 75,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 6
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 4,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 0,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": true,
+      "incident_limit": 0,
+      "incident_warn_mode": 2,
+      "incident_warn_param1": 17,
+      "incident_warn_param2": 8,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 16,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 11,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 4,
+      "region_competition": true,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races Tue at 2 GMT, Sun at 7 & 22 GMT, & Mon at 18 GMT",
+      "season_quarter": 2,
+      "season_short_name": "2025 Season ",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 579,
+      "short_parade_lap": false,
+      "start_date": "2025-04-08T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "formula_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 4
+    },
+    {
+      "season_id": 5860,
+      "season_name": "2025 Season 3 - 13th Week - Street Stock Challenge",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4064
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "ss"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "track_id": 201,
+          "track_name": "Langley Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 36,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 231207,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 186,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 237746,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 187,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 237801,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 40,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 17,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 60,
+      "open_practice_session_type_id": 169,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 0,
+      "reg_open_minutes": 15,
+      "reg_user_count": 22,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 15 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 134,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5862,
+      "season_name": "2025 Season 3 - 13th Week - Mazda Cup",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        74
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "miata"
+        },
+        {
+          "car_type": "mx5"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "sportscar"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "North Course",
+          "track_id": 467,
+          "track_name": "Virginia International Raceway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": null,
+        "race_time_limit": 10,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 17,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 60,
+      "open_practice_session_type_id": 169,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 0,
+      "reg_open_minutes": 15,
+      "reg_user_count": 378,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 15 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 135,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5865,
+      "season_name": "2025 Season 3 - 13th Week - FF1600 Series",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4016
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "ford"
+        },
+        {
+          "car_type": "formula"
+        },
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "International",
+          "track_id": 180,
+          "track_name": "Oulton Park Circuit"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": null,
+        "race_time_limit": 10,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 6
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 17,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 60,
+      "open_practice_session_type_id": 169,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 0,
+      "reg_open_minutes": 15,
+      "reg_user_count": 205,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 15 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 568,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "formula_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5866,
+      "season_name": "2025 Season 3 - 13th Week - Dirt Street Stock Challenge",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        86
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "track_id": 303,
+          "track_name": "Limaland Motorsports Park"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 79,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 224442,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 30,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 12,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 60,
+      "open_practice_session_type_id": 169,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 0,
+      "reg_user_count": 9,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Qual ever 5 minutes and races every half hour",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 341,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5867,
+      "season_name": "13th Week DIRTcar Pro late Model - Fixed - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        90
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        },
+        {
+          "car_type": "dlm"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "track_id": 314,
+          "track_name": "The Dirt Track at Charlotte"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 83,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264044,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 30,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 12,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 3,
+      "license_group_types": [
+        {
+          "license_group_type": 3
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 0,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour at :00 and :30",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 396,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5868,
+      "season_name": "2025 Season 3 - 13th Week - Midget Cup",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        104
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        },
+        {
+          "car_type": "midget"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "track_id": 513,
+          "track_name": "Millbridge Speedway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 30,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 12,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 2,
+      "license_group_types": [
+        {
+          "license_group_type": 2
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 1,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour at :15 and :45 ",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 324,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5869,
+      "season_name": "2025 Season 3 - 13th Week - iRacing Rallycross Series",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        105
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtroad"
+        },
+        {
+          "car_type": "irx"
+        },
+        {
+          "car_type": "rallycross"
+        },
+        {
+          "car_type": "subi"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_road",
+          "category_id": 4,
+          "config_name": "Rallycross Short",
+          "track_id": 296,
+          "track_name": "Daytona Rallycross and Dirt Road"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 15,
+        "race_time_limit": 20,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 4
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "heat_ses_info": {
+        "consolation_delta_max_field_size": 0,
+        "consolation_delta_session_laps": 0,
+        "consolation_delta_session_length_minutes": 0,
+        "consolation_first_max_field_size": 6,
+        "consolation_first_session_laps": 6,
+        "consolation_first_session_length_minutes": 10,
+        "consolation_num_position_to_invert": 0,
+        "consolation_num_to_consolation": 0,
+        "consolation_num_to_main": 1,
+        "consolation_run_always": false,
+        "consolation_scores_champ_points": true,
+        "created": "2018-03-15T18:34:47Z",
+        "cust_id": 0,
+        "description": "14 Entries  5 Minute Practice \r\n2, 5-lap heats  Top 4 Transfer directly to the Feature \r\n1 Consolation Race  6 Laps  Top 2 advance to the Feature \r\nFeature Event  10 Drivers - 10 Laps",
+        "heat_caution_type": 0,
+        "heat_info_id": 1026,
+        "heat_info_name": "GRC - 14 max drivers - 6 consi- 10 final",
+        "heat_laps": 5,
+        "heat_length_minutes": 10,
+        "heat_max_field_size": 7,
+        "heat_num_from_each_to_main": 4,
+        "heat_num_position_to_invert": 0,
+        "heat_scores_champ_points": true,
+        "heat_session_minutes_estimate": 71,
+        "hidden": false,
+        "main_laps": 10,
+        "main_length_minutes": 20,
+        "main_max_field_size": 10,
+        "main_num_position_to_invert": 0,
+        "max_entrants": 14,
+        "open_practice": true,
+        "pre_main_practice_length_minutes": 0,
+        "pre_qual_num_to_main": 0,
+        "pre_qual_practice_length_minutes": 5,
+        "qual_caution_type": 0,
+        "qual_laps": 3,
+        "qual_length_minutes": 5,
+        "qual_num_to_main": 0,
+        "qual_open_delay_seconds": 0,
+        "qual_scores_champ_points": false,
+        "qual_scoring": 0,
+        "qual_style": 1,
+        "race_style": 1
+      },
+      "ignore_license_for_practice": false,
+      "incident_limit": 17,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": true,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 1,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 11,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races on the hour every hour",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 323,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_road"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5870,
+      "season_name": "2025 Season 3 - 13th Week - iRacing RX Lite",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        3001
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtroad"
+        },
+        {
+          "car_type": "irx"
+        },
+        {
+          "car_type": "rallycross"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_road",
+          "category_id": 4,
+          "config_name": "Rallycross",
+          "track_id": 306,
+          "track_name": "[Legacy] Phoenix Raceway - 2008"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 138,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 227054,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 8,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 4
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 17,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 1,
+      "official": true,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 17,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races at :15 and :45",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 470,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_road"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5871,
+      "season_name": "13th Week 5 To Go - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4087
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "ford"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Oval",
+          "track_id": 191,
+          "track_name": "Daytona International Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 201,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264642,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 202,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264726,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 5,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 1,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 25,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 60,
+      "open_practice_session_type_id": 169,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 9,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 585,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5874,
+      "season_name": "13th Week iRacing Figure GR8 - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4069,
+        1454
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtroad"
+        },
+        {
+          "car_type": "mini"
+        },
+        {
+          "car_type": "offroad"
+        },
+        {
+          "car_type": "offroadtruck"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "rookie"
+        },
+        {
+          "car_type": "stock"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Figure 8",
+          "track_id": 506,
+          "track_name": "Slinger Speedway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 25,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": true,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": true,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 245,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5875,
+      "season_name": "13th Week iRacing Tube Frame Twister - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4086
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "arca"
+        },
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "ford"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "toyota"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Summit Point Raceway",
+          "track_id": 9,
+          "track_name": "Summit Point Raceway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 10,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 6,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 242,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5876,
+      "season_name": "13th Week - iRacing Prototype Challenge - Fixed - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        4029
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "gtp"
+        },
+        {
+          "car_type": "lmdh"
+        },
+        {
+          "car_type": "prototype"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "sports"
+        },
+        {
+          "car_type": "sportscar"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "Road Course",
+          "track_id": 192,
+          "track_name": "Daytona International Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 159,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 263879,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 168,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 266236,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 170,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 266214,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 174,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 266275,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 196,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264171,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": null,
+        "race_time_limit": 15,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": true,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 96,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour at half past",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 Fixed - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 250,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5877,
+      "season_name": "13th Week Shake Up - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        105,
+        1277
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtroad"
+        },
+        {
+          "car_type": "irx"
+        },
+        {
+          "car_type": "offroad"
+        },
+        {
+          "car_type": "offroadtruck"
+        },
+        {
+          "car_type": "rallycross"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "subi"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "road",
+          "category_id": 2,
+          "config_name": "2000 Full",
+          "track_id": 324,
+          "track_name": "Tsukuba Circuit"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": null,
+        "race_time_limit": 12,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 5
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": true,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 63,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 544,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "sports_car"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5878,
+      "season_name": "13th Week Pro 2 Dirt Oval",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        1454
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtroad"
+        },
+        {
+          "car_type": "offroad"
+        },
+        {
+          "car_type": "offroadtruck"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "config_name": "Dirt",
+          "track_id": 275,
+          "track_name": "USA International Speedway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 20,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes at :00 and :30",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 381,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5879,
+      "season_name": "13th Week MudSkipping - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        1
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "road"
+        },
+        {
+          "car_type": "rt2000"
+        },
+        {
+          "car_type": "sbrs"
+        },
+        {
+          "car_type": "skippy"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "config_name": "Dirt",
+          "track_id": 275,
+          "track_name": "USA International Speedway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 20,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 344,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5624,
+      "season_name": "Dallara DW12 Dash - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        63
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "openwheel"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 12,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Oval",
+          "track_id": 20,
+          "track_name": "Homestead Miami Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 57,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "qual_setup_id": 234228,
+            "race_setup_id": 234227,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 25,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 13,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 12,
+      "race_week_to_make_divisions": 14,
+      "reg_user_count": 1,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour on the hour",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 Fixed",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 471,
+      "short_parade_lap": false,
+      "start_date": "2025-06-17T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5880,
+      "season_name": "13th Week Dirt Ridiculousness - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        96,
+        2707,
+        85,
+        87,
+        103,
+        4071
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        },
+        {
+          "car_type": "dlm"
+        },
+        {
+          "car_type": "mini"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "rookie"
+        },
+        {
+          "car_type": "sprintcar"
+        },
+        {
+          "car_type": "stock"
+        },
+        {
+          "car_type": "wingedsprintcar"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_oval",
+          "category_id": 3,
+          "track_id": 303,
+          "track_name": "Limaland Motorsports Park"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 78,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 224074,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 80,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 224326,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 87,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 224240,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 95,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264130,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 134,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 224183,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 193,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 244424,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 25,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 3
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": true,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": true,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 1,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 15,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 528,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5881,
+      "season_name": "13th Week Symkhana",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        89
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtoval"
+        },
+        {
+          "car_type": "legends"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_road",
+          "category_id": 4,
+          "config_name": "Rallycross",
+          "track_id": 385,
+          "track_name": "Charlotte Motor Speedway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 6,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 4
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 1,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 6,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every 30 minutes at 15 and 45 past",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 13th Week",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 345,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_road"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5625,
+      "season_name": "NASCAR Pickup Cup - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        17
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        },
+        {
+          "car_type": "truck"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 12,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Oval - 2008",
+          "track_id": 27,
+          "track_name": "Daytona International Speedway"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 20,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 226760,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 10,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 13,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 12,
+      "race_week_to_make_divisions": 15,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour at :30 past",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 Fixed",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 259,
+      "short_parade_lap": false,
+      "start_date": "2025-06-17T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5626,
+      "season_name": "NASCAR Carburetor Cup - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        2978
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "chevy"
+        },
+        {
+          "car_type": "cupcar"
+        },
+        {
+          "car_type": "nascar"
+        },
+        {
+          "car_type": "oval"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": false,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 12,
+        "track": {
+          "category": "oval",
+          "category_id": 1,
+          "config_name": "Oval - Left turning",
+          "track_id": 245,
+          "track_name": "Autodromo Nazionale Monza"
+        },
+        "car_restrictions": [
+          {
+            "car_id": 139,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264978,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 140,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264979,
+            "weight_penalty_kg": 0
+          },
+          {
+            "car_id": 141,
+            "max_dry_tire_sets": 0,
+            "max_pct_fuel_fill": 100,
+            "power_adjust_pct": 0,
+            "race_setup_id": 264980,
+            "weight_penalty_kg": 0
+          }
+        ],
+        "race_lap_limit": 15,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Rolling",
+        "category_id": 1
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": true,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": false,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 13,
+      "min_team_drivers": 1,
+      "multiclass": false,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 12,
+      "race_week_to_make_divisions": 15,
+      "reg_user_count": 18,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour at :45 past",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 Fixed",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 116,
+      "short_parade_lap": false,
+      "start_date": "2025-06-17T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": true,
+      "track_types": [
+        {
+          "track_type": "oval"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    },
+    {
+      "season_id": 5882,
+      "season_name": "13th Week 2x4 Off Road Trucks - 2025 Season 3",
+      "active": true,
+      "allowed_season_members": null,
+      "car_class_ids": [
+        1277,
+        1278
+      ],
+      "car_switching": false,
+      "car_types": [
+        {
+          "car_type": "dirt"
+        },
+        {
+          "car_type": "dirtroad"
+        },
+        {
+          "car_type": "offroad"
+        },
+        {
+          "car_type": "offroadtruck"
+        },
+        {
+          "car_type": "road"
+        }
+      ],
+      "caution_laps_do_not_count": false,
+      "complete": false,
+      "connection_black_flag": true,
+      "consec_caution_within_nlaps": 2,
+      "consec_cautions_single_file": false,
+      "cross_license": false,
+      "current_week_sched": {
+        "race_week_num": 0,
+        "track": {
+          "category": "dirt_road",
+          "category_id": 4,
+          "config_name": "Full",
+          "track_id": 382,
+          "track_name": "Crandon International Raceway"
+        },
+        "car_restrictions": [],
+        "race_lap_limit": 10,
+        "race_time_limit": null,
+        "precip_chance": 0,
+        "start_type": "Standing",
+        "category_id": 4
+      },
+      "distributed_matchmaking": false,
+      "driver_change_rule": 0,
+      "driver_changes": false,
+      "drops": 0,
+      "elig": {
+        "own_car": false,
+        "own_track": false
+      },
+      "enable_pitlane_collisions": false,
+      "fixed_setup": false,
+      "green_white_checkered_limit": 0,
+      "grid_by_class": true,
+      "hardcore_level": 1,
+      "has_mpr": false,
+      "has_supersessions": false,
+      "ignore_license_for_practice": false,
+      "incident_limit": 0,
+      "incident_warn_mode": 0,
+      "incident_warn_param1": 0,
+      "incident_warn_param2": 0,
+      "is_heat_racing": false,
+      "license_group": 1,
+      "license_group_types": [
+        {
+          "license_group_type": 1
+        }
+      ],
+      "lucky_dog": false,
+      "max_team_drivers": 1,
+      "max_weeks": 7,
+      "min_team_drivers": 1,
+      "multiclass": true,
+      "must_use_diff_tire_types_in_race": false,
+      "num_fast_tows": 1,
+      "num_opt_laps": 0,
+      "official": false,
+      "op_duration": 120,
+      "open_practice_session_type_id": 170,
+      "qualifier_must_start_race": false,
+      "race_week": 0,
+      "race_week_to_make_divisions": 32,
+      "reg_user_count": 0,
+      "region_competition": false,
+      "restrict_by_member": false,
+      "restrict_to_car": false,
+      "restrict_viewing": false,
+      "schedule_description": "Races every hour on the hour",
+      "season_quarter": 3,
+      "season_short_name": "2025 Season 3 - 2x4 Off Road Trucks",
+      "season_year": 2025,
+      "send_to_open_practice": true,
+      "series_id": 382,
+      "short_parade_lap": false,
+      "start_date": "2025-09-09T00:00:00Z",
+      "start_on_qual_tire": false,
+      "start_zone": false,
+      "track_types": [
+        {
+          "track_type": "dirt_road"
+        }
+      ],
+      "unsport_conduct_rule_mode": 0
+    }
+  ]
+}
