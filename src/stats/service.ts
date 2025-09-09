@@ -1,6 +1,6 @@
 import type { IRacingClient } from "../client";
 import type { StatsMemberBestsParams, StatsMemberCareerParams, StatsMemberDivisionParams, StatsMemberRecapParams, StatsMemberRecentRacesParams, StatsMemberSummaryParams, StatsMemberYearlyParams, StatsSeasonDriverStandingsParams, StatsSeasonSupersessionStandingsParams, StatsSeasonTeamStandingsParams, StatsSeasonTtStandingsParams, StatsSeasonTtResultsParams, StatsSeasonQualifyResultsParams, StatsWorldRecordsParams, StatsMemberBestsResponse, StatsMemberCareerResponse, StatsMemberRecapResponse, StatsMemberRecentRacesResponse, StatsMemberSummaryResponse, StatsMemberYearlyResponse, StatsWorldRecordsResponse } from "./types";
-import { StatsMemberBestsSchema, StatsMemberCareerSchema, StatsMemberRecapSchema, StatsMemberRecentRacesSchema, StatsMemberSummarySchema, StatsMemberYearlySchema, StatsWorldRecordsSchema } from "./types";
+import { StatsMemberBests, StatsMemberCareer, StatsMemberRecap, StatsMemberRecentRaces, StatsMemberSummary, StatsMemberYearly, StatsWorldRecords } from "./types";
 
 export class StatsService {
   constructor(private client: IRacingClient) {}
@@ -11,7 +11,7 @@ export class StatsService {
    * @sample stats.member_bests.json
    */
   async memberBests(params: StatsMemberBestsParams): Promise<StatsMemberBestsResponse> {
-    return this.client.get<StatsMemberBestsResponse>("https://members-ng.iracing.com/data/stats/member_bests", { params, schema: StatsMemberBestsSchema });
+    return this.client.get<StatsMemberBestsResponse>("https://members-ng.iracing.com/data/stats/member_bests", { params, schema: StatsMemberBests });
   }
 
   /**
@@ -20,7 +20,7 @@ export class StatsService {
    * @sample stats.member_career.json
    */
   async memberCareer(params: StatsMemberCareerParams): Promise<StatsMemberCareerResponse> {
-    return this.client.get<StatsMemberCareerResponse>("https://members-ng.iracing.com/data/stats/member_career", { params, schema: StatsMemberCareerSchema });
+    return this.client.get<StatsMemberCareerResponse>("https://members-ng.iracing.com/data/stats/member_career", { params, schema: StatsMemberCareer });
   }
 
   /**
@@ -37,7 +37,7 @@ export class StatsService {
    * @sample stats.member_recap.json
    */
   async memberRecap(params: StatsMemberRecapParams): Promise<StatsMemberRecapResponse> {
-    return this.client.get<StatsMemberRecapResponse>("https://members-ng.iracing.com/data/stats/member_recap", { params, schema: StatsMemberRecapSchema });
+    return this.client.get<StatsMemberRecapResponse>("https://members-ng.iracing.com/data/stats/member_recap", { params, schema: StatsMemberRecap });
   }
 
   /**
@@ -46,7 +46,7 @@ export class StatsService {
    * @sample stats.member_recent_races.json
    */
   async memberRecentRaces(params: StatsMemberRecentRacesParams): Promise<StatsMemberRecentRacesResponse> {
-    return this.client.get<StatsMemberRecentRacesResponse>("https://members-ng.iracing.com/data/stats/member_recent_races", { params, schema: StatsMemberRecentRacesSchema });
+    return this.client.get<StatsMemberRecentRacesResponse>("https://members-ng.iracing.com/data/stats/member_recent_races", { params, schema: StatsMemberRecentRaces });
   }
 
   /**
@@ -55,7 +55,7 @@ export class StatsService {
    * @sample stats.member_summary.json
    */
   async memberSummary(params: StatsMemberSummaryParams): Promise<StatsMemberSummaryResponse> {
-    return this.client.get<StatsMemberSummaryResponse>("https://members-ng.iracing.com/data/stats/member_summary", { params, schema: StatsMemberSummarySchema });
+    return this.client.get<StatsMemberSummaryResponse>("https://members-ng.iracing.com/data/stats/member_summary", { params, schema: StatsMemberSummary });
   }
 
   /**
@@ -64,7 +64,7 @@ export class StatsService {
    * @sample stats.member_yearly.json
    */
   async memberYearly(params: StatsMemberYearlyParams): Promise<StatsMemberYearlyResponse> {
-    return this.client.get<StatsMemberYearlyResponse>("https://members-ng.iracing.com/data/stats/member_yearly", { params, schema: StatsMemberYearlySchema });
+    return this.client.get<StatsMemberYearlyResponse>("https://members-ng.iracing.com/data/stats/member_yearly", { params, schema: StatsMemberYearly });
   }
 
   /**
@@ -121,7 +121,7 @@ export class StatsService {
    * @sample stats.world_records.json
    */
   async worldRecords(params: StatsWorldRecordsParams): Promise<StatsWorldRecordsResponse> {
-    return this.client.get<StatsWorldRecordsResponse>("https://members-ng.iracing.com/data/stats/world_records", { params, schema: StatsWorldRecordsSchema });
+    return this.client.get<StatsWorldRecordsResponse>("https://members-ng.iracing.com/data/stats/world_records", { params, schema: StatsWorldRecords });
   }
 
 }

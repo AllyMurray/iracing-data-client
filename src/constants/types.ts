@@ -2,24 +2,24 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const ConstantsCategoriesSchema = z.array(z.object({
+const ConstantsCategories = z.array(z.object({
   label: z.string(),
   value: z.number()
 }));
-const ConstantsDivisionsSchema = z.array(z.object({
+const ConstantsDivisions = z.array(z.object({
   label: z.string(),
   value: z.number()
 }));
-const ConstantsEventTypesSchema = z.array(z.object({
+const ConstantsEventTypes = z.array(z.object({
   label: z.string(),
   value: z.number()
 }));
 
 // ---- Response Types (inferred from schemas) ----
 
-export type ConstantsCategoriesResponse = z.infer<typeof ConstantsCategoriesSchema>;
-export type ConstantsDivisionsResponse = z.infer<typeof ConstantsDivisionsSchema>;
-export type ConstantsEventTypesResponse = z.infer<typeof ConstantsEventTypesSchema>;
+export type ConstantsCategoriesResponse = z.infer<typeof ConstantsCategories>;
+export type ConstantsDivisionsResponse = z.infer<typeof ConstantsDivisions>;
+export type ConstantsEventTypesResponse = z.infer<typeof ConstantsEventTypes>;
 
 // ---- Parameter Schemas ----
 
@@ -44,7 +44,7 @@ export {
   ConstantsCategoriesParamsSchema,
   ConstantsDivisionsParamsSchema,
   ConstantsEventTypesParamsSchema,
-  ConstantsCategoriesSchema,
-  ConstantsDivisionsSchema,
-  ConstantsEventTypesSchema,
+  ConstantsCategories,
+  ConstantsDivisions,
+  ConstantsEventTypes,
 };

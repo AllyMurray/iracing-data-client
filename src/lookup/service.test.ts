@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { LookupService } from "./service";
 import type { IRacingClient } from "../client";
 import type { LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
-import { LookupCountriesSchema, LookupDriversSchema, LookupFlairsSchema, LookupGetSchema, LookupLicensesSchema } from "./types";
+import { LookupCountries, LookupDrivers, LookupFlairs, LookupGet, LookupLicenses } from "./types";
 
 // Import sample data
 import lookupcountriesSample from "../../samples/lookup.countries.json";
@@ -46,7 +46,7 @@ describe("LookupService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await lookupService.countries();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/countries", { schema: LookupCountriesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/countries", { schema: LookupCountries });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -86,7 +86,7 @@ describe("LookupService", () => {
   leagueId: 123
       };
       const result = await lookupService.drivers(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/drivers", { params: testParams, schema: LookupDriversSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/drivers", { params: testParams, schema: LookupDrivers });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -126,7 +126,7 @@ describe("LookupService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await lookupService.flairs();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/flairs", { schema: LookupFlairsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/flairs", { schema: LookupFlairs });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -162,7 +162,7 @@ describe("LookupService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await lookupService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/get", { schema: LookupGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/get", { schema: LookupGet });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -198,7 +198,7 @@ describe("LookupService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await lookupService.licenses();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/licenses", { schema: LookupLicensesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/licenses", { schema: LookupLicenses });
       expect(result).toEqual(expectedTransformedData);
     });
 

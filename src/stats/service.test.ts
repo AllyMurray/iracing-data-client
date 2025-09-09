@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { StatsService } from "./service";
 import type { IRacingClient } from "../client";
 import type { StatsMemberBestsResponse, StatsMemberCareerResponse, StatsMemberRecapResponse, StatsMemberRecentRacesResponse, StatsMemberSummaryResponse, StatsMemberYearlyResponse, StatsWorldRecordsResponse } from "./types";
-import { StatsMemberBestsSchema, StatsMemberCareerSchema, StatsMemberRecapSchema, StatsMemberRecentRacesSchema, StatsMemberSummarySchema, StatsMemberYearlySchema, StatsWorldRecordsSchema } from "./types";
+import { StatsMemberBests, StatsMemberCareer, StatsMemberRecap, StatsMemberRecentRaces, StatsMemberSummary, StatsMemberYearly, StatsWorldRecords } from "./types";
 
 // Import sample data
 import statsmemberbestsSample from "../../samples/stats.member_bests.json";
@@ -52,7 +52,7 @@ describe("StatsService", () => {
   carId: 123
       };
       const result = await statsService.memberBests(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_bests", { params: testParams, schema: StatsMemberBestsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_bests", { params: testParams, schema: StatsMemberBests });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -95,7 +95,7 @@ describe("StatsService", () => {
   custId: 123
       };
       const result = await statsService.memberCareer(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_career", { params: testParams, schema: StatsMemberCareerSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_career", { params: testParams, schema: StatsMemberCareer });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -153,7 +153,7 @@ describe("StatsService", () => {
   season: 123
       };
       const result = await statsService.memberRecap(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_recap", { params: testParams, schema: StatsMemberRecapSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_recap", { params: testParams, schema: StatsMemberRecap });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -197,7 +197,7 @@ describe("StatsService", () => {
   custId: 123
       };
       const result = await statsService.memberRecentRaces(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_recent_races", { params: testParams, schema: StatsMemberRecentRacesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_recent_races", { params: testParams, schema: StatsMemberRecentRaces });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -239,7 +239,7 @@ describe("StatsService", () => {
   custId: 123
       };
       const result = await statsService.memberSummary(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_summary", { params: testParams, schema: StatsMemberSummarySchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_summary", { params: testParams, schema: StatsMemberSummary });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -281,7 +281,7 @@ describe("StatsService", () => {
   custId: 123
       };
       const result = await statsService.memberYearly(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_yearly", { params: testParams, schema: StatsMemberYearlySchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/member_yearly", { params: testParams, schema: StatsMemberYearly });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -421,7 +421,7 @@ describe("StatsService", () => {
   seasonQuarter: 123
       };
       const result = await statsService.worldRecords(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/world_records", { params: testParams, schema: StatsWorldRecordsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/stats/world_records", { params: testParams, schema: StatsWorldRecords });
       expect(result).toEqual(expectedTransformedData);
     });
 

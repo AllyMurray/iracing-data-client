@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { CarclassService } from "./service";
 import type { IRacingClient } from "../client";
 import type { CarclassGetResponse } from "./types";
-import { CarclassGetSchema } from "./types";
+import { CarclassGet } from "./types";
 
 // Import sample data
 import carclassgetSample from "../../samples/carclass.get.json";
@@ -42,7 +42,7 @@ describe("CarclassService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await carclassService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/carclass/get", { schema: CarclassGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/carclass/get", { schema: CarclassGet });
       expect(result).toEqual(expectedTransformedData);
     });
 

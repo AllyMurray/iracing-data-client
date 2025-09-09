@@ -13,7 +13,7 @@ const TrackMapLayersSchema = z.object({
 
 // ---- Response Schemas ----
 
-const TrackAssetsSchema = z.record(z.string(), z.object({
+const TrackAssets = z.record(z.string(), z.object({
   coordinates: z.string(),
   detailCopy: z.string(),
   detailTechspecsCopy: z.optional(z.union([z.string(), z.null()])),
@@ -37,7 +37,7 @@ const TrackAssetsSchema = z.record(z.string(), z.object({
     turns: z.string()
   })
 }));
-const TrackGetSchema = z.array(z.object({
+const TrackGet = z.array(z.object({
   aiEnabled: z.boolean(),
   allowPitlaneCollisions: z.boolean(),
   allowRollingStart: z.boolean(),
@@ -101,8 +101,8 @@ const TrackGetSchema = z.array(z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type TrackAssetsResponse = z.infer<typeof TrackAssetsSchema>;
-export type TrackGetResponse = z.infer<typeof TrackGetSchema>;
+export type TrackAssetsResponse = z.infer<typeof TrackAssets>;
+export type TrackGetResponse = z.infer<typeof TrackGet>;
 
 // ---- Parameter Schemas ----
 
@@ -122,6 +122,6 @@ export type TrackGetParams = z.infer<typeof TrackGetParamsSchema>;
 export {
   TrackAssetsParamsSchema,
   TrackGetParamsSchema,
-  TrackAssetsSchema,
-  TrackGetSchema,
+  TrackAssets,
+  TrackGet,
 };

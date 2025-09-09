@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { ConstantsService } from "./service";
 import type { IRacingClient } from "../client";
 import type { ConstantsCategoriesResponse, ConstantsDivisionsResponse, ConstantsEventTypesResponse } from "./types";
-import { ConstantsCategoriesSchema, ConstantsDivisionsSchema, ConstantsEventTypesSchema } from "./types";
+import { ConstantsCategories, ConstantsDivisions, ConstantsEventTypes } from "./types";
 
 // Import sample data
 import constantscategoriesSample from "../../samples/constants.categories.json";
@@ -44,7 +44,7 @@ describe("ConstantsService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await constantsService.categories();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/categories", { schema: ConstantsCategoriesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/categories", { schema: ConstantsCategories });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -80,7 +80,7 @@ describe("ConstantsService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await constantsService.divisions();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/divisions", { schema: ConstantsDivisionsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/divisions", { schema: ConstantsDivisions });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -116,7 +116,7 @@ describe("ConstantsService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await constantsService.eventTypes();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/event_types", { schema: ConstantsEventTypesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/event_types", { schema: ConstantsEventTypes });
       expect(result).toEqual(expectedTransformedData);
     });
 

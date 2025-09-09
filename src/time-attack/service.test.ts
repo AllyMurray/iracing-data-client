@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TimeAttackService } from "./service";
 import type { IRacingClient } from "../client";
 import type { TimeAttackMemberSeasonResultsResponse } from "./types";
-import { TimeAttackMemberSeasonResultsSchema } from "./types";
+import { TimeAttackMemberSeasonResults } from "./types";
 
 // Import sample data
 import timeattackmemberseasonresultsSample from "../../samples/time_attack.member_season_results.json";
@@ -45,7 +45,7 @@ describe("TimeAttackService", () => {
   taCompSeasonId: 123
       };
       const result = await timeAttackService.memberSeasonResults(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/time_attack/member_season_results", { params: testParams, schema: TimeAttackMemberSeasonResultsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/time_attack/member_season_results", { params: testParams, schema: TimeAttackMemberSeasonResults });
       expect(result).toEqual(expectedTransformedData);
     });
 

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { MemberService } from "./service";
 import type { IRacingClient } from "../client";
 import type { MemberAwardsResponse, MemberAwardInstancesResponse, MemberChartDataResponse, MemberGetResponse, MemberInfoResponse, MemberParticipationCreditsResponse, MemberProfileResponse } from "./types";
-import { MemberAwardsSchema, MemberAwardInstancesSchema, MemberChartDataSchema, MemberGetSchema, MemberInfoSchema, MemberParticipationCreditsSchema, MemberProfileSchema } from "./types";
+import { MemberAwards, MemberAwardInstances, MemberChartData, MemberGet, MemberInfo, MemberParticipationCredits, MemberProfile } from "./types";
 
 // Import sample data
 import memberawardsSample from "../../samples/member.awards.json";
@@ -51,7 +51,7 @@ describe("MemberService", () => {
   custId: 123
       };
       const result = await memberService.awards(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/awards", { params: testParams, schema: MemberAwardsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/awards", { params: testParams, schema: MemberAwards });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -94,7 +94,7 @@ describe("MemberService", () => {
   awardId: 123
       };
       const result = await memberService.awardInstances(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/award_instances", { params: testParams, schema: MemberAwardInstancesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/award_instances", { params: testParams, schema: MemberAwardInstances });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -139,7 +139,7 @@ describe("MemberService", () => {
   chartType: 123
       };
       const result = await memberService.chartData(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/chart_data", { params: testParams, schema: MemberChartDataSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/chart_data", { params: testParams, schema: MemberChartData });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -184,7 +184,7 @@ describe("MemberService", () => {
   includeLicenses: true
       };
       const result = await memberService.get(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/get", { params: testParams, schema: MemberGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/get", { params: testParams, schema: MemberGet });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -224,7 +224,7 @@ describe("MemberService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await memberService.info();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/info", { schema: MemberInfoSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/info", { schema: MemberInfo });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -260,7 +260,7 @@ describe("MemberService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await memberService.participationCredits();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/participation_credits", { schema: MemberParticipationCreditsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/participation_credits", { schema: MemberParticipationCredits });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -299,7 +299,7 @@ describe("MemberService", () => {
   custId: 123
       };
       const result = await memberService.profile(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/profile", { params: testParams, schema: MemberProfileSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/member/profile", { params: testParams, schema: MemberProfile });
       expect(result).toEqual(expectedTransformedData);
     });
 

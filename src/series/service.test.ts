@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { SeriesService } from "./service";
 import type { IRacingClient } from "../client";
 import type { SeriesAssetsResponse, SeriesGetResponse, SeriesPastSeasonsResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./types";
-import { SeriesAssetsSchema, SeriesGetSchema, SeriesPastSeasonsSchema, SeriesSeasonsSchema, SeriesSeasonListSchema, SeriesStatsSeriesSchema } from "./types";
+import { SeriesAssets, SeriesGet, SeriesPastSeasons, SeriesSeasons, SeriesSeasonList, SeriesStatsSeries } from "./types";
 
 // Import sample data
 import seriesassetsSample from "../../samples/series.assets.json";
@@ -47,7 +47,7 @@ describe("SeriesService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await seriesService.assets();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/assets", { schema: SeriesAssetsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/assets", { schema: SeriesAssets });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -83,7 +83,7 @@ describe("SeriesService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await seriesService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/get", { schema: SeriesGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/get", { schema: SeriesGet });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -122,7 +122,7 @@ describe("SeriesService", () => {
   seriesId: 123
       };
       const result = await seriesService.pastSeasons(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/past_seasons", { params: testParams, schema: SeriesPastSeasonsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/past_seasons", { params: testParams, schema: SeriesPastSeasons });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -166,7 +166,7 @@ describe("SeriesService", () => {
   seasonQuarter: 123
       };
       const result = await seriesService.seasons(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/seasons", { params: testParams, schema: SeriesSeasonsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/seasons", { params: testParams, schema: SeriesSeasons });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -212,7 +212,7 @@ describe("SeriesService", () => {
   seasonQuarter: 123
       };
       const result = await seriesService.seasonList(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/season_list", { params: testParams, schema: SeriesSeasonListSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/season_list", { params: testParams, schema: SeriesSeasonList });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -266,7 +266,7 @@ describe("SeriesService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await seriesService.statsSeries();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/stats_series", { schema: SeriesStatsSeriesSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/series/stats_series", { schema: SeriesStatsSeries });
       expect(result).toEqual(expectedTransformedData);
     });
 

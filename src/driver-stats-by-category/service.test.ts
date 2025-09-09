@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { DriverStatsByCategoryService } from "./service";
 import type { IRacingClient } from "../client";
 import type { DriverStatsByCategoryOvalResponse, DriverStatsByCategorySportsCarResponse, DriverStatsByCategoryFormulaCarResponse, DriverStatsByCategoryRoadResponse, DriverStatsByCategoryDirtOvalResponse, DriverStatsByCategoryDirtRoadResponse } from "./types";
-import { DriverStatsByCategoryOvalSchema, DriverStatsByCategorySportsCarSchema, DriverStatsByCategoryFormulaCarSchema, DriverStatsByCategoryRoadSchema, DriverStatsByCategoryDirtOvalSchema, DriverStatsByCategoryDirtRoadSchema } from "./types";
+import { DriverStatsByCategoryOval, DriverStatsByCategorySportsCar, DriverStatsByCategoryFormulaCar, DriverStatsByCategoryRoad, DriverStatsByCategoryDirtOval, DriverStatsByCategoryDirtRoad } from "./types";
 
 // Import sample data
 import driverstatsbycategoryovalSample from "../../samples/driver_stats_by_category.oval.json";
@@ -47,7 +47,7 @@ describe("DriverStatsByCategoryService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await driverStatsByCategoryService.oval();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/oval", { schema: DriverStatsByCategoryOvalSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/oval", { schema: DriverStatsByCategoryOval });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -83,7 +83,7 @@ describe("DriverStatsByCategoryService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await driverStatsByCategoryService.sportsCar();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/sports_car", { schema: DriverStatsByCategorySportsCarSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/sports_car", { schema: DriverStatsByCategorySportsCar });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -119,7 +119,7 @@ describe("DriverStatsByCategoryService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await driverStatsByCategoryService.formulaCar();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/formula_car", { schema: DriverStatsByCategoryFormulaCarSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/formula_car", { schema: DriverStatsByCategoryFormulaCar });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -155,7 +155,7 @@ describe("DriverStatsByCategoryService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await driverStatsByCategoryService.road();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/road", { schema: DriverStatsByCategoryRoadSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/road", { schema: DriverStatsByCategoryRoad });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -191,7 +191,7 @@ describe("DriverStatsByCategoryService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await driverStatsByCategoryService.dirtOval();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/dirt_oval", { schema: DriverStatsByCategoryDirtOvalSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/dirt_oval", { schema: DriverStatsByCategoryDirtOval });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -227,7 +227,7 @@ describe("DriverStatsByCategoryService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await driverStatsByCategoryService.dirtRoad();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/dirt_road", { schema: DriverStatsByCategoryDirtRoadSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/driver_stats_by_category/dirt_road", { schema: DriverStatsByCategoryDirtRoad });
       expect(result).toEqual(expectedTransformedData);
     });
 

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { HostedService } from "./service";
 import type { IRacingClient } from "../client";
 import type { HostedCombinedSessionsResponse, HostedSessionsResponse } from "./types";
-import { HostedCombinedSessionsSchema, HostedSessionsSchema } from "./types";
+import { HostedCombinedSessions, HostedSessions } from "./types";
 
 // Import sample data
 import hostedcombinedsessionsSample from "../../samples/hosted.combined_sessions.json";
@@ -46,7 +46,7 @@ describe("HostedService", () => {
   packageId: 123
       };
       const result = await hostedService.combinedSessions(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/hosted/combined_sessions", { params: testParams, schema: HostedCombinedSessionsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/hosted/combined_sessions", { params: testParams, schema: HostedCombinedSessions });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -85,7 +85,7 @@ describe("HostedService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await hostedService.sessions();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/hosted/sessions", { schema: HostedSessionsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/hosted/sessions", { schema: HostedSessions });
       expect(result).toEqual(expectedTransformedData);
     });
 

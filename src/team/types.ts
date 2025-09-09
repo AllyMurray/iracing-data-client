@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const TeamMembershipSchema = z.array(z.object({
+const TeamMembership = z.array(z.object({
   teamId: z.number(),
   teamName: z.string(),
   owner: z.boolean(),
@@ -12,7 +12,7 @@ const TeamMembershipSchema = z.array(z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type TeamMembershipResponse = z.infer<typeof TeamMembershipSchema>;
+export type TeamMembershipResponse = z.infer<typeof TeamMembership>;
 
 // ---- Parameter Schemas ----
 
@@ -34,5 +34,5 @@ export type TeamMembershipParams = z.infer<typeof TeamMembershipParamsSchema>;
 export {
   TeamGetParamsSchema,
   TeamMembershipParamsSchema,
-  TeamMembershipSchema,
+  TeamMembership,
 };

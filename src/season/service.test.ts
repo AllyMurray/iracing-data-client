@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { SeasonService } from "./service";
 import type { IRacingClient } from "../client";
 import type { SeasonListResponse, SeasonRaceGuideResponse, SeasonSpectatorSubsessionidsResponse, SeasonSpectatorSubsessionidsDetailResponse } from "./types";
-import { SeasonListSchema, SeasonRaceGuideSchema, SeasonSpectatorSubsessionidsSchema, SeasonSpectatorSubsessionidsDetailSchema } from "./types";
+import { SeasonList, SeasonRaceGuide, SeasonSpectatorSubsessionids, SeasonSpectatorSubsessionidsDetail } from "./types";
 
 // Import sample data
 import seasonlistSample from "../../samples/season.list.json";
@@ -49,7 +49,7 @@ describe("SeasonService", () => {
   seasonQuarter: 123
       };
       const result = await seasonService.list(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/list", { params: testParams, schema: SeasonListSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/list", { params: testParams, schema: SeasonList });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -93,7 +93,7 @@ describe("SeasonService", () => {
   includeEndAfterFrom: true
       };
       const result = await seasonService.raceGuide(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/race_guide", { params: testParams, schema: SeasonRaceGuideSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/race_guide", { params: testParams, schema: SeasonRaceGuide });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -136,7 +136,7 @@ describe("SeasonService", () => {
   eventTypes: [123, 456]
       };
       const result = await seasonService.spectatorSubsessionids(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/spectator_subsessionids", { params: testParams, schema: SeasonSpectatorSubsessionidsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/spectator_subsessionids", { params: testParams, schema: SeasonSpectatorSubsessionids });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -179,7 +179,7 @@ describe("SeasonService", () => {
   seasonIds: [123, 456]
       };
       const result = await seasonService.spectatorSubsessionidsDetail(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/spectator_subsessionids_detail", { params: testParams, schema: SeasonSpectatorSubsessionidsDetailSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/season/spectator_subsessionids_detail", { params: testParams, schema: SeasonSpectatorSubsessionidsDetail });
       expect(result).toEqual(expectedTransformedData);
     });
 

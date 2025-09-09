@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const StatsMemberBestsSchema = z.object({
+const StatsMemberBests = z.object({
   carsDriven: z.array(z.object({
     carId: z.number(),
     carName: z.string()
@@ -23,7 +23,7 @@ const StatsMemberBestsSchema = z.object({
   custId: z.number(),
   carId: z.number()
 });
-const StatsMemberCareerSchema = z.object({
+const StatsMemberCareer = z.object({
   stats: z.array(z.object({
     categoryId: z.number(),
     category: z.string(),
@@ -44,7 +44,7 @@ const StatsMemberCareerSchema = z.object({
   })),
   custId: z.number()
 });
-const StatsMemberRecapSchema = z.object({
+const StatsMemberRecap = z.object({
   year: z.number(),
   stats: z.object({
     starts: z.number(),
@@ -70,7 +70,7 @@ const StatsMemberRecapSchema = z.object({
   season: z.optional(z.union([z.string(), z.null()])),
   custId: z.number()
 });
-const StatsMemberRecentRacesSchema = z.object({
+const StatsMemberRecentRaces = z.object({
   races: z.array(z.object({
     seasonId: z.number(),
     seriesId: z.number(),
@@ -121,7 +121,7 @@ const StatsMemberRecentRacesSchema = z.object({
   })),
   custId: z.number()
 });
-const StatsMemberSummarySchema = z.object({
+const StatsMemberSummary = z.object({
   thisYear: z.object({
     numOfficialSessions: z.number(),
     numLeagueSessions: z.number(),
@@ -130,7 +130,7 @@ const StatsMemberSummarySchema = z.object({
   }),
   custId: z.number()
 });
-const StatsMemberYearlySchema = z.object({
+const StatsMemberYearly = z.object({
   stats: z.array(z.object({
     categoryId: z.number(),
     category: z.string(),
@@ -152,7 +152,7 @@ const StatsMemberYearlySchema = z.object({
   })),
   custId: z.number()
 });
-const StatsWorldRecordsSchema = z.object({
+const StatsWorldRecords = z.object({
   type: z.string(),
   data: z.object({
     success: z.boolean(),
@@ -173,13 +173,13 @@ const StatsWorldRecordsSchema = z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type StatsMemberBestsResponse = z.infer<typeof StatsMemberBestsSchema>;
-export type StatsMemberCareerResponse = z.infer<typeof StatsMemberCareerSchema>;
-export type StatsMemberRecapResponse = z.infer<typeof StatsMemberRecapSchema>;
-export type StatsMemberRecentRacesResponse = z.infer<typeof StatsMemberRecentRacesSchema>;
-export type StatsMemberSummaryResponse = z.infer<typeof StatsMemberSummarySchema>;
-export type StatsMemberYearlyResponse = z.infer<typeof StatsMemberYearlySchema>;
-export type StatsWorldRecordsResponse = z.infer<typeof StatsWorldRecordsSchema>;
+export type StatsMemberBestsResponse = z.infer<typeof StatsMemberBests>;
+export type StatsMemberCareerResponse = z.infer<typeof StatsMemberCareer>;
+export type StatsMemberRecapResponse = z.infer<typeof StatsMemberRecap>;
+export type StatsMemberRecentRacesResponse = z.infer<typeof StatsMemberRecentRaces>;
+export type StatsMemberSummaryResponse = z.infer<typeof StatsMemberSummary>;
+export type StatsMemberYearlyResponse = z.infer<typeof StatsMemberYearly>;
+export type StatsWorldRecordsResponse = z.infer<typeof StatsWorldRecords>;
 
 // ---- Parameter Schemas ----
 
@@ -297,11 +297,11 @@ export {
   StatsSeasonTtResultsParamsSchema,
   StatsSeasonQualifyResultsParamsSchema,
   StatsWorldRecordsParamsSchema,
-  StatsMemberBestsSchema,
-  StatsMemberCareerSchema,
-  StatsMemberRecapSchema,
-  StatsMemberRecentRacesSchema,
-  StatsMemberSummarySchema,
-  StatsMemberYearlySchema,
-  StatsWorldRecordsSchema,
+  StatsMemberBests,
+  StatsMemberCareer,
+  StatsMemberRecap,
+  StatsMemberRecentRaces,
+  StatsMemberSummary,
+  StatsMemberYearly,
+  StatsWorldRecords,
 };

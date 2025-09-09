@@ -1,6 +1,6 @@
 import type { IRacingClient } from "../client";
 import type { LookupDriversParams, LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
-import { LookupCountriesSchema, LookupDriversSchema, LookupFlairsSchema, LookupGetSchema, LookupLicensesSchema } from "./types";
+import { LookupCountries, LookupDrivers, LookupFlairs, LookupGet, LookupLicenses } from "./types";
 
 export class LookupService {
   constructor(private client: IRacingClient) {}
@@ -11,7 +11,7 @@ export class LookupService {
    * @sample lookup.countries.json
    */
   async countries(): Promise<LookupCountriesResponse> {
-    return this.client.get<LookupCountriesResponse>("https://members-ng.iracing.com/data/lookup/countries", { schema: LookupCountriesSchema });
+    return this.client.get<LookupCountriesResponse>("https://members-ng.iracing.com/data/lookup/countries", { schema: LookupCountries });
   }
 
   /**
@@ -20,7 +20,7 @@ export class LookupService {
    * @sample lookup.drivers.json
    */
   async drivers(params: LookupDriversParams): Promise<LookupDriversResponse> {
-    return this.client.get<LookupDriversResponse>("https://members-ng.iracing.com/data/lookup/drivers", { params, schema: LookupDriversSchema });
+    return this.client.get<LookupDriversResponse>("https://members-ng.iracing.com/data/lookup/drivers", { params, schema: LookupDrivers });
   }
 
   /**
@@ -29,7 +29,7 @@ export class LookupService {
    * @sample lookup.flairs.json
    */
   async flairs(): Promise<LookupFlairsResponse> {
-    return this.client.get<LookupFlairsResponse>("https://members-ng.iracing.com/data/lookup/flairs", { schema: LookupFlairsSchema });
+    return this.client.get<LookupFlairsResponse>("https://members-ng.iracing.com/data/lookup/flairs", { schema: LookupFlairs });
   }
 
   /**
@@ -38,7 +38,7 @@ export class LookupService {
    * @sample lookup.get.json
    */
   async get(): Promise<LookupGetResponse> {
-    return this.client.get<LookupGetResponse>("https://members-ng.iracing.com/data/lookup/get", { schema: LookupGetSchema });
+    return this.client.get<LookupGetResponse>("https://members-ng.iracing.com/data/lookup/get", { schema: LookupGet });
   }
 
   /**
@@ -47,7 +47,7 @@ export class LookupService {
    * @sample lookup.licenses.json
    */
   async licenses(): Promise<LookupLicensesResponse> {
-    return this.client.get<LookupLicensesResponse>("https://members-ng.iracing.com/data/lookup/licenses", { schema: LookupLicensesSchema });
+    return this.client.get<LookupLicensesResponse>("https://members-ng.iracing.com/data/lookup/licenses", { schema: LookupLicenses });
   }
 
 }

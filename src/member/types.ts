@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const MemberAwardsSchema = z.object({
+const MemberAwards = z.object({
   type: z.string(),
   data: z.object({
     success: z.boolean(),
@@ -11,7 +11,7 @@ const MemberAwardsSchema = z.object({
   }),
   dataUrl: z.string()
 });
-const MemberAwardInstancesSchema = z.object({
+const MemberAwardInstances = z.object({
   type: z.string(),
   data: z.object({
     success: z.boolean(),
@@ -21,7 +21,7 @@ const MemberAwardInstancesSchema = z.object({
   }),
   dataUrl: z.string()
 });
-const MemberChartDataSchema = z.object({
+const MemberChartData = z.object({
   blackout: z.boolean(),
   categoryId: z.number(),
   chartType: z.number(),
@@ -32,7 +32,7 @@ const MemberChartDataSchema = z.object({
   success: z.boolean(),
   custId: z.number()
 });
-const MemberGetSchema = z.object({
+const MemberGet = z.object({
   success: z.boolean(),
   custIds: z.array(z.number()),
   members: z.array(z.object({
@@ -54,7 +54,7 @@ const MemberGetSchema = z.object({
     ai: z.boolean()
   }))
 });
-const MemberInfoSchema = z.object({
+const MemberInfo = z.object({
   custId: z.number(),
   displayName: z.string(),
   firstName: z.string(),
@@ -206,7 +206,7 @@ const MemberInfoSchema = z.object({
   hasReadTc: z.boolean(),
   hasReadPp: z.boolean()
 });
-const MemberParticipationCreditsSchema = z.array(z.object({
+const MemberParticipationCredits = z.array(z.object({
   custId: z.number(),
   seasonId: z.number(),
   seriesId: z.number(),
@@ -219,7 +219,7 @@ const MemberParticipationCreditsSchema = z.array(z.object({
   earnedCredits: z.number(),
   totalCredits: z.number()
 }));
-const MemberProfileSchema = z.object({
+const MemberProfile = z.object({
   recentAwards: z.array(z.object({
     memberAwardId: z.number(),
     awardId: z.number(),
@@ -331,13 +331,13 @@ const MemberProfileSchema = z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type MemberAwardsResponse = z.infer<typeof MemberAwardsSchema>;
-export type MemberAwardInstancesResponse = z.infer<typeof MemberAwardInstancesSchema>;
-export type MemberChartDataResponse = z.infer<typeof MemberChartDataSchema>;
-export type MemberGetResponse = z.infer<typeof MemberGetSchema>;
-export type MemberInfoResponse = z.infer<typeof MemberInfoSchema>;
-export type MemberParticipationCreditsResponse = z.infer<typeof MemberParticipationCreditsSchema>;
-export type MemberProfileResponse = z.infer<typeof MemberProfileSchema>;
+export type MemberAwardsResponse = z.infer<typeof MemberAwards>;
+export type MemberAwardInstancesResponse = z.infer<typeof MemberAwardInstances>;
+export type MemberChartDataResponse = z.infer<typeof MemberChartData>;
+export type MemberGetResponse = z.infer<typeof MemberGet>;
+export type MemberInfoResponse = z.infer<typeof MemberInfo>;
+export type MemberParticipationCreditsResponse = z.infer<typeof MemberParticipationCredits>;
+export type MemberProfileResponse = z.infer<typeof MemberProfile>;
 
 // ---- Parameter Schemas ----
 
@@ -391,11 +391,11 @@ export {
   MemberInfoParamsSchema,
   MemberParticipationCreditsParamsSchema,
   MemberProfileParamsSchema,
-  MemberAwardsSchema,
-  MemberAwardInstancesSchema,
-  MemberChartDataSchema,
-  MemberGetSchema,
-  MemberInfoSchema,
-  MemberParticipationCreditsSchema,
-  MemberProfileSchema,
+  MemberAwards,
+  MemberAwardInstances,
+  MemberChartData,
+  MemberGet,
+  MemberInfo,
+  MemberParticipationCredits,
+  MemberProfile,
 };

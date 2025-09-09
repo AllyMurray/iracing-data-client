@@ -2,14 +2,14 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const SeriesAssetsSchema = z.record(z.string(), z.object({
+const SeriesAssets = z.record(z.string(), z.object({
   largeImage: z.optional(z.union([z.string(), z.null()])),
   logo: z.optional(z.union([z.string(), z.null()])),
   seriesCopy: z.string(),
   seriesId: z.number(),
   smallImage: z.optional(z.union([z.string(), z.null()]))
 }));
-const SeriesGetSchema = z.array(z.object({
+const SeriesGet = z.array(z.object({
   allowedLicenses: z.array(z.object({
     groupName: z.optional(z.union([z.string(), z.null()])),
     licenseGroup: z.number(),
@@ -32,7 +32,7 @@ const SeriesGetSchema = z.array(z.object({
   seriesName: z.string(),
   seriesShortName: z.string()
 }));
-const SeriesPastSeasonsSchema = z.object({
+const SeriesPastSeasons = z.object({
   success: z.boolean(),
   series: z.object({
     seriesId: z.number(),
@@ -91,7 +91,7 @@ const SeriesPastSeasonsSchema = z.object({
   }),
   seriesId: z.number()
 });
-const SeriesSeasonsSchema = z.array(z.object({
+const SeriesSeasons = z.array(z.object({
   seasonId: z.number(),
   seasonName: z.string(),
   active: z.boolean(),
@@ -259,7 +259,7 @@ const SeriesSeasonsSchema = z.array(z.object({
   })),
   unsportConductRuleMode: z.number()
 }));
-const SeriesSeasonListSchema = z.object({
+const SeriesSeasonList = z.object({
   seasons: z.array(z.object({
     seasonId: z.number(),
     seasonName: z.string(),
@@ -358,7 +358,7 @@ const SeriesSeasonListSchema = z.object({
     unsportConductRuleMode: z.number()
   }))
 });
-const SeriesStatsSeriesSchema = z.array(z.object({
+const SeriesStatsSeries = z.array(z.object({
   seriesId: z.number(),
   seriesName: z.string(),
   seriesShortName: z.string(),
@@ -416,12 +416,12 @@ const SeriesStatsSeriesSchema = z.array(z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type SeriesAssetsResponse = z.infer<typeof SeriesAssetsSchema>;
-export type SeriesGetResponse = z.infer<typeof SeriesGetSchema>;
-export type SeriesPastSeasonsResponse = z.infer<typeof SeriesPastSeasonsSchema>;
-export type SeriesSeasonsResponse = z.infer<typeof SeriesSeasonsSchema>;
-export type SeriesSeasonListResponse = z.infer<typeof SeriesSeasonListSchema>;
-export type SeriesStatsSeriesResponse = z.infer<typeof SeriesStatsSeriesSchema>;
+export type SeriesAssetsResponse = z.infer<typeof SeriesAssets>;
+export type SeriesGetResponse = z.infer<typeof SeriesGet>;
+export type SeriesPastSeasonsResponse = z.infer<typeof SeriesPastSeasons>;
+export type SeriesSeasonsResponse = z.infer<typeof SeriesSeasons>;
+export type SeriesSeasonListResponse = z.infer<typeof SeriesSeasonList>;
+export type SeriesStatsSeriesResponse = z.infer<typeof SeriesStatsSeries>;
 
 // ---- Parameter Schemas ----
 
@@ -474,10 +474,10 @@ export {
   SeriesSeasonListParamsSchema,
   SeriesSeasonScheduleParamsSchema,
   SeriesStatsSeriesParamsSchema,
-  SeriesAssetsSchema,
-  SeriesGetSchema,
-  SeriesPastSeasonsSchema,
-  SeriesSeasonsSchema,
-  SeriesSeasonListSchema,
-  SeriesStatsSeriesSchema,
+  SeriesAssets,
+  SeriesGet,
+  SeriesPastSeasons,
+  SeriesSeasons,
+  SeriesSeasonList,
+  SeriesStatsSeries,
 };

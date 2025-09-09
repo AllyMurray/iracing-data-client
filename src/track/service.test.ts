@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TrackService } from "./service";
 import type { IRacingClient } from "../client";
 import type { TrackAssetsResponse, TrackGetResponse } from "./types";
-import { TrackAssetsSchema, TrackGetSchema } from "./types";
+import { TrackAssets, TrackGet } from "./types";
 
 // Import sample data
 import trackassetsSample from "../../samples/track.assets.json";
@@ -43,7 +43,7 @@ describe("TrackService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await trackService.assets();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/track/assets", { schema: TrackAssetsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/track/assets", { schema: TrackAssets });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -79,7 +79,7 @@ describe("TrackService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await trackService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/track/get", { schema: TrackGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/track/get", { schema: TrackGet });
       expect(result).toEqual(expectedTransformedData);
     });
 

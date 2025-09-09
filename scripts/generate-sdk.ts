@@ -490,7 +490,7 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
         }
         
         if (mergedSampleData !== null) {
-          const schemaName = `${toPascal(ep.method)}Schema`;
+          const schemaName = `${toPascal(ep.method)}`;
           const zodSchema = generateZodSchemaFromSample(mergedSampleData, schemaName);
           responseSchemas.push(zodSchema);
         } else {
@@ -499,7 +499,7 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
       } catch (error) {
         console.warn(`Failed to generate schema from ${ep.samplePath}:`, error);
         // Fallback to generic schema
-        const schemaName = `${toPascal(ep.method)}Schema`;
+        const schemaName = `${toPascal(ep.method)}`;
         responseSchemas.push(`const ${schemaName} = z.unknown();`);
       }
     }
@@ -575,7 +575,7 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
   lines.push(``);
   for (const ep of endpoints) {
     if (ep.samplePath) {
-      const schemaName = `${toPascal(ep.method)}Schema`;
+      const schemaName = `${toPascal(ep.method)}`;
       const typeName = `${toPascal(ep.method)}Response`;
       lines.push(`export type ${typeName} = z.infer<typeof ${schemaName}>;`);
     }
@@ -652,7 +652,7 @@ async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Pro
   // Export response schemas
   for (const ep of endpoints) {
     if (ep.responseType) {
-      const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+      const schemaName = `${ep.responseType.replace('Response', '')}`;
       lines.push(`  ${schemaName},`);
     }
   }
@@ -721,7 +721,7 @@ function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
   // Import schemas for endpoints that have responses
   const schemaImports = endpoints
     .filter(ep => ep.responseType)
-    .map(ep => `${ep.responseType!.replace('Response', '')}Schema`)
+    .map(ep => `${ep.responseType!.replace('Response', '')}`)
     .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
   
   if (schemaImports.length > 0) {
@@ -803,7 +803,7 @@ function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
         lines.push(`      const testParams = ${mockParams};`);
         lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
         if (ep.responseType) {
-          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          const schemaName = `${ep.responseType.replace('Response', '')}`;
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams, schema: ${schemaName} });`);
         } else {
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams });`);
@@ -811,7 +811,7 @@ function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
       } else {
         lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}();`);
         if (ep.responseType) {
-          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          const schemaName = `${ep.responseType.replace('Response', '')}`;
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { schema: ${schemaName} });`);
         } else {
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}");`);
@@ -853,7 +853,7 @@ function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
         lines.push(`      const testParams = ${mockParams};`);
         lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
         if (ep.responseType) {
-          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          const schemaName = `${ep.responseType.replace('Response', '')}`;
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams, schema: ${schemaName} });`);
         } else {
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { params: testParams });`);
@@ -861,7 +861,7 @@ function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
       } else {
         lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}();`);
         if (ep.responseType) {
-          const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+          const schemaName = `${ep.responseType.replace('Response', '')}`;
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}", { schema: ${schemaName} });`);
         } else {
           lines.push(`      expect(mockClient.get).toHaveBeenCalledWith("${ep.url}");`);
@@ -904,7 +904,7 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
   // Import schemas
   const schemaImports = endpoints
     .filter(ep => ep.responseType)
-    .map(ep => `${ep.responseType!.replace('Response', '')}Schema`);
+    .map(ep => `${ep.responseType!.replace('Response', '')}`);
   
   if (schemaImports.length > 0) {
     lines.push(`import { ${schemaImports.join(", ")} } from "${typesFile}";`);
@@ -934,7 +934,7 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
     if (hasParams) {
       lines.push(`  async ${methodName}(params: ${paramsType}): Promise<${returnType}> {`);
       if (ep.responseType) {
-        const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+        const schemaName = `${ep.responseType.replace('Response', '')}`;
         lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params, schema: ${schemaName} });`);
       } else {
         lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params });`);
@@ -942,7 +942,7 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
     } else {
       lines.push(`  async ${methodName}(): Promise<${returnType}> {`);
       if (ep.responseType) {
-        const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
+        const schemaName = `${ep.responseType.replace('Response', '')}`;
         lines.push(`    return this.client.get<${returnType}>("${ep.url}", { schema: ${schemaName} });`);
       } else {
         lines.push(`    return this.client.get<${returnType}>("${ep.url}");`);

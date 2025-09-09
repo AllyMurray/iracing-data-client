@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TeamService } from "./service";
 import type { IRacingClient } from "../client";
 import type { TeamMembershipResponse } from "./types";
-import { TeamMembershipSchema } from "./types";
+import { TeamMembership } from "./types";
 
 // Import sample data
 import teammembershipSample from "../../samples/team.membership.json";
@@ -56,7 +56,7 @@ describe("TeamService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await teamService.membership();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/team/membership", { schema: TeamMembershipSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/team/membership", { schema: TeamMembership });
       expect(result).toEqual(expectedTransformedData);
     });
 

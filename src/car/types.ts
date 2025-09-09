@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const CarAssetsSchema = z.record(z.string(), z.object({
+const CarAssets = z.record(z.string(), z.object({
   carId: z.number(),
   carRules: z.array(z.unknown()),
   detailCopy: z.string(),
@@ -19,7 +19,7 @@ const CarAssetsSchema = z.record(z.string(), z.object({
   sponsorLogo: z.optional(z.union([z.string(), z.null()])),
   templatePath: z.optional(z.union([z.string(), z.null()]))
 }));
-const CarGetSchema = z.array(z.object({
+const CarGet = z.array(z.object({
   aiEnabled: z.boolean(),
   allowNumberColors: z.boolean(),
   allowNumberFont: z.boolean(),
@@ -66,8 +66,8 @@ const CarGetSchema = z.array(z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type CarAssetsResponse = z.infer<typeof CarAssetsSchema>;
-export type CarGetResponse = z.infer<typeof CarGetSchema>;
+export type CarAssetsResponse = z.infer<typeof CarAssets>;
+export type CarGetResponse = z.infer<typeof CarGet>;
 
 // ---- Parameter Schemas ----
 
@@ -87,6 +87,6 @@ export type CarGetParams = z.infer<typeof CarGetParamsSchema>;
 export {
   CarAssetsParamsSchema,
   CarGetParamsSchema,
-  CarAssetsSchema,
-  CarGetSchema,
+  CarAssets,
+  CarGet,
 };

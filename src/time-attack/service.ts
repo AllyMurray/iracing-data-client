@@ -1,6 +1,6 @@
 import type { IRacingClient } from "../client";
 import type { TimeAttackMemberSeasonResultsParams, TimeAttackMemberSeasonResultsResponse } from "./types";
-import { TimeAttackMemberSeasonResultsSchema } from "./types";
+import { TimeAttackMemberSeasonResults } from "./types";
 
 export class TimeAttackService {
   constructor(private client: IRacingClient) {}
@@ -11,7 +11,7 @@ export class TimeAttackService {
    * @sample time_attack.member_season_results.json
    */
   async memberSeasonResults(params: TimeAttackMemberSeasonResultsParams): Promise<TimeAttackMemberSeasonResultsResponse> {
-    return this.client.get<TimeAttackMemberSeasonResultsResponse>("https://members-ng.iracing.com/data/time_attack/member_season_results", { params, schema: TimeAttackMemberSeasonResultsSchema });
+    return this.client.get<TimeAttackMemberSeasonResultsResponse>("https://members-ng.iracing.com/data/time_attack/member_season_results", { params, schema: TimeAttackMemberSeasonResults });
   }
 
 }

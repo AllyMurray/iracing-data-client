@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { CarService } from "./service";
 import type { IRacingClient } from "../client";
 import type { CarAssetsResponse, CarGetResponse } from "./types";
-import { CarAssetsSchema, CarGetSchema } from "./types";
+import { CarAssets, CarGet } from "./types";
 
 // Import sample data
 import carassetsSample from "../../samples/car.assets.json";
@@ -43,7 +43,7 @@ describe("CarService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await carService.assets();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/car/assets", { schema: CarAssetsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/car/assets", { schema: CarAssets });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -79,7 +79,7 @@ describe("CarService", () => {
       mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
 
       const result = await carService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/car/get", { schema: CarGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/car/get", { schema: CarGet });
       expect(result).toEqual(expectedTransformedData);
     });
 

@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const LeagueCustLeagueSessionsSchema = z.object({
+const LeagueCustLeagueSessions = z.object({
   mine: z.boolean(),
   subscribed: z.boolean(),
   sequence: z.number(),
@@ -293,7 +293,7 @@ const LeagueCustLeagueSessionsSchema = z.object({
   success: z.boolean(),
   packageId: z.number()
 });
-const LeagueDirectorySchema = z.object({
+const LeagueDirectory = z.object({
   resultsPage: z.array(z.object({
     leagueId: z.number(),
     ownerId: z.number(),
@@ -327,7 +327,7 @@ const LeagueDirectorySchema = z.object({
   upperbound: z.number(),
   rowCount: z.number()
 });
-const LeagueGetSchema = z.object({
+const LeagueGet = z.object({
   leagueId: z.number(),
   ownerId: z.number(),
   leagueName: z.string(),
@@ -399,7 +399,7 @@ const LeagueGetSchema = z.object({
     nickName: z.string()
   }))
 });
-const LeagueGetPointsSystemsSchema = z.object({
+const LeagueGetPointsSystems = z.object({
   subscribed: z.boolean(),
   success: z.boolean(),
   pointsSystems: z.array(z.object({
@@ -413,7 +413,7 @@ const LeagueGetPointsSystemsSchema = z.object({
   leagueId: z.number(),
   seasonId: z.number()
 });
-const LeagueMembershipSchema = z.array(z.object({
+const LeagueMembership = z.array(z.object({
   leagueId: z.number(),
   leagueName: z.string(),
   owner: z.boolean(),
@@ -423,7 +423,7 @@ const LeagueMembershipSchema = z.array(z.object({
   carNumber: z.string(),
   nickName: z.string()
 }));
-const LeagueRosterSchema = z.object({
+const LeagueRoster = z.object({
   type: z.string(),
   data: z.object({
     subscribed: z.boolean(),
@@ -433,7 +433,7 @@ const LeagueRosterSchema = z.object({
   }),
   dataUrl: z.string()
 });
-const LeagueSeasonsSchema = z.object({
+const LeagueSeasons = z.object({
   subscribed: z.boolean(),
   seasons: z.array(z.object({
     leagueId: z.number(),
@@ -471,7 +471,7 @@ const LeagueSeasonsSchema = z.object({
   retired: z.boolean(),
   leagueId: z.number()
 });
-const LeagueSeasonStandingsSchema = z.object({
+const LeagueSeasonStandings = z.object({
   carClassId: z.number(),
   success: z.boolean(),
   seasonId: z.number(),
@@ -484,7 +484,7 @@ const LeagueSeasonStandingsSchema = z.object({
   }),
   leagueId: z.number()
 });
-const LeagueSeasonSessionsSchema = z.object({
+const LeagueSeasonSessions = z.object({
   success: z.boolean(),
   subscribed: z.boolean(),
   leagueId: z.number(),
@@ -494,15 +494,15 @@ const LeagueSeasonSessionsSchema = z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type LeagueCustLeagueSessionsResponse = z.infer<typeof LeagueCustLeagueSessionsSchema>;
-export type LeagueDirectoryResponse = z.infer<typeof LeagueDirectorySchema>;
-export type LeagueGetResponse = z.infer<typeof LeagueGetSchema>;
-export type LeagueGetPointsSystemsResponse = z.infer<typeof LeagueGetPointsSystemsSchema>;
-export type LeagueMembershipResponse = z.infer<typeof LeagueMembershipSchema>;
-export type LeagueRosterResponse = z.infer<typeof LeagueRosterSchema>;
-export type LeagueSeasonsResponse = z.infer<typeof LeagueSeasonsSchema>;
-export type LeagueSeasonStandingsResponse = z.infer<typeof LeagueSeasonStandingsSchema>;
-export type LeagueSeasonSessionsResponse = z.infer<typeof LeagueSeasonSessionsSchema>;
+export type LeagueCustLeagueSessionsResponse = z.infer<typeof LeagueCustLeagueSessions>;
+export type LeagueDirectoryResponse = z.infer<typeof LeagueDirectory>;
+export type LeagueGetResponse = z.infer<typeof LeagueGet>;
+export type LeagueGetPointsSystemsResponse = z.infer<typeof LeagueGetPointsSystems>;
+export type LeagueMembershipResponse = z.infer<typeof LeagueMembership>;
+export type LeagueRosterResponse = z.infer<typeof LeagueRoster>;
+export type LeagueSeasonsResponse = z.infer<typeof LeagueSeasons>;
+export type LeagueSeasonStandingsResponse = z.infer<typeof LeagueSeasonStandings>;
+export type LeagueSeasonSessionsResponse = z.infer<typeof LeagueSeasonSessions>;
 
 // ---- Parameter Schemas ----
 
@@ -588,13 +588,13 @@ export {
   LeagueSeasonsParamsSchema,
   LeagueSeasonStandingsParamsSchema,
   LeagueSeasonSessionsParamsSchema,
-  LeagueCustLeagueSessionsSchema,
-  LeagueDirectorySchema,
-  LeagueGetSchema,
-  LeagueGetPointsSystemsSchema,
-  LeagueMembershipSchema,
-  LeagueRosterSchema,
-  LeagueSeasonsSchema,
-  LeagueSeasonStandingsSchema,
-  LeagueSeasonSessionsSchema,
+  LeagueCustLeagueSessions,
+  LeagueDirectory,
+  LeagueGet,
+  LeagueGetPointsSystems,
+  LeagueMembership,
+  LeagueRoster,
+  LeagueSeasons,
+  LeagueSeasonStandings,
+  LeagueSeasonSessions,
 };

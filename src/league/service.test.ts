@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { LeagueService } from "./service";
 import type { IRacingClient } from "../client";
 import type { LeagueCustLeagueSessionsResponse, LeagueDirectoryResponse, LeagueGetResponse, LeagueGetPointsSystemsResponse, LeagueMembershipResponse, LeagueRosterResponse, LeagueSeasonsResponse, LeagueSeasonStandingsResponse, LeagueSeasonSessionsResponse } from "./types";
-import { LeagueCustLeagueSessionsSchema, LeagueDirectorySchema, LeagueGetSchema, LeagueGetPointsSystemsSchema, LeagueMembershipSchema, LeagueRosterSchema, LeagueSeasonsSchema, LeagueSeasonStandingsSchema, LeagueSeasonSessionsSchema } from "./types";
+import { LeagueCustLeagueSessions, LeagueDirectory, LeagueGet, LeagueGetPointsSystems, LeagueMembership, LeagueRoster, LeagueSeasons, LeagueSeasonStandings, LeagueSeasonSessions } from "./types";
 
 // Import sample data
 import leaguecustleaguesessionsSample from "../../samples/league.cust_league_sessions.json";
@@ -54,7 +54,7 @@ describe("LeagueService", () => {
   packageId: 123
       };
       const result = await leagueService.custLeagueSessions(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/cust_league_sessions", { params: testParams, schema: LeagueCustLeagueSessionsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/cust_league_sessions", { params: testParams, schema: LeagueCustLeagueSessions });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -108,7 +108,7 @@ describe("LeagueService", () => {
   order: "test"
       };
       const result = await leagueService.directory(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/directory", { params: testParams, schema: LeagueDirectorySchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/directory", { params: testParams, schema: LeagueDirectory });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -162,7 +162,7 @@ describe("LeagueService", () => {
   includeLicenses: true
       };
       const result = await leagueService.get(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/get", { params: testParams, schema: LeagueGetSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/get", { params: testParams, schema: LeagueGet });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -206,7 +206,7 @@ describe("LeagueService", () => {
   seasonId: 123
       };
       const result = await leagueService.getPointsSystems(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/get_points_systems", { params: testParams, schema: LeagueGetPointsSystemsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/get_points_systems", { params: testParams, schema: LeagueGetPointsSystems });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -250,7 +250,7 @@ describe("LeagueService", () => {
   includeLeague: true
       };
       const result = await leagueService.membership(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/membership", { params: testParams, schema: LeagueMembershipSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/membership", { params: testParams, schema: LeagueMembership });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -294,7 +294,7 @@ describe("LeagueService", () => {
   includeLicenses: true
       };
       const result = await leagueService.roster(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/roster", { params: testParams, schema: LeagueRosterSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/roster", { params: testParams, schema: LeagueRoster });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -338,7 +338,7 @@ describe("LeagueService", () => {
   retired: true
       };
       const result = await leagueService.seasons(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/seasons", { params: testParams, schema: LeagueSeasonsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/seasons", { params: testParams, schema: LeagueSeasons });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -384,7 +384,7 @@ describe("LeagueService", () => {
   carId: 123
       };
       const result = await leagueService.seasonStandings(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/season_standings", { params: testParams, schema: LeagueSeasonStandingsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/season_standings", { params: testParams, schema: LeagueSeasonStandings });
       expect(result).toEqual(expectedTransformedData);
     });
 
@@ -431,7 +431,7 @@ describe("LeagueService", () => {
   resultsOnly: true
       };
       const result = await leagueService.seasonSessions(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/season_sessions", { params: testParams, schema: LeagueSeasonSessionsSchema });
+      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/league/season_sessions", { params: testParams, schema: LeagueSeasonSessions });
       expect(result).toEqual(expectedTransformedData);
     });
 

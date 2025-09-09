@@ -1,6 +1,6 @@
 import type { IRacingClient } from "../client";
 import type { TeamGetParams, TeamMembershipResponse } from "./types";
-import { TeamMembershipSchema } from "./types";
+import { TeamMembership } from "./types";
 
 export class TeamService {
   constructor(private client: IRacingClient) {}
@@ -19,7 +19,7 @@ export class TeamService {
    * @sample team.membership.json
    */
   async membership(): Promise<TeamMembershipResponse> {
-    return this.client.get<TeamMembershipResponse>("https://members-ng.iracing.com/data/team/membership", { schema: TeamMembershipSchema });
+    return this.client.get<TeamMembershipResponse>("https://members-ng.iracing.com/data/team/membership", { schema: TeamMembership });
   }
 
 }

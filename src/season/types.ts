@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const SeasonListSchema = z.object({
+const SeasonList = z.object({
   seasonQuarter: z.number(),
   seasons: z.array(z.object({
     seasonId: z.number(),
@@ -18,7 +18,7 @@ const SeasonListSchema = z.object({
   })),
   seasonYear: z.number()
 });
-const SeasonRaceGuideSchema = z.object({
+const SeasonRaceGuide = z.object({
   subscribed: z.boolean(),
   sessions: z.array(z.object({
     seasonId: z.number(),
@@ -34,12 +34,12 @@ const SeasonRaceGuideSchema = z.object({
   blockEndTime: z.string(),
   success: z.boolean()
 });
-const SeasonSpectatorSubsessionidsSchema = z.object({
+const SeasonSpectatorSubsessionids = z.object({
   eventTypes: z.array(z.number()),
   success: z.boolean(),
   subsessionIds: z.array(z.number())
 });
-const SeasonSpectatorSubsessionidsDetailSchema = z.object({
+const SeasonSpectatorSubsessionidsDetail = z.object({
   success: z.boolean(),
   seasonIds: z.array(z.number()),
   eventTypes: z.array(z.number()),
@@ -55,10 +55,10 @@ const SeasonSpectatorSubsessionidsDetailSchema = z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type SeasonListResponse = z.infer<typeof SeasonListSchema>;
-export type SeasonRaceGuideResponse = z.infer<typeof SeasonRaceGuideSchema>;
-export type SeasonSpectatorSubsessionidsResponse = z.infer<typeof SeasonSpectatorSubsessionidsSchema>;
-export type SeasonSpectatorSubsessionidsDetailResponse = z.infer<typeof SeasonSpectatorSubsessionidsDetailSchema>;
+export type SeasonListResponse = z.infer<typeof SeasonList>;
+export type SeasonRaceGuideResponse = z.infer<typeof SeasonRaceGuide>;
+export type SeasonSpectatorSubsessionidsResponse = z.infer<typeof SeasonSpectatorSubsessionids>;
+export type SeasonSpectatorSubsessionidsDetailResponse = z.infer<typeof SeasonSpectatorSubsessionidsDetail>;
 
 // ---- Parameter Schemas ----
 
@@ -95,8 +95,8 @@ export {
   SeasonRaceGuideParamsSchema,
   SeasonSpectatorSubsessionidsParamsSchema,
   SeasonSpectatorSubsessionidsDetailParamsSchema,
-  SeasonListSchema,
-  SeasonRaceGuideSchema,
-  SeasonSpectatorSubsessionidsSchema,
-  SeasonSpectatorSubsessionidsDetailSchema,
+  SeasonList,
+  SeasonRaceGuide,
+  SeasonSpectatorSubsessionids,
+  SeasonSpectatorSubsessionidsDetail,
 };

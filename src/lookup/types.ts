@@ -2,11 +2,11 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const LookupCountriesSchema = z.array(z.object({
+const LookupCountries = z.array(z.object({
   countryName: z.string(),
   countryCode: z.string()
 }));
-const LookupDriversSchema = z.array(z.object({
+const LookupDrivers = z.array(z.object({
   custId: z.number(),
   displayName: z.string(),
   helmet: z.object({
@@ -19,7 +19,7 @@ const LookupDriversSchema = z.array(z.object({
   }),
   profileDisabled: z.boolean()
 }));
-const LookupFlairsSchema = z.object({
+const LookupFlairs = z.object({
   flairs: z.array(z.object({
     flairId: z.number(),
     flairName: z.string(),
@@ -27,8 +27,8 @@ const LookupFlairsSchema = z.object({
   })),
   success: z.boolean()
 });
-const LookupGetSchema = z.array(z.unknown());
-const LookupLicensesSchema = z.array(z.object({
+const LookupGet = z.array(z.unknown());
+const LookupLicenses = z.array(z.object({
   licenseGroup: z.number(),
   groupName: z.optional(z.union([z.string(), z.null()])),
   minNumRaces: z.number(),
@@ -47,11 +47,11 @@ const LookupLicensesSchema = z.array(z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type LookupCountriesResponse = z.infer<typeof LookupCountriesSchema>;
-export type LookupDriversResponse = z.infer<typeof LookupDriversSchema>;
-export type LookupFlairsResponse = z.infer<typeof LookupFlairsSchema>;
-export type LookupGetResponse = z.infer<typeof LookupGetSchema>;
-export type LookupLicensesResponse = z.infer<typeof LookupLicensesSchema>;
+export type LookupCountriesResponse = z.infer<typeof LookupCountries>;
+export type LookupDriversResponse = z.infer<typeof LookupDrivers>;
+export type LookupFlairsResponse = z.infer<typeof LookupFlairs>;
+export type LookupGetResponse = z.infer<typeof LookupGet>;
+export type LookupLicensesResponse = z.infer<typeof LookupLicenses>;
 
 // ---- Parameter Schemas ----
 
@@ -88,9 +88,9 @@ export {
   LookupFlairsParamsSchema,
   LookupGetParamsSchema,
   LookupLicensesParamsSchema,
-  LookupCountriesSchema,
-  LookupDriversSchema,
-  LookupFlairsSchema,
-  LookupGetSchema,
-  LookupLicensesSchema,
+  LookupCountries,
+  LookupDrivers,
+  LookupFlairs,
+  LookupGet,
+  LookupLicenses,
 };

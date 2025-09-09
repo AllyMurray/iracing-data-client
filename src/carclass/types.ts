@@ -11,7 +11,7 @@ const CarInClassSchema = z.object({
 
 // ---- Response Schemas ----
 
-const CarclassGetSchema = z.array(z.object({
+const CarclassGet = z.array(z.object({
   carClassId: z.number(),
   carsInClass: z.array(z.object({
     carDirpath: z.string(),
@@ -28,7 +28,7 @@ const CarclassGetSchema = z.array(z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type CarclassGetResponse = z.infer<typeof CarclassGetSchema>;
+export type CarclassGetResponse = z.infer<typeof CarclassGet>;
 
 // ---- Parameter Schemas ----
 
@@ -43,5 +43,5 @@ export type CarclassGetParams = z.infer<typeof CarclassGetParamsSchema>;
 
 export {
   CarclassGetParamsSchema,
-  CarclassGetSchema,
+  CarclassGet,
 };

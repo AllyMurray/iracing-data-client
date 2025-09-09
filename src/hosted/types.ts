@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const HostedCombinedSessionsSchema = z.object({
+const HostedCombinedSessions = z.object({
   subscribed: z.boolean(),
   sequence: z.number(),
   sessions: z.array(z.object({
@@ -246,7 +246,7 @@ const HostedCombinedSessionsSchema = z.object({
   success: z.boolean(),
   packageId: z.number()
 });
-const HostedSessionsSchema = z.object({
+const HostedSessions = z.object({
   subscribed: z.boolean(),
   sessions: z.array(z.object({
     adaptiveAiEnabled: z.boolean(),
@@ -473,8 +473,8 @@ const HostedSessionsSchema = z.object({
 
 // ---- Response Types (inferred from schemas) ----
 
-export type HostedCombinedSessionsResponse = z.infer<typeof HostedCombinedSessionsSchema>;
-export type HostedSessionsResponse = z.infer<typeof HostedSessionsSchema>;
+export type HostedCombinedSessionsResponse = z.infer<typeof HostedCombinedSessions>;
+export type HostedSessionsResponse = z.infer<typeof HostedSessions>;
 
 // ---- Parameter Schemas ----
 
@@ -495,6 +495,6 @@ export type HostedSessionsParams = z.infer<typeof HostedSessionsParamsSchema>;
 export {
   HostedCombinedSessionsParamsSchema,
   HostedSessionsParamsSchema,
-  HostedCombinedSessionsSchema,
-  HostedSessionsSchema,
+  HostedCombinedSessions,
+  HostedSessions,
 };
