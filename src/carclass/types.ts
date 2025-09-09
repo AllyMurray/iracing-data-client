@@ -4,7 +4,7 @@ import * as z from "zod/mini";
 
 export interface CarclassGetItem {
   carClassId: number; // maps from: car_class_id
-  carsInClass: any[]; // maps from: cars_in_class
+  carsInClass: Array<any>; // maps from: cars_in_class
   custId: number; // maps from: cust_id
   name: string;
   rainEnabled: boolean; // maps from: rain_enabled
@@ -12,7 +12,7 @@ export interface CarclassGetItem {
   shortName: string; // maps from: short_name
 }
 
-export type CarclassGetResponse = CarclassGetItem[];
+export type CarclassGetResponse = Array<CarclassGetItem>;
 
 // ---- Response Schemas ----
 

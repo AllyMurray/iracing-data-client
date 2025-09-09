@@ -5,13 +5,13 @@ import * as z from "zod/mini";
 export interface HostedCombinedSessionsResponse {
   subscribed: boolean;
   sequence: number;
-  sessions: any[];
+  sessions: Array<any>;
   success: boolean;
 }
 
 export interface HostedSessionsResponse {
   subscribed: boolean;
-  sessions: any[];
+  sessions: Array<any>;
   success: boolean;
 }
 

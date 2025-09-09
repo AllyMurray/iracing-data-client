@@ -15,7 +15,7 @@ export interface SeriesAssetsResponse {
 }
 
 export interface SeriesGetItem {
-  allowedLicenses: any[]; // maps from: allowed_licenses
+  allowedLicenses: Array<any>; // maps from: allowed_licenses
   category: string;
   categoryId: number; // maps from: category_id
   eligible: boolean;
@@ -30,16 +30,16 @@ export interface SeriesGetItem {
   seriesShortName: string; // maps from: series_short_name
 }
 
-export type SeriesGetResponse = SeriesGetItem[];
+export type SeriesGetResponse = Array<SeriesGetItem>;
 
 export interface SeriesSeasonsItem {
   seasonId: number; // maps from: season_id
   seasonName: string; // maps from: season_name
   active: boolean;
   allowedSeasonMembers?: string | null; // maps from: allowed_season_members
-  carClassIds: number[]; // maps from: car_class_ids
+  carClassIds: Array<number>; // maps from: car_class_ids
   carSwitching: boolean; // maps from: car_switching
-  carTypes: any[]; // maps from: car_types
+  carTypes: Array<any>; // maps from: car_types
   cautionLapsDoNotCount: boolean; // maps from: caution_laps_do_not_count
   complete: boolean;
   connectionBlackFlag: boolean; // maps from: connection_black_flag
@@ -63,7 +63,7 @@ export interface SeriesSeasonsItem {
   incidentWarnParam2: number; // maps from: incident_warn_param2
   isHeatRacing: boolean; // maps from: is_heat_racing
   licenseGroup: number; // maps from: license_group
-  licenseGroupTypes: any[]; // maps from: license_group_types
+  licenseGroupTypes: Array<any>; // maps from: license_group_types
   luckyDog: boolean; // maps from: lucky_dog
   maxTeamDrivers: number; // maps from: max_team_drivers
   maxWeeks: number; // maps from: max_weeks
@@ -85,7 +85,7 @@ export interface SeriesSeasonsItem {
   restrictToCar: boolean; // maps from: restrict_to_car
   restrictViewing: boolean; // maps from: restrict_viewing
   scheduleDescription: string; // maps from: schedule_description
-  schedules: any[];
+  schedules: Array<any>;
   seasonQuarter: number; // maps from: season_quarter
   seasonShortName: string; // maps from: season_short_name
   seasonYear: number; // maps from: season_year
@@ -95,14 +95,14 @@ export interface SeriesSeasonsItem {
   startDate: string; // maps from: start_date
   startOnQualTire: boolean; // maps from: start_on_qual_tire
   startZone: boolean; // maps from: start_zone
-  trackTypes: any[]; // maps from: track_types
+  trackTypes: Array<any>; // maps from: track_types
   unsportConductRuleMode: number; // maps from: unsport_conduct_rule_mode
 }
 
-export type SeriesSeasonsResponse = SeriesSeasonsItem[];
+export type SeriesSeasonsResponse = Array<SeriesSeasonsItem>;
 
 export interface SeriesSeasonListResponse {
-  seasons: any[];
+  seasons: Array<any>;
 }
 
 export interface SeriesStatsSeriesItem {
@@ -116,12 +116,12 @@ export interface SeriesStatsSeriesItem {
   fixedSetup: boolean; // maps from: fixed_setup
   logo?: string | null;
   licenseGroup: number; // maps from: license_group
-  licenseGroupTypes: any[]; // maps from: license_group_types
-  allowedLicenses: any[]; // maps from: allowed_licenses
-  seasons: any[];
+  licenseGroupTypes: Array<any>; // maps from: license_group_types
+  allowedLicenses: Array<any>; // maps from: allowed_licenses
+  seasons: Array<any>;
 }
 
-export type SeriesStatsSeriesResponse = SeriesStatsSeriesItem[];
+export type SeriesStatsSeriesResponse = Array<SeriesStatsSeriesItem>;
 
 // ---- Response Schemas ----
 

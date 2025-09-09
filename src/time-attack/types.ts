@@ -2,7 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Types ----
 
-export type TimeAttackMemberSeasonResultsResponse = any[];
+export type TimeAttackMemberSeasonResultsResponse = Array<any>;
 
 // ---- Response Schemas ----
 

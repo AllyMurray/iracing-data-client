@@ -7,21 +7,21 @@ export interface ConstantsCategoriesItem {
   value: number;
 }
 
-export type ConstantsCategoriesResponse = ConstantsCategoriesItem[];
+export type ConstantsCategoriesResponse = Array<ConstantsCategoriesItem>;
 
 export interface ConstantsDivisionsItem {
   label: string;
   value: number;
 }
 
-export type ConstantsDivisionsResponse = ConstantsDivisionsItem[];
+export type ConstantsDivisionsResponse = Array<ConstantsDivisionsItem>;
 
 export interface ConstantsEventTypesItem {
   label: string;
   value: number;
 }
 
-export type ConstantsEventTypesResponse = ConstantsEventTypesItem[];
+export type ConstantsEventTypesResponse = Array<ConstantsEventTypesItem>;
 
 // ---- Response Schemas ----
 

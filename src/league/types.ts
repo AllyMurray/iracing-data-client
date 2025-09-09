@@ -6,12 +6,12 @@ export interface LeagueCustLeagueSessionsResponse {
   mine: boolean;
   subscribed: boolean;
   sequence: number;
-  sessions: any[];
+  sessions: Array<any>;
   success: boolean;
 }
 
 export interface LeagueDirectoryResponse {
-  resultsPage: any[]; // maps from: results_page
+  resultsPage: Array<any>; // maps from: results_page
   success: boolean;
   lowerbound: number;
   upperbound: number;
@@ -37,19 +37,19 @@ export interface LeagueGetResponse {
   owner: any;
   image: any;
   tags: any;
-  leagueApplications: any[]; // maps from: league_applications
-  pendingRequests: any[]; // maps from: pending_requests
+  leagueApplications: Array<any>; // maps from: league_applications
+  pendingRequests: Array<any>; // maps from: pending_requests
   isMember: boolean; // maps from: is_member
   isApplicant: boolean; // maps from: is_applicant
   isInvite: boolean; // maps from: is_invite
   isIgnored: boolean; // maps from: is_ignored
-  roster: any[];
+  roster: Array<any>;
 }
 
 export interface LeagueGetPointsSystemsResponse {
   subscribed: boolean;
   success: boolean;
-  pointsSystems: any[]; // maps from: points_systems
+  pointsSystems: Array<any>; // maps from: points_systems
   leagueId: number; // maps from: league_id
 }
 
@@ -64,7 +64,7 @@ export interface LeagueMembershipItem {
   nickName: string; // maps from: nick_name
 }
 
-export type LeagueMembershipResponse = LeagueMembershipItem[];
+export type LeagueMembershipResponse = Array<LeagueMembershipItem>;
 
 export interface LeagueRosterResponse {
   type: string;
@@ -74,7 +74,7 @@ export interface LeagueRosterResponse {
 
 export interface LeagueSeasonsResponse {
   subscribed: boolean;
-  seasons: any[];
+  seasons: Array<any>;
   success: boolean;
   retired: boolean;
   leagueId: number; // maps from: league_id
@@ -94,7 +94,7 @@ export interface LeagueSeasonSessionsResponse {
   subscribed: boolean;
   leagueId: number; // maps from: league_id
   seasonId: number; // maps from: season_id
-  sessions: any[];
+  sessions: Array<any>;
 }
 
 // ---- Response Schemas ----

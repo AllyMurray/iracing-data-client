@@ -4,7 +4,7 @@ import * as z from "zod/mini";
 
 export interface CarAssetsItem {
   carId: number; // maps from: car_id
-  carRules: any[]; // maps from: car_rules
+  carRules: Array<any>; // maps from: car_rules
   detailCopy: string; // maps from: detail_copy
   detailScreenShotImages: string; // maps from: detail_screen_shot_images
   detailTechspecsCopy: string; // maps from: detail_techspecs_copy
@@ -32,15 +32,15 @@ export interface CarGetItem {
   allowSponsor2: boolean; // maps from: allow_sponsor2
   allowWheelColor: boolean; // maps from: allow_wheel_color
   awardExempt: boolean; // maps from: award_exempt
-  carConfigDefs: any[]; // maps from: car_config_defs
-  carConfigs: any[]; // maps from: car_configs
+  carConfigDefs: Array<any>; // maps from: car_config_defs
+  carConfigs: Array<any>; // maps from: car_configs
   carDirpath: string; // maps from: car_dirpath
   carId: number; // maps from: car_id
   carName: string; // maps from: car_name
   carNameAbbreviated: string; // maps from: car_name_abbreviated
-  carTypes: any[]; // maps from: car_types
+  carTypes: Array<any>; // maps from: car_types
   carWeight: number; // maps from: car_weight
-  categories: string[];
+  categories: Array<string>;
   created: string;
   firstSale: string; // maps from: first_sale
   folder: string;
@@ -67,7 +67,7 @@ export interface CarGetItem {
   sponsorLogo?: string | null; // maps from: sponsor_logo
 }
 
-export type CarGetResponse = CarGetItem[];
+export type CarGetResponse = Array<CarGetItem>;
 
 // ---- Response Schemas ----
 

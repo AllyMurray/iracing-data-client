@@ -7,7 +7,7 @@ export interface LookupCountriesItem {
   countryCode: string; // maps from: country_code
 }
 
-export type LookupCountriesResponse = LookupCountriesItem[];
+export type LookupCountriesResponse = Array<LookupCountriesItem>;
 
 export interface LookupDriversItem {
   custId: number; // maps from: cust_id
@@ -16,14 +16,14 @@ export interface LookupDriversItem {
   profileDisabled: boolean; // maps from: profile_disabled
 }
 
-export type LookupDriversResponse = LookupDriversItem[];
+export type LookupDriversResponse = Array<LookupDriversItem>;
 
 export interface LookupFlairsResponse {
-  flairs: any[];
+  flairs: Array<any>;
   success: boolean;
 }
 
-export type LookupGetResponse = any[];
+export type LookupGetResponse = Array<any>;
 
 export interface LookupLicensesItem {
   licenseGroup: number; // maps from: license_group
@@ -31,11 +31,11 @@ export interface LookupLicensesItem {
   minNumRaces: number; // maps from: min_num_races
   participationCredits: number; // maps from: participation_credits
   minSrToFastTrack: number; // maps from: min_sr_to_fast_track
-  levels: any[];
+  levels: Array<any>;
   minNumTt: number; // maps from: min_num_tt
 }
 
-export type LookupLicensesResponse = LookupLicensesItem[];
+export type LookupLicensesResponse = Array<LookupLicensesItem>;
 
 // ---- Response Schemas ----
 

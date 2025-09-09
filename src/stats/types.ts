@@ -3,14 +3,14 @@ import * as z from "zod/mini";
 // ---- Response Types ----
 
 export interface StatsMemberBestsResponse {
-  carsDriven: any[]; // maps from: cars_driven
-  bests: any[];
+  carsDriven: Array<any>; // maps from: cars_driven
+  bests: Array<any>;
   custId: number; // maps from: cust_id
   carId: number; // maps from: car_id
 }
 
 export interface StatsMemberCareerResponse {
-  stats: any[];
+  stats: Array<any>;
   custId: number; // maps from: cust_id
 }
 
@@ -23,7 +23,7 @@ export interface StatsMemberRecapResponse {
 }
 
 export interface StatsMemberRecentRacesResponse {
-  races: any[];
+  races: Array<any>;
   custId: number; // maps from: cust_id
 }
 
@@ -33,7 +33,7 @@ export interface StatsMemberSummaryResponse {
 }
 
 export interface StatsMemberYearlyResponse {
-  stats: any[];
+  stats: Array<any>;
   custId: number; // maps from: cust_id
 }
 

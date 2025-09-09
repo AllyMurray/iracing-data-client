@@ -18,15 +18,15 @@ export interface MemberChartDataResponse {
   blackout: boolean;
   categoryId: number; // maps from: category_id
   chartType: number; // maps from: chart_type
-  data: any[];
+  data: Array<any>;
   success: boolean;
   custId: number; // maps from: cust_id
 }
 
 export interface MemberGetResponse {
   success: boolean;
-  custIds: number[]; // maps from: cust_ids
-  members: any[];
+  custIds: Array<number>; // maps from: cust_ids
+  members: Array<any>;
 }
 
 export interface MemberInfoResponse {
@@ -51,9 +51,9 @@ export interface MemberInfoResponse {
   helmet: any;
   suit: any;
   licenses: any;
-  carPackages: any[]; // maps from: car_packages
-  trackPackages: any[]; // maps from: track_packages
-  otherOwnedPackages: number[]; // maps from: other_owned_packages
+  carPackages: Array<any>; // maps from: car_packages
+  trackPackages: Array<any>; // maps from: track_packages
+  otherOwnedPackages: Array<number>; // maps from: other_owned_packages
   dev: boolean;
   alphaTester: boolean; // maps from: alpha_tester
   rainTester: boolean; // maps from: rain_tester
@@ -84,17 +84,17 @@ export interface MemberParticipationCreditsItem {
   totalCredits: number; // maps from: total_credits
 }
 
-export type MemberParticipationCreditsResponse = MemberParticipationCreditsItem[];
+export type MemberParticipationCreditsResponse = Array<MemberParticipationCreditsItem>;
 
 export interface MemberProfileResponse {
-  recentAwards: any[]; // maps from: recent_awards
+  recentAwards: Array<any>; // maps from: recent_awards
   activity: any;
   success: boolean;
   imageUrl: string; // maps from: image_url
   memberInfo: any; // maps from: member_info
   disabled: boolean;
-  licenseHistory: any[]; // maps from: license_history
-  recentEvents: any[]; // maps from: recent_events
+  licenseHistory: Array<any>; // maps from: license_history
+  recentEvents: Array<any>; // maps from: recent_events
   custId: number; // maps from: cust_id
   isGenericImage: boolean; // maps from: is_generic_image
   followCounts: any; // maps from: follow_counts

@@ -4,29 +4,29 @@ import * as z from "zod/mini";
 
 export interface SeasonListResponse {
   seasonQuarter: number; // maps from: season_quarter
-  seasons: any[];
+  seasons: Array<any>;
   seasonYear: number; // maps from: season_year
 }
 
 export interface SeasonRaceGuideResponse {
   subscribed: boolean;
-  sessions: any[];
+  sessions: Array<any>;
   blockBeginTime: string; // maps from: block_begin_time
   blockEndTime: string; // maps from: block_end_time
   success: boolean;
 }
 
 export interface SeasonSpectatorSubsessionidsResponse {
-  eventTypes: number[]; // maps from: event_types
+  eventTypes: Array<number>; // maps from: event_types
   success: boolean;
-  subsessionIds: number[]; // maps from: subsession_ids
+  subsessionIds: Array<number>; // maps from: subsession_ids
 }
 
 export interface SeasonSpectatorSubsessionidsDetailResponse {
   success: boolean;
-  seasonIds: number[]; // maps from: season_ids
-  eventTypes: number[]; // maps from: event_types
-  subsessions: any[];
+  seasonIds: Array<number>; // maps from: season_ids
+  eventTypes: Array<number>; // maps from: event_types
+  subsessions: Array<any>;
 }
 
 // ---- Response Schemas ----

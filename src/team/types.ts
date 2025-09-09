@@ -10,7 +10,7 @@ export interface TeamMembershipItem {
   defaultTeam: boolean; // maps from: default_team
 }
 
-export type TeamMembershipResponse = TeamMembershipItem[];
+export type TeamMembershipResponse = Array<TeamMembershipItem>;
 
 // ---- Response Schemas ----
 

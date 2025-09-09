@@ -164,14 +164,14 @@ function generateTypeFromJson(obj: any, typeName: string, indent: string = ""): 
         // Array of objects - generate interface for the item
         const itemTypeName = typeName.replace(/Response$/, "") + "Item";
         const itemType = generateTypeFromJson(firstItem, itemTypeName, "");
-        return `${itemType}\n\nexport type ${typeName} = ${itemTypeName}[];`;
+        return `${itemType}\n\nexport type ${typeName} = Array<${itemTypeName}>;`;
       } else {
         // Array of primitives
         const itemType = getTypeForValue(firstItem);
-        return `export type ${typeName} = ${itemType}[];`;
+        return `export type ${typeName} = Array<${itemType}>;`;
       }
     }
-    return `export type ${typeName} = any[];`;
+    return `export type ${typeName} = Array<any>;`;
   }
   
   // Check if it's a dictionary (object with numeric or similar keys)
@@ -329,9 +329,9 @@ function getTypeForValue(value: any): string {
       if (Array.isArray(value)) {
         if (value.length > 0) {
           const itemType = getTypeForValue(value[0]);
-          return `${itemType}[]`;
+          return `Array<${itemType}>`;
         }
-        return "any[]";
+        return "Array<any>";
       }
       return "any";
     default:

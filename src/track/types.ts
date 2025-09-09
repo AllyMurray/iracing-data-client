@@ -81,10 +81,10 @@ export interface TrackGetItem {
   trackName: string; // maps from: track_name
   trackType: number; // maps from: track_type
   trackTypeText: string; // maps from: track_type_text
-  trackTypes: any[]; // maps from: track_types
+  trackTypes: Array<any>; // maps from: track_types
 }
 
-export type TrackGetResponse = TrackGetItem[];
+export type TrackGetResponse = Array<TrackGetItem>;
 
 // ---- Response Schemas ----
 
