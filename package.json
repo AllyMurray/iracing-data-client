@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "test-sdk": "npx tsx test-sdk.ts"
+    "test-sdk": "npx tsx test-sdk.ts",
+    "gen-sdk": "npx tsx scripts/gen-sdk.ts"
   },
   "keywords": [
     "iracing",
