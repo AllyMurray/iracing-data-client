@@ -226,7 +226,7 @@ function getTypeForValue(value: any): string {
 async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Promise<string> {
   const lines: string[] = [];
   
-  lines.push(`import * as z from "zod-mini";`);
+  lines.push(`import * as z from "zod/mini";`);
   lines.push(``);
   lines.push(`// ---- Response Types ----`);
   lines.push(``);
@@ -381,9 +381,9 @@ export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promis
 const IRacingClientOptionsSchema = z.object({
   email: z.optional(z.string()),
   password: z.optional(z.string()),
-  headers: z.optional(z.record(z.string())),
-  fetchFn: z.optional(z.function()),
-  validateParams: z.default(z.boolean(), true),
+  headers: z.optional(z.record(z.string(), z.string())),
+  fetchFn: z.optional(z.any()),
+  validateParams: z.optional(z.boolean()),
 });
 
 export type IRacingClientOptions = z.infer<typeof IRacingClientOptionsSchema>;
@@ -426,8 +426,8 @@ export class IRacingClient {
     
     this.email = validatedOpts.email;
     this.password = validatedOpts.password;
-    this.presetHeaders = validatedOpts.headers;
-    this.validateParams = validatedOpts.validateParams;
+    this.presetHeaders = validatedOpts.headers as Record<string, string> | undefined;
+    this.validateParams = validatedOpts.validateParams ?? true;
     
     if (!this.email && !this.password && !this.presetHeaders) {
       throw new Error("Must provide either email/password or headers for authentication");
@@ -489,6 +489,10 @@ export class IRacingClient {
     this.authData = await response.json();
     
     // Parse and store cookies
+    if (!this.authData) {
+      throw new Error('Authentication failed - no auth data received');
+    }
+    
     this.cookies = {
       'irsso_membersv2': this.authData.ssoCookieValue,
       'authtoken_members': \`%7B%22authtoken%22%3A%7B%22authcode%22%3A%22\${this.authData.authcode}%22%2C%22email%22%3A%22\${encodeURIComponent(this.authData.email)}%22%7D%7D\`

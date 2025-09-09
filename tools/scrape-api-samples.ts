@@ -92,6 +92,10 @@ class IRacingScraperClient {
     this.authData = await response.json();
     
     // Parse and store cookies
+    if (!this.authData) {
+      throw new Error('Authentication failed - no auth data received');
+    }
+    
     this.cookies = {
       "irsso_membersv2": this.authData.ssoCookieValue,
       "authtoken_members": `%7B%22authtoken%22%3A%7B%22authcode%22%3A%22${this.authData.authcode}%22%2C%22email%22%3A%22${encodeURIComponent(this.authData.email)}%22%7D%7D`
