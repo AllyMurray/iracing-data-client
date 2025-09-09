@@ -9,15 +9,15 @@ export interface CarAssetsItem {
   detailScreenShotImages: string; // maps from: detail_screen_shot_images
   detailTechspecsCopy: string; // maps from: detail_techspecs_copy
   folder: string;
-  galleryImages: string; // maps from: gallery_images
-  galleryPrefix: null; // maps from: gallery_prefix
-  groupImage: null; // maps from: group_image
-  groupName: null; // maps from: group_name
+  galleryImages: string | ""; // maps from: gallery_images
+  galleryPrefix: string | null; // maps from: gallery_prefix
+  groupImage: string | null; // maps from: group_image
+  groupName: string | null; // maps from: group_name
   largeImage: string; // maps from: large_image
-  logo: string;
+  logo: string | "";
   smallImage: string; // maps from: small_image
-  sponsorLogo: null; // maps from: sponsor_logo
-  templatePath: string; // maps from: template_path
+  sponsorLogo: string | null; // maps from: sponsor_logo
+  templatePath: string | ""; // maps from: template_path
 }
 
 export interface CarAssetsResponse {
@@ -44,27 +44,27 @@ export interface CarGetItem {
   created: string;
   firstSale: string; // maps from: first_sale
   folder: string;
-  forumUrl: string; // maps from: forum_url
+  forumUrl: string | ""; // maps from: forum_url
   freeWithSubscription: boolean; // maps from: free_with_subscription
   hasHeadlights: boolean; // maps from: has_headlights
   hasMultipleDryTireTypes: boolean; // maps from: has_multiple_dry_tire_types
   hasRainCapableTireTypes: boolean; // maps from: has_rain_capable_tire_types
   hp: number;
   isPsPurchasable: boolean; // maps from: is_ps_purchasable
-  logo: string;
+  logo: string | "";
   maxPowerAdjustPct: number; // maps from: max_power_adjust_pct
   maxWeightPenaltyKg: number; // maps from: max_weight_penalty_kg
   minPowerAdjustPct: number; // maps from: min_power_adjust_pct
   packageId: number; // maps from: package_id
   patterns: number;
   price: number;
-  priceDisplay: string; // maps from: price_display
+  priceDisplay: string | ""; // maps from: price_display
   rainEnabled: boolean; // maps from: rain_enabled
   retired: boolean;
   searchFilters: string; // maps from: search_filters
   sku: number;
   smallImage: string; // maps from: small_image
-  sponsorLogo: null; // maps from: sponsor_logo
+  sponsorLogo: string | null; // maps from: sponsor_logo
 }
 
 export type CarGetResponse = CarGetItem[];

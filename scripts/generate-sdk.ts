@@ -193,7 +193,19 @@ function generateTypeFromJson(obj: any, typeName: string, indent: string = ""): 
   
   for (const [key, value] of Object.entries(obj)) {
     const propName = toCamelCase(key);
-    const typeStr = getTypeForValue(value);
+    let typeStr = getTypeForValue(value);
+    
+    // Make commonly problematic fields use union types to match schema generation
+    const problematicFields = ['logo', 'sponsorLogo', 'galleryImages', 'forumUrl', 'priceDisplay', 'groupImage', 'groupName', 'galleryPrefix', 'templatePath'];
+    if (problematicFields.includes(propName) || value === null || value === undefined || value === "") {
+      if (typeStr === "null") {
+        typeStr = "string | null";
+      } else if (typeStr === "string") {
+        typeStr = "string | \"\"";
+      } else if (!typeStr.includes('|')) {
+        typeStr = `${typeStr} | undefined`;
+      }
+    }
     
     if (propName !== key) {
       lines.push(`  ${propName}: ${typeStr}; // maps from: ${key}`);

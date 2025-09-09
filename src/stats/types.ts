@@ -18,7 +18,7 @@ export interface StatsMemberRecapResponse {
   year: number;
   stats: any;
   success: boolean;
-  season: null;
+  season: string | null;
   custId: number; // maps from: cust_id
 }
 

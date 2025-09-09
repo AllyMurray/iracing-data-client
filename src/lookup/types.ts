@@ -27,7 +27,7 @@ export type LookupGetResponse = any[];
 
 export interface LookupLicensesItem {
   licenseGroup: number; // maps from: license_group
-  groupName: string; // maps from: group_name
+  groupName: string | ""; // maps from: group_name
   minNumRaces: number; // maps from: min_num_races
   participationCredits: number; // maps from: participation_credits
   minSrToFastTrack: number; // maps from: min_sr_to_fast_track

@@ -5,13 +5,13 @@ import * as z from "zod/mini";
 export interface TrackAssetsItem {
   coordinates: string;
   detailCopy: string; // maps from: detail_copy
-  detailTechspecsCopy: null; // maps from: detail_techspecs_copy
-  detailVideo: null; // maps from: detail_video
+  detailTechspecsCopy: string | null; // maps from: detail_techspecs_copy
+  detailVideo: string | null; // maps from: detail_video
   folder: string;
-  galleryImages: string; // maps from: gallery_images
-  galleryPrefix: string; // maps from: gallery_prefix
+  galleryImages: string | ""; // maps from: gallery_images
+  galleryPrefix: string | ""; // maps from: gallery_prefix
   largeImage: string; // maps from: large_image
-  logo: string;
+  logo: string | "";
   north: string;
   numSvgImages: number; // maps from: num_svg_images
   smallImage: string; // maps from: small_image
@@ -51,7 +51,7 @@ export interface TrackGetItem {
   lapScoring: number; // maps from: lap_scoring
   latitude: number;
   location: string;
-  logo: string;
+  logo: string | "";
   longitude: number;
   maxCars: number; // maps from: max_cars
   nightLighting: boolean; // maps from: night_lighting

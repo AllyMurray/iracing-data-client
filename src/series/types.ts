@@ -3,11 +3,11 @@ import * as z from "zod/mini";
 // ---- Response Types ----
 
 export interface SeriesAssetsItem {
-  largeImage: null; // maps from: large_image
-  logo: string;
+  largeImage: string | null; // maps from: large_image
+  logo: string | "";
   seriesCopy: string; // maps from: series_copy
   seriesId: number; // maps from: series_id
-  smallImage: null; // maps from: small_image
+  smallImage: string | null; // maps from: small_image
 }
 
 export interface SeriesAssetsResponse {
@@ -20,7 +20,7 @@ export interface SeriesGetItem {
   categoryId: number; // maps from: category_id
   eligible: boolean;
   firstSeason: any; // maps from: first_season
-  forumUrl: string; // maps from: forum_url
+  forumUrl: string | ""; // maps from: forum_url
   maxStarters: number; // maps from: max_starters
   minStarters: number; // maps from: min_starters
   ovalCautionType: number; // maps from: oval_caution_type
@@ -36,7 +36,7 @@ export interface SeriesSeasonsItem {
   seasonId: number; // maps from: season_id
   seasonName: string; // maps from: season_name
   active: boolean;
-  allowedSeasonMembers: null; // maps from: allowed_season_members
+  allowedSeasonMembers: string | null; // maps from: allowed_season_members
   carClassIds: number[]; // maps from: car_class_ids
   carSwitching: boolean; // maps from: car_switching
   carTypes: any[]; // maps from: car_types
@@ -70,7 +70,7 @@ export interface SeriesSeasonsItem {
   minTeamDrivers: number; // maps from: min_team_drivers
   multiclass: boolean;
   mustUseDiffTireTypesInRace: boolean; // maps from: must_use_diff_tire_types_in_race
-  nextRaceSession: null; // maps from: next_race_session
+  nextRaceSession: string | null; // maps from: next_race_session
   numFastTows: number; // maps from: num_fast_tows
   numOptLaps: number; // maps from: num_opt_laps
   official: boolean;
@@ -114,7 +114,7 @@ export interface SeriesStatsSeriesItem {
   active: boolean;
   official: boolean;
   fixedSetup: boolean; // maps from: fixed_setup
-  logo: null;
+  logo: string | null;
   licenseGroup: number; // maps from: license_group
   licenseGroupTypes: any[]; // maps from: license_group_types
   allowedLicenses: any[]; // maps from: allowed_licenses
