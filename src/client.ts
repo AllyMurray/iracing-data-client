@@ -71,12 +71,12 @@ export class IRacingClient {
   constructor(opts: IRacingClientOptions = {}) {
     const validatedOpts = IRacingClientOptionsSchema.parse(opts);
     
-    this.fetchFn = validatedOpts.fetchFn ?? (globalThis as any).fetch;
+    this.fetchFn = validatedOpts.fetchFn ?? globalThis.fetch;
     if (!this.fetchFn) throw new Error("No fetch available. Pass fetchFn in IRacingClientOptions.");
     
     this.email = validatedOpts.email;
     this.password = validatedOpts.password;
-    this.presetHeaders = validatedOpts.headers as Record<string, string> | undefined;
+    this.presetHeaders = validatedOpts.headers;
     this.validateParams = validatedOpts.validateParams ?? true;
     
     if (!this.email && !this.password && !this.presetHeaders) {

@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { TrackAssetsParams, TrackGetParams, TrackAssetsResponse, TrackGetResponse } from "./types";
+import type { TrackAssetsResponse, TrackGetResponse } from "./types";
 import { TrackAssetsSchema, TrackGetSchema } from "./types";
 
 export class TrackService {

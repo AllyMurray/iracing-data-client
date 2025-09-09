@@ -701,14 +701,18 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
   
   lines.push(`import type { IRacingClient } from "../client";`);
   
-  // Import types
-  const paramImports = endpoints.map(ep => `${toPascal(ep.method)}Params`);
+  // Import types - only import parameter types that are actually used
+  const paramImports = endpoints
+    .filter(ep => Object.keys(ep.params).length > 0)
+    .map(ep => `${toPascal(ep.method)}Params`);
   const responseImports = endpoints
     .filter(ep => ep.responseType)
     .map(ep => ep.responseType!);
   
-  const allImports = [...paramImports, ...responseImports].join(", ");
-  lines.push(`import type { ${allImports} } from "${typesFile}";`);
+  const allImports = [...paramImports, ...responseImports];
+  if (allImports.length > 0) {
+    lines.push(`import type { ${allImports.join(", ")} } from "${typesFile}";`);
+  }
   
   // Import schemas
   const schemaImports = endpoints
@@ -744,7 +748,7 @@ function generateSectionService(sectionName: string, endpoints: Flat[]): string 
       lines.push(`  async ${methodName}(params: ${paramsType}): Promise<${returnType}> {`);
       if (ep.responseType) {
         const schemaName = `${ep.responseType.replace('Response', '')}Schema`;
-        lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params, schema: ${schemaName} as any });`);
+        lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params, schema: ${schemaName} });`);
       } else {
         lines.push(`    return this.client.get<${returnType}>("${ep.url}", { params });`);
       }
@@ -842,12 +846,12 @@ export class IRacingClient {
   constructor(opts: IRacingClientOptions = {}) {
     const validatedOpts = IRacingClientOptionsSchema.parse(opts);
     
-    this.fetchFn = validatedOpts.fetchFn ?? (globalThis as any).fetch;
+    this.fetchFn = validatedOpts.fetchFn ?? globalThis.fetch;
     if (!this.fetchFn) throw new Error("No fetch available. Pass fetchFn in IRacingClientOptions.");
     
     this.email = validatedOpts.email;
     this.password = validatedOpts.password;
-    this.presetHeaders = validatedOpts.headers as Record<string, string> | undefined;
+    this.presetHeaders = validatedOpts.headers;
     this.validateParams = validatedOpts.validateParams ?? true;
     
     if (!this.email && !this.password && !this.presetHeaders) {

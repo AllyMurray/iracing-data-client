@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { HostedCombinedSessionsParams, HostedSessionsParams, HostedCombinedSessionsResponse, HostedSessionsResponse } from "./types";
+import type { HostedCombinedSessionsParams, HostedCombinedSessionsResponse, HostedSessionsResponse } from "./types";
 import { HostedCombinedSessionsSchema, HostedSessionsSchema } from "./types";
 
 export class HostedService {
@@ -11,7 +11,7 @@ export class HostedService {
    * @sample hosted.combined_sessions.json
    */
   async combinedSessions(params: HostedCombinedSessionsParams): Promise<HostedCombinedSessionsResponse> {
-    return this.client.get<HostedCombinedSessionsResponse>("https://members-ng.iracing.com/data/hosted/combined_sessions", { params, schema: HostedCombinedSessionsSchema as any });
+    return this.client.get<HostedCombinedSessionsResponse>("https://members-ng.iracing.com/data/hosted/combined_sessions", { params, schema: HostedCombinedSessionsSchema });
   }
 
   /**

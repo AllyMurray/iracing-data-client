@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { LookupCountriesParams, LookupDriversParams, LookupFlairsParams, LookupGetParams, LookupLicensesParams, LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
+import type { LookupDriversParams, LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
 import { LookupCountriesSchema, LookupDriversSchema, LookupFlairsSchema, LookupGetSchema, LookupLicensesSchema } from "./types";
 
 export class LookupService {
@@ -20,7 +20,7 @@ export class LookupService {
    * @sample lookup.drivers.json
    */
   async drivers(params: LookupDriversParams): Promise<LookupDriversResponse> {
-    return this.client.get<LookupDriversResponse>("https://members-ng.iracing.com/data/lookup/drivers", { params, schema: LookupDriversSchema as any });
+    return this.client.get<LookupDriversResponse>("https://members-ng.iracing.com/data/lookup/drivers", { params, schema: LookupDriversSchema });
   }
 
   /**

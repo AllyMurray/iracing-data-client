@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { DriverStatsByCategoryOvalParams, DriverStatsByCategorySportsCarParams, DriverStatsByCategoryFormulaCarParams, DriverStatsByCategoryRoadParams, DriverStatsByCategoryDirtOvalParams, DriverStatsByCategoryDirtRoadParams, DriverStatsByCategoryOvalResponse, DriverStatsByCategorySportsCarResponse, DriverStatsByCategoryFormulaCarResponse, DriverStatsByCategoryRoadResponse, DriverStatsByCategoryDirtOvalResponse, DriverStatsByCategoryDirtRoadResponse } from "./types";
+import type { DriverStatsByCategoryOvalResponse, DriverStatsByCategorySportsCarResponse, DriverStatsByCategoryFormulaCarResponse, DriverStatsByCategoryRoadResponse, DriverStatsByCategoryDirtOvalResponse, DriverStatsByCategoryDirtRoadResponse } from "./types";
 import { DriverStatsByCategoryOvalSchema, DriverStatsByCategorySportsCarSchema, DriverStatsByCategoryFormulaCarSchema, DriverStatsByCategoryRoadSchema, DriverStatsByCategoryDirtOvalSchema, DriverStatsByCategoryDirtRoadSchema } from "./types";
 
 export class DriverStatsByCategoryService {

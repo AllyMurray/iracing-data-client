@@ -1,5 +1,5 @@
 import type { IRacingClient } from "../client";
-import type { TeamGetParams, TeamMembershipParams, TeamMembershipResponse } from "./types";
+import type { TeamGetParams, TeamMembershipResponse } from "./types";
 import { TeamMembershipSchema } from "./types";
 
 export class TeamService {
