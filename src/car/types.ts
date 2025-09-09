@@ -9,15 +9,15 @@ export interface CarAssetsItem {
   detailScreenShotImages: string; // maps from: detail_screen_shot_images
   detailTechspecsCopy: string; // maps from: detail_techspecs_copy
   folder: string;
-  galleryImages: string | ""; // maps from: gallery_images
-  galleryPrefix: string | null; // maps from: gallery_prefix
-  groupImage: string | null; // maps from: group_image
-  groupName: string | null; // maps from: group_name
+  galleryImages?: string | null; // maps from: gallery_images
+  galleryPrefix?: string | null; // maps from: gallery_prefix
+  groupImage?: string | null; // maps from: group_image
+  groupName?: string | null; // maps from: group_name
   largeImage: string; // maps from: large_image
-  logo: string | "";
+  logo?: string | null;
   smallImage: string; // maps from: small_image
-  sponsorLogo: string | null; // maps from: sponsor_logo
-  templatePath: string | ""; // maps from: template_path
+  sponsorLogo?: string | null; // maps from: sponsor_logo
+  templatePath?: string | null; // maps from: template_path
 }
 
 export interface CarAssetsResponse {
@@ -44,27 +44,27 @@ export interface CarGetItem {
   created: string;
   firstSale: string; // maps from: first_sale
   folder: string;
-  forumUrl: string | ""; // maps from: forum_url
+  forumUrl?: string | null; // maps from: forum_url
   freeWithSubscription: boolean; // maps from: free_with_subscription
   hasHeadlights: boolean; // maps from: has_headlights
   hasMultipleDryTireTypes: boolean; // maps from: has_multiple_dry_tire_types
   hasRainCapableTireTypes: boolean; // maps from: has_rain_capable_tire_types
   hp: number;
   isPsPurchasable: boolean; // maps from: is_ps_purchasable
-  logo: string | "";
+  logo?: string | null;
   maxPowerAdjustPct: number; // maps from: max_power_adjust_pct
   maxWeightPenaltyKg: number; // maps from: max_weight_penalty_kg
   minPowerAdjustPct: number; // maps from: min_power_adjust_pct
   packageId: number; // maps from: package_id
   patterns: number;
   price: number;
-  priceDisplay: string | ""; // maps from: price_display
+  priceDisplay?: string | null; // maps from: price_display
   rainEnabled: boolean; // maps from: rain_enabled
   retired: boolean;
   searchFilters: string; // maps from: search_filters
   sku: number;
   smallImage: string; // maps from: small_image
-  sponsorLogo: string | null; // maps from: sponsor_logo
+  sponsorLogo?: string | null; // maps from: sponsor_logo
 }
 
 export type CarGetResponse = CarGetItem[];
@@ -78,15 +78,15 @@ const CarAssetsSchema = z.record(z.string(), z.object({
   detailScreenShotImages: z.string(),
   detailTechspecsCopy: z.string(),
   folder: z.string(),
-  galleryImages: z.union([z.string(), z.literal("")]),
-  galleryPrefix: z.union([z.string(), z.literal(""), z.null()]),
-  groupImage: z.union([z.string(), z.literal(""), z.null()]),
-  groupName: z.union([z.string(), z.literal(""), z.null()]),
+  galleryImages: z.optional(z.union([z.string(), z.null()])),
+  galleryPrefix: z.optional(z.union([z.string(), z.null()])),
+  groupImage: z.optional(z.union([z.string(), z.null()])),
+  groupName: z.optional(z.union([z.string(), z.null()])),
   largeImage: z.string(),
-  logo: z.union([z.string(), z.literal("")]),
+  logo: z.optional(z.union([z.string(), z.null()])),
   smallImage: z.string(),
-  sponsorLogo: z.union([z.string(), z.literal(""), z.null()]),
-  templatePath: z.union([z.string(), z.literal("")])
+  sponsorLogo: z.optional(z.union([z.string(), z.null()])),
+  templatePath: z.optional(z.union([z.string(), z.null()]))
 }));
 
 const CarGetSchema = z.array(z.object({
@@ -111,27 +111,27 @@ const CarGetSchema = z.array(z.object({
   created: z.string(),
   firstSale: z.string(),
   folder: z.string(),
-  forumUrl: z.union([z.string(), z.literal("")]),
+  forumUrl: z.optional(z.union([z.string(), z.null()])),
   freeWithSubscription: z.boolean(),
   hasHeadlights: z.boolean(),
   hasMultipleDryTireTypes: z.boolean(),
   hasRainCapableTireTypes: z.boolean(),
   hp: z.number(),
   isPsPurchasable: z.boolean(),
-  logo: z.union([z.string(), z.literal("")]),
+  logo: z.optional(z.union([z.string(), z.null()])),
   maxPowerAdjustPct: z.number(),
   maxWeightPenaltyKg: z.number(),
   minPowerAdjustPct: z.number(),
   packageId: z.number(),
   patterns: z.number(),
   price: z.number(),
-  priceDisplay: z.union([z.string(), z.literal("")]),
+  priceDisplay: z.optional(z.union([z.string(), z.null()])),
   rainEnabled: z.boolean(),
   retired: z.boolean(),
   searchFilters: z.string(),
   sku: z.number(),
   smallImage: z.string(),
-  sponsorLogo: z.union([z.string(), z.literal(""), z.null()])
+  sponsorLogo: z.optional(z.union([z.string(), z.null()]))
 }));
 
 // ---- Parameter Schemas ----

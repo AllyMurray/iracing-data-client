@@ -27,7 +27,7 @@ export type LookupGetResponse = any[];
 
 export interface LookupLicensesItem {
   licenseGroup: number; // maps from: license_group
-  groupName: string | ""; // maps from: group_name
+  groupName?: string | null; // maps from: group_name
   minNumRaces: number; // maps from: min_num_races
   participationCredits: number; // maps from: participation_credits
   minSrToFastTrack: number; // maps from: min_sr_to_fast_track
@@ -71,7 +71,7 @@ const LookupGetSchema = z.array(z.unknown());
 
 const LookupLicensesSchema = z.array(z.object({
   licenseGroup: z.number(),
-  groupName: z.union([z.string(), z.literal("")]),
+  groupName: z.optional(z.union([z.string(), z.null()])),
   minNumRaces: z.number(),
   participationCredits: z.number(),
   minSrToFastTrack: z.number(),

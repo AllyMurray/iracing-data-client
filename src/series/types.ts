@@ -3,11 +3,11 @@ import * as z from "zod/mini";
 // ---- Response Types ----
 
 export interface SeriesAssetsItem {
-  largeImage: string | null; // maps from: large_image
-  logo: string | "";
+  largeImage?: string | null; // maps from: large_image
+  logo?: string | null;
   seriesCopy: string; // maps from: series_copy
   seriesId: number; // maps from: series_id
-  smallImage: string | null; // maps from: small_image
+  smallImage?: string | null; // maps from: small_image
 }
 
 export interface SeriesAssetsResponse {
@@ -20,7 +20,7 @@ export interface SeriesGetItem {
   categoryId: number; // maps from: category_id
   eligible: boolean;
   firstSeason: any; // maps from: first_season
-  forumUrl: string | ""; // maps from: forum_url
+  forumUrl?: string | null; // maps from: forum_url
   maxStarters: number; // maps from: max_starters
   minStarters: number; // maps from: min_starters
   ovalCautionType: number; // maps from: oval_caution_type
@@ -36,7 +36,7 @@ export interface SeriesSeasonsItem {
   seasonId: number; // maps from: season_id
   seasonName: string; // maps from: season_name
   active: boolean;
-  allowedSeasonMembers: string | null; // maps from: allowed_season_members
+  allowedSeasonMembers?: string | null; // maps from: allowed_season_members
   carClassIds: number[]; // maps from: car_class_ids
   carSwitching: boolean; // maps from: car_switching
   carTypes: any[]; // maps from: car_types
@@ -70,7 +70,7 @@ export interface SeriesSeasonsItem {
   minTeamDrivers: number; // maps from: min_team_drivers
   multiclass: boolean;
   mustUseDiffTireTypesInRace: boolean; // maps from: must_use_diff_tire_types_in_race
-  nextRaceSession: string | null; // maps from: next_race_session
+  nextRaceSession?: string | null; // maps from: next_race_session
   numFastTows: number; // maps from: num_fast_tows
   numOptLaps: number; // maps from: num_opt_laps
   official: boolean;
@@ -114,7 +114,7 @@ export interface SeriesStatsSeriesItem {
   active: boolean;
   official: boolean;
   fixedSetup: boolean; // maps from: fixed_setup
-  logo: string | null;
+  logo?: string | null;
   licenseGroup: number; // maps from: license_group
   licenseGroupTypes: any[]; // maps from: license_group_types
   allowedLicenses: any[]; // maps from: allowed_licenses
@@ -126,16 +126,16 @@ export type SeriesStatsSeriesResponse = SeriesStatsSeriesItem[];
 // ---- Response Schemas ----
 
 const SeriesAssetsSchema = z.record(z.string(), z.object({
-  largeImage: z.union([z.string(), z.literal(""), z.null()]),
-  logo: z.union([z.string(), z.literal("")]),
+  largeImage: z.optional(z.union([z.string(), z.null()])),
+  logo: z.optional(z.union([z.string(), z.null()])),
   seriesCopy: z.string(),
   seriesId: z.number(),
-  smallImage: z.union([z.string(), z.literal(""), z.null()])
+  smallImage: z.optional(z.union([z.string(), z.null()]))
 }));
 
 const SeriesGetSchema = z.array(z.object({
   allowedLicenses: z.array(z.object({
-  groupName: z.union([z.string(), z.literal("")]),
+  groupName: z.optional(z.union([z.string(), z.null()])),
   licenseGroup: z.number(),
   maxLicenseLevel: z.number(),
   minLicenseLevel: z.number()
@@ -147,7 +147,7 @@ const SeriesGetSchema = z.array(z.object({
   seasonYear: z.number(),
   seasonQuarter: z.number()
 }),
-  forumUrl: z.union([z.string(), z.literal("")]),
+  forumUrl: z.optional(z.union([z.string(), z.null()])),
   maxStarters: z.number(),
   minStarters: z.number(),
   ovalCautionType: z.number(),
@@ -161,7 +161,7 @@ const SeriesSeasonsSchema = z.array(z.object({
   seasonId: z.number(),
   seasonName: z.string(),
   active: z.boolean(),
-  allowedSeasonMembers: z.union([z.string(), z.literal(""), z.null()]),
+  allowedSeasonMembers: z.optional(z.union([z.string(), z.null()])),
   carClassIds: z.array(z.number()),
   carSwitching: z.boolean(),
   carTypes: z.array(z.object({
@@ -199,7 +199,7 @@ const SeriesSeasonsSchema = z.array(z.object({
   minTeamDrivers: z.number(),
   multiclass: z.boolean(),
   mustUseDiffTireTypesInRace: z.boolean(),
-  nextRaceSession: z.union([z.string(), z.literal(""), z.null()]),
+  nextRaceSession: z.optional(z.union([z.string(), z.null()])),
   numFastTows: z.number(),
   numOptLaps: z.number(),
   official: z.boolean(),
@@ -242,7 +242,7 @@ const SeriesSeasonsSchema = z.array(z.object({
   startDate: z.string(),
   superSession: z.boolean()
 })),
-  raceTimeLimit: z.union([z.string(), z.literal(""), z.null()]),
+  raceTimeLimit: z.optional(z.union([z.string(), z.null()])),
   raceWeekCarClassIds: z.array(z.unknown()),
   raceWeekCars: z.array(z.unknown()),
   restartType: z.string(),
@@ -251,7 +251,7 @@ const SeriesSeasonsSchema = z.array(z.object({
   seriesId: z.number(),
   seriesName: z.string(),
   shortParadeLap: z.boolean(),
-  specialEventType: z.union([z.string(), z.literal(""), z.null()]),
+  specialEventType: z.optional(z.union([z.string(), z.null()])),
   startDate: z.string(),
   startType: z.string(),
   startZone: z.boolean(),
@@ -331,7 +331,7 @@ const SeriesSeasonListSchema = z.object({
   seasonId: z.number(),
   seasonName: z.string(),
   active: z.boolean(),
-  allowedSeasonMembers: z.union([z.string(), z.literal(""), z.null()]),
+  allowedSeasonMembers: z.optional(z.union([z.string(), z.null()])),
   carClassIds: z.array(z.number()),
   carSwitching: z.boolean(),
   carTypes: z.array(z.object({
@@ -360,7 +360,7 @@ const SeriesSeasonListSchema = z.object({
   weightPenaltyKg: z.number()
 })),
   raceLapLimit: z.number(),
-  raceTimeLimit: z.union([z.string(), z.literal(""), z.null()]),
+  raceTimeLimit: z.optional(z.union([z.string(), z.null()])),
   precipChance: z.number(),
   startType: z.string(),
   categoryId: z.number()
@@ -435,13 +435,13 @@ const SeriesStatsSeriesSchema = z.array(z.object({
   active: z.boolean(),
   official: z.boolean(),
   fixedSetup: z.boolean(),
-  logo: z.union([z.string(), z.literal(""), z.null()]),
+  logo: z.optional(z.union([z.string(), z.null()])),
   licenseGroup: z.number(),
   licenseGroupTypes: z.array(z.object({
   licenseGroupType: z.number()
 })),
   allowedLicenses: z.array(z.object({
-  groupName: z.union([z.string(), z.literal("")]),
+  groupName: z.optional(z.union([z.string(), z.null()])),
   licenseGroup: z.number(),
   maxLicenseLevel: z.number(),
   minLicenseLevel: z.number(),

@@ -18,7 +18,7 @@ export interface StatsMemberRecapResponse {
   year: number;
   stats: any;
   success: boolean;
-  season: string | null;
+  season?: string | null;
   custId: number; // maps from: cust_id
 }
 
@@ -111,7 +111,7 @@ const StatsMemberRecapSchema = z.object({
 })
 }),
   success: z.boolean(),
-  season: z.union([z.string(), z.literal(""), z.null()]),
+  season: z.optional(z.union([z.string(), z.null()])),
   custId: z.number()
 });
 

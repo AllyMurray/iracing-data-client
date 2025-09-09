@@ -195,22 +195,27 @@ function generateTypeFromJson(obj: any, typeName: string, indent: string = ""): 
     const propName = toCamelCase(key);
     let typeStr = getTypeForValue(value);
     
-    // Make commonly problematic fields use union types to match schema generation
+    // Make commonly problematic fields handle null/undefined to match schema generation
     const problematicFields = ['logo', 'sponsorLogo', 'galleryImages', 'forumUrl', 'priceDisplay', 'groupImage', 'groupName', 'galleryPrefix', 'templatePath'];
+    let isOptional = false;
     if (problematicFields.includes(propName) || value === null || value === undefined || value === "") {
       if (typeStr === "null") {
         typeStr = "string | null";
+        isOptional = true;
       } else if (typeStr === "string") {
-        typeStr = "string | \"\"";
-      } else if (!typeStr.includes('|')) {
-        typeStr = `${typeStr} | undefined`;
+        typeStr = "string | null";
+        isOptional = true;
+      } else {
+        typeStr = `${typeStr} | null`;
+        isOptional = true;
       }
     }
     
+    const optionalMarker = isOptional ? "?" : "";
     if (propName !== key) {
-      lines.push(`  ${propName}: ${typeStr}; // maps from: ${key}`);
+      lines.push(`  ${propName}${optionalMarker}: ${typeStr}; // maps from: ${key}`);
     } else {
-      lines.push(`  ${propName}: ${typeStr};`);
+      lines.push(`  ${propName}${optionalMarker}: ${typeStr};`);
     }
   }
   
@@ -262,16 +267,16 @@ function generateZodSchemaFromSample(sample: any, schemaName: string): string {
       const camelKey = toCamelCase(key);
       let zodType = getZodTypeForValue(value);
       
-      // Make commonly problematic fields more flexible - they can be undefined, null, empty string, or their expected type
+      // Make commonly problematic fields handle null/undefined values
       const problematicFields = ['logo', 'sponsorLogo', 'galleryImages', 'forumUrl', 'priceDisplay', 'groupImage', 'groupName', 'galleryPrefix', 'templatePath'];
       if (problematicFields.includes(camelKey) || value === null || value === undefined || value === "") {
-        // These fields can be empty string, null, or string - use union type
+        // These fields can be strings, null, or undefined
         if (zodType === "z.null()") {
-          zodType = "z.union([z.string(), z.literal(\"\"), z.null()])";
+          zodType = "z.optional(z.union([z.string(), z.null()]))";
         } else if (zodType === "z.string()") {
-          zodType = "z.union([z.string(), z.literal(\"\")])";
+          zodType = "z.optional(z.union([z.string(), z.null()]))";
         } else {
-          zodType = `z.optional(${zodType})`;
+          zodType = `z.optional(z.union([${zodType}, z.null()]))`;
         }
       }
       

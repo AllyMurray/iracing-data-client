@@ -176,8 +176,8 @@ const LeagueCustLeagueSessionsSchema = z.object({
   minLicenseLevel: z.number(),
   maxLicenseLevel: z.number(),
   status: z.number(),
-  paceCarId: z.union([z.string(), z.literal(""), z.null()]),
-  paceCarClassId: z.union([z.string(), z.literal(""), z.null()]),
+  paceCarId: z.optional(z.union([z.string(), z.null()])),
+  paceCarClassId: z.optional(z.union([z.string(), z.null()])),
   numOptLaps: z.number(),
   damageModel: z.number(),
   doNotPaintCars: z.boolean(),
@@ -415,8 +415,8 @@ const LeagueDirectorySchema = z.object({
   faceType: z.number(),
   helmetType: z.number()
 }),
-  carNumber: z.union([z.string(), z.literal(""), z.null()]),
-  nickName: z.union([z.string(), z.literal(""), z.null()])
+  carNumber: z.optional(z.union([z.string(), z.null()])),
+  nickName: z.optional(z.union([z.string(), z.null()]))
 })
 })),
   success: z.boolean(),
@@ -452,18 +452,18 @@ const LeagueGetSchema = z.object({
   faceType: z.number(),
   helmetType: z.number()
 }),
-  carNumber: z.union([z.string(), z.literal(""), z.null()]),
-  nickName: z.union([z.string(), z.literal(""), z.null()])
+  carNumber: z.optional(z.union([z.string(), z.null()])),
+  nickName: z.optional(z.union([z.string(), z.null()]))
 }),
   image: z.object({
-  smallLogo: z.union([z.string(), z.literal(""), z.null()]),
-  largeLogo: z.union([z.string(), z.literal(""), z.null()])
+  smallLogo: z.optional(z.union([z.string(), z.null()])),
+  largeLogo: z.optional(z.union([z.string(), z.null()]))
 }),
   tags: z.object({
   categorized: z.array(z.object({
   categoryId: z.number(),
   name: z.string(),
-  limit: z.union([z.string(), z.literal(""), z.null()]),
+  limit: z.optional(z.union([z.string(), z.null()])),
   tags: z.array(z.object({
   tagId: z.number(),
   tagName: z.string()

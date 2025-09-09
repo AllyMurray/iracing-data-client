@@ -5,13 +5,13 @@ import * as z from "zod/mini";
 export interface TrackAssetsItem {
   coordinates: string;
   detailCopy: string; // maps from: detail_copy
-  detailTechspecsCopy: string | null; // maps from: detail_techspecs_copy
-  detailVideo: string | null; // maps from: detail_video
+  detailTechspecsCopy?: string | null; // maps from: detail_techspecs_copy
+  detailVideo?: string | null; // maps from: detail_video
   folder: string;
-  galleryImages: string | ""; // maps from: gallery_images
-  galleryPrefix: string | ""; // maps from: gallery_prefix
+  galleryImages?: string | null; // maps from: gallery_images
+  galleryPrefix?: string | null; // maps from: gallery_prefix
   largeImage: string; // maps from: large_image
-  logo: string | "";
+  logo?: string | null;
   north: string;
   numSvgImages: number; // maps from: num_svg_images
   smallImage: string; // maps from: small_image
@@ -51,7 +51,7 @@ export interface TrackGetItem {
   lapScoring: number; // maps from: lap_scoring
   latitude: number;
   location: string;
-  logo: string | "";
+  logo?: string | null;
   longitude: number;
   maxCars: number; // maps from: max_cars
   nightLighting: boolean; // maps from: night_lighting
@@ -91,13 +91,13 @@ export type TrackGetResponse = TrackGetItem[];
 const TrackAssetsSchema = z.record(z.string(), z.object({
   coordinates: z.string(),
   detailCopy: z.string(),
-  detailTechspecsCopy: z.union([z.string(), z.literal(""), z.null()]),
-  detailVideo: z.union([z.string(), z.literal(""), z.null()]),
+  detailTechspecsCopy: z.optional(z.union([z.string(), z.null()])),
+  detailVideo: z.optional(z.union([z.string(), z.null()])),
   folder: z.string(),
-  galleryImages: z.union([z.string(), z.literal("")]),
-  galleryPrefix: z.union([z.string(), z.literal("")]),
+  galleryImages: z.optional(z.union([z.string(), z.null()])),
+  galleryPrefix: z.optional(z.union([z.string(), z.null()])),
   largeImage: z.string(),
-  logo: z.union([z.string(), z.literal("")]),
+  logo: z.optional(z.union([z.string(), z.null()])),
   north: z.string(),
   numSvgImages: z.number(),
   smallImage: z.string(),
@@ -140,7 +140,7 @@ const TrackGetSchema = z.array(z.object({
   lapScoring: z.number(),
   latitude: z.number(),
   location: z.string(),
-  logo: z.union([z.string(), z.literal("")]),
+  logo: z.optional(z.union([z.string(), z.null()])),
   longitude: z.number(),
   maxCars: z.number(),
   nightLighting: z.boolean(),
