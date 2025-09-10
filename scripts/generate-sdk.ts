@@ -2,13 +2,8 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { quicktype, InputData, JSONSchemaInput, TypeScriptTargetLanguage } from "quicktype-core";
-
-/** ---- Input types (from your index JSON) ---- */
-type ParamType = "string" | "number" | "boolean" | "numbers";
-type ParamDef = { type: ParamType; required?: boolean; note?: string };
-type Endpoint = { link: string; parameters?: Record<string, ParamDef> };
-type Section = Record<string, Endpoint | Record<string, Endpoint>>;
-type Root = Record<string, Section>;
+import { toPascal, toCamelCase, toKebab } from "./generate-sdk/utils";
+import { type Root, type Flat, isEndpoint } from "./generate-sdk/types";
 
 /** ---- CLI args ---- */
 const INPUT = process.argv[2] ?? "docs/api/index.json";
@@ -16,21 +11,6 @@ const OUT_DIR = process.argv[3] ?? "src";
 const SAMPLES_DIR = process.argv[4] ?? "samples";
 
 const index: Root = JSON.parse(fs.readFileSync(INPUT, "utf8"));
-
-/** ---- Flatten endpoints ---- */
-type Flat = {
-  section: string;
-  name: string;         // "league.get"
-  method: string;       // "league_get"
-  url: string;
-  params: Record<string, ParamDef>;
-  samplePath?: string;
-  responseType?: string; // Generated response type name
-};
-
-function isEndpoint(x: any): x is Endpoint {
-  return x && typeof x === "object" && typeof x.link === "string";
-}
 
 function flatten(root: Root): Flat[] {
   const out: Flat[] = [];
@@ -63,31 +43,6 @@ function flatten(root: Root): Flat[] {
   }
 }
 
-/** ---- Helper functions ---- */
-function toPascal(s: string): string {
-  return s.split(/[_\-\.]/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join("");
-}
-
-function toCamelCase(s: string): string {
-  // Preserve leading underscores for private properties
-  if (s.startsWith('_')) {
-    const rest = s.slice(1);
-    // If the rest is already camelCase (like contentType), keep it as is
-    if (rest.includes('_') || rest.includes('-') || rest.includes('.')) {
-      const parts = rest.split(/[_\-\.]/);
-      return '_' + parts[0].toLowerCase() + parts.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join("");
-    } else {
-      return s; // Keep the original string if it's already in the right format
-    }
-  }
-
-  const parts = s.split(/[_\-\.]/);
-  return parts[0].toLowerCase() + parts.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join("");
-}
-
-function toKebab(s: string): string {
-  return s.replace(/[_\.]/g, "-").toLowerCase();
-}
 
 /** ---- Generate TypeScript types from JSON sample using quicktype ---- */
 async function generateTypesFromSample(samplePath: string, typeName: string): Promise<string | null> {
