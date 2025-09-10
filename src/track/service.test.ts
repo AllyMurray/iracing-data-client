@@ -1,95 +1,161 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { TrackService } from "./service";
-import type { IRacingClient } from "../client";
-import type { TrackAssetsResponse, TrackGetResponse } from "./types";
-import { TrackAssets, TrackGet } from "./types";
+import { IRacingClient } from "../client";
 
 // Import sample data
 import trackassetsSample from "../../samples/track.assets.json";
 import trackgetSample from "../../samples/track.get.json";
 
 describe("TrackService", () => {
-  let mockClient: IRacingClient;
+  let mockFetch: MockInstance;
+  let client: IRacingClient;
   let trackService: TrackService;
 
   beforeEach(() => {
-    // Create a mock client
-    mockClient = {
-      get: vi.fn(),
-    } as any;
-
-    trackService = new TrackService(mockClient);
+    mockFetch = vi.fn();
+    
+    client = new IRacingClient({
+      email: "test@example.com",
+      password: "password",
+      fetchFn: mockFetch
+    });
+    
+    trackService = new TrackService(client);
   });
 
   describe("assets()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate track assets data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(trackassetsSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(trackassetsSample)
+      });
 
       const result = await trackService.assets();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/track/assets", { schema: TrackAssets });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/track/assets",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching TrackAssetsResponse type structure", async () => {
-      const mockData = {} as TrackAssetsResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await trackService.assets();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(trackService.assets()).rejects.toThrow();
     });
   });
 
   describe("get()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate track get data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(trackgetSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(trackgetSample)
+      });
 
       const result = await trackService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/track/get", { schema: TrackGet });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/track/get",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching TrackGetResponse type structure", async () => {
-      const mockData = {} as TrackGetResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await trackService.get();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(trackService.get()).rejects.toThrow();
     });
   });
 

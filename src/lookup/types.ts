@@ -10,30 +10,32 @@ const LookupDrivers = z.array(z.object({
   custId: z.number(),
   displayName: z.string(),
   helmet: z.object({
-    pattern: z.number(),
-    color1: z.string(),
-    color2: z.string(),
-    color3: z.string(),
-    faceType: z.number(),
-    helmetType: z.number()
-  }),
+  pattern: z.number(),
+  color1: z.string(),
+  color2: z.string(),
+  color3: z.string(),
+  faceType: z.number(),
+  helmetType: z.number()
+}),
   profileDisabled: z.boolean()
 }));
 const LookupFlairs = z.object({
   flairs: z.array(z.object({
     flairId: z.number(),
     flairName: z.string(),
-    seq: z.number()
+    seq: z.number(),
+    flairShortname: z.optional(z.string()),
+    countryCode: z.optional(z.string())
   })),
   success: z.boolean()
 });
 const LookupGet = z.array(z.unknown());
 const LookupLicenses = z.array(z.object({
   licenseGroup: z.number(),
-  groupName: z.optional(z.union([z.string(), z.null()])),
-  minNumRaces: z.number(),
+  groupName: z.string(),
+  minNumRaces: z.nullable(z.number()),
   participationCredits: z.number(),
-  minSrToFastTrack: z.number(),
+  minSrToFastTrack: z.nullable(z.number()),
   levels: z.array(z.object({
     licenseId: z.number(),
     licenseGroup: z.number(),
@@ -42,7 +44,7 @@ const LookupLicenses = z.array(z.object({
     licenseLetter: z.string(),
     color: z.string()
   })),
-  minNumTt: z.number()
+  minNumTt: z.nullable(z.number())
 }));
 
 // ---- Response Types (inferred from schemas) ----

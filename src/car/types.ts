@@ -3,21 +3,21 @@ import * as z from "zod/mini";
 // ---- Response Schemas ----
 
 const CarAssets = z.record(z.string(), z.object({
-  carId: z.number(),
-  carRules: z.array(z.unknown()),
-  detailCopy: z.string(),
-  detailScreenShotImages: z.string(),
-  detailTechspecsCopy: z.string(),
-  folder: z.string(),
-  galleryImages: z.optional(z.union([z.string(), z.null()])),
-  galleryPrefix: z.optional(z.union([z.string(), z.null()])),
-  groupImage: z.optional(z.union([z.string(), z.null()])),
-  groupName: z.optional(z.union([z.string(), z.null()])),
-  largeImage: z.string(),
-  logo: z.optional(z.union([z.string(), z.null()])),
-  smallImage: z.string(),
-  sponsorLogo: z.optional(z.union([z.string(), z.null()])),
-  templatePath: z.optional(z.union([z.string(), z.null()]))
+  carId: z.optional(z.nullable(z.number())),
+  carRules: z.optional(z.nullable(z.array(z.unknown()))),
+  detailCopy: z.optional(z.nullable(z.string())),
+  detailScreenShotImages: z.optional(z.nullable(z.string())),
+  detailTechspecsCopy: z.optional(z.nullable(z.string())),
+  folder: z.optional(z.nullable(z.string())),
+  galleryImages: z.optional(z.nullable(z.string())),
+  galleryPrefix: z.optional(z.nullable(z.string())),
+  groupImage: z.optional(z.nullable(z.string())),
+  groupName: z.optional(z.nullable(z.string())),
+  largeImage: z.optional(z.nullable(z.string())),
+  logo: z.optional(z.nullable(z.string())),
+  smallImage: z.optional(z.nullable(z.string())),
+  sponsorLogo: z.optional(z.nullable(z.string())),
+  templatePath: z.optional(z.nullable(z.string()))
 }));
 const CarGet = z.array(z.object({
   aiEnabled: z.boolean(),
@@ -27,8 +27,17 @@ const CarGet = z.array(z.object({
   allowSponsor2: z.boolean(),
   allowWheelColor: z.boolean(),
   awardExempt: z.boolean(),
-  carConfigDefs: z.array(z.unknown()),
-  carConfigs: z.array(z.unknown()),
+  carConfigDefs: z.array(z.object({
+    carcfg: z.number(),
+    cfgSubdir: z.nullable(z.string()),
+    customPaintExt: z.nullable(z.string()),
+    name: z.string()
+  })),
+  carConfigs: z.array(z.object({
+    carcfg: z.number(),
+    trackId: z.optional(z.number()),
+    trackType: z.optional(z.number())
+  })),
   carDirpath: z.string(),
   carId: z.number(),
   carName: z.string(),
@@ -41,27 +50,31 @@ const CarGet = z.array(z.object({
   created: z.string(),
   firstSale: z.string(),
   folder: z.string(),
-  forumUrl: z.optional(z.union([z.string(), z.null()])),
+  forumUrl: z.optional(z.string()),
   freeWithSubscription: z.boolean(),
   hasHeadlights: z.boolean(),
   hasMultipleDryTireTypes: z.boolean(),
   hasRainCapableTireTypes: z.boolean(),
   hp: z.number(),
   isPsPurchasable: z.boolean(),
-  logo: z.optional(z.union([z.string(), z.null()])),
+  logo: z.nullable(z.string()),
   maxPowerAdjustPct: z.number(),
   maxWeightPenaltyKg: z.number(),
   minPowerAdjustPct: z.number(),
   packageId: z.number(),
   patterns: z.number(),
   price: z.number(),
-  priceDisplay: z.optional(z.union([z.string(), z.null()])),
+  priceDisplay: z.optional(z.string()),
   rainEnabled: z.boolean(),
   retired: z.boolean(),
   searchFilters: z.string(),
   sku: z.number(),
   smallImage: z.string(),
-  sponsorLogo: z.optional(z.union([z.string(), z.null()]))
+  sponsorLogo: z.nullable(z.string()),
+  carMake: z.optional(z.string()),
+  carModel: z.optional(z.string()),
+  paintRules: z.optional(z.record(z.string(), z.unknown())),
+  siteUrl: z.optional(z.string())
 }));
 
 // ---- Response Types (inferred from schemas) ----

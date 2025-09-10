@@ -14,7 +14,8 @@ const SeasonList = z.object({
     seasonQuarter: z.number(),
     licenseGroup: z.number(),
     fixedSetup: z.boolean(),
-    driverChanges: z.boolean()
+    driverChanges: z.boolean(),
+    rookieSeason: z.optional(z.string())
   })),
   seasonYear: z.number()
 });
@@ -27,7 +28,7 @@ const SeasonRaceGuide = z.object({
     seriesId: z.number(),
     raceWeekNum: z.number(),
     endTime: z.string(),
-    sessionId: z.number(),
+    sessionId: z.optional(z.number()),
     entryCount: z.number()
   })),
   blockBeginTime: z.string(),

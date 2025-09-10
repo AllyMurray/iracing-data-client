@@ -44,7 +44,7 @@ export class IRacingError extends Error {
   }
 
   get isMaintenanceMode(): boolean {
-    return this.status === 503 && 
+    return this.status === 503 &&
            this.responseData?.error === 'Site Maintenance';
   }
 
@@ -70,15 +70,15 @@ export class IRacingClient {
 
   constructor(opts: IRacingClientOptions = {}) {
     const validatedOpts = IRacingClientOptionsSchema.parse(opts);
-    
+
     this.fetchFn = validatedOpts.fetchFn ?? globalThis.fetch;
     if (!this.fetchFn) throw new Error("No fetch available. Pass fetchFn in IRacingClientOptions.");
-    
+
     this.email = validatedOpts.email;
     this.password = validatedOpts.password;
     this.presetHeaders = validatedOpts.headers;
     this.validateParams = validatedOpts.validateParams ?? true;
-    
+
     if (!this.email && !this.password && !this.presetHeaders) {
       throw new Error("Must provide either email/password or headers for authentication");
     }
@@ -86,7 +86,7 @@ export class IRacingClient {
 
   private buildUrl(endpoint: string, params?: Record<string, any>): string {
     const url = new URL(endpoint.startsWith("http") ? endpoint : `${this.baseUrl}${endpoint}`);
-    
+
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
@@ -100,7 +100,7 @@ export class IRacingClient {
         }
       });
     }
-    
+
     return url.toString();
   }
 
@@ -109,7 +109,7 @@ export class IRacingClient {
       // Using preset headers, no authentication needed
       return;
     }
-    
+
     if (!this.authData && this.email && this.password) {
       await this.authenticate();
     }
@@ -125,9 +125,9 @@ export class IRacingClient {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ 
-        email: this.email, 
-        password: this.password 
+      body: JSON.stringify({
+        email: this.email,
+        password: this.password
       }),
     });
 
@@ -137,12 +137,12 @@ export class IRacingClient {
     }
 
     this.authData = await response.json();
-    
+
     // Parse and store cookies
     if (!this.authData) {
       throw new Error('Authentication failed - no auth data received');
     }
-    
+
     this.cookies = {
       'irsso_membersv2': this.authData.ssoCookieValue,
       'authtoken_members': `%7B%22authtoken%22%3A%7B%22authcode%22%3A%22${this.authData.authcode}%22%2C%22email%22%3A%22${encodeURIComponent(this.authData.email)}%22%7D%7D`
@@ -162,21 +162,24 @@ export class IRacingClient {
 
   private mapResponseFromApi(data: any): any {
     if (data === null || data === undefined) return data;
-    
+
     if (Array.isArray(data)) {
       return data.map(item => this.mapResponseFromApi(item));
     }
-    
+
     if (typeof data === 'object') {
       const mapped: Record<string, any> = {};
       for (const [key, value] of Object.entries(data)) {
-        // Convert snake_case to camelCase
-        const camelKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+        // Convert snake_case and kebab-case to camelCase
+        // prettier-ignore
+        const camelKey = key
+          .replace(/_([a-z0-9])/g, (_, char) => char.toUpperCase())
+          .replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
         mapped[camelKey] = this.mapResponseFromApi(value);
       }
       return mapped;
     }
-    
+
     return data;
   }
 
@@ -186,9 +189,9 @@ export class IRacingClient {
 
     // Convert camelCase params back to snake_case for the API
     const apiParams = this.mapParamsToApi(options?.params);
-    
+
     const headers: Record<string, string> = {};
-    
+
     if (this.presetHeaders) {
       // Use preset headers (like cookies from manual auth)
       Object.assign(headers, this.presetHeaders);
@@ -209,14 +212,14 @@ export class IRacingClient {
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       let responseData: any = null;
-      
+
       // Try to parse JSON error response
       try {
         responseData = JSON.parse(text);
       } catch {
         // Not JSON, use raw text
       }
-      
+
       // Handle maintenance mode specifically
       if (response.status === 503 && responseData?.error === 'Site Maintenance') {
         throw new IRacingError(
@@ -226,7 +229,7 @@ export class IRacingClient {
           responseData
         );
       }
-      
+
       // Handle other specific errors
       if (response.status === 429) {
         throw new IRacingError(
@@ -236,7 +239,7 @@ export class IRacingClient {
           responseData
         );
       }
-      
+
       if (response.status === 401) {
         throw new IRacingError(
           'Authentication failed. Please check your credentials.',
@@ -245,7 +248,7 @@ export class IRacingClient {
           responseData
         );
       }
-      
+
       // Generic error
       const errorMessage = responseData?.message || responseData?.error || text || response.statusText;
       throw new IRacingError(
@@ -257,11 +260,11 @@ export class IRacingClient {
     }
 
     const contentType = response.headers.get("content-type") || "";
-    
+
     // Check if this is a direct JSON response (some endpoints don't use S3)
     if (contentType.includes("application/json")) {
       const data = await response.json();
-      
+
       // Check if it's an S3 link response
       if (data.link && data.expires) {
         // Fetch the actual data from S3
@@ -269,35 +272,35 @@ export class IRacingClient {
         if (!s3Response.ok) {
           throw new Error(`Failed to fetch from S3: ${s3Response.statusText}`);
         }
-        
+
         // Check content type of S3 response
         const s3ContentType = s3Response.headers.get("content-type") || "";
         if (s3ContentType.includes("text/csv") || s3ContentType.includes("text/plain")) {
           // Return CSV as raw text wrapped in an object
           const csvText = await s3Response.text();
-          return { 
-            _contentType: "csv", 
-            _rawData: csvText,
-            _note: "This endpoint returns CSV data, not JSON" 
+          return {
+            ContentType: "csv",
+            RawData: csvText,
+            Note: "This endpoint returns CSV data, not JSON"
           } as T;
         }
-        
+
         const s3Data = await s3Response.json();
         const mappedData = this.mapResponseFromApi(s3Data);
-        
+
         if (options?.schema) {
           return options.schema.parse(mappedData);
         }
-        
+
         return mappedData as T;
       }
-      
+
       const mappedData = this.mapResponseFromApi(data);
-      
+
       if (options?.schema) {
         return options.schema.parse(mappedData);
       }
-      
+
       return mappedData as T;
     }
 

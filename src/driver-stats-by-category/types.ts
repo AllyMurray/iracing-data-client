@@ -3,34 +3,34 @@ import * as z from "zod/mini";
 // ---- Response Schemas ----
 
 const DriverStatsByCategoryOval = z.object({
-  _contentType: z.literal("csv"),
-  _rawData: z.string(),
-  _note: z.string()
+  ContentType: z.literal("csv"),
+  RawData: z.string(),
+  Note: z.string()
 });
 const DriverStatsByCategorySportsCar = z.object({
-  _contentType: z.literal("csv"),
-  _rawData: z.string(),
-  _note: z.string()
+  ContentType: z.literal("csv"),
+  RawData: z.string(),
+  Note: z.string()
 });
 const DriverStatsByCategoryFormulaCar = z.object({
-  _contentType: z.literal("csv"),
-  _rawData: z.string(),
-  _note: z.string()
+  ContentType: z.literal("csv"),
+  RawData: z.string(),
+  Note: z.string()
 });
 const DriverStatsByCategoryRoad = z.object({
-  _contentType: z.literal("csv"),
-  _rawData: z.string(),
-  _note: z.string()
+  ContentType: z.literal("csv"),
+  RawData: z.string(),
+  Note: z.string()
 });
 const DriverStatsByCategoryDirtOval = z.object({
-  _contentType: z.literal("csv"),
-  _rawData: z.string(),
-  _note: z.string()
+  ContentType: z.literal("csv"),
+  RawData: z.string(),
+  Note: z.string()
 });
 const DriverStatsByCategoryDirtRoad = z.object({
-  _contentType: z.literal("csv"),
-  _rawData: z.string(),
-  _note: z.string()
+  ContentType: z.literal("csv"),
+  RawData: z.string(),
+  Note: z.string()
 });
 
 // ---- Response Types (inferred from schemas) ----

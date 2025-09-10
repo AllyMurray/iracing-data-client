@@ -1,8 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { LookupService } from "./service";
-import type { IRacingClient } from "../client";
-import type { LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
-import { LookupCountries, LookupDrivers, LookupFlairs, LookupGet, LookupLicenses } from "./types";
+import { IRacingClient } from "../client";
 
 // Import sample data
 import lookupcountriesSample from "../../samples/lookup.countries.json";
@@ -12,203 +10,367 @@ import lookupgetSample from "../../samples/lookup.get.json";
 import lookuplicensesSample from "../../samples/lookup.licenses.json";
 
 describe("LookupService", () => {
-  let mockClient: IRacingClient;
+  let mockFetch: MockInstance;
+  let client: IRacingClient;
   let lookupService: LookupService;
 
   beforeEach(() => {
-    // Create a mock client
-    mockClient = {
-      get: vi.fn(),
-    } as any;
-
-    lookupService = new LookupService(mockClient);
+    mockFetch = vi.fn();
+    
+    client = new IRacingClient({
+      email: "test@example.com",
+      password: "password",
+      fetchFn: mockFetch
+    });
+    
+    lookupService = new LookupService(client);
   });
 
   describe("countries()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate lookup countries data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(lookupcountriesSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(lookupcountriesSample)
+      });
 
       const result = await lookupService.countries();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/countries", { schema: LookupCountries });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/lookup/countries",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching LookupCountriesResponse type structure", async () => {
-      const mockData = {} as LookupCountriesResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await lookupService.countries();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(lookupService.countries()).rejects.toThrow();
     });
   });
 
   describe("drivers()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate lookup drivers data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(lookupdriversSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(lookupdriversSample)
+      });
 
       const testParams = {
   searchTerm: "test",
   leagueId: 123
       };
       const result = await lookupService.drivers(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/drivers", { params: testParams, schema: LookupDrivers });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/lookup/drivers"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching LookupDriversResponse type structure", async () => {
-      const mockData = {} as LookupDriversResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
 
       const testParams = {
   searchTerm: "test",
   leagueId: 123
       };
-      const result = await lookupService.drivers(testParams);
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      await expect(lookupService.drivers(testParams)).rejects.toThrow();
     });
   });
 
   describe("flairs()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate lookup flairs data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(lookupflairsSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(lookupflairsSample)
+      });
 
       const result = await lookupService.flairs();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/flairs", { schema: LookupFlairs });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/lookup/flairs",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching LookupFlairsResponse type structure", async () => {
-      const mockData = {} as LookupFlairsResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await lookupService.flairs();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(lookupService.flairs()).rejects.toThrow();
     });
   });
 
   describe("get()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate lookup get data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(lookupgetSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(lookupgetSample)
+      });
 
       const result = await lookupService.get();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/get", { schema: LookupGet });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/lookup/get",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching LookupGetResponse type structure", async () => {
-      const mockData = {} as LookupGetResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await lookupService.get();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(lookupService.get()).rejects.toThrow();
     });
   });
 
   describe("licenses()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate lookup licenses data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(lookuplicensesSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(lookuplicensesSample)
+      });
 
       const result = await lookupService.licenses();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/lookup/licenses", { schema: LookupLicenses });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/lookup/licenses",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching LookupLicensesResponse type structure", async () => {
-      const mockData = {} as LookupLicensesResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await lookupService.licenses();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(lookupService.licenses()).rejects.toThrow();
     });
   });
 

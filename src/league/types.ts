@@ -33,19 +33,19 @@ const LeagueCustLeagueSessions = z.object({
     restrictViewing: z.boolean(),
     maxUsers: z.number(),
     privateSessionId: z.number(),
-    sessionId: z.number(),
-    subsessionId: z.number(),
+    sessionId: z.optional(z.number()),
+    subsessionId: z.optional(z.number()),
     passwordProtected: z.boolean(),
     sessionName: z.string(),
-    openRegExpires: z.string(),
+    openRegExpires: z.optional(z.string()),
     launchAt: z.string(),
     fullCourseCautions: z.boolean(),
     numFastTows: z.number(),
     rollingStarts: z.boolean(),
     restarts: z.number(),
     multiclassType: z.number(),
-    pitsInUse: z.number(),
-    carsLeft: z.number(),
+    pitsInUse: z.optional(z.number()),
+    carsLeft: z.optional(z.number()),
     maxDrivers: z.number(),
     hardcoreLevel: z.number(),
     practiceLength: z.number(),
@@ -79,8 +79,8 @@ const LeagueCustLeagueSessions = z.object({
     minLicenseLevel: z.number(),
     maxLicenseLevel: z.number(),
     status: z.number(),
-    paceCarId: z.optional(z.union([z.string(), z.null()])),
-    paceCarClassId: z.optional(z.union([z.string(), z.null()])),
+    paceCarId: z.nullable(z.number()),
+    paceCarClassId: z.nullable(z.number()),
     numOptLaps: z.number(),
     damageModel: z.number(),
     doNotPaintCars: z.boolean(),
@@ -104,7 +104,7 @@ const LeagueCustLeagueSessions = z.object({
     maxVisorTearoffs: z.number(),
     categoryId: z.number(),
     category: z.string(),
-    sessionFull: z.boolean(),
+    sessionFull: z.optional(z.boolean()),
     host: z.object({
       custId: z.number(),
       displayName: z.string(),
@@ -119,13 +119,13 @@ const LeagueCustLeagueSessions = z.object({
     }),
     track: z.object({
       categoryId: z.number(),
-      configName: z.string(),
+      configName: z.optional(z.string()),
       trackId: z.number(),
       trackName: z.string()
     }),
     weather: z.object({
       allowFog: z.boolean(),
-      forecastOptions: z.object({
+      forecastOptions: z.optional(z.object({
         forecastType: z.number(),
         precipitation: z.number(),
         skies: z.number(),
@@ -134,7 +134,7 @@ const LeagueCustLeagueSessions = z.object({
         weatherSeed: z.number(),
         windDir: z.number(),
         windSpeed: z.number()
-      }),
+      })),
       precipOption: z.number(),
       relHumidity: z.number(),
       simulatedStartTime: z.string(),
@@ -146,7 +146,7 @@ const LeagueCustLeagueSessions = z.object({
       timeOfDay: z.number(),
       trackWater: z.number(),
       version: z.number(),
-      weatherSummary: z.object({
+      weatherSummary: z.optional(z.object({
         maxPrecipRate: z.number(),
         maxPrecipRateDesc: z.string(),
         precipChance: z.number(),
@@ -159,11 +159,13 @@ const LeagueCustLeagueSessions = z.object({
         windHigh: z.number(),
         windLow: z.number(),
         windUnits: z.number()
-      }),
-      weatherUrl: z.string(),
+      })),
+      weatherUrl: z.optional(z.string()),
       windDir: z.number(),
       windUnits: z.number(),
-      windValue: z.number()
+      windValue: z.number(),
+      fog: z.optional(z.number()),
+      type: z.optional(z.number())
     }),
     trackState: z.object({
       leaveMarbles: z.boolean(),
@@ -201,13 +203,13 @@ const LeagueCustLeagueSessions = z.object({
       weightPenaltyKg: z.number(),
       powerAdjustPct: z.number(),
       maxDryTireSets: z.number(),
-      qualSetupId: z.number(),
-      qualSetupFilename: z.string(),
-      raceSetupId: z.number(),
-      raceSetupFilename: z.string(),
+      qualSetupId: z.optional(z.number()),
+      qualSetupFilename: z.optional(z.string()),
+      raceSetupId: z.optional(z.number()),
+      raceSetupFilename: z.optional(z.string()),
       packageId: z.number()
     })),
-    heatSesInfo: z.object({
+    heatSesInfo: z.optional(z.object({
       consolationDeltaMaxFieldSize: z.number(),
       consolationDeltaSessionLaps: z.number(),
       consolationDeltaSessionLengthMinutes: z.number(),
@@ -221,7 +223,7 @@ const LeagueCustLeagueSessions = z.object({
       consolationScoresChampPoints: z.boolean(),
       created: z.string(),
       custId: z.number(),
-      description: z.string(),
+      description: z.optional(z.string()),
       heatCautionType: z.number(),
       heatInfoId: z.number(),
       heatInfoName: z.string(),
@@ -251,13 +253,17 @@ const LeagueCustLeagueSessions = z.object({
       qualScoring: z.number(),
       qualStyle: z.number(),
       raceStyle: z.number()
-    }),
-    countByCarId: z.object({
-      203: z.number()
-    }),
-    countByCarClassId: z.object({
+    })),
+    countByCarId: z.optional(z.object({
+      67: z.optional(z.number()),
+      106: z.optional(z.number()),
+      190: z.optional(z.number()),
+      192: z.optional(z.number()),
+      203: z.optional(z.number())
+    })),
+    countByCarClassId: z.optional(z.object({
       0: z.number()
-    }),
+    })),
     carTypes: z.array(z.object({
       carType: z.string()
     })),
@@ -274,24 +280,26 @@ const LeagueCustLeagueSessions = z.object({
       sessionType: z.number()
     })),
     canJoin: z.boolean(),
-    image: z.object({
+    image: z.optional(z.object({
       smallLogo: z.string(),
-      largeLogo: z.string()
-    }),
+      largeLogo: z.nullable(z.string())
+    })),
     owner: z.boolean(),
     admin: z.boolean(),
-    friends: z.array(z.unknown()),
-    watched: z.array(z.unknown()),
+    friends: z.optional(z.array(z.unknown())),
+    watched: z.optional(z.array(z.unknown())),
     endTime: z.string(),
     populated: z.boolean(),
     teamEntryCount: z.number(),
     isHeatRacing: z.boolean(),
     broadcaster: z.boolean(),
     minIr: z.number(),
-    maxIr: z.number()
+    maxIr: z.number(),
+    sessionDesc: z.optional(z.string()),
+    raceLengthType: z.optional(z.number())
   })),
   success: z.boolean(),
-  packageId: z.number()
+  packageId: z.optional(z.number())
 });
 const LeagueDirectory = z.object({
   resultsPage: z.array(z.object({
@@ -299,8 +307,8 @@ const LeagueDirectory = z.object({
     ownerId: z.number(),
     leagueName: z.string(),
     created: z.string(),
-    about: z.string(),
-    url: z.string(),
+    about: z.optional(z.string()),
+    url: z.optional(z.string()),
     rosterCount: z.number(),
     recruiting: z.boolean(),
     isAdmin: z.boolean(),
@@ -318,8 +326,8 @@ const LeagueDirectory = z.object({
         faceType: z.number(),
         helmetType: z.number()
       }),
-      carNumber: z.optional(z.union([z.string(), z.null()])),
-      nickName: z.optional(z.union([z.string(), z.null()]))
+      carNumber: z.nullable(z.string()),
+      nickName: z.nullable(z.string())
     })
   })),
   success: z.boolean(),
@@ -354,18 +362,18 @@ const LeagueGet = z.object({
       faceType: z.number(),
       helmetType: z.number()
     }),
-    carNumber: z.optional(z.union([z.string(), z.null()])),
-    nickName: z.optional(z.union([z.string(), z.null()]))
+    carNumber: z.nullable(z.unknown()),
+    nickName: z.nullable(z.unknown())
   }),
   image: z.object({
-    smallLogo: z.optional(z.union([z.string(), z.null()])),
-    largeLogo: z.optional(z.union([z.string(), z.null()]))
+    smallLogo: z.nullable(z.unknown()),
+    largeLogo: z.nullable(z.unknown())
   }),
   tags: z.object({
     categorized: z.array(z.object({
       categoryId: z.number(),
       name: z.string(),
-      limit: z.optional(z.union([z.string(), z.null()])),
+      limit: z.nullable(z.number()),
       tags: z.array(z.object({
         tagId: z.number(),
         tagName: z.string()
@@ -395,7 +403,7 @@ const LeagueGet = z.object({
     leagueMailOptOut: z.boolean(),
     leaguePmOptOut: z.boolean(),
     leagueMemberSince: z.string(),
-    carNumber: z.string(),
+    carNumber: z.nullable(z.string()),
     nickName: z.string()
   }))
 });
@@ -411,7 +419,7 @@ const LeagueGetPointsSystems = z.object({
     iracingSystem: z.boolean()
   })),
   leagueId: z.number(),
-  seasonId: z.number()
+  seasonId: z.optional(z.number())
 });
 const LeagueMembership = z.array(z.object({
   leagueId: z.number(),
@@ -420,8 +428,8 @@ const LeagueMembership = z.array(z.object({
   admin: z.boolean(),
   leagueMailOptOut: z.boolean(),
   leaguePmOptOut: z.boolean(),
-  carNumber: z.string(),
-  nickName: z.string()
+  carNumber: z.nullable(z.string()),
+  nickName: z.nullable(z.string())
 }));
 const LeagueRoster = z.object({
   type: z.string(),

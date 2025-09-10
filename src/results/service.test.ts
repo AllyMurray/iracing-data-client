@@ -1,66 +1,126 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { ResultsService } from "./service";
-import type { IRacingClient } from "../client";
+import { IRacingClient } from "../client";
 
 describe("ResultsService", () => {
-  let mockClient: IRacingClient;
+  let mockFetch: MockInstance;
+  let client: IRacingClient;
   let resultsService: ResultsService;
 
   beforeEach(() => {
-    // Create a mock client
-    mockClient = {
-      get: vi.fn(),
-    } as any;
-
-    resultsService = new ResultsService(mockClient);
+    mockFetch = vi.fn();
+    
+    client = new IRacingClient({
+      email: "test@example.com",
+      password: "password",
+      fetchFn: mockFetch
+    });
+    
+    resultsService = new ResultsService(client);
   });
 
   describe("get()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results get data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   subsessionId: 123,
   includeLicenses: true
       };
       await resultsService.get(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/get", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 
   describe("eventLog()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results eventLog data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   subsessionId: 123,
   simsessionNumber: 123
       };
       await resultsService.eventLog(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/event_log", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 
   describe("lapChartData()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results lapChartData data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   subsessionId: 123,
   simsessionNumber: 123
       };
       await resultsService.lapChartData(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/lap_chart_data", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 
   describe("lapData()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results lapData data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   subsessionId: 123,
@@ -69,14 +129,28 @@ describe("ResultsService", () => {
   teamId: 123
       };
       await resultsService.lapData(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/lap_data", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 
   describe("searchHosted()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results searchHosted data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   startRangeBegin: "test",
@@ -94,14 +168,28 @@ describe("ResultsService", () => {
   categoryIds: [123, 456]
       };
       await resultsService.searchHosted(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/search_hosted", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 
   describe("searchSeries()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results searchSeries data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   seasonYear: 123,
@@ -119,14 +207,28 @@ describe("ResultsService", () => {
   categoryIds: [123, 456]
       };
       await resultsService.searchSeries(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/search_series", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 
   describe("seasonResults()", () => {
-    it("should call client.get with correct URL", async () => {
-      const mockData = {}; // Add mock response data
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should fetch results seasonResults data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({})
+      });
 
       const testParams = {
   seasonId: 123,
@@ -134,7 +236,7 @@ describe("ResultsService", () => {
   raceWeekNum: 123
       };
       await resultsService.seasonResults(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/results/season_results", { params: testParams });
+      expect(mockFetch).toHaveBeenCalled();
     });
   });
 

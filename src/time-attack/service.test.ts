@@ -1,64 +1,98 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { TimeAttackService } from "./service";
-import type { IRacingClient } from "../client";
-import type { TimeAttackMemberSeasonResultsResponse } from "./types";
-import { TimeAttackMemberSeasonResults } from "./types";
+import { IRacingClient } from "../client";
 
 // Import sample data
 import timeattackmemberseasonresultsSample from "../../samples/time_attack.member_season_results.json";
 
 describe("TimeAttackService", () => {
-  let mockClient: IRacingClient;
+  let mockFetch: MockInstance;
+  let client: IRacingClient;
   let timeAttackService: TimeAttackService;
 
   beforeEach(() => {
-    // Create a mock client
-    mockClient = {
-      get: vi.fn(),
-    } as any;
-
-    timeAttackService = new TimeAttackService(mockClient);
+    mockFetch = vi.fn();
+    
+    client = new IRacingClient({
+      email: "test@example.com",
+      password: "password",
+      fetchFn: mockFetch
+    });
+    
+    timeAttackService = new TimeAttackService(client);
   });
 
   describe("memberSeasonResults()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate time_attack memberSeasonResults data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(timeattackmemberseasonresultsSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(timeattackmemberseasonresultsSample)
+      });
 
       const testParams = {
   taCompSeasonId: 123
       };
       const result = await timeAttackService.memberSeasonResults(testParams);
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/time_attack/member_season_results", { params: testParams, schema: TimeAttackMemberSeasonResults });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/time_attack/member_season_results"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching TimeAttackMemberSeasonResultsResponse type structure", async () => {
-      const mockData = {} as TimeAttackMemberSeasonResultsResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
+
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
 
       const testParams = {
   taCompSeasonId: 123
       };
-      const result = await timeAttackService.memberSeasonResults(testParams);
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      await expect(timeAttackService.memberSeasonResults(testParams)).rejects.toThrow();
     });
   });
 

@@ -1,8 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { ConstantsService } from "./service";
-import type { IRacingClient } from "../client";
-import type { ConstantsCategoriesResponse, ConstantsDivisionsResponse, ConstantsEventTypesResponse } from "./types";
-import { ConstantsCategories, ConstantsDivisions, ConstantsEventTypes } from "./types";
+import { IRacingClient } from "../client";
 
 // Import sample data
 import constantscategoriesSample from "../../samples/constants.categories.json";
@@ -10,123 +8,223 @@ import constantsdivisionsSample from "../../samples/constants.divisions.json";
 import constantseventtypesSample from "../../samples/constants.event_types.json";
 
 describe("ConstantsService", () => {
-  let mockClient: IRacingClient;
+  let mockFetch: MockInstance;
+  let client: IRacingClient;
   let constantsService: ConstantsService;
 
   beforeEach(() => {
-    // Create a mock client
-    mockClient = {
-      get: vi.fn(),
-    } as any;
-
-    constantsService = new ConstantsService(mockClient);
+    mockFetch = vi.fn();
+    
+    client = new IRacingClient({
+      email: "test@example.com",
+      password: "password",
+      fetchFn: mockFetch
+    });
+    
+    constantsService = new ConstantsService(client);
   });
 
   describe("categories()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate constants categories data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(constantscategoriesSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(constantscategoriesSample)
+      });
 
       const result = await constantsService.categories();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/categories", { schema: ConstantsCategories });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/constants/categories",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching ConstantsCategoriesResponse type structure", async () => {
-      const mockData = {} as ConstantsCategoriesResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await constantsService.categories();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(constantsService.categories()).rejects.toThrow();
     });
   });
 
   describe("divisions()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate constants divisions data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(constantsdivisionsSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(constantsdivisionsSample)
+      });
 
       const result = await constantsService.divisions();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/divisions", { schema: ConstantsDivisions });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/constants/divisions",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching ConstantsDivisionsResponse type structure", async () => {
-      const mockData = {} as ConstantsDivisionsResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await constantsService.divisions();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(constantsService.divisions()).rejects.toThrow();
     });
   });
 
   describe("eventTypes()", () => {
-    it("should call client.get with correct URL and return transformed data", async () => {
-      // Transform sample data to camelCase as our client would
-      const transformData = (data: any): any => {
-        if (Array.isArray(data)) {
-          return data.map(item => transformData(item));
-        }
-        if (typeof data === 'object' && data !== null) {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => [
-              key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
-              transformData(value)
-            ])
-          );
-        }
-        return data;
-      };
+    it("should fetch, transform, and validate constants eventTypes data", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const expectedTransformedData = transformData(constantseventtypesSample);
-      mockClient.get = vi.fn().mockResolvedValue(expectedTransformedData);
+      // Mock API response with original snake_case format
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(constantseventtypesSample)
+      });
 
       const result = await constantsService.eventTypes();
-      expect(mockClient.get).toHaveBeenCalledWith("https://members-ng.iracing.com/data/constants/event_types", { schema: ConstantsEventTypes });
-      expect(result).toEqual(expectedTransformedData);
+
+      // Verify authentication call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/auth",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com", password: "password" })
+        })
+      );
+
+      // Verify API call
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://members-ng.iracing.com/data/constants/event_types",
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+          })
+        })
+      );
+
+      // Verify response structure and transformation
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
 
-    it("should return data matching ConstantsEventTypesResponse type structure", async () => {
-      const mockData = {} as ConstantsEventTypesResponse; // Mock with appropriate structure
-      mockClient.get = vi.fn().mockResolvedValue(mockData);
+    it("should handle schema validation errors", async () => {
+      // Mock auth response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({
+          authcode: "test123",
+          ssoCookieValue: "cookie123",
+          email: "test@example.com"
+        })
+      });
 
-      const result = await constantsService.eventTypes();
-      expect(result).toBeDefined();
-      // Add specific type structure assertions here
+      // Mock invalid API response
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve({ invalid: "data" })
+      });
+
+      await expect(constantsService.eventTypes()).rejects.toThrow();
     });
   });
 

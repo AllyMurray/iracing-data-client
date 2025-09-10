@@ -36,7 +36,7 @@ const HostedCombinedSessions = z.object({
     subsessionId: z.number(),
     passwordProtected: z.boolean(),
     sessionName: z.string(),
-    sessionDesc: z.string(),
+    sessionDesc: z.optional(z.string()),
     openRegExpires: z.string(),
     launchAt: z.string(),
     fullCourseCautions: z.boolean(),
@@ -77,8 +77,8 @@ const HostedCombinedSessions = z.object({
     minLicenseLevel: z.number(),
     maxLicenseLevel: z.number(),
     status: z.number(),
-    paceCarId: z.optional(z.union([z.string(), z.null()])),
-    paceCarClassId: z.optional(z.union([z.string(), z.null()])),
+    paceCarId: z.nullable(z.number()),
+    paceCarClassId: z.nullable(z.number()),
     numOptLaps: z.number(),
     damageModel: z.number(),
     doNotPaintCars: z.boolean(),
@@ -94,7 +94,7 @@ const HostedCombinedSessions = z.object({
     maxAiDrivers: z.number(),
     aiAvoidPlayers: z.boolean(),
     adaptiveAiEnabled: z.boolean(),
-    adaptiveAiDifficulty: z.number(),
+    adaptiveAiDifficulty: z.optional(z.number()),
     mustUseDiffTireTypesInRace: z.boolean(),
     startZone: z.boolean(),
     enablePitlaneCollisions: z.boolean(),
@@ -117,13 +117,13 @@ const HostedCombinedSessions = z.object({
     }),
     track: z.object({
       categoryId: z.number(),
-      configName: z.string(),
+      configName: z.optional(z.string()),
       trackId: z.number(),
       trackName: z.string()
     }),
     weather: z.object({
       allowFog: z.boolean(),
-      forecastOptions: z.object({
+      forecastOptions: z.optional(z.object({
         forecastType: z.number(),
         precipitation: z.number(),
         skies: z.number(),
@@ -132,7 +132,7 @@ const HostedCombinedSessions = z.object({
         weatherSeed: z.number(),
         windDir: z.number(),
         windSpeed: z.number()
-      }),
+      })),
       precipOption: z.number(),
       relHumidity: z.number(),
       simulatedStartTime: z.string(),
@@ -144,7 +144,7 @@ const HostedCombinedSessions = z.object({
       timeOfDay: z.number(),
       trackWater: z.number(),
       version: z.number(),
-      weatherSummary: z.object({
+      weatherSummary: z.optional(z.object({
         maxPrecipRate: z.number(),
         maxPrecipRateDesc: z.string(),
         precipChance: z.number(),
@@ -157,11 +157,13 @@ const HostedCombinedSessions = z.object({
         windHigh: z.number(),
         windLow: z.number(),
         windUnits: z.number()
-      }),
-      weatherUrl: z.string(),
+      })),
+      weatherUrl: z.optional(z.string()),
       windDir: z.number(),
       windUnits: z.number(),
-      windValue: z.number()
+      windValue: z.number(),
+      fog: z.optional(z.number()),
+      type: z.optional(z.number())
     }),
     trackState: z.object({
       leaveMarbles: z.boolean(),
@@ -202,19 +204,40 @@ const HostedCombinedSessions = z.object({
       packageId: z.number()
     })),
     countByCarId: z.object({
-      132: z.number(),
-      133: z.number(),
-      156: z.number(),
-      169: z.number(),
-      173: z.number(),
-      176: z.number(),
-      184: z.number(),
-      185: z.number(),
-      188: z.number(),
-      194: z.number()
+      112: z.optional(z.number()),
+      117: z.optional(z.number()),
+      118: z.optional(z.number()),
+      119: z.optional(z.number()),
+      128: z.optional(z.number()),
+      132: z.optional(z.number()),
+      133: z.optional(z.number()),
+      143: z.optional(z.number()),
+      146: z.optional(z.number()),
+      147: z.optional(z.number()),
+      150: z.optional(z.number()),
+      156: z.optional(z.number()),
+      157: z.optional(z.number()),
+      169: z.optional(z.number()),
+      173: z.optional(z.number()),
+      176: z.optional(z.number()),
+      184: z.optional(z.number()),
+      185: z.optional(z.number()),
+      188: z.optional(z.number()),
+      189: z.optional(z.number()),
+      190: z.optional(z.number()),
+      192: z.optional(z.number()),
+      194: z.optional(z.number()),
+      195: z.optional(z.number())
     }),
     countByCarClassId: z.object({
-      2708: z.number()
+      0: z.optional(z.number()),
+      2708: z.optional(z.number()),
+      3104: z.optional(z.number()),
+      4073: z.optional(z.number()),
+      4076: z.optional(z.number()),
+      4083: z.optional(z.number()),
+      4084: z.optional(z.number()),
+      4085: z.optional(z.number())
     }),
     carTypes: z.array(z.object({
       carType: z.string()
@@ -241,10 +264,13 @@ const HostedCombinedSessions = z.object({
     populated: z.boolean(),
     broadcaster: z.boolean(),
     minIr: z.number(),
-    maxIr: z.number()
+    maxIr: z.number(),
+    aiMinSkill: z.optional(z.number()),
+    aiMaxSkill: z.optional(z.number()),
+    aiRosterName: z.optional(z.string())
   })),
   success: z.boolean(),
-  packageId: z.number()
+  packageId: z.optional(z.number())
 });
 const HostedSessions = z.object({
   subscribed: z.boolean(),
@@ -263,9 +289,9 @@ const HostedSessions = z.object({
       })
     })),
     aiAvoidPlayers: z.boolean(),
-    aiMaxSkill: z.number(),
-    aiMinSkill: z.number(),
-    aiRosterName: z.string(),
+    aiMaxSkill: z.optional(z.number()),
+    aiMinSkill: z.optional(z.number()),
+    aiRosterName: z.optional(z.string()),
     allowedLeagues: z.array(z.unknown()),
     allowedTeams: z.array(z.unknown()),
     carTypes: z.array(z.object({
@@ -289,19 +315,40 @@ const HostedSessions = z.object({
     consecCautionWithinNlaps: z.number(),
     consecCautionsSingleFile: z.boolean(),
     countByCarClassId: z.object({
-      0: z.number()
+      0: z.optional(z.number()),
+      2708: z.optional(z.number()),
+      3104: z.optional(z.number()),
+      4073: z.optional(z.number()),
+      4076: z.optional(z.number()),
+      4083: z.optional(z.number()),
+      4084: z.optional(z.number()),
+      4085: z.optional(z.number())
     }),
     countByCarId: z.object({
-      132: z.number(),
-      133: z.number(),
-      156: z.number(),
-      169: z.number(),
-      173: z.number(),
-      176: z.number(),
-      184: z.number(),
-      185: z.number(),
-      188: z.number(),
-      194: z.number()
+      112: z.optional(z.number()),
+      117: z.optional(z.number()),
+      118: z.optional(z.number()),
+      119: z.optional(z.number()),
+      128: z.optional(z.number()),
+      132: z.optional(z.number()),
+      133: z.optional(z.number()),
+      143: z.optional(z.number()),
+      146: z.optional(z.number()),
+      147: z.optional(z.number()),
+      150: z.optional(z.number()),
+      156: z.optional(z.number()),
+      157: z.optional(z.number()),
+      169: z.optional(z.number()),
+      173: z.optional(z.number()),
+      176: z.optional(z.number()),
+      184: z.optional(z.number()),
+      185: z.optional(z.number()),
+      188: z.optional(z.number()),
+      189: z.optional(z.number()),
+      190: z.optional(z.number()),
+      192: z.optional(z.number()),
+      194: z.optional(z.number()),
+      195: z.optional(z.number())
     }),
     damageModel: z.number(),
     disallowVirtualMirror: z.boolean(),
@@ -376,8 +423,8 @@ const HostedSessions = z.object({
     numOptLaps: z.number(),
     openRegExpires: z.string(),
     orderId: z.number(),
-    paceCarClassId: z.number(),
-    paceCarId: z.number(),
+    paceCarClassId: z.nullable(z.number()),
+    paceCarId: z.nullable(z.number()),
     passwordProtected: z.boolean(),
     pitsInUse: z.number(),
     practiceLength: z.number(),
@@ -409,7 +456,7 @@ const HostedSessions = z.object({
     timeLimit: z.number(),
     track: z.object({
       categoryId: z.number(),
-      configName: z.string(),
+      configName: z.optional(z.string()),
       trackId: z.number(),
       trackName: z.string()
     }),
@@ -427,7 +474,7 @@ const HostedSessions = z.object({
     warmupLength: z.number(),
     weather: z.object({
       allowFog: z.boolean(),
-      forecastOptions: z.object({
+      forecastOptions: z.optional(z.object({
         forecastType: z.number(),
         precipitation: z.number(),
         skies: z.number(),
@@ -436,7 +483,7 @@ const HostedSessions = z.object({
         weatherSeed: z.number(),
         windDir: z.number(),
         windSpeed: z.number()
-      }),
+      })),
       precipOption: z.number(),
       relHumidity: z.number(),
       simulatedStartTime: z.string(),
@@ -448,7 +495,7 @@ const HostedSessions = z.object({
       timeOfDay: z.number(),
       trackWater: z.number(),
       version: z.number(),
-      weatherSummary: z.object({
+      weatherSummary: z.optional(z.object({
         maxPrecipRate: z.number(),
         maxPrecipRateDesc: z.string(),
         precipChance: z.number(),
@@ -461,12 +508,16 @@ const HostedSessions = z.object({
         windHigh: z.number(),
         windLow: z.number(),
         windUnits: z.number()
-      }),
-      weatherUrl: z.string(),
+      })),
+      weatherUrl: z.optional(z.string()),
       windDir: z.number(),
       windUnits: z.number(),
-      windValue: z.number()
-    })
+      windValue: z.number(),
+      fog: z.optional(z.number()),
+      type: z.optional(z.number())
+    }),
+    adaptiveAiDifficulty: z.optional(z.number()),
+    sessionDesc: z.optional(z.string())
   })),
   success: z.boolean()
 });

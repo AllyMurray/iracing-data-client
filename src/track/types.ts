@@ -14,28 +14,28 @@ const TrackMapLayersSchema = z.object({
 // ---- Response Schemas ----
 
 const TrackAssets = z.record(z.string(), z.object({
-  coordinates: z.string(),
-  detailCopy: z.string(),
-  detailTechspecsCopy: z.optional(z.union([z.string(), z.null()])),
-  detailVideo: z.optional(z.union([z.string(), z.null()])),
-  folder: z.string(),
-  galleryImages: z.optional(z.union([z.string(), z.null()])),
-  galleryPrefix: z.optional(z.union([z.string(), z.null()])),
-  largeImage: z.string(),
-  logo: z.optional(z.union([z.string(), z.null()])),
-  north: z.string(),
-  numSvgImages: z.number(),
-  smallImage: z.string(),
-  trackId: z.number(),
-  trackMap: z.string(),
-  trackMapLayers: z.object({
+  coordinates: z.optional(z.nullable(z.string())),
+  detailCopy: z.optional(z.nullable(z.string())),
+  detailTechspecsCopy: z.optional(z.nullable(z.string())),
+  detailVideo: z.optional(z.nullable(z.string())),
+  folder: z.optional(z.nullable(z.string())),
+  galleryImages: z.optional(z.nullable(z.string())),
+  galleryPrefix: z.optional(z.nullable(z.string())),
+  largeImage: z.optional(z.nullable(z.string())),
+  logo: z.optional(z.nullable(z.string())),
+  north: z.optional(z.nullable(z.string())),
+  numSvgImages: z.optional(z.nullable(z.number())),
+  smallImage: z.optional(z.nullable(z.string())),
+  trackId: z.optional(z.nullable(z.number())),
+  trackMap: z.optional(z.nullable(z.string())),
+  trackMapLayers: z.optional(z.nullable(z.object({
     background: z.string(),
     inactive: z.string(),
     active: z.string(),
     pitroad: z.string(),
     startFinish: z.string(),
     turns: z.string()
-  })
+  })))
 }));
 const TrackGet = z.array(z.object({
   aiEnabled: z.boolean(),
@@ -46,7 +46,7 @@ const TrackGet = z.array(z.object({
   category: z.string(),
   categoryId: z.number(),
   closes: z.string(),
-  configName: z.string(),
+  configName: z.optional(z.string()),
   cornersPerLap: z.number(),
   created: z.string(),
   firstSale: z.string(),
@@ -64,14 +64,14 @@ const TrackGet = z.array(z.object({
   lapScoring: z.number(),
   latitude: z.number(),
   location: z.string(),
-  logo: z.optional(z.union([z.string(), z.null()])),
+  logo: z.string(),
   longitude: z.number(),
   maxCars: z.number(),
   nightLighting: z.boolean(),
   numberPitstalls: z.number(),
   opens: z.string(),
   packageId: z.number(),
-  pitRoadSpeedLimit: z.number(),
+  pitRoadSpeedLimit: z.optional(z.number()),
   price: z.number(),
   priority: z.number(),
   purchasable: z.boolean(),
@@ -80,7 +80,7 @@ const TrackGet = z.array(z.object({
   restartOnLeft: z.boolean(),
   retired: z.boolean(),
   searchFilters: z.string(),
-  siteUrl: z.string(),
+  siteUrl: z.optional(z.string()),
   sku: z.number(),
   smallImage: z.string(),
   soloLaps: z.number(),
@@ -96,7 +96,10 @@ const TrackGet = z.array(z.object({
   trackTypeText: z.string(),
   trackTypes: z.array(z.object({
     trackType: z.string()
-  }))
+  })),
+  priceDisplay: z.optional(z.string()),
+  nominalLapTime: z.optional(z.number()),
+  banking: z.optional(z.string())
 }));
 
 // ---- Response Types (inferred from schemas) ----

@@ -54,20 +54,20 @@ const StatsMemberRecap = z.object({
     avgFinishPosition: z.number(),
     laps: z.number(),
     lapsLed: z.number(),
-    favoriteCar: z.object({
+    favoriteCar: z.nullable(z.object({
       carId: z.number(),
       carName: z.string(),
       carImage: z.string()
-    }),
-    favoriteTrack: z.object({
+    })),
+    favoriteTrack: z.nullable(z.object({
       configName: z.string(),
       trackId: z.number(),
       trackLogo: z.string(),
       trackName: z.string()
-    })
+    }))
   }),
   success: z.boolean(),
-  season: z.optional(z.union([z.string(), z.null()])),
+  season: z.nullable(z.number()),
   custId: z.number()
 });
 const StatsMemberRecentRaces = z.object({
@@ -158,16 +158,16 @@ const StatsWorldRecords = z.object({
     success: z.boolean(),
     carId: z.number(),
     trackId: z.number(),
-    chunkInfo: z.object({
+    chunkInfo: z.nullable(z.object({
       chunkSize: z.number(),
       numChunks: z.number(),
       rows: z.number(),
       baseDownloadUrl: z.string(),
       chunkFileNames: z.array(z.string())
-    }),
+    })),
     lastUpdated: z.string(),
-    seasonYear: z.number(),
-    seasonQuarter: z.number()
+    seasonYear: z.optional(z.number()),
+    seasonQuarter: z.optional(z.number())
   })
 });
 
