@@ -897,8 +897,11 @@ export class IRacingClient {
     if (typeof data === 'object') {
       const mapped: Record<string, any> = {};
       for (const [key, value] of Object.entries(data)) {
-        // Convert snake_case to camelCase
-        const camelKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+        // Convert snake_case and kebab-case to camelCase
+        // prettier-ignore
+        const camelKey = key
+          .replace(/_([a-z0-9])/g, (_, char) => char.toUpperCase())
+          .replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
         mapped[camelKey] = this.mapResponseFromApi(value);
       }
       return mapped;
