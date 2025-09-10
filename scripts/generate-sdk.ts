@@ -6,6 +6,7 @@ import { toPascal, toCamelCase, toKebab } from "./generate-sdk/utils";
 import { type Root, type Flat, isEndpoint } from "./generate-sdk/types";
 import { generateZodSchemaFromSample } from "./generate-sdk/schema-generator";
 import { getTypeForValue, getSpecificObjectType, getCommonSchemasForSection } from "./generate-sdk/type-generator";
+import { generateSectionService, generateSectionTest } from "./generate-sdk/service-generator";
 
 /** ---- CLI args ---- */
 const INPUT = process.argv[2] ?? "docs/api/index.json";
