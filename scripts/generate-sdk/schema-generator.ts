@@ -272,9 +272,9 @@ ${objIndent}})`;
       // Handle special merged schema markers
       let zodType: string;
       if (value && typeof value === 'object' && '__mergedSchema' in value) {
-        zodType = value.__mergedSchema;
+        zodType = String(value.__mergedSchema);
       } else if (value && typeof value === 'object' && '__mergedArraySchema' in value) {
-        zodType = `z.array(${value.__mergedArraySchema})`;
+        zodType = `z.array(${String(value.__mergedArraySchema)})`;
       } else {
         zodType = getZodTypeForValue(value, depth + 1);
       }

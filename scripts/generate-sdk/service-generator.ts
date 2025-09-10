@@ -1,4 +1,4 @@
-import { toCamelCase, toPascal, toKebab } from "./utils";
+import { toCamelCase, toPascal } from "./utils";
 import type { Flat } from "./types";
 
 /** ---- Generate mock test parameters from parameter definitions ---- */
@@ -42,15 +42,20 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
   lines.push("");
   
   // Import sample data
-  lines.push("// Import sample data");
-  for (const endpoint of endpoints) {
-    if (endpoint.samplePath) {
-      const sampleVarName = toCamelCase(`${endpoint.name}_sample`);
-      lines.push(`import ${sampleVarName} from "../../${endpoint.samplePath}";`);
+  const sampleImports: string[] = [];
+  for (const ep of endpoints) {
+    if (ep.samplePath) {
+      const importName = toCamelCase(ep.method) + "Sample";
+      const relativePath = `../../${ep.samplePath}`;
+      sampleImports.push(`import ${importName} from "${relativePath}";`);
     }
   }
-  
-  lines.push("");
+
+  if (sampleImports.length > 0) {
+    lines.push("// Import sample data");
+    lines.push(...sampleImports);
+    lines.push("");
+  }
   lines.push(`describe("${toPascal(sectionName)}Service", () => {`);
   lines.push("  let mockFetch: MockInstance;");
   lines.push("  let client: IRacingClient;");
@@ -71,14 +76,15 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
   
   // Generate tests for each endpoint
   for (const endpoint of endpoints) {
-    if (!endpoint.samplePath) continue;
     
-    const methodName = toCamelCase(endpoint.name.split('.').pop() || '');
-    const sampleVarName = toCamelCase(`${endpoint.name}_sample`);
+    const methodName = toCamelCase(endpoint.name.replace(/\./g, "_"));
+    const sampleName = toCamelCase(endpoint.method) + "Sample";
     const mockParams = generateMockParams(endpoint.params);
     
     lines.push(`  describe("${methodName}()", () => {`);
-    lines.push(`    it("should fetch, transform, and validate ${sectionName} ${methodName} data", async () => {`);
+
+    if (endpoint.samplePath) {
+      lines.push(`    it("should fetch, transform, and validate ${sectionName} ${methodName} data", async () => {`);
     lines.push("      // Mock auth response");
     lines.push("      mockFetch.mockResolvedValueOnce({");
     lines.push("        ok: true,");
@@ -93,7 +99,7 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
     lines.push("      mockFetch.mockResolvedValueOnce({");
     lines.push("        ok: true,");
     lines.push('        headers: { get: () => "application/json" },');
-    lines.push(`        json: () => Promise.resolve(${sampleVarName})`);
+    lines.push(`        json: () => Promise.resolve(${sampleName})`);
     lines.push("      });");
     lines.push("");
     
@@ -116,14 +122,26 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
     lines.push("      );");
     lines.push("");
     lines.push("      // Verify API call");
-    lines.push("      expect(mockFetch).toHaveBeenCalledWith(");
-    lines.push(`        expect.stringContaining("${endpoint.url}"),`);
-    lines.push("        expect.objectContaining({");
-    lines.push("          headers: expect.objectContaining({");
-    lines.push('            Cookie: expect.stringContaining("irsso_membersv2=cookie123")');
-    lines.push("          })");
-    lines.push("        })");
-    lines.push("      );");
+    const hasParams = mockParams !== '{}';
+    if (hasParams) {
+      lines.push("      expect(mockFetch).toHaveBeenCalledWith(");
+      lines.push(`        expect.stringContaining("${endpoint.url}"),`);
+      lines.push("        expect.objectContaining({");
+      lines.push("          headers: expect.objectContaining({");
+      lines.push('            Cookie: expect.stringContaining("irsso_membersv2=cookie123")');
+      lines.push("          })");
+      lines.push("        })");
+      lines.push("      );");
+    } else {
+      lines.push("      expect(mockFetch).toHaveBeenCalledWith(");
+      lines.push(`        "${endpoint.url}",`);
+      lines.push("        expect.objectContaining({");
+      lines.push("          headers: expect.objectContaining({");
+      lines.push('            Cookie: expect.stringContaining("irsso_membersv2=cookie123")');
+      lines.push("          })");
+      lines.push("        })");
+      lines.push("      );");
+    }
     lines.push("");
     lines.push("      // Verify response structure and transformation");
     lines.push("      expect(result).toBeDefined();");
@@ -157,6 +175,38 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
     }
     
     lines.push("    });");
+    } else {
+      // No sample data - generate basic test
+      lines.push(`    it("should fetch ${sectionName} ${methodName} data", async () => {`);
+      lines.push("      // Mock auth response");
+      lines.push("      mockFetch.mockResolvedValueOnce({");
+      lines.push("        ok: true,");
+      lines.push("        json: () => Promise.resolve({");
+      lines.push('          authcode: "test123",');
+      lines.push('          ssoCookieValue: "cookie123",');
+      lines.push('          email: "test@example.com"');
+      lines.push("        })");
+      lines.push("      });");
+      lines.push("");
+      lines.push("      // Mock API response");
+      lines.push("      mockFetch.mockResolvedValueOnce({");
+      lines.push("        ok: true,");
+      lines.push('        headers: { get: () => "application/json" },');
+      lines.push("        json: () => Promise.resolve({})");
+      lines.push("      });");
+      lines.push("");
+
+      if (mockParams !== '{}') {
+        lines.push("      const testParams = " + mockParams + ";");
+        lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
+      } else {
+        lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}();`);
+      }
+
+      lines.push("      expect(mockFetch).toHaveBeenCalled();");
+      lines.push("    });");
+    }
+
     lines.push("  });");
     lines.push("");
   }
@@ -169,20 +219,30 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
 export function generateSectionService(sectionName: string, endpoints: Flat[]): string {
   const lines: string[] = [];
   
-  lines.push(`import { IRacingClient } from "../client";`);
+  lines.push(`import type { IRacingClient } from "../client";`);
   
-  // Import types and schemas
-  const typeImports: string[] = [];
+  // Import types and schemas - group params first, then responses
+  const paramImports: string[] = [];
+  const responseImports: string[] = [];
   const schemaImports: string[] = [];
   for (const endpoint of endpoints) {
+    const methodName = toCamelCase(endpoint.name.split('.').pop() || '');
+    const pascalMethodName = toPascal(methodName);
+    const hasParams = Object.keys(endpoint.params).length > 0;
+    
+    // Only include param types if endpoint actually has parameters
+    if (hasParams) {
+      paramImports.push(`${toPascal(sectionName)}${pascalMethodName}Params`);
+    }
+    
     if (endpoint.responseType) {
-      const methodName = toCamelCase(endpoint.name.split('.').pop() || '');
-      const pascalMethodName = toPascal(methodName);
       const schemaName = endpoint.responseType.replace('Response', '');
-      typeImports.push(`${pascalMethodName}Params`, `${endpoint.responseType}`);
+      responseImports.push(`${endpoint.responseType}`);
       schemaImports.push(schemaName);
     }
   }
+  
+  const typeImports = [...paramImports, ...responseImports];
   
   if (typeImports.length > 0) {
     lines.push(`import type { ${typeImports.join(", ")} } from "./types";`);
@@ -198,13 +258,24 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
   
   // Generate methods for each endpoint
   for (const endpoint of endpoints) {
-    if (!endpoint.responseType) continue;
     
     const methodName = toCamelCase(endpoint.name.split('.').pop() || '');
     const pascalMethodName = toPascal(methodName);
-    const paramsType = `${pascalMethodName}Params`;
-    const responseType = endpoint.responseType;
+    const paramsType = `${toPascal(sectionName)}${pascalMethodName}Params`;
+    const responseType = endpoint.responseType || 'unknown';
     const hasParams = Object.keys(endpoint.params).length > 0;
+    const schemaName = endpoint.responseType ? endpoint.responseType.replace('Response', '') : null;
+    
+    // Add JSDoc comments
+    lines.push(`  /**`);
+    // Use snake_case version for method name in comment
+    const endpointMethod = endpoint.name.split('.').pop() || '';
+    lines.push(`   * ${endpointMethod}`);
+    lines.push(`   * @see ${endpoint.url}`);
+    if (endpoint.samplePath) {
+      lines.push(`   * @sample ${endpoint.samplePath.replace('samples/', '')}`);
+    }
+    lines.push(`   */`);
     
     // Method signature
     if (hasParams) {
@@ -213,15 +284,20 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
       lines.push(`  async ${methodName}(): Promise<${responseType}> {`);
     }
     
-    // Method body
-    lines.push(`    return this.client.get<${responseType}>(`);
-    lines.push(`      "${endpoint.url}",`);
+    // Method body - single line format
     if (hasParams) {
-      lines.push(`      { params, schema: ${responseType.replace('Response', '')} }`);
+      if (schemaName) {
+        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { params, schema: ${schemaName} });`);
+      } else {
+        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { params });`);
+      }
     } else {
-      lines.push(`      { schema: ${responseType.replace('Response', '')} }`);
+      if (schemaName) {
+        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { schema: ${schemaName} });`);
+      } else {
+        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}");`);
+      }
     }
-    lines.push("    );");
     lines.push("  }");
     lines.push("");
   }
