@@ -11,6 +11,7 @@ dist/
 dist-ssr/
 build/
 out/
+lib/
 *.local
 
 # Environment files
