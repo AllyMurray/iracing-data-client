@@ -2,8 +2,25 @@
   "name": "iracing-data-client",
   "version": "0.0.1",
   "description": "Fully-typed HTTP Client for the iRacing Data API with automatic code generation, built-in caching, smart authentication, and comprehensive error handling.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "files": [
+    "lib/**/*",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build",
     "sdk:generate": "npx tsx scripts/generate-sdk.ts",
     "sdk:test": "npx tsx test-sdk.ts",
     "samples:scrape": "npx tsx scripts/scrape-api-samples.ts",
@@ -30,6 +47,7 @@
     "dotenv": "^17.2.2",
     "json-schema-to-zod": "^2.6.1",
     "quicktype-core": "^23.2.6",
+    "tsup": "^8.5.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
