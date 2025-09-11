@@ -46,9 +46,6 @@ function flatten(root: Root): Flat[] {
   }
 }
 
-
-
-
 /** ---- Main execution ---- */
 async function generateSDK() {
   const endpoints = flatten(index);
