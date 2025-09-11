@@ -38,10 +38,10 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Quick Example
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
-// Initialize the SDK
-const iracing = new IRacingSDK({
+// Initialize the Data Client
+const iracing = new IRacingDataClient({
   email: 'your-email@example.com',
   password: 'your-password'
 });
@@ -76,7 +76,7 @@ The SDK provides access to all iRacing Data API endpoints through organized serv
 
 <CardGrid>
 	<Card title="Installation" icon="download">
-		Learn how to install and configure the SDK in your project.
+		Learn how to install and configure the Data Client in your project.
 		[Get Started →](/getting-started/installation/)
 	</Card>
 	<Card title="Authentication" icon="key">
@@ -88,7 +88,7 @@ The SDK provides access to all iRacing Data API endpoints through organized serv
 		[Browse API →](/api/services/)
 	</Card>
 	<Card title="Examples" icon="code">
-		See real-world examples of using the SDK.
+		See real-world examples of using the Data Client.
 		[View Examples →](/examples/member-data/)
 	</Card>
 </CardGrid>

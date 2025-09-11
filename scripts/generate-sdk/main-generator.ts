@@ -1,7 +1,7 @@
 import { toPascal, toCamelCase, toKebab } from "./utils";
 
-/** ---- Generate main SDK class ---- */
-export function generateMainSDK(sections: string[]): string {
+/** ---- Generate main Data Client class ---- */
+export function generateMainDataClient(sections: string[]): string {
   const lines: string[] = [];
 
   lines.push(`/* AUTO-GENERATED — do not edit */`);
@@ -26,7 +26,7 @@ export function generateMainSDK(sections: string[]): string {
   }
 
   lines.push(``);
-  lines.push(`export class IRacingSDK {`);
+  lines.push(`export class IRacingDataClient {`);
   lines.push(`  private client: IRacingClient;`);
   lines.push(``);
 

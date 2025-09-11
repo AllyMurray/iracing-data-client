@@ -1,6 +1,6 @@
 ---
 title: Caching
-description: Understanding and optimizing the SDK's caching mechanisms
+description: Understanding and optimizing the Data Client's caching mechanisms
 ---
 
 import { Tabs, TabItem, Card, CardGrid, Aside } from '@astrojs/starlight/components';
@@ -19,7 +19,7 @@ The SDK automatically caches API responses based on expiration headers provided 
 4. **Automatic Expiration** - Cache entries expire based on API-provided times
 
 ```typescript
-const iracing = new IRacingSDK({ /* ... */ });
+const iracing = new IRacingDataClient({ /* ... */ });
 
 // First call - hits the API
 const cars1 = await iracing.car.get();  // Network request
@@ -97,7 +97,7 @@ Implement your own caching layer for more control:
 class CachedIRacingService {
   private cache = new Map<string, { data: any; expires: number }>();
   
-  constructor(private iracing: IRacingSDK) {}
+  constructor(private iracing: IRacingDataClient) {}
   
   async getMemberInfo(
     custId: number,
@@ -251,7 +251,7 @@ class LRUCache<T> {
 Warm up the cache on application start:
 
 ```typescript
-async function preloadCache(iracing: IRacingSDK) {
+async function preloadCache(iracing: IRacingDataClient) {
   console.log('Preloading cache...');
   
   const tasks = [
@@ -438,7 +438,7 @@ setInterval(() => {
 
 <CardGrid>
   <Card title="✅ Trust SDK Caching">
-    Let the SDK handle caching for most use cases - it's optimized for the API
+    Let the Data Client handle caching for most use cases - it's optimized for the API
   </Card>
   <Card title="✅ Cache Static Data">
     Aggressively cache data that rarely changes (cars, tracks, series)

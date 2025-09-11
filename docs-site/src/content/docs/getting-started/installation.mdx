@@ -11,7 +11,7 @@ Get started with the iRacing Data Client SDK in your project.
 
 ## Prerequisites
 
-Before installing the SDK, ensure you have:
+Before installing the Data Client, ensure you have:
 
 - **Node.js 18+** or a modern browser environment with fetch support
 - **npm**, **yarn**, or **pnpm** package manager
@@ -42,16 +42,16 @@ Before installing the SDK, ensure you have:
 
 <Steps>
 
-1. **Import the SDK**
+1. **Import the Data Client**
 
    ```typescript
-   import { IRacingSDK } from 'iracing-data-client';
+   import { IRacingDataClient } from 'iracing-data-client';
    ```
 
 2. **Initialize with credentials**
 
    ```typescript
-   const iracing = new IRacingSDK({
+   const iracing = new IRacingDataClient({
      email: 'your-email@example.com',
      password: 'your-password'
    });
@@ -94,7 +94,7 @@ interface IRacingClientOptions {
     The simplest method - provide your iRacing credentials directly:
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'your-email@example.com',
       password: 'your-password'
     });
@@ -109,7 +109,7 @@ interface IRacingClientOptions {
     Recommended approach for production:
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL,
       password: process.env.IRACING_PASSWORD
     });
@@ -126,7 +126,7 @@ interface IRacingClientOptions {
     For advanced authentication scenarios:
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       headers: {
         'Cookie': 'your-session-cookie',
         'User-Agent': 'MyApp/1.0'
@@ -178,7 +178,7 @@ The SDK includes TypeScript definitions out of the box. For the best experience:
     Works out of the box with native fetch support:
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'your-email@example.com',
       password: 'your-password'
     });
@@ -195,7 +195,7 @@ The SDK includes TypeScript definitions out of the box. For the best experience:
     ```typescript
     import fetch from 'node-fetch';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'your-email@example.com',
       password: 'your-password',
       fetchFn: fetch as any
@@ -217,7 +217,7 @@ The SDK can be used in browser environments with some considerations:
 ```typescript
 // In a secure backend API route or serverless function
 export async function getIRacingData() {
-  const iracing = new IRacingSDK({
+  const iracing = new IRacingDataClient({
     email: process.env.IRACING_EMAIL,
     password: process.env.IRACING_PASSWORD
   });
@@ -240,9 +240,9 @@ The iRacing API does not support CORS for browser requests. You'll need to:
   <TabItem label="Next.js">
     ```typescript
     // app/api/iracing/route.ts
-    import { IRacingSDK } from 'iracing-data-client';
+    import { IRacingDataClient } from 'iracing-data-client';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL!,
       password: process.env.IRACING_PASSWORD!
     });
@@ -258,10 +258,10 @@ The iRacing API does not support CORS for browser requests. You'll need to:
     ```typescript
     // server.ts
     import express from 'express';
-    import { IRacingSDK } from 'iracing-data-client';
+    import { IRacingDataClient } from 'iracing-data-client';
     
     const app = express();
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL!,
       password: process.env.IRACING_PASSWORD!
     });
@@ -276,9 +276,9 @@ The iRacing API does not support CORS for browser requests. You'll need to:
   <TabItem label="Deno">
     ```typescript
     // main.ts
-    import { IRacingSDK } from 'npm:iracing-data-client';
+    import { IRacingDataClient } from 'npm:iracing-data-client';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: Deno.env.get('IRACING_EMAIL')!,
       password: Deno.env.get('IRACING_PASSWORD')!
     });
@@ -294,11 +294,11 @@ The iRacing API does not support CORS for browser requests. You'll need to:
 Test your setup with this simple script:
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
 async function testConnection() {
   try {
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL!,
       password: process.env.IRACING_PASSWORD!
     });
@@ -349,7 +349,7 @@ testConnection();
 
 ## Next Steps
 
-Now that you have the SDK installed, check out:
+Now that you have the Data Client installed, check out:
 
 - [Quick Start Guide](/getting-started/quick-start/) - Build your first application
 - [Authentication Guide](/getting-started/authentication/) - Learn about authentication options

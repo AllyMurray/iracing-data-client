@@ -35,7 +35,7 @@ export * from "./team/types";
 export * from "./time-attack/types";
 export * from "./track/types";
 
-export class IRacingSDK {
+export class IRacingDataClient {
   private client: IRacingClient;
 
   public car: CarService;

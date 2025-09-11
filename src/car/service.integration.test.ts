@@ -1,13 +1,13 @@
 import * as dotenv from "dotenv";
 import { describe, it, expect, beforeAll } from "vitest";
-import { IRacingSDK } from "../index";
+import { IRacingDataClient } from "../index";
 import type { CarAssetsResponse, CarGetResponse } from "./types";
 
 // Load environment variables
 dotenv.config();
 
 describe.skip("CarService Integration Tests", () => {
-  let sdk: IRacingSDK;
+  let dataClient: IRacingDataClient;
 
   beforeAll(() => {
     const email = process.env.EMAIL;
@@ -17,7 +17,7 @@ describe.skip("CarService Integration Tests", () => {
       throw new Error("Missing EMAIL or PASSWORD in .env file");
     }
 
-    sdk = new IRacingSDK({
+    dataClient = new IRacingDataClient({
       email,
       password,
     });
@@ -25,7 +25,7 @@ describe.skip("CarService Integration Tests", () => {
 
   describe("car.get()", () => {
     it("should return an array of cars with required fields", async () => {
-      const cars = await sdk.car.get();
+      const cars = await dataClient.car.get();
 
       expect(Array.isArray(cars)).toBe(true);
       expect(cars.length).toBeGreaterThan(0);
@@ -49,7 +49,7 @@ describe.skip("CarService Integration Tests", () => {
 
   describe("car.assets()", () => {
     it("should return an object of car assets with required fields", async () => {
-      const assets = await sdk.car.assets();
+      const assets = await dataClient.car.assets();
 
       expect(typeof assets).toBe('object');
       expect(Array.isArray(assets)).toBe(false);
@@ -79,8 +79,8 @@ describe.skip("CarService Integration Tests", () => {
     it("should be able to call both methods successfully", async () => {
       // Just test that both calls work without timing out
       // We'll get the actual data structure from the individual tests above
-      const carsPromise = sdk.car.get();
-      const assetsPromise = sdk.car.assets();
+      const carsPromise = dataClient.car.get();
+      const assetsPromise = dataClient.car.assets();
 
       const [cars, assets] = await Promise.all([carsPromise, assetsPromise]);
 

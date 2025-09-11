@@ -1,6 +1,6 @@
 # iRacing Data Client
 
-A TypeScript SDK for the iRacing Data API with full type safety and authentication handling.
+A TypeScript Data Client for the iRacing Data API with full type safety and authentication handling.
 
 ## Features
 
@@ -25,20 +25,20 @@ yarn add iracing-data-client
 ## Quick Start
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
 // Initialize with credentials
-const sdk = new IRacingSDK({
+const dataClient = new IRacingDataClient({
   email: 'your-email@example.com',
   password: 'your-password'
 });
 
 // Fetch track data
-const tracks = await sdk.track.get();
+const tracks = await dataClient.track.get();
 console.log(tracks);
 
 // Get member info
-const member = await sdk.member.get({ custIds: [123456] });
+const member = await dataClient.member.get({ custIds: [123456] });
 console.log(member);
 ```
 
@@ -53,7 +53,7 @@ PASSWORD=your-iracing-password
 
 ## Available Services
 
-The SDK is organized into the following services:
+The Data Client is organized into the following services:
 
 - **car** - Car assets and information
 - **carclass** - Car class data
@@ -73,13 +73,13 @@ The SDK is organized into the following services:
 
 ## Error Handling
 
-The SDK includes proper error handling for common iRacing API scenarios:
+The Data Client includes proper error handling for common iRacing API scenarios:
 
 ```typescript
-import { IRacingSDK, IRacingError } from 'iracing-data-client';
+import { IRacingDataClient, IRacingError } from 'iracing-data-client';
 
 try {
-  const data = await sdk.member.get({ custIds: [123] });
+  const data = await dataClient.member.get({ custIds: [123] });
 } catch (error) {
   if (error instanceof IRacingError) {
     if (error.isMaintenanceMode) {
@@ -97,7 +97,7 @@ try {
 ## Configuration Options
 
 ```typescript
-const sdk = new IRacingSDK({
+const dataClient = new IRacingDataClient({
   email: 'your-email@example.com',        // iRacing account email
   password: 'your-password',              // iRacing account password
   headers: { 'User-Agent': 'MyApp/1.0' }, // Custom headers (optional)
@@ -110,14 +110,14 @@ const sdk = new IRacingSDK({
 
 ### Scripts
 
-- `npm run sdk:generate` - Generate SDK from API documentation
-- `npm run sdk:test` - Test the SDK with live API calls
+- `npm run sdk:generate` - Generate Data Client from API documentation
+- `npm run sdk:test` - Test the Data Client with live API calls
 - `npm run typecheck` - Run TypeScript type checking
 - `npm run test` - Run unit tests
 
-### Generating the SDK
+### Generating the Data Client
 
-The SDK is auto-generated from iRacing's API documentation:
+The Data Client is auto-generated from iRacing's API documentation:
 
 ```bash
 npm run sdk:generate
@@ -131,7 +131,7 @@ This creates:
 
 ### Testing
 
-Test the SDK against the live iRacing API:
+Test the Data Client against the live iRacing API:
 
 ```bash
 npm run sdk:test
@@ -143,7 +143,7 @@ Make sure your credentials are in the `.env` file.
 
 ### Authentication
 
-The SDK handles iRacing's cookie-based authentication automatically. On first request, it will:
+The Data Client handles iRacing's cookie-based authentication automatically. On first request, it will:
 
 1. Log in with your credentials
 2. Store authentication cookies
@@ -156,28 +156,28 @@ All endpoints return fully typed responses. For example:
 
 ```typescript
 // Member service
-const members = await sdk.member.get({ custIds: [123456] });
+const members = await dataClient.member.get({ custIds: [123456] });
 // members is typed as MemberGetResponse[]
 
 // Track service  
-const tracks = await sdk.track.get();
+const tracks = await dataClient.track.get();
 // tracks is typed as TrackGetResponse (TrackGetItem[])
 ```
 
 ### Parameter Validation
 
-When `validateParams: true` is set, the SDK validates all parameters using Zod schemas:
+When `validateParams: true` is set, the Data Client validates all parameters using Zod schemas:
 
 ```typescript
-const sdk = new IRacingSDK({ 
+const dataClient = new IRacingDataClient({ 
   email: 'test@example.com',
   password: 'password',
   validateParams: true 
 });
 
 // This will throw if seasonId is not a number
-await sdk.season.list({ seasonId: 'invalid' }); // ❌ Validation error
-await sdk.season.list({ seasonId: 12345 });     // ✅ Valid
+await dataClient.season.list({ seasonId: 'invalid' }); // ❌ Validation error
+await dataClient.season.list({ seasonId: 12345 });     // ✅ Valid
 ```
 
 ## Contributing
@@ -197,4 +197,4 @@ ISC License - see LICENSE file for details.
 
 ## Disclaimer
 
-This is an unofficial SDK for the iRacing Data API. iRacing is a trademark of iRacing.com Motorsport Simulations, LLC.
+This is an unofficial Data Client for the iRacing Data API. iRacing is a trademark of iRacing.com Motorsport Simulations, LLC.

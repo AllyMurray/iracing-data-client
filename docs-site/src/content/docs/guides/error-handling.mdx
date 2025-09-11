@@ -58,9 +58,9 @@ class IRacingError extends Error {
 ### Simple Try-Catch
 
 ```typescript
-import { IRacingSDK, IRacingError } from 'iracing-data-client';
+import { IRacingDataClient, IRacingError } from 'iracing-data-client';
 
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL!,
   password: process.env.IRACING_PASSWORD!
 });
@@ -371,7 +371,7 @@ try {
 ### Mocking Errors in Tests
 
 ```typescript
-import { IRacingSDK, IRacingError } from 'iracing-data-client';
+import { IRacingDataClient, IRacingError } from 'iracing-data-client';
 
 jest.mock('iracing-data-client');
 
@@ -389,9 +389,9 @@ describe('Error Handling', () => {
       }
     };
     
-    (IRacingSDK as jest.Mock).mockImplementation(() => mockSDK);
+    (IRacingDataClient as jest.Mock).mockImplementation(() => mockSDK);
     
-    const iracing = new IRacingSDK({ email: 'test', password: 'test' });
+    const iracing = new IRacingDataClient({ email: 'test', password: 'test' });
     
     await expect(iracing.member.info()).rejects.toThrow(mockError);
     expect(mockError.isMaintenanceMode).toBe(true);

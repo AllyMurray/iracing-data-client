@@ -6,7 +6,7 @@ import { type Root, type Flat, type Endpoint, isEndpoint } from "./generate-sdk/
 import { generateSectionService, generateSectionTest } from "./generate-sdk/service-generator";
 import { generateClientBase } from "./generate-sdk/client-generator";
 import { generateSectionTypes } from "./generate-sdk/section-types-generator";
-import { generateMainSDK } from "./generate-sdk/main-generator";
+import { generateMainDataClient } from "./generate-sdk/main-generator";
 
 /** ---- CLI args ---- */
 const INPUT = process.argv[2] ?? "docs/api/index.json";
@@ -47,7 +47,7 @@ function flatten(root: Root): Flat[] {
 }
 
 /** ---- Main execution ---- */
-async function generateSDK() {
+async function generateDataClient() {
   const endpoints = flatten(index);
   const bySection = new Map<string, Flat[]>();
 
@@ -92,15 +92,15 @@ async function generateSDK() {
     console.log(`Generated ${testFile}`);
   }
 
-  // Generate main SDK file
-  fs.writeFileSync(path.join(OUT_DIR, "index.ts"), generateMainSDK(sections), "utf8");
+  // Generate main Data Client file
+  fs.writeFileSync(path.join(OUT_DIR, "index.ts"), generateMainDataClient(sections), "utf8");
   console.log(`Generated ${OUT_DIR}/index.ts`);
 
-  console.log(`\nSuccessfully generated typed SDK with ${endpoints.length} endpoints across ${sections.length} sections!`);
+  console.log(`\nSuccessfully generated typed Data Client with ${endpoints.length} endpoints across ${sections.length} sections!`);
 }
 
 // Run the generator
-generateSDK().catch(error => {
+generateDataClient().catch(error => {
   console.error("Fatal error:", error);
   process.exit(1);
 });

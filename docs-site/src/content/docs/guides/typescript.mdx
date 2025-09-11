@@ -31,7 +31,7 @@ The SDK automatically infers all types - no manual type annotations needed:
 
 ```typescript
 // TypeScript knows all the types automatically
-const iracing = new IRacingSDK({ /* ... */ });
+const iracing = new IRacingDataClient({ /* ... */ });
 
 // 'info' is typed as MemberInfoResponse
 const info = await iracing.member.info();
@@ -48,7 +48,7 @@ Import specific types when needed:
 
 ```typescript
 import { 
-  IRacingSDK,
+  IRacingDataClient,
   type MemberInfoResponse,
   type CarGetResponse,
   type License
@@ -355,7 +355,7 @@ Create type-safe data repositories:
 
 ```typescript
 class MemberRepository {
-  constructor(private iracing: IRacingSDK) {}
+  constructor(private iracing: IRacingDataClient) {}
   
   async findById(id: number): Promise<Member | null> {
     const response = await this.iracing.member.get({
@@ -417,7 +417,7 @@ class MemberRepository {
     import type { MemberInfoResponse } from 'iracing-data-client';
     
     // Import both runtime and types
-    import { IRacingSDK, type IRacingError } from 'iracing-data-client';
+    import { IRacingDataClient, type IRacingError } from 'iracing-data-client';
     ```
   </TabItem>
 </Tabs>

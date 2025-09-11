@@ -33,9 +33,9 @@ The simplest authentication method using your iRacing account credentials:
 <Tabs>
   <TabItem label="Basic Setup">
     ```typescript
-    import { IRacingSDK } from 'iracing-data-client';
+    import { IRacingDataClient } from 'iracing-data-client';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'your-email@example.com',
       password: 'your-password'
     });
@@ -45,9 +45,9 @@ The simplest authentication method using your iRacing account credentials:
   <TabItem label="With Environment Variables">
     ```typescript
     // Recommended for production
-    import { IRacingSDK } from 'iracing-data-client';
+    import { IRacingDataClient } from 'iracing-data-client';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL,
       password: process.env.IRACING_PASSWORD
     });
@@ -71,10 +71,10 @@ The simplest authentication method using your iRacing account credentials:
     };
     
     // app.ts
-    import { IRacingSDK } from 'iracing-data-client';
+    import { IRacingDataClient } from 'iracing-data-client';
     import { config } from './config';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: config.iracing.email,
       password: config.iracing.password
     });
@@ -87,7 +87,7 @@ The simplest authentication method using your iRacing account credentials:
 For advanced scenarios where you manage authentication externally:
 
 ```typescript
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   headers: {
     'Cookie': 'irsso_members=your-session-cookie',
     'User-Agent': 'MyApp/1.0',
@@ -109,7 +109,7 @@ Reuse authentication tokens across instances:
 
 ```typescript
 // First instance - authenticate normally
-const iracing1 = new IRacingSDK({
+const iracing1 = new IRacingDataClient({
   email: process.env.IRACING_EMAIL,
   password: process.env.IRACING_PASSWORD
 });
@@ -121,7 +121,7 @@ await iracing1.member.info();
 const authCookies = iracing1.getAuthCookies(); // Note: This is pseudocode
 
 // Second instance - reuse the session
-const iracing2 = new IRacingSDK({
+const iracing2 = new IRacingDataClient({
   headers: {
     'Cookie': authCookies
   }
@@ -140,7 +140,7 @@ const iracing2 = new IRacingSDK({
   </Card>
   
   <Card title="🚫 Client-Side Security" icon="warning">
-    Never use the SDK with credentials in browser JavaScript. Always authenticate on the backend.
+    Never use the Data Client with credentials in browser JavaScript. Always authenticate on the backend.
   </Card>
   
   <Card title="♻️ Rotate Credentials" icon="refresh">
@@ -166,7 +166,7 @@ NODE_ENV=development
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL!,
   password: process.env.IRACING_PASSWORD!
 });
@@ -187,7 +187,7 @@ const iracing = new IRacingSDK({
   <TabItem label="Vercel">
     ```typescript
     // Set environment variables in Vercel Dashboard
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL!,
       password: process.env.IRACING_PASSWORD!
     });
@@ -215,7 +215,7 @@ const iracing = new IRacingSDK({
     export const handler = async () => {
       const secrets = await getSecrets();
       
-      const iracing = new IRacingSDK({
+      const iracing = new IRacingDataClient({
         email: secrets.email,
         password: secrets.password
       });
@@ -302,7 +302,7 @@ const iracing = new IRacingSDK({
     
     ```typescript
     try {
-      const iracing = new IRacingSDK({
+      const iracing = new IRacingDataClient({
         email: email.trim(), // Remove whitespace
         password: password.trim()
       });
@@ -322,7 +322,7 @@ const iracing = new IRacingSDK({
     
     ```typescript
     // Force re-authentication
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: process.env.IRACING_EMAIL,
       password: process.env.IRACING_PASSWORD
     });
@@ -369,11 +369,11 @@ const iracing = new IRacingSDK({
 
 ### Unit Testing
 
-Mock the SDK for unit tests:
+Mock the Data Client for unit tests:
 
 ```typescript
 // __mocks__/iracing-data-client.ts
-export const IRacingSDK = jest.fn().mockImplementation(() => ({
+export const IRacingDataClient = jest.fn().mockImplementation(() => ({
   member: {
     info: jest.fn().mockResolvedValue({
       custId: 123456,
@@ -385,13 +385,13 @@ export const IRacingSDK = jest.fn().mockImplementation(() => ({
 
 ```typescript
 // app.test.ts
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
 jest.mock('iracing-data-client');
 
 describe('App', () => {
   it('should fetch member info', async () => {
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'test@example.com',
       password: 'test'
     });
@@ -408,11 +408,11 @@ Test with real credentials in a controlled environment:
 
 ```typescript
 // test-auth.ts
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
 async function testAuth() {
   // Use test account credentials
-  const iracing = new IRacingSDK({
+  const iracing = new IRacingDataClient({
     email: process.env.TEST_IRACING_EMAIL!,
     password: process.env.TEST_IRACING_PASSWORD!
   });
@@ -440,13 +440,13 @@ Handle multiple iRacing accounts:
 
 ```typescript
 class IRacingMultiAccount {
-  private accounts: Map<string, IRacingSDK> = new Map();
+  private accounts: Map<string, IRacingDataClient> = new Map();
   
   addAccount(name: string, email: string, password: string) {
-    this.accounts.set(name, new IRacingSDK({ email, password }));
+    this.accounts.set(name, new IRacingDataClient({ email, password }));
   }
   
-  getAccount(name: string): IRacingSDK {
+  getAccount(name: string): IRacingDataClient {
     const account = this.accounts.get(name);
     if (!account) throw new Error(`Account ${name} not found`);
     return account;

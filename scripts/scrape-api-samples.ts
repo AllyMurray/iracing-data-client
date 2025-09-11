@@ -15,7 +15,7 @@
  *   
  * Features:
  * - Multiple parameter variations per endpoint for richer data
- * - Automatic merging of sample variations in SDK generation  
+ * - Automatic merging of sample variations in Data Client generation  
  * - Rate limiting to be respectful to the API
  * - Comprehensive error handling and reporting
  * - Force refresh mode to update existing samples

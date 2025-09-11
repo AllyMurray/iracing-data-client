@@ -16,9 +16,9 @@ This guide demonstrates various ways to fetch and work with member data using th
 Fetch information about the authenticated member:
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL!,
   password: process.env.IRACING_PASSWORD!
 });

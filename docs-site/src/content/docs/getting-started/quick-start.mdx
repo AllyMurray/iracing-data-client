@@ -33,7 +33,7 @@ A simple Node.js application that:
    npm init -y
    ```
 
-2. **Install the SDK**
+2. **Install the Data Client**
 
    ```bash
    npm install iracing-data-client
@@ -59,13 +59,13 @@ A simple Node.js application that:
 
    ```typescript
    // app.ts
-   import { IRacingSDK, IRacingError } from 'iracing-data-client';
+   import { IRacingDataClient, IRacingError } from 'iracing-data-client';
    import 'dotenv/config'; // Load environment variables
 
    async function main() {
      try {
-       // Initialize the SDK
-       const iracing = new IRacingSDK({
+       // Initialize the Data Client
+       const iracing = new IRacingDataClient({
          email: process.env.IRACING_EMAIL!,
          password: process.env.IRACING_PASSWORD!
        });
@@ -226,13 +226,13 @@ Here are more complete example applications:
 
 ```typescript
 import { Client, GatewayIntentBits } from 'discord.js';
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
 const discord = new Client({ 
   intents: [GatewayIntentBits.Guilds] 
 });
 
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL!,
   password: process.env.IRACING_PASSWORD!
 });
@@ -264,10 +264,10 @@ discord.on('interactionCreate', async interaction => {
 
 ```typescript
 import express from 'express';
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
 const app = express();
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL!,
   password: process.env.IRACING_PASSWORD!
 });

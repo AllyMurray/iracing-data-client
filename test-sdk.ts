@@ -1,11 +1,11 @@
 #!/usr/bin/env tsx
 import * as dotenv from "dotenv";
-import { IRacingSDK, IRacingError } from "./src/index.ts";
+import { IRacingDataClient, IRacingError } from "./src/index.ts";
 
 // Load environment variables
 dotenv.config();
 
-async function testSDK() {
+async function testDataClient() {
   const email = process.env.EMAIL;
   const password = process.env.PASSWORD;
 
@@ -14,12 +14,12 @@ async function testSDK() {
     process.exit(1);
   }
 
-  console.log("🏁 Testing iRacing SDK...");
+  console.log("🏁 Testing iRacing Data Client...");
   console.log(`📧 Using email: ${email.replace(/(.{2}).*(@.*)/, '$1***$2')}`);
 
   try {
-    // Initialize the SDK
-    const sdk = new IRacingSDK({
+    // Initialize the Data Client
+    const dataClient = new IRacingDataClient({
       email,
       password,
     });
@@ -28,7 +28,7 @@ async function testSDK() {
 
     // Test a simple endpoint - get constants categories
     console.log("📊 Fetching constants categories...");
-    const categories = await sdk.constants.categories();
+    const categories = await dataClient.constants.categories();
     
     console.log("✅ Success! Got categories:");
     console.log(`   Found ${Array.isArray(categories) ? categories.length : 'unknown count'} categories`);
@@ -42,7 +42,7 @@ async function testSDK() {
 
     // Test another endpoint - get car data
     console.log("\n🏎️  Fetching car data...");
-    const cars = await sdk.car.get();
+    const cars = await dataClient.car.get();
     
     console.log("✅ Success! Got cars:");
     console.log(`   Found ${Array.isArray(cars) ? cars.length : 'unknown count'} cars`);
@@ -54,7 +54,7 @@ async function testSDK() {
       });
     }
 
-    console.log("\n🎉 SDK test completed successfully!");
+    console.log("\n🎉 Data Client test completed successfully!");
 
   } catch (error) {
     if (error instanceof IRacingError) {
@@ -79,7 +79,7 @@ async function testSDK() {
 }
 
 // Run the test
-testSDK().catch(error => {
+testDataClient().catch(error => {
   console.error("🚨 Fatal error:", error);
   process.exit(1);
 });

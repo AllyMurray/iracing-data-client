@@ -1,6 +1,6 @@
 ---
 title: Client API
-description: API reference for the IRacingClient and IRacingSDK classes
+description: API reference for the IRacingClient and IRacingDataClient classes
 ---
 
 import { Tabs, TabItem, Card, Aside, Badge } from '@astrojs/starlight/components';
@@ -9,14 +9,14 @@ import { Tabs, TabItem, Card, Aside, Badge } from '@astrojs/starlight/components
 
 The client provides the core functionality for connecting to the iRacing Data API, handling authentication, and managing requests.
 
-## IRacingSDK
+## IRacingDataClient
 
-The main entry point for using the SDK.
+The main entry point for using the Data Client.
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
-const iracing = new IRacingSDK(options);
+const iracing = new IRacingDataClient(options);
 ```
 
 ### Constructor Options
@@ -45,7 +45,7 @@ interface IRacingClientOptions {
     Your iRacing account email address. Required unless using custom headers.
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'user@example.com'
     });
     ```
@@ -56,7 +56,7 @@ interface IRacingClientOptions {
     Your iRacing account password. Required unless using custom headers.
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       password: 'secure-password'
     });
     ```
@@ -67,7 +67,7 @@ interface IRacingClientOptions {
     Custom HTTP headers for authentication. Alternative to email/password.
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       headers: {
         'Cookie': 'session-cookie',
         'User-Agent': 'MyApp/1.0'
@@ -83,7 +83,7 @@ interface IRacingClientOptions {
     ```typescript
     import fetch from 'node-fetch';
     
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'user@example.com',
       password: 'password',
       fetchFn: fetch as any
@@ -96,7 +96,7 @@ interface IRacingClientOptions {
     Enable or disable parameter validation using Zod schemas.
     
     ```typescript
-    const iracing = new IRacingSDK({
+    const iracing = new IRacingDataClient({
       email: 'user@example.com',
       password: 'password',
       validateParams: false  // Disable validation
@@ -110,7 +110,7 @@ interface IRacingClientOptions {
 The SDK instance provides access to all service classes:
 
 ```typescript
-const iracing = new IRacingSDK(options);
+const iracing = new IRacingDataClient(options);
 
 // Access services as properties
 iracing.car              // CarService
@@ -284,9 +284,9 @@ import type {
 ### Basic Setup
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL,
   password: process.env.IRACING_PASSWORD
 });
@@ -295,10 +295,10 @@ const iracing = new IRacingSDK({
 ### With Custom Fetch
 
 ```typescript
-import { IRacingSDK } from 'iracing-data-client';
+import { IRacingDataClient } from 'iracing-data-client';
 import fetch from 'node-fetch';
 
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL,
   password: process.env.IRACING_PASSWORD,
   fetchFn: fetch as any
@@ -308,7 +308,7 @@ const iracing = new IRacingSDK({
 ### With Custom Headers
 
 ```typescript
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   headers: {
     'Cookie': sessionCookie,
     'User-Agent': 'MyRacingApp/2.0',
@@ -320,7 +320,7 @@ const iracing = new IRacingSDK({
 ### Disable Validation
 
 ```typescript
-const iracing = new IRacingSDK({
+const iracing = new IRacingDataClient({
   email: process.env.IRACING_EMAIL,
   password: process.env.IRACING_PASSWORD,
   validateParams: false  // Skip Zod validation
@@ -354,7 +354,7 @@ Best practices:
 The client reuses the same authenticated session across all requests:
 
 ```typescript
-const iracing = new IRacingSDK(options);
+const iracing = new IRacingDataClient(options);
 
 // All these requests share the same session
 await iracing.member.info();
@@ -367,12 +367,12 @@ await iracing.track.assets();
 ### Multiple Accounts
 
 ```typescript
-const mainAccount = new IRacingSDK({
+const mainAccount = new IRacingDataClient({
   email: process.env.MAIN_EMAIL,
   password: process.env.MAIN_PASSWORD
 });
 
-const altAccount = new IRacingSDK({
+const altAccount = new IRacingDataClient({
   email: process.env.ALT_EMAIL,
   password: process.env.ALT_PASSWORD
 });
@@ -386,10 +386,10 @@ const altInfo = await altAccount.member.info();
 
 ```typescript
 class IRacingWrapper {
-  private sdk: IRacingSDK;
+  private sdk: IRacingDataClient;
   
   constructor(options: IRacingClientOptions) {
-    this.sdk = new IRacingSDK(options);
+    this.sdk = new IRacingDataClient(options);
   }
   
   async safeRequest<T>(
