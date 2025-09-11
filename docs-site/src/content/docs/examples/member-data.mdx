@@ -1,0 +1,365 @@
+---
+title: Fetching Member Data
+description: Examples of working with member profiles and statistics
+---
+
+import { Tabs, TabItem, Aside, Code } from '@astrojs/starlight/components';
+
+# Fetching Member Data
+
+This guide demonstrates various ways to fetch and work with member data using the iRacing Data Client SDK.
+
+## Basic Member Information
+
+### Get Current Member
+
+Fetch information about the authenticated member:
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+
+async function getCurrentMember() {
+  const info = await iracing.member.info();
+  
+  console.log('Name:', info.displayName);
+  console.log('Customer ID:', info.custId);
+  console.log('Member Since:', info.memberSince);
+  console.log('Club:', info.clubName);
+  
+  // Check licenses
+  info.licenses.forEach(license => {
+    const sr = (license.safetyRating / 100).toFixed(2);
+    console.log(`${license.categoryName}: Class ${license.licenseLevel} (SR: ${sr})`);
+  });
+}
+```
+
+### Get Other Members
+
+Fetch data for specific members by customer ID:
+
+```typescript
+async function getMembersByIds(customerIds: number[]) {
+  const response = await iracing.member.get({
+    customerIds,
+    includeLicenses: true
+  });
+  
+  return response.members.map(member => ({
+    id: member.custId,
+    name: member.displayName,
+    irating: member.licenses[0]?.irating || 0,
+    safetyRating: member.licenses[0]?.safetyRating || 0
+  }));
+}
+
+// Get multiple members
+const members = await getMembersByIds([123456, 789012, 345678]);
+members.forEach(m => {
+  console.log(`${m.name}: iR ${m.irating}`);
+});
+```
+
+## Complete Member Profile
+
+Build a comprehensive member profile:
+
+```typescript
+interface CompleteMemberProfile {
+  basic: MemberInfo;
+  stats: MemberCareerStats;
+  recentRaces: RecentRace[];
+  awards: Award[];
+  bestLaps: BestLap[];
+}
+
+async function getCompleteProfile(custId: number): Promise<CompleteMemberProfile> {
+  // Fetch all data in parallel for efficiency
+  const [basic, career, recent, awards, bests] = await Promise.all([
+    iracing.member.get({ customerIds: [custId] }),
+    iracing.stats.memberCareer({ custId }),
+    iracing.stats.memberRecentRaces({ custId }),
+    iracing.member.awards({ custId }),
+    iracing.stats.memberBests({ custId, carId: 0 })
+  ]);
+  
+  return {
+    basic: basic.members[0],
+    stats: career.stats[0],
+    recentRaces: recent.races,
+    awards: awards.awards,
+    bestLaps: bests.stats
+  };
+}
+
+// Usage
+const profile = await getCompleteProfile(123456);
+console.log(`${profile.basic.displayName}'s Profile:`);
+console.log(`Wins: ${profile.stats.wins}`);
+console.log(`Recent races: ${profile.recentRaces.length}`);
+console.log(`Awards earned: ${profile.awards.length}`);
+```
+
+## Member Statistics
+
+### Career Statistics
+
+Get comprehensive career statistics:
+
+```typescript
+async function getCareerStats(custId: number) {
+  const career = await iracing.stats.memberCareer({ custId });
+  
+  career.stats.forEach(stat => {
+    console.log(`\n${stat.categoryName}:`);
+    console.log(`  Starts: ${stat.starts}`);
+    console.log(`  Wins: ${stat.wins} (${((stat.wins / stat.starts) * 100).toFixed(1)}%)`);
+    console.log(`  Top 5s: ${stat.top5s}`);
+    console.log(`  Avg Start: ${stat.avgStartPosition}`);
+    console.log(`  Avg Finish: ${stat.avgFinishPosition}`);
+    console.log(`  Avg Incidents: ${stat.avgIncPerRace.toFixed(2)}`);
+    console.log(`  Total Laps: ${stat.laps}`);
+    console.log(`  Laps Led: ${stat.lapsLed} (${((stat.lapsLed / stat.laps) * 100).toFixed(1)}%)`);
+  });
+}
+```
+
+### Recent Performance
+
+Analyze recent race performance:
+
+```typescript
+async function analyzeRecentPerformance(custId: number, limit = 10) {
+  const recent = await iracing.stats.memberRecentRaces({ custId });
+  const races = recent.races.slice(0, limit);
+  
+  // Calculate statistics
+  const stats = races.reduce((acc, race) => {
+    acc.totalPositionsGained += race.startPosition - race.finishPosition;
+    acc.totalIncidents += race.incidents;
+    acc.wins += race.finishPosition === 1 ? 1 : 0;
+    acc.top5s += race.finishPosition <= 5 ? 1 : 0;
+    acc.dnfs += race.reasonOut !== 'Running' ? 1 : 0;
+    return acc;
+  }, {
+    totalPositionsGained: 0,
+    totalIncidents: 0,
+    wins: 0,
+    top5s: 0,
+    dnfs: 0
+  });
+  
+  console.log(`Last ${limit} Races Analysis:`);
+  console.log(`  Average positions gained: ${(stats.totalPositionsGained / limit).toFixed(1)}`);
+  console.log(`  Average incidents: ${(stats.totalIncidents / limit).toFixed(2)}`);
+  console.log(`  Win rate: ${((stats.wins / limit) * 100).toFixed(1)}%`);
+  console.log(`  Top 5 rate: ${((stats.top5s / limit) * 100).toFixed(1)}%`);
+  console.log(`  DNF rate: ${((stats.dnfs / limit) * 100).toFixed(1)}%`);
+  
+  return stats;
+}
+```
+
+### iRating Tracking
+
+Track iRating changes over time:
+
+```typescript
+async function trackIRatingProgress(custId: number, categoryId: number) {
+  // Get chart data for iRating
+  const chartData = await iracing.member.chartData({
+    custId,
+    categoryId,
+    chartType: 1  // iRating chart
+  });
+  
+  if (chartData.data.length < 2) {
+    console.log('Not enough data for tracking');
+    return;
+  }
+  
+  // Analyze trends
+  const recent = chartData.data.slice(-30);  // Last 30 data points
+  const startRating = recent[0].value;
+  const currentRating = recent[recent.length - 1].value;
+  const change = currentRating - startRating;
+  
+  // Find peak and valley
+  const peak = Math.max(...recent.map(d => d.value));
+  const valley = Math.min(...recent.map(d => d.value));
+  
+  console.log('iRating Analysis (Last 30 races):');
+  console.log(`  Starting: ${startRating}`);
+  console.log(`  Current: ${currentRating}`);
+  console.log(`  Change: ${change > 0 ? '+' : ''}${change}`);
+  console.log(`  Peak: ${peak}`);
+  console.log(`  Valley: ${valley}`);
+  console.log(`  Volatility: ${peak - valley}`);
+  
+  // Calculate trend
+  const midpoint = Math.floor(recent.length / 2);
+  const firstHalf = recent.slice(0, midpoint).reduce((sum, d) => sum + d.value, 0) / midpoint;
+  const secondHalf = recent.slice(midpoint).reduce((sum, d) => sum + d.value, 0) / (recent.length - midpoint);
+  const trend = secondHalf > firstHalf ? 'upward' : 'downward';
+  
+  console.log(`  Trend: ${trend}`);
+}
+```
+
+## Searching and Discovery
+
+### Search for Members
+
+Find members by name or partial match:
+
+```typescript
+async function searchMembers(searchTerm: string) {
+  const results = await iracing.lookup.drivers({
+    searchTerm,
+    leagueId: 0  // 0 for global search
+  });
+  
+  return results.map(driver => ({
+    id: driver.custId,
+    name: driver.displayName,
+    helmet: driver.helmet,
+    club: driver.clubName
+  }));
+}
+
+// Search for drivers
+const drivers = await searchMembers('John');
+console.log(`Found ${drivers.length} drivers matching "John"`);
+```
+
+### League Members
+
+Get all members of a league:
+
+```typescript
+async function getLeagueMembers(leagueId: number) {
+  const roster = await iracing.league.roster({
+    leagueId,
+    includeLicenses: true
+  });
+  
+  // Sort by iRating
+  const sorted = roster.roster.sort((a, b) => 
+    (b.licenses[0]?.irating || 0) - (a.licenses[0]?.irating || 0)
+  );
+  
+  return sorted.map((member, index) => ({
+    rank: index + 1,
+    name: member.displayName,
+    irating: member.licenses[0]?.irating || 0,
+    safetyRating: member.licenses[0]?.safetyRating || 0,
+    admin: member.isLeagueAdmin,
+    owner: member.isLeagueOwner
+  }));
+}
+```
+
+## Batch Operations
+
+### Efficient Batch Processing
+
+Process multiple members efficiently:
+
+```typescript
+class MemberBatchProcessor {
+  private cache = new Map<number, any>();
+  
+  async processBatch(customerIds: number[]) {
+    const results = [];
+    const uncached = [];
+    
+    // Check cache first
+    for (const id of customerIds) {
+      if (this.cache.has(id)) {
+        results.push(this.cache.get(id));
+      } else {
+        uncached.push(id);
+      }
+    }
+    
+    // Fetch uncached in batches of 50 (API limit)
+    while (uncached.length > 0) {
+      const batch = uncached.splice(0, 50);
+      const response = await iracing.member.get({
+        customerIds: batch,
+        includeLicenses: true
+      });
+      
+      // Cache and collect results
+      response.members.forEach(member => {
+        this.cache.set(member.custId, member);
+        results.push(member);
+      });
+      
+      // Rate limit protection
+      if (uncached.length > 0) {
+        await new Promise(r => setTimeout(r, 100));
+      }
+    }
+    
+    return results;
+  }
+  
+  clearCache() {
+    this.cache.clear();
+  }
+}
+
+// Usage
+const processor = new MemberBatchProcessor();
+const members = await processor.processBatch([
+  123456, 789012, 345678, /* ... more IDs ... */
+]);
+```
+
+## Error Handling
+
+Handle member-specific errors:
+
+```typescript
+async function safeMemberFetch(custId: number) {
+  try {
+    const response = await iracing.member.get({
+      customerIds: [custId]
+    });
+    
+    if (response.members.length === 0) {
+      console.error(`Member ${custId} not found`);
+      return null;
+    }
+    
+    return response.members[0];
+  } catch (error) {
+    if (error instanceof IRacingError) {
+      if (error.status === 404) {
+        console.error(`Member ${custId} does not exist`);
+      } else if (error.isUnauthorized) {
+        console.error('Authentication required');
+      } else {
+        console.error(`API error: ${error.message}`);
+      }
+    }
+    return null;
+  }
+}
+```
+
+<Aside type="tip">
+  Always handle the case where a member might not exist or might have private profile settings that restrict data access.
+</Aside>
+
+## Next Steps
+
+- Explore [Race Results](/examples/race-results/) examples
+- See [Season Standings](/examples/season-standings/) for competition data
+- Review [API Reference](/api/services/member/) for all member methods

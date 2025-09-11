@@ -1,0 +1,446 @@
+---
+title: Error Handling
+description: Learn how to properly handle errors when using the iRacing Data Client
+---
+
+import { Tabs, TabItem, Card, CardGrid, Aside, Code } from '@astrojs/starlight/components';
+
+# Error Handling
+
+Robust error handling is crucial when working with external APIs. This guide covers all aspects of error handling with the iRacing Data Client SDK.
+
+## Error Types
+
+### IRacingError
+
+The SDK provides a custom `IRacingError` class with useful properties:
+
+```typescript
+class IRacingError extends Error {
+  status?: number;           // HTTP status code
+  statusText?: string;       // HTTP status text
+  responseData?: any;        // Response body from API
+  
+  // Helper properties
+  isMaintenanceMode: boolean;  // True when iRacing is under maintenance
+  isRateLimited: boolean;       // True when rate limit exceeded
+  isUnauthorized: boolean;      // True when authentication fails
+}
+```
+
+## Common Error Scenarios
+
+<CardGrid>
+  <Card title="🔧 Maintenance Mode" icon="wrench">
+    **Status: 503**
+    
+    iRacing is temporarily unavailable for maintenance.
+  </Card>
+  <Card title="⏱️ Rate Limiting" icon="moon">
+    **Status: 429**
+    
+    Too many requests sent in a short time period.
+  </Card>
+  <Card title="🔐 Authentication" icon="key">
+    **Status: 401**
+    
+    Invalid credentials or expired session.
+  </Card>
+  <Card title="🚫 Not Found" icon="x">
+    **Status: 404**
+    
+    Requested resource doesn't exist.
+  </Card>
+</CardGrid>
+
+## Basic Error Handling
+
+### Simple Try-Catch
+
+```typescript
+import { IRacingSDK, IRacingError } from 'iracing-data-client';
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+
+try {
+  const data = await iracing.member.info();
+  console.log(data);
+} catch (error) {
+  if (error instanceof IRacingError) {
+    console.error('iRacing API Error:', error.message);
+    console.error('Status:', error.status);
+  } else {
+    console.error('Unexpected error:', error);
+  }
+}
+```
+
+### Handling Specific Errors
+
+<Tabs>
+  <TabItem label="Maintenance Mode">
+    ```typescript
+    try {
+      const data = await iracing.member.info();
+    } catch (error) {
+      if (error instanceof IRacingError && error.isMaintenanceMode) {
+        console.log('🔧 iRacing is currently under maintenance');
+        console.log('Please try again later');
+        
+        // Show user-friendly message
+        showMaintenanceNotification();
+        
+        // Schedule retry in 5 minutes
+        setTimeout(() => retryRequest(), 5 * 60 * 1000);
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Rate Limiting">
+    ```typescript
+    try {
+      const data = await iracing.member.info();
+    } catch (error) {
+      if (error instanceof IRacingError && error.isRateLimited) {
+        console.log('⏱️ Rate limit exceeded');
+        
+        // Extract retry-after header if available
+        const retryAfter = error.responseData?.retryAfter || 60;
+        console.log(`Waiting ${retryAfter} seconds before retry`);
+        
+        await new Promise(r => setTimeout(r, retryAfter * 1000));
+        // Retry the request
+        return await iracing.member.info();
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Authentication">
+    ```typescript
+    try {
+      const data = await iracing.member.info();
+    } catch (error) {
+      if (error instanceof IRacingError && error.isUnauthorized) {
+        console.log('🔐 Authentication failed');
+        
+        // Check if credentials are present
+        if (!process.env.IRACING_EMAIL || !process.env.IRACING_PASSWORD) {
+          throw new Error('Missing iRacing credentials in environment');
+        }
+        
+        // Credentials might be invalid
+        console.error('Please check your iRacing email and password');
+        process.exit(1);
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+## Advanced Error Handling Patterns
+
+### Retry with Exponential Backoff
+
+```typescript
+async function withExponentialBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries = 5,
+  baseDelay = 1000
+): Promise<T> {
+  let lastError: Error;
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error as Error;
+      
+      if (error instanceof IRacingError) {
+        // Don't retry auth errors
+        if (error.isUnauthorized) throw error;
+        
+        // Don't retry 4xx errors (except rate limits)
+        if (error.status && error.status >= 400 && error.status < 500 && !error.isRateLimited) {
+          throw error;
+        }
+      }
+      
+      // Calculate delay with exponential backoff
+      const delay = baseDelay * Math.pow(2, i);
+      console.log(`Retry ${i + 1}/${maxRetries} after ${delay}ms`);
+      
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  
+  throw lastError!;
+}
+
+// Usage
+const data = await withExponentialBackoff(
+  () => iracing.member.info(),
+  5,    // max 5 retries
+  2000  // start with 2 second delay
+);
+```
+
+### Circuit Breaker Pattern
+
+```typescript
+class CircuitBreaker {
+  private failures = 0;
+  private lastFailTime = 0;
+  private state: 'closed' | 'open' | 'half-open' = 'closed';
+  
+  constructor(
+    private threshold = 5,
+    private timeout = 60000  // 1 minute
+  ) {}
+  
+  async execute<T>(fn: () => Promise<T>): Promise<T> {
+    // Check if circuit should be reset
+    if (this.state === 'open') {
+      if (Date.now() - this.lastFailTime > this.timeout) {
+        this.state = 'half-open';
+      } else {
+        throw new Error('Circuit breaker is open');
+      }
+    }
+    
+    try {
+      const result = await fn();
+      
+      // Success - reset on half-open
+      if (this.state === 'half-open') {
+        this.state = 'closed';
+        this.failures = 0;
+      }
+      
+      return result;
+    } catch (error) {
+      this.failures++;
+      this.lastFailTime = Date.now();
+      
+      if (this.failures >= this.threshold) {
+        this.state = 'open';
+        console.error(`Circuit breaker opened after ${this.failures} failures`);
+      }
+      
+      throw error;
+    }
+  }
+}
+
+// Usage
+const breaker = new CircuitBreaker(5, 60000);
+
+try {
+  const data = await breaker.execute(() => 
+    iracing.member.info()
+  );
+} catch (error) {
+  if (error.message === 'Circuit breaker is open') {
+    console.log('Too many failures - circuit breaker is open');
+  }
+}
+```
+
+### Error Recovery with Fallback
+
+```typescript
+class IRacingService {
+  private cache = new Map<string, any>();
+  
+  async getMemberInfo(custId: number) {
+    try {
+      // Try to get fresh data
+      const data = await this.iracing.member.get({ 
+        customerIds: [custId] 
+      });
+      
+      // Cache successful response
+      this.cache.set(`member:${custId}`, {
+        data,
+        timestamp: Date.now()
+      });
+      
+      return data;
+    } catch (error) {
+      if (error instanceof IRacingError) {
+        // Use cached data as fallback
+        const cached = this.cache.get(`member:${custId}`);
+        
+        if (cached) {
+          console.warn('Using cached data due to API error');
+          return cached.data;
+        }
+        
+        // No cache available
+        if (error.isMaintenanceMode) {
+          return this.getDefaultMemberData(custId);
+        }
+      }
+      
+      throw error;
+    }
+  }
+  
+  private getDefaultMemberData(custId: number) {
+    return {
+      members: [{
+        custId,
+        displayName: 'Unknown',
+        irating: 0,
+        safetyRating: 0
+      }]
+    };
+  }
+}
+```
+
+## Error Logging and Monitoring
+
+### Structured Error Logging
+
+```typescript
+class ErrorLogger {
+  log(error: unknown, context?: Record<string, any>) {
+    const errorData = this.formatError(error);
+    
+    console.error({
+      timestamp: new Date().toISOString(),
+      ...errorData,
+      context
+    });
+    
+    // Send to monitoring service
+    this.sendToMonitoring(errorData);
+  }
+  
+  private formatError(error: unknown) {
+    if (error instanceof IRacingError) {
+      return {
+        type: 'iracing_api_error',
+        message: error.message,
+        status: error.status,
+        statusText: error.statusText,
+        isMaintenanceMode: error.isMaintenanceMode,
+        isRateLimited: error.isRateLimited,
+        isUnauthorized: error.isUnauthorized,
+        responseData: error.responseData
+      };
+    }
+    
+    if (error instanceof Error) {
+      return {
+        type: 'general_error',
+        message: error.message,
+        stack: error.stack
+      };
+    }
+    
+    return {
+      type: 'unknown_error',
+      error: String(error)
+    };
+  }
+  
+  private sendToMonitoring(errorData: any) {
+    // Send to Sentry, DataDog, etc.
+  }
+}
+
+// Usage
+const logger = new ErrorLogger();
+
+try {
+  const data = await iracing.member.info();
+} catch (error) {
+  logger.log(error, {
+    operation: 'getMemberInfo',
+    userId: 123456
+  });
+}
+```
+
+## Testing Error Scenarios
+
+### Mocking Errors in Tests
+
+```typescript
+import { IRacingSDK, IRacingError } from 'iracing-data-client';
+
+jest.mock('iracing-data-client');
+
+describe('Error Handling', () => {
+  it('should handle maintenance mode', async () => {
+    const mockError = new IRacingError(
+      'Service Maintenance',
+      503,
+      'Service Unavailable'
+    );
+    
+    const mockSDK = {
+      member: {
+        info: jest.fn().mockRejectedValue(mockError)
+      }
+    };
+    
+    (IRacingSDK as jest.Mock).mockImplementation(() => mockSDK);
+    
+    const iracing = new IRacingSDK({ email: 'test', password: 'test' });
+    
+    await expect(iracing.member.info()).rejects.toThrow(mockError);
+    expect(mockError.isMaintenanceMode).toBe(true);
+  });
+});
+```
+
+## Best Practices
+
+<CardGrid>
+  <Card title="✅ Always Check Error Type">
+    Use `instanceof IRacingError` to handle API errors specifically
+  </Card>
+  <Card title="✅ Implement Retries">
+    Add retry logic for transient failures with exponential backoff
+  </Card>
+  <Card title="✅ Use Fallbacks">
+    Provide cached or default data when the API is unavailable
+  </Card>
+  <Card title="✅ Log Errors">
+    Implement structured logging for debugging and monitoring
+  </Card>
+  <Card title="❌ Don't Ignore Errors">
+    Never silently swallow errors - at least log them
+  </Card>
+  <Card title="❌ Don't Retry Everything">
+    Some errors (401, 404) shouldn't be retried
+  </Card>
+</CardGrid>
+
+## Error Reference
+
+| Status | Error Type | Retry? | Description |
+|--------|------------|--------|-------------|
+| 401 | Unauthorized | No | Invalid credentials or expired session |
+| 403 | Forbidden | No | Insufficient permissions |
+| 404 | Not Found | No | Resource doesn't exist |
+| 429 | Rate Limited | Yes | Too many requests |
+| 500 | Server Error | Yes | Internal server error |
+| 502 | Bad Gateway | Yes | Gateway error |
+| 503 | Maintenance | Yes | Service maintenance |
+| 504 | Timeout | Yes | Gateway timeout |
+
+<Aside type="tip">
+  When in doubt, check the `error.status` code and the helper properties (`isMaintenanceMode`, `isRateLimited`, `isUnauthorized`) to determine the appropriate action.
+</Aside>
+
+## Next Steps
+
+- Review the [Client API](/api/client/) for error class details
+- See [Authentication Guide](/getting-started/authentication/) for auth error handling
+- Check [Rate Limiting Guide](/guides/rate-limiting/) for handling rate limits

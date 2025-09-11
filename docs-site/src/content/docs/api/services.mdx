@@ -1,0 +1,401 @@
+---
+title: Services Overview
+description: Complete overview of all available services in the iRacing Data Client SDK
+---
+
+import { Card, CardGrid, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Services Overview
+
+The iRacing Data Client SDK organizes its functionality into **15 service classes**, each providing access to specific areas of the iRacing Data API. This page provides a complete overview of all available services and their capabilities.
+
+## Service Architecture
+
+Each service follows a consistent pattern:
+
+```typescript
+const iracing = new IRacingSDK(options);
+
+// Access services as properties
+const memberInfo = await iracing.member.info();
+const carData = await iracing.car.get();
+const trackAssets = await iracing.track.assets();
+```
+
+## Available Services
+
+<CardGrid>
+  <Card title="Car Service" icon="rocket">
+    **`iracing.car`**
+    
+    Vehicle information and assets
+    - `assets()` - Car images and paint schemes
+    - `get()` - Complete car database
+    
+    [View Documentation →](/api/services/car/)
+  </Card>
+  
+  <Card title="Car Class Service" icon="stack">
+    **`iracing.carclass`**
+    
+    Car classification data
+    - `get()` - All car classes and groupings
+    
+    [View Documentation →](/api/services/carclass/)
+  </Card>
+  
+  <Card title="Constants Service" icon="list">
+    **`iracing.constants`**
+    
+    System constants and lookups
+    - `categories()` - Competition categories
+    - `divisions()` - License divisions
+    - `eventTypes()` - Session event types
+    
+    [View Documentation →](/api/services/constants/)
+  </Card>
+  
+  <Card title="Driver Stats Service" icon="graph">
+    **`iracing.driverStatsByCategory`**
+    
+    Category-specific driver statistics
+    - `oval()` - Oval racing stats
+    - `road()` - Road racing stats
+    - `dirtOval()` - Dirt oval stats
+    - `dirtRoad()` - Dirt road stats
+    - `sportsCar()` - Sports car stats
+    - `formulaCar()` - Formula car stats
+    
+    [View Documentation →](/api/services/driver-stats/)
+  </Card>
+  
+  <Card title="Hosted Service" icon="server">
+    **`iracing.hosted`**
+    
+    Hosted and private sessions
+    - `combinedSessions()` - All session types
+    - `sessions()` - Hosted sessions only
+    
+    [View Documentation →](/api/services/hosted/)
+  </Card>
+  
+  <Card title="League Service" icon="group">
+    **`iracing.league`**
+    
+    League management and data
+    - `directory()` - Search leagues
+    - `get()` - League details
+    - `membership()` - Member status
+    - `roster()` - League members
+    - `seasons()` - League seasons
+    - `seasonStandings()` - Points standings
+    - `seasonSessions()` - Race sessions
+    - `getPointsSystems()` - Scoring systems
+    - `custLeagueSessions()` - Customer's league sessions
+    
+    [View Documentation →](/api/services/league/)
+  </Card>
+  
+  <Card title="Lookup Service" icon="search">
+    **`iracing.lookup`**
+    
+    Reference data lookups
+    - `countries()` - Country list
+    - `drivers()` - Driver search
+    - `flairs()` - Profile flairs
+    - `get()` - General lookups
+    - `licenses()` - License levels
+    
+    [View Documentation →](/api/services/lookup/)
+  </Card>
+  
+  <Card title="Member Service" icon="user">
+    **`iracing.member`**
+    
+    Member profiles and data
+    - `info()` - Current member info
+    - `get()` - Member by ID
+    - `profile()` - Public profile
+    - `awards()` - Achievement awards
+    - `awardInstances()` - Earned awards
+    - `chartData()` - Performance charts
+    - `participationCredits()` - Credit balance
+    
+    [View Documentation →](/api/services/member/)
+  </Card>
+  
+  <Card title="Results Service" icon="flag">
+    **`iracing.results`**
+    
+    Race results and data
+    - `get()` - Session results
+    - `searchSeries()` - Series results search
+    - `searchHosted()` - Hosted results search
+    - `seasonResults()` - Full season results
+    - `eventLog()` - Race events
+    - `lapData()` - Lap-by-lap data
+    - `lapChartData()` - Lap charts
+    
+    [View Documentation →](/api/services/results/)
+  </Card>
+  
+  <Card title="Season Service" icon="calendar">
+    **`iracing.season`**
+    
+    Season scheduling and info
+    - `list()` - All seasons
+    - `raceGuide()` - Upcoming races
+    - `spectatorSubsessionids()` - Spectator sessions
+    - `spectatorSubsessionidsDetail()` - Spectator details
+    
+    [View Documentation →](/api/services/season/)
+  </Card>
+  
+  <Card title="Series Service" icon="trophy">
+    **`iracing.series`**
+    
+    Series information
+    - `get()` - All series
+    - `assets()` - Series images
+    - `pastSeasons()` - Historical seasons
+    - `seasons()` - Current seasons
+    - `seasonList()` - Season list
+    - `seasonSchedule()` - Race schedule
+    - `statsSeries()` - Series statistics
+    
+    [View Documentation →](/api/services/series/)
+  </Card>
+  
+  <Card title="Stats Service" icon="graph">
+    **`iracing.stats`**
+    
+    Statistics and standings
+    - `memberBests()` - Personal records
+    - `memberCareer()` - Career stats
+    - `memberDivision()` - Division stats
+    - `memberRecap()` - Season recap
+    - `memberRecentRaces()` - Recent results
+    - `memberSummary()` - Quick summary
+    - `memberYearly()` - Annual stats
+    - `seasonDriverStandings()` - Driver points
+    - `seasonTeamStandings()` - Team points
+    - `seasonTtStandings()` - Time trial standings
+    - `seasonTtResults()` - Time trial results
+    - `seasonQualifyResults()` - Qualifying results
+    - `worldRecords()` - Track records
+    
+    [View Documentation →](/api/services/stats/)
+  </Card>
+  
+  <Card title="Team Service" icon="group">
+    **`iracing.team`**
+    
+    Team management
+    - `get()` - Team information
+    - `membership()` - Team members
+    
+    [View Documentation →](/api/services/team/)
+  </Card>
+  
+  <Card title="Time Attack Service" icon="moon">
+    **`iracing.timeAttack`**
+    
+    Time attack competitions
+    - `memberSeasonResults()` - Season results
+    
+    [View Documentation →](/api/services/time-attack/)
+  </Card>
+  
+  <Card title="Track Service" icon="puzzle">
+    **`iracing.track`**
+    
+    Track information
+    - `assets()` - Track maps and images
+    - `get()` - Track database
+    
+    [View Documentation →](/api/services/track/)
+  </Card>
+</CardGrid>
+
+## Service Categories
+
+Services can be grouped by their primary function:
+
+<Tabs>
+  <TabItem label="Content & Assets">
+    Services that provide static content and asset information:
+    
+    - **Car Service** - Vehicle specifications and images
+    - **Track Service** - Circuit layouts and track maps
+    - **Series Service** - Series logos and branding
+    - **Constants Service** - System lookups and references
+  </TabItem>
+  
+  <TabItem label="Member & Profile">
+    Services focused on member data and profiles:
+    
+    - **Member Service** - Profile information and awards
+    - **Team Service** - Team affiliations
+    - **Lookup Service** - Member search and discovery
+  </TabItem>
+  
+  <TabItem label="Competition & Results">
+    Services for race data and competition results:
+    
+    - **Results Service** - Race results and lap data
+    - **Stats Service** - Performance statistics
+    - **Driver Stats Service** - Category-specific stats
+    - **Time Attack Service** - Time trial competitions
+  </TabItem>
+  
+  <TabItem label="Organization & Scheduling">
+    Services for leagues, seasons, and scheduling:
+    
+    - **League Service** - League management
+    - **Season Service** - Season schedules
+    - **Hosted Service** - Private sessions
+    - **Car Class Service** - Competition groupings
+  </TabItem>
+</Tabs>
+
+## Common Patterns
+
+### Methods Without Parameters
+
+Many methods require no parameters:
+
+```typescript
+// Get all cars
+const cars = await iracing.car.get();
+
+// Get member info for authenticated user
+const info = await iracing.member.info();
+
+// Get all track assets
+const tracks = await iracing.track.assets();
+```
+
+### Methods With Required Parameters
+
+Some methods require specific parameters:
+
+```typescript
+// Get specific members by ID
+const members = await iracing.member.get({
+  customerIds: [123456, 789012]
+});
+
+// Search for league
+const leagues = await iracing.league.directory({
+  search: 'League Name',
+  active: true
+});
+
+// Get season standings
+const standings = await iracing.stats.seasonDriverStandings({
+  seasonId: 3456,
+  carClassId: 789
+});
+```
+
+### Methods With Optional Parameters
+
+Many methods support optional filtering:
+
+```typescript
+// Basic call
+const results = await iracing.results.searchSeries({
+  seasonId: 3456
+});
+
+// With optional filters
+const filteredResults = await iracing.results.searchSeries({
+  seasonId: 3456,
+  raceWeekNum: 5,
+  official: true,
+  eventType: 5
+});
+```
+
+## Response Types
+
+All service methods return fully typed responses:
+
+```typescript
+// TypeScript knows the exact shape
+const cars = await iracing.car.get();
+// cars is typed as CarGetResponse[]
+
+cars.forEach(car => {
+  console.log(car.carName);     // ✅ TypeScript knows this exists
+  console.log(car.carWeight);   // ✅ Valid property
+  console.log(car.wrongProp);   // ❌ TypeScript error
+});
+```
+
+## Error Handling
+
+All services use consistent error handling:
+
+```typescript
+try {
+  const data = await iracing.member.info();
+} catch (error) {
+  if (error instanceof IRacingError) {
+    // Handle specific error types
+    if (error.isMaintenanceMode) {
+      console.log('Service is in maintenance');
+    } else if (error.isRateLimited) {
+      console.log('Rate limit exceeded');
+    } else if (error.isUnauthorized) {
+      console.log('Authentication required');
+    }
+  }
+}
+```
+
+## Performance Tips
+
+<CardGrid>
+  <Card title="Use Caching" icon="rocket">
+    The SDK automatically caches responses. Repeated calls to the same endpoint return cached data when valid.
+  </Card>
+  
+  <Card title="Batch Requests" icon="stack">
+    When fetching multiple members or results, use batch parameters to reduce API calls.
+  </Card>
+  
+  <Card title="Respect Rate Limits" icon="information">
+    Avoid rapid successive calls. The API has rate limiting to prevent abuse.
+  </Card>
+  
+  <Card title="Filter Early" icon="list">
+    Use available parameters to filter data at the API level rather than client-side.
+  </Card>
+</CardGrid>
+
+## Quick Reference
+
+| Service | Methods | Primary Use |
+|---------|---------|-------------|
+| `car` | 2 | Vehicle data and assets |
+| `carclass` | 1 | Car classifications |
+| `constants` | 3 | System constants |
+| `driverStatsByCategory` | 6 | Category statistics |
+| `hosted` | 2 | Hosted sessions |
+| `league` | 9 | League management |
+| `lookup` | 5 | Reference lookups |
+| `member` | 7 | Member profiles |
+| `results` | 7 | Race results |
+| `season` | 4 | Season schedules |
+| `series` | 7 | Series information |
+| `stats` | 14 | Performance statistics |
+| `team` | 2 | Team management |
+| `timeAttack` | 1 | Time trials |
+| `track` | 2 | Track information |
+
+## Next Steps
+
+- Explore individual [service documentation](/api/services/car/) for detailed method information
+- Review the [Client API](/api/client/) for configuration options
+- Check out [practical examples](/examples/member-data/) using multiple services

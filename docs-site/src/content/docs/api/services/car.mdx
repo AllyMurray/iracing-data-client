@@ -1,0 +1,70 @@
+---
+title: Car Service
+description: API reference for the Car service
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+# Car Service
+
+The Car service provides access to vehicle information and assets.
+
+```typescript
+const carService = iracing.car;
+```
+
+## Methods
+
+### `get()`
+
+Get all cars in the iRacing database.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<CarGetResponse>`
+    
+    **Parameters:** None
+    
+    **Description:** Returns complete information about all cars available in iRacing.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const cars = await iracing.car.get();
+    
+    cars.forEach(car => {
+      console.log(`${car.carName} (ID: ${car.carId})`);
+      console.log(`  Category: ${car.categoryName}`);
+      console.log(`  Free: ${car.freeWithSubscription}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### `assets()`
+
+Get car asset information including images and paint templates.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<CarAssetsResponse>`
+    
+    **Parameters:** None
+    
+    **Description:** Returns URLs for car images, templates, and other visual assets.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const assets = await iracing.car.assets();
+    
+    Object.entries(assets).forEach(([carId, asset]) => {
+      console.log(`Car ${carId}:`);
+      console.log(`  Logo: ${asset.carLogo}`);
+      console.log(`  Small image: ${asset.smallImage}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="tip">
+  Car data is relatively static and heavily cached by the SDK. You can safely call these methods frequently without worrying about rate limits.
+</Aside>

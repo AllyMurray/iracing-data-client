@@ -1,36 +1,94 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: iRacing Data Client
+description: A fully typed TypeScript client for the iRacing Data API
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Access the complete iRacing Data API with TypeScript support, automatic caching, and comprehensive error handling
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: /getting-started/introduction/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: View on GitHub
+      link: https://github.com/ally/iracing-data-client
+      icon: github
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Features
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Fully Typed" icon="document">
+		Complete TypeScript types for all API endpoints with IntelliSense support and compile-time safety.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Auto-Generated" icon="rocket">
+		SDK automatically generated from the official iRacing API documentation for always up-to-date methods.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="Smart Caching" icon="laptop">
+		Built-in response caching with automatic expiration based on API response headers.
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Error Handling" icon="warning">
+		Comprehensive error handling with specific error types for maintenance mode, rate limiting, and authentication.
+	</Card>
+</CardGrid>
+
+## Quick Example
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+// Initialize the SDK
+const iracing = new IRacingSDK({
+  email: 'your-email@example.com',
+  password: 'your-password'
+});
+
+// Get member information
+const memberInfo = await iracing.member.info();
+console.log(`Welcome, ${memberInfo.displayName}!`);
+
+// Get current series
+const series = await iracing.series.get();
+console.log(`Found ${series.length} series`);
+```
+
+## Services Overview
+
+The SDK provides access to all iRacing Data API endpoints through organized service classes:
+
+- **Car & Track Data** - Vehicle and circuit information, assets, and configurations
+- **Member Services** - Profile data, awards, statistics, and participation credits
+- **Competition Data** - Race results, lap data, season standings, and world records
+- **League Management** - League rosters, seasons, standings, and sessions
+- **Hosted Sessions** - Information about hosted and official sessions
+- **Statistics** - Career stats, division standings, and performance metrics
+
+## Requirements
+
+- Node.js 18+ or modern browser environment
+- iRacing account with active subscription
+- TypeScript 5.0+ (for TypeScript projects)
+
+## Next Steps
+
+<CardGrid>
+	<Card title="Installation" icon="download">
+		Learn how to install and configure the SDK in your project.
+		[Get Started →](/getting-started/installation/)
+	</Card>
+	<Card title="Authentication" icon="key">
+		Set up authentication with your iRacing credentials.
+		[Learn More →](/getting-started/authentication/)
+	</Card>
+	<Card title="API Reference" icon="open-book">
+		Explore the complete API documentation for all services.
+		[Browse API →](/api/services/)
+	</Card>
+	<Card title="Examples" icon="code">
+		See real-world examples of using the SDK.
+		[View Examples →](/examples/member-data/)
 	</Card>
 </CardGrid>

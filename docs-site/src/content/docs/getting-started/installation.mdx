@@ -1,0 +1,356 @@
+---
+title: Installation
+description: How to install and set up the iRacing Data Client SDK
+---
+
+import { Code, Tabs, TabItem, Steps, Aside } from '@astrojs/starlight/components';
+
+# Installation
+
+Get started with the iRacing Data Client SDK in your project.
+
+## Prerequisites
+
+Before installing the SDK, ensure you have:
+
+- **Node.js 18+** or a modern browser environment with fetch support
+- **npm**, **yarn**, or **pnpm** package manager
+- An active **iRacing subscription** with valid credentials
+- **TypeScript 5.0+** (optional, but recommended for the best experience)
+
+## Package Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install iracing-data-client
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add iracing-data-client
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add iracing-data-client
+    ```
+  </TabItem>
+</Tabs>
+
+## Basic Setup
+
+<Steps>
+
+1. **Import the SDK**
+
+   ```typescript
+   import { IRacingSDK } from 'iracing-data-client';
+   ```
+
+2. **Initialize with credentials**
+
+   ```typescript
+   const iracing = new IRacingSDK({
+     email: 'your-email@example.com',
+     password: 'your-password'
+   });
+   ```
+
+3. **Make your first API call**
+
+   ```typescript
+   const memberInfo = await iracing.member.info();
+   console.log(`Hello, ${memberInfo.displayName}!`);
+   ```
+
+</Steps>
+
+## Configuration Options
+
+The SDK accepts several configuration options:
+
+```typescript
+interface IRacingClientOptions {
+  // Authentication credentials (required unless using headers)
+  email?: string;
+  password?: string;
+  
+  // Custom headers for authentication (alternative to email/password)
+  headers?: Record<string, string>;
+  
+  // Custom fetch function (for Node.js < 18 or custom implementations)
+  fetchFn?: FetchLike;
+  
+  // Enable/disable parameter validation (default: true)
+  validateParams?: boolean;
+}
+```
+
+### Authentication Methods
+
+<Tabs>
+  <TabItem label="Email & Password">
+    The simplest method - provide your iRacing credentials directly:
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      email: 'your-email@example.com',
+      password: 'your-password'
+    });
+    ```
+    
+    <Aside type="caution">
+      Never hardcode credentials in your source code. Use environment variables or secure configuration management.
+    </Aside>
+  </TabItem>
+  
+  <TabItem label="Environment Variables">
+    Recommended approach for production:
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL,
+      password: process.env.IRACING_PASSWORD
+    });
+    ```
+    
+    Create a `.env` file (don't commit to git):
+    ```env
+    IRACING_EMAIL=your-email@example.com
+    IRACING_PASSWORD=your-password
+    ```
+  </TabItem>
+  
+  <TabItem label="Custom Headers">
+    For advanced authentication scenarios:
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      headers: {
+        'Cookie': 'your-session-cookie',
+        'User-Agent': 'MyApp/1.0'
+      }
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## TypeScript Setup
+
+The SDK includes TypeScript definitions out of the box. For the best experience:
+
+<Steps>
+
+1. **Ensure TypeScript is installed**
+
+   ```bash
+   npm install --save-dev typescript @types/node
+   ```
+
+2. **Configure tsconfig.json**
+
+   ```json
+   {
+     "compilerOptions": {
+       "target": "ES2022",
+       "module": "ESNext",
+       "moduleResolution": "bundler",
+       "lib": ["ES2022"],
+       "strict": true,
+       "esModuleInterop": true,
+       "skipLibCheck": true,
+       "forceConsistentCasingInFileNames": true
+     }
+   }
+   ```
+
+3. **Enable type checking**
+
+   Your IDE should now provide full IntelliSense support and type checking for all SDK methods.
+
+</Steps>
+
+## Node.js Compatibility
+
+<Tabs>
+  <TabItem label="Node.js 18+">
+    Works out of the box with native fetch support:
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      email: 'your-email@example.com',
+      password: 'your-password'
+    });
+    ```
+  </TabItem>
+  
+  <TabItem label="Node.js < 18">
+    Requires a fetch polyfill:
+    
+    ```bash
+    npm install node-fetch
+    ```
+    
+    ```typescript
+    import fetch from 'node-fetch';
+    
+    const iracing = new IRacingSDK({
+      email: 'your-email@example.com',
+      password: 'your-password',
+      fetchFn: fetch as any
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Browser Usage
+
+The SDK can be used in browser environments with some considerations:
+
+<Aside type="caution">
+  **Security Warning**: Never expose your iRacing credentials in client-side code. Use a backend proxy or serverless functions for authentication.
+</Aside>
+
+### Recommended Browser Setup
+
+```typescript
+// In a secure backend API route or serverless function
+export async function getIRacingData() {
+  const iracing = new IRacingSDK({
+    email: process.env.IRACING_EMAIL,
+    password: process.env.IRACING_PASSWORD
+  });
+  
+  return await iracing.member.info();
+}
+```
+
+### CORS Considerations
+
+The iRacing API does not support CORS for browser requests. You'll need to:
+
+1. Use a backend proxy server
+2. Deploy serverless functions (Vercel, Netlify, AWS Lambda)
+3. Use a CORS proxy service (development only)
+
+## Environment Setup Examples
+
+<Tabs>
+  <TabItem label="Next.js">
+    ```typescript
+    // app/api/iracing/route.ts
+    import { IRacingSDK } from 'iracing-data-client';
+    
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL!,
+      password: process.env.IRACING_PASSWORD!
+    });
+    
+    export async function GET() {
+      const data = await iracing.member.info();
+      return Response.json(data);
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="Express">
+    ```typescript
+    // server.ts
+    import express from 'express';
+    import { IRacingSDK } from 'iracing-data-client';
+    
+    const app = express();
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL!,
+      password: process.env.IRACING_PASSWORD!
+    });
+    
+    app.get('/api/member/info', async (req, res) => {
+      const data = await iracing.member.info();
+      res.json(data);
+    });
+    ```
+  </TabItem>
+  
+  <TabItem label="Deno">
+    ```typescript
+    // main.ts
+    import { IRacingSDK } from 'npm:iracing-data-client';
+    
+    const iracing = new IRacingSDK({
+      email: Deno.env.get('IRACING_EMAIL')!,
+      password: Deno.env.get('IRACING_PASSWORD')!
+    });
+    
+    const data = await iracing.member.info();
+    console.log(data);
+    ```
+  </TabItem>
+</Tabs>
+
+## Verify Installation
+
+Test your setup with this simple script:
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+async function testConnection() {
+  try {
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL!,
+      password: process.env.IRACING_PASSWORD!
+    });
+    
+    const info = await iracing.member.info();
+    console.log('✅ Connected successfully!');
+    console.log(`Logged in as: ${info.displayName}`);
+    console.log(`Customer ID: ${info.custId}`);
+    
+  } catch (error) {
+    console.error('❌ Connection failed:', error);
+  }
+}
+
+testConnection();
+```
+
+## Troubleshooting
+
+<Tabs>
+  <TabItem label="Authentication Failed">
+    If you get authentication errors:
+    
+    - Verify your email and password are correct
+    - Check if your iRacing subscription is active
+    - Ensure you're not hitting rate limits
+    - Try logging into the iRacing website to verify credentials
+  </TabItem>
+  
+  <TabItem label="Network Errors">
+    For network-related issues:
+    
+    - Check your internet connection
+    - Verify firewall settings allow HTTPS requests
+    - Ensure Node.js has network access
+    - Try using a custom fetch implementation
+  </TabItem>
+  
+  <TabItem label="TypeScript Errors">
+    If TypeScript isn't working properly:
+    
+    - Ensure TypeScript 5.0+ is installed
+    - Check your tsconfig.json settings
+    - Restart your TypeScript language server
+    - Verify moduleResolution is set correctly
+  </TabItem>
+</Tabs>
+
+## Next Steps
+
+Now that you have the SDK installed, check out:
+
+- [Quick Start Guide](/getting-started/quick-start/) - Build your first application
+- [Authentication Guide](/getting-started/authentication/) - Learn about authentication options
+- [API Reference](/api/services/) - Explore available services and methods

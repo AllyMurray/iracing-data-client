@@ -1,0 +1,341 @@
+---
+title: Member Service
+description: API reference for the Member service
+---
+
+import { Tabs, TabItem, Badge, Card, Aside } from '@astrojs/starlight/components';
+
+# Member Service
+
+The Member service provides access to member profiles, statistics, awards, and participation data.
+
+```typescript
+const memberService = iracing.member;
+```
+
+## Methods
+
+### `info()`
+
+Get information about the authenticated member.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberInfoResponse>`
+    
+    **Parameters:** None
+    
+    **Description:** Returns detailed information about the currently authenticated member including profile data, licenses, and account status.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const info = await iracing.member.info();
+    
+    console.log(info.displayName);     // "John Doe"
+    console.log(info.custId);          // 123456
+    console.log(info.memberSince);    // "2020-01-15"
+    console.log(info.licenses);       // Array of license objects
+    ```
+  </TabItem>
+  <TabItem label="Response">
+    ```typescript
+    interface MemberInfoResponse {
+      custId: number;
+      displayName: string;
+      firstName: string;
+      lastName: string;
+      memberSince: string;
+      clubs: Club[];
+      licenses: License[];
+      helmet: HelmetPattern;
+      suit: SuitPattern;
+      // ... more fields
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `get(params)`
+
+Get information about specific members by customer ID.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberGetResponse>`
+    
+    **Parameters:**
+    - `customerIds: number[]` - Array of customer IDs (max 50)
+    - `includeLicenses?: boolean` - Include license information
+    
+    **Description:** Fetches profile information for up to 50 members at once.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const members = await iracing.member.get({
+      customerIds: [123456, 789012, 345678],
+      includeLicenses: true
+    });
+    
+    members.members.forEach(member => {
+      console.log(`${member.displayName}: iR ${member.irating}`);
+    });
+    ```
+  </TabItem>
+  <TabItem label="Response">
+    ```typescript
+    interface MemberGetResponse {
+      members: Array<{
+        custId: number;
+        displayName: string;
+        irating: number;
+        licenses: License[];
+        // ... more fields
+      }>;
+      success: boolean;
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `profile(params)`
+
+Get public profile information for a member.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberProfileResponse>`
+    
+    **Parameters:**
+    - `custId: number` - Customer ID
+    
+    **Description:** Returns public profile data visible to other members.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const profile = await iracing.member.profile({
+      custId: 123456
+    });
+    
+    console.log(profile.stats.careerStats.wins);
+    console.log(profile.stats.careerStats.totalClubPoints);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `awards(params)`
+
+Get member's earned awards and achievements.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberAwardsResponse>`
+    
+    **Parameters:**
+    - `custId: number` - Customer ID
+    
+    **Description:** Lists all awards and achievements earned by the member.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const awards = await iracing.member.awards({
+      custId: 123456
+    });
+    
+    awards.awards.forEach(award => {
+      console.log(`${award.awardName}: ${award.awardCount}x`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `awardInstances(params)`
+
+Get specific instances of awards earned.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberAwardInstancesResponse>`
+    
+    **Parameters:**
+    - `custId: number` - Customer ID
+    - `awardId?: number` - Specific award ID to filter
+    
+    **Description:** Returns detailed information about when and how awards were earned.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const instances = await iracing.member.awardInstances({
+      custId: 123456,
+      awardId: 5  // Championship award
+    });
+    
+    instances.forEach(instance => {
+      console.log(`Earned on: ${instance.awardedDate}`);
+      console.log(`Season: ${instance.seasonName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `chartData(params)`
+
+Get chart data for member statistics over time.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberChartDataResponse>`
+    
+    **Parameters:**
+    - `custId: number` - Customer ID
+    - `categoryId: number` - Category ID (1=Oval, 2=Road, 3=Dirt Oval, 4=Dirt Road)
+    - `chartType: number` - Type of chart data
+    
+    **Description:** Returns time-series data for graphing member performance.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const chartData = await iracing.member.chartData({
+      custId: 123456,
+      categoryId: 2,  // Road
+      chartType: 1     // iRating over time
+    });
+    
+    chartData.data.forEach(point => {
+      console.log(`${point.date}: ${point.value}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `participationCredits()`
+
+Get participation credit balance for the authenticated member.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<MemberParticipationCreditsResponse>`
+    
+    **Parameters:** None
+    
+    **Description:** Returns the current balance of participation credits earned through racing.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const credits = await iracing.member.participationCredits();
+    
+    console.log(`Available credits: ${credits.participationCredits}`);
+    console.log(`Total earned: ${credits.totalEarned}`);
+    console.log(`Total redeemed: ${credits.totalRedeemed}`);
+    ```
+  </TabItem>
+</Tabs>
+
+## Common Use Cases
+
+### Get Complete Member Profile
+
+```typescript
+async function getCompleteProfile(custId: number) {
+  const [member, profile, awards, recentRaces] = await Promise.all([
+    iracing.member.get({ customerIds: [custId] }),
+    iracing.member.profile({ custId }),
+    iracing.member.awards({ custId }),
+    iracing.stats.memberRecentRaces({ custId })
+  ]);
+  
+  return {
+    basic: member.members[0],
+    profile: profile,
+    awards: awards.awards,
+    recentRaces: recentRaces.races
+  };
+}
+```
+
+### Monitor iRating Changes
+
+```typescript
+async function trackIRatingChange(custId: number, categoryId: number) {
+  const chartData = await iracing.member.chartData({
+    custId,
+    categoryId,
+    chartType: 1  // iRating chart
+  });
+  
+  const recent = chartData.data.slice(-10);  // Last 10 data points
+  const change = recent[recent.length - 1].value - recent[0].value;
+  
+  console.log(`iRating change over last 10 races: ${change > 0 ? '+' : ''}${change}`);
+}
+```
+
+### Check License Progress
+
+```typescript
+async function checkLicenseProgress(custId: number) {
+  const member = await iracing.member.get({
+    customerIds: [custId],
+    includeLicenses: true
+  });
+  
+  member.members[0].licenses.forEach(license => {
+    const sr = license.safetyRating / 100;  // Convert to decimal
+    const nextLevel = Math.ceil(sr);
+    const progress = ((sr % 1) * 100).toFixed(0);
+    
+    console.log(`${license.categoryName}:`);
+    console.log(`  Class ${license.licenseLevel} - SR: ${sr.toFixed(2)}`);
+    console.log(`  Progress to Class ${String.fromCharCode(65 + nextLevel)}: ${progress}%`);
+  });
+}
+```
+
+## Error Handling
+
+```typescript
+try {
+  const info = await iracing.member.info();
+} catch (error) {
+  if (error instanceof IRacingError) {
+    if (error.isUnauthorized) {
+      console.error('Not authenticated');
+    } else if (error.status === 404) {
+      console.error('Member not found');
+    }
+  }
+}
+```
+
+## Rate Limiting
+
+<Aside type="caution">
+  The member endpoints have rate limits. Avoid making rapid successive calls for the same member data. Use caching when appropriate.
+</Aside>
+
+## Type Definitions
+
+All methods return fully typed responses. Key types include:
+
+- `MemberInfoResponse` - Complete member information
+- `MemberGetResponse` - Public member data
+- `License` - License level and safety rating
+- `Club` - Club membership information
+- `Award` - Achievement and award data
+
+## See Also
+
+- [Stats Service](/api/services/stats/) - For member statistics
+- [Results Service](/api/services/results/) - For race results
+- [League Service](/api/services/league/) - For league membership

@@ -1,0 +1,433 @@
+---
+title: TypeScript Usage
+description: Get the most out of TypeScript with the iRacing Data Client SDK
+---
+
+import { Tabs, TabItem, Card, Aside, Code } from '@astrojs/starlight/components';
+
+# TypeScript Usage
+
+The iRacing Data Client SDK is built with TypeScript first, providing complete type safety and excellent developer experience. This guide shows you how to leverage TypeScript features effectively.
+
+## Type Safety Benefits
+
+<Card title="🎯 IntelliSense Support" icon="document">
+  Get autocomplete suggestions for all methods, parameters, and response properties in your IDE.
+</Card>
+
+<Card title="🛡️ Compile-Time Checking" icon="shield">
+  Catch errors before runtime with TypeScript's static type checking.
+</Card>
+
+<Card title="📚 Self-Documenting Code" icon="open-book">
+  Types serve as inline documentation, making code more readable and maintainable.
+</Card>
+
+## Basic Type Usage
+
+### Automatic Type Inference
+
+The SDK automatically infers all types - no manual type annotations needed:
+
+```typescript
+// TypeScript knows all the types automatically
+const iracing = new IRacingSDK({ /* ... */ });
+
+// 'info' is typed as MemberInfoResponse
+const info = await iracing.member.info();
+
+// TypeScript knows these properties exist
+console.log(info.custId);        // ✅ Valid
+console.log(info.displayName);   // ✅ Valid
+console.log(info.wrongProp);     // ❌ TypeScript error
+```
+
+### Explicit Type Imports
+
+Import specific types when needed:
+
+```typescript
+import { 
+  IRacingSDK,
+  type MemberInfoResponse,
+  type CarGetResponse,
+  type License
+} from 'iracing-data-client';
+
+// Use types for function parameters
+function processLicense(license: License) {
+  console.log(`Class: ${license.licenseLevel}`);
+  console.log(`SR: ${license.safetyRating / 100}`);
+}
+
+// Use types for variables
+let memberData: MemberInfoResponse | null = null;
+memberData = await iracing.member.info();
+```
+
+## Working with Response Types
+
+### Accessing Nested Properties
+
+TypeScript provides full type safety for nested properties:
+
+```typescript
+const members = await iracing.member.get({
+  customerIds: [123456]
+});
+
+// TypeScript knows the structure
+members.members.forEach(member => {
+  // All properties are typed
+  member.licenses.forEach(license => {
+    console.log(`${license.categoryName}: ${license.irating}`);
+  });
+  
+  // Optional properties are handled
+  if (member.suit) {
+    console.log(`Suit pattern: ${member.suit.pattern}`);
+  }
+});
+```
+
+### Type Guards and Narrowing
+
+```typescript
+// Type narrowing with conditional checks
+const results = await iracing.results.get({ subsessionId: 12345 });
+
+if (results.sessionResults.length > 0) {
+  const session = results.sessionResults[0];
+  
+  // TypeScript knows session is defined here
+  session.results.forEach(result => {
+    if (result.reasonOut === 'Running') {
+      // Type narrowed to running cars
+      console.log(`P${result.finishPosition}: ${result.displayName}`);
+    }
+  });
+}
+```
+
+## Parameter Types
+
+### Required vs Optional Parameters
+
+The SDK enforces required parameters at compile time:
+
+```typescript
+// ❌ TypeScript error - missing required parameter
+await iracing.member.get();
+
+// ✅ Valid - required parameter provided
+await iracing.member.get({
+  customerIds: [123456]
+});
+
+// Optional parameters
+await iracing.results.searchSeries({
+  seasonId: 3456,        // Required
+  raceWeekNum: 5,       // Optional
+  official: true        // Optional
+});
+```
+
+### Parameter Validation
+
+All parameters are validated using Zod schemas:
+
+```typescript
+// The SDK validates types at runtime too
+try {
+  await iracing.member.get({
+    customerIds: 'not-an-array'  // ❌ TypeScript error
+  });
+} catch (error) {
+  // Zod validation error if types are bypassed
+}
+```
+
+## Advanced TypeScript Patterns
+
+### Generic Helper Functions
+
+Create reusable typed helpers:
+
+```typescript
+// Generic retry function with type preservation
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  retries = 3
+): Promise<T> {
+  try {
+    return await fn();
+  } catch (error) {
+    if (retries > 0) {
+      await new Promise(r => setTimeout(r, 1000));
+      return retryWithBackoff(fn, retries - 1);
+    }
+    throw error;
+  }
+}
+
+// Type is preserved through the helper
+const data = await retryWithBackoff(
+  () => iracing.member.info()
+);
+// 'data' is typed as MemberInfoResponse
+```
+
+### Type Predicates
+
+Create custom type guards:
+
+```typescript
+import { IRacingError } from 'iracing-data-client';
+
+// Type predicate function
+function isRateLimitError(error: unknown): error is IRacingError {
+  return error instanceof IRacingError && error.isRateLimited;
+}
+
+try {
+  const data = await iracing.member.info();
+} catch (error) {
+  if (isRateLimitError(error)) {
+    // TypeScript knows error is IRacingError here
+    console.log(`Rate limited with status: ${error.status}`);
+  }
+}
+```
+
+### Discriminated Unions
+
+Work with different response types:
+
+```typescript
+type RaceResult = 
+  | { status: 'finished'; position: number; time: string }
+  | { status: 'dnf'; reason: string; lapsCompleted: number }
+  | { status: 'dq'; reason: string };
+
+function processResult(result: RaceResult) {
+  switch (result.status) {
+    case 'finished':
+      // TypeScript knows 'position' exists here
+      console.log(`Finished P${result.position}`);
+      break;
+    case 'dnf':
+      // TypeScript knows 'lapsCompleted' exists here
+      console.log(`DNF after ${result.lapsCompleted} laps`);
+      break;
+    case 'dq':
+      console.log(`DQ: ${result.reason}`);
+      break;
+  }
+}
+```
+
+## Type Utilities
+
+### Extract Specific Types
+
+Extract nested types from responses:
+
+```typescript
+import type { MemberGetResponse } from 'iracing-data-client';
+
+// Extract the member type from the response
+type Member = MemberGetResponse['members'][0];
+
+// Extract license type
+type License = Member['licenses'][0];
+
+// Use extracted types
+function formatLicense(license: License): string {
+  return `${license.categoryName} - Class ${license.licenseLevel}`;
+}
+```
+
+### Partial and Required Types
+
+Use TypeScript utilities for flexible types:
+
+```typescript
+import type { MemberGetParams } from 'iracing-data-client';
+
+// Make all properties optional
+type PartialParams = Partial<MemberGetParams>;
+
+// Make all properties required
+type StrictParams = Required<MemberGetParams>;
+
+// Pick specific properties
+type IdOnly = Pick<MemberGetParams, 'customerIds'>;
+
+// Omit properties
+type NoLicenses = Omit<MemberGetParams, 'includeLicenses'>;
+```
+
+## IDE Configuration
+
+### VS Code Settings
+
+Optimize VS Code for TypeScript development:
+
+```json
+// .vscode/settings.json
+{
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true
+}
+```
+
+### TypeScript Config
+
+Recommended `tsconfig.json` settings:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+## Type-Safe Patterns
+
+### Builder Pattern
+
+Create a type-safe query builder:
+
+```typescript
+class MemberQueryBuilder {
+  private params: Partial<MemberGetParams> = {};
+  
+  withIds(...ids: number[]): this {
+    this.params.customerIds = ids;
+    return this;
+  }
+  
+  includeLicenses(): this {
+    this.params.includeLicenses = true;
+    return this;
+  }
+  
+  async execute(): Promise<MemberGetResponse> {
+    if (!this.params.customerIds) {
+      throw new Error('Customer IDs required');
+    }
+    
+    return iracing.member.get(this.params as MemberGetParams);
+  }
+}
+
+// Usage with chaining
+const members = await new MemberQueryBuilder()
+  .withIds(123456, 789012)
+  .includeLicenses()
+  .execute();
+```
+
+### Repository Pattern
+
+Create type-safe data repositories:
+
+```typescript
+class MemberRepository {
+  constructor(private iracing: IRacingSDK) {}
+  
+  async findById(id: number): Promise<Member | null> {
+    const response = await this.iracing.member.get({
+      customerIds: [id]
+    });
+    
+    return response.members[0] || null;
+  }
+  
+  async findByIds(ids: number[]): Promise<Member[]> {
+    const response = await this.iracing.member.get({
+      customerIds: ids
+    });
+    
+    return response.members;
+  }
+  
+  async getCurrentMember(): Promise<MemberInfo> {
+    return this.iracing.member.info();
+  }
+}
+```
+
+## Common TypeScript Issues
+
+<Tabs>
+  <TabItem label="Missing Types">
+    **Problem:** Types not recognized in IDE
+    
+    **Solution:**
+    ```bash
+    # Restart TypeScript server in VS Code
+    Cmd/Ctrl + Shift + P -> "TypeScript: Restart TS Server"
+    
+    # Or reinstall types
+    npm install --save-dev @types/node
+    ```
+  </TabItem>
+  <TabItem label="Type Conflicts">
+    **Problem:** Conflicting type definitions
+    
+    **Solution:**
+    ```json
+    // tsconfig.json
+    {
+      "compilerOptions": {
+        "skipLibCheck": true,
+        "types": ["node"]
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Import Errors">
+    **Problem:** Cannot import types
+    
+    **Solution:**
+    ```typescript
+    // Use type-only imports for types
+    import type { MemberInfoResponse } from 'iracing-data-client';
+    
+    // Import both runtime and types
+    import { IRacingSDK, type IRacingError } from 'iracing-data-client';
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="tip">
+  Enable strict mode in your TypeScript config for the best type safety. The SDK is designed to work perfectly with all strict mode flags enabled.
+</Aside>
+
+## Next Steps
+
+- Review [API Reference](/api/services/) for all available types
+- See [Examples](/examples/member-data/) for real-world TypeScript usage
+- Check [Error Handling](/guides/error-handling/) for typed error handling

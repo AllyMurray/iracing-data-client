@@ -1,0 +1,26 @@
+---
+title: Car Class Service
+description: API reference for the Car Class service
+---
+
+# Car Class Service
+
+The Car Class service provides car classification and grouping information.
+
+```typescript
+const carClassService = iracing.carclass;
+```
+
+## Methods
+
+### `get()`
+
+Get all car classes and their configurations.
+
+**Returns:** `Promise<CarClassGetResponse>`
+
+**Parameters:** None
+
+```typescript
+const carClasses = await iracing.carclass.get();
+```

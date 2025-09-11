@@ -1,0 +1,425 @@
+---
+title: Client API
+description: API reference for the IRacingClient and IRacingSDK classes
+---
+
+import { Tabs, TabItem, Card, Aside, Badge } from '@astrojs/starlight/components';
+
+# Client API
+
+The client provides the core functionality for connecting to the iRacing Data API, handling authentication, and managing requests.
+
+## IRacingSDK
+
+The main entry point for using the SDK.
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+const iracing = new IRacingSDK(options);
+```
+
+### Constructor Options
+
+```typescript
+interface IRacingClientOptions {
+  // Authentication credentials
+  email?: string;
+  password?: string;
+  
+  // Custom headers for authentication
+  headers?: Record<string, string>;
+  
+  // Custom fetch implementation
+  fetchFn?: FetchLike;
+  
+  // Enable/disable parameter validation
+  validateParams?: boolean;
+}
+```
+
+<Tabs>
+  <TabItem label="email">
+    **Type:** `string` (optional)
+    
+    Your iRacing account email address. Required unless using custom headers.
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      email: 'user@example.com'
+    });
+    ```
+  </TabItem>
+  <TabItem label="password">
+    **Type:** `string` (optional)
+    
+    Your iRacing account password. Required unless using custom headers.
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      password: 'secure-password'
+    });
+    ```
+  </TabItem>
+  <TabItem label="headers">
+    **Type:** `Record<string, string>` (optional)
+    
+    Custom HTTP headers for authentication. Alternative to email/password.
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      headers: {
+        'Cookie': 'session-cookie',
+        'User-Agent': 'MyApp/1.0'
+      }
+    });
+    ```
+  </TabItem>
+  <TabItem label="fetchFn">
+    **Type:** `FetchLike` (optional)
+    
+    Custom fetch implementation for HTTP requests. Useful for Node.js < 18 or testing.
+    
+    ```typescript
+    import fetch from 'node-fetch';
+    
+    const iracing = new IRacingSDK({
+      email: 'user@example.com',
+      password: 'password',
+      fetchFn: fetch as any
+    });
+    ```
+  </TabItem>
+  <TabItem label="validateParams">
+    **Type:** `boolean` (optional, default: `true`)
+    
+    Enable or disable parameter validation using Zod schemas.
+    
+    ```typescript
+    const iracing = new IRacingSDK({
+      email: 'user@example.com',
+      password: 'password',
+      validateParams: false  // Disable validation
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### Service Properties
+
+The SDK instance provides access to all service classes:
+
+```typescript
+const iracing = new IRacingSDK(options);
+
+// Access services as properties
+iracing.car              // CarService
+iracing.carclass        // CarclassService
+iracing.constants       // ConstantsService
+iracing.driverStatsByCategory  // DriverStatsByCategoryService
+iracing.hosted          // HostedService
+iracing.league          // LeagueService
+iracing.lookup          // LookupService
+iracing.member          // MemberService
+iracing.results         // ResultsService
+iracing.season          // SeasonService
+iracing.series          // SeriesService
+iracing.stats           // StatsService
+iracing.team            // TeamService
+iracing.timeAttack      // TimeAttackService
+iracing.track           // TrackService
+```
+
+## IRacingClient
+
+The underlying client that handles HTTP requests. You typically don't interact with this directly.
+
+### Features
+
+<Card title="🔐 Automatic Authentication" icon="key">
+  Handles the complete authentication flow including login, session management, and renewal.
+</Card>
+
+<Card title="🔄 S3 Link Following" icon="refresh">
+  Automatically follows presigned S3 URLs returned by the API for accessing data.
+</Card>
+
+<Card title="💾 Response Caching" icon="suitcase">
+  Caches responses based on expiration headers to reduce API calls and improve performance.
+</Card>
+
+<Card title="🔀 Parameter Transformation" icon="arrow-left">
+  Automatically converts between camelCase (SDK) and snake_case (API) formats.
+</Card>
+
+### Internal Methods
+
+The client provides these internal methods (used by services):
+
+#### `get<T>(url, options)`
+
+Makes a GET request to the API.
+
+```typescript
+async get<T>(
+  url: string,
+  options?: {
+    params?: Record<string, any>;
+    schema?: ZodSchema;
+  }
+): Promise<T>
+```
+
+## IRacingError
+
+Custom error class for API errors.
+
+```typescript
+class IRacingError extends Error {
+  status?: number;        // HTTP status code
+  statusText?: string;    // HTTP status text
+  responseData?: any;     // Response body
+  
+  // Helper properties
+  isMaintenanceMode: boolean;  // True if 503 maintenance
+  isRateLimited: boolean;       // True if 429 rate limit
+  isUnauthorized: boolean;      // True if 401 unauthorized
+}
+```
+
+### Error Handling Examples
+
+<Tabs>
+  <TabItem label="Basic">
+    ```typescript
+    try {
+      const data = await iracing.member.info();
+    } catch (error) {
+      if (error instanceof IRacingError) {
+        console.error(`API Error: ${error.message}`);
+        console.error(`Status: ${error.status}`);
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Specific Errors">
+    ```typescript
+    try {
+      const data = await iracing.member.info();
+    } catch (error) {
+      if (error instanceof IRacingError) {
+        if (error.isMaintenanceMode) {
+          console.log('iRacing is in maintenance mode');
+        } else if (error.isRateLimited) {
+          console.log('Rate limited - wait before retry');
+        } else if (error.isUnauthorized) {
+          console.log('Authentication failed');
+        } else {
+          console.error(`Other error: ${error.status}`);
+        }
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="With Retry">
+    ```typescript
+    async function withRetry<T>(
+      fn: () => Promise<T>,
+      retries = 3
+    ): Promise<T> {
+      for (let i = 0; i < retries; i++) {
+        try {
+          return await fn();
+        } catch (error) {
+          if (error instanceof IRacingError) {
+            // Don't retry auth errors
+            if (error.isUnauthorized) throw error;
+            
+            // Retry rate limits with backoff
+            if (error.isRateLimited && i < retries - 1) {
+              await new Promise(r => 
+                setTimeout(r, Math.pow(2, i) * 1000)
+              );
+              continue;
+            }
+          }
+          throw error;
+        }
+      }
+      throw new Error('Max retries exceeded');
+    }
+    
+    // Usage
+    const data = await withRetry(() => 
+      iracing.member.info()
+    );
+    ```
+  </TabItem>
+</Tabs>
+
+## Type Exports
+
+The SDK exports all TypeScript types for responses and parameters:
+
+```typescript
+import type {
+  // Response types
+  MemberInfoResponse,
+  CarGetResponse,
+  TrackAssetsResponse,
+  
+  // Parameter types
+  MemberGetParams,
+  ResultsSearchSeriesParams,
+  StatsSeasonDriverStandingsParams,
+  
+  // Client types
+  IRacingClientOptions,
+  IRacingError
+} from 'iracing-data-client';
+```
+
+## Configuration Examples
+
+### Basic Setup
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL,
+  password: process.env.IRACING_PASSWORD
+});
+```
+
+### With Custom Fetch
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+import fetch from 'node-fetch';
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL,
+  password: process.env.IRACING_PASSWORD,
+  fetchFn: fetch as any
+});
+```
+
+### With Custom Headers
+
+```typescript
+const iracing = new IRacingSDK({
+  headers: {
+    'Cookie': sessionCookie,
+    'User-Agent': 'MyRacingApp/2.0',
+    'X-Request-ID': requestId
+  }
+});
+```
+
+### Disable Validation
+
+```typescript
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL,
+  password: process.env.IRACING_PASSWORD,
+  validateParams: false  // Skip Zod validation
+});
+```
+
+## Performance Considerations
+
+### Caching
+
+The client automatically caches responses based on the `expires` header from the API:
+
+- Cached responses are returned immediately without making a new request
+- Cache is stored in memory per client instance
+- Cache expires based on API-provided expiration times
+
+### Rate Limiting
+
+<Aside type="caution">
+  The iRacing API has rate limits. The client will throw an `IRacingError` with `isRateLimited = true` when limits are exceeded.
+</Aside>
+
+Best practices:
+- Implement exponential backoff for retries
+- Cache responses when possible
+- Batch requests where the API supports it
+- Add delays between successive requests
+
+### Connection Pooling
+
+The client reuses the same authenticated session across all requests:
+
+```typescript
+const iracing = new IRacingSDK(options);
+
+// All these requests share the same session
+await iracing.member.info();
+await iracing.car.get();
+await iracing.track.assets();
+```
+
+## Advanced Usage
+
+### Multiple Accounts
+
+```typescript
+const mainAccount = new IRacingSDK({
+  email: process.env.MAIN_EMAIL,
+  password: process.env.MAIN_PASSWORD
+});
+
+const altAccount = new IRacingSDK({
+  email: process.env.ALT_EMAIL,
+  password: process.env.ALT_PASSWORD
+});
+
+// Use different accounts
+const mainInfo = await mainAccount.member.info();
+const altInfo = await altAccount.member.info();
+```
+
+### Custom Error Handler
+
+```typescript
+class IRacingWrapper {
+  private sdk: IRacingSDK;
+  
+  constructor(options: IRacingClientOptions) {
+    this.sdk = new IRacingSDK(options);
+  }
+  
+  async safeRequest<T>(
+    request: () => Promise<T>
+  ): Promise<T | null> {
+    try {
+      return await request();
+    } catch (error) {
+      this.handleError(error);
+      return null;
+    }
+  }
+  
+  private handleError(error: unknown) {
+    if (error instanceof IRacingError) {
+      // Log to monitoring service
+      console.error({
+        type: 'iracing_api_error',
+        status: error.status,
+        message: error.message,
+        isMaintenanceMode: error.isMaintenanceMode,
+        isRateLimited: error.isRateLimited
+      });
+    }
+  }
+}
+```
+
+## See Also
+
+- [Authentication Guide](/getting-started/authentication/) - Detailed authentication setup
+- [Error Handling Guide](/guides/error-handling/) - Comprehensive error handling strategies
+- [Services Overview](/api/services/) - All available services

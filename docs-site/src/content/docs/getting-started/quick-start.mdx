@@ -1,0 +1,397 @@
+---
+title: Quick Start
+description: Get up and running with the iRacing Data Client in 5 minutes
+---
+
+import { Steps, Code, Tabs, TabItem, Aside, Card } from '@astrojs/starlight/components';
+
+# Quick Start
+
+Build your first iRacing application in 5 minutes! This guide will walk you through creating a simple app that fetches and displays your racing statistics.
+
+## What We'll Build
+
+A simple Node.js application that:
+- Connects to the iRacing Data API
+- Fetches your member information
+- Displays your recent race results
+- Shows your career statistics
+
+<Aside type="tip">
+  This guide assumes you have Node.js 18+ installed and an active iRacing subscription.
+</Aside>
+
+## Step-by-Step Guide
+
+<Steps>
+
+1. **Create a new project**
+
+   ```bash
+   mkdir my-iracing-app
+   cd my-iracing-app
+   npm init -y
+   ```
+
+2. **Install the SDK**
+
+   ```bash
+   npm install iracing-data-client
+   npm install --save-dev typescript @types/node tsx
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in your project root:
+
+   ```env
+   IRACING_EMAIL=your-email@example.com
+   IRACING_PASSWORD=your-password
+   ```
+
+   <Aside type="caution">
+     Add `.env` to your `.gitignore` file to keep your credentials secure!
+   </Aside>
+
+4. **Create your application**
+
+   Create a file named `app.ts`:
+
+   ```typescript
+   // app.ts
+   import { IRacingSDK, IRacingError } from 'iracing-data-client';
+   import 'dotenv/config'; // Load environment variables
+
+   async function main() {
+     try {
+       // Initialize the SDK
+       const iracing = new IRacingSDK({
+         email: process.env.IRACING_EMAIL!,
+         password: process.env.IRACING_PASSWORD!
+       });
+
+       // Fetch member info
+       console.log('🏁 Connecting to iRacing...\n');
+       const memberInfo = await iracing.member.info();
+       
+       console.log(`👋 Welcome, ${memberInfo.displayName}!`);
+       console.log(`📊 Customer ID: ${memberInfo.custId}`);
+       console.log(`📅 Member Since: ${new Date(memberInfo.memberSince).toLocaleDateString()}`);
+       
+       // Get recent races
+       console.log('\n🏎️ Recent Races:');
+       const recentRaces = await iracing.stats.memberRecentRaces({
+         custId: memberInfo.custId
+       });
+       
+       recentRaces.races.slice(0, 5).forEach(race => {
+         console.log(`  • ${race.seriesName} at ${race.trackName}`);
+         console.log(`    Finished P${race.finishPosition} (Started P${race.startPosition})`);
+         console.log(`    SOF: ${race.strengthOfField}\n`);
+       });
+       
+       // Get career stats
+       console.log('📈 Career Statistics:');
+       const careerStats = await iracing.stats.memberCareer({
+         custId: memberInfo.custId
+       });
+       
+       console.log(`  • Total Races: ${careerStats.stats[0]?.starts || 0}`);
+       console.log(`  • Total Wins: ${careerStats.stats[0]?.wins || 0}`);
+       console.log(`  • Average Incidents: ${careerStats.stats[0]?.avgIncPerRace || 0}`);
+       
+     } catch (error) {
+       if (error instanceof IRacingError) {
+         console.error('❌ iRacing API Error:', error.message);
+         if (error.isMaintenanceMode) {
+           console.log('🔧 iRacing is currently in maintenance mode.');
+         }
+       } else {
+         console.error('❌ Unexpected error:', error);
+       }
+     }
+   }
+
+   main();
+   ```
+
+5. **Run your application**
+
+   ```bash
+   npx tsx app.ts
+   ```
+
+</Steps>
+
+## Expected Output
+
+When you run the application, you should see something like:
+
+```
+🏁 Connecting to iRacing...
+
+👋 Welcome, John Doe!
+📊 Customer ID: 123456
+📅 Member Since: 1/15/2020
+
+🏎️ Recent Races:
+  • IMSA Sportscar Championship at Road America
+    Finished P3 (Started P5)
+    SOF: 2150
+
+  • GT3 Fixed at Spa-Francorchamps
+    Finished P1 (Started P2)
+    SOF: 1875
+
+📈 Career Statistics:
+  • Total Races: 542
+  • Total Wins: 47
+  • Average Incidents: 3.2
+```
+
+## Expanding the Example
+
+Now that you have a working application, try adding more features:
+
+<Tabs>
+  <TabItem label="Season Standings">
+    ```typescript
+    // Get current season standings
+    const seasons = await iracing.season.list({
+      seasonYear: new Date().getFullYear(),
+      seasonQuarter: Math.ceil((new Date().getMonth() + 1) / 3)
+    });
+    
+    const mySeries = seasons.find(s => 
+      s.seriesName === 'GT3 Fixed'
+    );
+    
+    if (mySeries) {
+      const standings = await iracing.stats.seasonDriverStandings({
+        seasonId: mySeries.seasonId,
+        carClassId: mySeries.carClassIds[0]
+      });
+      
+      const myStanding = standings.driverStandings.find(
+        d => d.custId === memberInfo.custId
+      );
+      
+      console.log(`Position: ${myStanding?.position}`);
+      console.log(`Points: ${myStanding?.points}`);
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="Track Records">
+    ```typescript
+    // Get world records for a track
+    const records = await iracing.stats.worldRecords({
+      trackId: 266, // Spa-Francorchamps
+      carId: 100    // Mercedes AMG GT3
+    });
+    
+    records.forEach(record => {
+      console.log(`${record.trackConfigName}`);
+      console.log(`  Lap: ${record.lapTime}s`);
+      console.log(`  By: ${record.displayName}`);
+    });
+    ```
+  </TabItem>
+  
+  <TabItem label="League Info">
+    ```typescript
+    // Get league information
+    const leagues = await iracing.league.directory({
+      search: 'My League Name'
+    });
+    
+    if (leagues.length > 0) {
+      const leagueDetails = await iracing.league.get({
+        leagueId: leagues[0].leagueId
+      });
+      
+      console.log(`League: ${leagueDetails.leagueName}`);
+      console.log(`Members: ${leagueDetails.rosterCount}`);
+      console.log(`Owner: ${leagueDetails.ownerName}`);
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+## Complete Examples
+
+Here are more complete example applications:
+
+### Discord Bot Integration
+
+```typescript
+import { Client, GatewayIntentBits } from 'discord.js';
+import { IRacingSDK } from 'iracing-data-client';
+
+const discord = new Client({ 
+  intents: [GatewayIntentBits.Guilds] 
+});
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+
+discord.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return;
+  
+  if (interaction.commandName === 'driver') {
+    const custId = interaction.options.getInteger('id')!;
+    
+    const member = await iracing.member.get({ 
+      customerIds: [custId] 
+    });
+    
+    await interaction.reply({
+      embeds: [{
+        title: member.members[0].displayName,
+        fields: [
+          { name: 'iRating', value: member.members[0].irating },
+          { name: 'Safety Rating', value: member.members[0].safetyRating }
+        ]
+      }]
+    });
+  }
+});
+```
+
+### Express API Server
+
+```typescript
+import express from 'express';
+import { IRacingSDK } from 'iracing-data-client';
+
+const app = express();
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+
+// Cache middleware
+const cache = new Map();
+const cacheMiddleware = (duration: number) => {
+  return (req, res, next) => {
+    const key = req.originalUrl;
+    const cached = cache.get(key);
+    
+    if (cached && cached.expires > Date.now()) {
+      return res.json(cached.data);
+    }
+    
+    res.sendResponse = res.json;
+    res.json = (data) => {
+      cache.set(key, {
+        data,
+        expires: Date.now() + duration * 1000
+      });
+      return res.sendResponse(data);
+    };
+    next();
+  };
+};
+
+app.get('/api/member/:id', 
+  cacheMiddleware(300), // Cache for 5 minutes
+  async (req, res) => {
+    try {
+      const data = await iracing.member.get({
+        customerIds: [parseInt(req.params.id)]
+      });
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
+
+app.listen(3000, () => {
+  console.log('API server running on port 3000');
+});
+```
+
+## Best Practices
+
+<Card title="✅ Do's" icon="check">
+  - Store credentials in environment variables
+  - Implement error handling for all API calls
+  - Cache responses to reduce API load
+  - Use TypeScript for better type safety
+  - Handle maintenance mode gracefully
+</Card>
+
+<Card title="❌ Don'ts" icon="x">
+  - Never hardcode credentials in source code
+  - Don't make excessive API calls (respect rate limits)
+  - Avoid exposing credentials in client-side code
+  - Don't ignore error responses
+  - Never share your authentication tokens
+</Card>
+
+## Common Patterns
+
+### Error Handling
+
+```typescript
+async function safeApiCall<T>(
+  apiCall: () => Promise<T>
+): Promise<T | null> {
+  try {
+    return await apiCall();
+  } catch (error) {
+    if (error instanceof IRacingError) {
+      if (error.isMaintenanceMode) {
+        console.log('iRacing is in maintenance mode');
+      } else if (error.isRateLimited) {
+        console.log('Rate limited, waiting...');
+        await new Promise(r => setTimeout(r, 60000));
+        return safeApiCall(apiCall);
+      }
+    }
+    console.error('API call failed:', error);
+    return null;
+  }
+}
+
+// Usage
+const data = await safeApiCall(() => 
+  iracing.member.info()
+);
+```
+
+### Batch Operations
+
+```typescript
+async function getMembersBatch(custIds: number[]) {
+  const batchSize = 50; // iRacing limit
+  const results = [];
+  
+  for (let i = 0; i < custIds.length; i += batchSize) {
+    const batch = custIds.slice(i, i + batchSize);
+    const data = await iracing.member.get({
+      customerIds: batch
+    });
+    results.push(...data.members);
+    
+    // Respect rate limits
+    if (i + batchSize < custIds.length) {
+      await new Promise(r => setTimeout(r, 100));
+    }
+  }
+  
+  return results;
+}
+```
+
+## Next Steps
+
+Congratulations! You've built your first iRacing application. Here's what to explore next:
+
+- [Authentication Guide](/getting-started/authentication/) - Learn about different authentication methods
+- [API Reference](/api/services/) - Explore all available endpoints
+- [Error Handling](/guides/error-handling/) - Build robust error handling
+- [Examples](/examples/member-data/) - See more complex examples

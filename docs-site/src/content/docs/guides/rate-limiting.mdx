@@ -1,0 +1,488 @@
+---
+title: Rate Limiting
+description: Understanding and handling API rate limits effectively
+---
+
+import { Tabs, TabItem, Card, CardGrid, Aside, Badge } from '@astrojs/starlight/components';
+
+# Rate Limiting
+
+The iRacing API enforces rate limits to ensure fair usage and system stability. This guide explains how to work within these limits and handle rate limiting gracefully.
+
+## Understanding Rate Limits
+
+<CardGrid>
+  <Card title="🔢 Request Limits">
+    The API allows a limited number of requests per time window (exact limits not publicly documented)
+  </Card>
+  <Card title="⏱️ Time Windows">
+    Rate limits typically reset on a rolling window basis
+  </Card>
+  <Card title="📊 Per-Endpoint Limits">
+    Different endpoints may have different rate limits
+  </Card>
+  <Card title="🔄 Automatic Reset">
+    Limits reset automatically after the time window expires
+  </Card>
+</CardGrid>
+
+## Detecting Rate Limits
+
+The SDK automatically detects rate limiting:
+
+```typescript
+try {
+  const data = await iracing.member.info();
+} catch (error) {
+  if (error instanceof IRacingError && error.isRateLimited) {
+    console.log('Rate limit exceeded!');
+    console.log('Status:', error.status);  // 429
+    
+    // Check for retry-after header
+    const retryAfter = error.responseData?.retryAfter;
+    if (retryAfter) {
+      console.log(`Retry after ${retryAfter} seconds`);
+    }
+  }
+}
+```
+
+## Rate Limit Strategies
+
+### Strategy 1: Exponential Backoff
+
+Gradually increase wait time between retries:
+
+```typescript
+async function withExponentialBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries = 5,
+  baseDelay = 1000
+): Promise<T> {
+  let lastError: Error;
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error as Error;
+      
+      if (error instanceof IRacingError && error.isRateLimited) {
+        // Calculate exponential delay
+        const delay = baseDelay * Math.pow(2, i);
+        const jitter = Math.random() * 1000;  // Add jitter
+        
+        console.log(`Rate limited. Retry ${i + 1}/${maxRetries} in ${delay}ms`);
+        await new Promise(r => setTimeout(r, delay + jitter));
+      } else {
+        throw error;  // Non-rate-limit error
+      }
+    }
+  }
+  
+  throw lastError!;
+}
+
+// Usage
+const data = await withExponentialBackoff(
+  () => iracing.stats.memberRecentRaces({ custId: 123456 })
+);
+```
+
+### Strategy 2: Rate Limiter
+
+Proactively limit request rate:
+
+```typescript
+class RateLimiter {
+  private queue: Array<() => void> = [];
+  private running = 0;
+  
+  constructor(
+    private maxConcurrent = 2,
+    private minTime = 100  // ms between requests
+  ) {}
+  
+  async execute<T>(fn: () => Promise<T>): Promise<T> {
+    await this.waitForSlot();
+    
+    this.running++;
+    const startTime = Date.now();
+    
+    try {
+      return await fn();
+    } finally {
+      // Ensure minimum time between requests
+      const elapsed = Date.now() - startTime;
+      if (elapsed < this.minTime) {
+        await new Promise(r => 
+          setTimeout(r, this.minTime - elapsed)
+        );
+      }
+      
+      this.running--;
+      this.processQueue();
+    }
+  }
+  
+  private waitForSlot(): Promise<void> {
+    if (this.running < this.maxConcurrent) {
+      return Promise.resolve();
+    }
+    
+    return new Promise(resolve => {
+      this.queue.push(resolve);
+    });
+  }
+  
+  private processQueue() {
+    if (this.queue.length > 0 && this.running < this.maxConcurrent) {
+      const next = this.queue.shift();
+      next?.();
+    }
+  }
+}
+
+// Usage
+const limiter = new RateLimiter(2, 100);
+
+// All requests go through the limiter
+const results = await Promise.all([
+  limiter.execute(() => iracing.member.info()),
+  limiter.execute(() => iracing.car.get()),
+  limiter.execute(() => iracing.track.get())
+]);
+```
+
+### Strategy 3: Token Bucket
+
+Implement a token bucket algorithm:
+
+```typescript
+class TokenBucket {
+  private tokens: number;
+  private lastRefill: number;
+  
+  constructor(
+    private capacity = 10,
+    private refillRate = 1,  // tokens per second
+    private refillInterval = 1000  // ms
+  ) {
+    this.tokens = capacity;
+    this.lastRefill = Date.now();
+  }
+  
+  async acquire(tokens = 1): Promise<void> {
+    await this.refill();
+    
+    while (this.tokens < tokens) {
+      // Wait for tokens to become available
+      await new Promise(r => 
+        setTimeout(r, this.refillInterval)
+      );
+      await this.refill();
+    }
+    
+    this.tokens -= tokens;
+  }
+  
+  private async refill() {
+    const now = Date.now();
+    const elapsed = now - this.lastRefill;
+    const tokensToAdd = Math.floor(
+      (elapsed / 1000) * this.refillRate
+    );
+    
+    if (tokensToAdd > 0) {
+      this.tokens = Math.min(
+        this.capacity,
+        this.tokens + tokensToAdd
+      );
+      this.lastRefill = now;
+    }
+  }
+  
+  getAvailableTokens(): number {
+    return this.tokens;
+  }
+}
+
+// Usage
+const bucket = new TokenBucket(10, 2);  // 10 tokens, 2/sec refill
+
+async function makeRequest() {
+  await bucket.acquire(1);  // Wait for token
+  return iracing.member.info();
+}
+```
+
+## Batch Processing
+
+Reduce API calls by batching requests:
+
+<Tabs>
+  <TabItem label="Member Batching">
+    ```typescript
+    // Instead of multiple individual requests
+    const member1 = await iracing.member.get({ customerIds: [123456] });
+    const member2 = await iracing.member.get({ customerIds: [789012] });
+    const member3 = await iracing.member.get({ customerIds: [345678] });
+    
+    // Use a single batched request
+    const allMembers = await iracing.member.get({
+      customerIds: [123456, 789012, 345678]  // Up to 50 IDs
+    });
+    ```
+  </TabItem>
+  <TabItem label="Parallel Limiting">
+    ```typescript
+    // Process in chunks to avoid rate limits
+    async function processInChunks<T, R>(
+      items: T[],
+      processor: (item: T) => Promise<R>,
+      chunkSize = 5,
+      delay = 1000
+    ): Promise<R[]> {
+      const results: R[] = [];
+      
+      for (let i = 0; i < items.length; i += chunkSize) {
+        const chunk = items.slice(i, i + chunkSize);
+        
+        // Process chunk in parallel
+        const chunkResults = await Promise.all(
+          chunk.map(processor)
+        );
+        
+        results.push(...chunkResults);
+        
+        // Delay between chunks
+        if (i + chunkSize < items.length) {
+          await new Promise(r => setTimeout(r, delay));
+        }
+      }
+      
+      return results;
+    }
+    
+    // Usage
+    const sessionIds = [12345, 67890, 11111, 22222, 33333];
+    const results = await processInChunks(
+      sessionIds,
+      id => iracing.results.get({ subsessionId: id }),
+      2,    // Process 2 at a time
+      500   // 500ms between chunks
+    );
+    ```
+  </TabItem>
+</Tabs>
+
+## Queue Management
+
+Implement a request queue with rate limiting:
+
+```typescript
+class RequestQueue {
+  private queue: Array<{
+    fn: () => Promise<any>;
+    resolve: (value: any) => void;
+    reject: (error: any) => void;
+  }> = [];
+  private processing = false;
+  private requestCount = 0;
+  private windowStart = Date.now();
+  
+  constructor(
+    private maxRequests = 100,
+    private windowMs = 60000  // 1 minute
+  ) {}
+  
+  async add<T>(fn: () => Promise<T>): Promise<T> {
+    return new Promise((resolve, reject) => {
+      this.queue.push({ fn, resolve, reject });
+      this.process();
+    });
+  }
+  
+  private async process() {
+    if (this.processing) return;
+    this.processing = true;
+    
+    while (this.queue.length > 0) {
+      // Check rate limit
+      if (this.shouldWait()) {
+        await this.waitForReset();
+      }
+      
+      const item = this.queue.shift();
+      if (!item) break;
+      
+      try {
+        const result = await item.fn();
+        item.resolve(result);
+        this.requestCount++;
+      } catch (error) {
+        item.reject(error);
+        
+        // If rate limited, put back in queue
+        if (error instanceof IRacingError && error.isRateLimited) {
+          this.queue.unshift(item);
+          await this.waitForReset();
+        }
+      }
+      
+      // Small delay between requests
+      await new Promise(r => setTimeout(r, 50));
+    }
+    
+    this.processing = false;
+  }
+  
+  private shouldWait(): boolean {
+    const now = Date.now();
+    
+    // Reset window if expired
+    if (now - this.windowStart > this.windowMs) {
+      this.windowStart = now;
+      this.requestCount = 0;
+      return false;
+    }
+    
+    return this.requestCount >= this.maxRequests;
+  }
+  
+  private async waitForReset() {
+    const waitTime = this.windowMs - (Date.now() - this.windowStart);
+    console.log(`Rate limit reached. Waiting ${waitTime}ms`);
+    await new Promise(r => setTimeout(r, waitTime));
+    this.windowStart = Date.now();
+    this.requestCount = 0;
+  }
+}
+
+// Usage
+const queue = new RequestQueue(100, 60000);
+
+// All requests go through the queue
+const data = await queue.add(() => 
+  iracing.member.info()
+);
+```
+
+## Monitoring Rate Limits
+
+Track and log rate limit usage:
+
+```typescript
+class RateLimitMonitor {
+  private attempts = 0;
+  private rateLimitHits = 0;
+  private successfulRequests = 0;
+  private startTime = Date.now();
+  
+  async execute<T>(fn: () => Promise<T>): Promise<T> {
+    this.attempts++;
+    
+    try {
+      const result = await fn();
+      this.successfulRequests++;
+      return result;
+    } catch (error) {
+      if (error instanceof IRacingError && error.isRateLimited) {
+        this.rateLimitHits++;
+        console.warn(`Rate limit hit! Total: ${this.rateLimitHits}`);
+      }
+      throw error;
+    }
+  }
+  
+  getStats() {
+    const elapsed = (Date.now() - this.startTime) / 1000;
+    const requestsPerSecond = this.successfulRequests / elapsed;
+    
+    return {
+      attempts: this.attempts,
+      successful: this.successfulRequests,
+      rateLimitHits: this.rateLimitHits,
+      failureRate: `${((this.rateLimitHits / this.attempts) * 100).toFixed(2)}%`,
+      requestsPerSecond: requestsPerSecond.toFixed(2),
+      uptime: `${elapsed.toFixed(0)}s`
+    };
+  }
+}
+
+// Usage
+const monitor = new RateLimitMonitor();
+
+// Wrap all requests
+const data = await monitor.execute(() => 
+  iracing.member.info()
+);
+
+// Check stats
+setInterval(() => {
+  console.log('Rate Limit Stats:', monitor.getStats());
+}, 30000);
+```
+
+## Best Practices
+
+<CardGrid>
+  <Card title="✅ Cache Aggressively">
+    Use caching to reduce unnecessary API calls
+  </Card>
+  <Card title="✅ Batch Requests">
+    Combine multiple requests when the API supports it
+  </Card>
+  <Card title="✅ Add Delays">
+    Include small delays between requests to avoid bursts
+  </Card>
+  <Card title="✅ Handle Gracefully">
+    Implement proper retry logic with backoff
+  </Card>
+  <Card title="❌ Don't Hammer">
+    Avoid rapid successive requests to the same endpoint
+  </Card>
+  <Card title="❌ Don't Ignore Limits">
+    Respect rate limit errors and wait before retrying
+  </Card>
+</CardGrid>
+
+## Rate Limit Guidelines
+
+<Aside type="caution">
+  While exact rate limits aren't publicly documented, these guidelines will help avoid issues:
+  
+  - Keep requests under 2-3 per second sustained
+  - Add 50-100ms delays between requests
+  - Use exponential backoff when rate limited
+  - Cache responses whenever possible
+  - Batch requests where supported
+</Aside>
+
+## Debugging Rate Limits
+
+```typescript
+// Enhanced error logging for rate limits
+async function debugRateLimit(fn: () => Promise<any>) {
+  try {
+    return await fn();
+  } catch (error) {
+    if (error instanceof IRacingError && error.isRateLimited) {
+      console.error('=== RATE LIMIT DEBUG ===');
+      console.error('Status:', error.status);
+      console.error('Status Text:', error.statusText);
+      console.error('Response Data:', error.responseData);
+      console.error('Headers:', error.responseData?.headers);
+      console.error('Retry After:', error.responseData?.retryAfter);
+      console.error('========================');
+    }
+    throw error;
+  }
+}
+```
+
+## Next Steps
+
+- Review [Caching Guide](/guides/caching/) to reduce API calls
+- See [Error Handling](/guides/error-handling/) for handling rate limit errors
+- Check [Performance Guide](/guides/performance/) for optimization tips

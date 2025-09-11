@@ -1,0 +1,96 @@
+---
+title: Season Standings
+description: Examples of working with season standings and championship data
+---
+
+import { Tabs, TabItem, Card, Aside } from '@astrojs/starlight/components';
+
+# Season Standings
+
+Examples for fetching and analyzing season standings and championship data.
+
+## Driver Standings
+
+### Get Current Standings
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+
+async function getDriverStandings(seasonId: number, carClassId: number) {
+  const standings = await iracing.stats.seasonDriverStandings({
+    seasonId,
+    carClassId,
+    raceWeekNum: -1  // -1 for overall standings
+  });
+  
+  // Top 10 drivers
+  standings.driverStandings.slice(0, 10).forEach(driver => {
+    console.log(`${driver.position}. ${driver.displayName}`);
+    console.log(`   Points: ${driver.points}`);
+    console.log(`   Wins: ${driver.wins}`);
+    console.log(`   Weeks Counted: ${driver.weeksCountedChampPoints}`);
+  });
+  
+  return standings;
+}
+```
+
+### Track Your Position
+
+```typescript
+async function trackMyStanding(seasonId: number, carClassId: number) {
+  const myInfo = await iracing.member.info();
+  const standings = await iracing.stats.seasonDriverStandings({
+    seasonId,
+    carClassId
+  });
+  
+  const myStanding = standings.driverStandings.find(
+    d => d.custId === myInfo.custId
+  );
+  
+  if (myStanding) {
+    console.log(`Your position: ${myStanding.position}`);
+    console.log(`Points: ${myStanding.points}`);
+    console.log(`Gap to leader: ${standings.driverStandings[0].points - myStanding.points}`);
+    
+    // Find next position
+    const nextDriver = standings.driverStandings[myStanding.position - 2];
+    if (nextDriver) {
+      console.log(`Points to next position: ${nextDriver.points - myStanding.points}`);
+    }
+  }
+  
+  return myStanding;
+}
+```
+
+## Team Championships
+
+### Get Team Standings
+
+```typescript
+async function getTeamStandings(seasonId: number, carClassId: number) {
+  const standings = await iracing.stats.seasonTeamStandings({
+    seasonId,
+    carClassId
+  });
+  
+  return standings.teamStandings.map(team => ({
+    position: team.position,
+    teamName: team.teamName,
+    points: team.points,
+    wins: team.wins,
+    droppedPoints: team.droppedPoints
+  }));
+}
+```
+
+<Aside type="note">
+  This page is under construction. More examples coming soon!
+</Aside>

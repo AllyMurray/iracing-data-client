@@ -1,0 +1,480 @@
+---
+title: Authentication
+description: Learn about authentication methods and security best practices
+---
+
+import { Tabs, TabItem, Aside, Card, CardGrid, Code, Steps } from '@astrojs/starlight/components';
+
+# Authentication
+
+The iRacing Data Client SDK supports multiple authentication methods to securely connect to the iRacing API. This guide covers all authentication options and security best practices.
+
+## How Authentication Works
+
+The SDK handles the complete authentication flow automatically:
+
+<Steps>
+1. **Initial Login** - Sends credentials to iRacing's auth endpoint
+2. **Session Creation** - Receives and stores session cookies
+3. **Request Signing** - Automatically includes auth headers in all requests
+4. **Session Renewal** - Refreshes authentication when needed
+</Steps>
+
+<Aside type="note">
+  The SDK manages all authentication complexity internally. You just provide credentials, and it handles the rest!
+</Aside>
+
+## Authentication Methods
+
+### Method 1: Email & Password
+
+The simplest authentication method using your iRacing account credentials:
+
+<Tabs>
+  <TabItem label="Basic Setup">
+    ```typescript
+    import { IRacingSDK } from 'iracing-data-client';
+    
+    const iracing = new IRacingSDK({
+      email: 'your-email@example.com',
+      password: 'your-password'
+    });
+    ```
+  </TabItem>
+  
+  <TabItem label="With Environment Variables">
+    ```typescript
+    // Recommended for production
+    import { IRacingSDK } from 'iracing-data-client';
+    
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL,
+      password: process.env.IRACING_PASSWORD
+    });
+    ```
+    
+    ```bash
+    # .env file
+    IRACING_EMAIL=your-email@example.com
+    IRACING_PASSWORD=your-secure-password
+    ```
+  </TabItem>
+  
+  <TabItem label="With Config File">
+    ```typescript
+    // config.ts
+    export const config = {
+      iracing: {
+        email: process.env.IRACING_EMAIL!,
+        password: process.env.IRACING_PASSWORD!
+      }
+    };
+    
+    // app.ts
+    import { IRacingSDK } from 'iracing-data-client';
+    import { config } from './config';
+    
+    const iracing = new IRacingSDK({
+      email: config.iracing.email,
+      password: config.iracing.password
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### Method 2: Custom Headers
+
+For advanced scenarios where you manage authentication externally:
+
+```typescript
+const iracing = new IRacingSDK({
+  headers: {
+    'Cookie': 'irsso_members=your-session-cookie',
+    'User-Agent': 'MyApp/1.0',
+    'X-Custom-Header': 'custom-value'
+  }
+});
+```
+
+<Aside type="tip">
+  This method is useful when:
+  - You have existing session cookies from another authentication flow
+  - You need to pass custom headers for monitoring or debugging
+  - You're building a proxy service with pre-authenticated requests
+</Aside>
+
+### Method 3: Session Token Reuse
+
+Reuse authentication tokens across instances:
+
+```typescript
+// First instance - authenticate normally
+const iracing1 = new IRacingSDK({
+  email: process.env.IRACING_EMAIL,
+  password: process.env.IRACING_PASSWORD
+});
+
+// Make a request to trigger authentication
+await iracing1.member.info();
+
+// Get the auth cookies (implementation depends on your setup)
+const authCookies = iracing1.getAuthCookies(); // Note: This is pseudocode
+
+// Second instance - reuse the session
+const iracing2 = new IRacingSDK({
+  headers: {
+    'Cookie': authCookies
+  }
+});
+```
+
+## Security Best Practices
+
+<CardGrid>
+  <Card title="🔐 Never Hardcode Credentials" icon="shield">
+    Always use environment variables or secure vaults for credentials. Never commit credentials to version control.
+  </Card>
+  
+  <Card title="🔑 Use Secrets Management" icon="key">
+    In production, use proper secrets management like AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault.
+  </Card>
+  
+  <Card title="🚫 Client-Side Security" icon="warning">
+    Never use the SDK with credentials in browser JavaScript. Always authenticate on the backend.
+  </Card>
+  
+  <Card title="♻️ Rotate Credentials" icon="refresh">
+    Regularly update your iRacing password and update your application configuration accordingly.
+  </Card>
+</CardGrid>
+
+## Environment-Specific Setup
+
+### Development Environment
+
+For local development, use a `.env` file:
+
+```bash
+# .env.local
+IRACING_EMAIL=dev@example.com
+IRACING_PASSWORD=dev-password
+NODE_ENV=development
+```
+
+```typescript
+// Load environment variables
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+```
+
+<Aside type="caution">
+  Always add `.env*` files to your `.gitignore`:
+  ```gitignore
+  .env
+  .env.local
+  .env.*.local
+  ```
+</Aside>
+
+### Production Environment
+
+<Tabs>
+  <TabItem label="Vercel">
+    ```typescript
+    // Set environment variables in Vercel Dashboard
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL!,
+      password: process.env.IRACING_PASSWORD!
+    });
+    ```
+    
+    Configure in Vercel Dashboard:
+    - Go to Project Settings → Environment Variables
+    - Add `IRACING_EMAIL` and `IRACING_PASSWORD`
+    - Deploy your application
+  </TabItem>
+  
+  <TabItem label="AWS Lambda">
+    ```typescript
+    import { SecretsManager } from '@aws-sdk/client-secrets-manager';
+    
+    const client = new SecretsManager({ region: 'us-east-1' });
+    
+    async function getSecrets() {
+      const response = await client.getSecretValue({
+        SecretId: 'iracing-credentials'
+      });
+      return JSON.parse(response.SecretString!);
+    }
+    
+    export const handler = async () => {
+      const secrets = await getSecrets();
+      
+      const iracing = new IRacingSDK({
+        email: secrets.email,
+        password: secrets.password
+      });
+      
+      // Your logic here
+    };
+    ```
+  </TabItem>
+  
+  <TabItem label="Docker">
+    ```dockerfile
+    # Dockerfile
+    FROM node:18-alpine
+    WORKDIR /app
+    COPY . .
+    RUN npm install
+    CMD ["node", "app.js"]
+    ```
+    
+    ```yaml
+    # docker-compose.yml
+    version: '3.8'
+    services:
+      app:
+        build: .
+        environment:
+          - IRACING_EMAIL=${IRACING_EMAIL}
+          - IRACING_PASSWORD=${IRACING_PASSWORD}
+        env_file:
+          - .env.production
+    ```
+  </TabItem>
+  
+  <TabItem label="Kubernetes">
+    ```yaml
+    # secret.yaml
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: iracing-credentials
+    type: Opaque
+    data:
+      email: <base64-encoded-email>
+      password: <base64-encoded-password>
+    ```
+    
+    ```yaml
+    # deployment.yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    spec:
+      template:
+        spec:
+          containers:
+          - name: app
+            env:
+            - name: IRACING_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: iracing-credentials
+                  key: email
+            - name: IRACING_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: iracing-credentials
+                  key: password
+    ```
+  </TabItem>
+</Tabs>
+
+## Authentication Errors
+
+### Common Authentication Issues
+
+<Tabs>
+  <TabItem label="Invalid Credentials">
+    **Error:** `IRacingError: Authentication failed`
+    
+    **Solutions:**
+    - Verify email and password are correct
+    - Check for typos or extra spaces
+    - Ensure account has active subscription
+    - Try logging into iRacing website to verify
+    
+    ```typescript
+    try {
+      const iracing = new IRacingSDK({
+        email: email.trim(), // Remove whitespace
+        password: password.trim()
+      });
+      await iracing.member.info();
+    } catch (error) {
+      if (error.isUnauthorized) {
+        console.log('Check your credentials');
+      }
+    }
+    ```
+  </TabItem>
+  
+  <TabItem label="Expired Session">
+    **Error:** `IRacingError: Session expired`
+    
+    The SDK automatically handles session renewal, but if you see this:
+    
+    ```typescript
+    // Force re-authentication
+    const iracing = new IRacingSDK({
+      email: process.env.IRACING_EMAIL,
+      password: process.env.IRACING_PASSWORD
+    });
+    
+    // The SDK will create a new session on next request
+    await iracing.member.info();
+    ```
+  </TabItem>
+  
+  <TabItem label="Rate Limiting">
+    **Error:** `IRacingError: Too many requests`
+    
+    **Solutions:**
+    ```typescript
+    async function withRetry<T>(
+      fn: () => Promise<T>,
+      maxRetries = 3
+    ): Promise<T> {
+      for (let i = 0; i < maxRetries; i++) {
+        try {
+          return await fn();
+        } catch (error) {
+          if (error.isRateLimited && i < maxRetries - 1) {
+            // Wait with exponential backoff
+            await new Promise(r => 
+              setTimeout(r, Math.pow(2, i) * 1000)
+            );
+            continue;
+          }
+          throw error;
+        }
+      }
+      throw new Error('Max retries exceeded');
+    }
+    
+    const data = await withRetry(() => 
+      iracing.member.info()
+    );
+    ```
+  </TabItem>
+</Tabs>
+
+## Testing Authentication
+
+### Unit Testing
+
+Mock the SDK for unit tests:
+
+```typescript
+// __mocks__/iracing-data-client.ts
+export const IRacingSDK = jest.fn().mockImplementation(() => ({
+  member: {
+    info: jest.fn().mockResolvedValue({
+      custId: 123456,
+      displayName: 'Test Driver'
+    })
+  }
+}));
+```
+
+```typescript
+// app.test.ts
+import { IRacingSDK } from 'iracing-data-client';
+
+jest.mock('iracing-data-client');
+
+describe('App', () => {
+  it('should fetch member info', async () => {
+    const iracing = new IRacingSDK({
+      email: 'test@example.com',
+      password: 'test'
+    });
+    
+    const info = await iracing.member.info();
+    expect(info.displayName).toBe('Test Driver');
+  });
+});
+```
+
+### Integration Testing
+
+Test with real credentials in a controlled environment:
+
+```typescript
+// test-auth.ts
+import { IRacingSDK } from 'iracing-data-client';
+
+async function testAuth() {
+  // Use test account credentials
+  const iracing = new IRacingSDK({
+    email: process.env.TEST_IRACING_EMAIL!,
+    password: process.env.TEST_IRACING_PASSWORD!
+  });
+  
+  try {
+    const info = await iracing.member.info();
+    console.log('✅ Authentication successful');
+    console.log(`Logged in as: ${info.displayName}`);
+    return true;
+  } catch (error) {
+    console.error('❌ Authentication failed:', error);
+    return false;
+  }
+}
+
+// Run test
+if (process.env.NODE_ENV === 'test') {
+  testAuth();
+}
+```
+
+## Multi-Account Support
+
+Handle multiple iRacing accounts:
+
+```typescript
+class IRacingMultiAccount {
+  private accounts: Map<string, IRacingSDK> = new Map();
+  
+  addAccount(name: string, email: string, password: string) {
+    this.accounts.set(name, new IRacingSDK({ email, password }));
+  }
+  
+  getAccount(name: string): IRacingSDK {
+    const account = this.accounts.get(name);
+    if (!account) throw new Error(`Account ${name} not found`);
+    return account;
+  }
+  
+  async getAllMemberInfo() {
+    const results = [];
+    for (const [name, sdk] of this.accounts) {
+      const info = await sdk.member.info();
+      results.push({ name, info });
+    }
+    return results;
+  }
+}
+
+// Usage
+const manager = new IRacingMultiAccount();
+manager.addAccount('main', email1, password1);
+manager.addAccount('alt', email2, password2);
+
+const mainAccount = manager.getAccount('main');
+const data = await mainAccount.member.info();
+```
+
+## Next Steps
+
+Now that you understand authentication, explore:
+
+- [Error Handling](/guides/error-handling/) - Handle auth errors gracefully
+- [API Reference](/api/client/) - Learn about client configuration
+- [Examples](/examples/member-data/) - See authentication in action

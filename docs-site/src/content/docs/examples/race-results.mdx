@@ -1,0 +1,98 @@
+---
+title: Race Results
+description: Examples of fetching and analyzing race results
+---
+
+import { Tabs, TabItem, Card, Aside } from '@astrojs/starlight/components';
+
+# Race Results
+
+Examples for working with race results and session data.
+
+## Fetching Session Results
+
+### Get Results by Session ID
+
+```typescript
+import { IRacingSDK } from 'iracing-data-client';
+
+const iracing = new IRacingSDK({
+  email: process.env.IRACING_EMAIL!,
+  password: process.env.IRACING_PASSWORD!
+});
+
+async function getSessionResults(subsessionId: number) {
+  const results = await iracing.results.get({ subsessionId });
+  
+  console.log(`Session: ${results.sessionName}`);
+  console.log(`Track: ${results.trackName}`);
+  console.log(`Series: ${results.seriesName}`);
+  
+  // Process each session (practice, qualify, race)
+  results.sessionResults.forEach(session => {
+    console.log(`\n${session.simsessionTypeName}:`);
+    
+    session.results.forEach(result => {
+      console.log(`  P${result.finishPosition}: ${result.displayName}`);
+      console.log(`    Laps: ${result.lapsComplete}`);
+      console.log(`    Incidents: ${result.incidents}`);
+    });
+  });
+  
+  return results;
+}
+```
+
+### Search Series Results
+
+```typescript
+async function searchSeriesResults(seasonId: number, weekNum?: number) {
+  const results = await iracing.results.searchSeries({
+    seasonId,
+    raceWeekNum: weekNum,
+    official: true
+  });
+  
+  return results.map(session => ({
+    sessionId: session.subsessionId,
+    startTime: session.startTime,
+    trackName: session.trackName,
+    strengthOfField: session.strengthOfField,
+    winnerName: session.winnerName,
+    winnerTime: session.winnerLapsComplete
+  }));
+}
+```
+
+## Analyzing Lap Data
+
+### Get Lap Times
+
+```typescript
+async function getLapData(subsessionId: number, custId?: number) {
+  const lapData = await iracing.results.lapData({
+    subsessionId,
+    simsessionNumber: 0,  // 0 = Race session
+    custId  // Optional: filter by driver
+  });
+  
+  // Analyze lap times
+  const laps = lapData.lapData;
+  const fastestLap = Math.min(...laps.map(l => l.lapTime));
+  const averageLap = laps.reduce((sum, l) => sum + l.lapTime, 0) / laps.length;
+  
+  console.log(`Total laps: ${laps.length}`);
+  console.log(`Fastest lap: ${(fastestLap / 10000).toFixed(3)}s`);
+  console.log(`Average lap: ${(averageLap / 10000).toFixed(3)}s`);
+  
+  return {
+    laps,
+    fastestLap,
+    averageLap
+  };
+}
+```
+
+<Aside type="note">
+  This page is under construction. More examples coming soon!
+</Aside>

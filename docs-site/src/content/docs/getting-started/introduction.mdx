@@ -1,0 +1,229 @@
+---
+title: Introduction
+description: Introduction to the iRacing Data Client SDK
+---
+
+import { Card, CardGrid, Badge, Tabs, TabItem, Code } from '@astrojs/starlight/components';
+
+# Introduction
+
+The **iRacing Data Client** is a comprehensive TypeScript SDK for interacting with the iRacing Data API. It provides a fully typed, auto-generated client that makes it easy to access iRacing's extensive data services.
+
+## What is the iRacing Data API?
+
+The iRacing Data API is the official REST API provided by iRacing.com that allows developers to access racing data, member information, session results, and more. This API powers many community tools and applications in the iRacing ecosystem.
+
+## Why Use This SDK?
+
+<CardGrid>
+  <Card title="🚀 Auto-Generated" icon="rocket">
+    Automatically generated from the official iRacing API documentation, ensuring complete coverage and staying up-to-date with API changes.
+  </Card>
+  <Card title="📘 TypeScript First" icon="document">
+    Every API response is fully typed with IntelliSense support, compile-time checking, and Zod validation.
+  </Card>
+  <Card title="🔐 Smart Auth" icon="key">
+    Handles iRacing's authentication flow automatically with secure credential management and session renewal.
+  </Card>
+  <Card title="⚡ Performance" icon="rocket">
+    Built-in response caching, S3 link following, and intelligent error handling for optimal performance.
+  </Card>
+</CardGrid>
+
+## SDK Architecture
+
+The SDK is organized into service classes, each corresponding to a specific area of the iRacing API:
+
+<Tabs>
+  <TabItem label="Service Structure">
+    ```typescript
+    const iracing = new IRacingSDK(options);
+
+    // Each service is accessible as a property
+    iracing.member      // Member-related endpoints
+    iracing.series      // Series and seasons data
+    iracing.results     // Race results and lap data
+    iracing.stats       // Statistics and standings
+    iracing.car         // Car information and assets
+    iracing.track       // Track data and configurations
+    iracing.league      // League management
+    iracing.hosted      // Hosted session data
+    // ... and many more
+    ```
+  </TabItem>
+  <TabItem label="Available Services">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+      <Badge text="car" variant="tip" />
+      <Badge text="carclass" variant="tip" />
+      <Badge text="constants" variant="tip" />
+      <Badge text="driverStatsByCategory" variant="tip" />
+      <Badge text="hosted" variant="tip" />
+      <Badge text="league" variant="tip" />
+      <Badge text="lookup" variant="tip" />
+      <Badge text="member" variant="tip" />
+      <Badge text="results" variant="tip" />
+      <Badge text="season" variant="tip" />
+      <Badge text="series" variant="tip" />
+      <Badge text="stats" variant="tip" />
+      <Badge text="team" variant="tip" />
+      <Badge text="timeAttack" variant="tip" />
+      <Badge text="track" variant="tip" />
+    </div>
+  </TabItem>
+</Tabs>
+
+## Core Features
+
+### 🎯 Full Type Safety
+
+<Tabs>
+  <TabItem label="TypeScript">
+    ```typescript
+    // Full IntelliSense support
+    const member = await iracing.member.get({ 
+      customerIds: [123456] 
+    });
+    
+    // Type-safe access to response data
+    console.log(member.members[0].displayName);
+    console.log(member.members[0].licenses[0].irating);
+    
+    // Compile-time error checking
+    member.members[0].wrongProperty; // ❌ TypeScript Error
+    ```
+  </TabItem>
+  <TabItem label="Response Types">
+    ```typescript
+    interface MemberInfo {
+      custId: number;
+      displayName: string;
+      helmet: HelmetData;
+      licenses: License[];
+      memberSince: string;
+      clubs: Club[];
+      // ... and much more
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+### 🔄 Automatic Transformations
+
+The SDK automatically handles:
+
+<CardGrid>
+  <Card title="Case Conversion">
+    Converts between `snake_case` (API) and `camelCase` (SDK) automatically
+  </Card>
+  <Card title="S3 Presigned URLs">
+    Transparently follows iRacing's S3 redirect pattern for data access
+  </Card>
+  <Card title="Parameter Validation">
+    Validates all parameters using Zod schemas before sending requests
+  </Card>
+  <Card title="Response Caching">
+    Intelligently caches responses based on API-provided expiration headers
+  </Card>
+</CardGrid>
+
+### ⚠️ Comprehensive Error Handling
+
+```typescript
+try {
+  const data = await iracing.member.info();
+} catch (error) {
+  if (error instanceof IRacingError) {
+    if (error.isMaintenanceMode) {
+      console.log("iRacing is in maintenance mode");
+    } else if (error.isRateLimited) {
+      console.log("Rate limited, please slow down");
+    } else if (error.isUnauthorized) {
+      console.log("Authentication failed");
+    }
+  }
+}
+```
+
+## Use Cases
+
+<Tabs>
+  <TabItem label="Data Analysis">
+    Perfect for analyzing racing performance, creating statistical models, and tracking improvement over time.
+    
+    ```typescript
+    // Analyze driver performance
+    const stats = await iracing.stats.memberCareer({
+      custId: 123456
+    });
+    ```
+  </TabItem>
+  <TabItem label="League Management">
+    Automate league operations, manage rosters, and track standings.
+    
+    ```typescript
+    // Get league standings
+    const standings = await iracing.league.seasonStandings({
+      leagueId: 789,
+      seasonId: 456
+    });
+    ```
+  </TabItem>
+  <TabItem label="Discord Bots">
+    Build Discord bots that provide real-time racing information.
+    
+    ```typescript
+    // Get recent race results
+    const races = await iracing.stats.memberRecentRaces({
+      custId: memberId
+    });
+    ```
+  </TabItem>
+  <TabItem label="Web Apps">
+    Create web applications for the iRacing community.
+    
+    ```typescript
+    // Search for hosted sessions
+    const sessions = await iracing.results.searchHosted({
+      startRangeBegin: new Date()
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## What's Included
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+  <Card title="72+ Endpoints" icon="puzzle">
+    Complete coverage of all iRacing Data API endpoints
+  </Card>
+  <Card title="15 Service Classes" icon="package">
+    Logically organized services for different API areas
+  </Card>
+  <Card title="Full Type Definitions" icon="document">
+    TypeScript types for every request and response
+  </Card>
+  <Card title="Zod Validation" icon="shield">
+    Runtime validation for all API parameters
+  </Card>
+  <Card title="Smart Caching" icon="rocket">
+    Automatic response caching with expiration
+  </Card>
+  <Card title="Error Types" icon="warning">
+    Specific error handling for different scenarios
+  </Card>
+</div>
+
+## Next Steps
+
+<CardGrid>
+  <Card title="Installation" icon="download">
+    Get the SDK installed in your project
+    
+    [Continue to Installation →](/getting-started/installation/)
+  </Card>
+  <Card title="Quick Start" icon="rocket">
+    See a complete working example
+    
+    [View Quick Start →](/getting-started/quick-start/)
+  </Card>
+</CardGrid>
