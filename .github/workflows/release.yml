@@ -38,9 +38,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build packages
-        run: npx turbo build
+        run: pnpm run build
       - name: Test Build Artifacts
-        run: npx turbo test:build
+        run: pnpm test
       - name: Version packages
         run: |
           # Apply version changes and commit them
@@ -52,8 +52,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish packages
         run: |
-          # Publish packages directly
-          pnpm release
+          # Publish package to npm
+          pnpm publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -66,8 +66,8 @@ jobs:
       - name: Create GitHub Release
         run: |
           # Get the version from package.json
-          PACKAGE_VERSION=$(node -p "require('./packages/client/package.json').version")
-          PACKAGE_NAME=$(node -p "require('./packages/client/package.json').name")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
           echo "Creating GitHub release for $PACKAGE_NAME@$PACKAGE_VERSION"
           gh release create "$PACKAGE_NAME@$PACKAGE_VERSION" --title "$PACKAGE_NAME@$PACKAGE_VERSION" --generate-notes || echo "Release may already exist"
         env:
