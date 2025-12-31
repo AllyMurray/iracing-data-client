@@ -189,16 +189,30 @@ sequenceDiagram
 ```typescript
 // src/auth/types.ts
 
+import * as z from 'zod/mini';
+
+/**
+ * Fetch-like function type for HTTP requests.
+ * Allows injection of custom fetch implementations for testing.
+ */
+export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+
+/**
+ * Zod schema for validating OAuth token responses.
+ * Provides runtime validation of iRacing's token endpoint responses.
+ */
+export const TokenResponseSchema = z.object({
+  access_token: z.string(),
+  token_type: z.literal('Bearer'),
+  expires_in: z.number(),
+  refresh_token: z.optional(z.string()),
+  scope: z.optional(z.string()),
+});
+
 /**
  * OAuth token response from iRacing's token endpoint.
  */
-export interface TokenResponse {
-  access_token: string;
-  token_type: 'Bearer';
-  expires_in: number;
-  refresh_token?: string;
-  scope?: string;
-}
+export type TokenResponse = z.infer<typeof TokenResponseSchema>;
 
 /**
  * Internal token state with computed expiry.
@@ -441,6 +455,70 @@ src/
 └── index.ts                        # Updated exports
 ```
 
+### Package Exports
+
+```typescript
+// src/auth/index.ts - Auth module public exports
+
+export type {
+  AuthConfig,
+  PasswordLimitedAuth,
+  AuthorizationCodeAuth,
+  TokenResponse,
+  TokenState,
+  OnTokenRefresh,
+  PKCEPair,
+  FetchLike,
+} from './types';
+
+export { TokenResponseSchema } from './types';
+
+export {
+  isPasswordLimitedAuth,
+  isAuthorizationCodeAuth,
+} from './types';
+
+export {
+  OAuthError,
+  TokenRefreshError,
+  type OAuthErrorCode,
+} from './errors';
+
+export {
+  buildAuthorizationUrl,
+  exchangeAuthorizationCode,
+} from './flows/authorization-code';
+```
+
+```typescript
+// src/index.ts - Main package exports
+
+// Re-export client
+export { IRacingClient, type IRacingClientOptions } from './client';
+export { IRacingError } from './client';
+
+// Re-export auth types and helpers
+export type {
+  AuthConfig,
+  PasswordLimitedAuth,
+  AuthorizationCodeAuth,
+  TokenResponse,
+  OnTokenRefresh,
+} from './auth';
+
+export {
+  OAuthError,
+  TokenRefreshError,
+  buildAuthorizationUrl,
+  exchangeAuthorizationCode,
+} from './auth';
+
+// Re-export service types (existing)
+export * from './member';
+export * from './results';
+// ... other services
+```
+
 ### Constants
 
 ```typescript
@@ -552,6 +630,9 @@ export async function generatePKCE(): Promise<PKCEPair> {
 
 ### Error Classes
 
+> **Note**: `OAuthError` and `TokenRefreshError` are new classes in `src/auth/errors.ts`.
+> `IRacingError` remains in `src/client.ts` for API-level errors (rate limiting, maintenance, etc.).
+
 ```typescript
 // src/auth/errors.ts
 
@@ -628,6 +709,7 @@ import {
 import { OAuthError, TokenRefreshError } from './errors';
 import { refreshTokens } from './flows/refresh';
 import type { TokenState, TokenResponse, OnTokenRefresh, FetchLike } from './types';
+import { TokenResponseSchema } from './types';
 
 export interface TokenManagerOptions {
   clientId: string;
@@ -780,6 +862,7 @@ import { OAUTH_ENDPOINTS } from '../constants';
 import { maskPassword, maskClientSecret } from '../crypto';
 import { OAuthError } from '../errors';
 import type { TokenResponse, FetchLike } from '../types';
+import { TokenResponseSchema } from '../types';
 
 export interface PasswordLimitedTokenRequest {
   clientId: string;
@@ -827,7 +910,8 @@ export async function requestPasswordLimitedToken(
     throw new OAuthError(data.error, data.error_description, data.error_uri);
   }
 
-  return data as TokenResponse;
+  // Validate response structure
+  return TokenResponseSchema.parse(data);
 }
 ```
 
@@ -840,10 +924,12 @@ import { OAUTH_ENDPOINTS } from '../constants';
 import { generatePKCE, maskClientSecret } from '../crypto';
 import { OAuthError } from '../errors';
 import type { TokenResponse, PKCEPair, FetchLike } from '../types';
+import { TokenResponseSchema } from '../types';
 
 export interface AuthorizationUrlOptions {
   clientId: string;
   redirectUri: string;
+  scope?: string;
   state?: string;
   usePKCE?: boolean;
 }
@@ -860,7 +946,7 @@ export interface AuthorizationUrlResult {
 export async function buildAuthorizationUrl(
   options: AuthorizationUrlOptions
 ): Promise<AuthorizationUrlResult> {
-  const { clientId, redirectUri, usePKCE = true } = options;
+  const { clientId, redirectUri, scope, usePKCE = true } = options;
   const state = options.state ?? crypto.randomUUID();
 
   const params = new URLSearchParams({
@@ -869,6 +955,10 @@ export async function buildAuthorizationUrl(
     redirect_uri: redirectUri,
     state: state,
   });
+
+  if (scope) {
+    params.set('scope', scope);
+  }
 
   let pkce: PKCEPair | undefined;
   if (usePKCE) {
@@ -929,7 +1019,8 @@ export async function exchangeAuthorizationCode(
     throw new OAuthError(data.error, data.error_description, data.error_uri);
   }
 
-  return data as TokenResponse;
+  // Validate response structure
+  return TokenResponseSchema.parse(data);
 }
 ```
 
@@ -942,6 +1033,7 @@ import { OAUTH_ENDPOINTS } from '../constants';
 import { maskClientSecret } from '../crypto';
 import { OAuthError } from '../errors';
 import type { TokenResponse, FetchLike } from '../types';
+import { TokenResponseSchema } from '../types';
 
 export interface RefreshTokenRequest {
   clientId: string;
@@ -979,7 +1071,8 @@ export async function refreshTokens(options: RefreshTokenRequest): Promise<Token
     throw new OAuthError(data.error, data.error_description, data.error_uri);
   }
 
-  return data as TokenResponse;
+  // Validate response structure
+  return TokenResponseSchema.parse(data);
 }
 ```
 
@@ -1339,6 +1432,281 @@ try {
 
 ---
 
+## Unit Test Samples
+
+### Crypto Utilities Tests
+
+```typescript
+// src/auth/crypto.test.ts
+
+import { describe, it, expect } from 'vitest';
+import { maskSecret, maskPassword, maskClientSecret, generatePKCE } from './crypto';
+
+describe('maskSecret', () => {
+  it('should produce consistent hash for same inputs', async () => {
+    const result1 = await maskSecret('password123', 'user@example.com');
+    const result2 = await maskSecret('password123', 'user@example.com');
+    expect(result1).toBe(result2);
+  });
+
+  it('should normalize identifier to lowercase', async () => {
+    const result1 = await maskSecret('password123', 'User@Example.com');
+    const result2 = await maskSecret('password123', 'user@example.com');
+    expect(result1).toBe(result2);
+  });
+
+  it('should trim whitespace from identifier', async () => {
+    const result1 = await maskSecret('password123', '  user@example.com  ');
+    const result2 = await maskSecret('password123', 'user@example.com');
+    expect(result1).toBe(result2);
+  });
+
+  it('should produce base64 encoded output', async () => {
+    const result = await maskSecret('password', 'user');
+    // Base64 uses A-Z, a-z, 0-9, +, /, and = for padding
+    expect(result).toMatch(/^[A-Za-z0-9+/]+=*$/);
+  });
+});
+
+describe('maskPassword', () => {
+  it('should mask password with username', async () => {
+    const result = await maskPassword('user@example.com', 'mypassword');
+    expect(result).toBeTruthy();
+    expect(typeof result).toBe('string');
+  });
+});
+
+describe('maskClientSecret', () => {
+  it('should mask client secret with client id', async () => {
+    const result = await maskClientSecret('my-client-id', 'my-client-secret');
+    expect(result).toBeTruthy();
+    expect(typeof result).toBe('string');
+  });
+});
+
+describe('generatePKCE', () => {
+  it('should generate verifier and challenge', async () => {
+    const pkce = await generatePKCE();
+    expect(pkce.verifier).toBeTruthy();
+    expect(pkce.challenge).toBeTruthy();
+    expect(pkce.verifier.length).toBe(64);
+  });
+
+  it('should use URL-safe base64 for challenge', async () => {
+    const pkce = await generatePKCE();
+    // URL-safe base64 uses - and _ instead of + and /, no padding
+    expect(pkce.challenge).not.toMatch(/[+/=]/);
+  });
+
+  it('should generate unique values each time', async () => {
+    const pkce1 = await generatePKCE();
+    const pkce2 = await generatePKCE();
+    expect(pkce1.verifier).not.toBe(pkce2.verifier);
+  });
+});
+```
+
+### OAuth Flow Tests
+
+```typescript
+// src/auth/flows/password-limited.test.ts
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { requestPasswordLimitedToken } from './password-limited';
+import { OAuthError } from '../errors';
+
+describe('requestPasswordLimitedToken', () => {
+  const mockFetch = vi.fn();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should request token with masked credentials', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        access_token: 'test-access-token',
+        token_type: 'Bearer',
+        expires_in: 600,
+        refresh_token: 'test-refresh-token',
+      }),
+    });
+
+    const result = await requestPasswordLimitedToken({
+      clientId: 'test-client-id',
+      clientSecret: 'test-client-secret',
+      username: 'user@example.com',
+      password: 'password123',
+      fetchFn: mockFetch,
+    });
+
+    expect(result.access_token).toBe('test-access-token');
+    expect(result.token_type).toBe('Bearer');
+    expect(result.expires_in).toBe(600);
+
+    // Verify fetch was called with correct endpoint
+    expect(mockFetch).toHaveBeenCalledWith(
+      'https://oauth.iracing.com/oauth2/token',
+      expect.objectContaining({
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      })
+    );
+
+    // Verify body contains masked credentials (not raw)
+    const callArgs = mockFetch.mock.calls[0];
+    const body = callArgs[1].body;
+    expect(body).toContain('grant_type=password_limited');
+    expect(body).toContain('client_id=test-client-id');
+    expect(body).not.toContain('password=password123'); // Should be masked
+    expect(body).not.toContain('client_secret=test-client-secret'); // Should be masked
+  });
+
+  it('should throw OAuthError on failure', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({
+        error: 'invalid_grant',
+        error_description: 'Invalid credentials',
+      }),
+    });
+
+    await expect(
+      requestPasswordLimitedToken({
+        clientId: 'test-client-id',
+        clientSecret: 'test-client-secret',
+        username: 'user@example.com',
+        password: 'wrong-password',
+        fetchFn: mockFetch,
+      })
+    ).rejects.toThrow(OAuthError);
+  });
+});
+```
+
+### Token Manager Tests
+
+```typescript
+// src/auth/token-manager.test.ts
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { TokenManager } from './token-manager';
+
+describe('TokenManager', () => {
+  const mockFetch = vi.fn();
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.useFakeTimers();
+  });
+
+  it('should return valid token without refresh', async () => {
+    const manager = new TokenManager({
+      clientId: 'test-client-id',
+      clientSecret: 'test-client-secret',
+      fetchFn: mockFetch,
+    });
+
+    const futureExpiry = Math.floor(Date.now() / 1000) + 300; // 5 min from now
+    manager.setTokenState({
+      accessToken: 'valid-token',
+      refreshToken: 'refresh-token',
+      expiresAt: futureExpiry,
+      tokenType: 'Bearer',
+    });
+
+    const token = await manager.getAccessToken();
+    expect(token).toBe('valid-token');
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it('should refresh token when expiring soon', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        access_token: 'new-access-token',
+        token_type: 'Bearer',
+        expires_in: 600,
+        refresh_token: 'new-refresh-token',
+      }),
+    });
+
+    const manager = new TokenManager({
+      clientId: 'test-client-id',
+      clientSecret: 'test-client-secret',
+      fetchFn: mockFetch,
+    });
+
+    // Token expires in 20 seconds (within 30s buffer)
+    const soonExpiry = Math.floor(Date.now() / 1000) + 20;
+    manager.setTokenState({
+      accessToken: 'expiring-token',
+      refreshToken: 'refresh-token',
+      expiresAt: soonExpiry,
+      tokenType: 'Bearer',
+    });
+
+    const token = await manager.getAccessToken();
+    expect(token).toBe('new-access-token');
+    expect(mockFetch).toHaveBeenCalled();
+  });
+
+  it('should deduplicate concurrent refresh requests', async () => {
+    let resolveRefresh: (value: any) => void;
+    const refreshPromise = new Promise((resolve) => {
+      resolveRefresh = resolve;
+    });
+
+    mockFetch.mockImplementationOnce(async () => {
+      await refreshPromise;
+      return {
+        ok: true,
+        json: async () => ({
+          access_token: 'new-token',
+          token_type: 'Bearer',
+          expires_in: 600,
+        }),
+      };
+    });
+
+    const manager = new TokenManager({
+      clientId: 'test-client-id',
+      clientSecret: 'test-client-secret',
+      fetchFn: mockFetch,
+    });
+
+    const expiredTime = Math.floor(Date.now() / 1000) - 10;
+    manager.setTokenState({
+      accessToken: 'expired-token',
+      refreshToken: 'refresh-token',
+      expiresAt: expiredTime,
+      tokenType: 'Bearer',
+    });
+
+    // Start multiple concurrent requests
+    const promise1 = manager.getAccessToken();
+    const promise2 = manager.getAccessToken();
+    const promise3 = manager.getAccessToken();
+
+    // Resolve the refresh
+    resolveRefresh!(undefined);
+
+    const [token1, token2, token3] = await Promise.all([promise1, promise2, promise3]);
+
+    // All should get same token
+    expect(token1).toBe('new-token');
+    expect(token2).toBe('new-token');
+    expect(token3).toBe('new-token');
+
+    // But only one fetch call was made
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+  });
+});
+```
+
+---
+
 ## Implementation Checklist
 
 ### Phase 1: Core Infrastructure
@@ -1436,7 +1804,75 @@ const client = new IRacingDataClient({
 
 ---
 
-## Open Questions
+## Deferred Verification
 
-1. **Audience Parameter**: Confirm if `audience=data-server` is required (not seen in verified implementations)
-2. **Rate Limits**: Document exact rate limits for token endpoint
+The following items require testing with actual OAuth credentials (pending registration approval):
+
+### Must Verify Before Release
+
+| Item | Current Assumption | Verification Method |
+|------|-------------------|---------------------|
+| Masking algorithm | `Base64(SHA256(secret + lowercase(id)))` | Attempt token request, check for `invalid_grant` |
+| Client secret masking | Required for all token requests | Test password-limited and refresh flows |
+| Bearer token header | `Authorization: Bearer {token}` works with Data API | Make authenticated API call |
+| Token lifetimes | Access: 600s, Refresh: 7 days | Observe `expires_in` in response |
+
+### Open Questions
+
+1. **Audience Parameter**: Is `audience=data-server` required in token requests?
+   - Not seen in other implementations, likely not required
+   - Test: Try request without it first
+
+2. **Scope Parameter**: What scopes are available/required?
+   - Implementation supports optional `scope` parameter
+   - Test: Check if omitting scope works, document available scopes
+
+3. **Rate Limits**: What are the exact rate limits for the token endpoint?
+   - Current implementation has 1-second minimum between requests
+   - Document actual limits when credentials available
+
+4. **Error Response Format**: Does iRacing follow RFC 6749 error format exactly?
+   - Assumed: `{ error, error_description, error_uri }`
+   - Verify error codes match `OAuthErrorCode` type
+
+### Integration Test Plan
+
+Once credentials are available:
+
+```typescript
+// Manual integration test script
+import { IRacingDataClient } from './src';
+
+async function testOAuth() {
+  console.log('1. Testing Password Limited flow...');
+  const client = new IRacingDataClient({
+    auth: {
+      type: 'password-limited',
+      clientId: process.env.IRACING_CLIENT_ID!,
+      clientSecret: process.env.IRACING_CLIENT_SECRET!,
+      username: process.env.IRACING_USERNAME!,
+      password: process.env.IRACING_PASSWORD!,
+      onTokenRefresh: (tokens) => {
+        console.log('   Tokens received:', {
+          hasAccessToken: !!tokens.access_token,
+          hasRefreshToken: !!tokens.refresh_token,
+          expiresIn: tokens.expires_in,
+        });
+      },
+    },
+  });
+
+  console.log('2. Making API request...');
+  const member = await client.member.get();
+  console.log('   Member ID:', member.custId);
+
+  console.log('3. Waiting for token refresh...');
+  // Wait 10+ minutes to test refresh
+
+  console.log('4. Making another request (should use refreshed token)...');
+  const member2 = await client.member.get();
+  console.log('   Still working:', member2.custId === member.custId);
+}
+
+testOAuth().catch(console.error);
+```
