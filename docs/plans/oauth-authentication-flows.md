@@ -1816,22 +1816,22 @@ const client = new IRacingDataClient({
 
 | Item | Status | Source |
 |------|--------|--------|
-| Masking algorithm | ✅ Verified | `Base64(SHA256(secret + lowercase(id)))` - confirmed in multiple implementations |
+| Masking algorithm | ✅ Verified | `Base64(SHA256(secret + lowercase(id)))` - confirmed in docs |
 | Client secret masking | ✅ Verified | Required for all token requests |
 | Scope parameter | ✅ Verified | `scope=iracing.auth` required for Data API access |
 | Token lifetimes | ✅ Verified | Access: 600s (reusable), Refresh: 7 days (single-use) |
 | Audience parameter | ✅ Not needed | Set at client registration, not in token requests |
 | Response format | ✅ Verified | Includes `refresh_token_expires_in` field |
+| Bearer token header | ✅ Verified | "HTTP Authorization header prefixed by the text Bearer" |
+| PKCE implementation | ✅ Verified | S256 method, Base64URL encoding, 43-128 char verifier |
 
-Sources: [iRacing Token Endpoint](https://oauth.iracing.com/oauth2/book/token_endpoint.html), [Password Limited Flow](https://oauth.iracing.com/oauth2/book/password_limited_flow.html)
+Sources: [iRacing Token Endpoint](https://oauth.iracing.com/oauth2/book/token_endpoint.html), [Password Limited Flow](https://oauth.iracing.com/oauth2/book/password_limited_flow.html), [/authorize](https://oauth.iracing.com/oauth2/book/authorize.html)
 
 ### Deferred Until Credentials Available
 
 | Item | Notes |
 |------|-------|
-| Bearer token with Data API | Confirm `Authorization: Bearer {token}` works |
-| Rate limits | Document actual limits for token endpoint |
-| Error response codes | Verify all `OAuthErrorCode` values are accurate |
+| Rate limits | Not documented - observe actual limits during testing |
 
 ### Integration Test Plan
 
