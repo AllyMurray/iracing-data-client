@@ -206,6 +206,7 @@ export const TokenResponseSchema = z.object({
   token_type: z.literal('Bearer'),
   expires_in: z.number(),
   refresh_token: z.optional(z.string()),
+  refresh_token_expires_in: z.optional(z.number()),
   scope: z.optional(z.string()),
 });
 
@@ -528,6 +529,9 @@ export const OAUTH_ENDPOINTS = {
   authorize: 'https://oauth.iracing.com/oauth2/authorize',
   token: 'https://oauth.iracing.com/oauth2/token',
 } as const;
+
+/** Required scope for iRacing Data API access */
+export const IRACING_AUTH_SCOPE = 'iracing.auth';
 
 export const DATA_API_BASE_URL = 'https://members-ng.iracing.com';
 
@@ -896,6 +900,7 @@ export async function requestPasswordLimitedToken(
     client_secret: maskedClientSecret,
     username: username,
     password: maskedPassword,
+    scope: 'iracing.auth',
   });
 
   const response = await fetchFn(OAUTH_ENDPOINTS.token, {
@@ -1057,6 +1062,7 @@ export async function refreshTokens(options: RefreshTokenRequest): Promise<Token
     client_id: clientId,
     client_secret: maskedSecret,
     refresh_token: refreshToken,
+    scope: 'iracing.auth',
   });
 
   const response = await fetchFn(OAUTH_ENDPOINTS.token, {
@@ -1804,36 +1810,28 @@ const client = new IRacingDataClient({
 
 ---
 
-## Deferred Verification
+## Verification Status
 
-The following items require testing with actual OAuth credentials (pending registration approval):
+### Verified (from official documentation)
 
-### Must Verify Before Release
+| Item | Status | Source |
+|------|--------|--------|
+| Masking algorithm | ✅ Verified | `Base64(SHA256(secret + lowercase(id)))` - confirmed in multiple implementations |
+| Client secret masking | ✅ Verified | Required for all token requests |
+| Scope parameter | ✅ Verified | `scope=iracing.auth` required for Data API access |
+| Token lifetimes | ✅ Verified | Access: 600s (reusable), Refresh: 7 days (single-use) |
+| Audience parameter | ✅ Not needed | Set at client registration, not in token requests |
+| Response format | ✅ Verified | Includes `refresh_token_expires_in` field |
 
-| Item | Current Assumption | Verification Method |
-|------|-------------------|---------------------|
-| Masking algorithm | `Base64(SHA256(secret + lowercase(id)))` | Attempt token request, check for `invalid_grant` |
-| Client secret masking | Required for all token requests | Test password-limited and refresh flows |
-| Bearer token header | `Authorization: Bearer {token}` works with Data API | Make authenticated API call |
-| Token lifetimes | Access: 600s, Refresh: 7 days | Observe `expires_in` in response |
+Sources: [iRacing Token Endpoint](https://oauth.iracing.com/oauth2/book/token_endpoint.html), [Password Limited Flow](https://oauth.iracing.com/oauth2/book/password_limited_flow.html)
 
-### Open Questions
+### Deferred Until Credentials Available
 
-1. **Audience Parameter**: Is `audience=data-server` required in token requests?
-   - Not seen in other implementations, likely not required
-   - Test: Try request without it first
-
-2. **Scope Parameter**: What scopes are available/required?
-   - Implementation supports optional `scope` parameter
-   - Test: Check if omitting scope works, document available scopes
-
-3. **Rate Limits**: What are the exact rate limits for the token endpoint?
-   - Current implementation has 1-second minimum between requests
-   - Document actual limits when credentials available
-
-4. **Error Response Format**: Does iRacing follow RFC 6749 error format exactly?
-   - Assumed: `{ error, error_description, error_uri }`
-   - Verify error codes match `OAuthErrorCode` type
+| Item | Notes |
+|------|-------|
+| Bearer token with Data API | Confirm `Authorization: Bearer {token}` works |
+| Rate limits | Document actual limits for token endpoint |
+| Error response codes | Verify all `OAuthErrorCode` values are accurate |
 
 ### Integration Test Plan
 
