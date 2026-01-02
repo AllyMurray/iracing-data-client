@@ -10,28 +10,37 @@ describe("TimeAttackService", () => {
   let client: IRacingClient;
   let timeAttackService: TimeAttackService;
 
+  // Mock OAuth token response
+  const mockTokenResponse = {
+    access_token: "test-access-token",
+    token_type: "Bearer",
+    expires_in: 600,
+    refresh_token: "test-refresh-token",
+  };
+
   beforeEach(() => {
     mockFetch = vi.fn();
-    
+
     client = new IRacingClient({
-      email: "test@example.com",
-      password: "password",
+      auth: {
+        type: "password-limited",
+        clientId: "test-client-id",
+        clientSecret: "test-client-secret",
+        username: "test@example.com",
+        password: "password",
+      },
       fetchFn: mockFetch
     });
-    
+
     timeAttackService = new TimeAttackService(client);
   });
 
   describe("memberSeasonResults()", () => {
     it("should fetch, transform, and validate time_attack memberSeasonResults data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -46,13 +55,12 @@ describe("TimeAttackService", () => {
       };
       const result = await timeAttackService.memberSeasonResults(testParams);
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
@@ -61,7 +69,7 @@ describe("TimeAttackService", () => {
         expect.stringContaining("https://members-ng.iracing.com/data/time_attack/member_season_results"),
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -72,14 +80,10 @@ describe("TimeAttackService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response

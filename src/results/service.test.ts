@@ -7,28 +7,37 @@ describe("ResultsService", () => {
   let client: IRacingClient;
   let resultsService: ResultsService;
 
+  // Mock OAuth token response
+  const mockTokenResponse = {
+    access_token: "test-access-token",
+    token_type: "Bearer",
+    expires_in: 600,
+    refresh_token: "test-refresh-token",
+  };
+
   beforeEach(() => {
     mockFetch = vi.fn();
-    
+
     client = new IRacingClient({
-      email: "test@example.com",
-      password: "password",
+      auth: {
+        type: "password-limited",
+        clientId: "test-client-id",
+        clientSecret: "test-client-secret",
+        username: "test@example.com",
+        password: "password",
+      },
       fetchFn: mockFetch
     });
-    
+
     resultsService = new ResultsService(client);
   });
 
   describe("get()", () => {
     it("should fetch results get data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response
@@ -49,14 +58,10 @@ describe("ResultsService", () => {
 
   describe("eventLog()", () => {
     it("should fetch results eventLog data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response
@@ -77,14 +82,10 @@ describe("ResultsService", () => {
 
   describe("lapChartData()", () => {
     it("should fetch results lapChartData data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response
@@ -105,14 +106,10 @@ describe("ResultsService", () => {
 
   describe("lapData()", () => {
     it("should fetch results lapData data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response
@@ -135,14 +132,10 @@ describe("ResultsService", () => {
 
   describe("searchHosted()", () => {
     it("should fetch results searchHosted data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response
@@ -174,14 +167,10 @@ describe("ResultsService", () => {
 
   describe("searchSeries()", () => {
     it("should fetch results searchSeries data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response
@@ -213,14 +202,10 @@ describe("ResultsService", () => {
 
   describe("seasonResults()", () => {
     it("should fetch results seasonResults data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response

@@ -11,28 +11,37 @@ describe("HostedService", () => {
   let client: IRacingClient;
   let hostedService: HostedService;
 
+  // Mock OAuth token response
+  const mockTokenResponse = {
+    access_token: "test-access-token",
+    token_type: "Bearer",
+    expires_in: 600,
+    refresh_token: "test-refresh-token",
+  };
+
   beforeEach(() => {
     mockFetch = vi.fn();
-    
+
     client = new IRacingClient({
-      email: "test@example.com",
-      password: "password",
+      auth: {
+        type: "password-limited",
+        clientId: "test-client-id",
+        clientSecret: "test-client-secret",
+        username: "test@example.com",
+        password: "password",
+      },
       fetchFn: mockFetch
     });
-    
+
     hostedService = new HostedService(client);
   });
 
   describe("combinedSessions()", () => {
     it("should fetch, transform, and validate hosted combinedSessions data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -47,22 +56,21 @@ describe("HostedService", () => {
       };
       const result = await hostedService.combinedSessions(testParams);
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/hosted/combined_sessions"),
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -73,14 +81,10 @@ describe("HostedService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -99,14 +103,10 @@ describe("HostedService", () => {
 
   describe("sessions()", () => {
     it("should fetch, transform, and validate hosted sessions data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -118,22 +118,21 @@ describe("HostedService", () => {
 
       const result = await hostedService.sessions();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/hosted/sessions",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -144,14 +143,10 @@ describe("HostedService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response

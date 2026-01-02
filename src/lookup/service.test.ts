@@ -14,28 +14,37 @@ describe("LookupService", () => {
   let client: IRacingClient;
   let lookupService: LookupService;
 
+  // Mock OAuth token response
+  const mockTokenResponse = {
+    access_token: "test-access-token",
+    token_type: "Bearer",
+    expires_in: 600,
+    refresh_token: "test-refresh-token",
+  };
+
   beforeEach(() => {
     mockFetch = vi.fn();
-    
+
     client = new IRacingClient({
-      email: "test@example.com",
-      password: "password",
+      auth: {
+        type: "password-limited",
+        clientId: "test-client-id",
+        clientSecret: "test-client-secret",
+        username: "test@example.com",
+        password: "password",
+      },
       fetchFn: mockFetch
     });
-    
+
     lookupService = new LookupService(client);
   });
 
   describe("countries()", () => {
     it("should fetch, transform, and validate lookup countries data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -47,13 +56,12 @@ describe("LookupService", () => {
 
       const result = await lookupService.countries();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
@@ -62,7 +70,7 @@ describe("LookupService", () => {
         "https://members-ng.iracing.com/data/lookup/countries",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -73,14 +81,10 @@ describe("LookupService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -96,14 +100,10 @@ describe("LookupService", () => {
 
   describe("drivers()", () => {
     it("should fetch, transform, and validate lookup drivers data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -119,13 +119,12 @@ describe("LookupService", () => {
       };
       const result = await lookupService.drivers(testParams);
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
@@ -134,7 +133,7 @@ describe("LookupService", () => {
         expect.stringContaining("https://members-ng.iracing.com/data/lookup/drivers"),
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -145,14 +144,10 @@ describe("LookupService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -172,14 +167,10 @@ describe("LookupService", () => {
 
   describe("flairs()", () => {
     it("should fetch, transform, and validate lookup flairs data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -191,13 +182,12 @@ describe("LookupService", () => {
 
       const result = await lookupService.flairs();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
@@ -206,7 +196,7 @@ describe("LookupService", () => {
         "https://members-ng.iracing.com/data/lookup/flairs",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -217,14 +207,10 @@ describe("LookupService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -240,14 +226,10 @@ describe("LookupService", () => {
 
   describe("get()", () => {
     it("should fetch, transform, and validate lookup get data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -259,13 +241,12 @@ describe("LookupService", () => {
 
       const result = await lookupService.get();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
@@ -274,7 +255,7 @@ describe("LookupService", () => {
         "https://members-ng.iracing.com/data/lookup/get",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -285,14 +266,10 @@ describe("LookupService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -308,14 +285,10 @@ describe("LookupService", () => {
 
   describe("licenses()", () => {
     it("should fetch, transform, and validate lookup licenses data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -327,13 +300,12 @@ describe("LookupService", () => {
 
       const result = await lookupService.licenses();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
@@ -342,7 +314,7 @@ describe("LookupService", () => {
         "https://members-ng.iracing.com/data/lookup/licenses",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -353,14 +325,10 @@ describe("LookupService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response

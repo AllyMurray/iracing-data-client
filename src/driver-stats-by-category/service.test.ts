@@ -15,28 +15,37 @@ describe("DriverStatsByCategoryService", () => {
   let client: IRacingClient;
   let driverStatsByCategoryService: DriverStatsByCategoryService;
 
+  // Mock OAuth token response
+  const mockTokenResponse = {
+    access_token: "test-access-token",
+    token_type: "Bearer",
+    expires_in: 600,
+    refresh_token: "test-refresh-token",
+  };
+
   beforeEach(() => {
     mockFetch = vi.fn();
-    
+
     client = new IRacingClient({
-      email: "test@example.com",
-      password: "password",
+      auth: {
+        type: "password-limited",
+        clientId: "test-client-id",
+        clientSecret: "test-client-secret",
+        username: "test@example.com",
+        password: "password",
+      },
       fetchFn: mockFetch
     });
-    
+
     driverStatsByCategoryService = new DriverStatsByCategoryService(client);
   });
 
   describe("oval()", () => {
     it("should fetch, transform, and validate driver_stats_by_category oval data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -48,22 +57,21 @@ describe("DriverStatsByCategoryService", () => {
 
       const result = await driverStatsByCategoryService.oval();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/oval",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -74,14 +82,10 @@ describe("DriverStatsByCategoryService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -97,14 +101,10 @@ describe("DriverStatsByCategoryService", () => {
 
   describe("sportsCar()", () => {
     it("should fetch, transform, and validate driver_stats_by_category sportsCar data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -116,22 +116,21 @@ describe("DriverStatsByCategoryService", () => {
 
       const result = await driverStatsByCategoryService.sportsCar();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/sports_car",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -142,14 +141,10 @@ describe("DriverStatsByCategoryService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -165,14 +160,10 @@ describe("DriverStatsByCategoryService", () => {
 
   describe("formulaCar()", () => {
     it("should fetch, transform, and validate driver_stats_by_category formulaCar data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -184,22 +175,21 @@ describe("DriverStatsByCategoryService", () => {
 
       const result = await driverStatsByCategoryService.formulaCar();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/formula_car",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -210,14 +200,10 @@ describe("DriverStatsByCategoryService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -233,14 +219,10 @@ describe("DriverStatsByCategoryService", () => {
 
   describe("road()", () => {
     it("should fetch, transform, and validate driver_stats_by_category road data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -252,22 +234,21 @@ describe("DriverStatsByCategoryService", () => {
 
       const result = await driverStatsByCategoryService.road();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/road",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -278,14 +259,10 @@ describe("DriverStatsByCategoryService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -301,14 +278,10 @@ describe("DriverStatsByCategoryService", () => {
 
   describe("dirtOval()", () => {
     it("should fetch, transform, and validate driver_stats_by_category dirtOval data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -320,22 +293,21 @@ describe("DriverStatsByCategoryService", () => {
 
       const result = await driverStatsByCategoryService.dirtOval();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/dirt_oval",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -346,14 +318,10 @@ describe("DriverStatsByCategoryService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
@@ -369,14 +337,10 @@ describe("DriverStatsByCategoryService", () => {
 
   describe("dirtRoad()", () => {
     it("should fetch, transform, and validate driver_stats_by_category dirtRoad data", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock API response with original snake_case format
@@ -388,22 +352,21 @@ describe("DriverStatsByCategoryService", () => {
 
       const result = await driverStatsByCategoryService.dirtRoad();
 
-      // Verify authentication call
+      // Verify OAuth token request
       expect(mockFetch).toHaveBeenCalledWith(
-        "https://members-ng.iracing.com/auth",
+        "https://oauth.iracing.com/oauth2/token",
         expect.objectContaining({
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "test@example.com", password: "password" })
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
       );
 
-      // Verify API call
+      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/dirt_road",
         expect.objectContaining({
           headers: expect.objectContaining({
-            Cookie: expect.stringContaining("irsso_membersv2=cookie123")
+            Authorization: "Bearer test-access-token"
           })
         })
       );
@@ -414,14 +377,10 @@ describe("DriverStatsByCategoryService", () => {
     });
 
     it("should handle schema validation errors", async () => {
-      // Mock auth response
+      // Mock OAuth token response
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: () => Promise.resolve({
-          authcode: "test123",
-          ssoCookieValue: "cookie123",
-          email: "test@example.com"
-        })
+        json: () => Promise.resolve(mockTokenResponse)
       });
 
       // Mock invalid API response
