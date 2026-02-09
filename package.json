@@ -29,6 +29,8 @@
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
     "test": "vitest",
+    "test:integration": "vitest run --testPathPattern=integration",
+    "test:oauth": "npx tsx test-oauth.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
