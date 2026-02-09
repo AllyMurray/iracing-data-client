@@ -144,8 +144,8 @@ The underlying client that handles HTTP requests. You typically don't interact w
   Automatically follows presigned S3 URLs returned by the API for accessing data.
 </Card>
 
-<Card title="💾 Response Caching" icon="suitcase">
-  Caches responses based on expiration headers to reduce API calls and improve performance.
+<Card title="💾 Response Caching (Coming Soon)" icon="suitcase">
+  Response caching is on the roadmap. See our [roadmap](/roadmap) for details.
 </Card>
 
 <Card title="🔀 Parameter Transformation" icon="arrow-left">
@@ -329,13 +329,15 @@ const iracing = new IRacingDataClient({
 
 ## Performance Considerations
 
-### Caching
+### Caching (Coming Soon)
 
-The client automatically caches responses based on the `expires` header from the API:
+Response caching is planned for a future release. When implemented, it will:
 
-- Cached responses are returned immediately without making a new request
-- Cache is stored in memory per client instance
-- Cache expires based on API-provided expiration times
+- Cache responses based on expiration headers from the API
+- Reduce unnecessary API calls for frequently accessed data
+- Respect rate limits automatically
+
+See our [roadmap](/roadmap) for implementation details.
 
 ### Rate Limiting
 
@@ -345,7 +347,7 @@ The client automatically caches responses based on the `expires` header from the
 
 Best practices:
 - Implement exponential backoff for retries
-- Cache responses when possible
+- Reuse client instances to avoid re-authentication
 - Batch requests where the API supports it
 - Add delays between successive requests
 
