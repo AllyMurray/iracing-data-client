@@ -6,20 +6,29 @@ import type { CarAssetsResponse, CarGetResponse } from "./types";
 // Load environment variables
 dotenv.config();
 
-describe.skip("CarService Integration Tests", () => {
+describe("CarService Integration Tests", () => {
   let dataClient: IRacingDataClient;
 
   beforeAll(() => {
-    const email = process.env.EMAIL;
-    const password = process.env.PASSWORD;
+    const clientId = process.env.IRACING_CLIENT_ID;
+    const clientSecret = process.env.IRACING_CLIENT_SECRET;
+    const username = process.env.IRACING_USERNAME;
+    const password = process.env.IRACING_PASSWORD;
 
-    if (!email || !password) {
-      throw new Error("Missing EMAIL or PASSWORD in .env file");
+    if (!clientId || !clientSecret || !username || !password) {
+      throw new Error(
+        "Missing OAuth credentials. Set IRACING_CLIENT_ID, IRACING_CLIENT_SECRET, IRACING_USERNAME, IRACING_PASSWORD in .env file"
+      );
     }
 
     dataClient = new IRacingDataClient({
-      email,
-      password,
+      auth: {
+        type: 'password-limited',
+        clientId,
+        clientSecret,
+        username,
+        password,
+      },
     });
   });
 
