@@ -1,0 +1,69 @@
+---
+title: Roadmap
+description: Planned features and improvements for the iRacing Data Client
+---
+
+# Roadmap
+
+This page outlines planned features and improvements for the iRacing Data Client.
+
+## 🚀 Upcoming Features
+
+### Response Caching (High Priority)
+**Status:** Planned for v0.1.0
+
+Intelligent response caching to reduce API calls and improve performance.
+
+**Features:**
+- Automatic caching based on API expiration headers
+- Memory-efficient cache with configurable size limits
+- Cache statistics and debugging tools
+- Per-endpoint cache control
+
+**Benefits:**
+- 50%+ reduction in API calls for common operations
+- Faster response times for cached data
+- Automatic rate limit management
+
+[View implementation plan →](https://github.com/ally-murray/iracing-data-client/blob/main/docs/plans/caching-implementation.md)
+
+### Browser Support (Medium Priority)
+**Status:** Under consideration
+
+Full browser compatibility with CORS handling.
+
+**Features:**
+- Browser-compatible authentication flow
+- CORS proxy support
+- Web Worker support for background operations
+
+### CLI Tool (Low Priority)
+**Status:** Planned for future release
+
+Command-line interface for quick data access.
+
+**Features:**
+- Interactive authentication
+- Data export to CSV/JSON
+- Batch operations
+- Shell completion
+
+## 📝 Recently Completed
+
+### v0.0.1 - Initial Release
+- ✅ Full TypeScript support with generated types
+- ✅ Automatic authentication and session management
+- ✅ S3 link following for data retrieval
+- ✅ Parameter transformation (camelCase ↔ snake_case)
+- ✅ Comprehensive error handling
+- ✅ 15 service classes covering all endpoints
+
+## 🤝 Contributing
+
+Want to help implement these features? Check out our [GitHub repository](https://github.com/ally-murray/iracing-data-client) and open an issue or pull request!
+
+## 📢 Feedback
+
+Have ideas for new features? Let us know by:
+- Opening a [GitHub issue](https://github.com/ally-murray/iracing-data-client/issues)
+- Starting a [discussion](https://github.com/ally-murray/iracing-data-client/discussions)
