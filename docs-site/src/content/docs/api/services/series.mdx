@@ -1,10 +1,253 @@
 ---
 title: Series Service
-description: API reference for the series service
+description: API reference for the Series service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Series Service
 
-Documentation for the series service.
+The Series service provides access to series information, assets, seasons, and schedules.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const seriesService = iracing.series;
+```
+
+## Methods
+
+### `get()`
+
+Get all series.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeriesGetResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns information about all series available in iRacing.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const series = await iracing.series.get();
+
+    series.forEach(s => {
+      console.log(`${s.seriesName} (ID: ${s.seriesId})`);
+      console.log(`  Category: ${s.categoryName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `assets()`
+
+Get series asset information.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeriesAssetsResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns URLs for series images, logos, and other visual assets.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const assets = await iracing.series.assets();
+
+    Object.entries(assets).forEach(([seriesId, asset]) => {
+      console.log(`Series ${seriesId}: ${asset.logo}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `pastSeasons(params)`
+
+Get past seasons for a series.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeriesPastSeasonsResponse>`
+
+    **Parameters:**
+    - `seriesId: number` **(required)** - The series ID
+
+    **Description:** Returns historical season data for a specific series.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const pastSeasons = await iracing.series.pastSeasons({
+      seriesId: 234
+    });
+
+    pastSeasons.forEach(season => {
+      console.log(`${season.seasonYear}S${season.seasonQuarter}: ${season.seasonName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasons(params?)`
+
+Get current season details.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeriesSeasonsResponse>`
+
+    **Parameters:**
+    - `includeSeries?: boolean` - Include full series details
+    - `seasonYear?: number` - Filter by year
+    - `seasonQuarter?: number` - Filter by quarter (1-4)
+
+    **Description:** Returns current season information, optionally including full series details.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const seasons = await iracing.series.seasons({
+      includeSeries: true,
+      seasonYear: 2024,
+      seasonQuarter: 3
+    });
+
+    seasons.forEach(season => {
+      console.log(`${season.seasonName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonList(params?)`
+
+Get a list of seasons.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeriesSeasonListResponse>`
+
+    **Parameters:**
+    - `includeSeries?: boolean` - Include full series details
+    - `seasonYear?: number` - Filter by year
+    - `seasonQuarter?: number` - Filter by quarter (1-4)
+
+    **Description:** Returns a list of seasons with optional filtering.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const seasonList = await iracing.series.seasonList({
+      seasonYear: 2024,
+      seasonQuarter: 3
+    });
+
+    seasonList.forEach(season => {
+      console.log(`${season.seasonName} (ID: ${season.seasonId})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonSchedule(params)`
+
+Get the race schedule for a season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+
+    **Description:** Returns the complete race schedule for a specific season, including tracks, dates, and race configurations.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const schedule = await iracing.series.seasonSchedule({
+      seasonId: 3456
+    });
+
+    schedule.forEach(week => {
+      console.log(`Week ${week.raceWeekNum}: ${week.trackName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `statsSeries()`
+
+Get series statistics data.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeriesStatsSeriesResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns statistical data about series including participation counts and popularity metrics.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const statsSeries = await iracing.series.statsSeries();
+
+    statsSeries.forEach(s => {
+      console.log(`${s.seriesName}: ${s.averageParticipation} avg participants`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="tip">
+  Series and asset data is relatively static. Consider implementing your own caching strategy for optimal performance. Response caching is coming in a future release.
+</Aside>
+
+## Common Use Cases
+
+### Build a Series Directory
+
+```typescript
+async function getSeriesDirectory() {
+  const [series, assets] = await Promise.all([
+    iracing.series.get(),
+    iracing.series.assets(),
+  ]);
+
+  return series.map(s => ({
+    ...s,
+    assets: assets[s.seriesId],
+  }));
+}
+```
+
+### Get Full Season Schedule
+
+```typescript
+async function getFullSchedule(seriesId: number) {
+  const pastSeasons = await iracing.series.pastSeasons({ seriesId });
+  const currentSeason = pastSeasons[pastSeasons.length - 1];
+
+  const schedule = await iracing.series.seasonSchedule({
+    seasonId: currentSeason.seasonId
+  });
+
+  return schedule;
+}
+```
+
+## See Also
+
+- [Season Service](/api/services/season/) - Season list and race guide
+- [Results Service](/api/services/results/) - Season results
+- [Track Service](/api/services/track/) - Track information
+- [Services Overview](/api/services/) - All available services

@@ -1,10 +1,283 @@
 ---
 title: Results Service
-description: API reference for the results service
+description: API reference for the Results service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Results Service
 
-Documentation for the results service.
+The Results service provides access to race results, lap data, event logs, and result search functionality.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const resultsService = iracing.results;
+```
+
+## Methods
+
+### `get(params)`
+
+Get results for a specific subsession.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `subsessionId: number` **(required)** - The subsession ID
+    - `includeLicenses?: boolean` - Include license information
+
+    **Description:** Returns the complete results for a specific race subsession.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const results = await iracing.results.get({
+      subsessionId: 12345678,
+      includeLicenses: true
+    });
+
+    console.log(`Session: ${results.sessionName}`);
+    console.log(`Track: ${results.track.trackName}`);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `eventLog(params)`
+
+Get the event log for a session.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `subsessionId: number` **(required)** - The subsession ID
+    - `simsessionNumber: number` **(required)** - The sim session number (e.g. 0 for practice, 1 for qualifying, 2 for race)
+
+    **Description:** Returns the event log with incidents, flags, and other race events.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const eventLog = await iracing.results.eventLog({
+      subsessionId: 12345678,
+      simsessionNumber: 2  // Race session
+    });
+
+    eventLog.forEach(event => {
+      console.log(`Lap ${event.lapNumber}: ${event.eventDescription}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `lapChartData(params)`
+
+Get lap chart data for a session.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `subsessionId: number` **(required)** - The subsession ID
+    - `simsessionNumber: number` **(required)** - The sim session number
+
+    **Description:** Returns lap chart data showing positions over time, useful for creating position charts.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const lapChart = await iracing.results.lapChartData({
+      subsessionId: 12345678,
+      simsessionNumber: 2
+    });
+
+    console.log('Lap chart data:', lapChart);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `lapData(params)`
+
+Get detailed lap data for a session.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `subsessionId: number` **(required)** - The subsession ID
+    - `simsessionNumber: number` **(required)** - The sim session number
+    - `custId?: number` - Filter to a specific driver
+    - `teamId?: number` - Filter to a specific team
+
+    **Description:** Returns detailed lap-by-lap data including lap times, positions, and incidents.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Get all lap data for a race
+    const allLaps = await iracing.results.lapData({
+      subsessionId: 12345678,
+      simsessionNumber: 2
+    });
+
+    // Get lap data for a specific driver
+    const driverLaps = await iracing.results.lapData({
+      subsessionId: 12345678,
+      simsessionNumber: 2,
+      custId: 123456
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `searchSeries(params?)`
+
+Search for official series results.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonYear?: number` - Season year
+    - `seasonQuarter?: number` - Season quarter (1-4)
+    - `startRangeBegin?: string` - Start of date range (ISO format)
+    - `startRangeEnd?: string` - End of start date range
+    - `finishRangeBegin?: string` - Start of finish date range
+    - `finishRangeEnd?: string` - End of finish date range
+    - `custId?: number` - Filter to a specific driver
+    - `teamId?: number` - Filter to a specific team
+    - `seriesId?: number` - Filter to a specific series
+    - `raceWeekNum?: number` - Filter to a specific race week
+    - `officialOnly?: boolean` - Only official sessions
+    - `eventTypes?: number[]` - Filter by event types
+    - `categoryIds?: number[]` - Filter by category IDs
+
+    **Description:** Searches for official series race results with extensive filtering options.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Search for a driver's recent races
+    const results = await iracing.results.searchSeries({
+      custId: 123456,
+      seasonYear: 2024,
+      seasonQuarter: 3
+    });
+
+    // Search a specific series
+    const seriesResults = await iracing.results.searchSeries({
+      seriesId: 234,
+      raceWeekNum: 5,
+      officialOnly: true
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `searchHosted(params?)`
+
+Search for hosted session results.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `startRangeBegin?: string` - Start of date range (ISO format)
+    - `startRangeEnd?: string` - End of start date range
+    - `finishRangeBegin?: string` - Start of finish date range
+    - `finishRangeEnd?: string` - End of finish date range
+    - `custId?: number` - Filter to a specific driver
+    - `teamId?: number` - Filter to a specific team
+    - `hostCustId?: number` - Filter by session host
+    - `sessionName?: string` - Filter by session name
+    - `leagueId?: number` - Filter to a specific league
+    - `leagueSeasonId?: number` - Filter to a specific league season
+    - `carId?: number` - Filter by car
+    - `trackId?: number` - Filter by track
+    - `categoryIds?: number[]` - Filter by category IDs
+
+    **Description:** Searches for hosted session results with filtering options.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Search by league
+    const leagueResults = await iracing.results.searchHosted({
+      leagueId: 1234,
+      leagueSeasonId: 5678
+    });
+
+    // Search by host
+    const hostedResults = await iracing.results.searchHosted({
+      hostCustId: 123456,
+      startRangeBegin: '2024-01-01T00:00:00Z'
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonResults(params)`
+
+Get results for an entire season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `eventType?: number` - Filter by event type
+    - `raceWeekNum?: number` - Filter to a specific race week
+
+    **Description:** Returns all results for a given season, optionally filtered by event type and race week.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Get all season results
+    const results = await iracing.results.seasonResults({
+      seasonId: 3456
+    });
+
+    // Get results for a specific week
+    const weekResults = await iracing.results.seasonResults({
+      seasonId: 3456,
+      raceWeekNum: 5
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Common Use Cases
+
+### Analyze a Race
+
+```typescript
+async function analyzeRace(subsessionId: number) {
+  const [results, laps, eventLog] = await Promise.all([
+    iracing.results.get({ subsessionId }),
+    iracing.results.lapData({ subsessionId, simsessionNumber: 2 }),
+    iracing.results.eventLog({ subsessionId, simsessionNumber: 2 }),
+  ]);
+
+  return { results, laps, eventLog };
+}
+```
+
+## See Also
+
+- [Stats Service](/api/services/stats/) - Season standings and statistics
+- [Season Service](/api/services/season/) - Season schedules
+- [Hosted Service](/api/services/hosted/) - Active hosted sessions
+- [Services Overview](/api/services/) - All available services

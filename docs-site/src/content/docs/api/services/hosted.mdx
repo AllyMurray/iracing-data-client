@@ -1,10 +1,76 @@
 ---
 title: Hosted Service
-description: API reference for the hosted service
+description: API reference for the Hosted service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Hosted Service
 
-Documentation for the hosted service.
+The Hosted service provides access to hosted (private) session data.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const hostedService = iracing.hosted;
+```
+
+## Methods
+
+### `combinedSessions(params?)`
+
+Get combined hosted sessions, optionally filtered by package ID.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<HostedCombinedSessionsResponse>`
+
+    **Parameters:**
+    - `packageId?: number` - Filter by content package ID
+
+    **Description:** Returns a combined list of hosted sessions. Optionally filter by a specific content package.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Get all combined sessions
+    const sessions = await iracing.hosted.combinedSessions();
+
+    // Filter by package ID
+    const filtered = await iracing.hosted.combinedSessions({
+      packageId: 123
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `sessions()`
+
+Get hosted sessions.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<HostedSessionsResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns a list of currently available hosted sessions.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const sessions = await iracing.hosted.sessions();
+
+    sessions.forEach(session => {
+      console.log(`Session: ${session.sessionName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="note">
+  Hosted session data is dynamic and changes frequently. Avoid caching this data for extended periods.
+</Aside>
+
+## See Also
+
+- [Results Service](/api/services/results/) - Search hosted session results with `searchHosted()`
+- [Services Overview](/api/services/) - All available services

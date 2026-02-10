@@ -1,10 +1,96 @@
 ---
 title: Track Service
-description: API reference for the track service
+description: API reference for the Track service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Track Service
 
-Documentation for the track service.
+The Track service provides access to circuit information and track assets.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const trackService = iracing.track;
+```
+
+## Methods
+
+### `get()`
+
+Get all tracks in the iRacing database.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<TrackGetResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns complete information about all tracks available in iRacing, including configurations, locations, and categories.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const tracks = await iracing.track.get();
+
+    tracks.forEach(track => {
+      console.log(`${track.trackName} (ID: ${track.trackId})`);
+      console.log(`  Category: ${track.categoryName}`);
+      console.log(`  Config: ${track.configName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `assets()`
+
+Get track asset information including images and maps.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<TrackAssetsResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns URLs for track images, maps, and other visual assets.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const assets = await iracing.track.assets();
+
+    Object.entries(assets).forEach(([trackId, asset]) => {
+      console.log(`Track ${trackId}:`);
+      console.log(`  Logo: ${asset.logo}`);
+      console.log(`  Map: ${asset.trackMap}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="tip">
+  Track data is relatively static. Consider implementing your own caching strategy for optimal performance. Response caching is coming in a future release.
+</Aside>
+
+## Common Use Cases
+
+### Build a Track Directory
+
+```typescript
+async function getTrackDirectory() {
+  const [tracks, assets] = await Promise.all([
+    iracing.track.get(),
+    iracing.track.assets(),
+  ]);
+
+  return tracks.map(track => ({
+    ...track,
+    assets: assets[track.trackId],
+  }));
+}
+```
+
+## See Also
+
+- [Car Service](/api/services/car/) - Vehicle data and assets
+- [Series Service](/api/services/series/) - Series and schedule information
+- [Services Overview](/api/services/) - All available services

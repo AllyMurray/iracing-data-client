@@ -1,10 +1,72 @@
 ---
 title: Team Service
-description: API reference for the team service
+description: API reference for the Team service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Team Service
 
-Documentation for the team service.
+The Team service provides access to team information and membership data.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const teamService = iracing.team;
+```
+
+## Methods
+
+### `get(params)`
+
+Get information about a specific team.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `teamId: number` **(required)** - The team ID
+    - `includeLicenses?: boolean` - Include license information for team members
+
+    **Description:** Returns detailed information about a specific team including its roster and settings.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const team = await iracing.team.get({
+      teamId: 12345,
+      includeLicenses: true
+    });
+
+    console.log(`Team: ${team.teamName}`);
+    console.log(`Members: ${team.rosterCount}`);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `membership()`
+
+Get team membership for the authenticated user.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<TeamMembershipResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns the team membership details for the currently authenticated member.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const membership = await iracing.team.membership();
+
+    console.log('Your teams:', membership);
+    ```
+  </TabItem>
+</Tabs>
+
+## See Also
+
+- [Member Service](/api/services/member/) - Member profiles and data
+- [Stats Service](/api/services/stats/) - Team standings with `seasonTeamStandings()`
+- [Services Overview](/api/services/) - All available services

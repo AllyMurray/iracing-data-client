@@ -1,10 +1,155 @@
 ---
 title: Season Service
-description: API reference for the season service
+description: API reference for the Season service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Season Service
 
-Documentation for the season service.
+The Season service provides access to season schedules, race guides, and spectator session information.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const seasonService = iracing.season;
+```
+
+## Methods
+
+### `list(params)`
+
+Get a list of seasons for a given year and quarter.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeasonListResponse>`
+
+    **Parameters:**
+    - `seasonYear: number` **(required)** - The season year
+    - `seasonQuarter: number` **(required)** - The season quarter (1-4)
+
+    **Description:** Returns all seasons for the specified year and quarter.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const seasons = await iracing.season.list({
+      seasonYear: 2024,
+      seasonQuarter: 3
+    });
+
+    seasons.forEach(season => {
+      console.log(`${season.seasonName} (ID: ${season.seasonId})`);
+      console.log(`  Series: ${season.seriesName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `raceGuide(params?)`
+
+Get the race guide showing upcoming sessions.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeasonRaceGuideResponse>`
+
+    **Parameters:**
+    - `from?: string` - Start time (ISO format)
+    - `includeEndAfterFrom?: boolean` - Include sessions that end after the from time
+
+    **Description:** Returns the race guide with upcoming race sessions and their schedules.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Get current race guide
+    const guide = await iracing.season.raceGuide();
+
+    // Get race guide from a specific time
+    const futureGuide = await iracing.season.raceGuide({
+      from: '2024-06-01T00:00:00Z',
+      includeEndAfterFrom: true
+    });
+
+    guide.sessions.forEach(session => {
+      console.log(`${session.seriesName} - ${session.startDate}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `spectatorSubsessionids(params?)`
+
+Get subsession IDs available for spectating.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeasonSpectatorSubsessionidsResponse>`
+
+    **Parameters:**
+    - `eventTypes?: number[]` - Filter by event types
+
+    **Description:** Returns subsession IDs that are currently available for spectating.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const spectatorSessions = await iracing.season.spectatorSubsessionids();
+
+    console.log('Available for spectating:', spectatorSessions);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `spectatorSubsessionidsDetail(params?)`
+
+Get detailed spectator subsession information.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<SeasonSpectatorSubsessionidsDetailResponse>`
+
+    **Parameters:**
+    - `eventTypes?: number[]` - Filter by event types
+    - `seasonIds?: number[]` - Filter by season IDs
+
+    **Description:** Returns detailed information about subsessions available for spectating, including series and track data.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const details = await iracing.season.spectatorSubsessionidsDetail({
+      seasonIds: [3456, 7890]
+    });
+
+    details.forEach(session => {
+      console.log(`${session.seriesName} at ${session.trackName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Common Use Cases
+
+### Find Available Races
+
+```typescript
+async function findUpcomingRaces(categoryId?: number) {
+  const guide = await iracing.season.raceGuide({
+    includeEndAfterFrom: true
+  });
+
+  return guide.sessions.filter(session =>
+    !categoryId || session.categoryId === categoryId
+  );
+}
+```
+
+## See Also
+
+- [Series Service](/api/services/series/) - Series details and schedules
+- [Results Service](/api/services/results/) - Season results
+- [Stats Service](/api/services/stats/) - Season standings
+- [Services Overview](/api/services/) - All available services
