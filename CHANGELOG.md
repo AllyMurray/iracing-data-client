@@ -1,5 +1,11 @@
 # iracing-data-client
 
+## 0.1.1
+
+### Patch Changes
+
+- 2b73ecc: Update documentation site with complete API references for all service pages and add npm homepage link
+
 ## 0.1.0
 
 ### Minor Changes
