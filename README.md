@@ -2,6 +2,8 @@
 
 A TypeScript client for the iRacing Data API with full type safety and automatic OAuth2 authentication.
 
+> **ℹ️ Authentication has been migrated to the new iRacing OAuth2 system.** The legacy email/password authentication has been replaced with OAuth2 client credentials. See the [Authentication guide](https://allymurray.github.io/iracing-data-client/getting-started/authentication/) for details.
+
 - 🏎️ Complete coverage of the iRacing Data API (72+ endpoints)
 - 🔒 OAuth2 authentication with automatic token refresh
 - 📝 Full TypeScript support with generated types
