@@ -10,7 +10,7 @@ import { Tabs, TabItem, Card, CardGrid, Aside } from '@astrojs/starlight/compone
 The iRacing API enforces rate limits to ensure fair usage and system stability. The SDK detects rate limit responses and throws an `IRacingError` with `isRateLimited = true`, but does not automatically retry or throttle requests.
 
 <Aside type="note">
-  Built-in rate limit handling (automatic retry with backoff, request queuing, concurrency control) is planned for a future release. See our [roadmap](/roadmap/) for details. In the meantime, this guide covers strategies you can implement yourself.
+  Built-in rate limit handling (automatic retry with backoff, request queuing, concurrency control) is planned for a future release. See our [roadmap](/iracing-data-client/roadmap/) for details. In the meantime, this guide covers strategies you can implement yourself.
 </Aside>
 
 ## Detecting Rate Limits
@@ -404,5 +404,5 @@ setInterval(() => {
 
 ## Next Steps
 
-- Review [Caching Guide](/guides/caching/) to reduce API calls
-- See [Error Handling](/guides/error-handling/) for handling rate limit errors
+- Review [Caching Guide](/iracing-data-client/guides/caching/) to reduce API calls
+- See [Error Handling](/iracing-data-client/guides/error-handling/) for handling rate limit errors
