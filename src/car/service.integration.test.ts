@@ -1,10 +1,5 @@
-import * as dotenv from "dotenv";
 import { describe, it, expect, beforeAll } from "vitest";
 import { IRacingDataClient } from "../index";
-import type { CarAssetsResponse, CarGetResponse } from "./types";
-
-// Load environment variables
-dotenv.config();
 
 describe("CarService Integration Tests", () => {
   let dataClient: IRacingDataClient;
