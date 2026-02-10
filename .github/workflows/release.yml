@@ -59,12 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish packages
-        run: |
-          # Publish package to npm
-          pnpm publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm publish --provenance --access public
       - name: Push tags
         run: |
           # Push any tags created by changeset publish
