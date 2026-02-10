@@ -282,7 +282,7 @@ Some methods require specific parameters:
 ```typescript
 // Get specific members by ID
 const members = await iracing.member.get({
-  customerIds: [123456, 789012]
+  custIds: [123456, 789012]
 });
 
 // Search for league
@@ -357,8 +357,8 @@ try {
 ## Performance Tips
 
 <CardGrid>
-  <Card title="Use Caching" icon="rocket">
-    Response caching is coming in a future release. For now, consider implementing your own caching strategy for frequently accessed data.
+  <Card title="Cache Data" icon="rocket">
+    Response caching is coming in a future release. For now, see the [Caching guide](/guides/caching/) for strategies you can implement yourself.
   </Card>
   
   <Card title="Batch Requests" icon="stack">

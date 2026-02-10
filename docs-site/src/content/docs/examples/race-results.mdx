@@ -17,8 +17,13 @@ Examples for working with race results and session data.
 import { IRacingDataClient } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 async function getSessionResults(subsessionId: number) {

@@ -19,8 +19,13 @@ Fetch information about the authenticated member:
 import { IRacingDataClient } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 async function getCurrentMember() {
@@ -44,9 +49,9 @@ async function getCurrentMember() {
 Fetch data for specific members by customer ID:
 
 ```typescript
-async function getMembersByIds(customerIds: number[]) {
+async function getMembersByIds(custIds: number[]) {
   const response = await iracing.member.get({
-    customerIds,
+    custIds,
     includeLicenses: true
   });
   
@@ -81,7 +86,7 @@ interface CompleteMemberProfile {
 async function getCompleteProfile(custId: number): Promise<CompleteMemberProfile> {
   // Fetch all data in parallel for efficiency
   const [basic, career, recent, awards, bests] = await Promise.all([
-    iracing.member.get({ customerIds: [custId] }),
+    iracing.member.get({ custIds: [custId] }),
     iracing.stats.memberCareer({ custId }),
     iracing.stats.memberRecentRaces({ custId }),
     iracing.member.awards({ custId }),
@@ -274,12 +279,12 @@ Process multiple members efficiently:
 class MemberBatchProcessor {
   private cache = new Map<number, any>();
   
-  async processBatch(customerIds: number[]) {
+  async processBatch(custIds: number[]) {
     const results = [];
     const uncached = [];
     
     // Check cache first
-    for (const id of customerIds) {
+    for (const id of custIds) {
       if (this.cache.has(id)) {
         results.push(this.cache.get(id));
       } else {
@@ -291,7 +296,7 @@ class MemberBatchProcessor {
     while (uncached.length > 0) {
       const batch = uncached.splice(0, 50);
       const response = await iracing.member.get({
-        customerIds: batch,
+        custIds: batch,
         includeLicenses: true
       });
       
@@ -330,7 +335,7 @@ Handle member-specific errors:
 async function safeMemberFetch(custId: number) {
   try {
     const response = await iracing.member.get({
-      customerIds: [custId]
+      custIds: [custId]
     });
     
     if (response.members.length === 0) {

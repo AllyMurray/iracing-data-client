@@ -7,10 +7,10 @@ description: Planned features and improvements for the iRacing Data Client
 
 This page outlines planned features and improvements for the iRacing Data Client.
 
-## 🚀 Upcoming Features
+## Upcoming Features
 
 ### Response Caching (High Priority)
-**Status:** Planned for v0.1.0
+**Status:** Planned
 
 Intelligent response caching to reduce API calls and improve performance.
 
@@ -20,14 +20,17 @@ Intelligent response caching to reduce API calls and improve performance.
 - Cache statistics and debugging tools
 - Per-endpoint cache control
 
-**Benefits:**
-- 50%+ reduction in API calls for common operations
-- Faster response times for cached data
-- Automatic rate limit management
+### Built-in Rate Limit Handling (Medium Priority)
+**Status:** Planned
 
-[View implementation plan →](https://github.com/ally-murray/iracing-data-client/blob/main/docs/plans/caching-implementation.md)
+Automatic retry and request throttling when rate limits are hit.
 
-### Browser Support (Medium Priority)
+**Features:**
+- Automatic retry with exponential backoff on 429 responses
+- Request queue with configurable concurrency
+- Rate limit statistics
+
+### Browser Support (Low Priority)
 **Status:** Under consideration
 
 Full browser compatibility with CORS handling.
@@ -48,22 +51,25 @@ Command-line interface for quick data access.
 - Batch operations
 - Shell completion
 
-## 📝 Recently Completed
+## Recently Completed
 
-### v0.0.1 - Initial Release
-- ✅ Full TypeScript support with generated types
-- ✅ Automatic authentication and session management
-- ✅ S3 link following for data retrieval
-- ✅ Parameter transformation (camelCase ↔ snake_case)
-- ✅ Comprehensive error handling
-- ✅ 15 service classes covering all endpoints
+### v0.1.0
+- OAuth2 authentication (Password Limited and Authorization Code with PKCE)
+- Automatic token refresh with configurable callbacks
+- Full TypeScript support with generated types
+- Automatic authentication and session management
+- S3 link following for data retrieval
+- Parameter transformation (camelCase to snake_case and back)
+- Comprehensive error handling (maintenance mode, rate limit detection, auth errors)
+- 15 service classes covering 72+ endpoints
+- Runtime parameter validation with Zod schemas
 
-## 🤝 Contributing
+## Contributing
 
-Want to help implement these features? Check out our [GitHub repository](https://github.com/ally-murray/iracing-data-client) and open an issue or pull request!
+Want to help implement these features? Check out our [GitHub repository](https://github.com/AllyMurray/iracing-data-client) and open an issue or pull request!
 
-## 📢 Feedback
+## Feedback
 
 Have ideas for new features? Let us know by:
-- Opening a [GitHub issue](https://github.com/ally-murray/iracing-data-client/issues)
-- Starting a [discussion](https://github.com/ally-murray/iracing-data-client/discussions)
+- Opening a [GitHub issue](https://github.com/AllyMurray/iracing-data-client/issues)
+- Starting a [discussion](https://github.com/AllyMurray/iracing-data-client/discussions)

@@ -42,11 +42,13 @@ A simple Node.js application that:
 
 3. **Set up environment variables**
 
-   Create a `.env` file in your project root:
+   Create a `.env` file in your project root. You'll need OAuth credentials from iRacing — see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials) to register.
 
    ```env
-   IRACING_EMAIL=your-email@example.com
-   IRACING_PASSWORD=your-password
+   IRACING_CLIENT_ID=your-client-id
+   IRACING_CLIENT_SECRET=your-client-secret
+   IRACING_USERNAME=your-iracing-email
+   IRACING_PASSWORD=your-iracing-password
    ```
 
    <Aside type="caution">
@@ -60,14 +62,18 @@ A simple Node.js application that:
    ```typescript
    // app.ts
    import { IRacingDataClient, IRacingError } from 'iracing-data-client';
-   import 'dotenv/config'; // Load environment variables
 
    async function main() {
      try {
        // Initialize the Data Client
        const iracing = new IRacingDataClient({
-         email: process.env.IRACING_EMAIL!,
-         password: process.env.IRACING_PASSWORD!
+         auth: {
+           type: 'password-limited',
+           clientId: process.env.IRACING_CLIENT_ID!,
+           clientSecret: process.env.IRACING_CLIENT_SECRET!,
+           username: process.env.IRACING_USERNAME!,
+           password: process.env.IRACING_PASSWORD!,
+         },
        });
 
        // Fetch member info
@@ -228,13 +234,18 @@ Here are more complete example applications:
 import { Client, GatewayIntentBits } from 'discord.js';
 import { IRacingDataClient } from 'iracing-data-client';
 
-const discord = new Client({ 
-  intents: [GatewayIntentBits.Guilds] 
+const discord = new Client({
+  intents: [GatewayIntentBits.Guilds],
 });
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 discord.on('interactionCreate', async interaction => {
@@ -243,8 +254,8 @@ discord.on('interactionCreate', async interaction => {
   if (interaction.commandName === 'driver') {
     const custId = interaction.options.getInteger('id')!;
     
-    const member = await iracing.member.get({ 
-      customerIds: [custId] 
+    const member = await iracing.member.get({
+      custIds: [custId],
     });
     
     await interaction.reply({
@@ -268,8 +279,13 @@ import { IRacingDataClient } from 'iracing-data-client';
 
 const app = express();
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 // Cache middleware
@@ -300,7 +316,7 @@ app.get('/api/member/:id',
   async (req, res) => {
     try {
       const data = await iracing.member.get({
-        customerIds: [parseInt(req.params.id)]
+        custIds: [parseInt(req.params.id)]
       });
       res.json(data);
     } catch (error) {
@@ -373,7 +389,7 @@ async function getMembersBatch(custIds: number[]) {
   for (let i = 0; i < custIds.length; i += batchSize) {
     const batch = custIds.slice(i, i + batchSize);
     const data = await iracing.member.get({
-      customerIds: batch
+      custIds: batch
     });
     results.push(...data.members);
     

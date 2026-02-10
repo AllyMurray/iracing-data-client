@@ -22,11 +22,11 @@ The iRacing Data API is the official REST API provided by iRacing.com that allow
   <Card title="📘 TypeScript First" icon="document">
     Every API response is fully typed with IntelliSense support, compile-time checking, and Zod validation.
   </Card>
-  <Card title="🔐 Smart Auth" icon="key">
-    Handles iRacing's authentication flow automatically with secure credential management and session renewal.
+  <Card title="🔐 OAuth2 Auth" icon="key">
+    Handles iRacing's OAuth2 authentication automatically with token management and automatic refresh.
   </Card>
   <Card title="⚡ Performance" icon="rocket">
-    Built-in response caching, S3 link following, and intelligent error handling for optimal performance.
+    S3 link following, intelligent error handling, and response caching *(coming soon)* for optimal performance.
   </Card>
 </CardGrid>
 
@@ -80,14 +80,14 @@ The SDK is organized into service classes, each corresponding to a specific area
   <TabItem label="TypeScript">
     ```typescript
     // Full IntelliSense support
-    const member = await iracing.member.get({ 
-      customerIds: [123456] 
+    const member = await iracing.member.get({
+      custIds: [123456]
     });
-    
+
     // Type-safe access to response data
     console.log(member.members[0].displayName);
     console.log(member.members[0].licenses[0].irating);
-    
+
     // Compile-time error checking
     member.members[0].wrongProperty; // ❌ TypeScript Error
     ```
@@ -121,8 +121,8 @@ The SDK automatically handles:
   <Card title="Parameter Validation">
     Validates all parameters using Zod schemas before sending requests
   </Card>
-  <Card title="Response Caching">
-    Intelligently caches responses based on API-provided expiration headers
+  <Card title="Response Caching *(coming soon)*">
+    Will intelligently cache responses based on API-provided expiration headers
   </Card>
 </CardGrid>
 
@@ -205,8 +205,8 @@ try {
   <Card title="Zod Validation" icon="shield">
     Runtime validation for all API parameters
   </Card>
-  <Card title="Smart Caching" icon="rocket">
-    Automatic response caching with expiration
+  <Card title="Smart Caching *(coming soon)*" icon="rocket">
+    Response caching with automatic expiration
   </Card>
   <Card title="Error Types" icon="warning">
     Specific error handling for different scenarios
