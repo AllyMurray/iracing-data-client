@@ -1,0 +1,17 @@
+/* iRacing-inspired theme */
+
+/* Light mode */
+:root {
+	--sl-color-accent-low: #dce5f3;
+	--sl-color-accent: #1e4488;
+	--sl-color-accent-high: #142e5c;
+}
+
+/* Dark mode */
+:root[data-theme='dark'] {
+	--sl-color-accent-low: #19284f;
+	--sl-color-accent: #1d336a;
+	--sl-color-accent-high: #a8c4f0;
+	--sl-color-black: #12121a;
+	--sl-color-gray-6: #05050e;
+}
