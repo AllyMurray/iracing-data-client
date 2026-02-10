@@ -1,16 +1,12 @@
 #!/usr/bin/env tsx
-import * as dotenv from "dotenv";
 import { IRacingDataClient, IRacingError } from "./src/index.ts";
 
-// Load environment variables
-dotenv.config();
-
 async function testDataClient() {
-  const email = process.env.EMAIL;
-  const password = process.env.PASSWORD;
+  const email = process.env.IRACING_USERNAME;
+  const password = process.env.IRACING_PASSWORD;
 
   if (!email || !password) {
-    console.error("❌ Missing EMAIL or PASSWORD in .env file");
+    console.error("❌ Missing IRACING_USERNAME or IRACING_PASSWORD environment variables");
     process.exit(1);
   }
 
@@ -18,10 +14,23 @@ async function testDataClient() {
   console.log(`📧 Using email: ${email.replace(/(.{2}).*(@.*)/, '$1***$2')}`);
 
   try {
+    const clientId = process.env.IRACING_CLIENT_ID;
+    const clientSecret = process.env.IRACING_CLIENT_SECRET;
+
+    if (!clientId || !clientSecret) {
+      console.error("❌ Missing IRACING_CLIENT_ID or IRACING_CLIENT_SECRET environment variables");
+      process.exit(1);
+    }
+
     // Initialize the Data Client
     const dataClient = new IRacingDataClient({
-      email,
-      password,
+      auth: {
+        type: 'password-limited',
+        clientId,
+        clientSecret,
+        username: email,
+        password,
+      },
     });
 
     console.log("🔐 Authenticating...");

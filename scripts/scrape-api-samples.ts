@@ -10,8 +10,8 @@
  *   npm run scrape-samples [input.json] [samples_dir] [--force]
  *   
  * Environment variables required:
- *   EMAIL - Your iRacing login email
- *   PASSWORD - Your iRacing login password
+ *   IRACING_USERNAME - Your iRacing login email
+ *   IRACING_PASSWORD - Your iRacing login password
  *   
  * Features:
  * - Multiple parameter variations per endpoint for richer data
@@ -22,10 +22,7 @@
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
-import * as dotenv from "dotenv";
 
-// Load environment variables
-dotenv.config();
 
 /** ---- Input types (from your index JSON) ---- */
 type ParamType = "string" | "number" | "boolean" | "numbers";
@@ -352,11 +349,11 @@ function generateParameterVariations(params: Record<string, ParamDef>, custId: n
 
 /** ---- Main scraper ---- */
 async function scrapeApiSamples() {
-  const email = process.env.EMAIL;
-  const password = process.env.PASSWORD;
-  
+  const email = process.env.IRACING_USERNAME;
+  const password = process.env.IRACING_PASSWORD;
+
   if (!email || !password) {
-    throw new Error("EMAIL and PASSWORD must be set in .env file");
+    throw new Error("IRACING_USERNAME and IRACING_PASSWORD must be set");
   }
   
   // Create samples directory

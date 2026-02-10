@@ -22,13 +22,15 @@
     "dev": "tsup --watch",
     "prepublishOnly": "npm run build",
     "sdk:generate": "npx tsx scripts/generate-sdk.ts",
-    "sdk:test": "npx tsx test-sdk.ts",
-    "samples:scrape": "npx tsx scripts/scrape-api-samples.ts",
-    "samples:scrape-force": "npx tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
+    "sdk:test": "npx @dotenvx/dotenvx run -- npx tsx test-sdk.ts",
+    "samples:scrape": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts",
+    "samples:scrape-force": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
     "docs:dev": "cd docs-site && pnpm dev",
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
     "test": "vitest",
+    "test:integration": "npx @dotenvx/dotenvx run -- vitest run integration",
+    "test:oauth": "npx @dotenvx/dotenvx run -- npx tsx test-oauth.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -44,7 +46,6 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
     "@types/node": "^24.3.1",
-    "dotenv": "^17.2.2",
     "json-schema-to-zod": "^2.6.1",
     "quicktype-core": "^23.2.6",
     "tsup": "^8.5.0",

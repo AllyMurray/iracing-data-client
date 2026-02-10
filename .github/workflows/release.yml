@@ -39,8 +39,16 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build packages
         run: pnpm run build
-      - name: Test Build Artifacts
-        run: pnpm test
+      - name: Unit tests
+        run: pnpm test run
+      - name: Restore encrypted .env
+        run: echo "$DOTENV_ENV_FILE" > .env
+        env:
+          DOTENV_ENV_FILE: ${{ secrets.DOTENV_ENV_FILE }}
+      - name: Integration tests
+        run: pnpm test:integration
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
       - name: Version packages
         run: |
           # Apply version changes and commit them

@@ -27,10 +27,14 @@ yarn add iracing-data-client
 ```typescript
 import { IRacingDataClient } from 'iracing-data-client';
 
-// Initialize with credentials
 const dataClient = new IRacingDataClient({
-  email: 'your-email@example.com',
-  password: 'your-password'
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID,
+    clientSecret: process.env.IRACING_CLIENT_SECRET,
+    username: process.env.IRACING_USERNAME,
+    password: process.env.IRACING_PASSWORD,
+  },
 });
 
 // Fetch track data
@@ -44,12 +48,72 @@ console.log(member);
 
 ## Environment Variables
 
-For testing and development, create a `.env` file:
+Copy the example file and fill in your credentials:
 
-```env
-EMAIL=your-iracing-email@example.com
-PASSWORD=your-iracing-password
+```bash
+cp .env.example .env
 ```
+
+You'll need OAuth credentials from iRacing — see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials) to register.
+
+### Encrypting with dotenvx (recommended)
+
+We use [dotenvx](https://dotenvx.com) to encrypt `.env` files so secrets never exist as plaintext on disk:
+
+```bash
+# Encrypt your .env file
+npx @dotenvx/dotenvx encrypt
+
+# Store the private key in your macOS Keychain
+security add-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w "$(grep '^DOTENV_PRIVATE_KEY=' .env.keys | cut -d'=' -f2)"
+```
+
+Once the key is in your keychain, you can delete `.env.keys` from disk.
+
+To run commands that need env vars, prefix with the key from keychain:
+
+```bash
+DOTENV_PRIVATE_KEY=$(security find-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w) pnpm test:integration
+```
+
+To avoid typing the prefix every time, add an alias to your `~/.zshrc`:
+
+```bash
+alias iracing-env='DOTENV_PRIVATE_KEY=$(security find-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w)'
+```
+
+Then just:
+
+```bash
+iracing-env pnpm test:integration
+iracing-env pnpm sdk:test
+```
+
+### CI / GitHub Actions
+
+In CI, the encrypted `.env` file is restored from a GitHub secret and decrypted by dotenvx at runtime. This means adding or changing env vars only requires updating a single secret — the workflow YAML never needs to change.
+
+Two repository secrets are required:
+
+- **`DOTENV_PRIVATE_KEY`** — the decryption key (retrieve from your keychain)
+- **`DOTENV_ENV_FILE`** — the full content of your encrypted `.env` file
+
+To update `DOTENV_ENV_FILE`, copy the content of your local `.env` and paste it as the secret value in GitHub Settings > Secrets > Actions.
+
+### Rotating keys
+
+If your private key is compromised, rotate it and update your keychain and GitHub secrets:
+
+```bash
+# Generate a new key pair and re-encrypt all values
+npx @dotenvx/dotenvx rotate
+
+# Update the keychain entry
+security delete-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY"
+security add-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w "$(grep '^DOTENV_PRIVATE_KEY=' .env.keys | cut -d'=' -f2)"
+```
+
+After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub repository secrets to match.
 
 ## Available Services
 
@@ -98,11 +162,13 @@ try {
 
 ```typescript
 const dataClient = new IRacingDataClient({
-  email: 'your-email@example.com',        // iRacing account email
-  password: 'your-password',              // iRacing account password
-  headers: { 'User-Agent': 'MyApp/1.0' }, // Custom headers (optional)
-  fetchFn: customFetch,                   // Custom fetch function (optional)
-  validateParams: true                    // Enable parameter validation (optional)
+  auth: {
+    type: 'password-limited',
+    clientId: 'your-client-id',
+    clientSecret: 'your-client-secret',
+    username: 'your-email@example.com',
+    password: 'your-password',
+  },
 });
 ```
 
@@ -110,43 +176,42 @@ const dataClient = new IRacingDataClient({
 
 ### Scripts
 
-- `npm run sdk:generate` - Generate Data Client from API documentation
-- `npm run sdk:test` - Test the Data Client with live API calls
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run test` - Run unit tests
+- `pnpm run sdk:generate` - Generate Data Client from API documentation
+- `pnpm run sdk:test` - Test the Data Client with live API calls
+- `pnpm run test` - Run unit tests
+- `pnpm run test:integration` - Run integration tests against the live API
+- `pnpm run typecheck` - Run TypeScript type checking
+
+### Testing
+
+Scripts that need credentials use dotenvx automatically. Set `DOTENV_PRIVATE_KEY` and run:
+
+```bash
+DOTENV_PRIVATE_KEY=$(security find-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w) pnpm test:integration
+```
 
 ### Generating the Data Client
 
 The Data Client is auto-generated from iRacing's API documentation:
 
 ```bash
-npm run sdk:generate
+pnpm run sdk:generate
 ```
 
 This creates:
 - Individual service files in `src/[service]/service.ts`
-- Type definitions in `src/[service]/types.ts`  
+- Type definitions in `src/[service]/types.ts`
 - Main export file `src/index.ts`
 - HTTP client with authentication in `src/client.ts`
-
-### Testing
-
-Test the Data Client against the live iRacing API:
-
-```bash
-npm run sdk:test
-```
-
-Make sure your credentials are in the `.env` file.
 
 ## API Reference
 
 ### Authentication
 
-The Data Client handles iRacing's cookie-based authentication automatically. On first request, it will:
+The Data Client handles iRacing's OAuth2 authentication automatically. On first request, it will:
 
-1. Log in with your credentials
-2. Store authentication cookies
+1. Authenticate using the Password Limited OAuth flow
+2. Manage access and refresh tokens
 3. Follow S3 redirect links to fetch actual data
 4. Handle CSV responses where applicable
 
@@ -166,18 +231,12 @@ const tracks = await dataClient.track.get();
 
 ### Parameter Validation
 
-When `validateParams: true` is set, the Data Client validates all parameters using Zod schemas:
+All parameters are validated at runtime using Zod schemas:
 
 ```typescript
-const dataClient = new IRacingDataClient({ 
-  email: 'test@example.com',
-  password: 'password',
-  validateParams: true 
-});
-
 // This will throw if seasonId is not a number
-await dataClient.season.list({ seasonId: 'invalid' }); // ❌ Validation error
-await dataClient.season.list({ seasonId: 12345 });     // ✅ Valid
+await dataClient.season.list({ seasonId: 'invalid' }); // Validation error
+await dataClient.season.list({ seasonId: 12345 });     // Valid
 ```
 
 ## Contributing
