@@ -17,25 +17,7 @@ import { TeamService } from "./team/service";
 import { TimeAttackService } from "./time-attack/service";
 import { TrackService } from "./track/service";
 
-// Re-export client
 export { IRacingClient, IRacingError, type IRacingClientOptions };
-
-// Re-export auth types and helpers
-export type {
-  AuthConfig,
-  PasswordLimitedAuth,
-  AuthorizationCodeAuth,
-  TokenResponse,
-  OnTokenRefresh,
-  FetchLike,
-} from "./auth";
-
-export {
-  OAuthError,
-  TokenRefreshError,
-  buildAuthorizationUrl,
-  exchangeAuthorizationCode,
-} from "./auth";
 
 export * from "./car/types";
 export * from "./carclass/types";

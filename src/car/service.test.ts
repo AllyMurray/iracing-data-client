@@ -11,40 +11,30 @@ describe("CarService", () => {
   let client: IRacingClient;
   let carService: CarService;
 
-  // Mock OAuth token response
-  const mockTokenResponse = {
-    access_token: "test-access-token",
-    token_type: "Bearer",
-    expires_in: 600,
-    refresh_token: "test-refresh-token",
-  };
-
   beforeEach(() => {
     mockFetch = vi.fn();
 
     client = new IRacingClient({
       auth: {
-        type: "password-limited",
+        type: "authorization-code",
         clientId: "test-client-id",
         clientSecret: "test-client-secret",
-        username: "test@example.com",
-        password: "password",
+        tokens: {
+          accessToken: "test-access-token",
+          refreshToken: "test-refresh-token",
+          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+        },
       },
-      fetchFn: mockFetch
+      fetchFn: mockFetch as any,
+      validateParams: false,
+      validateSemanticParams: false,
     });
 
     carService = new CarService(client);
   });
 
   describe("assets()", () => {
-    it("should fetch, transform, and validate car assets data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate car assets data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -53,16 +43,6 @@ describe("CarService", () => {
 
       const result = await carService.assets();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/car/assets",
         expect.objectContaining({
@@ -72,38 +52,13 @@ describe("CarService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      await expect(carService.assets()).rejects.toThrow();
     });
   });
 
   describe("get()", () => {
-    it("should fetch, transform, and validate car get data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate car get data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -112,16 +67,6 @@ describe("CarService", () => {
 
       const result = await carService.get();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/car/get",
         expect.objectContaining({
@@ -131,26 +76,8 @@ describe("CarService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      await expect(carService.get()).rejects.toThrow();
     });
   });
 

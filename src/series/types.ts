@@ -158,8 +158,8 @@ const SeriesSeasons = z.array(z.object({
       maxDryTireSets: z.number(),
       maxPctFuelFill: z.number(),
       powerAdjustPct: z.number(),
-      weightPenaltyKg: z.number(),
       raceSetupId: z.optional(z.number()),
+      weightPenaltyKg: z.number(),
       qualSetupId: z.optional(z.number())
     })),
     category: z.string(),
@@ -172,18 +172,22 @@ const SeriesSeasons = z.array(z.object({
     qualifyLength: z.optional(z.number()),
     raceLapLimit: z.nullable(z.number()),
     raceTimeDescriptors: z.array(z.object({
+      repeating: z.boolean(),
+      sessionMinutes: z.number(),
+      sessionTimes: z.optional(z.array(z.string())),
+      superSession: z.boolean(),
       dayOffset: z.optional(z.array(z.number())),
       firstSessionTime: z.optional(z.string()),
       repeatMinutes: z.optional(z.number()),
-      repeating: z.boolean(),
-      sessionMinutes: z.number(),
-      startDate: z.optional(z.string()),
-      superSession: z.boolean(),
-      sessionTimes: z.optional(z.array(z.string()))
+      startDate: z.optional(z.string())
     })),
     raceTimeLimit: z.nullable(z.number()),
-    raceWeekCarClassIds: z.array(z.unknown()),
-    raceWeekCars: z.array(z.unknown()),
+    raceWeekCarClassIds: z.array(z.number()),
+    raceWeekCars: z.array(z.object({
+      carId: z.number(),
+      carName: z.string(),
+      carNameAbbreviated: z.string()
+    })),
     restartType: z.string(),
     scheduleName: z.string(),
     seasonName: z.string(),
@@ -197,9 +201,9 @@ const SeriesSeasons = z.array(z.object({
     track: z.object({
       category: z.string(),
       categoryId: z.number(),
-      configName: z.optional(z.string()),
       trackId: z.number(),
-      trackName: z.string()
+      trackName: z.string(),
+      configName: z.optional(z.string())
     }),
     trackState: z.object({
       leaveMarbles: z.boolean(),
@@ -208,19 +212,19 @@ const SeriesSeasons = z.array(z.object({
     }),
     warmupLength: z.optional(z.number()),
     weather: z.object({
-      allowFog: z.boolean(),
-      forecastOptions: z.object({
+      allowFog: z.optional(z.boolean()),
+      forecastOptions: z.optional(z.object({
         allowFog: z.boolean(),
         forecastType: z.number(),
         precipitation: z.number(),
         skies: z.number(),
         stopPrecip: z.number(),
         temperature: z.number(),
-        weatherSeed: z.optional(z.number()),
+        weatherSeed: z.number(),
         windDir: z.number(),
         windSpeed: z.number()
-      }),
-      precipOption: z.number(),
+      })),
+      precipOption: z.optional(z.number()),
       relHumidity: z.number(),
       simulatedStartTime: z.string(),
       simulatedTimeMultiplier: z.number(),
@@ -229,9 +233,9 @@ const SeriesSeasons = z.array(z.object({
       tempUnits: z.number(),
       tempValue: z.number(),
       timeOfDay: z.number(),
-      trackWater: z.number(),
+      trackWater: z.optional(z.number()),
       version: z.number(),
-      weatherSummary: z.object({
+      weatherSummary: z.optional(z.object({
         maxPrecipRate: z.number(),
         maxPrecipRateDesc: z.string(),
         precipChance: z.number(),
@@ -244,14 +248,19 @@ const SeriesSeasons = z.array(z.object({
         windHigh: z.number(),
         windLow: z.number(),
         windUnits: z.number()
-      }),
-      weatherUrl: z.string(),
+      })),
+      weatherUrl: z.optional(z.string()),
       windDir: z.number(),
       windUnits: z.number(),
-      windValue: z.number()
+      windValue: z.number(),
+      fog: z.optional(z.number()),
+      type: z.optional(z.number()),
+      weatherVarInitial: z.optional(z.number()),
+      weatherVarOngoing: z.optional(z.number())
     }),
     weekEndTime: z.string()
   })),
+  scoreAsCarclassid: z.optional(z.number()),
   seasonQuarter: z.number(),
   seasonShortName: z.string(),
   seasonYear: z.number(),
@@ -265,6 +274,8 @@ const SeriesSeasons = z.array(z.object({
     trackType: z.string()
   })),
   unsportConductRuleMode: z.number(),
+  rookieSeason: z.optional(z.string()),
+  regOpenMinutes: z.optional(z.number()),
   heatSesInfo: z.optional(z.object({
   consolationDeltaMaxFieldSize: z.number(),
   consolationDeltaSessionLaps: z.number(),
@@ -309,8 +320,7 @@ const SeriesSeasons = z.array(z.object({
   qualScoring: z.number(),
   qualStyle: z.number(),
   raceStyle: z.number()
-})),
-  regOpenMinutes: z.optional(z.number())
+}))
 }));
 const SeriesSeasonList = z.object({
   seasons: z.array(z.object({
@@ -334,22 +344,22 @@ const SeriesSeasonList = z.object({
       track: z.object({
         category: z.string(),
         categoryId: z.number(),
-        configName: z.optional(z.string()),
         trackId: z.number(),
-        trackName: z.string()
+        trackName: z.string(),
+        configName: z.optional(z.string())
       }),
       carRestrictions: z.array(z.object({
         carId: z.number(),
         maxDryTireSets: z.number(),
         maxPctFuelFill: z.number(),
         powerAdjustPct: z.number(),
-        weightPenaltyKg: z.number(),
         raceSetupId: z.optional(z.number()),
+        weightPenaltyKg: z.number(),
         qualSetupId: z.optional(z.number())
       })),
       raceLapLimit: z.nullable(z.number()),
       raceTimeLimit: z.nullable(z.number()),
-      precipChance: z.number(),
+      precipChance: z.optional(z.number()),
       startType: z.string(),
       categoryId: z.number()
     }),
@@ -391,6 +401,10 @@ const SeriesSeasonList = z.object({
     openPracticeSessionTypeId: z.number(),
     qualifierMustStartRace: z.boolean(),
     raceWeek: z.number(),
+    raceWeekCarClassIds: z.optional(z.array(z.object({
+      raceWeekNum: z.number(),
+      carClassIds: z.array(z.number())
+    }))),
     raceWeekToMakeDivisions: z.number(),
     regUserCount: z.number(),
     regionCompetition: z.boolean(),
@@ -411,6 +425,8 @@ const SeriesSeasonList = z.object({
       trackType: z.string()
     })),
     unsportConductRuleMode: z.number(),
+    rookieSeason: z.optional(z.string()),
+    regOpenMinutes: z.optional(z.number()),
     heatSesInfo: z.optional(z.object({
       consolationDeltaMaxFieldSize: z.number(),
       consolationDeltaSessionLaps: z.number(),
@@ -455,8 +471,93 @@ const SeriesSeasonList = z.object({
       qualScoring: z.number(),
       qualStyle: z.number(),
       raceStyle: z.number()
+    }))
+  }))
+});
+const SeriesSeasonSchedule = z.object({
+  success: z.boolean(),
+  seasonId: z.number(),
+  schedules: z.array(z.object({
+    seasonId: z.number(),
+    raceWeekNum: z.number(),
+    carRestrictions: z.array(z.unknown()),
+    category: z.string(),
+    categoryId: z.number(),
+    enablePitlaneCollisions: z.boolean(),
+    eventOptions: z.object({
+      allowWaveArounds: z.boolean(),
+      cautionsEnabled: z.boolean(),
+      qualifyScoringType: z.number(),
+      restartType: z.number(),
+      shortParadeLap: z.boolean(),
+      singleFileConsecCautions: z.boolean(),
+      standingStart: z.boolean(),
+      startingGridType: z.number()
+    }),
+    eventSessions: z.array(z.object({
+      laps: z.number(),
+      minutes: z.number(),
+      startTimeOffset: z.number(),
+      type: z.number(),
+      typeName: z.string(),
+      unlimitedLaps: z.boolean(),
+      unlimitedTime: z.boolean()
     })),
-    regOpenMinutes: z.optional(z.number())
+    fullCourseCautions: z.boolean(),
+    practiceLength: z.number(),
+    qualAttached: z.boolean(),
+    qualTimeDescriptors: z.array(z.unknown()),
+    qualifyLaps: z.number(),
+    qualifyLength: z.number(),
+    raceLapLimit: z.nullable(z.string()),
+    raceTimeDescriptors: z.array(z.object({
+      repeating: z.boolean(),
+      sessionMinutes: z.number(),
+      sessionTimes: z.array(z.string()),
+      superSession: z.boolean()
+    })),
+    raceTimeLimit: z.number(),
+    raceWeekCarClasses: z.array(z.unknown()),
+    restartType: z.string(),
+    scheduleName: z.string(),
+    seasonName: z.string(),
+    seriesId: z.number(),
+    seriesName: z.string(),
+    shortParadeLap: z.boolean(),
+    specialEventType: z.nullable(z.string()),
+    startDate: z.string(),
+    startType: z.string(),
+    startZone: z.boolean(),
+    track: z.object({
+      category: z.string(),
+      categoryId: z.number(),
+      configName: z.optional(z.string()),
+      trackId: z.number(),
+      trackName: z.string()
+    }),
+    trackState: z.object({
+      leaveMarbles: z.boolean()
+    }),
+    warmupLength: z.number(),
+    weather: z.object({
+      fog: z.number(),
+      relHumidity: z.number(),
+      simulatedStartTime: z.string(),
+      simulatedTimeMultiplier: z.number(),
+      simulatedTimeOffsets: z.array(z.number()),
+      skies: z.number(),
+      tempUnits: z.number(),
+      tempValue: z.number(),
+      timeOfDay: z.number(),
+      type: z.number(),
+      version: z.number(),
+      weatherVarInitial: z.number(),
+      weatherVarOngoing: z.number(),
+      windDir: z.number(),
+      windUnits: z.number(),
+      windValue: z.number()
+    }),
+    weekEndTime: z.string()
   }))
 });
 const SeriesStatsSeries = z.array(z.object({
@@ -523,6 +624,7 @@ export type SeriesGetResponse = z.infer<typeof SeriesGet>;
 export type SeriesPastSeasonsResponse = z.infer<typeof SeriesPastSeasons>;
 export type SeriesSeasonsResponse = z.infer<typeof SeriesSeasons>;
 export type SeriesSeasonListResponse = z.infer<typeof SeriesSeasonList>;
+export type SeriesSeasonScheduleResponse = z.infer<typeof SeriesSeasonSchedule>;
 export type SeriesStatsSeriesResponse = z.infer<typeof SeriesStatsSeries>;
 
 // ---- Parameter Schemas ----
@@ -581,5 +683,6 @@ export {
   SeriesPastSeasons,
   SeriesSeasons,
   SeriesSeasonList,
+  SeriesSeasonSchedule,
   SeriesStatsSeries,
 };

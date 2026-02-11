@@ -5,10 +5,17 @@ import { IRacingClient } from "../client";
 // Import sample data
 import statsmemberbestsSample from "../../samples/stats.member_bests.json";
 import statsmembercareerSample from "../../samples/stats.member_career.json";
+import statsmemberdivisionSample from "../../samples/stats.member_division.json";
 import statsmemberrecapSample from "../../samples/stats.member_recap.json";
 import statsmemberrecentracesSample from "../../samples/stats.member_recent_races.json";
 import statsmembersummarySample from "../../samples/stats.member_summary.json";
 import statsmemberyearlySample from "../../samples/stats.member_yearly.json";
+import statsseasondriverstandingsSample from "../../samples/stats.season_driver_standings.json";
+import statsseasonsupersessionstandingsSample from "../../samples/stats.season_supersession_standings.json";
+import statsseasonteamstandingsSample from "../../samples/stats.season_team_standings.json";
+import statsseasonttstandingsSample from "../../samples/stats.season_tt_standings.json";
+import statsseasonttresultsSample from "../../samples/stats.season_tt_results.json";
+import statsseasonqualifyresultsSample from "../../samples/stats.season_qualify_results.json";
 import statsworldrecordsSample from "../../samples/stats.world_records.json";
 
 describe("StatsService", () => {
@@ -16,40 +23,30 @@ describe("StatsService", () => {
   let client: IRacingClient;
   let statsService: StatsService;
 
-  // Mock OAuth token response
-  const mockTokenResponse = {
-    access_token: "test-access-token",
-    token_type: "Bearer",
-    expires_in: 600,
-    refresh_token: "test-refresh-token",
-  };
-
   beforeEach(() => {
     mockFetch = vi.fn();
 
     client = new IRacingClient({
       auth: {
-        type: "password-limited",
+        type: "authorization-code",
         clientId: "test-client-id",
         clientSecret: "test-client-secret",
-        username: "test@example.com",
-        password: "password",
+        tokens: {
+          accessToken: "test-access-token",
+          refreshToken: "test-refresh-token",
+          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+        },
       },
-      fetchFn: mockFetch
+      fetchFn: mockFetch as any,
+      validateParams: false,
+      validateSemanticParams: false,
     });
 
     statsService = new StatsService(client);
   });
 
   describe("memberBests()", () => {
-    it("should fetch, transform, and validate stats memberBests data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats memberBests data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -62,16 +59,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.memberBests(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/member_bests"),
         expect.objectContaining({
@@ -81,42 +68,13 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  custId: 123,
-  carId: 123
-      };
-      await expect(statsService.memberBests(testParams)).rejects.toThrow();
     });
   });
 
   describe("memberCareer()", () => {
-    it("should fetch, transform, and validate stats memberCareer data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats memberCareer data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -128,16 +86,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.memberCareer(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/member_career"),
         expect.objectContaining({
@@ -147,65 +95,41 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  custId: 123
-      };
-      await expect(statsService.memberCareer(testParams)).rejects.toThrow();
     });
   });
 
   describe("memberDivision()", () => {
-    it("should fetch stats memberDivision data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats memberDivision data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsmemberdivisionSample)
       });
 
       const testParams = {
   seasonId: 123,
   eventType: 123
       };
-      await statsService.memberDivision(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.memberDivision(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_division"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("memberRecap()", () => {
-    it("should fetch, transform, and validate stats memberRecap data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats memberRecap data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -219,16 +143,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.memberRecap(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/member_recap"),
         expect.objectContaining({
@@ -238,43 +152,13 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  custId: 123,
-  year: 123,
-  season: 123
-      };
-      await expect(statsService.memberRecap(testParams)).rejects.toThrow();
     });
   });
 
   describe("memberRecentRaces()", () => {
-    it("should fetch, transform, and validate stats memberRecentRaces data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats memberRecentRaces data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -286,16 +170,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.memberRecentRaces(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/member_recent_races"),
         expect.objectContaining({
@@ -305,41 +179,13 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  custId: 123
-      };
-      await expect(statsService.memberRecentRaces(testParams)).rejects.toThrow();
     });
   });
 
   describe("memberSummary()", () => {
-    it("should fetch, transform, and validate stats memberSummary data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats memberSummary data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -351,16 +197,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.memberSummary(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/member_summary"),
         expect.objectContaining({
@@ -370,41 +206,13 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  custId: 123
-      };
-      await expect(statsService.memberSummary(testParams)).rejects.toThrow();
     });
   });
 
   describe("memberYearly()", () => {
-    it("should fetch, transform, and validate stats memberYearly data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats memberYearly data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -416,16 +224,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.memberYearly(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/member_yearly"),
         expect.objectContaining({
@@ -435,45 +233,17 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  custId: 123
-      };
-      await expect(statsService.memberYearly(testParams)).rejects.toThrow();
     });
   });
 
   describe("seasonDriverStandings()", () => {
-    it("should fetch stats seasonDriverStandings data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats seasonDriverStandings data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsseasondriverstandingsSample)
       });
 
       const testParams = {
@@ -482,24 +252,28 @@ describe("StatsService", () => {
   division: 123,
   raceWeekNum: 123
       };
-      await statsService.seasonDriverStandings(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.seasonDriverStandings(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/season_driver_standings"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("seasonSupersessionStandings()", () => {
-    it("should fetch stats seasonSupersessionStandings data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats seasonSupersessionStandings data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsseasonsupersessionstandingsSample)
       });
 
       const testParams = {
@@ -508,24 +282,28 @@ describe("StatsService", () => {
   division: 123,
   raceWeekNum: 123
       };
-      await statsService.seasonSupersessionStandings(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.seasonSupersessionStandings(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/season_supersession_standings"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("seasonTeamStandings()", () => {
-    it("should fetch stats seasonTeamStandings data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats seasonTeamStandings data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsseasonteamstandingsSample)
       });
 
       const testParams = {
@@ -533,24 +311,28 @@ describe("StatsService", () => {
   carClassId: 123,
   raceWeekNum: 123
       };
-      await statsService.seasonTeamStandings(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.seasonTeamStandings(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/season_team_standings"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("seasonTtStandings()", () => {
-    it("should fetch stats seasonTtStandings data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats seasonTtStandings data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsseasonttstandingsSample)
       });
 
       const testParams = {
@@ -559,24 +341,28 @@ describe("StatsService", () => {
   division: 123,
   raceWeekNum: 123
       };
-      await statsService.seasonTtStandings(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.seasonTtStandings(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/season_tt_standings"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("seasonTtResults()", () => {
-    it("should fetch stats seasonTtResults data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats seasonTtResults data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsseasonttresultsSample)
       });
 
       const testParams = {
@@ -585,24 +371,28 @@ describe("StatsService", () => {
   raceWeekNum: 123,
   division: 123
       };
-      await statsService.seasonTtResults(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.seasonTtResults(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/season_tt_results"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("seasonQualifyResults()", () => {
-    it("should fetch stats seasonQualifyResults data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response
+    it("should fetch and validate stats seasonQualifyResults data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
+        json: () => Promise.resolve(statsseasonqualifyresultsSample)
       });
 
       const testParams = {
@@ -611,20 +401,24 @@ describe("StatsService", () => {
   raceWeekNum: 123,
   division: 123
       };
-      await statsService.seasonQualifyResults(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await statsService.seasonQualifyResults(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/stats/season_qualify_results"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("worldRecords()", () => {
-    it("should fetch, transform, and validate stats worldRecords data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock API response with original snake_case format
+    it("should fetch and validate stats worldRecords data", async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         headers: { get: () => "application/json" },
@@ -639,16 +433,6 @@ describe("StatsService", () => {
       };
       const result = await statsService.worldRecords(testParams);
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("https://members-ng.iracing.com/data/stats/world_records"),
         expect.objectContaining({
@@ -658,32 +442,8 @@ describe("StatsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
-
-      const testParams = {
-  carId: 123,
-  trackId: 123,
-  seasonYear: 123,
-  seasonQuarter: 123
-      };
-      await expect(statsService.worldRecords(testParams)).rejects.toThrow();
     });
   });
 

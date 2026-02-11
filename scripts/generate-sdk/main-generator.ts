@@ -38,7 +38,7 @@ export function generateMainDataClient(sections: string[]): string {
   }
 
   lines.push(``);
-  lines.push(`  constructor(opts: IRacingClientOptions = {}) {`);
+  lines.push(`  constructor(opts: IRacingClientOptions) {`);
   lines.push(`    this.client = new IRacingClient(opts);`);
   lines.push(``);
 

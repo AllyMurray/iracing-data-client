@@ -39,6 +39,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build packages
         run: pnpm run build
+      - name: No unknown service return types
+        run: pnpm run sdk:check-no-unknown
       - name: Unit tests
         run: pnpm test run
       - name: Restore encrypted .env
