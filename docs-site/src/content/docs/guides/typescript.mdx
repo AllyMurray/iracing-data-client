@@ -72,22 +72,17 @@ memberData = await iracing.member.info();
 TypeScript provides full type safety for nested properties:
 
 ```typescript
-const members = await iracing.member.get({
-  custIds: [123456]
-});
+const info = await iracing.member.info();
 
 // TypeScript knows the structure
-members.members.forEach(member => {
-  // All properties are typed
-  member.licenses.forEach(license => {
-    console.log(`${license.categoryName}: ${license.irating}`);
-  });
-  
-  // Optional properties are handled
-  if (member.suit) {
-    console.log(`Suit pattern: ${member.suit.pattern}`);
-  }
-});
+console.log(info.displayName);
+console.log(info.licenses.oval.irating);
+console.log(info.licenses.sportsCar.safetyRating);
+
+// Optional-style handling still works where fields may be nullable
+if (info.account.countryRules) {
+  console.log('Country-specific rules are configured');
+}
 ```
 
 ### Type Guards and Narrowing
@@ -146,6 +141,26 @@ try {
   // Zod validation error if types are bypassed
 }
 ```
+
+### Semantic Validation Controls
+
+Some endpoints support additional semantic preflight checks beyond shape validation.
+
+```typescript
+const iracing = new IRacingDataClient({
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
+  validateParams: true,           // Keep Zod schema checks enabled
+  validateSemanticParams: false,  // Disable extra metadata-based preflight checks
+});
+```
+
+Use this when you want strict type/schema validation but do not want additional API metadata requests.
 
 ## Advanced TypeScript Patterns
 

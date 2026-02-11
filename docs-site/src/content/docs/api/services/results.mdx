@@ -21,7 +21,7 @@ Get results for a specific subsession.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsGetResponse>`
 
     **Parameters:**
     - `subsessionId: number` **(required)** - The subsession ID
@@ -50,7 +50,7 @@ Get the event log for a session.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsEventLogResponse>`
 
     **Parameters:**
     - `subsessionId: number` **(required)** - The subsession ID
@@ -80,7 +80,7 @@ Get lap chart data for a session.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsLapChartDataResponse>`
 
     **Parameters:**
     - `subsessionId: number` **(required)** - The subsession ID
@@ -108,7 +108,7 @@ Get detailed lap data for a session.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsLapDataResponse>`
 
     **Parameters:**
     - `subsessionId: number` **(required)** - The subsession ID
@@ -144,7 +144,7 @@ Search for official series results.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsSearchHostedResponse>`
 
     **Parameters:**
     - `seasonYear?: number` - Season year
@@ -190,7 +190,7 @@ Search for hosted session results.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsSearchSeriesResponse>`
 
     **Parameters:**
     - `startRangeBegin?: string` - Start of date range (ISO format)
@@ -234,7 +234,7 @@ Get results for an entire season.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<ResultsSeasonResultsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID

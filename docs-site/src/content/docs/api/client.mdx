@@ -33,6 +33,8 @@ const iracing = new IRacingDataClient({
 interface IRacingClientOptions {
   auth: AuthConfig;
   fetchFn?: FetchLike;
+  validateParams?: boolean;
+  validateSemanticParams?: boolean;
 }
 ```
 
@@ -47,7 +49,11 @@ interface IRacingClientOptions {
       clientSecret: string;
       username: string;
       password: string;
-      token?: TokenResponse;        // Pre-obtained token
+      tokens?: {
+        accessToken: string;
+        refreshToken?: string;
+        expiresAt?: number;
+      };                             // Optional pre-obtained tokens
       onTokenRefresh?: OnTokenRefresh; // Callback on token refresh
     }
     ```
@@ -58,7 +64,11 @@ interface IRacingClientOptions {
       type: 'authorization-code';
       clientId: string;
       clientSecret: string;
-      token: TokenResponse;          // Required: obtained via code exchange
+      tokens: {
+        accessToken: string;
+        refreshToken?: string;
+        expiresAt?: number;
+      };                             // Required: obtained via code exchange
       onTokenRefresh?: OnTokenRefresh; // Callback on token refresh
     }
     ```
@@ -72,6 +82,37 @@ interface IRacingClientOptions {
     const iracing = new IRacingDataClient({
       auth: { /* ... */ },
       fetchFn: customFetch,
+    });
+    ```
+  </TabItem>
+  <TabItem label="validateParams">
+    **Type:** `boolean` (optional, default `true`)
+
+    Enables or disables runtime parameter validation.
+
+    This controls generated Zod schema validation only.
+
+    ```typescript
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      validateParams: false,
+    });
+    ```
+  </TabItem>
+  <TabItem label="validateSemanticParams">
+    **Type:** `boolean` (optional, default `true`)
+
+    Enables endpoint-specific semantic preflight checks where implemented.
+
+    Example: validating `seasonId`/`carClassId` pairs for standings endpoints before making the API request.
+
+    These checks may perform additional metadata requests on first use.
+
+    ```typescript
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      validateParams: true,
+      validateSemanticParams: false,
     });
     ```
   </TabItem>

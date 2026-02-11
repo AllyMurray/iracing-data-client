@@ -25,7 +25,7 @@ This code review analyzes the current state of the iRacing Data Client SDK, focu
 
 ### Developer Experience
 - **Parameter transformation**: Automatic camelCase ↔ snake_case conversion between JS and API
-- **Flexible authentication**: Supports both email/password and preset headers (cookies)
+- **Flexible authentication**: Supports OAuth2 Password Limited and Authorization Code flows
 - **TypeScript-first**: Strong typing throughout with proper generic constraints
 - **Clean API surface**: Consistent method signatures across all services
 
