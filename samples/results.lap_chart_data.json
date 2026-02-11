@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "session_info": {
+    "subsession_id": 64487883,
+    "session_id": 219520651,
+    "simsession_number": 0,
+    "simsession_type": 2,
+    "simsession_name": "TIME TRIAL",
+    "num_laps_for_qual_average": 2,
+    "num_laps_for_solo_average": 5,
+    "event_type": 4,
+    "event_type_name": "Time Trial",
+    "private_session_id": -1,
+    "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+    "season_short_name": "2023 Season 4",
+    "series_name": "FIA F4 Esports Regional Tour - Europe South",
+    "series_short_name": "FIA F4 Esports Regional Tour  - Europe South",
+    "start_time": "2023-10-23T23:16:00Z",
+    "track": {
+      "config_name": "N/A",
+      "track_id": 413,
+      "track_name": "Hungaroring"
+    }
+  },
+  "best_lap_num": 6,
+  "best_lap_time": 1109010,
+  "best_nlaps_num": 6,
+  "best_nlaps_time": 1119406,
+  "best_qual_lap_num": -1,
+  "best_qual_lap_time": -1,
+  "best_qual_lap_at": null,
+  "chunk_info": {
+    "chunk_size": 500,
+    "num_chunks": 1,
+    "rows": 14,
+    "base_download_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/long_lived/lapdata/subsession/64487883/0/chart/",
+    "chunk_file_names": [
+      "7b06abd051f1552b99447844c81dc30af190b48dbaea8df0e640fcefd7defe05.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260211T122016Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260211%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=3ce523a4cf231e32ba5a66a4ad838553c66f516ce7a49925c2a6beb4053f0bad"
+    ]
+  },
+  "last_updated": "2026-02-11T12:20:16.529067329Z"
+}

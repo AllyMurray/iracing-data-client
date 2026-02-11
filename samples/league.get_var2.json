@@ -13,7 +13,7 @@
   "private_results": false,
   "is_owner": false,
   "is_admin": false,
-  "roster_count": 19,
+  "roster_count": 20,
   "owner": {
     "cust_id": 599890,
     "display_name": "Alex Williams8",
@@ -141,6 +141,25 @@
       "league_member_since": "2024-12-15T18:22:30Z",
       "car_number": "19",
       "nick_name": "Ally M"
+    },
+    {
+      "cust_id": 1232056,
+      "display_name": "Chris Whiteside",
+      "helmet": {
+        "pattern": 1,
+        "color1": "ffffff",
+        "color2": "2e358f",
+        "color3": "ec232d",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false,
+      "league_mail_opt_out": false,
+      "league_pm_opt_out": false,
+      "league_member_since": "2025-09-30T18:49:05Z",
+      "car_number": null,
+      "nick_name": null
     },
     {
       "cust_id": 595176,

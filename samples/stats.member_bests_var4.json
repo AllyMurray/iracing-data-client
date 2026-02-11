@@ -61,10 +61,6 @@
       "car_name": "Porsche 718 Cayman GT4 Clubsport MR"
     },
     {
-      "car_id": 143,
-      "car_name": "Porsche 911 GT3 Cup (992)"
-    },
-    {
       "car_id": 169,
       "car_name": "Porsche 911 GT3 R (992)"
     },
@@ -85,12 +81,20 @@
       "car_name": "Renault Clio"
     },
     {
+      "car_id": 1,
+      "car_name": "Skip Barber Formula 2000"
+    },
+    {
       "car_id": 160,
       "car_name": "Toyota GR86"
     },
     {
       "car_id": 138,
       "car_name": "VW Beetle - Lite"
+    },
+    {
+      "car_id": 143,
+      "car_name": "[Legacy] Porsche 911 GT3 Cup (992.1)"
     }
   ],
   "bests": [],

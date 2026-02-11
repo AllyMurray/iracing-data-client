@@ -1,0 +1,43 @@
+{
+  "type": "search_series_results",
+  "data": {
+    "success": true,
+    "chunk_info": {
+      "chunk_size": 500,
+      "num_chunks": 0,
+      "rows": 0,
+      "base_download_url": null,
+      "chunk_file_names": []
+    },
+    "params": {
+      "cust_id": -318499,
+      "team_id": -318499,
+      "start_range_begin": "2026-02-04T12:19:42Z",
+      "category_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "race_week_num": 5,
+      "official_only": true,
+      "event_types": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "season_license_groups": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  }
+}

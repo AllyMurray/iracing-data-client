@@ -1,9 +1,9 @@
 [
   {
     "cust_id": 926270,
-    "season_id": 5563,
-    "series_id": 519,
-    "series_name": "Renault Clio Cup",
+    "season_id": 5942,
+    "series_id": 34,
+    "series_name": "Skip Barber Race Series",
     "license_group": 2,
     "license_group_name": "Class D",
     "participation_credits": 4,
@@ -14,14 +14,14 @@
   },
   {
     "cust_id": 926270,
-    "season_id": 5591,
-    "series_id": 228,
-    "series_name": "GT Sprint Series by Simucube",
-    "license_group": 4,
-    "license_group_name": "Class B",
-    "participation_credits": 7,
+    "season_id": 5895,
+    "series_id": 514,
+    "series_name": "Toyota GR86 Cup by SIMAGIC",
+    "license_group": 2,
+    "license_group_name": "Class D",
+    "participation_credits": 4,
     "min_weeks": 8,
-    "weeks": 5,
+    "weeks": 1,
     "earned_credits": 0,
     "total_credits": 0
   }

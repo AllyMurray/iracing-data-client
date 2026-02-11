@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "session_info": {
+    "subsession_id": 64487883,
+    "session_id": 219520651,
+    "simsession_number": 0,
+    "simsession_type": 2,
+    "simsession_name": "TIME TRIAL",
+    "num_laps_for_qual_average": 2,
+    "num_laps_for_solo_average": 5,
+    "event_type": 4,
+    "event_type_name": "Time Trial",
+    "private_session_id": -1,
+    "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+    "season_short_name": "2023 Season 4",
+    "series_name": "FIA F4 Esports Regional Tour - Europe South",
+    "series_short_name": "FIA F4 Esports Regional Tour  - Europe South",
+    "start_time": "2023-10-23T23:16:00Z",
+    "track": {
+      "config_name": "N/A",
+      "track_id": 413,
+      "track_name": "Hungaroring"
+    }
+  },
+  "best_lap_num": 6,
+  "best_lap_time": 1109010,
+  "best_nlaps_num": 6,
+  "best_nlaps_time": 1119406,
+  "best_qual_lap_num": -1,
+  "best_qual_lap_time": -1,
+  "best_qual_lap_at": null,
+  "chunk_info": {
+    "chunk_size": 500,
+    "num_chunks": 1,
+    "rows": 14,
+    "base_download_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/long_lived/lapdata/subsession/64487883/0/823471/",
+    "chunk_file_names": [
+      "000bd4e03e1d07740aeb20cb89bd51fc351e0fc66bb993aa69c321da612129d1.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260211T123224Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260211%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=e123436602648a2a8a6a8d41e2bb9755725d4703ca1439da5b223b07d5b69d1f"
+    ]
+  },
+  "last_updated": "2026-02-11T12:32:24.451135184Z",
+  "group_id": 823471,
+  "cust_id": 823471,
+  "name": "Horton Mccormick",
+  "car_id": 148,
+  "license_level": 10,
+  "livery": {
+    "car_id": 148,
+    "pattern": 3,
+    "color1": "ffffff",
+    "color2": "ff0000",
+    "color3": "000000",
+    "number_font": 21,
+    "number_color1": "ffffff",
+    "number_color2": "777777",
+    "number_color3": "000000",
+    "number_slant": 3,
+    "sponsor1": 163,
+    "sponsor2": 208,
+    "car_number": "1",
+    "wheel_color": null,
+    "rim_type": -1
+  }
+}

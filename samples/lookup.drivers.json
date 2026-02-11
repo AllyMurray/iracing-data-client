@@ -1,37 +1,11 @@
 [
   {
-    "cust_id": 896852,
-    "display_name": "Alex Sample",
+    "cust_id": 687617,
+    "display_name": "A.D. Johnson",
     "helmet": {
-      "pattern": 57,
+      "pattern": 0,
       "color1": "ffffff",
-      "color2": "000000",
-      "color3": "929292",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 961859,
-    "display_name": "Alex Sample2",
-    "helmet": {
-      "pattern": 11,
-      "color1": "00f0ff",
       "color2": "ffffff",
-      "color3": "ff0000",
-      "face_type": 4,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 630106,
-    "display_name": "Austin Sampley",
-    "helmet": {
-      "pattern": 12,
-      "color1": "000000",
-      "color2": "ff5c00",
       "color3": "ffffff",
       "face_type": 4,
       "helmet_type": 0
@@ -39,229 +13,255 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 143944,
-    "display_name": "Bill Samples",
+    "cust_id": 120013,
+    "display_name": "A.J. Johnson",
     "helmet": {
-      "pattern": 50,
-      "color1": "f58ab3",
-      "color2": "a5fa00",
-      "color3": "8e0fc7",
-      "face_type": 0,
+      "pattern": 42,
+      "color1": "060f8a",
+      "color2": "b0b0b0",
+      "color3": "ed2129",
+      "face_type": 10,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 1060684,
-    "display_name": "Brandon Samples",
+    "cust_id": 154951,
+    "display_name": "A.P. Johnson",
     "helmet": {
-      "pattern": 1,
-      "color1": "ffee47",
+      "pattern": 5,
+      "color1": "111111",
       "color2": "0300c2",
-      "color3": "111111",
+      "color3": "ffee47",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 481228,
-    "display_name": "Brayden Samples",
-    "helmet": {
-      "pattern": 19,
-      "color1": "050505",
-      "color2": "EEF1EF",
-      "color3": "E32626",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 672768,
-    "display_name": "Brayden Samples2",
-    "helmet": {
-      "pattern": 1,
-      "color1": "0300c2",
-      "color2": "ffee47",
-      "color3": "111111",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 1188951,
-    "display_name": "Brayden Samples3",
-    "helmet": {
-      "pattern": 1,
-      "color1": "0a0a0a",
-      "color2": "d7592a",
-      "color3": "71419",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 788029,
-    "display_name": "Brendan Sample",
+    "cust_id": 284931,
+    "display_name": "A.T. Johnson",
     "helmet": {
       "pattern": 1,
       "color1": "ffffff",
-      "color2": "111111",
-      "color3": "5481fc",
+      "color2": "5481fc",
+      "color3": "111111",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 788034,
-    "display_name": "Brendan Sample2",
+    "cust_id": 1140382,
+    "display_name": "Aadyn Johnson",
     "helmet": {
-      "pattern": 68,
-      "color1": "0037d9",
-      "color2": "111111",
+      "pattern": 1,
+      "color1": "f1732e",
+      "color2": "372a75",
       "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 294288,
+    "display_name": "Aaron D Johnson",
+    "helmet": {
+      "pattern": 7,
+      "color1": "B3FF11",
+      "color2": "002B5C",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 363130,
+    "display_name": "Aaron D. Johnson",
+    "helmet": {
+      "pattern": 0,
+      "color1": "bcff00",
+      "color2": "bcff00",
+      "color3": "bcff00",
       "face_type": 4,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 685086,
-    "display_name": "Charles Samples",
+    "cust_id": 71649,
+    "display_name": "Aaron E Johnson",
+    "helmet": {
+      "pattern": 6,
+      "color1": "070808",
+      "color2": "000000",
+      "color3": "ffffff",
+      "face_type": 6,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 22066,
+    "display_name": "Aaron Johnson",
+    "helmet": {
+      "pattern": 2,
+      "color1": "ffffff",
+      "color2": "e20100",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 460656,
+    "display_name": "Aaron Johnson10",
+    "helmet": {
+      "pattern": 28,
+      "color1": "ffffff",
+      "color2": "284a94",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 464784,
+    "display_name": "Aaron Johnson11",
+    "helmet": {
+      "pattern": 1,
+      "color1": "0ada00",
+      "color2": "ffffff",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 465330,
+    "display_name": "Aaron Johnson12",
     "helmet": {
       "pattern": 1,
       "color1": "ed2129",
-      "color2": "2a3795",
-      "color3": "ffffff",
+      "color2": "ffffff",
+      "color3": "2a3795",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 722110,
-    "display_name": "Codi Samples",
-    "helmet": {
-      "pattern": 6,
-      "color1": "000000",
-      "color2": "0002fa",
-      "color3": "23fa00",
-      "face_type": 4,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 1288193,
-    "display_name": "Cody Sample",
-    "helmet": {
-      "pattern": 1,
-      "color1": "000000",
-      "color2": "CE181E",
-      "color3": "194BA0",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 192540,
-    "display_name": "Daniel Sample",
-    "helmet": {
-      "pattern": 68,
-      "color1": "000000",
-      "color2": "000000",
-      "color3": "FF0FCA",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 452216,
-    "display_name": "David Sample",
-    "helmet": {
-      "pattern": 1,
-      "color1": "111111",
-      "color2": "fc0706",
-      "color3": "ffffff",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 1206647,
-    "display_name": "Dylan Sample",
-    "helmet": {
-      "pattern": 1,
-      "color1": "313237",
-      "color2": "000000",
-      "color3": "49fd00",
-      "face_type": 4,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 1320636,
-    "display_name": "Erica Samples",
-    "helmet": {
-      "pattern": 30,
-      "color1": "000000",
-      "color2": "7800ff",
-      "color3": "ffffff",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 821149,
-    "display_name": "Ethan Sampley",
+    "cust_id": 507487,
+    "display_name": "Aaron Johnson13",
     "helmet": {
       "pattern": 1,
       "color1": "ffffff",
-      "color2": "1f2892",
-      "color3": "7de54c",
+      "color2": "372a75",
+      "color3": "f1732e",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 711345,
-    "display_name": "Frederick Sample",
+    "cust_id": 522997,
+    "display_name": "Aaron Johnson14",
     "helmet": {
-      "pattern": 54,
-      "color1": "f02b00",
-      "color2": "f7f2f0",
-      "color3": "2709de",
+      "pattern": 13,
+      "color1": "000000",
+      "color2": "ffffff",
+      "color3": "fe4600",
+      "face_type": 6,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 582996,
+    "display_name": "Aaron Johnson15",
+    "helmet": {
+      "pattern": 35,
+      "color1": "ffffff",
+      "color2": "00ffd9",
+      "color3": "fffc00",
       "face_type": 4,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 796727,
-    "display_name": "Geoffrey Samples",
+    "cust_id": 615672,
+    "display_name": "Aaron Johnson16",
+    "helmet": {
+      "pattern": 8,
+      "color1": "111111",
+      "color2": "cccccc",
+      "color3": "ed1c24",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 676661,
+    "display_name": "Aaron Johnson17",
     "helmet": {
       "pattern": 1,
-      "color1": "111111",
-      "color2": "b82f37",
-      "color3": "284a94",
+      "color1": "ffffff",
+      "color2": "ed2129",
+      "color3": "2a3795",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 965594,
-    "display_name": "Geoffrey Samples2",
+    "cust_id": 703653,
+    "display_name": "Aaron Johnson19",
+    "helmet": {
+      "pattern": 1,
+      "color1": "111111",
+      "color2": "0ada00",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 755039,
+    "display_name": "Aaron Johnson20",
+    "helmet": {
+      "pattern": 1,
+      "color1": "000aff",
+      "color2": "05ff00",
+      "color3": "ff0000",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 824535,
+    "display_name": "Aaron Johnson21",
+    "helmet": {
+      "pattern": 1,
+      "color1": "fc0706",
+      "color2": "111111",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 849700,
+    "display_name": "Aaron Johnson23",
     "helmet": {
       "pattern": 1,
       "color1": "2a3795",
@@ -273,64 +273,38 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 1171693,
-    "display_name": "George Sample",
+    "cust_id": 947817,
+    "display_name": "Aaron Johnson24",
     "helmet": {
       "pattern": 1,
-      "color1": "ffffff",
-      "color2": "2646ef",
-      "color3": "dd3527",
+      "color1": "c93dec",
+      "color2": "111111",
+      "color3": "03bbbd",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 769770,
-    "display_name": "Jackson Sample",
+    "cust_id": 966940,
+    "display_name": "Aaron Johnson25",
     "helmet": {
       "pattern": 1,
-      "color1": "00aeef",
-      "color2": "0a0a0a",
-      "color3": "f26522",
-      "face_type": 0,
+      "color1": "1a4b9b",
+      "color2": "ffffff",
+      "color3": "dff000",
+      "face_type": 8,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 618527,
-    "display_name": "Jacob Sampler",
+    "cust_id": 999230,
+    "display_name": "Aaron Johnson26",
     "helmet": {
       "pattern": 1,
-      "color1": "f26522",
-      "color2": "00aeef",
-      "color3": "0a0a0a",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 73054,
-    "display_name": "James Sample",
-    "helmet": {
-      "pattern": 22,
-      "color1": "ffffff",
-      "color2": "ED2129",
-      "color3": "000000",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 150804,
-    "display_name": "James Sample2",
-    "helmet": {
-      "pattern": 4,
-      "color1": "ffee47",
-      "color2": "0300c2",
+      "color1": "135324",
+      "color2": "5e5e5e",
       "color3": "111111",
       "face_type": 0,
       "helmet_type": 0
@@ -338,125 +312,281 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 453035,
-    "display_name": "James Sample3",
+    "cust_id": 1089948,
+    "display_name": "Aaron Johnson27",
     "helmet": {
-      "pattern": 20,
-      "color1": "bd0e0e",
-      "color2": "080808",
-      "color3": "a10402",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 578052,
-    "display_name": "james Samples II",
-    "helmet": {
-      "pattern": 1,
-      "color1": "013990",
-      "color2": "4bd3fd",
-      "color3": "ffffff",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 1190363,
-    "display_name": "James Samples Ii2",
-    "helmet": {
-      "pattern": 1,
-      "color1": "0a0a0a",
+      "pattern": 9,
+      "color1": "6900ff",
       "color2": "ffffff",
-      "color3": "ed1b29",
-      "face_type": 0,
+      "color3": "000000",
+      "face_type": 4,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 916186,
-    "display_name": "James Sampley",
-    "helmet": {
-      "pattern": 1,
-      "color1": "f06e34",
-      "color2": "111111",
-      "color3": "ffffff",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 191577,
-    "display_name": "Jeffrey Samples",
-    "helmet": {
-      "pattern": 2,
-      "color1": "0a0000",
-      "color2": "f6eb37",
-      "color3": "421cf2",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 194939,
-    "display_name": "Jeremiah Samples",
-    "helmet": {
-      "pattern": 27,
-      "color1": "49ba45",
-      "color2": "e4d111",
-      "color3": "ce1212",
-      "face_type": 0,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 329130,
-    "display_name": "Jonathan Sample",
+    "cust_id": 1202024,
+    "display_name": "Aaron Johnson29",
     "helmet": {
       "pattern": 1,
       "color1": "ffffff",
-      "color2": "ee3442",
-      "color3": "447ac0",
+      "color2": "ff2001",
+      "color3": "0a0a0a",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 648536,
-    "display_name": "Logan Samples",
+    "cust_id": 213016,
+    "display_name": "Aaron Johnson3",
     "helmet": {
-      "pattern": 20,
-      "color1": "0040ff",
-      "color2": "fcf7f7",
-      "color3": "ff9900",
+      "pattern": 4,
+      "color1": "184252",
+      "color2": "03bbbd",
+      "color3": "111111",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 431548,
-    "display_name": "Matthew Sample",
+    "cust_id": 1206860,
+    "display_name": "Aaron Johnson30",
     "helmet": {
-      "pattern": 67,
-      "color1": "FFFFFF",
-      "color2": "111111",
-      "color3": "2A3795",
+      "pattern": 0,
+      "color1": "ffffff",
+      "color2": "ffffff",
+      "color3": "ffffff",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 795683,
-    "display_name": "Michael Samples",
+    "cust_id": 1255083,
+    "display_name": "Aaron Johnson31",
+    "helmet": {
+      "pattern": 25,
+      "color1": "000000",
+      "color2": "e00606",
+      "color3": "ffffff",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1285625,
+    "display_name": "Aaron Johnson32",
+    "helmet": {
+      "pattern": 1,
+      "color1": "d7592a",
+      "color2": "d7592a",
+      "color3": "0a0a0a",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1385197,
+    "display_name": "Aaron Johnson33",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ec232d",
+      "color2": "ffffff",
+      "color3": "2e358f",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1408453,
+    "display_name": "Aaron Johnson34",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ec232d",
+      "color2": "ffffff",
+      "color3": "2e358f",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1425324,
+    "display_name": "Aaron Johnson35",
+    "helmet": {
+      "pattern": 1,
+      "color1": "000000",
+      "color2": "000000",
+      "color3": "000000",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 364055,
+    "display_name": "Aaron Johnson6",
+    "helmet": {
+      "pattern": 1,
+      "color1": "000000",
+      "color2": "1d1ded",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 391472,
+    "display_name": "Aaron Johnson7",
+    "helmet": {
+      "pattern": 8,
+      "color1": "ffffff",
+      "color2": "ff0000",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 417206,
+    "display_name": "Aaron Johnson8",
+    "helmet": {
+      "pattern": 56,
+      "color1": "ffffff",
+      "color2": "000000",
+      "color3": "620909",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 425068,
+    "display_name": "Aaron Johnson9",
+    "helmet": {
+      "pattern": 61,
+      "color1": "919191",
+      "color2": "ff1111",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1427576,
+    "display_name": "Aaron S Johnson",
+    "helmet": {
+      "pattern": 36,
+      "color1": "000000",
+      "color2": "ff001f",
+      "color3": "2b00ff",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 127813,
+    "display_name": "Aarron Johnson",
+    "helmet": {
+      "pattern": 1,
+      "color1": "1a4b9b",
+      "color2": "dff000",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 929982,
+    "display_name": "Abdul Hakim Johnson",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "372a75",
+      "color3": "f1732e",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 869768,
+    "display_name": "Ace Johnson",
+    "helmet": {
+      "pattern": 0,
+      "color1": "ffffff",
+      "color2": "ffffff",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1093838,
+    "display_name": "AD Johnson",
+    "helmet": {
+      "pattern": 35,
+      "color1": "111112",
+      "color2": "3477ad",
+      "color3": "7743da",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 764859,
+    "display_name": "Adam G Johnson",
+    "helmet": {
+      "pattern": 66,
+      "color1": "1c08fa",
+      "color2": "eee7e7",
+      "color3": "000000",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 79695,
+    "display_name": "Adam Johnson",
+    "helmet": {
+      "pattern": 2,
+      "color1": "ed2129",
+      "color2": "ffffff",
+      "color3": "2a3795",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 503009,
+    "display_name": "Adam Johnson10",
+    "helmet": {
+      "pattern": 55,
+      "color1": "201148",
+      "color2": "00ccfd",
+      "color3": "ff34b3",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 575082,
+    "display_name": "Adam Johnson11",
     "helmet": {
       "pattern": 1,
       "color1": "111111",
@@ -468,24 +598,271 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 820217,
-    "display_name": "Nathen Sample",
+    "cust_id": 586512,
+    "display_name": "Adam Johnson12",
     "helmet": {
-      "pattern": 1,
-      "color1": "111111",
-      "color2": "ffee47",
-      "color3": "0300c2",
+      "pattern": 0,
+      "color1": "000000",
+      "color2": "000000",
+      "color3": "000000",
+      "face_type": 6,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 774340,
+    "display_name": "Adam Johnson14",
+    "helmet": {
+      "pattern": 6,
+      "color1": "000000",
+      "color2": "ff0000",
+      "color3": "ffffff",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 868442,
+    "display_name": "Adam Johnson15",
+    "helmet": {
+      "pattern": 59,
+      "color1": "000000",
+      "color2": "2e005c",
+      "color3": "00f0ff",
+      "face_type": 2,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 881168,
+    "display_name": "Adam Johnson16",
+    "helmet": {
+      "pattern": 35,
+      "color1": "000000",
+      "color2": "003e4c",
+      "color3": "9eff00",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 294437,
-    "display_name": "Nicholas Sample",
+    "cust_id": 927783,
+    "display_name": "Adam Johnson17",
     "helmet": {
-      "pattern": 14,
+      "pattern": 32,
       "color1": "000000",
+      "color2": "7b21ed",
+      "color3": "e3ff00",
+      "face_type": 2,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 934006,
+    "display_name": "Adam Johnson18",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ee3442",
+      "color2": "447ac0",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1014819,
+    "display_name": "Adam Johnson19",
+    "helmet": {
+      "pattern": 8,
+      "color1": "000000",
+      "color2": "000000",
+      "color3": "000000",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 99359,
+    "display_name": "Adam Johnson2",
+    "helmet": {
+      "pattern": 5,
+      "color1": "00aeef",
+      "color2": "f26522",
+      "color3": "0a0a0a",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1039328,
+    "display_name": "Adam Johnson20",
+    "helmet": {
+      "pattern": 57,
+      "color1": "ffffff",
+      "color2": "ffffff",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1063436,
+    "display_name": "Adam Johnson21",
+    "helmet": {
+      "pattern": 1,
+      "color1": "111111",
+      "color2": "f06e34",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1110458,
+    "display_name": "Adam Johnson23",
+    "helmet": {
+      "pattern": 5,
+      "color1": "111111",
+      "color2": "d7162d",
+      "color3": "efd600",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1255554,
+    "display_name": "Adam Johnson24",
+    "helmet": {
+      "pattern": 42,
+      "color1": "000000",
+      "color2": "030f6c",
+      "color3": "ffffff",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1279804,
+    "display_name": "Adam Johnson25",
+    "helmet": {
+      "pattern": 1,
+      "color1": "29292f",
+      "color2": "0a0a0a",
+      "color3": "f5f96a",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 106846,
+    "display_name": "Adam Johnson3",
+    "helmet": {
+      "pattern": 5,
+      "color1": "ffffff",
+      "color2": "111111",
+      "color3": "0ada00",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 113530,
+    "display_name": "Adam Johnson4",
+    "helmet": {
+      "pattern": 3,
+      "color1": "03bbbd",
+      "color2": "111111",
+      "color3": "184252",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 203438,
+    "display_name": "Adam Johnson5",
+    "helmet": {
+      "pattern": 48,
+      "color1": "ffcd00",
+      "color2": "00843d",
+      "color3": "ff0000",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 220171,
+    "display_name": "Adam Johnson6",
+    "helmet": {
+      "pattern": 3,
+      "color1": "ccff00",
+      "color2": "111111",
+      "color3": "391c83",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 316077,
+    "display_name": "Adam Johnson7",
+    "helmet": {
+      "pattern": 13,
+      "color1": "EDDC21",
+      "color2": "161618",
+      "color3": "EBEBE5",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 341717,
+    "display_name": "Adam Johnson8",
+    "helmet": {
+      "pattern": 1,
+      "color1": "0a0a0a",
+      "color2": "f26522",
+      "color3": "00aeef",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 346161,
+    "display_name": "Adam Johnson9",
+    "helmet": {
+      "pattern": 8,
+      "color1": "FFFFFF",
+      "color2": "ee3442",
+      "color3": "010914",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1198502,
+    "display_name": "Addison D Johnson",
+    "helmet": {
+      "pattern": 2,
+      "color1": "d4de12",
       "color2": "000000",
       "color3": "000000",
       "face_type": 0,
@@ -494,24 +871,102 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 279975,
-    "display_name": "Noah Samples",
+    "cust_id": 409461,
+    "display_name": "Addison Johnson",
     "helmet": {
-      "pattern": 35,
-      "color1": "F2E40D",
-      "color2": "111111",
-      "color3": "FF4500",
+      "pattern": 6,
+      "color1": "000000",
+      "color2": "E51013",
+      "color3": "947610",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 30446,
-    "display_name": "Randy Sample",
+    "cust_id": 1090427,
+    "display_name": "Adrian Johnson",
     "helmet": {
-      "pattern": 28,
-      "color1": "bdff00",
+      "pattern": 1,
+      "color1": "135324",
+      "color2": "5e5e5e",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1216800,
+    "display_name": "Adrian Johnson2",
+    "helmet": {
+      "pattern": 14,
+      "color1": "f60b0b",
+      "color2": "000000",
+      "color3": "fff3f3",
+      "face_type": 2,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 258112,
+    "display_name": "Aidan Johnson",
+    "helmet": {
+      "pattern": 5,
+      "color1": "ffffff",
+      "color2": "2a3795",
+      "color3": "ed2129",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 325974,
+    "display_name": "Aidan Johnson2",
+    "helmet": {
+      "pattern": 65,
+      "color1": "000000",
+      "color2": "E60011",
+      "color3": "FFED0A",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 452486,
+    "display_name": "Aidan Johnson3",
+    "helmet": {
+      "pattern": 49,
+      "color1": "000000",
+      "color2": "47ED1D",
+      "color3": "005FD1",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 797030,
+    "display_name": "Aidan Johnson4",
+    "helmet": {
+      "pattern": 1,
+      "color1": "03bbbd",
+      "color2": "111111",
+      "color3": "184252",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 956506,
+    "display_name": "Aidan Johnson5",
+    "helmet": {
+      "pattern": 9,
+      "color1": "009cff",
       "color2": "ffffff",
       "color3": "000000",
       "face_type": 0,
@@ -520,12 +975,233 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 348524,
-    "display_name": "Spencer Sample",
+    "cust_id": 1050201,
+    "display_name": "Aidan Johnson6",
     "helmet": {
-      "pattern": 57,
-      "color1": "669cf1",
-      "color2": "f0a500",
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "0ada00",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1061133,
+    "display_name": "Aidan Johnson7",
+    "helmet": {
+      "pattern": 17,
+      "color1": "2a3795",
+      "color2": "ed2229",
+      "color3": "eeeeee",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1273685,
+    "display_name": "Aidan Johnson8",
+    "helmet": {
+      "pattern": 1,
+      "color1": "221E1F",
+      "color2": "ED1C24",
+      "color3": "005AAA",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1416967,
+    "display_name": "Aidan Johnson9",
+    "helmet": {
+      "pattern": 28,
+      "color1": "4aff00",
+      "color2": "13539e",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 553076,
+    "display_name": "Aiden Johnson",
+    "helmet": {
+      "pattern": 8,
+      "color1": "ff9900",
+      "color2": "000000",
+      "color3": "000b84",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 906781,
+    "display_name": "Aiden Johnson2",
+    "helmet": {
+      "pattern": 20,
+      "color1": "111111",
+      "color2": "ffee00",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1108936,
+    "display_name": "Aiden Johnson3",
+    "helmet": {
+      "pattern": 7,
+      "color1": "3097b8",
+      "color2": "449428",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 627785,
+    "display_name": "Ainsley Johnson",
+    "helmet": {
+      "pattern": 1,
+      "color1": "fc0706",
+      "color2": "ffffff",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1250908,
+    "display_name": "Airick Johnson",
+    "helmet": {
+      "pattern": 35,
+      "color1": "000000",
+      "color2": "000000",
+      "color3": "7c7c7c",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 361300,
+    "display_name": "AJ Johnson",
+    "helmet": {
+      "pattern": 53,
+      "color1": "680FA3",
+      "color2": "141414",
+      "color3": "F2F9F1",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 378770,
+    "display_name": "Akli Johnson",
+    "helmet": {
+      "pattern": 1,
+      "color1": "fc0706",
+      "color2": "ffffff",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 575184,
+    "display_name": "Alan Johnson3",
+    "helmet": {
+      "pattern": 12,
+      "color1": "0b0b0b",
+      "color2": "8d8d8d",
+      "color3": "ff0700",
+      "face_type": 4,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1129481,
+    "display_name": "Alan Johnson4",
+    "helmet": {
+      "pattern": 56,
+      "color1": "ffffff",
+      "color2": "ff0000",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1161199,
+    "display_name": "Alan Johnson5",
+    "helmet": {
+      "pattern": 1,
+      "color1": "ffffff",
+      "color2": "ffe901",
+      "color3": "231f20",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 419950,
+    "display_name": "Alan K Johnson",
+    "helmet": {
+      "pattern": 5,
+      "color1": "21fd37",
+      "color2": "2a3795",
+      "color3": "ed2129",
+      "face_type": 8,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1048556,
+    "display_name": "Albert Johnson2",
+    "helmet": {
+      "pattern": 1,
+      "color1": "fc0706",
+      "color2": "ffffff",
+      "color3": "111111",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 1168317,
+    "display_name": "Albie Johnson",
+    "helmet": {
+      "pattern": 30,
+      "color1": "000000",
+      "color2": "890000",
+      "color3": "5500e0",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 738699,
+    "display_name": "Alden Johnson",
+    "helmet": {
+      "pattern": 39,
+      "color1": "ffffff",
+      "color2": "f9f9f9",
       "color3": "ffffff",
       "face_type": 0,
       "helmet_type": 0
@@ -533,53 +1209,92 @@
     "profile_disabled": false
   },
   {
-    "cust_id": 709429,
-    "display_name": "Spencer Samples",
+    "cust_id": 787528,
+    "display_name": "Alec Johnson",
     "helmet": {
-      "pattern": 20,
-      "color1": "100062",
-      "color2": "680000",
-      "color3": "eed300",
-      "face_type": 4,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 861594,
-    "display_name": "Steven Sampleton",
-    "helmet": {
-      "pattern": 8,
-      "color1": "fa9209",
-      "color2": "ffffff",
-      "color3": "000000",
-      "face_type": 10,
-      "helmet_type": 0
-    },
-    "profile_disabled": false
-  },
-  {
-    "cust_id": 68941,
-    "display_name": "Timothy Samples",
-    "helmet": {
-      "pattern": 35,
-      "color1": "fc0706",
-      "color2": "06ff0b",
-      "color3": "00c702",
+      "pattern": 39,
+      "color1": "ffffff",
+      "color2": "6cd622",
+      "color3": "ff0000",
       "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false
   },
   {
-    "cust_id": 959746,
-    "display_name": "William Samples",
+    "cust_id": 1218604,
+    "display_name": "Alec Johnson2",
     "helmet": {
       "pattern": 3,
-      "color1": "000000",
-      "color2": "ffffff",
-      "color3": "ed2129",
-      "face_type": 8,
+      "color1": "231f20",
+      "color2": "0087ff",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 302540,
+    "display_name": "Aleksei johnson",
+    "helmet": {
+      "pattern": 57,
+      "color1": "5e2da5",
+      "color2": "ca35f0",
+      "color3": "000000",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 723556,
+    "display_name": "Aleksei Johnson2",
+    "helmet": {
+      "pattern": 39,
+      "color1": "6100ff",
+      "color2": "5fabf1",
+      "color3": "111111",
+      "face_type": 3,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 804211,
+    "display_name": "Aleksei Johnson3",
+    "helmet": {
+      "pattern": 1,
+      "color1": "013990",
+      "color2": "4bd3fd",
+      "color3": "ffffff",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 858379,
+    "display_name": "Alex Fox-Johnson",
+    "helmet": {
+      "pattern": 9,
+      "color1": "039d9d",
+      "color2": "039d9d",
+      "color3": "000000",
+      "face_type": 2,
+      "helmet_type": 0
+    },
+    "profile_disabled": false
+  },
+  {
+    "cust_id": 157823,
+    "display_name": "Alex Johnson",
+    "helmet": {
+      "pattern": 1,
+      "color1": "1ca620",
+      "color2": "479b12",
+      "color3": "666666",
+      "face_type": 0,
       "helmet_type": 0
     },
     "profile_disabled": false

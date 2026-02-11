@@ -1,872 +1,2597 @@
 {
   "success": true,
   "season_ids": [
-    5376,
-    5377,
-    5378,
-    5379,
-    5380,
-    5381,
-    5382,
-    5383,
-    5516,
-    5517,
-    5518,
-    5519,
-    5520,
-    5522,
-    5860,
-    5862,
-    5865,
-    5866,
-    5867,
-    5868,
-    5869,
-    5870,
-    5871,
-    5874,
-    5875,
-    5876,
-    5877,
-    5878,
-    5879,
-    5624,
-    5880,
-    5881,
-    5625,
-    5626,
-    5882
+    5892,
+    5893,
+    5894,
+    5895,
+    5896,
+    5897,
+    5898,
+    5899,
+    5900,
+    5901,
+    5902,
+    5903,
+    5904,
+    5905,
+    5906,
+    5907,
+    5908,
+    5909,
+    5910,
+    5911,
+    5912,
+    5913,
+    5914,
+    5915,
+    5916,
+    5917,
+    5918,
+    5919,
+    5920,
+    5921,
+    5922,
+    5923,
+    5924,
+    5925,
+    5926,
+    5927,
+    5928,
+    5929,
+    5930,
+    5931,
+    5932,
+    5933,
+    5934,
+    5935,
+    5936,
+    5937,
+    5938,
+    5939,
+    5940,
+    5941,
+    5942,
+    5943,
+    5944,
+    5945,
+    5946,
+    5947,
+    5948,
+    5949,
+    5950,
+    5951,
+    5952,
+    5953,
+    5954,
+    5955,
+    5956,
+    5957,
+    5958,
+    5959,
+    5960,
+    5961,
+    5962,
+    5963,
+    5964,
+    5965,
+    5966,
+    5967,
+    5968,
+    5969,
+    5970,
+    5971,
+    5972,
+    5973,
+    5974,
+    5975,
+    5976,
+    5977,
+    5978,
+    5979,
+    5980,
+    5981,
+    5982,
+    5983,
+    5984,
+    5985,
+    5986,
+    5987,
+    5988,
+    5989,
+    5990,
+    5991,
+    5992,
+    5993,
+    5994,
+    5995,
+    5996,
+    5997,
+    5998,
+    5999,
+    6000,
+    6001,
+    6002,
+    6003,
+    6004,
+    6005,
+    6006,
+    6007,
+    6008,
+    6009,
+    6010,
+    6011,
+    6012,
+    6013,
+    6014,
+    6015,
+    6016,
+    6017,
+    6018,
+    6019,
+    6020,
+    6021,
+    6022,
+    6023,
+    6025,
+    6026,
+    6038,
+    6073,
+    6074,
+    6075,
+    6076,
+    6077,
+    6078,
+    6079,
+    6080,
+    6081
   ],
   "event_types": [
-    2,
-    3,
     5,
-    4
+    4,
+    3,
+    2
   ],
   "subsessions": [
     {
-      "subsession_id": 79770412,
-      "session_id": 285744578,
-      "season_id": 5376,
-      "start_time": "2025-09-09T11:26:39Z",
-      "race_week_num": 30,
+      "subsession_id": 83464599,
+      "session_id": 300589199,
+      "season_id": 5893,
+      "start_time": "2026-02-11T11:27:30Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770419,
-      "session_id": 285744585,
-      "season_id": 5376,
-      "start_time": "2025-09-09T11:27:39Z",
-      "race_week_num": 30,
+      "subsession_id": 83464604,
+      "session_id": 300589204,
+      "season_id": 5893,
+      "start_time": "2026-02-11T11:28:03Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770265,
-      "session_id": 285744180,
-      "season_id": 5376,
-      "start_time": "2025-09-09T10:45:00Z",
-      "race_week_num": 30,
+      "subsession_id": 83465036,
+      "session_id": 300591015,
+      "season_id": 5893,
+      "start_time": "2026-02-11T11:50:10Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465076,
+      "session_id": 300591285,
+      "season_id": 5893,
+      "start_time": "2026-02-11T11:54:51Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465108,
+      "session_id": 300591551,
+      "season_id": 5893,
+      "start_time": "2026-02-11T11:58:10Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465126,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
       "event_type": 5
     },
     {
-      "subsession_id": 79770303,
-      "session_id": 285744463,
-      "season_id": 5377,
-      "start_time": "2025-09-09T10:52:21Z",
-      "race_week_num": 30,
+      "subsession_id": 83465127,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465128,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465129,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465130,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465131,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465132,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465133,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465134,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465135,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465136,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465137,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465138,
+      "session_id": 300587312,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465225,
+      "session_id": 300587635,
+      "season_id": 5893,
+      "start_time": "2026-02-11T12:04:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464780,
+      "session_id": 300589952,
+      "season_id": 5894,
+      "start_time": "2026-02-11T11:36:16Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770411,
-      "session_id": 285744577,
-      "season_id": 5377,
-      "start_time": "2025-09-09T11:26:39Z",
-      "race_week_num": 30,
+      "subsession_id": 83465241,
+      "session_id": 300592142,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:06:28Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770416,
-      "session_id": 285744582,
-      "season_id": 5377,
-      "start_time": "2025-09-09T11:27:08Z",
-      "race_week_num": 30,
+      "subsession_id": 83465269,
+      "session_id": 300592400,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:11:21Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770424,
-      "session_id": 285744592,
-      "season_id": 5379,
-      "start_time": "2025-09-09T11:28:11Z",
-      "race_week_num": 28,
+      "subsession_id": 83465292,
+      "session_id": 300588392,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465293,
+      "session_id": 300588392,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465294,
+      "session_id": 300588392,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465295,
+      "session_id": 300588392,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465296,
+      "session_id": 300588392,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465297,
+      "session_id": 300588392,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465139,
+      "session_id": 300587313,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465204,
+      "session_id": 300587494,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:02:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465284,
+      "session_id": 300588274,
+      "season_id": 5894,
+      "start_time": "2026-02-11T12:14:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464010,
+      "session_id": 300585719,
+      "season_id": 5895,
+      "start_time": "2026-02-11T10:37:49Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770222,
-      "session_id": 285744378,
-      "season_id": 5522,
-      "start_time": "2025-09-09T10:30:28Z",
-      "race_week_num": 11,
+      "subsession_id": 83464250,
+      "session_id": 300586764,
+      "season_id": 5895,
+      "start_time": "2026-02-11T10:50:51Z",
+      "race_week_num": 8,
       "event_type": 2
     },
     {
-      "subsession_id": 79770400,
-      "session_id": 285744564,
-      "season_id": 5860,
-      "start_time": "2025-09-09T11:24:05Z",
+      "subsession_id": 83464625,
+      "session_id": 300589342,
+      "season_id": 5895,
+      "start_time": "2026-02-11T11:29:43Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464806,
+      "session_id": 300589978,
+      "season_id": 5895,
+      "start_time": "2026-02-11T11:37:55Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465047,
+      "session_id": 300591022,
+      "season_id": 5895,
+      "start_time": "2026-02-11T11:51:14Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464955,
+      "session_id": 300586328,
+      "season_id": 5895,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464956,
+      "session_id": 300586328,
+      "season_id": 5895,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465298,
+      "session_id": 300588393,
+      "season_id": 5895,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465299,
+      "session_id": 300588393,
+      "season_id": 5895,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464804,
+      "session_id": 300589976,
+      "season_id": 5896,
+      "start_time": "2026-02-11T11:37:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464792,
+      "session_id": 300589964,
+      "season_id": 5897,
+      "start_time": "2026-02-11T11:36:49Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465140,
+      "session_id": 300587317,
+      "season_id": 5897,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464563,
+      "session_id": 300588927,
+      "season_id": 5898,
+      "start_time": "2026-02-11T11:22:57Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464987,
+      "session_id": 300590616,
+      "season_id": 5898,
+      "start_time": "2026-02-11T11:45:43Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465034,
+      "session_id": 300590895,
+      "season_id": 5898,
+      "start_time": "2026-02-11T11:49:36Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465058,
+      "session_id": 300591150,
+      "season_id": 5898,
+      "start_time": "2026-02-11T11:53:01Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465282,
+      "session_id": 300592529,
+      "season_id": 5898,
+      "start_time": "2026-02-11T12:14:01Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463950,
+      "session_id": 300585427,
+      "season_id": 5900,
+      "start_time": "2026-02-11T10:33:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464752,
+      "session_id": 300589810,
+      "season_id": 5900,
+      "start_time": "2026-02-11T11:34:24Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464957,
+      "session_id": 300586329,
+      "season_id": 5900,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464868,
+      "session_id": 300590389,
+      "season_id": 5901,
+      "start_time": "2026-02-11T11:42:23Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463960,
+      "session_id": 300585552,
+      "season_id": 5902,
+      "start_time": "2026-02-11T10:34:29Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463991,
+      "session_id": 300585700,
+      "season_id": 5902,
+      "start_time": "2026-02-11T10:36:43Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464745,
+      "session_id": 300589803,
+      "season_id": 5902,
+      "start_time": "2026-02-11T11:34:23Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464790,
+      "session_id": 300589962,
+      "season_id": 5902,
+      "start_time": "2026-02-11T11:36:49Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465015,
+      "session_id": 300590759,
+      "season_id": 5902,
+      "start_time": "2026-02-11T11:46:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465141,
+      "session_id": 300587321,
+      "season_id": 5902,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465142,
+      "session_id": 300587321,
+      "season_id": 5902,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465143,
+      "session_id": 300587321,
+      "season_id": 5902,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465252,
+      "session_id": 300587902,
+      "season_id": 5902,
+      "start_time": "2026-02-11T12:08:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465263,
+      "session_id": 300588028,
+      "season_id": 5902,
+      "start_time": "2026-02-11T12:10:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463814,
+      "session_id": 300585067,
+      "season_id": 5903,
+      "start_time": "2026-02-11T10:28:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464444,
+      "session_id": 300587889,
+      "season_id": 5903,
+      "start_time": "2026-02-11T11:06:34Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464615,
+      "session_id": 300589332,
+      "season_id": 5903,
+      "start_time": "2026-02-11T11:29:10Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464735,
+      "session_id": 300589676,
+      "season_id": 5903,
+      "start_time": "2026-02-11T11:33:47Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465300,
+      "session_id": 300588394,
+      "season_id": 5903,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464616,
+      "session_id": 300589333,
+      "season_id": 5904,
+      "start_time": "2026-02-11T11:29:10Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464761,
+      "session_id": 300589819,
+      "season_id": 5904,
+      "start_time": "2026-02-11T11:34:57Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465301,
+      "session_id": 300588395,
+      "season_id": 5904,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464450,
+      "session_id": 300588013,
+      "season_id": 5905,
+      "start_time": "2026-02-11T11:08:12Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464478,
+      "session_id": 300588268,
+      "season_id": 5905,
+      "start_time": "2026-02-11T11:13:01Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465302,
+      "session_id": 300588396,
+      "season_id": 5905,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464958,
+      "session_id": 300586330,
+      "season_id": 5906,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465207,
+      "session_id": 300591879,
+      "season_id": 5907,
+      "start_time": "2026-02-11T12:02:40Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464753,
+      "session_id": 300589811,
+      "season_id": 5908,
+      "start_time": "2026-02-11T11:34:24Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464740,
+      "session_id": 300589681,
+      "season_id": 5909,
+      "start_time": "2026-02-11T11:33:48Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464959,
+      "session_id": 300586331,
+      "season_id": 5909,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83463758,
+      "session_id": 300584666,
+      "season_id": 5910,
+      "start_time": "2026-02-11T10:23:20Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463962,
+      "session_id": 300585554,
+      "season_id": 5910,
+      "start_time": "2026-02-11T10:34:29Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464525,
+      "session_id": 300588542,
+      "season_id": 5910,
+      "start_time": "2026-02-11T11:17:53Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464566,
+      "session_id": 300588930,
+      "season_id": 5910,
+      "start_time": "2026-02-11T11:23:29Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464746,
+      "session_id": 300589804,
+      "season_id": 5910,
+      "start_time": "2026-02-11T11:34:23Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464413,
+      "session_id": 300587627,
+      "season_id": 5911,
+      "start_time": "2026-02-11T11:03:15Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465177,
+      "session_id": 300591734,
+      "season_id": 5911,
+      "start_time": "2026-02-11T12:00:59Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465217,
+      "session_id": 300591889,
+      "season_id": 5911,
+      "start_time": "2026-02-11T12:03:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464652,
+      "session_id": 300585114,
+      "season_id": 5911,
+      "start_time": "2026-02-11T11:30:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464708,
+      "session_id": 300589532,
+      "season_id": 5912,
+      "start_time": "2026-02-11T11:31:59Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464838,
+      "session_id": 300590125,
+      "season_id": 5916,
+      "start_time": "2026-02-11T11:39:37Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464918,
+      "session_id": 300590556,
+      "season_id": 5917,
+      "start_time": "2026-02-11T11:44:35Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464191,
+      "session_id": 300586362,
+      "season_id": 5918,
+      "start_time": "2026-02-11T10:45:21Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464736,
+      "session_id": 300589677,
+      "season_id": 5918,
+      "start_time": "2026-02-11T11:33:47Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464991,
+      "session_id": 300590620,
+      "season_id": 5918,
+      "start_time": "2026-02-11T11:45:44Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465303,
+      "session_id": 300588397,
+      "season_id": 5918,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464051,
+      "session_id": 300585991,
+      "season_id": 5919,
+      "start_time": "2026-02-11T10:40:18Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464762,
+      "session_id": 300589820,
+      "season_id": 5920,
+      "start_time": "2026-02-11T11:34:57Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465304,
+      "session_id": 300588398,
+      "season_id": 5920,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83463808,
+      "session_id": 300585061,
+      "season_id": 5921,
+      "start_time": "2026-02-11T10:28:19Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463935,
+      "session_id": 300585412,
+      "season_id": 5921,
+      "start_time": "2026-02-11T10:33:20Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464124,
+      "session_id": 300586296,
+      "season_id": 5921,
+      "start_time": "2026-02-11T10:44:12Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464572,
+      "session_id": 300589054,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:24:36Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464720,
+      "session_id": 300589661,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:32:42Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464771,
+      "session_id": 300589829,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:35:09Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464889,
+      "session_id": 300590410,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:43:26Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464960,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464961,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464962,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464963,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464964,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464965,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464966,
+      "session_id": 300586333,
+      "season_id": 5921,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465240,
+      "session_id": 300587790,
+      "season_id": 5921,
+      "start_time": "2026-02-11T12:06:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463812,
+      "session_id": 300585065,
+      "season_id": 5922,
+      "start_time": "2026-02-11T10:28:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464052,
+      "session_id": 300585992,
+      "season_id": 5922,
+      "start_time": "2026-02-11T10:40:18Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464407,
+      "session_id": 300587621,
+      "season_id": 5922,
+      "start_time": "2026-02-11T11:02:42Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464754,
+      "session_id": 300589812,
+      "season_id": 5922,
+      "start_time": "2026-02-11T11:34:24Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464758,
+      "session_id": 300589816,
+      "season_id": 5922,
+      "start_time": "2026-02-11T11:34:25Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465215,
+      "session_id": 300591887,
+      "season_id": 5922,
+      "start_time": "2026-02-11T12:03:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465066,
+      "session_id": 300586919,
+      "season_id": 5922,
+      "start_time": "2026-02-11T11:54:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465253,
+      "session_id": 300587917,
+      "season_id": 5922,
+      "start_time": "2026-02-11T12:08:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465273,
+      "session_id": 300588167,
+      "season_id": 5922,
+      "start_time": "2026-02-11T12:12:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463815,
+      "session_id": 300585068,
+      "season_id": 5924,
+      "start_time": "2026-02-11T10:28:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464112,
+      "session_id": 300586166,
+      "season_id": 5924,
+      "start_time": "2026-02-11T10:43:36Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464609,
+      "session_id": 300589326,
+      "season_id": 5924,
+      "start_time": "2026-02-11T11:28:37Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464737,
+      "session_id": 300589678,
+      "season_id": 5924,
+      "start_time": "2026-02-11T11:33:48Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464226,
+      "session_id": 300586508,
+      "season_id": 5925,
+      "start_time": "2026-02-11T10:47:02Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464747,
+      "session_id": 300589805,
+      "season_id": 5925,
+      "start_time": "2026-02-11T11:34:23Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464791,
+      "session_id": 300589963,
+      "season_id": 5925,
+      "start_time": "2026-02-11T11:36:49Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465104,
+      "session_id": 300591429,
+      "season_id": 5925,
+      "start_time": "2026-02-11T11:57:36Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465145,
+      "session_id": 300587338,
+      "season_id": 5925,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465146,
+      "session_id": 300587338,
+      "season_id": 5925,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465147,
+      "session_id": 300587338,
+      "season_id": 5925,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465226,
+      "session_id": 300587658,
+      "season_id": 5925,
+      "start_time": "2026-02-11T12:04:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465285,
+      "session_id": 300588296,
+      "season_id": 5925,
+      "start_time": "2026-02-11T12:14:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463945,
+      "session_id": 300585422,
+      "season_id": 5926,
+      "start_time": "2026-02-11T10:33:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464457,
+      "session_id": 300588016,
+      "season_id": 5926,
+      "start_time": "2026-02-11T11:08:44Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464465,
+      "session_id": 300588139,
+      "season_id": 5926,
+      "start_time": "2026-02-11T11:10:21Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464748,
+      "session_id": 300589806,
+      "season_id": 5926,
+      "start_time": "2026-02-11T11:34:23Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465260,
+      "session_id": 300592275,
+      "season_id": 5926,
+      "start_time": "2026-02-11T12:09:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465254,
+      "session_id": 300587919,
+      "season_id": 5926,
+      "start_time": "2026-02-11T12:08:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465324,
+      "session_id": 300588442,
+      "season_id": 5926,
+      "start_time": "2026-02-11T12:16:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463974,
+      "session_id": 300585566,
+      "season_id": 5927,
+      "start_time": "2026-02-11T10:35:03Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464763,
+      "session_id": 300589821,
+      "season_id": 5927,
+      "start_time": "2026-02-11T11:34:57Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464770,
+      "session_id": 300589828,
+      "season_id": 5927,
+      "start_time": "2026-02-11T11:35:09Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465286,
+      "session_id": 300588298,
+      "season_id": 5927,
+      "start_time": "2026-02-11T12:14:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463736,
+      "session_id": 300584529,
+      "season_id": 5928,
+      "start_time": "2026-02-11T10:20:58Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464548,
+      "session_id": 300588797,
+      "season_id": 5928,
+      "start_time": "2026-02-11T11:21:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464968,
+      "session_id": 300586336,
+      "season_id": 5928,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83463753,
+      "session_id": 300584661,
+      "season_id": 5929,
+      "start_time": "2026-02-11T10:22:47Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464013,
+      "session_id": 300585722,
+      "season_id": 5929,
+      "start_time": "2026-02-11T10:38:01Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464589,
+      "session_id": 300589071,
+      "season_id": 5929,
+      "start_time": "2026-02-11T11:25:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464969,
+      "session_id": 300586337,
+      "season_id": 5929,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464970,
+      "session_id": 300586337,
+      "season_id": 5929,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464971,
+      "session_id": 300586337,
+      "season_id": 5929,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465206,
+      "session_id": 300587520,
+      "season_id": 5929,
+      "start_time": "2026-02-11T12:02:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465255,
+      "session_id": 300587922,
+      "season_id": 5929,
+      "start_time": "2026-02-11T12:08:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463952,
+      "session_id": 300585429,
+      "season_id": 5930,
+      "start_time": "2026-02-11T10:33:55Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463956,
+      "session_id": 300585433,
+      "season_id": 5930,
+      "start_time": "2026-02-11T10:33:55Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464755,
+      "session_id": 300589813,
+      "season_id": 5930,
+      "start_time": "2026-02-11T11:34:24Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464853,
+      "session_id": 300590257,
+      "season_id": 5930,
+      "start_time": "2026-02-11T11:41:16Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464353,
+      "session_id": 300583076,
+      "season_id": 5930,
+      "start_time": "2026-02-11T11:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464657,
+      "session_id": 300589498,
+      "season_id": 5932,
+      "start_time": "2026-02-11T11:30:19Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464772,
+      "session_id": 300589830,
+      "season_id": 5932,
+      "start_time": "2026-02-11T11:35:10Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464821,
+      "session_id": 300590108,
+      "season_id": 5932,
+      "start_time": "2026-02-11T11:39:02Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465148,
+      "session_id": 300587345,
+      "season_id": 5932,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464785,
+      "session_id": 300589957,
+      "season_id": 5933,
+      "start_time": "2026-02-11T11:36:17Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464786,
+      "session_id": 300589958,
+      "season_id": 5933,
+      "start_time": "2026-02-11T11:36:17Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465151,
+      "session_id": 300587347,
+      "season_id": 5933,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464408,
+      "session_id": 300587622,
+      "season_id": 5934,
+      "start_time": "2026-02-11T11:02:43Z",
+      "race_week_num": 4,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464741,
+      "session_id": 300589682,
+      "season_id": 5934,
+      "start_time": "2026-02-11T11:33:48Z",
+      "race_week_num": 4,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465209,
+      "session_id": 300591881,
+      "season_id": 5934,
+      "start_time": "2026-02-11T12:02:41Z",
+      "race_week_num": 4,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83463788,
+      "session_id": 300584928,
+      "season_id": 5935,
+      "start_time": "2026-02-11T10:26:40Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464240,
+      "session_id": 300586637,
+      "season_id": 5935,
+      "start_time": "2026-02-11T10:48:41Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464386,
+      "session_id": 300587486,
+      "season_id": 5935,
+      "start_time": "2026-02-11T11:01:27Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464551,
+      "session_id": 300588800,
+      "season_id": 5935,
+      "start_time": "2026-02-11T11:21:43Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465014,
+      "session_id": 300590758,
+      "season_id": 5935,
+      "start_time": "2026-02-11T11:46:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465189,
+      "session_id": 300591746,
+      "season_id": 5935,
+      "start_time": "2026-02-11T12:01:33Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464521,
+      "session_id": 300588538,
+      "season_id": 5936,
+      "start_time": "2026-02-11T11:16:49Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464552,
+      "session_id": 300588801,
+      "season_id": 5936,
+      "start_time": "2026-02-11T11:21:43Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464890,
+      "session_id": 300590411,
+      "season_id": 5936,
+      "start_time": "2026-02-11T11:43:26Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464972,
+      "session_id": 300586338,
+      "season_id": 5936,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464973,
+      "session_id": 300586338,
+      "season_id": 5936,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464590,
+      "session_id": 300589190,
+      "season_id": 5937,
+      "start_time": "2026-02-11T11:26:26Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465088,
+      "session_id": 300591297,
+      "season_id": 5937,
+      "start_time": "2026-02-11T11:55:56Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465238,
+      "session_id": 300592022,
+      "season_id": 5937,
+      "start_time": "2026-02-11T12:05:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465156,
+      "session_id": 300587349,
+      "season_id": 5937,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465157,
+      "session_id": 300587349,
+      "season_id": 5937,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464728,
+      "session_id": 300589669,
+      "season_id": 5938,
+      "start_time": "2026-02-11T11:33:15Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464795,
+      "session_id": 300589967,
+      "season_id": 5938,
+      "start_time": "2026-02-11T11:37:22Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465216,
+      "session_id": 300591888,
+      "season_id": 5938,
+      "start_time": "2026-02-11T12:03:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465221,
+      "session_id": 300591893,
+      "season_id": 5938,
+      "start_time": "2026-02-11T12:03:44Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465249,
+      "session_id": 300592150,
+      "season_id": 5938,
+      "start_time": "2026-02-11T12:07:32Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465305,
+      "session_id": 300588399,
+      "season_id": 5938,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465306,
+      "session_id": 300588399,
+      "season_id": 5938,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465090,
+      "session_id": 300587071,
+      "season_id": 5938,
+      "start_time": "2026-02-11T11:56:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463816,
+      "session_id": 300585069,
+      "season_id": 5941,
+      "start_time": "2026-02-11T10:28:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464610,
+      "session_id": 300589327,
+      "season_id": 5941,
+      "start_time": "2026-02-11T11:28:37Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464631,
+      "session_id": 300589348,
+      "season_id": 5941,
+      "start_time": "2026-02-11T11:29:44Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464976,
+      "session_id": 300586341,
+      "season_id": 5941,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464796,
+      "session_id": 300589968,
+      "season_id": 5942,
+      "start_time": "2026-02-11T11:37:22Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464930,
+      "session_id": 300590597,
+      "season_id": 5942,
+      "start_time": "2026-02-11T11:45:09Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464876,
+      "session_id": 300590397,
+      "season_id": 5943,
+      "start_time": "2026-02-11T11:42:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465161,
+      "session_id": 300587356,
+      "season_id": 5943,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465162,
+      "session_id": 300587356,
+      "season_id": 5943,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465163,
+      "session_id": 300587356,
+      "season_id": 5943,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464219,
+      "session_id": 300586501,
+      "season_id": 5944,
+      "start_time": "2026-02-11T10:47:01Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464533,
+      "session_id": 300588664,
+      "season_id": 5944,
+      "start_time": "2026-02-11T11:19:31Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465256,
+      "session_id": 300592271,
+      "season_id": 5944,
+      "start_time": "2026-02-11T12:08:39Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464417,
+      "session_id": 300587631,
+      "season_id": 5945,
+      "start_time": "2026-02-11T11:03:47Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465064,
+      "session_id": 300591156,
+      "season_id": 5945,
+      "start_time": "2026-02-11T11:53:44Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465308,
+      "session_id": 300588401,
+      "season_id": 5945,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465309,
+      "session_id": 300588401,
+      "season_id": 5945,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465287,
+      "session_id": 300588312,
+      "season_id": 5945,
+      "start_time": "2026-02-11T12:14:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83463754,
+      "session_id": 300584662,
+      "season_id": 5946,
+      "start_time": "2026-02-11T10:22:47Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464564,
+      "session_id": 300588928,
+      "season_id": 5946,
+      "start_time": "2026-02-11T11:22:57Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464695,
+      "session_id": 300589519,
+      "season_id": 5949,
+      "start_time": "2026-02-11T11:31:26Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464749,
+      "session_id": 300589807,
+      "season_id": 5949,
+      "start_time": "2026-02-11T11:34:23Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465310,
+      "session_id": 300588402,
+      "season_id": 5949,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464696,
+      "session_id": 300589520,
+      "season_id": 5950,
+      "start_time": "2026-02-11T11:31:26Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464699,
+      "session_id": 300589523,
+      "season_id": 5950,
+      "start_time": "2026-02-11T11:31:26Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464251,
+      "session_id": 300586765,
+      "season_id": 5951,
+      "start_time": "2026-02-11T10:50:51Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464760,
+      "session_id": 300589818,
+      "season_id": 5951,
+      "start_time": "2026-02-11T11:34:25Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464978,
+      "session_id": 300586343,
+      "season_id": 5951,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464979,
+      "session_id": 300586343,
+      "season_id": 5951,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465264,
+      "session_id": 300588066,
+      "season_id": 5951,
+      "start_time": "2026-02-11T12:10:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464797,
+      "session_id": 300589969,
+      "season_id": 5952,
+      "start_time": "2026-02-11T11:37:53Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465325,
+      "session_id": 300588465,
+      "season_id": 5953,
+      "start_time": "2026-02-11T12:16:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464120,
+      "session_id": 300586292,
+      "season_id": 5954,
+      "start_time": "2026-02-11T10:44:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464830,
+      "session_id": 300590117,
+      "season_id": 5954,
+      "start_time": "2026-02-11T11:39:04Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464125,
+      "session_id": 300586297,
+      "season_id": 5958,
+      "start_time": "2026-02-11T10:44:12Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465009,
+      "session_id": 300590753,
+      "season_id": 5958,
+      "start_time": "2026-02-11T11:46:20Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465166,
+      "session_id": 300587374,
+      "season_id": 5958,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464460,
+      "session_id": 300588019,
+      "season_id": 5959,
+      "start_time": "2026-02-11T11:09:47Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464485,
+      "session_id": 300588416,
+      "season_id": 5959,
+      "start_time": "2026-02-11T11:15:11Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464823,
+      "session_id": 300590110,
+      "season_id": 5959,
+      "start_time": "2026-02-11T11:39:03Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464836,
+      "session_id": 300590123,
+      "season_id": 5960,
+      "start_time": "2026-02-11T11:39:37Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465268,
+      "session_id": 300592399,
+      "season_id": 5960,
+      "start_time": "2026-02-11T12:10:49Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464917,
+      "session_id": 300590555,
+      "season_id": 5962,
+      "start_time": "2026-02-11T11:44:35Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464419,
+      "session_id": 300587633,
+      "season_id": 5964,
+      "start_time": "2026-02-11T11:03:48Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465107,
+      "session_id": 300591550,
+      "season_id": 5964,
+      "start_time": "2026-02-11T11:58:09Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465231,
+      "session_id": 300592015,
+      "season_id": 5964,
+      "start_time": "2026-02-11T12:04:18Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465234,
+      "session_id": 300592018,
+      "season_id": 5966,
+      "start_time": "2026-02-11T12:04:51Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465102,
+      "session_id": 300591427,
+      "season_id": 5967,
+      "start_time": "2026-02-11T11:57:35Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465218,
+      "session_id": 300591890,
+      "season_id": 5967,
+      "start_time": "2026-02-11T12:03:12Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465311,
+      "session_id": 300588404,
+      "season_id": 5967,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465312,
+      "session_id": 300588404,
+      "season_id": 5967,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465045,
+      "session_id": 300591020,
+      "season_id": 5968,
+      "start_time": "2026-02-11T11:50:42Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465197,
+      "session_id": 300591872,
+      "season_id": 5968,
+      "start_time": "2026-02-11T12:02:08Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464677,
+      "session_id": 300585168,
+      "season_id": 5968,
+      "start_time": "2026-02-11T11:30:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465171,
+      "session_id": 300587385,
+      "season_id": 5968,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465313,
+      "session_id": 300588405,
+      "season_id": 5969,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465190,
+      "session_id": 300591747,
+      "season_id": 5970,
+      "start_time": "2026-02-11T12:01:33Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464840,
+      "session_id": 300590127,
+      "season_id": 5971,
+      "start_time": "2026-02-11T11:39:37Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464982,
+      "session_id": 300586346,
+      "season_id": 5971,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464983,
+      "session_id": 300586346,
+      "season_id": 5971,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464467,
+      "session_id": 300588141,
+      "season_id": 5975,
+      "start_time": "2026-02-11T11:10:53Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464537,
+      "session_id": 300588668,
+      "season_id": 5975,
+      "start_time": "2026-02-11T11:19:31Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464716,
+      "session_id": 300589657,
+      "season_id": 5975,
+      "start_time": "2026-02-11T11:32:41Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465172,
+      "session_id": 300587394,
+      "season_id": 5975,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465173,
+      "session_id": 300587394,
+      "season_id": 5975,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465049,
+      "session_id": 300591024,
+      "season_id": 5979,
+      "start_time": "2026-02-11T11:51:15Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464742,
+      "session_id": 300589683,
+      "season_id": 5981,
+      "start_time": "2026-02-11T11:33:48Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465314,
+      "session_id": 300588406,
+      "season_id": 5981,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464683,
+      "session_id": 300589507,
+      "season_id": 5982,
+      "start_time": "2026-02-11T11:30:52Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465315,
+      "session_id": 300588407,
+      "season_id": 5982,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465316,
+      "session_id": 300588407,
+      "season_id": 5982,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464532,
+      "session_id": 300588663,
+      "season_id": 5984,
+      "start_time": "2026-02-11T11:18:59Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464538,
+      "session_id": 300588669,
+      "season_id": 5988,
+      "start_time": "2026-02-11T11:19:32Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464541,
+      "session_id": 300588790,
+      "season_id": 5988,
+      "start_time": "2026-02-11T11:20:06Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464800,
+      "session_id": 300589972,
+      "season_id": 5988,
+      "start_time": "2026-02-11T11:37:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464900,
+      "session_id": 300590421,
+      "season_id": 5989,
+      "start_time": "2026-02-11T11:43:59Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465083,
+      "session_id": 300591292,
+      "season_id": 5989,
+      "start_time": "2026-02-11T11:55:24Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465174,
+      "session_id": 300587413,
+      "season_id": 5989,
+      "start_time": "2026-02-11T12:00:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464805,
+      "session_id": 300589977,
+      "season_id": 5990,
+      "start_time": "2026-02-11T11:37:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464430,
+      "session_id": 300587758,
+      "season_id": 5991,
+      "start_time": "2026-02-11T11:04:22Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464542,
+      "session_id": 300588791,
+      "season_id": 5991,
+      "start_time": "2026-02-11T11:20:06Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465274,
+      "session_id": 300588228,
+      "season_id": 5992,
+      "start_time": "2026-02-11T12:12:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464818,
+      "session_id": 300590105,
+      "season_id": 5999,
+      "start_time": "2026-02-11T11:38:30Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464802,
+      "session_id": 300589974,
+      "season_id": 6000,
+      "start_time": "2026-02-11T11:37:54Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465317,
+      "session_id": 300588408,
+      "season_id": 6000,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464984,
+      "session_id": 300586350,
+      "season_id": 6001,
+      "start_time": "2026-02-11T11:45:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465288,
+      "session_id": 300588365,
+      "season_id": 6001,
+      "start_time": "2026-02-11T12:14:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464989,
+      "session_id": 300590618,
+      "season_id": 6003,
+      "start_time": "2026-02-11T11:45:44Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464834,
+      "session_id": 300590121,
+      "season_id": 6004,
+      "start_time": "2026-02-11T11:39:04Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465318,
+      "session_id": 300588409,
+      "season_id": 6004,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83465201,
+      "session_id": 300591876,
+      "season_id": 6005,
+      "start_time": "2026-02-11T12:02:08Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464547,
+      "session_id": 300588796,
+      "season_id": 6006,
+      "start_time": "2026-02-11T11:20:39Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465054,
+      "session_id": 300586872,
+      "season_id": 6011,
+      "start_time": "2026-02-11T11:52:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83464606,
+      "session_id": 300589206,
+      "season_id": 6012,
+      "start_time": "2026-02-11T11:28:03Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464706,
+      "session_id": 300589530,
+      "season_id": 6016,
+      "start_time": "2026-02-11T11:31:59Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465195,
+      "session_id": 300591870,
+      "season_id": 6016,
+      "start_time": "2026-02-11T12:02:07Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465319,
+      "session_id": 300588413,
+      "season_id": 6016,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464996,
+      "session_id": 300590625,
+      "season_id": 6018,
+      "start_time": "2026-02-11T11:45:45Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465073,
+      "session_id": 300591282,
+      "season_id": 6018,
+      "start_time": "2026-02-11T11:54:19Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465326,
+      "session_id": 300588527,
+      "season_id": 6018,
+      "start_time": "2026-02-11T12:16:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465289,
+      "session_id": 300588383,
+      "season_id": 6019,
+      "start_time": "2026-02-11T12:14:00Z",
+      "race_week_num": 8,
+      "event_type": 4
+    },
+    {
+      "subsession_id": 83465038,
+      "session_id": 300591017,
+      "season_id": 6038,
+      "start_time": "2026-02-11T11:50:10Z",
+      "race_week_num": 8,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465320,
+      "session_id": 300588415,
+      "season_id": 6038,
+      "start_time": "2026-02-11T12:15:00Z",
+      "race_week_num": 8,
+      "event_type": 5
+    },
+    {
+      "subsession_id": 83464943,
+      "session_id": 300590610,
+      "season_id": 6074,
+      "start_time": "2026-02-11T11:45:11Z",
+      "race_week_num": 3,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83464630,
+      "session_id": 300589347,
+      "season_id": 6078,
+      "start_time": "2026-02-11T11:29:43Z",
       "race_week_num": 0,
       "event_type": 2
     },
     {
-      "subsession_id": 79770401,
-      "session_id": 285744565,
-      "season_id": 5860,
-      "start_time": "2025-09-09T11:24:35Z",
+      "subsession_id": 83464712,
+      "session_id": 300589536,
+      "season_id": 6078,
+      "start_time": "2026-02-11T11:31:59Z",
       "race_week_num": 0,
       "event_type": 2
     },
     {
-      "subsession_id": 79770461,
-      "session_id": 285744615,
-      "season_id": 5860,
-      "start_time": "2025-09-09T11:30:44Z",
+      "subsession_id": 83464397,
+      "session_id": 300587615,
+      "season_id": 6079,
+      "start_time": "2026-02-11T11:02:10Z",
       "race_week_num": 0,
       "event_type": 2
     },
     {
-      "subsession_id": 79770432,
-      "session_id": 285744368,
-      "season_id": 5860,
-      "start_time": "2025-09-09T11:30:00Z",
+      "subsession_id": 83464927,
+      "session_id": 300590565,
+      "season_id": 6079,
+      "start_time": "2026-02-11T11:44:36Z",
+      "race_week_num": 0,
+      "event_type": 2
+    },
+    {
+      "subsession_id": 83465176,
+      "session_id": 300587462,
+      "season_id": 6079,
+      "start_time": "2026-02-11T12:00:00Z",
       "race_week_num": 0,
       "event_type": 5
     },
     {
-      "subsession_id": 79770490,
-      "session_id": 285744430,
-      "season_id": 5860,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770348,
-      "session_id": 285744505,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:01:08Z",
+      "subsession_id": 83464668,
+      "session_id": 300589506,
+      "season_id": 6081,
+      "start_time": "2026-02-11T11:30:20Z",
       "race_week_num": 0,
       "event_type": 2
-    },
-    {
-      "subsession_id": 79770360,
-      "session_id": 285744528,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:12:25Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770391,
-      "session_id": 285744547,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:17:36Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770396,
-      "session_id": 285744556,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:20:32Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770406,
-      "session_id": 285744570,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:25:06Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770427,
-      "session_id": 285744595,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:29:12Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770469,
-      "session_id": 285744625,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:33:48Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770478,
-      "session_id": 285744644,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:42:31Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770433,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770434,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770435,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770436,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770437,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770438,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770439,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770440,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770441,
-      "session_id": 285744369,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770491,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770492,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770493,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770494,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770495,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770496,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770497,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770498,
-      "session_id": 285744431,
-      "season_id": 5862,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770355,
-      "session_id": 285744521,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:10:23Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770359,
-      "session_id": 285744525,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:11:55Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770420,
-      "session_id": 285744586,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:27:39Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770421,
-      "session_id": 285744587,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:27:39Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770485,
-      "session_id": 285744653,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:44:03Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770520,
-      "session_id": 285744678,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:46:37Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770447,
-      "session_id": 285744370,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770448,
-      "session_id": 285744370,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770449,
-      "session_id": 285744370,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770450,
-      "session_id": 285744370,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770451,
-      "session_id": 285744370,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770452,
-      "session_id": 285744370,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:30:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770499,
-      "session_id": 285744432,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770500,
-      "session_id": 285744432,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770501,
-      "session_id": 285744432,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770502,
-      "session_id": 285744432,
-      "season_id": 5865,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770398,
-      "session_id": 285744560,
-      "season_id": 5866,
-      "start_time": "2025-09-09T11:23:04Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770402,
-      "session_id": 285744566,
-      "season_id": 5866,
-      "start_time": "2025-09-09T11:24:35Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770525,
-      "session_id": 285744685,
-      "season_id": 5866,
-      "start_time": "2025-09-09T11:49:15Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770470,
-      "session_id": 285744630,
-      "season_id": 5868,
-      "start_time": "2025-09-09T11:36:20Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770307,
-      "session_id": 285744467,
-      "season_id": 5869,
-      "start_time": "2025-09-09T10:53:53Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770320,
-      "session_id": 285744486,
-      "season_id": 5869,
-      "start_time": "2025-09-09T10:58:05Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770351,
-      "session_id": 285744514,
-      "season_id": 5870,
-      "start_time": "2025-09-09T11:06:13Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770392,
-      "session_id": 285744548,
-      "season_id": 5870,
-      "start_time": "2025-09-09T11:17:36Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770395,
-      "session_id": 285744555,
-      "season_id": 5870,
-      "start_time": "2025-09-09T11:20:31Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770464,
-      "session_id": 285744620,
-      "season_id": 5870,
-      "start_time": "2025-09-09T11:32:16Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770504,
-      "session_id": 285744434,
-      "season_id": 5870,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770505,
-      "session_id": 285744434,
-      "season_id": 5870,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770407,
-      "session_id": 285744571,
-      "season_id": 5871,
-      "start_time": "2025-09-09T11:25:07Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770408,
-      "session_id": 285744572,
-      "season_id": 5871,
-      "start_time": "2025-09-09T11:25:07Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770356,
-      "session_id": 285744522,
-      "season_id": 5875,
-      "start_time": "2025-09-09T11:10:23Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770506,
-      "session_id": 285744436,
-      "season_id": 5875,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770109,
-      "session_id": 285744265,
-      "season_id": 5876,
-      "start_time": "2025-09-09T10:03:35Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770175,
-      "session_id": 285744339,
-      "season_id": 5876,
-      "start_time": "2025-09-09T10:26:20Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770231,
-      "session_id": 285744391,
-      "season_id": 5876,
-      "start_time": "2025-09-09T10:34:03Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770233,
-      "session_id": 285744395,
-      "season_id": 5876,
-      "start_time": "2025-09-09T10:36:56Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770349,
-      "session_id": 285744506,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:01:39Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770350,
-      "session_id": 285744507,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:01:39Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770403,
-      "session_id": 285744567,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:24:36Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770471,
-      "session_id": 285744631,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:36:50Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770507,
-      "session_id": 285744437,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770508,
-      "session_id": 285744437,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770509,
-      "session_id": 285744437,
-      "season_id": 5876,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770114,
-      "session_id": 285744276,
-      "season_id": 5877,
-      "start_time": "2025-09-09T10:08:17Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770234,
-      "session_id": 285744396,
-      "season_id": 5877,
-      "start_time": "2025-09-09T10:37:27Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770252,
-      "session_id": 285744420,
-      "season_id": 5877,
-      "start_time": "2025-09-09T10:43:34Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770357,
-      "session_id": 285744523,
-      "season_id": 5877,
-      "start_time": "2025-09-09T11:10:54Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770364,
-      "session_id": 285744534,
-      "season_id": 5877,
-      "start_time": "2025-09-09T11:14:58Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770510,
-      "session_id": 285744438,
-      "season_id": 5877,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770511,
-      "session_id": 285744438,
-      "season_id": 5877,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770300,
-      "session_id": 285744456,
-      "season_id": 5878,
-      "start_time": "2025-09-09T10:49:18Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770405,
-      "session_id": 285744569,
-      "season_id": 5879,
-      "start_time": "2025-09-09T11:24:36Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770482,
-      "session_id": 285744648,
-      "season_id": 5624,
-      "start_time": "2025-09-09T11:43:32Z",
-      "race_week_num": 12,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770299,
-      "session_id": 285744453,
-      "season_id": 5880,
-      "start_time": "2025-09-09T10:47:47Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770397,
-      "session_id": 285744557,
-      "season_id": 5880,
-      "start_time": "2025-09-09T11:20:32Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770528,
-      "session_id": 285744690,
-      "season_id": 5880,
-      "start_time": "2025-09-09T11:51:24Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770418,
-      "session_id": 285744584,
-      "season_id": 5881,
-      "start_time": "2025-09-09T11:27:09Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770472,
-      "session_id": 285744636,
-      "season_id": 5881,
-      "start_time": "2025-09-09T11:40:29Z",
-      "race_week_num": 0,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770512,
-      "session_id": 285744439,
-      "season_id": 5881,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 0,
-      "event_type": 5
-    },
-    {
-      "subsession_id": 79770306,
-      "session_id": 285744466,
-      "season_id": 5625,
-      "start_time": "2025-09-09T10:53:53Z",
-      "race_week_num": 12,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770315,
-      "session_id": 285744477,
-      "season_id": 5625,
-      "start_time": "2025-09-09T10:55:57Z",
-      "race_week_num": 12,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770352,
-      "session_id": 285744517,
-      "season_id": 5626,
-      "start_time": "2025-09-09T11:08:21Z",
-      "race_week_num": 12,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770354,
-      "session_id": 285744520,
-      "season_id": 5626,
-      "start_time": "2025-09-09T11:10:23Z",
-      "race_week_num": 12,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770358,
-      "session_id": 285744524,
-      "season_id": 5626,
-      "start_time": "2025-09-09T11:11:55Z",
-      "race_week_num": 12,
-      "event_type": 2
-    },
-    {
-      "subsession_id": 79770489,
-      "session_id": 285744429,
-      "season_id": 5626,
-      "start_time": "2025-09-09T11:45:00Z",
-      "race_week_num": 12,
-      "event_type": 5
     }
   ]
 }

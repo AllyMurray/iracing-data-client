@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "season_id": 4508,
+  "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+  "season_short_name": "2023 Season 4",
+  "series_id": 543,
+  "series_name": "FIA F4 Esports Regional Tour - Europe South",
+  "car_class_id": 3188,
+  "race_week_num": 2,
+  "division": 2,
+  "customer_rank": -1,
+  "chunk_info": {
+    "chunk_size": 500,
+    "num_chunks": 0,
+    "rows": 0,
+    "base_download_url": null,
+    "chunk_file_names": []
+  },
+  "last_updated": "2026-02-11T12:26:18.291127986Z",
+  "csv_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/long_lived/standings2/season-tt/season/4508/3188/2/filters/2/all/export.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260211T122618Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260211%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=72da9f0ff56a9fc864199777692a7190fbeff5a95e898d5f433fe2612b20b1bb"
+}

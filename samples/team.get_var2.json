@@ -1,0 +1,202 @@
+{
+  "team_id": -318499,
+  "owner_id": 599890,
+  "team_name": "WTEC Tide",
+  "created": "2023-06-15T20:38:18Z",
+  "hidden": false,
+  "message": "www.WtecRacing.Co.Uk",
+  "about": "No",
+  "url": "www.WtecRacing.Co.Uk",
+  "roster_count": 11,
+  "recruiting": true,
+  "private_wall": true,
+  "is_default": false,
+  "is_owner": false,
+  "is_admin": false,
+  "suit": {
+    "pattern": 8,
+    "color1": "ffffff",
+    "color2": "1517bb",
+    "color3": "000000"
+  },
+  "owner": {
+    "cust_id": 599890,
+    "display_name": "Alex Williams8",
+    "helmet": {
+      "pattern": 41,
+      "color1": "ffffff",
+      "color2": "000000",
+      "color3": "0500f0",
+      "face_type": 5,
+      "helmet_type": 0
+    },
+    "owner": true,
+    "admin": true
+  },
+  "tags": {
+    "categorized": [],
+    "not_categorized": []
+  },
+  "team_applications": [],
+  "pending_requests": [],
+  "is_member": true,
+  "is_applicant": false,
+  "is_invite": false,
+  "is_ignored": false,
+  "roster": [
+    {
+      "cust_id": 599890,
+      "display_name": "Alex Williams8",
+      "helmet": {
+        "pattern": 41,
+        "color1": "ffffff",
+        "color2": "000000",
+        "color3": "0500f0",
+        "face_type": 5,
+        "helmet_type": 0
+      },
+      "owner": true,
+      "admin": true
+    },
+    {
+      "cust_id": 234679,
+      "display_name": "Adam S Robinson",
+      "helmet": {
+        "pattern": 28,
+        "color1": "000000",
+        "color2": "ff0000",
+        "color3": "000000",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": true
+    },
+    {
+      "cust_id": 926270,
+      "display_name": "Alistair Murray",
+      "helmet": {
+        "pattern": 12,
+        "color1": "0018f0",
+        "color2": "e2f222",
+        "color3": "0a0a0a",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 749272,
+      "display_name": "Bevan Thomson",
+      "helmet": {
+        "pattern": 37,
+        "color1": "ff4747",
+        "color2": "001e6b",
+        "color3": "ffffff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 595176,
+      "display_name": "Christopher Rowe3",
+      "helmet": {
+        "pattern": 68,
+        "color1": "000000",
+        "color2": "ff00f5",
+        "color3": "00f0ff",
+        "face_type": 4,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 534062,
+      "display_name": "Ian Joyner",
+      "helmet": {
+        "pattern": 1,
+        "color1": "0b63d9",
+        "color2": "ffffff",
+        "color3": "ffffff",
+        "face_type": 8,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 606006,
+      "display_name": "Jomi Scott",
+      "helmet": {
+        "pattern": 22,
+        "color1": "000000",
+        "color2": "ffffff",
+        "color3": "f57a31",
+        "face_type": 8,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 68662,
+      "display_name": "Karl McGuirk",
+      "helmet": {
+        "pattern": 67,
+        "color1": "000000",
+        "color2": "f34600",
+        "color3": "f34600",
+        "face_type": 11,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 567276,
+      "display_name": "Luke Grundmann",
+      "helmet": {
+        "pattern": 36,
+        "color1": "000000",
+        "color2": "ffffff",
+        "color3": "4f4f4f",
+        "face_type": 4,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 769198,
+      "display_name": "Matt Williams7",
+      "helmet": {
+        "pattern": 63,
+        "color1": "ffffff",
+        "color2": "ffffff",
+        "color3": "ee7c06",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    },
+    {
+      "cust_id": 524991,
+      "display_name": "Richard Harwood",
+      "helmet": {
+        "pattern": 63,
+        "color1": "000000",
+        "color2": "ff1700",
+        "color3": "ffffff",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": false
+    }
+  ]
+}

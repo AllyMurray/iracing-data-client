@@ -121,7 +121,32 @@
       "league_id": 0,
       "retired": false,
       "iracing_system": true
+    },
+    {
+      "points_system_id": 1965,
+      "name": "Standard",
+      "description": " ",
+      "league_id": 0,
+      "retired": false,
+      "iracing_system": false
+    },
+    {
+      "points_system_id": 8772,
+      "name": "WTEC",
+      "description": " ",
+      "league_id": 0,
+      "retired": false,
+      "iracing_system": false
+    },
+    {
+      "points_system_id": 8777,
+      "name": "WTEC",
+      "description": " ",
+      "league_id": 0,
+      "retired": false,
+      "iracing_system": false
     }
   ],
-  "league_id": 1
+  "season_id": 4508,
+  "league_id": 7058
 }

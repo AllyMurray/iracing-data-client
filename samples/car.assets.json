@@ -209,7 +209,7 @@
     "detail_copy": "<br>Chevrolet Impala</b><br><br>\nA new set of tech specs has caused a revolution in stock car racing, and the iRacing Chevrolet Impala accurately reflects all of the changes that have been implemented as a result.  This new generation of stock car racer has been engineered from the beginning to present a greater challenge to the skills of even the best drivers in the world. For iRacers who climb behind the wheel of the Impala, the fun-to-drive factor is high, but it takes experience to get the most out of it, and talent to be able to race it successfully in a pack of other cars.\n<br><br>\nPowered by the latest version of Chevrolet's stock car racing V8 with more than 750 horsepower, the Impala weighs in at 3,450 pounds.  At 53.5 inches at the top of the windshield, the new Impala is several inches taller than its Monte Carlo predecessor, reflecting a desire to use additional aerodynamic drag to slow speeds at 2.5-mile and longer tracks, such as Daytona International Speedway and its fractionally longer sister track, Talladega Superspeedway.\n<br><br>\nAll of the mechanical adjustments permitted in the rules and possible on the physical version of the car are possible on its virtual counterpart.  It's a complicated car to set up and on a fast track a challenging one to race, but experienced simracers will achieve a high level of satisfaction in competing on America's top stock car tracks with the Chevrolet Impala, and every iRacer can test with the car to sample what was previously off limits to all but the top-level pros.",
     "detail_screen_shot_images": "impala/impala_ss_1,impala/impala_ss_2,impala/impala_ss_3,impala/impala_ss_4,impala/impala_ss_5,impala/impala_ss_6,impala/impala_ss_7,impala/impala_ss_8",
     "detail_techspecs_copy": "<center>\n<b>Constructor</b><br>\nChevrolet\n<br><br>\n\n<b>Chassis</b><br>\nMild-Steel w/ Full Rollcage\n<br><br>\n\n\n<b>Horsepower</b><br>\n750+\n<br><br>\n\n\n<b>Engine</b><br>\nChevrolet\n<br><br>\n\n\n<b>Transmission</b><br>\n4-Speed Manual\n<br><br>\n\n\n<b>Bodywork</b><br>\nSteel\n<br><br>\n\n\n<b>Wheelbase</b><br>\n2794 mm\n<br><br>\n\n\n<b>Weight</b><br>\n3,450 lbs\n<br><br>\n\n<b>Suspension</b><br>\nSLA front, truck arm rear\n<br><br>",
-    "folder": "/img/cars/chevroletimpalacot",
+    "folder": "/img/cars/carid_22",
     "gallery_images": "8",
     "gallery_prefix": null,
     "group_image": null,
@@ -984,7 +984,7 @@
     "group_image": null,
     "group_name": null,
     "large_image": "mercedesamggt3-large.jpg",
-    "logo": "/img/logos/partners/AMG-Logo.png",
+    "logo": "/img/logos/partners/amg-logo.png",
     "small_image": "mercedesamggt3-small.jpg",
     "sponsor_logo": null,
     "template_path": "car_templates/72_template_MGT3.zip"
@@ -1688,7 +1688,7 @@
   "114": {
     "car_id": 114,
     "car_rules": [],
-    "detail_copy": "The NASCAR XFINITY Chevrolet Camaro is the final step on the stock car ladder to the NASCAR Cup Series Chevys, Fords and Toyotas raced in the highest levels of real-world NASCAR and eNASCAR alike. The Camaro has been updated with an all-new build reflecting the car and its performance in the 2019 NASCAR XFINITY Series season.\r\n<br><br>\r\nLike its NASCAR XFINITY Series counterpart, the Camaro is powered by a 358 cu in (5.8 liter) pushrod V8 putting out 650-700 hp (450 hp with restrictor plates) and sports non-adjustable nose “splitters” and rear spoilers along with a variety of safety features including double frame rails aligning with front and rear bumpers to improve protection in side impacts.",
+    "detail_copy": "The NASCAR O'Reilly Chevrolet Camaro is the final step on the stock car ladder to the NASCAR Cup Series Chevys, Fords and Toyotas raced in the highest levels of real-world NASCAR and eNASCAR alike. The Camaro has been updated with an all-new build reflecting the car and its performance in the 2019 NASCAR O'Reilly Series season.\r\n<br><br>\r\nLike its NASCAR O'Reilly Series counterpart, the Camaro is powered by a 358 cu in (5.8 liter) pushrod V8 putting out 650-700 hp (450 hp with restrictor plates) and sports non-adjustable nose “splitters” and rear spoilers along with a variety of safety features including double frame rails aligning with front and rear bumpers to improve protection in side impacts.",
     "detail_screen_shot_images": "carid_114/shot_ss_1,carid_114/shot_ss_2,carid_114/shot_ss_3,carid_114/shot_ss_4,carid_114/shot_ss_5",
     "detail_techspecs_copy": "<center>\r\n<b>Engine displacement:</b><br>358 cubic inch (5.8L> Pushrod V8) \r\n<br><br>\r\n<b>Horsepower:</b><br>650-700 hp (485-522 kW) unrestricted\r\n<br>\r\n450 hp (335 kW) restricted \r\n<br><br>\r\n<b>Fuel capacity:</b><br>18.5 U.S. gallons (70 liters) \r\n<br><br>\r\n<b>Compression ratio:</b><br>12:1 \r\n<br><br>\r\n<b>Aspiration:</b><br>Naturally aspirated \r\n<br><br>\r\n<b>Carburetor size:</b><br>380 cubic feet/min (184 L/s) 4 Barrel \r\n<br><br>\r\n<b>Transmission:</b><br>4-Speed Manual \r\n<br><br>\r\n<b>Steering:</b><br>Power, recirculating ball \r\n<br><br>\r\n<b>Tires:</b><br>Slick tires and rain tires provided by Goodyear Tire and Rubber Company \r\n<br><br>\r\n<b>Chassis:</b><br>Mild-Steel w/ Full Rollcage \r\n<br><br>\r\n<b>Bodywork:</b><br>Steel \r\n<br><br>\r\n<b>Wheelbase:</b><br>110” \r\n<br><br>\r\n<b>Weight:</b><br>3,450 lb (1,568 kg) minimum (without driver)\r\n<br>\r\n3,630 lb (1,650 kg) minimum (with driver) \r\n<br><br>\r\n<b>Length/Width/Height:</b><br>201\" (5100 mm) 76.75\" (1,949 mm) 53.5\" (1,359 mm)\r\n</center>",
     "folder": "/img/cars/xfinitycamaro",
@@ -1699,13 +1699,13 @@
     "large_image": "xfinitycamaro-large.jpg",
     "logo": "/img/logos/partners/chevrolet-logo.png",
     "small_image": "xfinitycamaro-small.jpg",
-    "sponsor_logo": "/img/logos/partners/nascarxfinityseries-logo.png",
-    "template_path": "car_templates/114_template_XCC.zip"
+    "sponsor_logo": "/img/logos/partners/oreillyautopartsseries-logo.png",
+    "template_path": "car_templates/114_template_NCC.zip"
   },
   "115": {
     "car_id": 115,
     "car_rules": [],
-    "detail_copy": "The NASCAR XFINITY Ford Mustang is the final step on the stock car ladder to the NASCAR Cup Series Chevys, Fords and Toyotas raced in the highest levels of real-world NASCAR and eNASCAR alike. The Mustang has been updated with an all-new build reflecting the car and its performance in the 2019 NASCAR XFINITY Series season.\r\n<br><br>\r\nLike its NASCAR XFINITY Series counterpart, the Mustang is powered by a 358 cu in (5.8 liter) pushrod V8 putting out 650-700 hp (450 hp with restrictor plates) and sports non-adjustable nose “splitters” and rear spoilers along with a variety of safety features including double frame rails aligning with front and rear bumpers to improve protection in side impacts.",
+    "detail_copy": "The NASCAR O'Reilly Ford Mustang is the final step on the stock car ladder to the NASCAR Cup Series Chevys, Fords and Toyotas raced in the highest levels of real-world NASCAR and eNASCAR alike. The Mustang has been updated with an all-new build reflecting the car and its performance in the 2019 NASCAR O'Reilly Series season.\r\n<br><br>\r\nLike its NASCAR O'Reilly Series counterpart, the Mustang is powered by a 358 cu in (5.8 liter) pushrod V8 putting out 650-700 hp (450 hp with restrictor plates) and sports non-adjustable nose “splitters” and rear spoilers along with a variety of safety features including double frame rails aligning with front and rear bumpers to improve protection in side impacts.",
     "detail_screen_shot_images": "carid_115/shot_ss_1,carid_115/shot_ss_2,carid_115/shot_ss_3,carid_115/shot_ss_4,carid_115/shot_ss_5",
     "detail_techspecs_copy": "<center>\r\n<b>Engine displacement:</b><br>358 cubic inch (5.8L> Pushrod V8) \r\n<br><br>\r\n<b>Horsepower:</b><br>650-700 hp (485-522 kW) unrestricted\r\n<br>\r\n450 hp (335 kW) restricted \r\n<br><br>\r\n<b>Fuel capacity:</b><br>18.5 U.S. gallons (70 liters) \r\n<br><br>\r\n<b>Compression ratio:</b><br>12:1 \r\n<br><br>\r\n<b>Aspiration:</b><br>Naturally aspirated \r\n<br><br>\r\n<b>Carburetor size:</b><br>380 cubic feet/min (184 L/s) 4 Barrel \r\n<br><br>\r\n<b>Transmission:</b><br>4-Speed Manual \r\n<br><br>\r\n<b>Steering:</b><br>Power, recirculating ball \r\n<br><br>\r\n<b>Tires:</b><br>Slick tires and rain tires provided by Goodyear Tire and Rubber Company \r\n<br><br>\r\n<b>Chassis:</b><br>Mild-Steel w/ Full Rollcage \r\n<br><br>\r\n<b>Bodywork:</b><br>Steel \r\n<br><br>\r\n<b>Wheelbase:</b><br>110” \r\n<br><br>\r\n<b>Weight:</b><br>3,450 lb (1,568 kg) minimum (without driver)\r\n<br>\r\n3,630 lb (1,650 kg) minimum (with driver) \r\n<br><br>\r\n<b>Length/Width/Height:</b><br>201\" (5100 mm) 76.75\" (1,949 mm) 53.5\" (1,359 mm)\r\n</center>",
     "folder": "/img/cars/xfinitymustang",
@@ -1716,13 +1716,13 @@
     "large_image": "xfinitymustang-large.jpg",
     "logo": "/img/logos/partners/ford-logo.png",
     "small_image": "xfinitymustang-small.jpg",
-    "sponsor_logo": "/img/logos/partners/nascarxfinityseries-logo.png",
-    "template_path": "car_templates/115_template_XFM.zip"
+    "sponsor_logo": "/img/logos/partners/oreillyautopartsseries-logo.png",
+    "template_path": "car_templates/115_template_NFM.zip"
   },
   "116": {
     "car_id": 116,
     "car_rules": [],
-    "detail_copy": "The NASCAR XFINITY Toyota Supra is the final step on the stock car ladder to the NASCAR Cup Series Chevys, Fords and Toyotas raced in the highest levels of real-world NASCAR and eNASCAR alike. The Supra has been updated with an all-new build reflecting the car and its performance in the 2019 NASCAR XFINITY Series season.\r\n<br><br>\r\nLike its NASCAR XFINITY Series counterpart, the Supra is powered by a 358 cu in (5.8 liter) pushrod V8 putting out 650-700 hp (450 hp with restrictor plates) and sports non-adjustable nose “splitters” and rear spoilers along with a variety of safety features including double frame rails aligning with the front and rear bumpers to improve protection in side impacts.",
+    "detail_copy": "The NASCAR O'Reilly Toyota Supra is the final step on the stock car ladder to the NASCAR Cup Series Chevys, Fords and Toyotas raced in the highest levels of real-world NASCAR and eNASCAR alike. The Supra has been updated with an all-new build reflecting the car and its performance in the 2019 NASCAR O'Reilly Series season.\r\n<br><br>\r\nLike its NASCAR O'Reilly Series counterpart, the Supra is powered by a 358 cu in (5.8 liter) pushrod V8 putting out 650-700 hp (450 hp with restrictor plates) and sports non-adjustable nose “splitters” and rear spoilers along with a variety of safety features including double frame rails aligning with the front and rear bumpers to improve protection in side impacts.",
     "detail_screen_shot_images": "carid_116/shot_ss_1,carid_116/shot_ss_2,carid_116/shot_ss_3,carid_116/shot_ss_4,carid_116/shot_ss_5",
     "detail_techspecs_copy": "<center>\r\n<b>Engine displacement:</b><br>358 cubic inch (5.8L> Pushrod V8) \r\n<br><br>\r\n<b>Horsepower:</b><br>650-700 hp (485-522 kW) unrestricted\r\n<br>\r\n450 hp (335 kW) restricted \r\n<br><br>\r\n<b>Fuel capacity:</b><br>18.5 U.S. gallons (70 liters) \r\n<br><br>\r\n<b>Compression ratio:</b><br>12:1 \r\n<br><br>\r\n<b>Aspiration:</b><br>Naturally aspirated \r\n<br><br>\r\n<b>Carburetor size:</b><br>380 cubic feet/min (184 L/s) 4 Barrel \r\n<br><br>\r\n<b>Transmission:</b><br>4-Speed Manual \r\n<br><br>\r\n<b>Steering:</b><br>Power, recirculating ball \r\n<br><br>\r\n<b>Tires:</b><br>Slick tires and rain tires provided by Goodyear Tire and Rubber Company \r\n<br><br>\r\n<b>Chassis:</b><br>Mild-Steel w/ Full Rollcage \r\n<br><br>\r\n<b>Bodywork:</b><br>Steel \r\n<br><br>\r\n<b>Wheelbase:</b><br>110” \r\n<br><br>\r\n<b>Weight:</b><br>3,450 lb (1,568 kg) minimum (without driver)\r\n<br>\r\n3,630 lb (1,650 kg) minimum (with driver) \r\n<br><br>\r\n<b>Length/Width/Height:</b><br>201\" (5100 mm) 76.75\" (1,949 mm) 53.5\" (1,359 mm)\r\n</center>",
     "folder": "/img/cars/xfinitysupra",
@@ -1733,8 +1733,8 @@
     "large_image": "xfinitysupra-large.jpg",
     "logo": "/img/logos/partners/toyota-logo.png",
     "small_image": "xfinitysupra-small.jpg",
-    "sponsor_logo": "/img/logos/partners/nascarxfinityseries-logo.png",
-    "template_path": "car_templates/116_template_XTS.zip"
+    "sponsor_logo": "/img/logos/partners/oreillyautopartsseries-logo.png",
+    "template_path": "car_templates/116_template_NTS.zip"
   },
   "117": {
     "car_id": 117,
@@ -1976,14 +1976,14 @@
     "detail_copy": "<p>Revealed at BMW Sim Live in December 2020, the BMW M4 GT3's reveal was a bridge between the virtual world and the real one—especially as its steering wheel could be removed from the real car and plugged directly into iRacing. The car received a pre-release on iRacing to give sim racers a taste of what to expect before it began competing in GT3 series around the world, and received updates in-sim to match its final form.</p> <p>The BMW M4 GT3 succeeded the BMW Z4 GT3 as the second BMW to join iRacing's GT3 offerings. It's powered by a 3-liter twin turbo straight-six engine capable of producing 590 horsepower. Marked by traditional BMW styling cues, the M4 GT3 is as instantly recognizable as any of its predecessors both on track and off. The M4 GT3 EVO, featuring refinements to its chassis and aerodynamics, debuted both on track and on iRacing in 2025.</p>",
     "detail_screen_shot_images": "carid_132/shot_ss_1,carid_132/shot_ss_2,carid_132/shot_ss_3,carid_132/shot_ss_4,carid_132/shot_ss_5",
     "detail_techspecs_copy": "<center>\r\n<b>Overall length:</b><br>197.4\"\r\n<br><br>\r\n<b>Overall width:</b><br>79.6\"\r\n<br><br>\r\n<b>Height:</b><br>37.4\"\r\n<br><br>\r\n<b>Wheelbase:</b><br>114.8\"\r\n<br><br>\r\n<b>Front track:</b><br>61.1\"\r\n<br><br>\r\n<b>Rear track:</b><br>62.2\"\r\n<br><br>\r\n<b>Dry weight:</b><br>2833 lbs.\r\n<br><br>\r\n<b>Front tires:</b><br>325/680-18\r\n<br><br>\r\n<b>Rear tires:</b><br>325/705-18\r\n<br><br>\r\n<b>Brakes:</b><br>Brembo racing calipers (6 piston front, 4 piston rear), full floating Brembo rotors\r\n<br><br>\r\n<b>Suspension:</b><br>Front and rear double A-arms with coilovers; KW 4-way adjustable dampers; blade-adjustable front and rear anti-roll bars\r\n<br><br>\r\n<b>Drive-line:</b><br>6-speed sequential transaxle gearbox with pneumatic actuation\r\n<br><br>\r\n<b>Engine Configuration:</b><br>Water-cooled inline 6\r\n<br><br>\r\n<b>Location:</b><br>Front, longitudinally mounted\r\n<br><br>\r\n<b>Construction:</b><br>Aluminum alloy block and heads\r\n<br><br>\r\n<b>Displacement:</b><br>182.617\r\n<br><br>\r\n<b>Valvetrain:</b><br>4 valves / cylinder, DOHC\r\n<br><br>\r\n<b>Fuel feed:</b><br>Direct fuel injection\r\n<br><br>\r\n<b>Lubrication:</b><br>Dry sump\r\n<br><br>\r\n<b>Aspiration:</b><br>Turbocharged\r\n</center>",
-    "folder": "/img/cars/bmwm4gt3",
+    "folder": "/img/cars/carid_132",
     "gallery_images": null,
     "gallery_prefix": null,
     "group_image": null,
     "group_name": null,
-    "large_image": "bmwm4gt3-large.jpg",
+    "large_image": "bmwm4gt3evo-large.jpg",
     "logo": "/img/logos/partners/bmw-logo.png",
-    "small_image": "bmwm4gt3-small.jpg",
+    "small_image": "bmwm4gt3evo-small.jpg",
     "sponsor_logo": null,
     "template_path": "car_templates/132_template_M4GT3.zip"
   },
@@ -2394,7 +2394,7 @@
     "group_image": null,
     "group_name": null,
     "large_image": "mercedesamgevogt3-large.jpg",
-    "logo": "/img/logos/partners/AMG-Logo.png",
+    "logo": "/img/logos/partners/amg-logo.png",
     "small_image": "mercedesamgevogt3-small.jpg",
     "sponsor_logo": null,
     "template_path": "car_templates/156_template_MGT3E.zip"
@@ -2411,7 +2411,7 @@
     "group_image": null,
     "group_name": null,
     "large_image": "mercedesamggt4-large.jpg",
-    "logo": "/img/logos/partners/AMG-Logo.png",
+    "logo": "/img/logos/partners/amg-logo.png",
     "small_image": "mercedesamggt4-small.jpg",
     "sponsor_logo": null,
     "template_path": "car_templates/157_template_MGT4.zip"
@@ -2435,16 +2435,11 @@
   },
   "159": {
     "car_id": 159,
-    "car_rules": [
-      {
-        "rule_category": "Hybrid System",
-        "text": "While on track, the Power Unit system is limited to four deployment mode changes per lap. Once the limit has been reached, the system will remain in whichever mode was last selected until the car has crossed the start/finish line to begin another lap."
-      }
-    ],
+    "car_rules": [],
     "detail_copy": "<p>BMW's long-awaited return to the highest ranks of prototype racing comes in 2023, as the German manufacturer teams up with chassis partner Dallara and team partner Rahal Letterman Lanigan Racing to bring the BMW M Hybrid V8 to the IMSA WeatherTech SportsCar Championship. Built to a new set of global prototype regulations, two M Hybrid V8s will compete in IMSA's premier GTP class, but countless more reproductions of the car are set to debut on iRacing before its first racing lap.</p><p>\nYears of coordinated efforts in both North America and Europe to create a unified top-level rule set have allowed top-tier manufacturers to return to the prototype ranks, with BMW becoming one of the first to announce its involvement. The M Hybrid V8 produces approximately 640 horsepower out of its four-liter powerplant alone, with its electric motor able to add even more boost.</p>",
     "detail_screen_shot_images": "carid_159/shot_ss_1,carid_159/shot_ss_2,carid_159/shot_ss_3,carid_159/shot_ss_4,carid_159/shot_ss_5",
     "detail_techspecs_copy": "<center>\n<b>Engine: </b><br> V-shaped Otto four-stroke twin-turbo engine\n<br><br>\n<b>Capacity: </b><br> 3,999 ccm\n<br><br>\n<b>No. cylinders: </b><br> 8\n<br><br>\n<b>Cylinder construction: </b><br> Cast aluminium cylinder block and cylinder head, cylinder lining as iron layer in LDS procedure\n<br><br>\n<b>V angle: </b><br> 90°\n<br><br>\n<b>Bore: </b><br> 93 mm\n<br><br>\n<b>Stroke: </b><br> 73.6 mm\n<br><br>\n<b>Cylinder spacing: </b><br> 102 mm\n<br><br>\n<b>Valves per cylinder: </b><br> 4\n<br><br>\n<b>Engine speed: </b><br> max. 8,200 rpm\n<br><br>\n<b>Output (regulated): </b><br> approx. 665 hp\n<br><br>\n<b>Torque: </b><br> approx. 650 Nm\n<br><br>\n<b>Injection: </b><br> High-pressure direct injection at 350 bar\n<br><br>\n<b>Oil system: </b><br> Dry sump system with six-cell oil drain pump and oil tank\n<br><br>\n<b>Length: </b><br> 5100 mm\n<br><br>\n<b>Wheelbase: </b><br> 3150 mm\n</center>",
-    "folder": "/img/cars/bmwlmdh",
+    "folder": "/img/cars/carid_159",
     "gallery_images": null,
     "gallery_prefix": null,
     "group_image": null,
@@ -2597,12 +2592,7 @@
   },
   "168": {
     "car_id": 168,
-    "car_rules": [
-      {
-        "rule_category": "Hybrid System",
-        "text": "While on track, the Power Unit system is limited to four deployment mode changes per lap. Once the limit has been reached, the system will remain in whichever mode was last selected until the car has crossed the start/finish line to begin another lap."
-      }
-    ],
+    "car_rules": [],
     "detail_copy": "<p>The Cadillac V-Series.R is General Motors' latest top-level prototype entry for global sports car competition. Built to the universal Le Mans Daytona h regulations that made their debut for the 2023 season, the V-Series.R was launched in both the IMSA WeatherTech SportsCar Championship with entries from Chip Ganassi Racing and Action Express Racing, and internationally with another Ganassi-run team.</p> <p>The Cadillac V-Series.R succeeds the Cadillac DPi-V.R, which scored five consecutive 24 Hours of Daytona wins from 2017 to 2021. Powered by a 5.5-liter V8, the V-Series.R has the largest engine of any cars to compete in the GTP class. It was able to score its first IMSA win in the 2023 12 Hours of Sebring with Alexander Sims, Pipo Derani, and Jack Aitken behind the wheel, recovering from an early incident and surviving a race of attrition in IMSA's hotly contested GTP class.</p>",
     "detail_screen_shot_images": "carid_168/shot_ss_1,carid_168/shot_ss_2,carid_168/shot_ss_3,carid_168/shot_ss_4,carid_168/shot_ss_5",
     "detail_techspecs_copy": "\n<center>\n<b>Engine Type:</b> <br> 5.5 Liters DOHC V8\n<br><br><b>Induction:</b> <br> Naturally Aspirated\n<br><br><b>Power:</b> <br> Series Specified up to 670 HP\n<br><br><b>Gearbox:</b> <br> 7-Speed Sequential\n<br><br><b>Lubrication:</b> <br> Dry Sump\n<br><br><b>Weight:</b> <br> 1080 KG (2380 pounds)\n<br><br><b>Electric Motor:</b> <br> Rear-mounted 50KW spec MGU supplied by Bosch\n<br><br><b>Transmission:</b> <br> Xtrac P1359, 7-speed carbon-fibre plastics reinforced pneumatically actuated\n<br><br><b>Tires:</b> <br> Michelin\n</center>",
@@ -2636,12 +2626,7 @@
   },
   "170": {
     "car_id": 170,
-    "car_rules": [
-      {
-        "rule_category": "Hybrid System",
-        "text": "While on track, the Power Unit system is limited to four deployment mode changes per lap. Once the limit has been reached, the system will remain in whichever mode was last selected until the car has crossed the start/finish line to begin another lap."
-      }
-    ],
+    "car_rules": [],
     "detail_copy": "<p>Built to the IMSA WeatherTech SportsCar Championship's new GTP regulations, the Acura ARX-06 debuted at the 2023 24 Hours of Daytona as a replacement for the ARX-05 that had run for five years under the previous DPi rule set. Acura continued its previous relationship with constructor Oreca to build the new car, which would debut in the hands of Meyer Shank Racing with Curb-Agajanian and Wayne Taylor Racing with Andretti Autosport; the teams would come roaring out of the gate by finishing 1-2 at Daytona.</p> <p>The ARX-06 features a 2.4-liter, twin-turbocharged V6 engine, smaller than its predecessor but packing a powerful punch at over 670 horsepower. As with other GTP cars, the car weighs 1,030 kg and features a spec 50kW hybrid system.</p>",
     "detail_screen_shot_images": "carid_170/shot_ss_1,carid_170/shot_ss_2,carid_170/shot_ss_3,carid_170/shot_ss_4,carid_170/shot_ss_5",
     "detail_techspecs_copy": "<center>\r\n<b>Chassis:</b><br> Carbon fiber monocoque chassis manufactured by ORECA<br><br>\r\n<b>Bodywork:</b><br> Acura-specific bodywork, aerodynamics and cooling systems<br><br>\r\n<b>Suspension:</b><br> Double wishbone, pushrod suspension front and rear, Penske dampers<br><br>\r\n<b>Safety:</b><br> FIA-specified roll cage structure, carbon fiber driver's seat shell, six-point safety harness, fresh air intake system, on-board fire suppression system<br><br>\r\n<b>Engine:</b><br> Bespoke Acura 2.4-liter, twin-turbocharged, direct injected V6 internal combustion engine designed, developed and manufactured by HPD, mated to IMSA-specified electric Bosch Motor Generator Unit (MGU) and Williams Advanced Engineering battery pack<br><br>\r\n<b>HP:</b><br>667 hp<br><br>\r\n<b>Weight:</b><br>2447 lbs.\r\n<b>Transmission:</b><br> IMSA-specified XTrac six-speed, sequential, paddle-operated transmission, rear-wheel drive<br><br>\r\n<b>Dimensions:</b><br> 5100mm length x 2000mm width x 1060mm height (above reference plane); 3148mm wheelbase\r\n</center>",
@@ -2730,12 +2715,7 @@
   },
   "174": {
     "car_id": 174,
-    "car_rules": [
-      {
-        "rule_category": "Hybrid System",
-        "text": "While on track, the Power Unit system is limited to four deployment mode changes per lap. Once the limit has been reached, the system will remain in whichever mode was last selected until the car has crossed the start/finish line to begin another lap."
-      }
-    ],
+    "car_rules": [],
     "detail_copy": "<p>After a five-year hiatus from top-level prototype racing, Porsche returned to the discipline in 2023 with the all-new 963 for the IMSA WeatherTech SportsCar Championship's GTP class. Partnering with Multimatic to construct the chassis, the 963 made its racing debut at the 2023 24 Hours of Daytona with Porsche Penske Motorsport, and more teams have begun to adopt the car around the world as the season has continued. Penske's Mathieu Jaminet and Nick Tandy gave the car its first win at Long Beach in its third start of the IMSA season.</p> <p>Powered by Porsche's 4.6 liter, twin-turbocharged V8, the 9RD engine that powers the 963 makes over 670 horsepower. As with other GTP cars, the car weighs 1,030 kg and features a spec 50kW hybrid system.</p>",
     "detail_screen_shot_images": "carid_174/shot_ss_1,carid_174/shot_ss_2,carid_174/shot_ss_3,carid_174/shot_ss_4,carid_174/shot_ss_5",
     "detail_techspecs_copy": "<center>\r\n<b>Engine:</b><br>\r\nDouble supercharged, twin-turbo 4.6L V8 combustion engine, 4 valves / cylinder, DOHC, Direct Fuel Injection<br><br>\r\n<b>Location:</b><br>\r\nMid, longitudinally mounted<br><br>\r\n<b>Weight:</b><br>1120 kg (2469 lb)<br><br>\r\n<b>Chassis:</b><br>\r\ncarbon-fibre and aluminium honeycomb monocoque<br><br>\r\n<b>Gearbox:</b><br>\r\nXTrac. Single specification hybrid system, 7-speed racing transmission, pneumatically actuated<br><br>\r\n<b>Combined Power:</b><br>\r\n670 bhp / 500 kW @ 10,000 rpm\r\n</center>",
@@ -3092,12 +3072,7 @@
   },
   "196": {
     "car_id": 196,
-    "car_rules": [
-      {
-        "rule_category": "Hybrid System",
-        "text": "While on track, the Power Unit system is limited to four deployment mode changes per lap. Once the limit has been reached, the system will remain in whichever mode was last selected until the car has crossed the start/finish line to begin another lap."
-      }
-    ],
+    "car_rules": [],
     "detail_copy": "<p>Sports car racing fans from around the world rejoiced when Ferrari unveiled its 499P prototype in late 2022. After all, it ended a 50-year absence of factory-backed Ferrari prototypes competing at the sport's highest level—and the brand celebrated its return by adopting 50 as its flagship car number in the process. The 499P quickly established itself as a global force to be reckoned with, winning Le Mans on its first try in 2023 and going back-to-back the next year as well.</p> <p>As with other top-tier prototypes competing in the world's major global series, the 499P is powered by a 671 horsepower twin-turbo hybrid motor. Weighing in at just 1120 kg, drivers will quickly cycle through its seven-speed sequential paddle shift to find top speed at long straightaways like those on the famed French circuit. Any driver who can find the limits of the 499P is among the best of the best in sports car racing, whether real or virtual.</p>",
     "detail_screen_shot_images": "carid_196/shot_ss_1,carid_196/shot_ss_2,carid_196/shot_ss_3,carid_196/shot_ss_4,carid_196/shot_ss_5",
     "detail_techspecs_copy": "<center>\n<b>Horsepower: </b><br> 665 <br><br>\n<b>Engine Type: </b><br> Twin turbo V6 hybrid <br><br>\n<b>Transmission: </b><br> 7 speed sequential paddle shift <br><br>\n<b>Fuel Tank Size (gal.): </b><br> 29 gal <br><br>\n<b>Weight (lbs.): </b><br> 1120 kg / 2469 lb <br><br>\n<b>Chassis: </b><br> Carbon composite monocoque <br><br>\n<b>Suspension: </b><br> Double wishbone with pushrod activation <br><br>\n<b>Brakes: </b><br> Carbon rotors, 6 piston calipers <br><br>\n<b>Wheels: </b><br> One piece aluminum <br><br>\n<b>Tires: </b><br> Michelin <br><br>\n<b>Overall dimensions (in.): </b><br> 197 x 78.7 x 50.2 inches <br><br>\n<b>Wheelbase (in.): </b><br> 122.1 in <br><br>\n</center>",
@@ -3236,7 +3211,7 @@
     "car_rules": [],
     "detail_copy": "<p>The series currently known as INDY NXT debuted in 2002 as a feeder series for the then-Indy Racing League, and it took on its current name in 2023 when it was acquired by Penske Entertainment. It has become highly effective at graduating drivers into the premier NTT INDYCAR Series, with future INDYCAR champion Josef Newgarden and fellow stars Patricio O'Ward and Kyle Kirkwood each using INDY NXT titles to springboard their future successes at the highest level.</p> <p>INDY NXT's weapon of choice is the Dallara IL-15. Introduced in 2015, it features 450 base horsepower (plus an additional 50 with push-to-pass) coming out of a turbocharged 2.0-liter inline-four. The car received updates in 2021 including a halo for driver safety and new engine tuning by AER to run a full season without a rebuild. The latest update to the car came in 2023, when Firestone took over as tire supplier after Penske's acquisition of the championship.</p>",
     "detail_screen_shot_images": "carid_205/shot_ss_1,carid_205/shot_ss_2,carid_205/shot_ss_3,carid_205/shot_ss_4,carid_205/shot_ss_5",
-    "detail_techspecs_copy": "<center>\n<b>Horsepower:</b><br> 450 HP\n<br><br>\n<b>Engine Type:</b><br> 2.0-liter I4 turbocharged\n<br><br>\n<b>Transmission:</b><br> 6-speed sequential\n<br><br>\n<b>Fuel Tank Size (gal.):</b><br> 20 gallons\n<br><br>\n<b>Weight (lbs.):</b><br> 1420 lbs (dry, no driver)\n<br><br>\n<b>Chassis:</b><br> Carbon fiber tub and bodywork and wings front and rear\n<br><br>\n<b>Suspension:</b><br> Double withbone front and rear, pushrod with rocker activated inboard dampers\n<br><br>\n<b>Brakes:</b><br> PFC 6-piston front and rear with iron rotors\n<br><br>\n<b>Wheels:</b><br> 10\" x 15\" front, 14\" x 15\" rear\n<br><br>\n<b>Tires:</b><br> Firestone Firehawk 10.0/23.5 R15 front, 14.0 / 24.5 R15 rear\n<br><br>\n<b>Overall dimensions (in.):</b><br> 191.5\" x 73.0\" x 45.5\"\n<br><br>\n<b>Wheelbase (in.):</b><br> 117 in\n</center>",
+    "detail_techspecs_copy": "<center>\n<b>Horsepower:</b><br> 450 HP\n<br><br>\n<b>Engine Type:</b><br> 2.0-liter I4 turbocharged\n<br><br>\n<b>Transmission:</b><br> 6-speed sequential\n<br><br>\n<b>Fuel Tank Size (gal.):</b><br> 20 gallons\n<br><br>\n<b>Weight (lbs.):</b><br> 1420 lbs (dry, no driver)\n<br><br>\n<b>Chassis:</b><br> Carbon fiber tub and bodywork and wings front and rear\n<br><br>\n<b>Suspension:</b><br> Double wishbone front and rear, pushrod with rocker activated inboard dampers\n<br><br>\n<b>Brakes:</b><br> PFC 6-piston front and rear with iron rotors\n<br><br>\n<b>Wheels:</b><br> 10\" x 15\" front, 14\" x 15\" rear\n<br><br>\n<b>Tires:</b><br> Firestone Firehawk 10.0/23.5 R15 front, 14.0 / 24.5 R15 rear\n<br><br>\n<b>Overall dimensions (in.):</b><br> 191.5\" x 73.0\" x 45.5\"\n<br><br>\n<b>Wheelbase (in.):</b><br> 117 in\n</center>",
     "folder": "/img/cars/carid_205",
     "gallery_images": null,
     "gallery_prefix": null,
@@ -3264,5 +3239,39 @@
     "small_image": "amvantageevogt3-small.jpg",
     "sponsor_logo": null,
     "template_path": "car_templates/206_template_AMGT3.zip"
+  },
+  "207": {
+    "car_id": 207,
+    "car_rules": [],
+    "detail_copy": "<p>Whether you've got dreams of reaching the top levels of global rallycross and autocross or are just looking for a fun car to sling dirt with, cross cars are especially popular options in Europe—especially among young drivers—and gaining a foothold in America. The FIA Cross Car represents the highest level of machinery on a thoughtfully designed ladder that allows drivers as young as six years old to start in the discipline.</p> <p>The top-level Cross Car produces 120 horsepower from the same 850cc Yamaha MT-09 engine that powers Legends cars the world over. Weighing in at just 345 kilograms, that's more than enough power for rapid lap times on tracks of all types. The car has proven itself in the FIA European Cross Car Championship with a championship at the hands of driver David Méat, and it has been a regular presence on the podium in multiple rallycross series as well.</p>",
+    "detail_screen_shot_images": "carid_207/shot_ss_1,carid_207/shot_ss_2,carid_207/shot_ss_3,carid_207/shot_ss_4,carid_207/shot_ss_5",
+    "detail_techspecs_copy": "<center>\n<b>Horsepower:</b><br> 120 hp\n<br><br>\n<b>Engine Type:</b><br> Yamaha MT-09 890cc 3 cyl\n<br><br>\n<b>Transmission:</b><br> Integrated 6-speed sequential\n<br><br>\n<b>Fuel Tank Size (gal.):</b><br> 6L\n<br><br>\n<b>Weight (lbs.):</b><br> 435 kg incl driver and fluids\n<br><br>\n<b>Chassis:</b><br> Tubeframe with rock cage\n<br><br>\n<b>Suspension:</b><br> SLA coilover shocks\n<br><br>\n<b>Brakes:</b><br> Wilwood 2-pot front, 4-pot single caliper in the rear\n<br><br>\n<b>Wheels:</b><br> 10x6 front 10x8 rear\n<br><br>\n<b>Tires:</b><br> Goldspeed 165/70-10 front 225/40-10 rear\n<br><br>\n<b>Overall dimensions (in.):</b><br> 2.55x2.08x1.45m LxWxH\n<br><br>\n<b>Wheelbase (in.):</b><br> 2000 mm\n</center>",
+    "folder": "/img/cars/carid_207",
+    "gallery_images": null,
+    "gallery_prefix": null,
+    "group_image": null,
+    "group_name": null,
+    "large_image": "crosscartn11-large.jpg",
+    "logo": "/img/logos/partners/crosscartn11-logo.png",
+    "small_image": "crosscartn11-small.jpg",
+    "sponsor_logo": null,
+    "template_path": "car_templates/207_template_FIAACC.zip"
+  },
+  "208": {
+    "car_id": 208,
+    "car_rules": [],
+    "detail_copy": "<p>One of the world's most iconic single-make customer racing platforms receives a new evolution for 2026, as the Porsche 911 Cup (992.2) makes its debut in the Porsche Mobil 1 Supercup and select Carrera Cup series the world over. Streamlining the experience is the priority with the new car, which features improved aerodynamics, simplified operation behind the wheel and in the pits, and a new name.</p> <p>The 911 Cup (992.2) still features a normally aspirated, 4.0-liter flat-six engine, which features more components from the road-going Porsche 911 GT3 but still produces 520 horsepower. Design upgrades to the front and rear bumpers, improved performance and lifespan to the car's brakes, and the ability to make more adjustments in the car make this the best entry yet in Porsche's impressive catalogue of machines for its one-make series.</p>",
+    "detail_screen_shot_images": "carid_208/shot_ss_1,carid_208/shot_ss_2,carid_208/shot_ss_3,carid_208/shot_ss_4,carid_208/shot_ss_5",
+    "detail_techspecs_copy": "<center>\n<b>Horsepower:</b><br> 520\n<br><br>\n<b>Engine Type:</b><br> Naturally Aspirated 4.0 L Flat-Six\n<br><br>\n<b>Transmission:</b><br> 6-Speed Sequential\n<br><br>\n<b>Fuel Tank Size (gal.):</b><br> 29.1\n<br><br>\n<b>Weight (lbs.):</b><br> 2866\n<br><br>\n<b>Chassis:</b><br> Unibody with recyled composites\n<br><br>\n<b>Suspension:</b><br> Double wishbone front, multi-link rar\n<br><br>\n<b>Brakes:</b><br> Brembo 6-piston front, 4-piston rear with iron rotors and ABS\n<br><br>\n<b>Wheels:</b><br> 12.0\" x 18\" Front, 13.0\" x 18\" Rear\n<br><br>\n<b>Tires:</b><br> 30/65-18 Front, 31/71-18 Rear Michelin N3&N3R\n<br><br>\n<b>Overall dimensions (in.):</b><br> 181.1\" x 75.6\" x 50.0\"\n<br><br>\n<b>Wheelbase (in.):</b><br> 97.2\"\n</center>",
+    "folder": "/img/cars/carid_208",
+    "gallery_images": null,
+    "gallery_prefix": null,
+    "group_image": null,
+    "group_name": null,
+    "large_image": "porsche9922cup-large.jpg",
+    "logo": "/img/logos/partners/porsche-logo.png",
+    "small_image": "porsche9922cup-small.jpg",
+    "sponsor_logo": null,
+    "template_path": "car_templates/208_template_P9922.zip"
   }
 }

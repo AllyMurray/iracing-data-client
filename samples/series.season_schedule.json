@@ -1,0 +1,467 @@
+{
+  "success": true,
+  "season_id": 4508,
+  "schedules": [
+    {
+      "season_id": 4508,
+      "race_week_num": 0,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": true,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 34,
+          "session_times": [
+            "2023-09-13T19:00:00Z",
+            "2023-09-13T21:00:00Z",
+            "2023-09-13T23:00:00Z",
+            "2023-09-14T19:00:00Z",
+            "2023-09-14T21:00:00Z",
+            "2023-09-14T23:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "F4 Regional - Europe South 19 GMT",
+      "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+      "series_id": 543,
+      "series_name": "FIA F4 Esports Regional Tour - Europe South",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2023-09-13",
+      "start_type": "Standing",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Grand Prix",
+        "track_id": 239,
+        "track_name": "Autodromo Nazionale Monza"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "fog": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2023-09-16T09:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          0,
+          0
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 1,
+        "type": 1,
+        "version": 0,
+        "weather_var_initial": 0,
+        "weather_var_ongoing": 0,
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2023-09-18T23:58:00Z"
+    },
+    {
+      "season_id": 4508,
+      "race_week_num": 2,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": true,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 34,
+          "session_times": [
+            "2023-09-27T17:00:00Z",
+            "2023-09-27T19:00:00Z",
+            "2023-09-27T21:00:00Z",
+            "2023-09-27T23:00:00Z",
+            "2023-09-28T17:00:00Z",
+            "2023-09-28T19:00:00Z",
+            "2023-09-28T21:00:00Z",
+            "2023-09-28T23:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "F4 Regional - Europe South 19 GMT",
+      "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+      "series_id": 543,
+      "series_name": "FIA F4 Esports Regional Tour - Europe South",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2023-09-27",
+      "start_type": "Standing",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "track_id": 489,
+        "track_name": "Circuit de Lédenon"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "fog": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2023-09-30T14:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          0,
+          0
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 0,
+        "type": 1,
+        "version": 0,
+        "weather_var_initial": 0,
+        "weather_var_ongoing": 0,
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2023-10-02T23:58:00Z"
+    },
+    {
+      "season_id": 4508,
+      "race_week_num": 6,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": true,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 34,
+          "session_times": [
+            "2023-10-25T17:00:00Z",
+            "2023-10-25T19:00:00Z",
+            "2023-10-25T21:00:00Z",
+            "2023-10-25T23:00:00Z",
+            "2023-10-26T17:00:00Z",
+            "2023-10-26T19:00:00Z",
+            "2023-10-26T21:00:00Z",
+            "2023-10-26T23:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "F4 Regional - Europe South 19 GMT",
+      "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+      "series_id": 543,
+      "series_name": "FIA F4 Esports Regional Tour - Europe South",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2023-10-25",
+      "start_type": "Standing",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Grand Prix",
+        "track_id": 403,
+        "track_name": "Red Bull Ring"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "fog": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2023-10-28T13:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          0,
+          0
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 0,
+        "type": 1,
+        "version": 0,
+        "weather_var_initial": 0,
+        "weather_var_ongoing": 0,
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2023-10-30T23:58:00Z"
+    },
+    {
+      "season_id": 4508,
+      "race_week_num": 9,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": true,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 34,
+          "session_times": [
+            "2023-11-15T17:00:00Z",
+            "2023-11-15T19:00:00Z",
+            "2023-11-15T21:00:00Z",
+            "2023-11-15T23:00:00Z",
+            "2023-11-16T17:00:00Z",
+            "2023-11-16T19:00:00Z",
+            "2023-11-16T21:00:00Z",
+            "2023-11-16T23:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "F4 Regional - Europe South 19 GMT",
+      "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+      "series_id": 543,
+      "series_name": "FIA F4 Esports Regional Tour - Europe South",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2023-11-15",
+      "start_type": "Standing",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Grand Prix",
+        "track_id": 390,
+        "track_name": "Hockenheimring Baden-Württemberg"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "fog": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2024-04-01T13:55:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          0,
+          0
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 0,
+        "type": 1,
+        "version": 0,
+        "weather_var_initial": 0,
+        "weather_var_ongoing": 0,
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2023-11-20T23:58:00Z"
+    }
+  ]
+}

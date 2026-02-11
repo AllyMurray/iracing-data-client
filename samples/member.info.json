@@ -9,7 +9,7 @@
   "flair_name": "Scotland",
   "flair_shortname": "SCT",
   "flair_country_code": "SCT",
-  "last_login": "2025-09-09T11:33:46.528646596Z",
+  "last_login": "2026-02-10T20:20:49.588810297Z",
   "read_tc": "2024-09-25T16:18:14Z",
   "read_pp": "2024-10-29T19:48:26Z",
   "read_comp_rules": "2023-07-31T15:20:46Z",
@@ -60,9 +60,9 @@
       "category": "sports_car",
       "category_name": "Sports Car",
       "license_level": 19,
-      "safety_rating": 3.13,
-      "cpi": 52.533875,
-      "irating": 1601,
+      "safety_rating": 3.09,
+      "cpi": 51.073196,
+      "irating": 1651,
       "tt_rating": 1332,
       "mpr_num_races": 5,
       "color": "0153db",
@@ -77,9 +77,9 @@
       "category": "formula_car",
       "category_name": "Formula Car",
       "license_level": 11,
-      "safety_rating": 3.42,
-      "cpi": 30.280396,
-      "irating": 1186,
+      "safety_rating": 3.57,
+      "cpi": 33.461452,
+      "irating": 1254,
       "tt_rating": 1350,
       "mpr_num_races": 0,
       "color": "feec04",
@@ -125,6 +125,12 @@
     }
   },
   "car_packages": [
+    {
+      "package_id": 15,
+      "content_ids": [
+        1
+      ]
+    },
     {
       "package_id": 20,
       "content_ids": [
@@ -432,6 +438,24 @@
       "content_ids": [
         195
       ]
+    },
+    {
+      "package_id": 528,
+      "content_ids": [
+        204
+      ]
+    },
+    {
+      "package_id": 535,
+      "content_ids": [
+        207
+      ]
+    },
+    {
+      "package_id": 537,
+      "content_ids": [
+        208
+      ]
     }
   ],
   "track_packages": [
@@ -518,8 +542,17 @@
       "content_ids": [
         37,
         38,
+        550,
         39,
-        40
+        551,
+        40,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557,
+        558
       ]
     },
     {
@@ -715,6 +748,7 @@
     {
       "package_id": 154,
       "content_ids": [
+        579,
         229,
         230,
         231
@@ -815,20 +849,6 @@
       ]
     },
     {
-      "package_id": 268,
-      "content_ids": [
-        336,
-        337,
-        385,
-        338,
-        339,
-        340,
-        330,
-        350,
-        335
-      ]
-    },
-    {
       "package_id": 276,
       "content_ids": [
         332
@@ -906,6 +926,7 @@
     {
       "package_id": 397,
       "content_ids": [
+        582,
         439,
         440
       ]
@@ -1003,6 +1024,18 @@
       "content_ids": [
         532
       ]
+    },
+    {
+      "package_id": 533,
+      "content_ids": [
+        576,
+        577,
+        578,
+        572,
+        573,
+        574,
+        575
+      ]
     }
   ],
   "other_owned_packages": [
@@ -1016,7 +1049,12 @@
     262,
     265,
     271,
+    527,
+    529,
     273,
+    531,
+    534,
+    536,
     280,
     24,
     25,
@@ -1182,7 +1220,7 @@
   "flags_hex": "0",
   "hundred_pct_club": false,
   "twenty_pct_discount": false,
-  "last_season": 5563,
+  "last_season": 5942,
   "has_additional_content": true,
   "has_read_tc": true,
   "has_read_pp": true
