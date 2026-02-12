@@ -35,6 +35,9 @@ interface IRacingClientOptions {
   
   // Enable/disable parameter validation
   validateParams?: boolean;
+  
+  // Optional pluggable stores for caching, deduplication, and rate limiting
+  stores?: HttpClientStores;
 }
 ```
 
@@ -102,6 +105,31 @@ interface IRacingClientOptions {
       validateParams: false  // Disable validation
     });
     ```
+  </TabItem>
+  <TabItem label="stores">
+    **Type:** `HttpClientStores` (optional)
+    
+    Pluggable stores for caching, deduplication, and rate limiting, powered by `@http-client-toolkit/core`. When omitted, the SDK operates without external stores (same behaviour as previous versions).
+    
+    Available store keys:
+    - **`cache`** — A `CacheStore` for caching S3 responses. TTL is automatically derived from presigned URL expiry.
+    - **`rateLimit`** — A `RateLimitStore` or `AdaptiveRateLimitStore` for automatic request throttling.
+    - **`dedup`** — A `DedupStore` for deduplicating concurrent identical requests.
+    
+    ```typescript
+    import { IRacingDataClient } from 'iracing-data-client';
+    
+    const iracing = new IRacingDataClient({
+      email: 'user@example.com',
+      password: 'password',
+      stores: {
+        cache: myCacheStore,
+        rateLimit: myRateLimitStore,
+      }
+    });
+    ```
+    
+    See the [Caching Guide](/guides/caching/) and [Rate Limiting Guide](/guides/rate-limiting/) for detailed examples.
   </TabItem>
 </Tabs>
 

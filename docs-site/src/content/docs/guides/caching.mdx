@@ -87,6 +87,56 @@ await iracing.member.get({ customerIds: [789012] });  // Cache key 2
 await iracing.member.get({ customerIds: [123456] });  // From cache
 ```
 
+## Pluggable Cache Store
+
+<Aside type="tip">
+  New in the latest release: you can now pass a `CacheStore` via the `stores` option to use external caching (Redis, SQLite, etc.) instead of the built-in in-memory cache.
+</Aside>
+
+The SDK integrates with `@http-client-toolkit/core`, which accepts pluggable stores. When you provide a `CacheStore`, S3 responses are cached with a TTL automatically derived from the presigned URL's expiry time — no manual TTL management needed.
+
+### Before (manual caching)
+
+```typescript
+// You had to build your own caching layer
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ }
+});
+
+// Manual cache wrapper needed
+const cache = new Map();
+async function getCars() {
+  if (cache.has('cars')) return cache.get('cars');
+  const cars = await iracing.car.get();
+  cache.set('cars', cars);
+  return cars;
+}
+```
+
+### After (pluggable store)
+
+```typescript
+import { IRacingDataClient } from 'iracing-data-client';
+import { RedisCacheStore } from '@http-client-toolkit/store-redis'; // example
+
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ },
+  stores: {
+    cache: new RedisCacheStore({ url: 'redis://localhost:6379' })
+  }
+});
+
+// Caching is now automatic — S3 responses are cached with
+// TTL derived from the presigned URL expiry
+const cars = await iracing.car.get(); // cached transparently
+```
+
+<Aside type="note">
+  The `stores` option is completely optional. When omitted, the SDK behaves exactly as before — no breaking changes.
+</Aside>
+
+Check the [`@http-client-toolkit`](https://github.com/http-client-toolkit) organisation for available store packages, or implement the `CacheStore` interface yourself.
+
 ## Custom Caching Strategies
 
 ### Application-Level Cache
