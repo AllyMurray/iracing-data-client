@@ -1,4 +1,5 @@
 import * as z from 'zod/mini';
+import { HttpClient, type HttpClientStores } from '@http-client-toolkit/core';
 import {
   type AuthConfig,
   type FetchLike,
@@ -33,6 +34,12 @@ export interface IRacingClientOptions {
    * @default true
    */
   validateParams?: boolean;
+
+  /**
+   * Optional stores for caching, deduplication, and rate limiting.
+   * When omitted, HttpClient operates without stores (same as current behaviour).
+   */
+  stores?: HttpClientStores;
 }
 
 /**
@@ -69,16 +76,17 @@ export class IRacingError extends Error {
  * iRacing Data API Client with OAuth2 authentication.
  */
 export class IRacingClient {
-  private readonly fetchFn: FetchLike;
+  private readonly userFetchFn: FetchLike;
   private readonly authConfig: AuthConfig;
   private readonly tokenManager: TokenManager;
   private readonly validateParams: boolean;
+  private readonly httpClient: HttpClient;
 
   private authenticationPromise: Promise<void> | null = null;
 
   constructor(options: IRacingClientOptions) {
-    this.fetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
-    if (!this.fetchFn) {
+    this.userFetchFn = options.fetchFn ?? globalThis.fetch.bind(globalThis);
+    if (!this.userFetchFn) {
       throw new Error('No fetch available. Pass fetchFn in IRacingClientOptions.');
     }
 
@@ -89,7 +97,7 @@ export class IRacingClient {
     this.tokenManager = new TokenManager({
       clientId: options.auth.clientId,
       clientSecret: options.auth.clientSecret,
-      fetchFn: this.fetchFn,
+      fetchFn: this.userFetchFn,
       onTokenRefresh: options.auth.onTokenRefresh,
     });
 
@@ -105,18 +113,220 @@ export class IRacingClient {
         tokenType: 'Bearer',
       });
     }
+
+    // Create HttpClient with iRacing-specific hooks
+    this.httpClient = new HttpClient(
+      options.stores,
+      {
+        fetchFn: this.createFetchFn(),
+        requestInterceptor: this.createRequestInterceptor(),
+        responseTransformer: (data) => this.mapResponseFromApi(data),
+        errorHandler: (error) => this.mapError(error),
+      },
+    );
+  }
+
+  /**
+   * Normalizes a fetch-like response into a proper Response object.
+   * This ensures compatibility with mocked fetch implementations that return
+   * plain objects instead of real Response instances.
+   */
+  private async normalizeResponse(response: Response): Promise<Response> {
+    if (response instanceof Response) {
+      return response;
+    }
+
+    // Handle mock/non-standard response objects
+    const mock = response as unknown as {
+      ok?: boolean;
+      status?: number;
+      statusText?: string;
+      headers?: { get?: (name: string) => string | null } | Headers;
+      json?: () => Promise<unknown>;
+      text?: () => Promise<string>;
+    };
+
+    let body: string;
+    if (mock.json) {
+      try {
+        const data = await mock.json();
+        body = JSON.stringify(data);
+      } catch {
+        body = mock.text ? await mock.text() : '';
+      }
+    } else if (mock.text) {
+      body = await mock.text();
+    } else {
+      body = '';
+    }
+
+    const headers = new Headers();
+    if (mock.headers) {
+      if (mock.headers instanceof Headers) {
+        mock.headers.forEach((value, key) => headers.set(key, value));
+      } else if (typeof mock.headers.get === 'function') {
+        // Try common header names
+        for (const name of ['content-type', 'cache-control', 'authorization']) {
+          const val = mock.headers.get(name);
+          if (val) headers.set(name, val);
+        }
+      }
+    }
+
+    return new Response(body, {
+      status: mock.status ?? (mock.ok ? 200 : 500),
+      statusText: mock.statusText ?? (mock.ok ? 'OK' : 'Internal Server Error'),
+      headers,
+    });
+  }
+
+  /**
+   * Creates the fetchFn that handles S3 link resolution and CSV responses.
+   */
+  private createFetchFn(): (url: string, init?: RequestInit) => Promise<Response> {
+    return async (url: string, init?: RequestInit): Promise<Response> => {
+      const rawResponse = await this.userFetchFn(url, init);
+      const response = await this.normalizeResponse(rawResponse);
+
+      if (!response.ok) {
+        return response;
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        return response;
+      }
+
+      // Clone to read body without consuming
+      const cloned = response.clone();
+      const data = await cloned.json();
+
+      // Not an S3 link response — return original
+      if (!data.link || !data.expires) {
+        return response;
+      }
+
+      // Follow the S3 pre-signed URL
+      const rawS3Response = await this.userFetchFn(data.link);
+      const s3Response = await this.normalizeResponse(rawS3Response);
+
+      if (!s3Response.ok) {
+        throw new IRacingError(
+          `Failed to fetch from S3: ${s3Response.statusText}`,
+          s3Response.status,
+          s3Response.statusText,
+        );
+      }
+
+      // Calculate max-age from the S3 link's expires field
+      const expiresDate = new Date(data.expires);
+      const maxAge = Math.max(0, Math.floor((expiresDate.getTime() - Date.now()) / 1000));
+
+      // Check if S3 returned CSV
+      const s3ContentType = s3Response.headers.get('content-type') || '';
+      if (s3ContentType.includes('text/csv') || s3ContentType.includes('text/plain')) {
+        const csvText = await s3Response.text();
+        const csvPayload = JSON.stringify({
+          ContentType: 'csv',
+          RawData: csvText,
+          Note: 'This endpoint returns CSV data, not JSON',
+        });
+
+        return new Response(csvPayload, {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': `max-age=${maxAge}`,
+          },
+        });
+      }
+
+      // JSON S3 response — re-wrap with cache headers
+      const s3Body = await s3Response.text();
+      return new Response(s3Body, {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': `max-age=${maxAge}`,
+        },
+      });
+    };
+  }
+
+  /**
+   * Creates the requestInterceptor that injects auth headers.
+   */
+  private createRequestInterceptor(): (url: string, init: RequestInit) => Promise<RequestInit> {
+    return async (_url: string, init: RequestInit): Promise<RequestInit> => {
+      await this.ensureAuthenticated();
+      const authHeaders = await this.getAuthHeaders();
+
+      return {
+        ...init,
+        headers: {
+          ...Object.fromEntries(new Headers(init.headers).entries()),
+          ...authHeaders,
+        },
+      };
+    };
+  }
+
+  /**
+   * Maps errors to IRacingError instances.
+   */
+  private mapError(error: unknown): IRacingError {
+    if (error instanceof IRacingError) {
+      return error;
+    }
+
+    if (error instanceof Response || (error && typeof error === 'object' && 'status' in error)) {
+      const resp = error as Response;
+      const status = resp.status;
+
+      if (status === 503) {
+        return new IRacingError(
+          'iRacing is currently in maintenance mode',
+          503,
+          resp.statusText,
+        );
+      }
+      if (status === 429) {
+        return new IRacingError(
+          'Rate limit exceeded. Please wait before making more requests.',
+          429,
+          resp.statusText,
+        );
+      }
+      if (status === 401) {
+        return new IRacingError(
+          'Authentication failed. Please check your credentials.',
+          401,
+          resp.statusText,
+        );
+      }
+
+      return new IRacingError(
+        `Request failed: ${resp.statusText}`,
+        status,
+        resp.statusText,
+      );
+    }
+
+    if (error instanceof Error) {
+      return new IRacingError(error.message);
+    }
+
+    return new IRacingError(String(error));
   }
 
   /**
    * Ensures the client is authenticated before making API requests.
    */
   private async ensureAuthenticated(): Promise<void> {
-    // Already have tokens
     if (this.tokenManager.hasTokens()) {
       return;
     }
 
-    // Authorization Code flow requires pre-obtained tokens
     if (isAuthorizationCodeAuth(this.authConfig)) {
       throw new OAuthError(
         'invalid_grant',
@@ -125,9 +335,7 @@ export class IRacingClient {
       );
     }
 
-    // Password Limited flow - authenticate
     if (isPasswordLimitedAuth(this.authConfig)) {
-      // Prevent concurrent authentication
       if (!this.authenticationPromise) {
         this.authenticationPromise = this.authenticatePasswordLimited();
       }
@@ -150,7 +358,7 @@ export class IRacingClient {
       clientSecret: this.authConfig.clientSecret,
       username: this.authConfig.username,
       password: this.authConfig.password,
-      fetchFn: this.fetchFn,
+      fetchFn: this.userFetchFn,
     });
 
     this.tokenManager.setTokens(tokens);
@@ -194,7 +402,6 @@ export class IRacingClient {
     if (!params) return undefined;
     const mapped: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(params)) {
-      // Convert camelCase to snake_case
       const snakeKey = key.replace(/[A-Z]/g, (m) => '_' + m.toLowerCase());
       mapped[snakeKey] = value;
     }
@@ -211,7 +418,6 @@ export class IRacingClient {
     if (typeof data === 'object') {
       const mapped: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(data as Record<string, unknown>)) {
-        // Convert snake_case and kebab-case to camelCase
         const camelKey = key
           .replace(/_([a-z0-9])/g, (_, char) => char.toUpperCase())
           .replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
@@ -230,124 +436,19 @@ export class IRacingClient {
     url: string,
     options?: { params?: Record<string, unknown>; schema?: z.ZodMiniType<T> }
   ): Promise<T> {
-    await this.ensureAuthenticated();
-
-    // Convert camelCase params back to snake_case for the API
+    // Convert camelCase params to snake_case for the API
     const apiParams = this.mapParamsToApi(options?.params);
+    const fullUrl = this.buildUrl(url, apiParams);
 
-    const headers = await this.getAuthHeaders();
+    // Delegate to HttpClient (handles auth, S3 resolution, caching, case mapping, errors)
+    const data = await this.httpClient.get<T>(fullUrl);
 
-    const response = await this.fetchFn(this.buildUrl(url, apiParams), {
-      headers,
-    });
-
-    if (!response.ok) {
-      const text = await response.text().catch(() => '');
-      let responseData: unknown = null;
-
-      // Try to parse JSON error response
-      try {
-        responseData = JSON.parse(text);
-      } catch {
-        // Not JSON, use raw text
-      }
-
-      // Handle maintenance mode specifically
-      if (
-        response.status === 503 &&
-        (responseData as Record<string, unknown>)?.error === 'Site Maintenance'
-      ) {
-        throw new IRacingError(
-          `iRacing is currently in maintenance mode: ${(responseData as Record<string, unknown>)?.message || 'Service temporarily unavailable'}`,
-          response.status,
-          response.statusText,
-          responseData
-        );
-      }
-
-      // Handle other specific errors
-      if (response.status === 429) {
-        throw new IRacingError(
-          'Rate limit exceeded. Please wait before making more requests.',
-          response.status,
-          response.statusText,
-          responseData
-        );
-      }
-
-      if (response.status === 401) {
-        throw new IRacingError(
-          'Authentication failed. Please check your credentials.',
-          response.status,
-          response.statusText,
-          responseData
-        );
-      }
-
-      // Generic error
-      const errorMessage =
-        (responseData as Record<string, unknown>)?.message ||
-        (responseData as Record<string, unknown>)?.error ||
-        text ||
-        response.statusText;
-      throw new IRacingError(
-        `Request failed: ${errorMessage}`,
-        response.status,
-        response.statusText,
-        responseData
-      );
+    // Per-request Zod validation (not an HttpClient concern)
+    if (options?.schema) {
+      return options.schema.parse(data);
     }
 
-    const contentType = response.headers.get('content-type') || '';
-
-    // Check if this is a direct JSON response (some endpoints don't use S3)
-    if (contentType.includes('application/json')) {
-      const data = await response.json();
-
-      // Check if it's an S3 link response
-      if (data.link && data.expires) {
-        // Fetch the actual data from S3
-        const s3Response = await this.fetchFn(data.link);
-        if (!s3Response.ok) {
-          throw new IRacingError(
-            `Failed to fetch from S3: ${s3Response.statusText}`,
-            s3Response.status,
-            s3Response.statusText
-          );
-        }
-
-        // Check content type of S3 response
-        const s3ContentType = s3Response.headers.get('content-type') || '';
-        if (s3ContentType.includes('text/csv') || s3ContentType.includes('text/plain')) {
-          // Return CSV as raw text wrapped in an object
-          const csvText = await s3Response.text();
-          return {
-            ContentType: 'csv',
-            RawData: csvText,
-            Note: 'This endpoint returns CSV data, not JSON',
-          } as T;
-        }
-
-        const s3Data = await s3Response.json();
-        const mappedData = this.mapResponseFromApi(s3Data);
-
-        if (options?.schema) {
-          return options.schema.parse(mappedData);
-        }
-
-        return mappedData as T;
-      }
-
-      const mappedData = this.mapResponseFromApi(data);
-
-      if (options?.schema) {
-        return options.schema.parse(mappedData);
-      }
-
-      return mappedData as T;
-    }
-
-    throw new IRacingError(`Unexpected content type: ${contentType}`);
+    return data;
   }
 
   /**

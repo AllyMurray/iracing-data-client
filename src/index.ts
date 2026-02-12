@@ -20,6 +20,9 @@ import { TrackService } from "./track/service";
 // Re-export client
 export { IRacingClient, IRacingError, type IRacingClientOptions };
 
+// Re-export http-client-toolkit types
+export type { HttpClientStores } from '@http-client-toolkit/core';
+
 // Re-export auth types and helpers
 export type {
   AuthConfig,
