@@ -4,10 +4,13 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://allymurray.github.io',
+	base: '/iracing-data-client',
 	integrations: [
 		starlight({
 			title: 'iRacing Data Client',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ally/iracing-data-client' }],
+			customCss: ['./src/styles/custom.css'],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/AllyMurray/iracing-data-client' }],
 			sidebar: [
 				{
 					label: 'Getting Started',

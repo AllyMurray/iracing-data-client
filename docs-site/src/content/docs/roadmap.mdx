@@ -1,0 +1,75 @@
+---
+title: Roadmap
+description: Planned features and improvements for the iRacing Data Client
+---
+
+# Roadmap
+
+This page outlines planned features and improvements for the iRacing Data Client.
+
+## Upcoming Features
+
+### Response Caching (High Priority)
+**Status:** Planned
+
+Intelligent response caching to reduce API calls and improve performance.
+
+**Features:**
+- Automatic caching based on API expiration headers
+- Memory-efficient cache with configurable size limits
+- Cache statistics and debugging tools
+- Per-endpoint cache control
+
+### Built-in Rate Limit Handling (Medium Priority)
+**Status:** Planned
+
+Automatic retry and request throttling when rate limits are hit.
+
+**Features:**
+- Automatic retry with exponential backoff on 429 responses
+- Request queue with configurable concurrency
+- Rate limit statistics
+
+### Browser Support (Low Priority)
+**Status:** Under consideration
+
+Full browser compatibility with CORS handling.
+
+**Features:**
+- Browser-compatible authentication flow
+- CORS proxy support
+- Web Worker support for background operations
+
+### CLI Tool (Low Priority)
+**Status:** Planned for future release
+
+Command-line interface for quick data access.
+
+**Features:**
+- Interactive authentication
+- Data export to CSV/JSON
+- Batch operations
+- Shell completion
+
+## Recently Completed
+
+### v0.1.0
+- OAuth2 authentication (Password Limited and Authorization Code with PKCE)
+- Automatic token refresh with configurable callbacks
+- Full TypeScript support with generated types
+- Automatic authentication and session management
+- S3 link following for data retrieval
+- Parameter transformation (camelCase to snake_case and back)
+- Comprehensive error handling (maintenance mode, rate limit detection, auth errors)
+- 15 service classes covering 72+ endpoints
+- Runtime parameter validation with Zod schemas
+
+## Contributing
+
+Want to help implement these features? Check out our [GitHub repository](https://github.com/AllyMurray/iracing-data-client) and open an issue or pull request!
+
+## Feedback
+
+Have ideas for new features? Let us know by:
+- Opening a [GitHub issue](https://github.com/AllyMurray/iracing-data-client/issues)
+- Starting a [discussion](https://github.com/AllyMurray/iracing-data-client/discussions)

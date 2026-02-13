@@ -17,8 +17,13 @@ Examples for working with track data and assets.
 import { IRacingDataClient } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 async function getAllTracks() {
@@ -125,6 +130,8 @@ async function getTrackDetails(trackId: number) {
 }
 ```
 
-<Aside type="note">
-  This page is under construction. More examples coming soon!
-</Aside>
+## See Also
+
+- [Track Service](/iracing-data-client/api/services/track/) - Full API reference for tracks
+- [Car Service](/iracing-data-client/api/services/car/) - Car data and assets
+- [Series Service](/iracing-data-client/api/services/series/) - Series and schedule information

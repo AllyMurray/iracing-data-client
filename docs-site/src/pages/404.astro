@@ -1,0 +1,25 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: '404: Page not found',
+    template: 'splash',
+    hero: {
+      tagline: "The page you're looking for doesn't exist or has been moved.",
+    },
+  }}
+>
+  <div style="text-align: center; padding: 1rem 0;">
+    <p style="margin-bottom: 1.5rem; color: var(--sl-color-gray-2);">
+      Try using the search bar above, or visit one of these pages:
+    </p>
+    <nav style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/iracing-data-client/" style="display: inline-block; padding: 0.5rem 1.25rem; border-radius: 0.5rem; background: var(--sl-color-accent-low); border: 1px solid var(--sl-color-accent); color: var(--sl-color-white); text-decoration: none; font-weight: 500;">Home</a>
+      <a href="/iracing-data-client/getting-started/introduction/" style="display: inline-block; padding: 0.5rem 1.25rem; border-radius: 0.5rem; background: var(--sl-color-accent-low); border: 1px solid var(--sl-color-accent); color: var(--sl-color-white); text-decoration: none; font-weight: 500;">Getting Started</a>
+      <a href="/iracing-data-client/api/services/" style="display: inline-block; padding: 0.5rem 1.25rem; border-radius: 0.5rem; background: var(--sl-color-accent-low); border: 1px solid var(--sl-color-accent); color: var(--sl-color-white); text-decoration: none; font-weight: 500;">API Reference</a>
+      <a href="/iracing-data-client/examples/member-data/" style="display: inline-block; padding: 0.5rem 1.25rem; border-radius: 0.5rem; background: var(--sl-color-accent-low); border: 1px solid var(--sl-color-accent); color: var(--sl-color-white); text-decoration: none; font-weight: 500;">Examples</a>
+    </nav>
+  </div>
+</StarlightPage>

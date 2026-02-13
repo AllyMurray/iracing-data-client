@@ -17,8 +17,13 @@ Examples for working with race results and session data.
 import { IRacingDataClient } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 async function getSessionResults(subsessionId: number) {
@@ -93,6 +98,8 @@ async function getLapData(subsessionId: number, custId?: number) {
 }
 ```
 
-<Aside type="note">
-  This page is under construction. More examples coming soon!
-</Aside>
+## See Also
+
+- [Results Service](/iracing-data-client/api/services/results/) - Full API reference for results
+- [Season Standings](/iracing-data-client/examples/season-standings/) - Championship standings examples
+- [Member Data](/iracing-data-client/examples/member-data/) - Member profile examples

@@ -1,10 +1,157 @@
 ---
 title: Lookup Service
-description: API reference for the lookup service
+description: API reference for the Lookup service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Lookup Service
 
-Documentation for the lookup service.
+The Lookup service provides reference data and search functionality for drivers, countries, licenses, and more.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const lookupService = iracing.lookup;
+```
+
+## Methods
+
+### `countries()`
+
+Get a list of all countries.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LookupCountriesResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns a list of all countries available in the iRacing system.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const countries = await iracing.lookup.countries();
+
+    countries.forEach(country => {
+      console.log(`${country.countryName} (${country.countryCode})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `drivers(params)`
+
+Search for drivers by name.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LookupDriversResponse>`
+
+    **Parameters:**
+    - `searchTerm: string` **(required)** - Name or partial name to search for
+    - `leagueId?: number` - Limit search to a specific league
+
+    **Description:** Searches for drivers matching the given term. Optionally restrict results to members of a specific league.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Search all drivers
+    const drivers = await iracing.lookup.drivers({
+      searchTerm: 'Max'
+    });
+
+    // Search within a league
+    const leagueDrivers = await iracing.lookup.drivers({
+      searchTerm: 'Max',
+      leagueId: 1234
+    });
+
+    drivers.forEach(driver => {
+      console.log(`${driver.displayName} (ID: ${driver.custId})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `flairs()`
+
+Get available profile flairs.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LookupFlairsResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns the list of available flairs that can be displayed on member profiles.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const flairs = await iracing.lookup.flairs();
+
+    flairs.forEach(flair => {
+      console.log(`${flair.flairDesc}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `get()`
+
+Get general lookup data.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LookupGetResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns general lookup reference data used across the API.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const lookups = await iracing.lookup.get();
+    console.log('Lookup data:', lookups);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `licenses()`
+
+Get all license levels.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LookupLicensesResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns the list of all license levels and groups in the iRacing system.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const licenses = await iracing.lookup.licenses();
+
+    licenses.forEach(license => {
+      console.log(`${license.licenseGroupName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="tip">
+  Country and license data is very stable. Consider caching these responses for the lifetime of your application.
+</Aside>
+
+## See Also
+
+- [Constants Service](/iracing-data-client/api/services/constants/) - System-level reference data
+- [Member Service](/iracing-data-client/api/services/member/) - Member profiles
+- [Services Overview](/iracing-data-client/api/services/) - All available services

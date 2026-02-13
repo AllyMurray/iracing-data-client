@@ -1,10 +1,98 @@
 ---
 title: Constants Service
-description: API reference for the constants service
+description: API reference for the Constants service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Constants Service
 
-Documentation for the constants service.
+The Constants service provides access to system-level reference data used throughout the iRacing platform.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const constantsService = iracing.constants;
+```
+
+## Methods
+
+### `categories()`
+
+Get all competition categories.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<ConstantsCategoriesResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns the list of competition categories (e.g. Oval, Road, Dirt Oval, Dirt Road).
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const categories = await iracing.constants.categories();
+
+    categories.forEach(category => {
+      console.log(`${category.label} (ID: ${category.value})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `divisions()`
+
+Get all license divisions.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<ConstantsDivisionsResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns the list of iRacing license divisions used for competition grouping.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const divisions = await iracing.constants.divisions();
+
+    divisions.forEach(division => {
+      console.log(`${division.label} (ID: ${division.value})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `eventTypes()`
+
+Get all session event types.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<ConstantsEventTypesResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns the list of event types (e.g. Practice, Qualifying, Race, Time Trial).
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const eventTypes = await iracing.constants.eventTypes();
+
+    eventTypes.forEach(eventType => {
+      console.log(`${eventType.label} (ID: ${eventType.value})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="tip">
+  Constants data is very stable and rarely changes. Consider caching these responses for the lifetime of your application. Response caching is coming in a future release.
+</Aside>
+
+## See Also
+
+- [Lookup Service](/iracing-data-client/api/services/lookup/) - Additional reference data
+- [Services Overview](/iracing-data-client/api/services/) - All available services

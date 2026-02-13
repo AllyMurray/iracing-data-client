@@ -1,16 +1,17 @@
 # iRacing Data Client
 
-A TypeScript Data Client for the iRacing Data API with full type safety and authentication handling.
+A TypeScript client for the iRacing Data API with full type safety and automatic OAuth2 authentication.
 
-## Features
+> **ℹ️ Authentication has been migrated to the new iRacing OAuth2 system.** The legacy email/password authentication has been replaced with OAuth2 client credentials. See the [Authentication guide](https://allymurray.github.io/iracing-data-client/getting-started/authentication/) for details.
 
-- 🏎️ Complete coverage of iRacing Data API (72+ endpoints)
-- 🔒 Built-in authentication with cookie management
+- 🏎️ Complete coverage of the iRacing Data API (72+ endpoints)
+- 🔒 OAuth2 authentication with automatic token refresh
 - 📝 Full TypeScript support with generated types
-- 🎯 Tree-shakeable imports using Zod schemas
-- 🚀 Modular architecture with service-based organization
-- 🛡️ Proper error handling with maintenance mode detection
 - 🔄 Automatic camelCase conversion for JavaScript conventions
+- 🎯 Runtime parameter validation using Zod schemas
+- 🛡️ Maintenance mode and rate limit detection
+
+**[Documentation](https://allymurray.github.io/iracing-data-client)**
 
 ## Installation
 
@@ -24,36 +25,26 @@ yarn add iracing-data-client
 
 ## Quick Start
 
+You'll need OAuth credentials from iRacing — see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials) to register.
+
 ```typescript
 import { IRacingDataClient } from 'iracing-data-client';
 
-// Initialize with credentials
 const dataClient = new IRacingDataClient({
-  email: 'your-email@example.com',
-  password: 'your-password'
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID,
+    clientSecret: process.env.IRACING_CLIENT_SECRET,
+    username: process.env.IRACING_USERNAME,
+    password: process.env.IRACING_PASSWORD,
+  },
 });
 
-// Fetch track data
 const tracks = await dataClient.track.get();
-console.log(tracks);
-
-// Get member info
 const member = await dataClient.member.get({ custIds: [123456] });
-console.log(member);
 ```
 
-## Environment Variables
-
-For testing and development, create a `.env` file:
-
-```env
-EMAIL=your-iracing-email@example.com
-PASSWORD=your-iracing-password
-```
-
-## Available Services
-
-The Data Client is organized into the following services:
+## Services
 
 - **car** - Car assets and information
 - **carclass** - Car class data
@@ -63,7 +54,7 @@ The Data Client is organized into the following services:
 - **league** - League information and standings
 - **lookup** - Countries, drivers, licenses, etc.
 - **member** - Member profiles, awards, participation
-- **results** - Race results and lap data  
+- **results** - Race results and lap data
 - **season** - Season information and race guides
 - **series** - Series data and statistics
 - **stats** - Member statistics and world records
@@ -71,9 +62,9 @@ The Data Client is organized into the following services:
 - **timeAttack** - Time attack season results
 - **track** - Track assets and configuration
 
-## Error Handling
+See the [API reference](https://allymurray.github.io/iracing-data-client/api/services) for full details.
 
-The Data Client includes proper error handling for common iRacing API scenarios:
+## Error Handling
 
 ```typescript
 import { IRacingDataClient, IRacingError } from 'iracing-data-client';
@@ -84,112 +75,18 @@ try {
   if (error instanceof IRacingError) {
     if (error.isMaintenanceMode) {
       console.log('iRacing is in maintenance mode');
-      // Handle gracefully
       return;
     }
-    
+
     console.log(`API Error: ${error.message}`);
     console.log(`Status: ${error.status}`);
   }
 }
 ```
 
-## Configuration Options
-
-```typescript
-const dataClient = new IRacingDataClient({
-  email: 'your-email@example.com',        // iRacing account email
-  password: 'your-password',              // iRacing account password
-  headers: { 'User-Agent': 'MyApp/1.0' }, // Custom headers (optional)
-  fetchFn: customFetch,                   // Custom fetch function (optional)
-  validateParams: true                    // Enable parameter validation (optional)
-});
-```
-
-## Development
-
-### Scripts
-
-- `npm run sdk:generate` - Generate Data Client from API documentation
-- `npm run sdk:test` - Test the Data Client with live API calls
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run test` - Run unit tests
-
-### Generating the Data Client
-
-The Data Client is auto-generated from iRacing's API documentation:
-
-```bash
-npm run sdk:generate
-```
-
-This creates:
-- Individual service files in `src/[service]/service.ts`
-- Type definitions in `src/[service]/types.ts`  
-- Main export file `src/index.ts`
-- HTTP client with authentication in `src/client.ts`
-
-### Testing
-
-Test the Data Client against the live iRacing API:
-
-```bash
-npm run sdk:test
-```
-
-Make sure your credentials are in the `.env` file.
-
-## API Reference
-
-### Authentication
-
-The Data Client handles iRacing's cookie-based authentication automatically. On first request, it will:
-
-1. Log in with your credentials
-2. Store authentication cookies
-3. Follow S3 redirect links to fetch actual data
-4. Handle CSV responses where applicable
-
-### Response Types
-
-All endpoints return fully typed responses. For example:
-
-```typescript
-// Member service
-const members = await dataClient.member.get({ custIds: [123456] });
-// members is typed as MemberGetResponse[]
-
-// Track service  
-const tracks = await dataClient.track.get();
-// tracks is typed as TrackGetResponse (TrackGetItem[])
-```
-
-### Parameter Validation
-
-When `validateParams: true` is set, the Data Client validates all parameters using Zod schemas:
-
-```typescript
-const dataClient = new IRacingDataClient({ 
-  email: 'test@example.com',
-  password: 'password',
-  validateParams: true 
-});
-
-// This will throw if seasonId is not a number
-await dataClient.season.list({ seasonId: 'invalid' }); // ❌ Validation error
-await dataClient.season.list({ seasonId: 12345 });     // ✅ Valid
-```
-
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run type checking (`npm run typecheck`)
-5. Test with the live API (`npm run sdk:test`)
-6. Commit your changes (`git commit -m 'Add amazing feature'`)
-7. Push to the branch (`git push origin feature/amazing-feature`)
-8. Open a Pull Request
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, including how to configure secrets with dotenvx and run integration tests.
 
 ## License
 
@@ -197,4 +94,4 @@ ISC License - see LICENSE file for details.
 
 ## Disclaimer
 
-This is an unofficial Data Client for the iRacing Data API. iRacing is a trademark of iRacing.com Motorsport Simulations, LLC.
+This is an unofficial client for the iRacing Data API. iRacing is a trademark of iRacing.com Motorsport Simulations, LLC.

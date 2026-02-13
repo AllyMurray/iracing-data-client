@@ -61,8 +61,13 @@ class IRacingError extends Error {
 import { IRacingDataClient, IRacingError } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 try {
@@ -127,12 +132,12 @@ try {
         console.log('🔐 Authentication failed');
         
         // Check if credentials are present
-        if (!process.env.IRACING_EMAIL || !process.env.IRACING_PASSWORD) {
+        if (!process.env.IRACING_CLIENT_ID || !process.env.IRACING_CLIENT_SECRET) {
           throw new Error('Missing iRacing credentials in environment');
         }
-        
+
         // Credentials might be invalid
-        console.error('Please check your iRacing email and password');
+        console.error('Please check your iRacing credentials');
         process.exit(1);
       }
     }
@@ -258,7 +263,7 @@ class IRacingService {
     try {
       // Try to get fresh data
       const data = await this.iracing.member.get({ 
-        customerIds: [custId] 
+        custIds: [custId] 
       });
       
       // Cache successful response
@@ -391,7 +396,7 @@ describe('Error Handling', () => {
     
     (IRacingDataClient as jest.Mock).mockImplementation(() => mockSDK);
     
-    const iracing = new IRacingDataClient({ email: 'test', password: 'test' });
+    const iracing = new IRacingDataClient({ auth: { type: 'password-limited', clientId: 'test', clientSecret: 'test', username: 'test', password: 'test' } });
     
     await expect(iracing.member.info()).rejects.toThrow(mockError);
     expect(mockError.isMaintenanceMode).toBe(true);
@@ -441,6 +446,6 @@ describe('Error Handling', () => {
 
 ## Next Steps
 
-- Review the [Client API](/api/client/) for error class details
-- See [Authentication Guide](/getting-started/authentication/) for auth error handling
-- Check [Rate Limiting Guide](/guides/rate-limiting/) for handling rate limits
+- Review the [Client API](/iracing-data-client/api/client/) for error class details
+- See [Authentication Guide](/iracing-data-client/getting-started/authentication/) for auth error handling
+- Check [Rate Limiting Guide](/iracing-data-client/guides/rate-limiting/) for handling rate limits

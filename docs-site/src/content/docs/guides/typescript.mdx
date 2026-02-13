@@ -73,7 +73,7 @@ TypeScript provides full type safety for nested properties:
 
 ```typescript
 const members = await iracing.member.get({
-  customerIds: [123456]
+  custIds: [123456]
 });
 
 // TypeScript knows the structure
@@ -121,7 +121,7 @@ await iracing.member.get();
 
 // ✅ Valid - required parameter provided
 await iracing.member.get({
-  customerIds: [123456]
+  custIds: [123456]
 });
 
 // Optional parameters
@@ -140,7 +140,7 @@ All parameters are validated using Zod schemas:
 // The SDK validates types at runtime too
 try {
   await iracing.member.get({
-    customerIds: 'not-an-array'  // ❌ TypeScript error
+    custIds: 'not-an-array'  // ❌ TypeScript error
   });
 } catch (error) {
   // Zod validation error if types are bypassed
@@ -261,7 +261,7 @@ type PartialParams = Partial<MemberGetParams>;
 type StrictParams = Required<MemberGetParams>;
 
 // Pick specific properties
-type IdOnly = Pick<MemberGetParams, 'customerIds'>;
+type IdOnly = Pick<MemberGetParams, 'custIds'>;
 
 // Omit properties
 type NoLicenses = Omit<MemberGetParams, 'includeLicenses'>;
@@ -324,7 +324,7 @@ class MemberQueryBuilder {
   private params: Partial<MemberGetParams> = {};
   
   withIds(...ids: number[]): this {
-    this.params.customerIds = ids;
+    this.params.custIds = ids;
     return this;
   }
   
@@ -334,7 +334,7 @@ class MemberQueryBuilder {
   }
   
   async execute(): Promise<MemberGetResponse> {
-    if (!this.params.customerIds) {
+    if (!this.params.custIds) {
       throw new Error('Customer IDs required');
     }
     
@@ -359,7 +359,7 @@ class MemberRepository {
   
   async findById(id: number): Promise<Member | null> {
     const response = await this.iracing.member.get({
-      customerIds: [id]
+      custIds: [id]
     });
     
     return response.members[0] || null;
@@ -367,7 +367,7 @@ class MemberRepository {
   
   async findByIds(ids: number[]): Promise<Member[]> {
     const response = await this.iracing.member.get({
-      customerIds: ids
+      custIds: ids
     });
     
     return response.members;
@@ -428,6 +428,6 @@ class MemberRepository {
 
 ## Next Steps
 
-- Review [API Reference](/api/services/) for all available types
-- See [Examples](/examples/member-data/) for real-world TypeScript usage
-- Check [Error Handling](/guides/error-handling/) for typed error handling
+- Review [API Reference](/iracing-data-client/api/services/) for all available types
+- See [Examples](/iracing-data-client/examples/member-data/) for real-world TypeScript usage
+- Check [Error Handling](/iracing-data-client/guides/error-handling/) for typed error handling

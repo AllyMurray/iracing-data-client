@@ -1,10 +1,471 @@
 ---
 title: Stats Service
-description: API reference for the stats service
+description: API reference for the Stats service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Stats Service
 
-Documentation for the stats service.
+The Stats service provides comprehensive access to member statistics, season standings, time trial results, qualifying results, and world records.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const statsService = iracing.stats;
+```
+
+## Member Statistics
+
+### `memberBests(params?)`
+
+Get a member's personal best lap times.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsMemberBestsResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+    - `carId?: number` - Filter to a specific car
+
+    **Description:** Returns the member's personal best lap times across all tracks.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Get your own bests
+    const myBests = await iracing.stats.memberBests();
+
+    // Get bests for a specific car
+    const carBests = await iracing.stats.memberBests({
+      carId: 123
+    });
+
+    // Get another member's bests
+    const otherBests = await iracing.stats.memberBests({
+      custId: 123456
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `memberCareer(params?)`
+
+Get a member's career statistics.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsMemberCareerResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+
+    **Description:** Returns career-wide statistics including starts, wins, top fives, and more.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const career = await iracing.stats.memberCareer({
+      custId: 123456
+    });
+
+    career.forEach(category => {
+      console.log(`${category.categoryName}:`);
+      console.log(`  Starts: ${category.starts}`);
+      console.log(`  Wins: ${category.wins}`);
+      console.log(`  Top 5s: ${category.top5}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `memberDivision(params)`
+
+Get division statistics for a member.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `eventType: number` **(required)** - The event type
+
+    **Description:** Returns the member's division-level statistics for a specific season and event type.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const division = await iracing.stats.memberDivision({
+      seasonId: 3456,
+      eventType: 5  // Race
+    });
+
+    console.log('Division stats:', division);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `memberRecap(params?)`
+
+Get a member's season recap.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsMemberRecapResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+    - `year?: number` - Filter by year
+    - `season?: number` - Filter by season quarter (1-4)
+
+    **Description:** Returns a recap of the member's performance for a season or year.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const recap = await iracing.stats.memberRecap({
+      custId: 123456,
+      year: 2024,
+      season: 3
+    });
+
+    console.log('Season recap:', recap);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `memberRecentRaces(params?)`
+
+Get a member's recent race results.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsMemberRecentRacesResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+
+    **Description:** Returns the member's most recent race results.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const recentRaces = await iracing.stats.memberRecentRaces({
+      custId: 123456
+    });
+
+    recentRaces.races.forEach(race => {
+      console.log(`${race.seriesName} at ${race.trackName}`);
+      console.log(`  Finished: P${race.finishPosition}`);
+      console.log(`  iRating change: ${race.newIrating - race.oldIrating}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `memberSummary(params?)`
+
+Get a quick summary of a member's statistics.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsMemberSummaryResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+
+    **Description:** Returns a concise summary of the member's racing statistics.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const summary = await iracing.stats.memberSummary({
+      custId: 123456
+    });
+
+    console.log('Member summary:', summary);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `memberYearly(params?)`
+
+Get a member's yearly statistics.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsMemberYearlyResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+
+    **Description:** Returns yearly aggregated statistics for the member.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const yearly = await iracing.stats.memberYearly({
+      custId: 123456
+    });
+
+    yearly.forEach(year => {
+      console.log(`${year.year}: ${year.starts} starts, ${year.wins} wins`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Season Standings
+
+### `seasonDriverStandings(params)`
+
+Get driver standings for a season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId: number` **(required)** - The car class ID
+    - `division?: number` - Filter by division
+    - `raceWeekNum?: number` - Standings up to a specific week
+
+    **Description:** Returns driver championship standings for a specific season and car class.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const standings = await iracing.stats.seasonDriverStandings({
+      seasonId: 3456,
+      carClassId: 789
+    });
+
+    // Filter by division
+    const divStandings = await iracing.stats.seasonDriverStandings({
+      seasonId: 3456,
+      carClassId: 789,
+      division: 1
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonSupersessionStandings(params)`
+
+Get supersession standings for a season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId: number` **(required)** - The car class ID
+    - `division?: number` - Filter by division
+    - `raceWeekNum?: number` - Standings up to a specific week
+
+    **Description:** Returns supersession standings for a specific season and car class.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const standings = await iracing.stats.seasonSupersessionStandings({
+      seasonId: 3456,
+      carClassId: 789
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonTeamStandings(params)`
+
+Get team standings for a season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId: number` **(required)** - The car class ID
+    - `raceWeekNum?: number` - Standings up to a specific week
+
+    **Description:** Returns team championship standings for a specific season and car class.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const teamStandings = await iracing.stats.seasonTeamStandings({
+      seasonId: 3456,
+      carClassId: 789
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Time Trial & Qualifying
+
+### `seasonTtStandings(params)`
+
+Get time trial standings for a season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId: number` **(required)** - The car class ID
+    - `division?: number` - Filter by division
+    - `raceWeekNum?: number` - Standings up to a specific week
+
+    **Description:** Returns time trial standings for a specific season and car class.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const ttStandings = await iracing.stats.seasonTtStandings({
+      seasonId: 3456,
+      carClassId: 789
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonTtResults(params)`
+
+Get time trial results for a specific week.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId: number` **(required)** - The car class ID
+    - `raceWeekNum: number` **(required)** - The race week number
+    - `division?: number` - Filter by division
+
+    **Description:** Returns time trial results for a specific week in a season.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const ttResults = await iracing.stats.seasonTtResults({
+      seasonId: 3456,
+      carClassId: 789,
+      raceWeekNum: 5
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonQualifyResults(params)`
+
+Get qualifying results for a specific week.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<unknown>`
+
+    **Parameters:**
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId: number` **(required)** - The car class ID
+    - `raceWeekNum: number` **(required)** - The race week number
+    - `division?: number` - Filter by division
+
+    **Description:** Returns qualifying results for a specific week in a season.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const qualResults = await iracing.stats.seasonQualifyResults({
+      seasonId: 3456,
+      carClassId: 789,
+      raceWeekNum: 5
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## World Records
+
+### `worldRecords(params)`
+
+Get world records for a car/track combination.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<StatsWorldRecordsResponse>`
+
+    **Parameters:**
+    - `carId: number` **(required)** - The car ID
+    - `trackId: number` **(required)** - The track ID
+    - `seasonYear?: number` - Filter by year
+    - `seasonQuarter?: number` - Filter by quarter (1-4)
+
+    **Description:** Returns the world record lap times for a specific car and track combination.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const records = await iracing.stats.worldRecords({
+      carId: 123,
+      trackId: 456
+    });
+
+    // Filter by season
+    const seasonRecords = await iracing.stats.worldRecords({
+      carId: 123,
+      trackId: 456,
+      seasonYear: 2024,
+      seasonQuarter: 3
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Common Use Cases
+
+### Build a Driver Profile
+
+```typescript
+async function getDriverProfile(custId: number) {
+  const [career, bests, recentRaces, summary] = await Promise.all([
+    iracing.stats.memberCareer({ custId }),
+    iracing.stats.memberBests({ custId }),
+    iracing.stats.memberRecentRaces({ custId }),
+    iracing.stats.memberSummary({ custId }),
+  ]);
+
+  return { career, bests, recentRaces, summary };
+}
+```
+
+### Track Season Progress
+
+```typescript
+async function getSeasonProgress(seasonId: number, carClassId: number) {
+  const [driverStandings, teamStandings, ttStandings] = await Promise.all([
+    iracing.stats.seasonDriverStandings({ seasonId, carClassId }),
+    iracing.stats.seasonTeamStandings({ seasonId, carClassId }),
+    iracing.stats.seasonTtStandings({ seasonId, carClassId }),
+  ]);
+
+  return { driverStandings, teamStandings, ttStandings };
+}
+```
+
+## See Also
+
+- [Member Service](/iracing-data-client/api/services/member/) - Member profiles and chart data
+- [Results Service](/iracing-data-client/api/services/results/) - Detailed race results
+- [Driver Stats Service](/iracing-data-client/api/services/driver-stats/) - Category-specific statistics
+- [Services Overview](/iracing-data-client/api/services/) - All available services

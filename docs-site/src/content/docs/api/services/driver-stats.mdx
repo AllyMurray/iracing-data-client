@@ -1,10 +1,176 @@
 ---
 title: Driver Stats Service
-description: API reference for the Driver Stats service
+description: API reference for the Driver Stats by Category service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # Driver Stats Service
 
-Documentation for the driver-stats service.
+The Driver Stats by Category service provides statistical data for drivers broken down by racing category.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const driverStatsService = iracing.driverStatsByCategory;
+```
+
+## Methods
+
+### `oval()`
+
+Get driver statistics for the Oval category.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<DriverStatsByCategoryOvalResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns oval racing statistics for the authenticated driver.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const ovalStats = await iracing.driverStatsByCategory.oval();
+    console.log('Oval Stats:', ovalStats);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `road()`
+
+Get driver statistics for the Road category.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<DriverStatsByCategoryRoadResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns road racing statistics for the authenticated driver.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const roadStats = await iracing.driverStatsByCategory.road();
+    console.log('Road Stats:', roadStats);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `dirtOval()`
+
+Get driver statistics for the Dirt Oval category.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<DriverStatsByCategoryDirtOvalResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns dirt oval racing statistics for the authenticated driver.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const dirtOvalStats = await iracing.driverStatsByCategory.dirtOval();
+    console.log('Dirt Oval Stats:', dirtOvalStats);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `dirtRoad()`
+
+Get driver statistics for the Dirt Road category.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<DriverStatsByCategoryDirtRoadResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns dirt road racing statistics for the authenticated driver.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const dirtRoadStats = await iracing.driverStatsByCategory.dirtRoad();
+    console.log('Dirt Road Stats:', dirtRoadStats);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `sportsCar()`
+
+Get driver statistics for the Sports Car category.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<DriverStatsByCategorySportsCarResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns sports car racing statistics for the authenticated driver.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const sportsCarStats = await iracing.driverStatsByCategory.sportsCar();
+    console.log('Sports Car Stats:', sportsCarStats);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `formulaCar()`
+
+Get driver statistics for the Formula Car category.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<DriverStatsByCategoryFormulaCarResponse>`
+
+    **Parameters:** None
+
+    **Description:** Returns formula car racing statistics for the authenticated driver.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const formulaCarStats = await iracing.driverStatsByCategory.formulaCar();
+    console.log('Formula Car Stats:', formulaCarStats);
+    ```
+  </TabItem>
+</Tabs>
+
+## Common Use Cases
+
+### Get All Category Stats
+
+```typescript
+async function getAllCategoryStats() {
+  const [oval, road, dirtOval, dirtRoad, sportsCar, formulaCar] =
+    await Promise.all([
+      iracing.driverStatsByCategory.oval(),
+      iracing.driverStatsByCategory.road(),
+      iracing.driverStatsByCategory.dirtOval(),
+      iracing.driverStatsByCategory.dirtRoad(),
+      iracing.driverStatsByCategory.sportsCar(),
+      iracing.driverStatsByCategory.formulaCar(),
+    ]);
+
+  return { oval, road, dirtOval, dirtRoad, sportsCar, formulaCar };
+}
+```
+
+<Aside type="note">
+  These endpoints return data for the authenticated user. Use the [Stats Service](/iracing-data-client/api/services/stats/) for statistics about other members.
+</Aside>
+
+## See Also
+
+- [Stats Service](/iracing-data-client/api/services/stats/) - General statistics and standings
+- [Member Service](/iracing-data-client/api/services/member/) - Member profiles and chart data
+- [Services Overview](/iracing-data-client/api/services/) - All available services

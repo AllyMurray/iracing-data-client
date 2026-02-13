@@ -3,8 +3,44 @@ title: Time Attack Service
 description: API reference for the Time Attack service
 ---
 
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
 # Time Attack Service
 
-Documentation for the time-attack service.
+The Time Attack service provides access to time attack competition data.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const timeAttackService = iracing.timeAttack;
+```
+
+## Methods
+
+### `memberSeasonResults(params)`
+
+Get a member's time attack season results.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<TimeAttackMemberSeasonResultsResponse>`
+
+    **Parameters:**
+    - `taCompSeasonId: number` **(required)** - The time attack competition season ID
+
+    **Description:** Returns the authenticated member's results for a specific time attack competition season.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const results = await iracing.timeAttack.memberSeasonResults({
+      taCompSeasonId: 456
+    });
+
+    console.log('Time Attack Results:', results);
+    ```
+  </TabItem>
+</Tabs>
+
+## See Also
+
+- [Stats Service](/iracing-data-client/api/services/stats/) - Time trial standings and results
+- [Season Service](/iracing-data-client/api/services/season/) - Season schedules
+- [Services Overview](/iracing-data-client/api/services/) - All available services

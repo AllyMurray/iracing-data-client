@@ -66,7 +66,7 @@ Get information about specific members by customer ID.
     **Returns:** `Promise<MemberGetResponse>`
     
     **Parameters:**
-    - `customerIds: number[]` - Array of customer IDs (max 50)
+    - `custIds: number[]` - Array of customer IDs (max 50)
     - `includeLicenses?: boolean` - Include license information
     
     **Description:** Fetches profile information for up to 50 members at once.
@@ -74,7 +74,7 @@ Get information about specific members by customer ID.
   <TabItem label="Example">
     ```typescript
     const members = await iracing.member.get({
-      customerIds: [123456, 789012, 345678],
+      custIds: [123456, 789012, 345678],
       includeLicenses: true
     });
     
@@ -249,7 +249,7 @@ Get participation credit balance for the authenticated member.
 ```typescript
 async function getCompleteProfile(custId: number) {
   const [member, profile, awards, recentRaces] = await Promise.all([
-    iracing.member.get({ customerIds: [custId] }),
+    iracing.member.get({ custIds: [custId] }),
     iracing.member.profile({ custId }),
     iracing.member.awards({ custId }),
     iracing.stats.memberRecentRaces({ custId })
@@ -286,7 +286,7 @@ async function trackIRatingChange(custId: number, categoryId: number) {
 ```typescript
 async function checkLicenseProgress(custId: number) {
   const member = await iracing.member.get({
-    customerIds: [custId],
+    custIds: [custId],
     includeLicenses: true
   });
   
@@ -336,6 +336,6 @@ All methods return fully typed responses. Key types include:
 
 ## See Also
 
-- [Stats Service](/api/services/stats/) - For member statistics
-- [Results Service](/api/services/results/) - For race results
-- [League Service](/api/services/league/) - For league membership
+- [Stats Service](/iracing-data-client/api/services/stats/) - For member statistics
+- [Results Service](/iracing-data-client/api/services/results/) - For race results
+- [League Service](/iracing-data-client/api/services/league/) - For league membership

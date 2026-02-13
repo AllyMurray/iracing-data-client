@@ -3,15 +3,16 @@ title: iRacing Data Client
 description: A fully typed TypeScript client for the iRacing Data API
 template: splash
 hero:
-  tagline: Access the complete iRacing Data API with TypeScript support, automatic caching, and comprehensive error handling
+  tagline: Access the complete iRacing Data API with TypeScript support, OAuth2 authentication, and comprehensive error handling
   image:
-    file: ../../assets/houston.webp
+    dark: ../../assets/hero-dark.png
+    light: ../../assets/hero-light.png
   actions:
     - text: Get Started
-      link: /getting-started/introduction/
+      link: /iracing-data-client/getting-started/introduction/
       icon: right-arrow
     - text: View on GitHub
-      link: https://github.com/ally/iracing-data-client
+      link: https://github.com/AllyMurray/iracing-data-client
       icon: github
       variant: minimal
 ---
@@ -20,7 +21,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Features
 
-<CardGrid stagger>
+<CardGrid>
 	<Card title="Fully Typed" icon="document">
 		Complete TypeScript types for all API endpoints with IntelliSense support and compile-time safety.
 	</Card>
@@ -28,7 +29,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 		SDK automatically generated from the official iRacing API documentation for always up-to-date methods.
 	</Card>
 	<Card title="Smart Caching" icon="laptop">
-		Built-in response caching with automatic expiration based on API response headers.
+		Response caching with automatic expiration based on API response headers. *(Coming soon)*
 	</Card>
 	<Card title="Error Handling" icon="warning">
 		Comprehensive error handling with specific error types for maintenance mode, rate limiting, and authentication.
@@ -42,17 +43,21 @@ import { IRacingDataClient } from 'iracing-data-client';
 
 // Initialize the Data Client
 const iracing = new IRacingDataClient({
-  email: 'your-email@example.com',
-  password: 'your-password'
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID,
+    clientSecret: process.env.IRACING_CLIENT_SECRET,
+    username: process.env.IRACING_USERNAME,
+    password: process.env.IRACING_PASSWORD,
+  },
 });
 
-// Get member information
-const memberInfo = await iracing.member.info();
-console.log(`Welcome, ${memberInfo.displayName}!`);
+// Get all tracks
+const tracks = await iracing.track.get();
+console.log(`Found ${tracks.length} tracks`);
 
-// Get current series
-const series = await iracing.series.get();
-console.log(`Found ${series.length} series`);
+// Get member data
+const member = await iracing.member.get({ custIds: [123456] });
 ```
 
 ## Services Overview
@@ -77,18 +82,18 @@ The SDK provides access to all iRacing Data API endpoints through organized serv
 <CardGrid>
 	<Card title="Installation" icon="download">
 		Learn how to install and configure the Data Client in your project.
-		[Get Started →](/getting-started/installation/)
+		[Get Started →](/iracing-data-client/getting-started/installation/)
 	</Card>
 	<Card title="Authentication" icon="key">
 		Set up authentication with your iRacing credentials.
-		[Learn More →](/getting-started/authentication/)
+		[Learn More →](/iracing-data-client/getting-started/authentication/)
 	</Card>
 	<Card title="API Reference" icon="open-book">
 		Explore the complete API documentation for all services.
-		[Browse API →](/api/services/)
+		[Browse API →](/iracing-data-client/api/services/)
 	</Card>
 	<Card title="Examples" icon="code">
 		See real-world examples of using the Data Client.
-		[View Examples →](/examples/member-data/)
+		[View Examples →](/iracing-data-client/examples/member-data/)
 	</Card>
 </CardGrid>

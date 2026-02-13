@@ -17,8 +17,13 @@ Examples for fetching and analyzing season standings and championship data.
 import { IRacingDataClient } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL!,
-  password: process.env.IRACING_PASSWORD!
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 
 async function getDriverStandings(seasonId: number, carClassId: number) {
@@ -91,6 +96,8 @@ async function getTeamStandings(seasonId: number, carClassId: number) {
 }
 ```
 
-<Aside type="note">
-  This page is under construction. More examples coming soon!
-</Aside>
+## See Also
+
+- [Stats Service](/iracing-data-client/api/services/stats/) - Full API reference for stats
+- [Race Results](/iracing-data-client/examples/race-results/) - Race results examples
+- [Member Data](/iracing-data-client/examples/member-data/) - Member profile examples

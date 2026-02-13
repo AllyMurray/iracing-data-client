@@ -1,10 +1,324 @@
 ---
 title: League Service
-description: API reference for the league service
+description: API reference for the League service
 ---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
 
 # League Service
 
-Documentation for the league service.
+The League service provides comprehensive access to league management, rosters, seasons, standings, and sessions.
 
-See the [Services Overview](/api/services/) for general information.
+```typescript
+const leagueService = iracing.league;
+```
+
+## Methods
+
+### `get(params)`
+
+Get detailed information about a league.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueGetResponse>`
+
+    **Parameters:**
+    - `leagueId: number` **(required)** - The league ID
+    - `includeLicenses?: boolean` - Include license information for members
+
+    **Description:** Returns detailed information about a specific league.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const league = await iracing.league.get({
+      leagueId: 1234,
+      includeLicenses: true
+    });
+
+    console.log(`${league.leagueName}`);
+    console.log(`Owner: ${league.ownerDisplayName}`);
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `directory(params?)`
+
+Search the league directory.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueDirectoryResponse>`
+
+    **Parameters:**
+    - `search?: string` - Search term for league name
+    - `tag?: string` - Filter by tag
+    - `restrictToMember?: boolean` - Only leagues you belong to
+    - `restrictToRecruiting?: boolean` - Only leagues currently recruiting
+    - `restrictToFriends?: boolean` - Only leagues with friends
+    - `restrictToWatched?: boolean` - Only watched leagues
+    - `minimumRosterCount?: number` - Minimum number of members
+    - `maximumRosterCount?: number` - Maximum number of members
+    - `lowerbound?: number` - Lower bound for pagination
+    - `upperbound?: number` - Upper bound for pagination
+    - `sort?: string` - Sort field
+    - `order?: string` - Sort order
+
+    **Description:** Searches the league directory with various filtering and sorting options.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Search for leagues by name
+    const leagues = await iracing.league.directory({
+      search: 'Endurance',
+      restrictToRecruiting: true
+    });
+
+    // Get your leagues
+    const myLeagues = await iracing.league.directory({
+      restrictToMember: true
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `membership(params?)`
+
+Get league membership information.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueMembershipResponse>`
+
+    **Parameters:**
+    - `custId?: number` - Customer ID (defaults to authenticated user)
+    - `includeLeague?: boolean` - Include full league details
+
+    **Description:** Returns the leagues that a member belongs to.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    // Get your own memberships
+    const memberships = await iracing.league.membership({
+      includeLeague: true
+    });
+
+    // Get another member's memberships
+    const otherMemberships = await iracing.league.membership({
+      custId: 123456
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `roster(params)`
+
+Get a league's roster.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueRosterResponse>`
+
+    **Parameters:**
+    - `leagueId: number` **(required)** - The league ID
+    - `includeLicenses?: boolean` - Include license information
+
+    **Description:** Returns the full member roster for a league.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const roster = await iracing.league.roster({
+      leagueId: 1234,
+      includeLicenses: true
+    });
+
+    roster.members.forEach(member => {
+      console.log(`${member.displayName} (ID: ${member.custId})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasons(params)`
+
+Get a league's seasons.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueSeasonsResponse>`
+
+    **Parameters:**
+    - `leagueId: number` **(required)** - The league ID
+    - `retired?: boolean` - Include retired seasons
+
+    **Description:** Returns all seasons for a league, optionally including retired ones.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const seasons = await iracing.league.seasons({
+      leagueId: 1234,
+      retired: false
+    });
+
+    seasons.forEach(season => {
+      console.log(`${season.seasonName} (ID: ${season.seasonId})`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonStandings(params)`
+
+Get standings for a league season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueSeasonStandingsResponse>`
+
+    **Parameters:**
+    - `leagueId: number` **(required)** - The league ID
+    - `seasonId: number` **(required)** - The season ID
+    - `carClassId?: number` - Filter by car class
+    - `carId?: number` - Filter by car
+
+    **Description:** Returns the points standings for a specific league season.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const standings = await iracing.league.seasonStandings({
+      leagueId: 1234,
+      seasonId: 5678
+    });
+
+    standings.forEach(entry => {
+      console.log(`${entry.position}. ${entry.displayName}: ${entry.points} pts`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `seasonSessions(params)`
+
+Get sessions for a league season.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueSeasonSessionsResponse>`
+
+    **Parameters:**
+    - `leagueId: number` **(required)** - The league ID
+    - `seasonId: number` **(required)** - The season ID
+    - `resultsOnly?: boolean` - Only return sessions with results
+
+    **Description:** Returns all scheduled and completed sessions for a league season.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const sessions = await iracing.league.seasonSessions({
+      leagueId: 1234,
+      seasonId: 5678,
+      resultsOnly: true
+    });
+
+    sessions.forEach(session => {
+      console.log(`${session.sessionName} - ${session.launchAt}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `getPointsSystems(params)`
+
+Get points systems for a league.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueGetPointsSystemsResponse>`
+
+    **Parameters:**
+    - `leagueId: number` **(required)** - The league ID
+    - `seasonId?: number` - Filter to a specific season
+
+    **Description:** Returns the custom points systems configured for a league.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const pointsSystems = await iracing.league.getPointsSystems({
+      leagueId: 1234
+    });
+
+    pointsSystems.forEach(system => {
+      console.log(`${system.name}: ${system.description}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+### `custLeagueSessions(params?)`
+
+Get the customer's league sessions.
+
+<Tabs>
+  <TabItem label="Details">
+    **Returns:** `Promise<LeagueCustLeagueSessionsResponse>`
+
+    **Parameters:**
+    - `mine?: boolean` - Only show your sessions
+    - `packageId?: number` - Filter by content package
+
+    **Description:** Returns league sessions relevant to the authenticated member.
+  </TabItem>
+  <TabItem label="Example">
+    ```typescript
+    const sessions = await iracing.league.custLeagueSessions({
+      mine: true
+    });
+
+    sessions.forEach(session => {
+      console.log(`${session.leagueName} - ${session.sessionName}`);
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Common Use Cases
+
+### Get Complete League Info
+
+```typescript
+async function getLeagueOverview(leagueId: number) {
+  const [league, roster, seasons] = await Promise.all([
+    iracing.league.get({ leagueId }),
+    iracing.league.roster({ leagueId }),
+    iracing.league.seasons({ leagueId }),
+  ]);
+
+  return {
+    name: league.leagueName,
+    memberCount: roster.members.length,
+    activeSeasons: seasons.filter(s => !s.retired),
+  };
+}
+```
+
+## See Also
+
+- [Results Service](/iracing-data-client/api/services/results/) - Race results for league sessions
+- [Member Service](/iracing-data-client/api/services/member/) - Member profile data
+- [Services Overview](/iracing-data-client/api/services/) - All available services
