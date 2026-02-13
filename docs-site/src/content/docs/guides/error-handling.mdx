@@ -19,8 +19,10 @@ The SDK provides a custom `IRacingError` class with useful properties:
 class IRacingError extends Error {
   status?: number;           // HTTP status code
   statusText?: string;       // HTTP status text
-  responseData?: any;        // Response body from API
-  
+  url?: string;              // The URL that was requested
+  responseData?: unknown;    // Response body from API
+  headers?: Headers;         // Response headers
+
   // Helper properties
   isMaintenanceMode: boolean;  // True when iRacing is under maintenance
   isRateLimited: boolean;       // True when rate limit exceeded
@@ -389,8 +391,7 @@ describe('Error Handling', () => {
   it('should handle maintenance mode', async () => {
     const mockError = new IRacingError(
       'Service Maintenance',
-      503,
-      'Service Unavailable'
+      { status: 503, statusText: 'Service Unavailable' },
     );
     
     const mockSDK = {
