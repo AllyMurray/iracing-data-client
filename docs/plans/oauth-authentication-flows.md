@@ -6,7 +6,7 @@ This plan outlines the implementation strategy for migrating the iRacing Data Cl
 
 ### Background
 
-As of December 9, 2025 (2026 Season 1 Release), iRacing retired legacy read-only authentication. All third-party applications must use OAuth2 authentication. The current client implementation uses the legacy `members-ng.iracing.com/auth` endpoint which is **no longer supported**.
+As of December 9, 2025 (2026 Season 1 Release), iRacing retired legacy read-only authentication. All third-party applications must use OAuth2 authentication. The previous client implementation used the deprecated legacy auth endpoint, which is **no longer supported**.
 
 ### References
 

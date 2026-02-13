@@ -74,7 +74,7 @@ For applications where users authenticate through their browser:
 import { buildAuthorizationUrl, exchangeAuthorizationCode, IRacingDataClient } from 'iracing-data-client';
 
 // Step 1: Build the authorization URL
-const { url, codeVerifier } = await buildAuthorizationUrl({
+const { url, pkce } = await buildAuthorizationUrl({
   clientId: process.env.IRACING_CLIENT_ID,
   redirectUri: 'http://localhost:3000/callback',
   scope: 'openid',
@@ -86,7 +86,7 @@ const token = await exchangeAuthorizationCode({
   clientSecret: process.env.IRACING_CLIENT_SECRET,
   code: callbackCode,
   redirectUri: 'http://localhost:3000/callback',
-  codeVerifier,
+  codeVerifier: pkce?.verifier,
 });
 
 // Step 3: Create client with the obtained token
@@ -95,7 +95,11 @@ const iracing = new IRacingDataClient({
     type: 'authorization-code',
     clientId: process.env.IRACING_CLIENT_ID,
     clientSecret: process.env.IRACING_CLIENT_SECRET,
-    token,
+    tokens: {
+      accessToken: token.access_token,
+      refreshToken: token.refresh_token,
+      expiresAt: Math.floor(Date.now() / 1000) + token.expires_in,
+    },
   },
 });
 ```

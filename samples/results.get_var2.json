@@ -1,0 +1,261 @@
+{
+  "subsession_id": 64487883,
+  "allowed_licenses": [
+    {
+      "group_name": "Rookie",
+      "license_group": 1,
+      "max_license_level": 4,
+      "min_license_level": 4,
+      "parent_id": 543
+    },
+    {
+      "group_name": "Class D",
+      "license_group": 2,
+      "max_license_level": 8,
+      "min_license_level": 5,
+      "parent_id": 543
+    },
+    {
+      "group_name": "Class C",
+      "license_group": 3,
+      "max_license_level": 12,
+      "min_license_level": 9,
+      "parent_id": 543
+    },
+    {
+      "group_name": "Class B",
+      "license_group": 4,
+      "max_license_level": 16,
+      "min_license_level": 13,
+      "parent_id": 543
+    },
+    {
+      "group_name": "Class A",
+      "license_group": 5,
+      "max_license_level": 20,
+      "min_license_level": 17,
+      "parent_id": 543
+    },
+    {
+      "group_name": "Pro",
+      "license_group": 6,
+      "max_license_level": 24,
+      "min_license_level": 21,
+      "parent_id": 543
+    },
+    {
+      "group_name": "Pro/WC",
+      "license_group": 7,
+      "max_license_level": 28,
+      "min_license_level": 25,
+      "parent_id": 543
+    }
+  ],
+  "associated_subsession_ids": [
+    64487883
+  ],
+  "can_protest": false,
+  "car_classes": [
+    {
+      "car_class_id": 3188,
+      "short_name": "FIA F4",
+      "name": "FIA F4",
+      "strength_of_field": 454,
+      "num_entries": 1,
+      "cars_in_class": [
+        {
+          "car_id": 148
+        }
+      ]
+    }
+  ],
+  "caution_type": 2,
+  "cooldown_minutes": 30,
+  "corners_per_lap": 14,
+  "damage_model": 0,
+  "driver_change_param1": -1,
+  "driver_change_param2": -1,
+  "driver_change_rule": 0,
+  "driver_changes": false,
+  "end_time": "2023-10-23T23:44:20Z",
+  "event_average_lap": -1,
+  "event_best_lap_time": 1109010,
+  "event_laps_complete": -1,
+  "event_strength_of_field": -1,
+  "event_type": 4,
+  "event_type_name": "Time Trial",
+  "heat_info_id": -1,
+  "license_category": "Road",
+  "license_category_id": 2,
+  "limit_minutes": 10080,
+  "max_team_drivers": 1,
+  "max_weeks": 12,
+  "min_team_drivers": 1,
+  "num_caution_laps": -1,
+  "num_cautions": -1,
+  "num_drivers": 1,
+  "num_laps_for_qual_average": 2,
+  "num_laps_for_solo_average": 5,
+  "num_lead_changes": -1,
+  "official_session": true,
+  "points_type": "timetrial",
+  "private_session_id": -1,
+  "race_week_num": 5,
+  "results_restricted": false,
+  "season_id": 4508,
+  "season_name": "FIA F4 Esports Regional Tour  - Europe South - 2023 Season 4",
+  "season_quarter": 4,
+  "season_short_name": "2023 Season 4",
+  "season_year": 2023,
+  "series_id": 543,
+  "series_logo": "seriesid_543.png",
+  "series_name": "FIA F4 Esports Regional Tour - Europe South",
+  "series_short_name": "FIA F4 Esports Regional Tour  - Europe South",
+  "session_id": 219520651,
+  "session_results": [
+    {
+      "simsession_number": 0,
+      "simsession_name": "TIME TRIAL",
+      "simsession_type": 2,
+      "simsession_type_name": "Lone Practice",
+      "simsession_subtype": 0,
+      "results": [
+        {
+          "cust_id": 823471,
+          "display_name": "Horton Mccormick",
+          "aggregate_champ_points": 0,
+          "ai": false,
+          "average_lap": 1130034,
+          "best_lap_num": 6,
+          "best_lap_time": 1109010,
+          "best_nlaps_num": 6,
+          "best_nlaps_time": 1119406,
+          "best_qual_lap_at": "1970-01-01T00:00:00Z",
+          "best_qual_lap_num": -1,
+          "best_qual_lap_time": -1,
+          "car_class_id": 3188,
+          "car_class_name": "FIA F4",
+          "car_class_short_name": "FIA F4",
+          "car_id": 148,
+          "car_name": "FIA F4",
+          "carcfg": -1,
+          "champ_points": 0,
+          "class_interval": 0,
+          "country_code": "US",
+          "division": 7,
+          "division_name": "Division 8",
+          "drop_race": false,
+          "finish_position": 0,
+          "finish_position_in_class": 0,
+          "flair_id": 223,
+          "flair_name": "United States",
+          "flair_shortname": "USA",
+          "friend": false,
+          "helmet": {
+            "pattern": 5,
+            "color1": "ff6a00",
+            "color2": "3300ff",
+            "color3": "ffffff",
+            "face_type": 0,
+            "helmet_type": 0
+          },
+          "incidents": 1,
+          "interval": 0,
+          "laps_complete": 13,
+          "laps_lead": 0,
+          "league_agg_points": 0,
+          "league_points": 0,
+          "license_change_oval": -1,
+          "license_change_road": -1,
+          "livery": {
+            "car_id": 148,
+            "pattern": 3,
+            "color1": "ffffff",
+            "color2": "ff0000",
+            "color3": "000000",
+            "number_font": 21,
+            "number_color1": "ffffff",
+            "number_color2": "777777",
+            "number_color3": "000000",
+            "number_slant": 3,
+            "sponsor1": 163,
+            "sponsor2": 208,
+            "car_number": "1",
+            "wheel_color": null,
+            "rim_type": -1
+          },
+          "max_pct_fuel_fill": -1,
+          "new_cpi": 25.02221,
+          "new_license_level": 10,
+          "new_sub_level": 271,
+          "new_ttrating": 1251,
+          "newi_rating": 454,
+          "old_cpi": 24.09972,
+          "old_license_level": 10,
+          "old_sub_level": 265,
+          "old_ttrating": 1237,
+          "oldi_rating": 454,
+          "opt_laps_complete": 0,
+          "position": 0,
+          "qual_lap_time": -1,
+          "reason_out": "Running",
+          "reason_out_id": 0,
+          "starting_position": -1,
+          "starting_position_in_class": -1,
+          "suit": {
+            "pattern": 1,
+            "color1": "ff6a00",
+            "color2": "ffffff",
+            "color3": "797979"
+          },
+          "watched": false,
+          "weight_penalty_kg": -1
+        }
+      ]
+    }
+  ],
+  "session_splits": [
+    {
+      "subsession_id": 64487883,
+      "event_strength_of_field": -1
+    }
+  ],
+  "special_event_type": -1,
+  "start_time": "2023-10-23T23:16:00Z",
+  "track": {
+    "category": "Road",
+    "category_id": 2,
+    "config_name": "N/A",
+    "track_id": 413,
+    "track_name": "Hungaroring"
+  },
+  "track_state": {
+    "leave_marbles": false,
+    "practice_rubber": -1,
+    "qualify_rubber": -1,
+    "race_rubber": -1,
+    "warmup_rubber": -1
+  },
+  "weather": {
+    "allow_fog": false,
+    "fog": 0,
+    "precip_mm2hr_before_final_session": 0,
+    "precip_mm_final_session": 0,
+    "precip_option": 0,
+    "precip_time_pct": 0,
+    "rel_humidity": 55,
+    "simulated_start_time": "2023-10-21T09:30:00",
+    "skies": 1,
+    "temp_units": 0,
+    "temp_value": 78,
+    "time_of_day": 1,
+    "track_water": 0,
+    "type": 0,
+    "version": 0,
+    "weather_var_initial": 0,
+    "weather_var_ongoing": 0,
+    "wind_dir": 0,
+    "wind_units": 0,
+    "wind_value": 2
+  }
+}

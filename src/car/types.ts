@@ -2,23 +2,7 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const CarAssets = z.record(z.string(), z.object({
-  carId: z.optional(z.nullable(z.number())),
-  carRules: z.optional(z.nullable(z.array(z.unknown()))),
-  detailCopy: z.optional(z.nullable(z.string())),
-  detailScreenShotImages: z.optional(z.nullable(z.string())),
-  detailTechspecsCopy: z.optional(z.nullable(z.string())),
-  folder: z.optional(z.nullable(z.string())),
-  galleryImages: z.optional(z.nullable(z.string())),
-  galleryPrefix: z.optional(z.nullable(z.string())),
-  groupImage: z.optional(z.nullable(z.string())),
-  groupName: z.optional(z.nullable(z.string())),
-  largeImage: z.optional(z.nullable(z.string())),
-  logo: z.optional(z.nullable(z.string())),
-  smallImage: z.optional(z.nullable(z.string())),
-  sponsorLogo: z.optional(z.nullable(z.string())),
-  templatePath: z.optional(z.nullable(z.string()))
-}));
+const CarAssets = z.record(z.string(), z.unknown());
 const CarGet = z.array(z.object({
   aiEnabled: z.boolean(),
   allowNumberColors: z.boolean(),

@@ -1,0 +1,42 @@
+{
+  "type": "search_series_results",
+  "data": {
+    "success": true,
+    "chunk_info": {
+      "chunk_size": 500,
+      "num_chunks": 0,
+      "rows": 0,
+      "base_download_url": null,
+      "chunk_file_names": []
+    },
+    "params": {
+      "cust_id": -318499,
+      "team_id": -318499,
+      "finish_range_begin": "2026-01-28T12:19:42Z",
+      "finish_range_end": "2026-02-09T12:19:42Z",
+      "start_range_begin": "2026-01-28T12:19:42Z",
+      "start_range_end": "2026-02-09T12:19:42Z",
+      "category_ids": [
+        1,
+        2
+      ],
+      "series_id": 39,
+      "season_year": 2026,
+      "season_quarter": 1,
+      "race_week_num": 5,
+      "official_only": false,
+      "event_types": [
+        2
+      ],
+      "season_license_groups": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  }
+}

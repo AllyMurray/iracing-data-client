@@ -20,16 +20,19 @@ const LookupDrivers = z.array(z.object({
   profileDisabled: z.boolean()
 }));
 const LookupFlairs = z.object({
+  success: z.boolean(),
   flairs: z.array(z.object({
     flairId: z.number(),
     flairName: z.string(),
     seq: z.number(),
     flairShortname: z.optional(z.string()),
     countryCode: z.optional(z.string())
-  })),
-  success: z.boolean()
+  }))
 });
-const LookupGet = z.array(z.unknown());
+const LookupGet = z.array(z.object({
+  lookups: z.array(z.unknown()),
+  tag: z.string()
+}));
 const LookupLicenses = z.array(z.object({
   licenseGroup: z.number(),
   groupName: z.string(),

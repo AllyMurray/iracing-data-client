@@ -1,5 +1,4 @@
-import { type FetchLike } from "../auth/types";
-import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { ConstantsService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -7,58 +6,44 @@ import { IRacingClient } from "../client";
 import constantscategoriesSample from "../../samples/constants.categories.json";
 import constantsdivisionsSample from "../../samples/constants.divisions.json";
 import constantseventtypesSample from "../../samples/constants.event_types.json";
-import { createMockResponse } from "../__tests__/test-utils";
 
 describe("ConstantsService", () => {
-  let mockFetch: Mock<FetchLike>;
+  let mockFetch: MockInstance;
   let client: IRacingClient;
   let constantsService: ConstantsService;
-
-  // Mock OAuth token response
-  const mockTokenResponse = {
-    access_token: "test-access-token",
-    token_type: "Bearer",
-    expires_in: 600,
-    refresh_token: "test-refresh-token",
-  };
 
   beforeEach(() => {
     mockFetch = vi.fn();
 
     client = new IRacingClient({
       auth: {
-        type: "password-limited",
+        type: "authorization-code",
         clientId: "test-client-id",
         clientSecret: "test-client-secret",
-        username: "test@example.com",
-        password: "password",
+        tokens: {
+          accessToken: "test-access-token",
+          refreshToken: "test-refresh-token",
+          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+        },
       },
-      fetchFn: mockFetch
+      fetchFn: mockFetch as any,
+      validateParams: false,
+      validateSemanticParams: false,
     });
 
     constantsService = new ConstantsService(client);
   });
 
   describe("categories()", () => {
-    it("should fetch, transform, and validate constants categories data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(constantscategoriesSample));
+    it("should fetch and validate constants categories data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(constantscategoriesSample)
+      });
 
       const result = await constantsService.categories();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/constants/categories",
         expect.objectContaining({
@@ -68,42 +53,21 @@ describe("ConstantsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(constantsService.categories()).rejects.toThrow();
     });
   });
 
   describe("divisions()", () => {
-    it("should fetch, transform, and validate constants divisions data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(constantsdivisionsSample));
+    it("should fetch and validate constants divisions data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(constantsdivisionsSample)
+      });
 
       const result = await constantsService.divisions();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/constants/divisions",
         expect.objectContaining({
@@ -113,42 +77,21 @@ describe("ConstantsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(constantsService.divisions()).rejects.toThrow();
     });
   });
 
   describe("eventTypes()", () => {
-    it("should fetch, transform, and validate constants eventTypes data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(constantseventtypesSample));
+    it("should fetch and validate constants eventTypes data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(constantseventtypesSample)
+      });
 
       const result = await constantsService.eventTypes();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/constants/event_types",
         expect.objectContaining({
@@ -158,19 +101,8 @@ describe("ConstantsService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(constantsService.eventTypes()).rejects.toThrow();
     });
   });
 

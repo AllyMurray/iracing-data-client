@@ -1,0 +1,26 @@
+{
+  "type": "search_hosted_results",
+  "data": {
+    "success": true,
+    "chunk_info": {
+      "chunk_size": 500,
+      "num_chunks": 0,
+      "rows": 0,
+      "base_download_url": null,
+      "chunk_file_names": []
+    },
+    "params": {
+      "cust_id": -301167,
+      "team_id": -301167,
+      "start_range_begin": "2026-02-04T12:04:55Z",
+      "category_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  }
+}

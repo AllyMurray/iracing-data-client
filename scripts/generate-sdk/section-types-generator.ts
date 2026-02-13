@@ -69,11 +69,12 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
   lines.push(`// ---- Response Types (inferred from schemas) ----`);
   lines.push(``);
   for (const ep of endpoints) {
-    if (ep.samplePath) {
-      const schemaName = `${toPascal(ep.method)}`;
-      const typeName = `${toPascal(ep.method)}Response`;
-      lines.push(`export type ${typeName} = z.infer<typeof ${schemaName}>;`);
+    if (!ep.samplePath) {
+      throw new Error(`Missing sample for endpoint ${sectionName}.${ep.name}`);
     }
+    const schemaName = `${toPascal(ep.method)}`;
+    const typeName = `${toPascal(ep.method)}Response`;
+    lines.push(`export type ${typeName} = z.infer<typeof ${schemaName}>;`);
   }
   lines.push(``);
 
@@ -146,7 +147,7 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 
   // Export response schemas
   for (const ep of endpoints) {
-    if (ep.responseType) {
+    if (ep.samplePath && ep.responseType) {
       const schemaName = `${ep.responseType.replace('Response', '')}`;
       lines.push(`  ${schemaName},`);
     }
@@ -185,16 +186,30 @@ function findSampleVariations(baseSamplePath: string): string[] {
 }
 
 /** ---- Helper to merge sample data for richer schemas ---- */
+function hasObjectStructureMatch(existing: unknown, candidate: unknown): boolean {
+  const existingIsObject = typeof existing === 'object' && existing !== null && !Array.isArray(existing);
+  const candidateIsObject = typeof candidate === 'object' && candidate !== null && !Array.isArray(candidate);
+
+  if (!existingIsObject || !candidateIsObject) {
+    return existing === candidate;
+  }
+
+  const existingKeys = Object.keys(existing as Record<string, unknown>);
+  const candidateKeys = Object.keys(candidate as Record<string, unknown>);
+
+  return (
+    existingKeys.length === candidateKeys.length &&
+    existingKeys.every((key) => key in (candidate as Record<string, unknown>))
+  );
+}
+
 function mergeSampleData(base: any, additional: any): any {
   if (Array.isArray(base) && Array.isArray(additional)) {
     // For arrays, combine all unique items by structure
     const merged = [...base];
     for (const item of additional) {
       // Add items that have different structures (more fields, etc.)
-      const hasMatchingStructure = merged.some(existing =>
-        Object.keys(existing).length === Object.keys(item).length &&
-        Object.keys(existing).every(key => key in item)
-      );
+      const hasMatchingStructure = merged.some((existing) => hasObjectStructureMatch(existing, item));
       if (!hasMatchingStructure) {
         merged.push(item);
       }

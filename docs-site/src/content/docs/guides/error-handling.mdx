@@ -51,6 +51,11 @@ class IRacingError extends Error {
     
     Requested resource doesn't exist.
   </Card>
+  <Card title="🧪 Invalid Params" icon="warning">
+    **Status: 400**
+
+    Request parameters are structurally valid but semantically invalid for the endpoint.
+  </Card>
 </CardGrid>
 
 ## Basic Error Handling
@@ -432,6 +437,7 @@ describe('Error Handling', () => {
 | Status | Error Type | Retry? | Description |
 |--------|------------|--------|-------------|
 | 401 | Unauthorized | No | Invalid credentials or expired session |
+| 400 | Bad Request | No | Invalid parameter combination (SDK preflight) |
 | 403 | Forbidden | No | Insufficient permissions |
 | 404 | Not Found | No | Resource doesn't exist |
 | 429 | Rate Limited | Yes | Too many requests |

@@ -34,21 +34,61 @@ function flatten(root: Root): Flat[] {
     const base = `${section}.${name}`;
     const method = toCamelCase(base.replace(/[^\w]/g, "_"));
     const sampleFile = `${SAMPLES_DIR}/${base}.json`;
+    const samplePath = resolveSamplePath(sampleFile);
     return {
       section,
       name,
       method,
       url: ep.link,
       params: ep.parameters || {},
-      samplePath: fs.existsSync(sampleFile) ? sampleFile : undefined,
-      responseType: fs.existsSync(sampleFile) ? `${toPascal(base.replace(/[^\w]/g, "_"))}Response` : undefined,
+      samplePath,
+      responseType: `${toPascal(base.replace(/[^\w]/g, "_"))}Response`,
     };
   }
+}
+
+function resolveSamplePath(baseSamplePath: string): string | undefined {
+  if (fs.existsSync(baseSamplePath)) {
+    return baseSamplePath;
+  }
+
+  const baseDir = path.dirname(baseSamplePath);
+  const baseName = path.basename(baseSamplePath, ".json");
+
+  if (!fs.existsSync(baseDir)) {
+    return undefined;
+  }
+
+  const variationFiles = fs
+    .readdirSync(baseDir)
+    .filter((file) => file.startsWith(`${baseName}_var`) && file.endsWith(".json"))
+    .sort();
+
+  if (variationFiles.length > 0) {
+    return path.join(baseDir, variationFiles[0]);
+  }
+
+  return undefined;
 }
 
 /** ---- Main execution ---- */
 async function generateDataClient() {
   const endpoints = flatten(index);
+  const missingSamples = endpoints.filter((ep) => !ep.samplePath);
+
+  if (missingSamples.length > 0) {
+    const missingList = missingSamples
+      .map((ep) => `- ${ep.section}.${ep.name} (${ep.url})`)
+      .join("\n");
+
+    throw new Error(
+      `Missing sample data for ${missingSamples.length} endpoint(s).\n` +
+      `Every endpoint must have concrete sample-backed response types.\n\n` +
+      `${missingList}\n\n` +
+      `Run sample collection and try again.`
+    );
+  }
+
   const bySection = new Map<string, Flat[]>();
 
   for (const ep of endpoints) {

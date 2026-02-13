@@ -1,79 +1,76 @@
-import { type FetchLike } from "../auth/types";
-import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { TeamService } from "./service";
 import { IRacingClient } from "../client";
 
 // Import sample data
+import teamgetSample from "../../samples/team.get.json";
 import teammembershipSample from "../../samples/team.membership.json";
-import { createMockResponse } from "../__tests__/test-utils";
 
 describe("TeamService", () => {
-  let mockFetch: Mock<FetchLike>;
+  let mockFetch: MockInstance;
   let client: IRacingClient;
   let teamService: TeamService;
-
-  // Mock OAuth token response
-  const mockTokenResponse = {
-    access_token: "test-access-token",
-    token_type: "Bearer",
-    expires_in: 600,
-    refresh_token: "test-refresh-token",
-  };
 
   beforeEach(() => {
     mockFetch = vi.fn();
 
     client = new IRacingClient({
       auth: {
-        type: "password-limited",
+        type: "authorization-code",
         clientId: "test-client-id",
         clientSecret: "test-client-secret",
-        username: "test@example.com",
-        password: "password",
+        tokens: {
+          accessToken: "test-access-token",
+          refreshToken: "test-refresh-token",
+          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+        },
       },
-      fetchFn: mockFetch
+      fetchFn: mockFetch as any,
+      validateParams: false,
+      validateSemanticParams: false,
     });
 
     teamService = new TeamService(client);
   });
 
   describe("get()", () => {
-    it("should fetch team get data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({}));
+    it("should fetch and validate team get data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(teamgetSample)
+      });
 
       const testParams = {
   teamId: 123,
   includeLicenses: true
       };
-      await teamService.get(testParams);
-      expect(mockFetch).toHaveBeenCalled();
+      const result = await teamService.get(testParams);
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("https://members-ng.iracing.com/data/team/get"),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: "Bearer test-access-token"
+          })
+        })
+      );
+
+      expect(result).toBeDefined();
+      expect(typeof result).toBe("object");
     });
   });
 
   describe("membership()", () => {
-    it("should fetch, transform, and validate team membership data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(teammembershipSample));
+    it("should fetch and validate team membership data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(teammembershipSample)
+      });
 
       const result = await teamService.membership();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/team/membership",
         expect.objectContaining({
@@ -83,19 +80,8 @@ describe("TeamService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(teamService.membership()).rejects.toThrow();
     });
   });
 

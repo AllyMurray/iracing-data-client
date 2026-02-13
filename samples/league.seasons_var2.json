@@ -188,9 +188,40 @@
       "hidden": false,
       "num_drops": 0,
       "no_drops_on_or_after_race_num": -1,
-      "points_cars": [],
-      "driver_points_car_classes": [],
-      "team_points_car_classes": [],
+      "points_cars": [
+        {
+          "car_id": 5,
+          "car_name": "Legends Ford '34 Coupe"
+        }
+      ],
+      "driver_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            },
+            {
+              "car_id": 5,
+              "car_name": "Legends Ford '34 Coupe"
+            }
+          ]
+        }
+      ],
+      "team_points_car_classes": [
+        {
+          "car_class_id": 0,
+          "name": "All Car Classes",
+          "cars_in_class": [
+            {
+              "car_id": 0,
+              "car_name": "All Cars"
+            }
+          ]
+        }
+      ],
       "points_system_name": "None",
       "points_system_desc": "No points will be awarded.  The league administrator will assign points at a later date."
     },

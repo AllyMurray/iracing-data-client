@@ -228,6 +228,7 @@ const MemberProfile = z.object({
     awardDate: z.string(),
     awardOrder: z.number(),
     awardedDescription: z.string(),
+    custId: z.number(),
     description: z.string(),
     groupName: z.string(),
     hasPdf: z.boolean(),
@@ -240,8 +241,7 @@ const MemberProfile = z.object({
     threshold: z.optional(z.number()),
     viewed: z.boolean(),
     weight: z.number(),
-    subsessionId: z.optional(z.number()),
-    custId: z.optional(z.number())
+    subsessionId: z.optional(z.number())
   })),
   activity: z.object({
     recent30daysCount: z.number(),

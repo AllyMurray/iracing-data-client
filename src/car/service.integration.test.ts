@@ -63,6 +63,10 @@ describe("CarService Integration Tests", () => {
 
       const firstAssetKey = assetKeys[0];
       const firstAsset = assets[firstAssetKey];
+      expect(firstAsset).toBeTruthy();
+      expect(typeof firstAsset).toBe('object');
+
+      const firstAssetObj = firstAsset as Record<string, unknown>;
 
       // Should always be camelCase now thanks to our client transformation
       expect(firstAsset).toHaveProperty('carId');
@@ -71,11 +75,11 @@ describe("CarService Integration Tests", () => {
       expect(firstAsset).toHaveProperty('smallImage');
       expect(firstAsset).toHaveProperty('largeImage');
 
-      expect(typeof firstAsset.carId).toBe('number');
-      expect(typeof firstAsset.folder).toBe('string');
-      expect(typeof firstAsset.logo).toBe('string');
-      expect(typeof firstAsset.smallImage).toBe('string');
-      expect(typeof firstAsset.largeImage).toBe('string');
+      expect(typeof firstAssetObj.carId).toBe('number');
+      expect(typeof firstAssetObj.folder).toBe('string');
+      expect(typeof firstAssetObj.logo).toBe('string');
+      expect(typeof firstAssetObj.smallImage).toBe('string');
+      expect(typeof firstAssetObj.largeImage).toBe('string');
     }, 30000); // 30 second timeout for API call
   });
 

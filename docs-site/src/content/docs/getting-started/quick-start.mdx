@@ -104,7 +104,7 @@ A simple Node.js application that:
        
        console.log(`  • Total Races: ${careerStats.stats[0]?.starts || 0}`);
        console.log(`  • Total Wins: ${careerStats.stats[0]?.wins || 0}`);
-       console.log(`  • Average Incidents: ${careerStats.stats[0]?.avgIncPerRace || 0}`);
+        console.log(`  • Average Incidents: ${careerStats.stats[0]?.avgIncidents || 0}`);
        
      } catch (error) {
        if (error instanceof IRacingError) {
@@ -266,8 +266,8 @@ discord.on('interactionCreate', async interaction => {
       embeds: [{
         title: member.members[0].displayName,
         fields: [
-          { name: 'iRating', value: member.members[0].irating },
-          { name: 'Safety Rating', value: member.members[0].safetyRating }
+          { name: 'Last Login', value: member.members[0].lastLogin },
+          { name: 'Member Since', value: member.members[0].memberSince }
         ]
       }]
     });

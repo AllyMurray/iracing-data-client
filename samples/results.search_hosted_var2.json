@@ -1,0 +1,31 @@
+{
+  "type": "search_hosted_results",
+  "data": {
+    "success": true,
+    "chunk_info": {
+      "chunk_size": 500,
+      "num_chunks": 0,
+      "rows": 0,
+      "base_download_url": null,
+      "chunk_file_names": []
+    },
+    "params": {
+      "cust_id": -301167,
+      "team_id": -301167,
+      "finish_range_begin": "2026-01-28T12:04:55Z",
+      "finish_range_end": "2026-02-09T12:04:55Z",
+      "start_range_begin": "2026-01-28T12:04:55Z",
+      "start_range_end": "2026-02-09T12:04:55Z",
+      "category_ids": [
+        1,
+        2
+      ],
+      "host_cust_id": 2,
+      "session_name": "variant",
+      "car_id": 23,
+      "track_id": 14,
+      "league_id": 7058,
+      "league_season_id": 2
+    }
+  }
+}

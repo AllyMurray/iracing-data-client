@@ -86,7 +86,7 @@ Get division statistics for a member.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsMemberDivisionResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -228,7 +228,7 @@ Get driver standings for a season.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsSeasonDriverStandingsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -237,6 +237,8 @@ Get driver standings for a season.
     - `raceWeekNum?: number` - Standings up to a specific week
 
     **Description:** Returns driver championship standings for a specific season and car class.
+
+    The SDK validates `seasonId` + `carClassId` as a known pair before calling the API when `validateSemanticParams` is enabled.
   </TabItem>
   <TabItem label="Example">
     ```typescript
@@ -263,7 +265,7 @@ Get supersession standings for a season.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsSeasonSupersessionStandingsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -272,6 +274,8 @@ Get supersession standings for a season.
     - `raceWeekNum?: number` - Standings up to a specific week
 
     **Description:** Returns supersession standings for a specific season and car class.
+
+    The SDK validates `seasonId` + `carClassId` as a known pair before calling the API when `validateSemanticParams` is enabled.
   </TabItem>
   <TabItem label="Example">
     ```typescript
@@ -291,7 +295,7 @@ Get team standings for a season.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsSeasonTeamStandingsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -299,6 +303,8 @@ Get team standings for a season.
     - `raceWeekNum?: number` - Standings up to a specific week
 
     **Description:** Returns team championship standings for a specific season and car class.
+
+    The SDK performs an additional semantic preflight check for this endpoint when `validateSemanticParams` is enabled (default). It verifies that `seasonId` and `carClassId` form a known valid pair from series metadata and throws an `IRacingError` with status `400` before making the request when the pair is invalid.
   </TabItem>
   <TabItem label="Example">
     ```typescript
@@ -318,7 +324,7 @@ Get time trial standings for a season.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsSeasonTtStandingsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -327,6 +333,8 @@ Get time trial standings for a season.
     - `raceWeekNum?: number` - Standings up to a specific week
 
     **Description:** Returns time trial standings for a specific season and car class.
+
+    The SDK validates `seasonId` + `carClassId` as a known pair before calling the API when `validateSemanticParams` is enabled.
   </TabItem>
   <TabItem label="Example">
     ```typescript
@@ -346,7 +354,7 @@ Get time trial results for a specific week.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsSeasonTtResultsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -355,6 +363,8 @@ Get time trial results for a specific week.
     - `division?: number` - Filter by division
 
     **Description:** Returns time trial results for a specific week in a season.
+
+    The SDK validates `seasonId` + `carClassId` as a known pair before calling the API when `validateSemanticParams` is enabled.
   </TabItem>
   <TabItem label="Example">
     ```typescript
@@ -375,7 +385,7 @@ Get qualifying results for a specific week.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<unknown>`
+    **Returns:** `Promise<StatsSeasonQualifyResultsResponse>`
 
     **Parameters:**
     - `seasonId: number` **(required)** - The season ID
@@ -384,6 +394,8 @@ Get qualifying results for a specific week.
     - `division?: number` - Filter by division
 
     **Description:** Returns qualifying results for a specific week in a season.
+
+    The SDK validates `seasonId` + `carClassId` as a known pair before calling the API when `validateSemanticParams` is enabled.
   </TabItem>
   <TabItem label="Example">
     ```typescript

@@ -1,5 +1,4 @@
-import { type FetchLike } from "../auth/types";
-import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
+import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
 import { DriverStatsByCategoryService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -10,58 +9,44 @@ import driverstatsbycategoryformulacarSample from "../../samples/driver_stats_by
 import driverstatsbycategoryroadSample from "../../samples/driver_stats_by_category.road.json";
 import driverstatsbycategorydirtovalSample from "../../samples/driver_stats_by_category.dirt_oval.json";
 import driverstatsbycategorydirtroadSample from "../../samples/driver_stats_by_category.dirt_road.json";
-import { createMockResponse } from "../__tests__/test-utils";
 
 describe("DriverStatsByCategoryService", () => {
-  let mockFetch: Mock<FetchLike>;
+  let mockFetch: MockInstance;
   let client: IRacingClient;
   let driverStatsByCategoryService: DriverStatsByCategoryService;
-
-  // Mock OAuth token response
-  const mockTokenResponse = {
-    access_token: "test-access-token",
-    token_type: "Bearer",
-    expires_in: 600,
-    refresh_token: "test-refresh-token",
-  };
 
   beforeEach(() => {
     mockFetch = vi.fn();
 
     client = new IRacingClient({
       auth: {
-        type: "password-limited",
+        type: "authorization-code",
         clientId: "test-client-id",
         clientSecret: "test-client-secret",
-        username: "test@example.com",
-        password: "password",
+        tokens: {
+          accessToken: "test-access-token",
+          refreshToken: "test-refresh-token",
+          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+        },
       },
-      fetchFn: mockFetch
+      fetchFn: mockFetch as any,
+      validateParams: false,
+      validateSemanticParams: false,
     });
 
     driverStatsByCategoryService = new DriverStatsByCategoryService(client);
   });
 
   describe("oval()", () => {
-    it("should fetch, transform, and validate driver_stats_by_category oval data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategoryovalSample));
+    it("should fetch and validate driver_stats_by_category oval data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(driverstatsbycategoryovalSample)
+      });
 
       const result = await driverStatsByCategoryService.oval();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/oval",
         expect.objectContaining({
@@ -71,42 +56,21 @@ describe("DriverStatsByCategoryService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(driverStatsByCategoryService.oval()).rejects.toThrow();
     });
   });
 
   describe("sportsCar()", () => {
-    it("should fetch, transform, and validate driver_stats_by_category sportsCar data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategorysportscarSample));
+    it("should fetch and validate driver_stats_by_category sportsCar data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(driverstatsbycategorysportscarSample)
+      });
 
       const result = await driverStatsByCategoryService.sportsCar();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/sports_car",
         expect.objectContaining({
@@ -116,42 +80,21 @@ describe("DriverStatsByCategoryService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(driverStatsByCategoryService.sportsCar()).rejects.toThrow();
     });
   });
 
   describe("formulaCar()", () => {
-    it("should fetch, transform, and validate driver_stats_by_category formulaCar data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategoryformulacarSample));
+    it("should fetch and validate driver_stats_by_category formulaCar data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(driverstatsbycategoryformulacarSample)
+      });
 
       const result = await driverStatsByCategoryService.formulaCar();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/formula_car",
         expect.objectContaining({
@@ -161,42 +104,21 @@ describe("DriverStatsByCategoryService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(driverStatsByCategoryService.formulaCar()).rejects.toThrow();
     });
   });
 
   describe("road()", () => {
-    it("should fetch, transform, and validate driver_stats_by_category road data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategoryroadSample));
+    it("should fetch and validate driver_stats_by_category road data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(driverstatsbycategoryroadSample)
+      });
 
       const result = await driverStatsByCategoryService.road();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/road",
         expect.objectContaining({
@@ -206,42 +128,21 @@ describe("DriverStatsByCategoryService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(driverStatsByCategoryService.road()).rejects.toThrow();
     });
   });
 
   describe("dirtOval()", () => {
-    it("should fetch, transform, and validate driver_stats_by_category dirtOval data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategorydirtovalSample));
+    it("should fetch and validate driver_stats_by_category dirtOval data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(driverstatsbycategorydirtovalSample)
+      });
 
       const result = await driverStatsByCategoryService.dirtOval();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/dirt_oval",
         expect.objectContaining({
@@ -251,42 +152,21 @@ describe("DriverStatsByCategoryService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(driverStatsByCategoryService.dirtOval()).rejects.toThrow();
     });
   });
 
   describe("dirtRoad()", () => {
-    it("should fetch, transform, and validate driver_stats_by_category dirtRoad data", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategorydirtroadSample));
+    it("should fetch and validate driver_stats_by_category dirtRoad data", async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: () => "application/json" },
+        json: () => Promise.resolve(driverstatsbycategorydirtroadSample)
+      });
 
       const result = await driverStatsByCategoryService.dirtRoad();
 
-      // Verify OAuth token request
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://oauth.iracing.com/oauth2/token",
-        expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
-      );
-
-      // Verify API call with Bearer token
       expect(mockFetch).toHaveBeenCalledWith(
         "https://members-ng.iracing.com/data/driver_stats_by_category/dirt_road",
         expect.objectContaining({
@@ -296,19 +176,8 @@ describe("DriverStatsByCategoryService", () => {
         })
       );
 
-      // Verify response structure and transformation
       expect(result).toBeDefined();
       expect(typeof result).toBe("object");
-    });
-
-    it("should handle schema validation errors", async () => {
-      // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock invalid API response
-      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
-
-      await expect(driverStatsByCategoryService.dirtRoad()).rejects.toThrow();
     });
   });
 

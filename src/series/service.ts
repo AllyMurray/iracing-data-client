@@ -1,6 +1,6 @@
 import type { IRacingClient } from "../client";
-import type { SeriesPastSeasonsParams, SeriesSeasonsParams, SeriesSeasonListParams, SeriesSeasonScheduleParams, SeriesAssetsResponse, SeriesGetResponse, SeriesPastSeasonsResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesStatsSeriesResponse } from "./types";
-import { SeriesAssets, SeriesGet, SeriesPastSeasons, SeriesSeasons, SeriesSeasonList, SeriesStatsSeries } from "./types";
+import type { SeriesPastSeasonsParams, SeriesSeasonsParams, SeriesSeasonListParams, SeriesSeasonScheduleParams, SeriesAssetsResponse, SeriesGetResponse, SeriesPastSeasonsResponse, SeriesSeasonsResponse, SeriesSeasonListResponse, SeriesSeasonScheduleResponse, SeriesStatsSeriesResponse } from "./types";
+import { SeriesAssets, SeriesGet, SeriesPastSeasons, SeriesSeasons, SeriesSeasonList, SeriesSeasonSchedule, SeriesStatsSeries } from "./types";
 
 export class SeriesService {
   constructor(private client: IRacingClient) {}
@@ -53,9 +53,10 @@ export class SeriesService {
   /**
    * season_schedule
    * @see https://members-ng.iracing.com/data/series/season_schedule
+   * @sample series.season_schedule.json
    */
-  async seasonSchedule(params: SeriesSeasonScheduleParams): Promise<unknown> {
-    return this.client.get<unknown>("https://members-ng.iracing.com/data/series/season_schedule", { params });
+  async seasonSchedule(params: SeriesSeasonScheduleParams): Promise<SeriesSeasonScheduleResponse> {
+    return this.client.get<SeriesSeasonScheduleResponse>("https://members-ng.iracing.com/data/series/season_schedule", { params, schema: SeriesSeasonSchedule });
   }
 
   /**
