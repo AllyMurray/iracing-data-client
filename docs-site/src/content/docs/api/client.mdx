@@ -114,7 +114,7 @@ interface IRacingClientOptions {
     Available store keys:
     - **`cache`** — A `CacheStore` for caching S3 responses. TTL is automatically derived from presigned URL expiry.
     - **`rateLimit`** — A `RateLimitStore` or `AdaptiveRateLimitStore` for automatic request throttling.
-    - **`dedup`** — A `DedupStore` for deduplicating concurrent identical requests.
+    - **`dedupe`** — A `DedupeStore` for deduplicating concurrent identical requests.
     
     ```typescript
     import { IRacingDataClient } from 'iracing-data-client';
