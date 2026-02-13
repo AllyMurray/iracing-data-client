@@ -110,7 +110,7 @@ export class IRacingClient {
     });
 
     // Initialize with pre-obtained tokens if provided
-    const tokens = isPasswordLimitedAuth(options.auth) ? options.auth.tokens : options.auth.tokens;
+    const tokens = options.auth.tokens;
 
     if (tokens) {
       this.tokenManager.setTokenState({
