@@ -151,11 +151,6 @@ describe('HttpClient Integration', () => {
       mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 401, statusText: 'Unauthorized' }));
 
       await expect(client.get('/data/test/auth')).rejects.toThrow(IRacingError);
-      try {
-        await client.get('/data/test/auth');
-      } catch (e) {
-        // The error from the first call is sufficient
-      }
     });
 
     it('should throw IRacingError for 429 responses', async () => {
