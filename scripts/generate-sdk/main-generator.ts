@@ -6,7 +6,7 @@ export function generateMainDataClient(sections: string[]): string {
 
   lines.push(`/* AUTO-GENERATED — do not edit */`);
   lines.push(``);
-  lines.push(`import { IRacingClient, IRacingError, type IRacingClientOptions } from "./client";`);
+  lines.push(`import { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";`);
 
   // Import all service classes
   for (const section of sections) {
@@ -17,7 +17,7 @@ export function generateMainDataClient(sections: string[]): string {
 
   lines.push(``);
   lines.push(`// Re-export client`);
-  lines.push(`export { IRacingClient, IRacingError, type IRacingClientOptions };`);
+  lines.push(`export { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };`);
   lines.push(``);
   lines.push(`// Re-export http-client-toolkit types`);
   lines.push(`export type { HttpClientStores } from '@http-client-toolkit/core';`);
