@@ -1,40 +1,61 @@
 ---
 title: Caching
-description: Understanding and optimizing the Data Client's caching mechanisms
+description: Configuring caching for the iRacing Data Client SDK
 ---
 
 import { Tabs, TabItem, Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
 # Caching
 
-The iRacing Data Client SDK includes built-in caching to improve performance and reduce API calls. This guide explains how caching works and how to optimize it for your use case.
+The iRacing Data Client SDK supports opt-in caching via pluggable stores powered by `@http-client-toolkit/core`. When a `CacheStore` is provided, S3 responses are cached automatically with TTL derived from the presigned URL's expiry — no manual TTL management needed.
 
-## How Caching Works
+<Aside type="note">
+  Caching is **not enabled by default**. Without a `stores.cache`, every API call makes a network request. This matches the behaviour of previous SDK versions.
+</Aside>
 
-The SDK automatically caches API responses based on expiration headers provided by the iRacing API:
+## Enabling Caching
 
-1. **Automatic Detection** - The SDK reads the `expires` header from API responses
-2. **In-Memory Storage** - Cached data is stored in memory per client instance
-3. **Transparent Usage** - Cached responses are returned automatically when valid
-4. **Automatic Expiration** - Cache entries expire based on API-provided times
+Pass a `CacheStore` implementation via the `stores` option:
 
 ```typescript
-const iracing = new IRacingDataClient({ /* ... */ });
+import { IRacingDataClient } from 'iracing-data-client';
 
-// First call - hits the API
-const cars1 = await iracing.car.get();  // Network request
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ },
+  stores: {
+    cache: myCacheStore,
+  },
+});
 
-// Second call within cache period - returns cached data
-const cars2 = await iracing.car.get();  // From cache (instant)
+// First call — network request, response is cached
+const cars1 = await iracing.car.get();
 
-// After expiration - hits the API again
-// ... wait for cache to expire ...
-const cars3 = await iracing.car.get();  // Network request
+// Second call within cache period — returned from store
+const cars2 = await iracing.car.get();
 ```
 
-## Cache Behavior by Endpoint
+### How It Works
 
-Different endpoints have different cache durations:
+When caching is enabled:
+
+1. **S3 Link Resolution** — The SDK follows presigned S3 URLs returned by the iRacing API
+2. **TTL Derivation** — Cache TTL is automatically calculated from the S3 link's `expires` field
+3. **Cache Key** — Generated from the full request URL including query parameters
+4. **Transparent** — Cached responses are returned automatically; no code changes needed per-call
+
+### Cache Key Generation
+
+Cache keys are derived from the request URL and parameters, so different parameters produce different cache entries:
+
+```typescript
+await iracing.member.get({ custIds: [123456] });  // Cache key 1
+await iracing.member.get({ custIds: [789012] });  // Cache key 2
+await iracing.member.get({ custIds: [123456] });  // Hits cache key 1
+```
+
+## Cache Behaviour by Endpoint
+
+Different endpoints have different cache durations, determined by the iRacing API's presigned URL expiry times:
 
 <CardGrid>
   <Card title="Static Data (Long Cache)">
@@ -59,61 +80,11 @@ Different endpoints have different cache durations:
   </Card>
 </CardGrid>
 
-## Working with the Cache
+## Store Implementations
 
-### Understanding Cache Headers
+### Using a Package
 
-The SDK respects these cache-related headers:
-
-```typescript
-// Example response headers from iRacing API
-{
-  "expires": "2024-01-15T12:00:00Z",
-  "cache-control": "max-age=3600",
-  "x-ratelimit-remaining": "99"
-}
-```
-
-### Cache Key Generation
-
-Cache keys are generated from the request URL and parameters:
-
-```typescript
-// These create different cache entries
-await iracing.member.get({ custIds: [123456] });  // Cache key 1
-await iracing.member.get({ custIds: [789012] });  // Cache key 2
-
-// This uses the first cache entry
-await iracing.member.get({ custIds: [123456] });  // From cache
-```
-
-## Pluggable Cache Store
-
-<Aside type="tip">
-  New in the latest release: you can now pass a `CacheStore` via the `stores` option to use external caching (Redis, SQLite, etc.) instead of the built-in in-memory cache.
-</Aside>
-
-The SDK integrates with `@http-client-toolkit/core`, which accepts pluggable stores. When you provide a `CacheStore`, S3 responses are cached with a TTL automatically derived from the presigned URL's expiry time — no manual TTL management needed.
-
-### Before (manual caching)
-
-```typescript
-// You had to build your own caching layer
-const iracing = new IRacingDataClient({
-  auth: { /* ... */ }
-});
-
-// Manual cache wrapper needed
-const cache = new Map();
-async function getCars() {
-  if (cache.has('cars')) return cache.get('cars');
-  const cars = await iracing.car.get();
-  cache.set('cars', cars);
-  return cars;
-}
-```
-
-### After (pluggable store)
+Check the [`@http-client-toolkit`](https://github.com/http-client-toolkit) organisation for available store packages:
 
 ```typescript
 import { IRacingDataClient } from 'iracing-data-client';
@@ -122,394 +93,147 @@ import { RedisCacheStore } from '@http-client-toolkit/store-redis'; // example
 const iracing = new IRacingDataClient({
   auth: { /* ... */ },
   stores: {
-    cache: new RedisCacheStore({ url: 'redis://localhost:6379' })
-  }
+    cache: new RedisCacheStore({ url: 'redis://localhost:6379' }),
+  },
 });
-
-// Caching is now automatic — S3 responses are cached with
-// TTL derived from the presigned URL expiry
-const cars = await iracing.car.get(); // cached transparently
 ```
 
-<Aside type="note">
-  The `stores` option is completely optional. When omitted, the SDK behaves exactly as before — no breaking changes.
-</Aside>
+### Implementing Your Own
 
-Check the [`@http-client-toolkit`](https://github.com/http-client-toolkit) organisation for available store packages, or implement the `CacheStore` interface yourself.
+A `CacheStore` implements the following interface:
 
-## Custom Caching Strategies
+```typescript
+interface CacheStore {
+  get(key: string): Promise<Response | undefined> | Response | undefined;
+  set(key: string, value: Response, ttl?: number): Promise<void> | void;
+  delete(key: string): Promise<void> | void;
+}
+```
 
-### Application-Level Cache
+Simple in-memory example:
 
-Implement your own caching layer for more control:
+```typescript
+class InMemoryCacheStore {
+  private cache = new Map<string, { response: Response; expires: number }>();
+
+  get(key: string): Response | undefined {
+    const entry = this.cache.get(key);
+    if (!entry) return undefined;
+    if (entry.expires < Date.now()) {
+      this.cache.delete(key);
+      return undefined;
+    }
+    return entry.response.clone();
+  }
+
+  set(key: string, value: Response, ttl?: number): void {
+    this.cache.set(key, {
+      response: value.clone(),
+      expires: Date.now() + (ttl ?? 300) * 1000,
+    });
+  }
+
+  delete(key: string): void {
+    this.cache.delete(key);
+  }
+}
+
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ },
+  stores: {
+    cache: new InMemoryCacheStore(),
+  },
+});
+```
+
+## Application-Level Caching
+
+If you need caching logic beyond what the store provides (e.g. custom TTLs per endpoint, conditional caching), you can layer your own cache on top:
 
 ```typescript
 class CachedIRacingService {
-  private cache = new Map<string, { data: any; expires: number }>();
-  
+  private cache = new Map<string, { data: unknown; expires: number }>();
+
   constructor(private iracing: IRacingDataClient) {}
-  
+
   async getMemberInfo(
     custId: number,
     cacheDuration = 5 * 60 * 1000  // 5 minutes
   ) {
     const cacheKey = `member:${custId}`;
     const cached = this.cache.get(cacheKey);
-    
-    // Check if cache is valid
+
     if (cached && cached.expires > Date.now()) {
-      console.log('Cache hit:', cacheKey);
       return cached.data;
     }
-    
-    // Fetch fresh data
-    console.log('Cache miss:', cacheKey);
-    const data = await this.iracing.member.get({
-      custIds: [custId]
-    });
-    
-    // Store in cache
+
+    const data = await this.iracing.member.get({ custIds: [custId] });
+
     this.cache.set(cacheKey, {
       data,
-      expires: Date.now() + cacheDuration
+      expires: Date.now() + cacheDuration,
     });
-    
+
     return data;
   }
-  
+
   clearCache() {
     this.cache.clear();
-  }
-  
-  invalidate(pattern: string) {
-    for (const key of this.cache.keys()) {
-      if (key.includes(pattern)) {
-        this.cache.delete(key);
-      }
-    }
-  }
-}
-```
-
-### Redis Cache Implementation
-
-For distributed applications:
-
-```typescript
-import Redis from 'ioredis';
-
-class RedisCache {
-  private redis: Redis;
-  
-  constructor() {
-    this.redis = new Redis({
-      host: 'localhost',
-      port: 6379
-    });
-  }
-  
-  async get<T>(key: string): Promise<T | null> {
-    const data = await this.redis.get(key);
-    return data ? JSON.parse(data) : null;
-  }
-  
-  async set<T>(
-    key: string,
-    value: T,
-    ttl: number  // seconds
-  ): Promise<void> {
-    await this.redis.set(
-      key,
-      JSON.stringify(value),
-      'EX',
-      ttl
-    );
-  }
-  
-  async wrap<T>(
-    key: string,
-    fn: () => Promise<T>,
-    ttl = 300  // 5 minutes default
-  ): Promise<T> {
-    // Try cache first
-    const cached = await this.get<T>(key);
-    if (cached) return cached;
-    
-    // Fetch and cache
-    const data = await fn();
-    await this.set(key, data, ttl);
-    return data;
-  }
-}
-
-// Usage with iRacing SDK
-const cache = new RedisCache();
-
-const memberInfo = await cache.wrap(
-  `member:${custId}`,
-  () => iracing.member.get({ custIds: [custId] }),
-  600  // Cache for 10 minutes
-);
-```
-
-### Memory-Efficient Cache
-
-Implement LRU (Least Recently Used) cache:
-
-```typescript
-class LRUCache<T> {
-  private cache = new Map<string, { data: T; expires: number }>();
-  
-  constructor(private maxSize = 100) {}
-  
-  get(key: string): T | null {
-    const item = this.cache.get(key);
-    
-    if (!item) return null;
-    
-    if (item.expires < Date.now()) {
-      this.cache.delete(key);
-      return null;
-    }
-    
-    // Move to end (most recently used)
-    this.cache.delete(key);
-    this.cache.set(key, item);
-    
-    return item.data;
-  }
-  
-  set(key: string, data: T, ttl: number) {
-    // Remove oldest if at capacity
-    if (this.cache.size >= this.maxSize) {
-      const firstKey = this.cache.keys().next().value;
-      this.cache.delete(firstKey);
-    }
-    
-    this.cache.set(key, {
-      data,
-      expires: Date.now() + ttl
-    });
   }
 }
 ```
 
 ## Cache Optimization
 
-### Preloading Cache
+### Preloading
 
 Warm up the cache on application start:
 
 ```typescript
 async function preloadCache(iracing: IRacingDataClient) {
-  console.log('Preloading cache...');
-  
-  const tasks = [
+  await Promise.all([
     iracing.car.get(),
     iracing.track.get(),
     iracing.series.get(),
     iracing.constants.categories(),
-    iracing.constants.divisions()
-  ];
-  
-  await Promise.all(tasks);
-  console.log('Cache preloaded');
+    iracing.constants.divisions(),
+  ]);
 }
 
-// On app start
 await preloadCache(iracing);
 ```
 
 ### Batch Requests
 
-Optimize cache usage with batching:
+Combine requests to reduce cache entries and API calls:
 
 ```typescript
-class BatchedMemberService {
-  private pendingRequests = new Map<number, Promise<any>>();
-  
-  async getMember(custId: number) {
-    // Check if request is already pending
-    if (this.pendingRequests.has(custId)) {
-      return this.pendingRequests.get(custId);
-    }
-    
-    // Create batched request
-    const promise = this.executeBatch(custId);
-    this.pendingRequests.set(custId, promise);
-    
-    try {
-      return await promise;
-    } finally {
-      this.pendingRequests.delete(custId);
-    }
-  }
-  
-  private async executeBatch(custId: number) {
-    // Collect IDs for batch
-    await new Promise(r => setTimeout(r, 10));
-    
-    const ids = Array.from(this.pendingRequests.keys());
-    
-    // Single batched request
-    const response = await iracing.member.get({
-      custIds: ids
-    });
-    
-    // Return specific member
-    return response.members.find(m => m.custId === custId);
-  }
-}
-```
+// Instead of fetching members one at a time
+const ids = [123, 456, 789];
 
-## Cache Invalidation
-
-### Manual Invalidation
-
-Clear cache when data changes:
-
-```typescript
-class IRacingDataManager {
-  private lastUpdate = new Map<string, number>();
-  private updateInterval = 5 * 60 * 1000;  // 5 minutes
-  
-  async getMemberStats(custId: number) {
-    const key = `stats:${custId}`;
-    const lastUpdate = this.lastUpdate.get(key) || 0;
-    
-    // Force refresh if stale
-    if (Date.now() - lastUpdate > this.updateInterval) {
-      // This will bypass cache and get fresh data
-      const stats = await this.forceRefresh(
-        () => iracing.stats.memberSummary({ custId })
-      );
-      
-      this.lastUpdate.set(key, Date.now());
-      return stats;
-    }
-    
-    // Use potentially cached data
-    return iracing.stats.memberSummary({ custId });
-  }
-  
-  private async forceRefresh<T>(fn: () => Promise<T>): Promise<T> {
-    // Add timestamp to bypass cache
-    // Note: This is conceptual - actual implementation
-    // depends on SDK internals
-    return fn();
-  }
-}
-```
-
-### Event-Based Invalidation
-
-Clear cache based on events:
-
-```typescript
-import { EventEmitter } from 'events';
-
-class CacheManager extends EventEmitter {
-  private cache = new Map();
-  
-  constructor() {
-    super();
-    
-    // Listen for invalidation events
-    this.on('race-finished', (sessionId) => {
-      this.invalidatePattern(`results:${sessionId}`);
-    });
-    
-    this.on('standings-updated', (seasonId) => {
-      this.invalidatePattern(`standings:${seasonId}`);
-    });
-  }
-  
-  invalidatePattern(pattern: string) {
-    for (const key of this.cache.keys()) {
-      if (key.includes(pattern)) {
-        this.cache.delete(key);
-        console.log(`Invalidated cache: ${key}`);
-      }
-    }
-  }
-}
-
-// Usage
-const cacheManager = new CacheManager();
-
-// After a race finishes
-cacheManager.emit('race-finished', 12345);
-```
-
-## Performance Monitoring
-
-Track cache performance:
-
-```typescript
-class CacheMetrics {
-  private hits = 0;
-  private misses = 0;
-  private errors = 0;
-  
-  recordHit() { this.hits++; }
-  recordMiss() { this.misses++; }
-  recordError() { this.errors++; }
-  
-  getStats() {
-    const total = this.hits + this.misses;
-    const hitRate = total > 0 ? (this.hits / total) * 100 : 0;
-    
-    return {
-      hits: this.hits,
-      misses: this.misses,
-      errors: this.errors,
-      total,
-      hitRate: `${hitRate.toFixed(2)}%`
-    };
-  }
-  
-  reset() {
-    this.hits = 0;
-    this.misses = 0;
-    this.errors = 0;
-  }
-}
-
-// Monitor cache performance
-const metrics = new CacheMetrics();
-
-// Log metrics periodically
-setInterval(() => {
-  console.log('Cache Statistics:', metrics.getStats());
-}, 60000);  // Every minute
+// Single batched request
+const members = await iracing.member.get({ custIds: ids });
 ```
 
 ## Best Practices
 
 <CardGrid>
-  <Card title="✅ Trust SDK Caching">
-    Let the Data Client handle caching for most use cases - it's optimized for the API
+  <Card title="Use Pluggable Stores">
+    Pass a `CacheStore` via `stores.cache` for automatic, TTL-aware caching with no extra code
   </Card>
-  <Card title="✅ Cache Static Data">
+  <Card title="Cache Static Data">
     Aggressively cache data that rarely changes (cars, tracks, series)
   </Card>
-  <Card title="✅ Monitor Performance">
-    Track cache hit rates to optimize your caching strategy
+  <Card title="Monitor Performance">
+    Track cache hit rates to validate your caching strategy
   </Card>
-  <Card title="❌ Don't Over-Cache">
+  <Card title="Don't Over-Cache">
     Avoid caching real-time data that needs to be fresh
-  </Card>
-  <Card title="❌ Don't Ignore Expiration">
-    Respect cache expiration times provided by the API
   </Card>
 </CardGrid>
 
-<Aside type="tip">
-  The SDK's built-in caching is usually sufficient for most applications. Only implement custom caching when you have specific requirements that the default behavior doesn't meet.
-</Aside>
-
 ## Next Steps
 
-- Learn about [Rate Limiting](/guides/rate-limiting/) to avoid API limits
-- See [Performance Guide](/guides/performance/) for optimization tips
-- Review [Error Handling](/guides/error-handling/) for cache-related errors
+- Learn about [Rate Limiting](/iracing-data-client/guides/rate-limiting/) to avoid API limits
+- Review [Error Handling](/iracing-data-client/guides/error-handling/) for cache-related errors
+- See the [Client API Reference](/iracing-data-client/api/client/) for the `stores` option
