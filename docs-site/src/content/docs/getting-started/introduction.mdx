@@ -26,7 +26,7 @@ The iRacing Data API is the official REST API provided by iRacing.com that allow
     Handles iRacing's OAuth2 authentication automatically with token management and automatic refresh.
   </Card>
   <Card title="⚡ Performance" icon="rocket">
-    S3 link following, intelligent error handling, and response caching *(coming soon)* for optimal performance.
+    S3 link following, intelligent error handling, and pluggable response caching for optimal performance.
   </Card>
 </CardGrid>
 
@@ -121,8 +121,8 @@ The SDK automatically handles:
   <Card title="Parameter Validation">
     Validates all parameters using Zod schemas before sending requests
   </Card>
-  <Card title="Response Caching *(coming soon)*">
-    Will intelligently cache responses based on API-provided expiration headers
+  <Card title="Response Caching">
+    Intelligently caches responses based on API-provided expiration headers via pluggable stores
   </Card>
 </CardGrid>
 
@@ -205,8 +205,8 @@ try {
   <Card title="Zod Validation" icon="shield">
     Runtime validation for all API parameters
   </Card>
-  <Card title="Smart Caching *(coming soon)*" icon="rocket">
-    Response caching with automatic expiration
+  <Card title="Smart Caching" icon="rocket">
+    Response caching with automatic expiration via pluggable stores
   </Card>
   <Card title="Error Types" icon="warning">
     Specific error handling for different scenarios
