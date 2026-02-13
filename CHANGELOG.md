@@ -1,5 +1,11 @@
 # iracing-data-client
 
+## 0.2.0
+
+### Minor Changes
+
+- d787efa: Refactor IRacingError to accept an options object and expose `url` and `headers` from HTTP error responses. Add `IRacingErrorOptions` export.
+
 ## 0.1.1
 
 ### Patch Changes
