@@ -204,14 +204,14 @@ Custom error class for API errors.
 
 ```typescript
 class IRacingError extends Error {
-  status?: number;        // HTTP status code
-  statusText?: string;    // HTTP status text
-  responseData?: any;     // Response body
-  
-  // Helper properties
-  isMaintenanceMode: boolean;  // True if 503 maintenance
-  isRateLimited: boolean;       // True if 429 rate limit
-  isUnauthorized: boolean;      // True if 401 unauthorized
+  status?: number;           // HTTP status code
+  statusText?: string;       // HTTP status text
+  responseData?: unknown;    // Response body
+
+  // Computed helper properties
+  get isMaintenanceMode(): boolean;  // True if 503 maintenance
+  get isRateLimited(): boolean;      // True if 429 rate limit
+  get isUnauthorized(): boolean;     // True if 401 unauthorized
 }
 ```
 
