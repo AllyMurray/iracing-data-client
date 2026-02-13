@@ -38,11 +38,18 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
+    "iracing",
+    "iracing-api",
     "iracing-data-api",
     "iracing-data-client",
-    "iracing-data-client",
-    "iracing",
-    "sim-racing"
+    "sim-racing",
+    "motorsport",
+    "racing",
+    "typescript",
+    "api-client",
+    "sdk",
+    "oauth2",
+    "esports"
   ],
   "author": "Ally Murray",
   "license": "ISC",
