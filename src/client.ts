@@ -36,6 +36,12 @@ export interface IRacingClientOptions {
   validateParams?: boolean;
 
   /**
+   * Enable semantic validation for known endpoint parameter combinations.
+   * @default true
+   */
+  validateSemanticParams?: boolean;
+
+  /**
    * Optional stores for caching, deduplication, and rate limiting.
    * When omitted, HttpClient operates without stores (same as current behaviour).
    */
@@ -57,10 +63,7 @@ export class IRacingError extends Error {
   }
 
   get isMaintenanceMode(): boolean {
-    return (
-      this.status === 503 &&
-      (this.responseData as Record<string, unknown>)?.error === 'Site Maintenance'
-    );
+    return this.status === 503;
   }
 
   get isRateLimited(): boolean {
@@ -80,7 +83,11 @@ export class IRacingClient {
   private readonly authConfig: AuthConfig;
   private readonly tokenManager: TokenManager;
   private readonly validateParams: boolean;
+  private readonly validateSemanticParams: boolean;
   private readonly httpClient: HttpClient;
+
+  private validSeasonCarClassPairs: Set<string> | null = null;
+  private validTeamSeasonCarClassPairs: Set<string> | null = null;
 
   private authenticationPromise: Promise<void> | null = null;
 
@@ -92,6 +99,7 @@ export class IRacingClient {
 
     this.authConfig = options.auth;
     this.validateParams = options.validateParams ?? true;
+    this.validateSemanticParams = options.validateSemanticParams ?? true;
 
     // Initialize token manager
     this.tokenManager = new TokenManager({
@@ -429,6 +437,128 @@ export class IRacingClient {
     return data;
   }
 
+  private pairKey(seasonId: number, carClassId: number): string {
+    return `${seasonId}|${carClassId}`;
+  }
+
+  private collectSeasonCarClassPairsFromData(
+    data: unknown,
+    allPairs: Set<string>,
+    teamPairs: Set<string>,
+    inheritedSeasonId?: number,
+    inheritedTeamSeries?: boolean
+  ): void {
+    if (data === null || data === undefined) return;
+
+    if (Array.isArray(data)) {
+      for (const item of data) {
+        this.collectSeasonCarClassPairsFromData(
+          item,
+          allPairs,
+          teamPairs,
+          inheritedSeasonId,
+          inheritedTeamSeries
+        );
+      }
+      return;
+    }
+
+    if (typeof data !== 'object') return;
+
+    const record = data as Record<string, unknown>;
+    const seasonId =
+      typeof record.seasonId === 'number'
+        ? record.seasonId
+        : typeof record.season_id === 'number'
+          ? record.season_id
+          : inheritedSeasonId;
+    const isTeamSeries =
+      inheritedTeamSeries ||
+      (typeof record.maxTeamDrivers === 'number' && record.maxTeamDrivers > 1) ||
+      (typeof record.max_team_drivers === 'number' && record.max_team_drivers > 1) ||
+      record.driverChanges === true ||
+      record.driver_changes === true;
+
+    if (seasonId !== undefined && seasonId > 0) {
+      const addPair = (value: unknown) => {
+        if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) return;
+        const key = this.pairKey(seasonId, value);
+        allPairs.add(key);
+        if (isTeamSeries) {
+          teamPairs.add(key);
+        }
+      };
+
+      addPair(record.carClassId);
+      addPair(record.car_class_id);
+
+      const classArrays: unknown[] = [];
+      if (Array.isArray(record.carClassIds)) classArrays.push(record.carClassIds);
+      if (Array.isArray(record.car_class_ids)) classArrays.push(record.car_class_ids);
+      if (Array.isArray(record.raceWeekCarClassIds)) classArrays.push(record.raceWeekCarClassIds);
+      if (Array.isArray(record.race_week_car_class_ids)) classArrays.push(record.race_week_car_class_ids);
+
+      for (const classArray of classArrays) {
+        for (const value of classArray as unknown[]) {
+          addPair(value);
+        }
+      }
+    }
+
+    for (const value of Object.values(record)) {
+      this.collectSeasonCarClassPairsFromData(value, allPairs, teamPairs, seasonId, isTeamSeries);
+    }
+  }
+
+  private async loadSeasonCarClassPairs(): Promise<void> {
+    if (this.validSeasonCarClassPairs && this.validTeamSeasonCarClassPairs) {
+      return;
+    }
+
+    const allPairs = new Set<string>();
+    const teamPairs = new Set<string>();
+    const seasons = await this.get<unknown>('https://members-ng.iracing.com/data/series/seasons');
+    this.collectSeasonCarClassPairsFromData(seasons, allPairs, teamPairs);
+
+    this.validSeasonCarClassPairs = allPairs;
+    this.validTeamSeasonCarClassPairs = teamPairs;
+  }
+
+  async ensureSeasonCarClassPair(
+    endpointId: string,
+    seasonId: number,
+    carClassId: number
+  ): Promise<void> {
+    if (!this.validateSemanticParams) return;
+    if (!Number.isFinite(seasonId) || !Number.isFinite(carClassId)) return;
+
+    await this.loadSeasonCarClassPairs();
+    const key = this.pairKey(seasonId, carClassId);
+
+    const preferredSet =
+      endpointId === 'stats.season_team_standings' &&
+      this.validTeamSeasonCarClassPairs &&
+      this.validTeamSeasonCarClassPairs.size > 0
+        ? this.validTeamSeasonCarClassPairs
+        : this.validSeasonCarClassPairs;
+
+    if (!preferredSet || preferredSet.has(key)) {
+      return;
+    }
+
+    throw new IRacingError(
+      `Parameter validation failed for ${endpointId}: seasonId=${seasonId} and carClassId=${carClassId} do not form a known valid pair.`,
+      400,
+      'Bad Request',
+      {
+        error: 'InvalidParameterCombination',
+        endpoint: endpointId,
+        seasonId,
+        carClassId,
+      }
+    );
+  }
+
   /**
    * Makes a GET request to the iRacing Data API.
    */
@@ -444,7 +574,7 @@ export class IRacingClient {
     const data = await this.httpClient.get<T>(fullUrl);
 
     // Per-request Zod validation (not an HttpClient concern)
-    if (options?.schema) {
+    if (this.validateParams && options?.schema) {
       return options.schema.parse(data);
     }
 
