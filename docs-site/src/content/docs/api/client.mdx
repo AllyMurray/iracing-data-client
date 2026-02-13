@@ -295,16 +295,18 @@ import type {
   MemberInfoResponse,
   CarGetResponse,
   TrackAssetsResponse,
-  
+
   // Parameter types
   MemberGetParams,
   ResultsSearchSeriesParams,
   StatsSeasonDriverStandingsParams,
-  
+
   // Client types
   IRacingClientOptions,
-  IRacingError
 } from 'iracing-data-client';
+
+// IRacingError is a class — use a value import for instanceof checks
+import { IRacingError } from 'iracing-data-client';
 ```
 
 ## Configuration Examples
