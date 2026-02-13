@@ -1,5 +1,5 @@
 import * as z from 'zod/mini';
-import { HttpClient, type HttpClientStores } from '@http-client-toolkit/core';
+import { HttpClient, type HttpClientStores, type HttpErrorContext } from '@http-client-toolkit/core';
 import {
   type AuthConfig,
   type FetchLike,
@@ -138,7 +138,7 @@ export class IRacingClient {
         fetchFn: this.createFetchFn(),
         requestInterceptor: this.createRequestInterceptor(),
         responseTransformer: (data) => this.mapResponseFromApi(data),
-        errorHandler: (error) => this.mapError(error),
+        errorHandler: (context) => this.classifyHttpError(context),
       },
     );
   }
@@ -206,13 +206,7 @@ export class IRacingClient {
       const response = await this.normalizeResponse(rawResponse);
 
       if (!response.ok) {
-        let responseData: unknown;
-        try {
-          responseData = await response.clone().json();
-        } catch {
-          // Non-JSON error response, leave responseData undefined
-        }
-        throw this.createHttpError(response.status, response.statusText, responseData);
+        return response; // toolkit handles error detection + body reading
       }
 
       const contentType = response.headers.get('content-type') || '';
@@ -234,11 +228,7 @@ export class IRacingClient {
       const s3Response = await this.normalizeResponse(rawS3Response);
 
       if (!s3Response.ok) {
-        throw new IRacingError(
-          `Failed to fetch from S3: ${s3Response.statusText}`,
-          s3Response.status,
-          s3Response.statusText,
-        );
+        throw new Error(`Failed to fetch from S3: ${s3Response.statusText}`);
       }
 
       // Calculate max-age from the S3 link's expires field
@@ -295,62 +285,49 @@ export class IRacingClient {
   }
 
   /**
-   * Creates an IRacingError from an HTTP error response with status-specific messages.
+   * Classifies an HTTP error response into a specific IRacingError.
+   * Called by the toolkit's errorHandler — only receives HTTP errors, never network failures.
    */
-  private createHttpError(status: number, statusText: string, responseData?: unknown): IRacingError {
+  private classifyHttpError(context: HttpErrorContext): IRacingError {
+    const { status, data } = context.response;
+
     if (status === 503) {
       const isMaintenance =
-        responseData != null &&
-        typeof responseData === 'object' &&
-        (responseData as Record<string, unknown>).error === 'Site Maintenance';
-
+        data != null &&
+        typeof data === 'object' &&
+        (data as Record<string, unknown>).error === 'Site Maintenance';
       return new IRacingError(
         isMaintenance
           ? 'iRacing is currently in maintenance mode'
-          : `Service unavailable: ${statusText}`,
+          : 'Service unavailable',
         503,
-        statusText,
-        responseData,
+        undefined,
+        data,
       );
     }
     if (status === 429) {
       return new IRacingError(
         'Rate limit exceeded. Please wait before making more requests.',
         429,
-        statusText,
-        responseData,
+        undefined,
+        data,
       );
     }
     if (status === 401) {
       return new IRacingError(
         'Authentication failed. Please check your OAuth credentials and token state.',
         401,
-        statusText,
-        responseData,
+        undefined,
+        data,
       );
     }
 
     return new IRacingError(
-      `Request failed: ${statusText}`,
+      context.message,
       status,
-      statusText,
-      responseData,
+      undefined,
+      data,
     );
-  }
-
-  /**
-   * Maps errors to IRacingError instances (fallback for non-HTTP errors).
-   */
-  private mapError(error: unknown): IRacingError {
-    if (error instanceof IRacingError) {
-      return error;
-    }
-
-    if (error instanceof Error) {
-      return new IRacingError(error.message);
-    }
-
-    return new IRacingError(String(error));
   }
 
   /**
