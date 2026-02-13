@@ -1,6 +1,6 @@
 /* AUTO-GENERATED — do not edit */
 
-import { IRacingClient, IRacingError, type IRacingClientOptions } from "./client";
+import { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";
 import { CarService } from "./car/service";
 import { CarclassService } from "./carclass/service";
 import { ConstantsService } from "./constants/service";
@@ -18,7 +18,7 @@ import { TimeAttackService } from "./time-attack/service";
 import { TrackService } from "./track/service";
 
 // Re-export client
-export { IRacingClient, IRacingError, type IRacingClientOptions };
+export { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };
 
 // Re-export http-client-toolkit types
 export type { HttpClientStores } from '@http-client-toolkit/core';

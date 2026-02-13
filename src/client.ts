@@ -49,17 +49,34 @@ export interface IRacingClientOptions {
 }
 
 /**
+ * Options for constructing an IRacingError.
+ */
+export interface IRacingErrorOptions {
+  status?: number;
+  statusText?: string;
+  url?: string;
+  responseData?: unknown;
+  headers?: Headers;
+}
+
+/**
  * Error thrown for iRacing API-level errors.
  */
 export class IRacingError extends Error {
-  constructor(
-    message: string,
-    public readonly status?: number,
-    public readonly statusText?: string,
-    public readonly responseData?: unknown
-  ) {
+  public readonly status?: number;
+  public readonly statusText?: string;
+  public readonly url?: string;
+  public readonly responseData?: unknown;
+  public readonly headers?: Headers;
+
+  constructor(message: string, options: IRacingErrorOptions = {}) {
     super(message);
     this.name = 'IRacingError';
+    this.status = options.status;
+    this.statusText = options.statusText;
+    this.url = options.url;
+    this.responseData = options.responseData;
+    this.headers = options.headers;
   }
 
   get isMaintenanceMode(): boolean {
@@ -289,7 +306,7 @@ export class IRacingClient {
    * Called by the toolkit's errorHandler — only receives HTTP errors, never network failures.
    */
   private classifyHttpError(context: HttpErrorContext): IRacingError {
-    const { status, data } = context.response;
+    const { status, data, headers } = context.response;
 
     if (status === 503) {
       const isMaintenance =
@@ -300,33 +317,25 @@ export class IRacingClient {
         isMaintenance
           ? 'iRacing is currently in maintenance mode'
           : 'Service unavailable',
-        503,
-        undefined,
-        data,
+        { status: 503, url: context.url, responseData: data, headers },
       );
     }
     if (status === 429) {
       return new IRacingError(
         'Rate limit exceeded. Please wait before making more requests.',
-        429,
-        undefined,
-        data,
+        { status: 429, url: context.url, responseData: data, headers },
       );
     }
     if (status === 401) {
       return new IRacingError(
         'Authentication failed. Please check your OAuth credentials and token state.',
-        401,
-        undefined,
-        data,
+        { status: 401, url: context.url, responseData: data, headers },
       );
     }
 
     return new IRacingError(
       context.message,
-      status,
-      undefined,
-      data,
+      { status, url: context.url, responseData: data, headers },
     );
   }
 
@@ -551,14 +560,16 @@ export class IRacingClient {
 
     throw new IRacingError(
       `Parameter validation failed for ${endpointId}: seasonId=${seasonId} and carClassId=${carClassId} do not form a known valid pair.`,
-      400,
-      'Bad Request',
       {
-        error: 'InvalidParameterCombination',
-        endpoint: endpointId,
-        seasonId,
-        carClassId,
-      }
+        status: 400,
+        statusText: 'Bad Request',
+        responseData: {
+          error: 'InvalidParameterCombination',
+          endpoint: endpointId,
+          seasonId,
+          carClassId,
+        },
+      },
     );
   }
 
