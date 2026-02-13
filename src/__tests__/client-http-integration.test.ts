@@ -158,6 +158,8 @@ describe('HttpClient Integration', () => {
         expect(err.status).toBe(401);
         expect(err.isUnauthorized).toBe(true);
         expect(err.responseData).toEqual(errorBody);
+        expect(err.url).toBe('https://members-ng.iracing.com/data/test/auth');
+        expect(err.headers).toBeInstanceOf(Headers);
       }
     });
 
@@ -172,6 +174,8 @@ describe('HttpClient Integration', () => {
         expect(e).toBeInstanceOf(IRacingError);
         const err = e as IRacingError;
         expect(err.isRateLimited).toBe(true);
+        expect(err.url).toBe('https://members-ng.iracing.com/data/test/rate-limit');
+        expect(err.headers).toBeInstanceOf(Headers);
       }
     });
 
@@ -191,6 +195,8 @@ describe('HttpClient Integration', () => {
         const err = e as IRacingError;
         expect(err.isMaintenanceMode).toBe(true);
         expect(err.isServiceUnavailable).toBe(false);
+        expect(err.url).toBe('https://members-ng.iracing.com/data/test/maintenance');
+        expect(err.headers).toBeInstanceOf(Headers);
       }
     });
 
@@ -209,6 +215,8 @@ describe('HttpClient Integration', () => {
         const err = e as IRacingError;
         expect(err.isMaintenanceMode).toBe(false);
         expect(err.isServiceUnavailable).toBe(true);
+        expect(err.url).toBe('https://members-ng.iracing.com/data/test/unavailable');
+        expect(err.headers).toBeInstanceOf(Headers);
       }
     });
   });
