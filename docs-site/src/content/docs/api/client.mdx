@@ -7,7 +7,7 @@ import { Tabs, TabItem, Card, Aside, Badge } from '@astrojs/starlight/components
 
 # Client API
 
-The client provides the core functionality for connecting to the iRacing Data API, handling authentication, and managing requests.
+The client provides the core functionality for connecting to the iRacing Data API, handling OAuth2 authentication, and managing requests.
 
 ## IRacingDataClient
 
@@ -23,115 +23,198 @@ const iracing = new IRacingDataClient(options);
 
 ```typescript
 interface IRacingClientOptions {
-  // Authentication credentials
-  email?: string;
-  password?: string;
-  
-  // Custom headers for authentication
-  headers?: Record<string, string>;
-  
-  // Custom fetch implementation
+  auth: AuthConfig;
   fetchFn?: FetchLike;
-  
-  // Enable/disable parameter validation
   validateParams?: boolean;
-  
-  // Optional pluggable stores for caching, deduplication, and rate limiting
+  validateSemanticParams?: boolean;
   stores?: HttpClientStores;
 }
 ```
 
 <Tabs>
-  <TabItem label="email">
-    **Type:** `string` (optional)
-    
-    Your iRacing account email address. Required unless using custom headers.
-    
+  <TabItem label="auth">
+    **Type:** `AuthConfig` (required)
+
+    Authentication configuration. A discriminated union of two OAuth2 flows:
+
+    - `PasswordLimitedAuth` — for scripts, CLIs, and backend services
+    - `AuthorizationCodeAuth` — for web apps acting on behalf of other users
+
+    See [Authentication Configuration](#authentication-configuration) below for full details.
+
     ```typescript
     const iracing = new IRacingDataClient({
-      email: 'user@example.com'
-    });
-    ```
-  </TabItem>
-  <TabItem label="password">
-    **Type:** `string` (optional)
-    
-    Your iRacing account password. Required unless using custom headers.
-    
-    ```typescript
-    const iracing = new IRacingDataClient({
-      password: 'secure-password'
-    });
-    ```
-  </TabItem>
-  <TabItem label="headers">
-    **Type:** `Record<string, string>` (optional)
-    
-    Custom HTTP headers for authentication. Alternative to email/password.
-    
-    ```typescript
-    const iracing = new IRacingDataClient({
-      headers: {
-        'Cookie': 'session-cookie',
-        'User-Agent': 'MyApp/1.0'
-      }
+      auth: {
+        type: 'password-limited',
+        clientId: process.env.IRACING_CLIENT_ID!,
+        clientSecret: process.env.IRACING_CLIENT_SECRET!,
+        username: process.env.IRACING_USERNAME!,
+        password: process.env.IRACING_PASSWORD!,
+      },
     });
     ```
   </TabItem>
   <TabItem label="fetchFn">
     **Type:** `FetchLike` (optional)
-    
-    Custom fetch implementation for HTTP requests. Useful for Node.js < 18 or testing.
-    
+
+    Custom fetch implementation for HTTP requests. Useful for testing or environments without global fetch.
+
     ```typescript
-    import fetch from 'node-fetch';
-    
     const iracing = new IRacingDataClient({
-      email: 'user@example.com',
-      password: 'password',
-      fetchFn: fetch as any
+      auth: { /* ... */ },
+      fetchFn: myCustomFetch,
     });
     ```
   </TabItem>
   <TabItem label="validateParams">
     **Type:** `boolean` (optional, default: `true`)
-    
-    Enable or disable parameter validation using Zod schemas.
-    
+
+    Enable or disable runtime parameter validation using Zod schemas.
+
     ```typescript
     const iracing = new IRacingDataClient({
-      email: 'user@example.com',
-      password: 'password',
-      validateParams: false  // Disable validation
+      auth: { /* ... */ },
+      validateParams: false,
+    });
+    ```
+  </TabItem>
+  <TabItem label="validateSemanticParams">
+    **Type:** `boolean` (optional, default: `true`)
+
+    Enable or disable semantic validation for known endpoint parameter combinations (e.g. validating that a `seasonId`/`carClassId` pair exists).
+
+    ```typescript
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      validateSemanticParams: false,
     });
     ```
   </TabItem>
   <TabItem label="stores">
     **Type:** `HttpClientStores` (optional)
-    
-    Pluggable stores for caching, deduplication, and rate limiting, powered by `@http-client-toolkit/core`. When omitted, the SDK operates without external stores (same behaviour as previous versions).
-    
+
+    Pluggable stores for caching, deduplication, and rate limiting, powered by `@http-client-toolkit/core`. When omitted, the SDK operates without external stores.
+
     Available store keys:
     - **`cache`** — A `CacheStore` for caching S3 responses. TTL is automatically derived from presigned URL expiry.
     - **`rateLimit`** — A `RateLimitStore` or `AdaptiveRateLimitStore` for automatic request throttling.
     - **`dedupe`** — A `DedupeStore` for deduplicating concurrent identical requests.
-    
+
     ```typescript
-    import { IRacingDataClient } from 'iracing-data-client';
-    
     const iracing = new IRacingDataClient({
-      email: 'user@example.com',
-      password: 'password',
+      auth: { /* ... */ },
       stores: {
         cache: myCacheStore,
         rateLimit: myRateLimitStore,
-      }
+        dedupe: myDedupeStore,
+      },
     });
     ```
-    
-    See the [Caching Guide](/guides/caching/) and [Rate Limiting Guide](/guides/rate-limiting/) for detailed examples.
+
+    See the [Caching Guide](/iracing-data-client/guides/caching/) and [Rate Limiting Guide](/iracing-data-client/guides/rate-limiting/) for detailed examples.
   </TabItem>
 </Tabs>
+
+## Authentication Configuration
+
+The `auth` option accepts a discriminated union (`AuthConfig`) of two OAuth2 flows.
+
+### Password Limited Flow
+
+For scripts, CLI tools, and backend services running on behalf of the registered client owner. This is the most common flow.
+
+```typescript
+interface PasswordLimitedAuth {
+  type: 'password-limited';
+  clientId: string;
+  clientSecret: string;
+  username: string;
+  password: string;
+  tokens?: {
+    accessToken: string;
+    refreshToken?: string;
+    expiresAt?: number;
+  };
+  onTokenRefresh?: OnTokenRefresh;
+}
+```
+
+The client authenticates automatically on the first API call. You can optionally provide pre-obtained `tokens` to skip the initial token request, and an `onTokenRefresh` callback to persist tokens for reuse across sessions.
+
+```typescript
+const iracing = new IRacingDataClient({
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+    onTokenRefresh: async (tokens) => {
+      await fs.writeFile('tokens.json', JSON.stringify(tokens));
+    },
+  },
+});
+```
+
+### Authorization Code Flow
+
+For web and desktop applications that access data on behalf of other users. Requires completing the OAuth flow externally before creating the client.
+
+```typescript
+interface AuthorizationCodeAuth {
+  type: 'authorization-code';
+  clientId: string;
+  clientSecret: string;
+  tokens: {
+    accessToken: string;
+    refreshToken?: string;
+    expiresAt?: number;
+  };
+  onTokenRefresh?: OnTokenRefresh;
+}
+```
+
+Use the exported helper functions to complete the flow:
+
+```typescript
+import {
+  IRacingDataClient,
+  buildAuthorizationUrl,
+  exchangeAuthorizationCode,
+} from 'iracing-data-client';
+
+// Step 1: Build the authorization URL and redirect the user
+const { url, state, pkce } = await buildAuthorizationUrl({
+  clientId: process.env.IRACING_CLIENT_ID!,
+  redirectUri: 'https://myapp.com/callback',
+  usePKCE: true,
+});
+
+// Step 2: Exchange the authorization code for tokens (in your callback handler)
+const tokens = await exchangeAuthorizationCode({
+  clientId: process.env.IRACING_CLIENT_ID!,
+  clientSecret: process.env.IRACING_CLIENT_SECRET!,
+  code: callbackCode,
+  redirectUri: 'https://myapp.com/callback',
+  codeVerifier: pkce?.verifier,
+});
+
+// Step 3: Create the client with the obtained tokens
+const iracing = new IRacingDataClient({
+  auth: {
+    type: 'authorization-code',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    tokens: {
+      accessToken: tokens.access_token,
+      refreshToken: tokens.refresh_token,
+    },
+    onTokenRefresh: (newTokens) => {
+      // Persist refreshed tokens for the user's session
+    },
+  },
+});
+```
 
 ### Service Properties
 
@@ -164,19 +247,19 @@ The underlying client that handles HTTP requests. You typically don't interact w
 
 ### Features
 
-<Card title="🔐 Automatic Authentication" icon="key">
-  Handles the complete authentication flow including login, session management, and renewal.
+<Card title="Automatic OAuth2 Authentication" icon="key">
+  Handles the complete OAuth2 flow including token acquisition, Bearer header injection, and automatic token refresh.
 </Card>
 
-<Card title="🔄 S3 Link Following" icon="refresh">
+<Card title="S3 Link Following" icon="refresh">
   Automatically follows presigned S3 URLs returned by the API for accessing data.
 </Card>
 
-<Card title="💾 Response Caching" icon="suitcase">
-  Caches responses based on expiration headers to reduce API calls and improve performance.
+<Card title="Pluggable Stores" icon="suitcase">
+  Supports optional caching, deduplication, and rate limiting via `@http-client-toolkit/core` stores.
 </Card>
 
-<Card title="🔀 Parameter Transformation" icon="arrow-left">
+<Card title="Parameter Transformation" icon="arrow-left">
   Automatically converts between camelCase (SDK) and snake_case (API) formats.
 </Card>
 
@@ -192,15 +275,33 @@ Makes a GET request to the API.
 async get<T>(
   url: string,
   options?: {
-    params?: Record<string, any>;
+    params?: Record<string, unknown>;
     schema?: ZodSchema;
   }
 ): Promise<T>
 ```
 
-## IRacingError
+#### `isAuthenticated()`
 
-Custom error class for API errors.
+Returns `true` if the client has valid, non-expired tokens.
+
+```typescript
+isAuthenticated(): boolean
+```
+
+#### `clearTokens()`
+
+Clears stored tokens, requiring re-authentication on the next request.
+
+```typescript
+clearTokens(): void
+```
+
+## Error Classes
+
+### IRacingError
+
+Error thrown for iRacing Data API errors (non-2xx HTTP responses).
 
 ```typescript
 class IRacingError extends Error {
@@ -215,11 +316,40 @@ class IRacingError extends Error {
 }
 ```
 
+### OAuthError
+
+Error thrown for OAuth-related failures (token requests, invalid credentials).
+
+```typescript
+class OAuthError extends Error {
+  code: OAuthErrorCode | string;
+  description?: string;
+  uri?: string;
+
+  get isInvalidGrant(): boolean;
+  get isInvalidClient(): boolean;
+  get isRateLimited(): boolean;
+  get isUnauthorizedClient(): boolean;
+}
+```
+
+### TokenRefreshError
+
+Error thrown when token refresh fails and no recovery is possible. Extends `OAuthError`.
+
+```typescript
+class TokenRefreshError extends OAuthError {
+  cause?: Error;
+}
+```
+
 ### Error Handling Examples
 
 <Tabs>
   <TabItem label="Basic">
     ```typescript
+    import { IRacingError } from 'iracing-data-client';
+
     try {
       const data = await iracing.member.info();
     } catch (error) {
@@ -232,18 +362,24 @@ class IRacingError extends Error {
   </TabItem>
   <TabItem label="Specific Errors">
     ```typescript
+    import { IRacingError, OAuthError, TokenRefreshError } from 'iracing-data-client';
+
     try {
       const data = await iracing.member.info();
     } catch (error) {
-      if (error instanceof IRacingError) {
+      if (error instanceof TokenRefreshError) {
+        console.log('Session expired - user needs to re-authenticate');
+      } else if (error instanceof OAuthError) {
+        if (error.isInvalidClient) {
+          console.log('Invalid client credentials');
+        }
+      } else if (error instanceof IRacingError) {
         if (error.isMaintenanceMode) {
           console.log('iRacing is in maintenance mode');
         } else if (error.isRateLimited) {
           console.log('Rate limited - wait before retry');
         } else if (error.isUnauthorized) {
           console.log('Authentication failed');
-        } else {
-          console.error(`Other error: ${error.status}`);
         }
       }
     }
@@ -251,6 +387,8 @@ class IRacingError extends Error {
   </TabItem>
   <TabItem label="With Retry">
     ```typescript
+    import { IRacingError } from 'iracing-data-client';
+
     async function withRetry<T>(
       fn: () => Promise<T>,
       retries = 3
@@ -262,10 +400,10 @@ class IRacingError extends Error {
           if (error instanceof IRacingError) {
             // Don't retry auth errors
             if (error.isUnauthorized) throw error;
-            
+
             // Retry rate limits with backoff
             if (error.isRateLimited && i < retries - 1) {
-              await new Promise(r => 
+              await new Promise(r =>
                 setTimeout(r, Math.pow(2, i) * 1000)
               );
               continue;
@@ -276,9 +414,9 @@ class IRacingError extends Error {
       }
       throw new Error('Max retries exceeded');
     }
-    
+
     // Usage
-    const data = await withRetry(() => 
+    const data = await withRetry(() =>
       iracing.member.info()
     );
     ```
@@ -291,6 +429,18 @@ The SDK exports all TypeScript types for responses and parameters:
 
 ```typescript
 import type {
+  // Auth types
+  AuthConfig,
+  PasswordLimitedAuth,
+  AuthorizationCodeAuth,
+  TokenResponse,
+  OnTokenRefresh,
+  FetchLike,
+
+  // Client types
+  IRacingClientOptions,
+  HttpClientStores,
+
   // Response types
   MemberInfoResponse,
   CarGetResponse,
@@ -300,13 +450,16 @@ import type {
   MemberGetParams,
   ResultsSearchSeriesParams,
   StatsSeasonDriverStandingsParams,
-
-  // Client types
-  IRacingClientOptions,
 } from 'iracing-data-client';
 
-// IRacingError is a class — use a value import for instanceof checks
-import { IRacingError } from 'iracing-data-client';
+// Classes — use value imports for instanceof checks
+import {
+  IRacingError,
+  OAuthError,
+  TokenRefreshError,
+  buildAuthorizationUrl,
+  exchangeAuthorizationCode,
+} from 'iracing-data-client';
 ```
 
 ## Configuration Examples
@@ -317,33 +470,59 @@ import { IRacingError } from 'iracing-data-client';
 import { IRacingDataClient } from 'iracing-data-client';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL,
-  password: process.env.IRACING_PASSWORD
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+  },
 });
 ```
 
-### With Custom Fetch
+### With Token Persistence
 
 ```typescript
+import * as fs from 'node:fs/promises';
 import { IRacingDataClient } from 'iracing-data-client';
-import fetch from 'node-fetch';
 
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL,
-  password: process.env.IRACING_PASSWORD,
-  fetchFn: fetch as any
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+    onTokenRefresh: async (tokens) => {
+      await fs.writeFile('tokens.json', JSON.stringify(tokens));
+    },
+  },
 });
 ```
 
-### With Custom Headers
+### Reusing Saved Tokens
 
 ```typescript
+import * as fs from 'node:fs/promises';
+import { IRacingDataClient } from 'iracing-data-client';
+
+const savedTokens = JSON.parse(await fs.readFile('tokens.json', 'utf-8'));
+
 const iracing = new IRacingDataClient({
-  headers: {
-    'Cookie': sessionCookie,
-    'User-Agent': 'MyRacingApp/2.0',
-    'X-Request-ID': requestId
-  }
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.IRACING_CLIENT_ID!,
+    clientSecret: process.env.IRACING_CLIENT_SECRET!,
+    username: process.env.IRACING_USERNAME!,
+    password: process.env.IRACING_PASSWORD!,
+    tokens: {
+      accessToken: savedTokens.access_token,
+      refreshToken: savedTokens.refresh_token,
+    },
+    onTokenRefresh: async (tokens) => {
+      await fs.writeFile('tokens.json', JSON.stringify(tokens));
+    },
+  },
 });
 ```
 
@@ -351,9 +530,33 @@ const iracing = new IRacingDataClient({
 
 ```typescript
 const iracing = new IRacingDataClient({
-  email: process.env.IRACING_EMAIL,
-  password: process.env.IRACING_PASSWORD,
-  validateParams: false  // Skip Zod validation
+  auth: { /* ... */ },
+  validateParams: false,
+  validateSemanticParams: false,
+});
+```
+
+### Multiple Accounts
+
+```typescript
+const mainAccount = new IRacingDataClient({
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.MAIN_CLIENT_ID!,
+    clientSecret: process.env.MAIN_CLIENT_SECRET!,
+    username: process.env.MAIN_USERNAME!,
+    password: process.env.MAIN_PASSWORD!,
+  },
+});
+
+const altAccount = new IRacingDataClient({
+  auth: {
+    type: 'password-limited',
+    clientId: process.env.ALT_CLIENT_ID!,
+    clientSecret: process.env.ALT_CLIENT_SECRET!,
+    username: process.env.ALT_USERNAME!,
+    password: process.env.ALT_PASSWORD!,
+  },
 });
 ```
 
@@ -361,11 +564,13 @@ const iracing = new IRacingDataClient({
 
 ### Caching
 
-The client automatically caches responses based on the `expires` header from the API:
+When a `CacheStore` is provided via the `stores` option, the client caches S3 responses with TTL derived from the presigned URL expiry:
 
 - Cached responses are returned immediately without making a new request
-- Cache is stored in memory per client instance
-- Cache expires based on API-provided expiration times
+- Cache TTL is automatically calculated from the S3 link's `expires` field
+- Without a `stores.cache`, no caching is performed
+
+See the [Caching Guide](/iracing-data-client/guides/caching/) for setup and store implementations.
 
 ### Rate Limiting
 
@@ -374,10 +579,9 @@ The client automatically caches responses based on the `expires` header from the
 </Aside>
 
 Best practices:
+- Provide a `RateLimitStore` via `stores.rateLimit` for automatic throttling
 - Implement exponential backoff for retries
-- Cache responses when possible
 - Batch requests where the API supports it
-- Add delays between successive requests
 
 ### Connection Pooling
 
@@ -386,70 +590,14 @@ The client reuses the same authenticated session across all requests:
 ```typescript
 const iracing = new IRacingDataClient(options);
 
-// All these requests share the same session
+// All these requests share the same OAuth tokens
 await iracing.member.info();
 await iracing.car.get();
 await iracing.track.assets();
 ```
 
-## Advanced Usage
-
-### Multiple Accounts
-
-```typescript
-const mainAccount = new IRacingDataClient({
-  email: process.env.MAIN_EMAIL,
-  password: process.env.MAIN_PASSWORD
-});
-
-const altAccount = new IRacingDataClient({
-  email: process.env.ALT_EMAIL,
-  password: process.env.ALT_PASSWORD
-});
-
-// Use different accounts
-const mainInfo = await mainAccount.member.info();
-const altInfo = await altAccount.member.info();
-```
-
-### Custom Error Handler
-
-```typescript
-class IRacingWrapper {
-  private sdk: IRacingDataClient;
-  
-  constructor(options: IRacingClientOptions) {
-    this.sdk = new IRacingDataClient(options);
-  }
-  
-  async safeRequest<T>(
-    request: () => Promise<T>
-  ): Promise<T | null> {
-    try {
-      return await request();
-    } catch (error) {
-      this.handleError(error);
-      return null;
-    }
-  }
-  
-  private handleError(error: unknown) {
-    if (error instanceof IRacingError) {
-      // Log to monitoring service
-      console.error({
-        type: 'iracing_api_error',
-        status: error.status,
-        message: error.message,
-        isMaintenanceMode: error.isMaintenanceMode,
-        isRateLimited: error.isRateLimited
-      });
-    }
-  }
-}
-```
-
 ## See Also
 
-- [Authentication Guide](/getting-started/authentication/) - Detailed authentication setup
-- [Error Handling Guide](/guides/error-handling/) - Comprehensive error handling strategies
-- [Services Overview](/api/services/) - All available services
+- [Authentication Guide](/iracing-data-client/getting-started/authentication/) — Detailed authentication setup
+- [Error Handling Guide](/iracing-data-client/guides/error-handling/) — Comprehensive error handling strategies
+- [Services Overview](/iracing-data-client/api/services/) — All available services
