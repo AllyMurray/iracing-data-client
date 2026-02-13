@@ -1,5 +1,11 @@
 # iracing-data-client
 
+## 0.2.1
+
+### Patch Changes
+
+- d91a8fd: Improve npm discoverability by fixing duplicate keyword and adding additional search keywords.
+
 ## 0.2.0
 
 ### Minor Changes
