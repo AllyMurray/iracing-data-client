@@ -80,11 +80,11 @@ Cache keys are generated from the request URL and parameters:
 
 ```typescript
 // These create different cache entries
-await iracing.member.get({ customerIds: [123456] });  // Cache key 1
-await iracing.member.get({ customerIds: [789012] });  // Cache key 2
+await iracing.member.get({ custIds: [123456] });  // Cache key 1
+await iracing.member.get({ custIds: [789012] });  // Cache key 2
 
 // This uses the first cache entry
-await iracing.member.get({ customerIds: [123456] });  // From cache
+await iracing.member.get({ custIds: [123456] });  // From cache
 ```
 
 ## Pluggable Cache Store
@@ -165,7 +165,7 @@ class CachedIRacingService {
     // Fetch fresh data
     console.log('Cache miss:', cacheKey);
     const data = await this.iracing.member.get({
-      customerIds: [custId]
+      custIds: [custId]
     });
     
     // Store in cache
@@ -247,7 +247,7 @@ const cache = new RedisCache();
 
 const memberInfo = await cache.wrap(
   `member:${custId}`,
-  () => iracing.member.get({ customerIds: [custId] }),
+  () => iracing.member.get({ custIds: [custId] }),
   600  // Cache for 10 minutes
 );
 ```
@@ -353,7 +353,7 @@ class BatchedMemberService {
     
     // Single batched request
     const response = await iracing.member.get({
-      customerIds: ids
+      custIds: ids
     });
     
     // Return specific member
