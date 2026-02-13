@@ -143,21 +143,26 @@ describe('HttpClient Integration', () => {
   });
 
   describe('errorHandler maps HTTP errors to IRacingError', () => {
-    it('should throw IRacingError for 401 responses', async () => {
-      // Mock OAuth
+    it('should throw IRacingError with responseData for 401 responses', async () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
-      // Mock 401 response
-      mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 401, statusText: 'Unauthorized' }));
+      const errorBody = { error: 'unauthorized', message: 'Token expired' };
+      mockFetch.mockResolvedValueOnce(createMockResponse(errorBody, { ok: false, status: 401, statusText: 'Unauthorized' }));
 
-      await expect(client.get('/data/test/auth')).rejects.toThrow(IRacingError);
+      try {
+        await client.get('/data/test/auth');
+        expect.unreachable('Should have thrown');
+      } catch (e) {
+        expect(e).toBeInstanceOf(IRacingError);
+        const err = e as IRacingError;
+        expect(err.status).toBe(401);
+        expect(err.isUnauthorized).toBe(true);
+        expect(err.responseData).toEqual(errorBody);
+      }
     });
 
     it('should throw IRacingError for 429 responses', async () => {
-      // Mock OAuth (tokens already obtained from prior test setup, but fresh client)
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-
-      // Mock 429 response
       mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }));
 
       try {
@@ -165,6 +170,45 @@ describe('HttpClient Integration', () => {
         expect.unreachable('Should have thrown');
       } catch (e) {
         expect(e).toBeInstanceOf(IRacingError);
+        const err = e as IRacingError;
+        expect(err.isRateLimited).toBe(true);
+      }
+    });
+
+    it('should distinguish maintenance mode from generic 503', async () => {
+      // Maintenance mode: 503 with specific error body
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
+      mockFetch.mockResolvedValueOnce(createMockResponse(
+        { error: 'Site Maintenance' },
+        { ok: false, status: 503, statusText: 'Service Unavailable' },
+      ));
+
+      try {
+        await client.get('/data/test/maintenance');
+        expect.unreachable('Should have thrown');
+      } catch (e) {
+        expect(e).toBeInstanceOf(IRacingError);
+        const err = e as IRacingError;
+        expect(err.isMaintenanceMode).toBe(true);
+        expect(err.isServiceUnavailable).toBe(false);
+      }
+    });
+
+    it('should flag generic 503 as service unavailable, not maintenance', async () => {
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
+      mockFetch.mockResolvedValueOnce(createMockResponse(
+        '',
+        { ok: false, status: 503, statusText: 'Service Unavailable' },
+      ));
+
+      try {
+        await client.get('/data/test/unavailable');
+        expect.unreachable('Should have thrown');
+      } catch (e) {
+        expect(e).toBeInstanceOf(IRacingError);
+        const err = e as IRacingError;
+        expect(err.isMaintenanceMode).toBe(false);
+        expect(err.isServiceUnavailable).toBe(true);
       }
     });
   });

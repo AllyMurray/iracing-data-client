@@ -63,7 +63,16 @@ export class IRacingError extends Error {
   }
 
   get isMaintenanceMode(): boolean {
-    return this.status === 503;
+    return (
+      this.status === 503 &&
+      this.responseData != null &&
+      typeof this.responseData === 'object' &&
+      (this.responseData as Record<string, unknown>).error === 'Site Maintenance'
+    );
+  }
+
+  get isServiceUnavailable(): boolean {
+    return this.status === 503 && !this.isMaintenanceMode;
   }
 
   get isRateLimited(): boolean {
@@ -197,7 +206,13 @@ export class IRacingClient {
       const response = await this.normalizeResponse(rawResponse);
 
       if (!response.ok) {
-        return response;
+        let responseData: unknown;
+        try {
+          responseData = await response.clone().json();
+        } catch {
+          // Non-JSON error response, leave responseData undefined
+        }
+        throw this.createHttpError(response.status, response.statusText, responseData);
       }
 
       const contentType = response.headers.get('content-type') || '';
@@ -280,44 +295,55 @@ export class IRacingClient {
   }
 
   /**
-   * Maps errors to IRacingError instances.
+   * Creates an IRacingError from an HTTP error response with status-specific messages.
+   */
+  private createHttpError(status: number, statusText: string, responseData?: unknown): IRacingError {
+    if (status === 503) {
+      const isMaintenance =
+        responseData != null &&
+        typeof responseData === 'object' &&
+        (responseData as Record<string, unknown>).error === 'Site Maintenance';
+
+      return new IRacingError(
+        isMaintenance
+          ? 'iRacing is currently in maintenance mode'
+          : `Service unavailable: ${statusText}`,
+        503,
+        statusText,
+        responseData,
+      );
+    }
+    if (status === 429) {
+      return new IRacingError(
+        'Rate limit exceeded. Please wait before making more requests.',
+        429,
+        statusText,
+        responseData,
+      );
+    }
+    if (status === 401) {
+      return new IRacingError(
+        'Authentication failed. Please check your OAuth credentials and token state.',
+        401,
+        statusText,
+        responseData,
+      );
+    }
+
+    return new IRacingError(
+      `Request failed: ${statusText}`,
+      status,
+      statusText,
+      responseData,
+    );
+  }
+
+  /**
+   * Maps errors to IRacingError instances (fallback for non-HTTP errors).
    */
   private mapError(error: unknown): IRacingError {
     if (error instanceof IRacingError) {
       return error;
-    }
-
-    if (error instanceof Response || (error && typeof error === 'object' && 'status' in error)) {
-      const resp = error as Response;
-      const status = resp.status;
-
-      if (status === 503) {
-        return new IRacingError(
-          'iRacing is currently in maintenance mode',
-          503,
-          resp.statusText,
-        );
-      }
-      if (status === 429) {
-        return new IRacingError(
-          'Rate limit exceeded. Please wait before making more requests.',
-          429,
-          resp.statusText,
-        );
-      }
-      if (status === 401) {
-        return new IRacingError(
-          'Authentication failed. Please check your credentials.',
-          401,
-          resp.statusText,
-        );
-      }
-
-      return new IRacingError(
-        `Request failed: ${resp.statusText}`,
-        status,
-        resp.statusText,
-      );
     }
 
     if (error instanceof Error) {
