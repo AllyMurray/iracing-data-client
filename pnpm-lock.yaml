@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@http-client-toolkit/core':
+        specifier: ^0.7.0
+        version: 0.7.0
       zod:
         specifier: 4.1.5
         version: 4.1.5
@@ -256,6 +259,10 @@ packages:
 
   '@glideapps/ts-necessities@2.2.3':
     resolution: {integrity: sha512-gXi0awOZLHk3TbW55GZLCPP6O+y/b5X1pBXKBVckFONSwF1z1E5ND2BGJsghQFah+pW7pkkyFb2VhUQI2qhL5w==}
+
+  '@http-client-toolkit/core@0.7.0':
+    resolution: {integrity: sha512-SufVdt78lhVK7xxUK/Q0T/0xMvyco3NkvspxB7pva6qpUGCdk78dikdo4oQw1/Z/GuGjj694qsm7GncaPMgoMA==}
+    engines: {node: '>= 20.0.0'}
 
   '@inquirer/external-editor@1.0.1':
     resolution: {integrity: sha512-Oau4yL24d2B5IL4ma4UpbQigkVhzPDXLoqy1ggK4gnHg/stmkffJE4oOXHXF3uz0UEpywG68KcyXsyYpA1Re/Q==}
@@ -1306,6 +1313,9 @@ packages:
     engines: {node: '>= 14.6'}
     hasBin: true
 
+  zod@3.25.71:
+    resolution: {integrity: sha512-BsBc/NPk7h8WsUWYWYL+BajcJPY8YhjelaWu2NMLuzgraKAz4Lb4/6K11g9jpuDetjMiqhZ6YaexFLOC0Ogi3Q==}
+
   zod@4.1.5:
     resolution: {integrity: sha512-rcUUZqlLJgBC33IT3PNMgsCq6TzLQEG/Ei/KTCU0PedSWRMAXoOUN+4t/0H+Q8bdnLPdqUYnvboJT0bn/229qg==}
 
@@ -1536,6 +1546,10 @@ snapshots:
     optional: true
 
   '@glideapps/ts-necessities@2.2.3': {}
+
+  '@http-client-toolkit/core@0.7.0':
+    dependencies:
+      zod: 3.25.71
 
   '@inquirer/external-editor@1.0.1(@types/node@24.3.1)':
     dependencies:
@@ -2525,5 +2539,7 @@ snapshots:
       strip-ansi: 7.1.2
 
   yaml@2.8.1: {}
+
+  zod@3.25.71: {}
 
   zod@4.1.5: {}

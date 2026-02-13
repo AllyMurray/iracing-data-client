@@ -13,6 +13,33 @@ The iRacing API enforces rate limits to ensure fair usage and system stability. 
   Built-in rate limit handling (automatic retry with backoff, request queuing, concurrency control) is planned for a future release. See our [roadmap](/iracing-data-client/roadmap/) for details. In the meantime, this guide covers strategies you can implement yourself.
 </Aside>
 
+## Pluggable Rate Limit Store
+
+<Aside type="tip">
+  New in the latest release: you can now pass a `RateLimitStore` or `AdaptiveRateLimitStore` via the `stores` option for automatic, built-in rate limiting.
+</Aside>
+
+Instead of building your own rate limiter, you can provide a store that the SDK's underlying `HttpClient` will use to throttle requests automatically:
+
+```typescript
+import { IRacingDataClient } from 'iracing-data-client';
+import { MemoryRateLimitStore } from '@http-client-toolkit/store-memory'; // example
+
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ },
+  stores: {
+    rateLimit: new MemoryRateLimitStore({ maxRequests: 100, windowMs: 60_000 })
+  }
+});
+
+// Requests are now automatically throttled — no wrapper needed
+const data = await iracing.member.info();
+```
+
+The `stores` option is completely optional. When omitted, the SDK behaves exactly as before.
+
+Check the [`@http-client-toolkit`](https://github.com/http-client-toolkit) organisation for available store packages, or implement the `RateLimitStore` interface yourself.
+
 ## Detecting Rate Limits
 
 The SDK throws an `IRacingError` when the API returns a 429 status:

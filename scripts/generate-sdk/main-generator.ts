@@ -6,7 +6,7 @@ export function generateMainDataClient(sections: string[]): string {
 
   lines.push(`/* AUTO-GENERATED — do not edit */`);
   lines.push(``);
-  lines.push(`import { IRacingClient, IRacingError, type IRacingClientOptions } from "./client";`);
+  lines.push(`import { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";`);
 
   // Import all service classes
   for (const section of sections) {
@@ -16,7 +16,28 @@ export function generateMainDataClient(sections: string[]): string {
   }
 
   lines.push(``);
-  lines.push(`export { IRacingClient, IRacingError, type IRacingClientOptions };`);
+  lines.push(`// Re-export client`);
+  lines.push(`export { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };`);
+  lines.push(``);
+  lines.push(`// Re-export http-client-toolkit types`);
+  lines.push(`export type { HttpClientStores } from '@http-client-toolkit/core';`);
+  lines.push(``);
+  lines.push(`// Re-export auth types and helpers`);
+  lines.push(`export type {`);
+  lines.push(`  AuthConfig,`);
+  lines.push(`  PasswordLimitedAuth,`);
+  lines.push(`  AuthorizationCodeAuth,`);
+  lines.push(`  TokenResponse,`);
+  lines.push(`  OnTokenRefresh,`);
+  lines.push(`  FetchLike,`);
+  lines.push(`} from "./auth";`);
+  lines.push(``);
+  lines.push(`export {`);
+  lines.push(`  OAuthError,`);
+  lines.push(`  TokenRefreshError,`);
+  lines.push(`  buildAuthorizationUrl,`);
+  lines.push(`  exchangeAuthorizationCode,`);
+  lines.push(`} from "./auth";`);
   lines.push(``);
 
   // Export all types
