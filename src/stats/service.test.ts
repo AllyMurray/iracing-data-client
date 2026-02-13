@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { StatsService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -10,9 +11,10 @@ import statsmemberrecentracesSample from "../../samples/stats.member_recent_race
 import statsmembersummarySample from "../../samples/stats.member_summary.json";
 import statsmemberyearlySample from "../../samples/stats.member_yearly.json";
 import statsworldrecordsSample from "../../samples/stats.world_records.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("StatsService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let statsService: StatsService;
 
@@ -44,17 +46,10 @@ describe("StatsService", () => {
   describe("memberBests()", () => {
     it("should fetch, transform, and validate stats memberBests data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsmemberbestsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsmemberbestsSample));
 
       const testParams = {
   custId: 123,
@@ -88,17 +83,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123,
@@ -111,17 +99,10 @@ describe("StatsService", () => {
   describe("memberCareer()", () => {
     it("should fetch, transform, and validate stats memberCareer data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsmembercareerSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsmembercareerSample));
 
       const testParams = {
   custId: 123
@@ -154,17 +135,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123
@@ -176,17 +150,10 @@ describe("StatsService", () => {
   describe("memberDivision()", () => {
     it("should fetch stats memberDivision data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -200,17 +167,10 @@ describe("StatsService", () => {
   describe("memberRecap()", () => {
     it("should fetch, transform, and validate stats memberRecap data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsmemberrecapSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsmemberrecapSample));
 
       const testParams = {
   custId: 123,
@@ -245,17 +205,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123,
@@ -269,17 +222,10 @@ describe("StatsService", () => {
   describe("memberRecentRaces()", () => {
     it("should fetch, transform, and validate stats memberRecentRaces data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsmemberrecentracesSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsmemberrecentracesSample));
 
       const testParams = {
   custId: 123
@@ -312,17 +258,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123
@@ -334,17 +273,10 @@ describe("StatsService", () => {
   describe("memberSummary()", () => {
     it("should fetch, transform, and validate stats memberSummary data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsmembersummarySample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsmembersummarySample));
 
       const testParams = {
   custId: 123
@@ -377,17 +309,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123
@@ -399,17 +324,10 @@ describe("StatsService", () => {
   describe("memberYearly()", () => {
     it("should fetch, transform, and validate stats memberYearly data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsmemberyearlySample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsmemberyearlySample));
 
       const testParams = {
   custId: 123
@@ -442,17 +360,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123
@@ -464,17 +375,10 @@ describe("StatsService", () => {
   describe("seasonDriverStandings()", () => {
     it("should fetch stats seasonDriverStandings data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -490,17 +394,10 @@ describe("StatsService", () => {
   describe("seasonSupersessionStandings()", () => {
     it("should fetch stats seasonSupersessionStandings data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -516,17 +413,10 @@ describe("StatsService", () => {
   describe("seasonTeamStandings()", () => {
     it("should fetch stats seasonTeamStandings data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -541,17 +431,10 @@ describe("StatsService", () => {
   describe("seasonTtStandings()", () => {
     it("should fetch stats seasonTtStandings data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -567,17 +450,10 @@ describe("StatsService", () => {
   describe("seasonTtResults()", () => {
     it("should fetch stats seasonTtResults data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -593,17 +469,10 @@ describe("StatsService", () => {
   describe("seasonQualifyResults()", () => {
     it("should fetch stats seasonQualifyResults data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,
@@ -619,17 +488,10 @@ describe("StatsService", () => {
   describe("worldRecords()", () => {
     it("should fetch, transform, and validate stats worldRecords data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(statsworldrecordsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(statsworldrecordsSample));
 
       const testParams = {
   carId: 123,
@@ -665,17 +527,10 @@ describe("StatsService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   carId: 123,

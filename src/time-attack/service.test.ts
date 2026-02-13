@@ -1,12 +1,14 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { TimeAttackService } from "./service";
 import { IRacingClient } from "../client";
 
 // Import sample data
 import timeattackmemberseasonresultsSample from "../../samples/time_attack.member_season_results.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("TimeAttackService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let timeAttackService: TimeAttackService;
 
@@ -38,17 +40,10 @@ describe("TimeAttackService", () => {
   describe("memberSeasonResults()", () => {
     it("should fetch, transform, and validate time_attack memberSeasonResults data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(timeattackmemberseasonresultsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(timeattackmemberseasonresultsSample));
 
       const testParams = {
   taCompSeasonId: 123
@@ -81,17 +76,10 @@ describe("TimeAttackService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   taCompSeasonId: 123

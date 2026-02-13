@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { SeasonService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -7,9 +8,10 @@ import seasonlistSample from "../../samples/season.list.json";
 import seasonraceguideSample from "../../samples/season.race_guide.json";
 import seasonspectatorsubsessionidsSample from "../../samples/season.spectator_subsessionids.json";
 import seasonspectatorsubsessionidsdetailSample from "../../samples/season.spectator_subsessionids_detail.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("SeasonService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let seasonService: SeasonService;
 
@@ -41,17 +43,10 @@ describe("SeasonService", () => {
   describe("list()", () => {
     it("should fetch, transform, and validate season list data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(seasonlistSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(seasonlistSample));
 
       const testParams = {
   seasonYear: 123,
@@ -85,17 +80,10 @@ describe("SeasonService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   seasonYear: 123,
@@ -108,17 +96,10 @@ describe("SeasonService", () => {
   describe("raceGuide()", () => {
     it("should fetch, transform, and validate season raceGuide data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(seasonraceguideSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(seasonraceguideSample));
 
       const testParams = {
   from: "test",
@@ -152,17 +133,10 @@ describe("SeasonService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   from: "test",
@@ -175,17 +149,10 @@ describe("SeasonService", () => {
   describe("spectatorSubsessionids()", () => {
     it("should fetch, transform, and validate season spectatorSubsessionids data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(seasonspectatorsubsessionidsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(seasonspectatorsubsessionidsSample));
 
       const testParams = {
   eventTypes: [123, 456]
@@ -218,17 +185,10 @@ describe("SeasonService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   eventTypes: [123, 456]
@@ -240,17 +200,10 @@ describe("SeasonService", () => {
   describe("spectatorSubsessionidsDetail()", () => {
     it("should fetch, transform, and validate season spectatorSubsessionidsDetail data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(seasonspectatorsubsessionidsdetailSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(seasonspectatorsubsessionidsdetailSample));
 
       const testParams = {
   eventTypes: [123, 456],
@@ -284,17 +237,10 @@ describe("SeasonService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   eventTypes: [123, 456],

@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { MemberService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -10,9 +11,10 @@ import membergetSample from "../../samples/member.get.json";
 import memberinfoSample from "../../samples/member.info.json";
 import memberparticipationcreditsSample from "../../samples/member.participation_credits.json";
 import memberprofileSample from "../../samples/member.profile.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("MemberService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let memberService: MemberService;
 
@@ -44,17 +46,10 @@ describe("MemberService", () => {
   describe("awards()", () => {
     it("should fetch, transform, and validate member awards data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(memberawardsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(memberawardsSample));
 
       const testParams = {
   custId: 123
@@ -87,17 +82,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123
@@ -109,17 +97,10 @@ describe("MemberService", () => {
   describe("awardInstances()", () => {
     it("should fetch, transform, and validate member awardInstances data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(memberawardinstancesSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(memberawardinstancesSample));
 
       const testParams = {
   custId: 123,
@@ -153,17 +134,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123,
@@ -176,17 +150,10 @@ describe("MemberService", () => {
   describe("chartData()", () => {
     it("should fetch, transform, and validate member chartData data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(memberchartdataSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(memberchartdataSample));
 
       const testParams = {
   custId: 123,
@@ -221,17 +188,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123,
@@ -245,17 +205,10 @@ describe("MemberService", () => {
   describe("get()", () => {
     it("should fetch, transform, and validate member get data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(membergetSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(membergetSample));
 
       const testParams = {
   custIds: [123, 456],
@@ -289,17 +242,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custIds: [123, 456],
@@ -312,17 +258,10 @@ describe("MemberService", () => {
   describe("info()", () => {
     it("should fetch, transform, and validate member info data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(memberinfoSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(memberinfoSample));
 
       const result = await memberService.info();
 
@@ -352,17 +291,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(memberService.info()).rejects.toThrow();
     });
@@ -371,17 +303,10 @@ describe("MemberService", () => {
   describe("participationCredits()", () => {
     it("should fetch, transform, and validate member participationCredits data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(memberparticipationcreditsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(memberparticipationcreditsSample));
 
       const result = await memberService.participationCredits();
 
@@ -411,17 +336,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(memberService.participationCredits()).rejects.toThrow();
     });
@@ -430,17 +348,10 @@ describe("MemberService", () => {
   describe("profile()", () => {
     it("should fetch, transform, and validate member profile data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(memberprofileSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(memberprofileSample));
 
       const testParams = {
   custId: 123
@@ -473,17 +384,10 @@ describe("MemberService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   custId: 123

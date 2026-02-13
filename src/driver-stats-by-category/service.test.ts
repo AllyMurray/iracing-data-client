@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { DriverStatsByCategoryService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -9,9 +10,10 @@ import driverstatsbycategoryformulacarSample from "../../samples/driver_stats_by
 import driverstatsbycategoryroadSample from "../../samples/driver_stats_by_category.road.json";
 import driverstatsbycategorydirtovalSample from "../../samples/driver_stats_by_category.dirt_oval.json";
 import driverstatsbycategorydirtroadSample from "../../samples/driver_stats_by_category.dirt_road.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("DriverStatsByCategoryService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let driverStatsByCategoryService: DriverStatsByCategoryService;
 
@@ -43,17 +45,10 @@ describe("DriverStatsByCategoryService", () => {
   describe("oval()", () => {
     it("should fetch, transform, and validate driver_stats_by_category oval data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(driverstatsbycategoryovalSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategoryovalSample));
 
       const result = await driverStatsByCategoryService.oval();
 
@@ -83,17 +78,10 @@ describe("DriverStatsByCategoryService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(driverStatsByCategoryService.oval()).rejects.toThrow();
     });
@@ -102,17 +90,10 @@ describe("DriverStatsByCategoryService", () => {
   describe("sportsCar()", () => {
     it("should fetch, transform, and validate driver_stats_by_category sportsCar data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(driverstatsbycategorysportscarSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategorysportscarSample));
 
       const result = await driverStatsByCategoryService.sportsCar();
 
@@ -142,17 +123,10 @@ describe("DriverStatsByCategoryService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(driverStatsByCategoryService.sportsCar()).rejects.toThrow();
     });
@@ -161,17 +135,10 @@ describe("DriverStatsByCategoryService", () => {
   describe("formulaCar()", () => {
     it("should fetch, transform, and validate driver_stats_by_category formulaCar data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(driverstatsbycategoryformulacarSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategoryformulacarSample));
 
       const result = await driverStatsByCategoryService.formulaCar();
 
@@ -201,17 +168,10 @@ describe("DriverStatsByCategoryService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(driverStatsByCategoryService.formulaCar()).rejects.toThrow();
     });
@@ -220,17 +180,10 @@ describe("DriverStatsByCategoryService", () => {
   describe("road()", () => {
     it("should fetch, transform, and validate driver_stats_by_category road data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(driverstatsbycategoryroadSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategoryroadSample));
 
       const result = await driverStatsByCategoryService.road();
 
@@ -260,17 +213,10 @@ describe("DriverStatsByCategoryService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(driverStatsByCategoryService.road()).rejects.toThrow();
     });
@@ -279,17 +225,10 @@ describe("DriverStatsByCategoryService", () => {
   describe("dirtOval()", () => {
     it("should fetch, transform, and validate driver_stats_by_category dirtOval data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(driverstatsbycategorydirtovalSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategorydirtovalSample));
 
       const result = await driverStatsByCategoryService.dirtOval();
 
@@ -319,17 +258,10 @@ describe("DriverStatsByCategoryService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(driverStatsByCategoryService.dirtOval()).rejects.toThrow();
     });
@@ -338,17 +270,10 @@ describe("DriverStatsByCategoryService", () => {
   describe("dirtRoad()", () => {
     it("should fetch, transform, and validate driver_stats_by_category dirtRoad data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(driverstatsbycategorydirtroadSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(driverstatsbycategorydirtroadSample));
 
       const result = await driverStatsByCategoryService.dirtRoad();
 
@@ -378,17 +303,10 @@ describe("DriverStatsByCategoryService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(driverStatsByCategoryService.dirtRoad()).rejects.toThrow();
     });

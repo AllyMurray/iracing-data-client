@@ -1,13 +1,15 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { HostedService } from "./service";
 import { IRacingClient } from "../client";
 
 // Import sample data
 import hostedcombinedsessionsSample from "../../samples/hosted.combined_sessions.json";
 import hostedsessionsSample from "../../samples/hosted.sessions.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("HostedService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let hostedService: HostedService;
 
@@ -39,17 +41,10 @@ describe("HostedService", () => {
   describe("combinedSessions()", () => {
     it("should fetch, transform, and validate hosted combinedSessions data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(hostedcombinedsessionsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(hostedcombinedsessionsSample));
 
       const testParams = {
   packageId: 123
@@ -82,17 +77,10 @@ describe("HostedService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   packageId: 123
@@ -104,17 +92,10 @@ describe("HostedService", () => {
   describe("sessions()", () => {
     it("should fetch, transform, and validate hosted sessions data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(hostedsessionsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(hostedsessionsSample));
 
       const result = await hostedService.sessions();
 
@@ -144,17 +125,10 @@ describe("HostedService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(hostedService.sessions()).rejects.toThrow();
     });

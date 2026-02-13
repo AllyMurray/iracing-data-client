@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { LookupService } from "./service";
 import { IRacingClient } from "../client";
 
@@ -8,9 +9,10 @@ import lookupdriversSample from "../../samples/lookup.drivers.json";
 import lookupflairsSample from "../../samples/lookup.flairs.json";
 import lookupgetSample from "../../samples/lookup.get.json";
 import lookuplicensesSample from "../../samples/lookup.licenses.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("LookupService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let lookupService: LookupService;
 
@@ -42,17 +44,10 @@ describe("LookupService", () => {
   describe("countries()", () => {
     it("should fetch, transform, and validate lookup countries data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(lookupcountriesSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(lookupcountriesSample));
 
       const result = await lookupService.countries();
 
@@ -82,17 +77,10 @@ describe("LookupService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(lookupService.countries()).rejects.toThrow();
     });
@@ -101,17 +89,10 @@ describe("LookupService", () => {
   describe("drivers()", () => {
     it("should fetch, transform, and validate lookup drivers data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(lookupdriversSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(lookupdriversSample));
 
       const testParams = {
   searchTerm: "test",
@@ -145,17 +126,10 @@ describe("LookupService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       const testParams = {
   searchTerm: "test",
@@ -168,17 +142,10 @@ describe("LookupService", () => {
   describe("flairs()", () => {
     it("should fetch, transform, and validate lookup flairs data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(lookupflairsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(lookupflairsSample));
 
       const result = await lookupService.flairs();
 
@@ -208,17 +175,10 @@ describe("LookupService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(lookupService.flairs()).rejects.toThrow();
     });
@@ -227,17 +187,10 @@ describe("LookupService", () => {
   describe("get()", () => {
     it("should fetch, transform, and validate lookup get data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(lookupgetSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(lookupgetSample));
 
       const result = await lookupService.get();
 
@@ -267,17 +220,10 @@ describe("LookupService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(lookupService.get()).rejects.toThrow();
     });
@@ -286,17 +232,10 @@ describe("LookupService", () => {
   describe("licenses()", () => {
     it("should fetch, transform, and validate lookup licenses data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(lookuplicensesSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(lookuplicensesSample));
 
       const result = await lookupService.licenses();
 
@@ -326,17 +265,10 @@ describe("LookupService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(lookupService.licenses()).rejects.toThrow();
     });

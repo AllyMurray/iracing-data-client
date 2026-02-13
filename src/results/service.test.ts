@@ -1,9 +1,11 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { ResultsService } from "./service";
 import { IRacingClient } from "../client";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("ResultsService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let resultsService: ResultsService;
 
@@ -35,17 +37,10 @@ describe("ResultsService", () => {
   describe("get()", () => {
     it("should fetch results get data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   subsessionId: 123,
@@ -59,17 +54,10 @@ describe("ResultsService", () => {
   describe("eventLog()", () => {
     it("should fetch results eventLog data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   subsessionId: 123,
@@ -83,17 +71,10 @@ describe("ResultsService", () => {
   describe("lapChartData()", () => {
     it("should fetch results lapChartData data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   subsessionId: 123,
@@ -107,17 +88,10 @@ describe("ResultsService", () => {
   describe("lapData()", () => {
     it("should fetch results lapData data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   subsessionId: 123,
@@ -133,17 +107,10 @@ describe("ResultsService", () => {
   describe("searchHosted()", () => {
     it("should fetch results searchHosted data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   startRangeBegin: "test",
@@ -168,17 +135,10 @@ describe("ResultsService", () => {
   describe("searchSeries()", () => {
     it("should fetch results searchSeries data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonYear: 123,
@@ -203,17 +163,10 @@ describe("ResultsService", () => {
   describe("seasonResults()", () => {
     it("should fetch results seasonResults data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({})
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({}));
 
       const testParams = {
   seasonId: 123,

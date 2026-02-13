@@ -1,13 +1,15 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from "vitest";
+import { type FetchLike } from "../auth/types";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { TrackService } from "./service";
 import { IRacingClient } from "../client";
 
 // Import sample data
 import trackassetsSample from "../../samples/track.assets.json";
 import trackgetSample from "../../samples/track.get.json";
+import { createMockResponse } from "../__tests__/test-utils";
 
 describe("TrackService", () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
   let trackService: TrackService;
 
@@ -39,17 +41,10 @@ describe("TrackService", () => {
   describe("assets()", () => {
     it("should fetch, transform, and validate track assets data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(trackassetsSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(trackassetsSample));
 
       const result = await trackService.assets();
 
@@ -79,17 +74,10 @@ describe("TrackService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(trackService.assets()).rejects.toThrow();
     });
@@ -98,17 +86,10 @@ describe("TrackService", () => {
   describe("get()", () => {
     it("should fetch, transform, and validate track get data", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with original snake_case format
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve(trackgetSample)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(trackgetSample));
 
       const result = await trackService.get();
 
@@ -138,17 +119,10 @@ describe("TrackService", () => {
 
     it("should handle schema validation errors", async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse)
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock invalid API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: () => "application/json" },
-        json: () => Promise.resolve({ invalid: "data" })
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ invalid: "data" }));
 
       await expect(trackService.get()).rejects.toThrow();
     });

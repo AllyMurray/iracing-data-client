@@ -1,8 +1,10 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from 'vitest';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { type FetchLike } from '../auth/types';
 import { IRacingClient, IRacingError } from '../client';
+import { createMockResponse } from "./test-utils";
 
 describe('HttpClient Integration', () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<FetchLike>;
   let client: IRacingClient;
 
   const mockTokenResponse = {
@@ -29,17 +31,10 @@ describe('HttpClient Integration', () => {
   describe('requestInterceptor injects auth headers', () => {
     it('should add Authorization header to requests', async () => {
       // Mock OAuth token response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response (non-S3, direct JSON)
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ some_data: 'value' }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ some_data: 'value' }));
 
       await client.get('/data/test/endpoint');
 
@@ -61,24 +56,13 @@ describe('HttpClient Integration', () => {
       const futureDate = new Date(Date.now() + 3600 * 1000).toISOString();
 
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with S3 link
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ link: 'https://s3.example.com/data', expires: futureDate }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ link: 'https://s3.example.com/data', expires: futureDate }));
 
       // Mock S3 response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ car_id: 123, car_name: 'Test Car' }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ car_id: 123, car_name: 'Test Car' }));
 
       const result = await client.get('/data/car/get');
 
@@ -93,24 +77,13 @@ describe('HttpClient Integration', () => {
       const csvData = 'header1,header2\nvalue1,value2';
 
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with S3 link
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ link: 'https://s3.example.com/csv', expires: futureDate }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ link: 'https://s3.example.com/csv', expires: futureDate }));
 
       // Mock S3 CSV response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'text/csv' : null) },
-        text: () => Promise.resolve(csvData),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(csvData, { headers: { "content-type": "text/csv" } }));
 
       const result = await client.get('/data/results/lap_data');
 
@@ -127,17 +100,10 @@ describe('HttpClient Integration', () => {
   describe('fetchFn passes through non-S3 responses', () => {
     it('should return data directly for non-S3 JSON responses', async () => {
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock direct API response (no link/expires)
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ car_id: 456, car_name: 'Direct Car' }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ car_id: 456, car_name: 'Direct Car' }));
 
       const result = await client.get('/data/test/direct');
 
@@ -149,17 +115,10 @@ describe('HttpClient Integration', () => {
   describe('responseTransformer converts snake_case to camelCase', () => {
     it('should recursively convert response keys', async () => {
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with nested snake_case
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () =>
-          Promise.resolve({
+      mockFetch.mockResolvedValueOnce(createMockResponse({
             car_id: 1,
             car_name: 'Test',
             nested_object: {
@@ -167,8 +126,7 @@ describe('HttpClient Integration', () => {
               deep_nested: { deep_key: 'deep' },
             },
             array_field: [{ item_id: 1 }, { item_id: 2 }],
-          }),
-      });
+          }));
 
       const result = await client.get('/data/test/nested');
 
@@ -187,19 +145,10 @@ describe('HttpClient Integration', () => {
   describe('errorHandler maps HTTP errors to IRacingError', () => {
     it('should throw IRacingError for 401 responses', async () => {
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock 401 response
-      mockFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 401,
-        statusText: 'Unauthorized',
-        headers: { get: () => null },
-        text: () => Promise.resolve(''),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 401, statusText: 'Unauthorized' }));
 
       await expect(client.get('/data/test/auth')).rejects.toThrow(IRacingError);
       try {
@@ -211,19 +160,10 @@ describe('HttpClient Integration', () => {
 
     it('should throw IRacingError for 429 responses', async () => {
       // Mock OAuth (tokens already obtained from prior test setup, but fresh client)
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock 429 response
-      mockFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 429,
-        statusText: 'Too Many Requests',
-        headers: { get: () => null },
-        text: () => Promise.resolve(''),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }));
 
       try {
         await client.get('/data/test/rate-limit');
@@ -237,17 +177,10 @@ describe('HttpClient Integration', () => {
   describe('get() delegates to HttpClient and applies Zod validation', () => {
     it('should return data without schema validation when no schema provided', async () => {
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ test_key: 'test_value' }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ test_key: 'test_value' }));
 
       const result = await client.get('/data/test/no-schema');
       expect(result).toEqual({ testKey: 'test_value' });
@@ -255,17 +188,10 @@ describe('HttpClient Integration', () => {
 
     it('should convert camelCase params to snake_case', async () => {
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ result: 'ok' }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ result: 'ok' }));
 
       await client.get('/data/test/params', {
         params: { seasonYear: 2024, raceWeekNum: 5 },
@@ -282,17 +208,10 @@ describe('HttpClient Integration', () => {
   describe('stores are optional', () => {
     it('should work without stores (same as current behaviour)', async () => {
       // Mock OAuth
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockTokenResponse),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response
-      mockFetch.mockResolvedValueOnce({
-        ok: true,
-        headers: { get: (name: string) => (name === 'content-type' ? 'application/json' : null) },
-        json: () => Promise.resolve({ data: 'value' }),
-      });
+      mockFetch.mockResolvedValueOnce(createMockResponse({ data: 'value' }));
 
       const result = await client.get('/data/test/no-stores');
       expect(result).toBeDefined();
