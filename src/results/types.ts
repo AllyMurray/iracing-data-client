@@ -379,8 +379,8 @@ const ResultsSearchSeries = z.object({
       chunkFileNames: z.array(z.unknown())
     }),
     params: z.object({
-      custId: z.number(),
-      teamId: z.number(),
+      custId: z.optional(z.number()),
+      teamId: z.optional(z.number()),
       finishRangeBegin: z.optional(z.string()),
       finishRangeEnd: z.optional(z.string()),
       startRangeBegin: z.optional(z.string()),
