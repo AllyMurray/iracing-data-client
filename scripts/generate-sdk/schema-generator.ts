@@ -472,16 +472,18 @@ ${objIndent}})`;
 
   if (typeof sample === 'object' && sample !== null) {
     // For dictionary-like objects (like car assets with numeric keys or paint_rules with mixed keys)
-    const keys = Object.keys(sample);
+    // Filter out internal markers (__optional_, __nullable_, etc.) before checking keys
+    const keys = Object.keys(sample).filter(k => !k.startsWith('__'));
     // Detect dictionaries: mostly numeric keys, OR mix of numeric and special keys
     const numericKeys = keys.filter(k => /^\d+$/.test(k));
     const isDictionary = keys.length > 0 && (
       keys.every(k => /^\d+$/.test(k)) || // All numeric
       (numericKeys.length > 0 && numericKeys.length >= keys.length * 0.7) // Mostly numeric
     );
-    
+
     if (isDictionary) {
-      const allValues = Object.values(sample);
+      // Only use actual data entries (filter out internal __ markers)
+      const allValues = keys.map(k => sample[k]);
       
       // If all values are primitives, use simple record
       if (allValues.every(v => typeof v === 'number' || typeof v === 'string' || typeof v === 'boolean')) {
