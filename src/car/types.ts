@@ -2,7 +2,27 @@ import * as z from "zod/mini";
 
 // ---- Response Schemas ----
 
-const CarAssets = z.record(z.string(), z.unknown());
+const CarAssets = z.record(z.string(), z.object({
+  carId: z.number().nullable();
+
+  folder: z.string().nullable();
+  largeImage: z.string().nullable();
+  smallImage: z.string().nullable();
+  logo: z.string().nullable();
+  sponsorLogo: z.string().nullable();
+
+  galleryImages: z.string().nullable();
+  galleryPrefix: z.string().nullable();
+  detailScreenShotImages: z.string().nullable();
+
+  detailCopy: z.string().nullable();
+  detailTechspecsCopy: z.string().nullable();
+
+  templatePath: z.string().nullable();
+
+  groupImage: z.string().nullable();
+  groupName: z.string().nullable();
+}));
 const CarGet = z.array(z.object({
   aiEnabled: z.boolean(),
   allowNumberColors: z.boolean(),
