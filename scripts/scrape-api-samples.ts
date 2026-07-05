@@ -601,6 +601,14 @@ function addUnique(target: number[], value: unknown): void {
   if (!target.includes(value)) target.push(value);
 }
 
+function preferUnique(target: number[], value: unknown): void {
+  if (typeof value !== "number" || Number.isNaN(value)) return;
+
+  const existingIndex = target.indexOf(value);
+  if (existingIndex >= 0) target.splice(existingIndex, 1);
+  target.push(value);
+}
+
 function collectContextFromValue(value: unknown, context: ScrapeContext, inheritedSeasonId?: number): void {
   if (value === null || value === undefined) return;
 
@@ -1039,6 +1047,12 @@ async function scrapeApiSamples() {
   addUnique(scrapeContext.carClassIds, Number(process.env.IRACING_CAR_CLASS_ID));
 
   await bootstrapContext(client, scrapeContext);
+
+  // Explicit overrides should win over bootstrapped IDs for targeted sample refreshes.
+  preferUnique(scrapeContext.seasonIds, Number(process.env.IRACING_SEASON_ID));
+  preferUnique(scrapeContext.subsessionIds, Number(process.env.IRACING_SUBSESSION_ID));
+  preferUnique(scrapeContext.teamIds, Number(process.env.IRACING_TEAM_ID));
+  preferUnique(scrapeContext.carClassIds, Number(process.env.IRACING_CAR_CLASS_ID));
 
   if (MISSING_ONLY) {
     const before = endpoints.length;
