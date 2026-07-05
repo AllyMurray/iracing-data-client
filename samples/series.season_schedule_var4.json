@@ -1,0 +1,1826 @@
+{
+  "success": true,
+  "season_id": 5895,
+  "schedules": [
+    {
+      "season_id": 5895,
+      "race_week_num": 0,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2025-12-16",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2025-12-16",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Full Course",
+        "track_id": 465,
+        "track_name": "Virginia International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 3417939243255496,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2026-02-15T13:05:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 66,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 18.7,
+          "temp_low": 18.7,
+          "temp_units": 1,
+          "wind_dir": 7,
+          "wind_high": 20.9,
+          "wind_low": 20.4,
+          "wind_units": 1
+        },
+        "wind_dir": 7,
+        "wind_units": 0,
+        "wind_value": 12
+      },
+      "week_end_time": "2025-12-22T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 1,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2025-12-23",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2025-12-23",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "track_id": 580,
+        "track_name": "Adelaide Street Circuit"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -399910731529829,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 41,
+        "simulated_start_time": "2026-03-01T14:40:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 77,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 2,
+          "skies_low": 1,
+          "temp_high": 25.2,
+          "temp_low": 25.2,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 18.4,
+          "wind_low": 18.4,
+          "wind_units": 1
+        },
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2025-12-29T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 2,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2025-12-30",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2025-12-30",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "MIA Loop",
+        "track_id": 534,
+        "track_name": "Miami International Autodrome"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -4287182985802045,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 92,
+        "simulated_start_time": "2026-04-01T12:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 73,
+        "time_of_day": 9,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 1,
+          "temp_high": 23.4,
+          "temp_low": 22.9,
+          "temp_units": 1,
+          "wind_dir": 3,
+          "wind_high": 28.6,
+          "wind_low": 28.3,
+          "wind_units": 1
+        },
+        "wind_dir": 3,
+        "wind_units": 0,
+        "wind_value": 17
+      },
+      "week_end_time": "2026-01-05T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 3,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-01-06",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-01-06",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "B Course",
+        "track_id": 455,
+        "track_name": "Motorsport Arena Oschersleben"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 0,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 3087587695599728,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 99,
+        "simulated_start_time": "2026-03-15T08:50:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 3,
+        "temp_units": 0,
+        "temp_value": 65,
+        "time_of_day": 1,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 32,
+          "skies_high": 3,
+          "skies_low": 3,
+          "temp_high": 18.4,
+          "temp_low": 18.5,
+          "temp_units": 1,
+          "wind_dir": 6,
+          "wind_high": 20.1,
+          "wind_low": 19.3,
+          "wind_units": 1
+        },
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 12
+      },
+      "week_end_time": "2026-01-12T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 4,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-01-13",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-01-13",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Short",
+        "track_id": 128,
+        "track_name": "Road Atlanta"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 1372728833363021,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 46,
+        "simulated_start_time": "2026-04-01T14:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 72,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 1,
+          "temp_high": 23,
+          "temp_low": 22.1,
+          "temp_units": 1,
+          "wind_dir": 7,
+          "wind_high": 18.2,
+          "wind_low": 17.5,
+          "wind_units": 1
+        },
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 9
+      },
+      "week_end_time": "2026-01-19T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 5,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 7,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 3,
+          "minutes": 10080,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": false,
+          "unlimited_time": true
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 0,
+      "qual_attached": false,
+      "qual_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 31,
+          "start_date": "2026-01-20",
+          "super_session": false
+        }
+      ],
+      "qualify_laps": 0,
+      "qualify_length": 0,
+      "race_lap_limit": 3,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 31,
+          "start_date": "2026-01-20",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past Nurb R & Q",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-01-20",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Industriefahrten",
+        "track_id": 249,
+        "track_name": "Nürburgring Nordschleife"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 7,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 909107537231023,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 61,
+        "simulated_start_time": "2026-04-01T09:20:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          20,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 65,
+        "time_of_day": 1,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 2,
+          "skies_low": 2,
+          "temp_high": 18.7,
+          "temp_low": 18.8,
+          "temp_units": 1,
+          "wind_dir": 4,
+          "wind_high": 5.2,
+          "wind_low": 5,
+          "wind_units": 1
+        },
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 9
+      },
+      "week_end_time": "2026-01-26T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 6,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-01-27",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-01-27",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Summit Point Raceway",
+        "track_id": 9,
+        "track_name": "Summit Point Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -1969426721153649,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 42,
+        "simulated_start_time": "2026-03-01T12:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 66,
+        "time_of_day": 9,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 3,
+          "skies_low": 2,
+          "temp_high": 18.4,
+          "temp_low": 18.5,
+          "temp_units": 1,
+          "wind_dir": 6,
+          "wind_high": 27.6,
+          "wind_low": 25.5,
+          "wind_units": 1
+        },
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-02-02T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 7,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-02-03",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-02-03",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "National",
+        "track_id": 404,
+        "track_name": "Red Bull Ring"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2337186727538412,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 79,
+        "simulated_start_time": "2026-03-01T08:55:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 65,
+        "time_of_day": 1,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 1,
+          "temp_high": 18.4,
+          "temp_low": 18.5,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 4.7,
+          "wind_low": 4.6,
+          "wind_units": 1
+        },
+        "wind_dir": 7,
+        "wind_units": 0,
+        "wind_value": 4
+      },
+      "week_end_time": "2026-02-09T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 8,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-02-10",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-02-10",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Grand Prix",
+        "track_id": 145,
+        "track_name": "Brands Hatch Circuit"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -3999110490568466,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 71,
+        "simulated_start_time": "2026-03-01T09:15:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 65,
+        "time_of_day": 1,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 2,
+          "skies_low": 1,
+          "temp_high": 18.4,
+          "temp_low": 18.5,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 24.1,
+          "wind_low": 23,
+          "wind_units": 1
+        },
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-02-16T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 9,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-02-17",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-02-17",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Short",
+        "track_id": 167,
+        "track_name": "Okayama International Circuit"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 1884273734802237,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 50,
+        "simulated_start_time": "2026-04-01T12:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 66,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 3,
+          "skies_low": 3,
+          "temp_high": 18.8,
+          "temp_low": 18.9,
+          "temp_units": 1,
+          "wind_dir": 4,
+          "wind_high": 15.7,
+          "wind_low": 15.4,
+          "wind_units": 1
+        },
+        "wind_dir": 7,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2026-02-23T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 10,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-02-24",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-02-24",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "National Historic",
+        "track_id": 575,
+        "track_name": "Autódromo Hermanos Rodríguez"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 0,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2533958831308209,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 29,
+        "simulated_start_time": "2026-02-28T13:55:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 75,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0.5,
+          "max_precip_rate_desc": "Light",
+          "precip_chance": 35,
+          "skies_high": 3,
+          "skies_low": 1,
+          "temp_high": 21.6,
+          "temp_low": 21.3,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 22.4,
+          "wind_low": 21.7,
+          "wind_units": 1
+        },
+        "wind_dir": 4,
+        "wind_units": 0,
+        "wind_value": 8
+      },
+      "week_end_time": "2026-03-02T23:58:00Z"
+    },
+    {
+      "season_id": 5895,
+      "race_week_num": 11,
+      "car_restrictions": [
+        {
+          "car_id": 160,
+          "max_dry_tire_sets": 0,
+          "max_pct_fuel_fill": 100,
+          "power_adjust_pct": 0,
+          "race_setup_id": 277333,
+          "weight_penalty_kg": 0
+        }
+      ],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 15,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 29,
+          "start_date": "2026-03-03",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 15,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "GR Cup - every 30 minuts at :15 past and :45 past",
+      "season_name": "Toyota GR86 Cup by SIMAGIC - 2026 Season 1",
+      "series_id": 514,
+      "series_name": "Toyota GR86 Cup by SIMAGIC",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-03",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Cup",
+        "track_id": 433,
+        "track_name": "Watkins Glen International"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -1593528199402482,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 74,
+        "simulated_start_time": "2026-04-01T08:40:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          20,
+          80
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 65,
+        "time_of_day": 1,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 1,
+          "temp_high": 18.9,
+          "temp_low": 18.7,
+          "temp_units": 1,
+          "wind_dir": 7,
+          "wind_high": 11,
+          "wind_low": 8.9,
+          "wind_units": 1
+        },
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 6
+      },
+      "week_end_time": "2026-03-09T23:58:00Z"
+    }
+  ]
+}

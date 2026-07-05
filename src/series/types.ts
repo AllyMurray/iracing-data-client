@@ -480,7 +480,14 @@ const SeriesSeasonSchedule = z.object({
   schedules: z.array(z.object({
     seasonId: z.number(),
     raceWeekNum: z.number(),
-    carRestrictions: z.array(z.unknown()),
+    carRestrictions: z.array(z.object({
+      carId: z.number(),
+      maxDryTireSets: z.number(),
+      maxPctFuelFill: z.number(),
+      powerAdjustPct: z.number(),
+      raceSetupId: z.number(),
+      weightPenaltyKg: z.number()
+    })),
     category: z.string(),
     categoryId: z.number(),
     enablePitlaneCollisions: z.boolean(),
@@ -506,7 +513,15 @@ const SeriesSeasonSchedule = z.object({
     fullCourseCautions: z.boolean(),
     practiceLength: z.number(),
     qualAttached: z.boolean(),
-    qualTimeDescriptors: z.array(z.unknown()),
+    qualTimeDescriptors: z.array(z.object({
+      dayOffset: z.array(z.number()),
+      firstSessionTime: z.string(),
+      repeatMinutes: z.number(),
+      repeating: z.boolean(),
+      sessionMinutes: z.number(),
+      startDate: z.string(),
+      superSession: z.boolean()
+    })),
     qualifyLaps: z.number(),
     qualifyLength: z.number(),
     raceLapLimit: z.nullable(z.number()),
