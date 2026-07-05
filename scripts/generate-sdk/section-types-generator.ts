@@ -46,7 +46,7 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 
         if (mergedSampleData !== null) {
           const schemaName = `${toPascal(ep.method)}`;
-          const zodSchema = generateZodSchemaFromSample(mergedSampleData, schemaName);
+          const zodSchema = applyResponseSchemaOverrides(ep, generateZodSchemaFromSample(mergedSampleData, schemaName));
           responseSchemas.push(zodSchema);
         } else {
           throw new Error("No valid sample data found");
@@ -156,6 +156,31 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
   lines.push(`};`);
 
   return lines.join("\n");
+}
+
+function applyResponseSchemaOverrides(endpoint: Flat, schema: string): string {
+  const endpointName = `${endpoint.section}.${endpoint.name}`;
+
+  if (endpointName !== "results.search_series") {
+    return schema;
+  }
+
+  // The endpoint can be queried by season or time range without participant filters.
+  // The response echoes only supplied query params, so cust_id/team_id may be absent
+  // even though our current account-bound samples include both fields.
+  const optionalParticipantFilters = [
+    "      // Omitted when search_series is called without participant filters.",
+    "      custId: z.optional(z.number()),",
+    "      teamId: z.optional(z.number()),",
+  ].join("\n");
+
+  const requiredParticipantFilters = "      custId: z.number(),\n      teamId: z.number(),";
+  if (schema.includes(requiredParticipantFilters)) {
+    return schema.replace(requiredParticipantFilters, optionalParticipantFilters);
+  }
+
+  const undocumentedOptionalParticipantFilters = "      custId: z.optional(z.number()),\n      teamId: z.optional(z.number()),";
+  return schema.replace(undocumentedOptionalParticipantFilters, optionalParticipantFilters);
 }
 
 /** ---- Helper to find sample variation files ---- */
