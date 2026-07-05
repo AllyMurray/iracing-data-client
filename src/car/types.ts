@@ -35,8 +35,8 @@ const CarGet = z.array(z.object({
   })),
   carConfigs: z.array(z.object({
     carcfg: z.number(),
-    trackId: z.optional(z.number()),
-    trackType: z.optional(z.number())
+    trackType: z.optional(z.number()),
+    trackId: z.optional(z.number())
   })),
   carDirpath: z.string(),
   carId: z.number(),

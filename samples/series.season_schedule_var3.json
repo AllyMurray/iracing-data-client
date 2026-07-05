@@ -1,0 +1,958 @@
+{
+  "success": true,
+  "season_id": 6259,
+  "schedules": [
+    {
+      "season_id": 6259,
+      "race_week_num": 0,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-10",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-10",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -1067384002659345,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 94,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 71,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 1,
+          "temp_high": 22.1,
+          "temp_low": 21.4,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 7.2,
+          "wind_low": 6.6,
+          "wind_units": 1
+        },
+        "wind_dir": 2,
+        "wind_units": 0,
+        "wind_value": 4
+      },
+      "week_end_time": "2026-03-10T23:45:00Z"
+    },
+    {
+      "season_id": 6259,
+      "race_week_num": 1,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-11",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-11",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 4,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -350636057971083,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 100,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 3,
+        "temp_units": 0,
+        "temp_value": 67,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 100,
+          "skies_high": 3,
+          "skies_low": 3,
+          "temp_high": 19.6,
+          "temp_low": 19.6,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 17.9,
+          "wind_low": 16.4,
+          "wind_units": 1
+        },
+        "wind_dir": 2,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-03-11T23:45:00Z"
+    },
+    {
+      "season_id": 6259,
+      "race_week_num": 2,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-12",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-12",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -897474727519668,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 22.6,
+          "temp_low": 22.1,
+          "temp_units": 1,
+          "wind_dir": 3,
+          "wind_high": 5.7,
+          "wind_low": 5.6,
+          "wind_units": 1
+        },
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2026-03-12T23:45:00Z"
+    },
+    {
+      "season_id": 6259,
+      "race_week_num": 3,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-13",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-13",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 4,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -3835804404740392,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 100,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 3,
+        "temp_units": 0,
+        "temp_value": 67,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 100,
+          "skies_high": 3,
+          "skies_low": 3,
+          "temp_high": 19.6,
+          "temp_low": 19.5,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 18.2,
+          "wind_low": 17,
+          "wind_units": 1
+        },
+        "wind_dir": 2,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-03-13T23:45:00Z"
+    },
+    {
+      "season_id": 6259,
+      "race_week_num": 4,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-14",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-14",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2936989026021372,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 20.3,
+          "temp_low": 19.9,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 9.6,
+          "wind_low": 9.1,
+          "wind_units": 1
+        },
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2026-03-14T23:45:00Z"
+    },
+    {
+      "season_id": 6259,
+      "race_week_num": 5,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-15",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-15",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 4,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2051608560684579,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 100,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 2,
+        "temp_units": 0,
+        "temp_value": 67,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 100,
+          "skies_high": 3,
+          "skies_low": 2,
+          "temp_high": 19.6,
+          "temp_low": 19.5,
+          "temp_units": 1,
+          "wind_dir": 4,
+          "wind_high": 17.9,
+          "wind_low": 16.2,
+          "wind_units": 1
+        },
+        "wind_dir": 4,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-03-15T23:45:00Z"
+    },
+    {
+      "season_id": 6259,
+      "race_week_num": 6,
+      "car_restrictions": [],
+      "category": "sports_car",
+      "category_id": 5,
+      "enable_pitlane_collisions": false,
+      "event_options": {
+        "allow_wave_arounds": true,
+        "cautions_enabled": true,
+        "qualify_scoring_type": 0,
+        "restart_type": 2,
+        "short_parade_lap": false,
+        "single_file_consec_cautions": false,
+        "standing_start": false,
+        "starting_grid_type": 1
+      },
+      "event_sessions": [
+        {
+          "laps": 32767,
+          "minutes": 3,
+          "start_time_offset": 0,
+          "type": 3,
+          "type_name": "Open Practice",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        },
+        {
+          "laps": 2,
+          "minutes": 8,
+          "start_time_offset": 0,
+          "type": 4,
+          "type_name": "Lone Qualifying",
+          "unlimited_laps": false,
+          "unlimited_time": false
+        },
+        {
+          "laps": 32767,
+          "minutes": 20,
+          "start_time_offset": 0,
+          "type": 6,
+          "type_name": "Race",
+          "unlimited_laps": true,
+          "unlimited_time": false
+        }
+      ],
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": null,
+      "race_time_descriptors": [
+        {
+          "day_offset": [
+            0
+          ],
+          "first_session_time": "00:15:00",
+          "repeat_minutes": 30,
+          "repeating": true,
+          "session_minutes": 34,
+          "start_date": "2026-03-16",
+          "super_session": false
+        }
+      ],
+      "race_time_limit": 20,
+      "race_week_car_classes": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "13th week - road - rolling - every 30m at 15 past - timed",
+      "season_name": "13th Week - Sebring Sunrise - 2026 Season 1",
+      "series_id": 406,
+      "series_name": "13th Week Sebring Sunrise",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-16",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -111392389767509,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 55,
+        "simulated_start_time": "2026-05-09T06:45:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 78,
+        "time_of_day": 5,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 2,
+          "skies_low": 2,
+          "temp_high": 22.4,
+          "temp_low": 22.1,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 8,
+          "wind_low": 7.6,
+          "wind_units": 1
+        },
+        "wind_dir": 0,
+        "wind_units": 0,
+        "wind_value": 2
+      },
+      "week_end_time": "2026-03-16T23:45:00Z"
+    }
+  ]
+}

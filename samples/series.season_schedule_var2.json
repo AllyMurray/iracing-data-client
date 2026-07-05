@@ -1,0 +1,1684 @@
+{
+  "success": true,
+  "season_id": 6216,
+  "schedules": [
+    {
+      "season_id": 6216,
+      "race_week_num": 0,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 48,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 117,
+          "session_times": [
+            "2026-02-26T01:00:00Z",
+            "2026-02-27T20:00:00Z",
+            "2026-02-28T18:00:00Z",
+            "2026-03-01T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-02-26",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "International",
+        "track_id": 95,
+        "track_name": "Sebring International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2171356098296646,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 78,
+        "simulated_start_time": "2026-03-01T12:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 2,
+        "temp_units": 0,
+        "temp_value": 74,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 21.8,
+          "temp_low": 21.4,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 23.5,
+          "wind_low": 22.9,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw0_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=a0deebdceccf5e3b97905ecdc8d4ddb07dc520dacbca598f58174103fe24d756",
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2026-03-02T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 1,
+      "car_restrictions": [],
+      "category": "oval",
+      "category_id": 1,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": true,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 5,
+      "race_lap_limit": 250,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 197,
+          "session_times": [
+            "2026-03-05T01:00:00Z",
+            "2026-03-06T20:00:00Z",
+            "2026-03-07T18:00:00Z",
+            "2026-03-08T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Single-file Maintain",
+      "schedule_name": "IndyCar Series - Oval - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-05",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "oval",
+        "category_id": 1,
+        "config_name": "Oval",
+        "track_id": 418,
+        "track_name": "Phoenix Raceway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2471863265023163,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 25,
+        "simulated_start_time": "2026-03-07T13:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          30
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 74,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 0,
+          "temp_high": 22.9,
+          "temp_low": 21.9,
+          "temp_units": 1,
+          "wind_dir": 6,
+          "wind_high": 19.5,
+          "wind_low": 14.9,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw1_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b34ea1b17bb5a6ec311e1f7856951e49360a6296846528c3307e44f442aeb181",
+        "wind_dir": 4,
+        "wind_units": 0,
+        "wind_value": 8
+      },
+      "week_end_time": "2026-03-09T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 2,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 100,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 142,
+          "session_times": [
+            "2026-03-19T01:00:00Z",
+            "2026-03-20T20:00:00Z",
+            "2026-03-21T18:00:00Z",
+            "2026-03-22T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-19",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Grand Prix",
+        "track_id": 584,
+        "track_name": "St. Petersburg Grand Prix"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 3146409481287075,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 72,
+        "simulated_start_time": "2026-03-21T11:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 0,
+        "temp_units": 0,
+        "temp_value": 72,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 23.9,
+          "temp_low": 22.2,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 16.4,
+          "wind_low": 15.6,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw2_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fd5383f79a1b7772ea25139fcded007257f63a464597fb2104a2fac87a14f9e4",
+        "wind_dir": 4,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-03-23T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 3,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 90,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 148,
+          "session_times": [
+            "2026-03-26T01:00:00Z",
+            "2026-03-27T20:00:00Z",
+            "2026-03-28T18:00:00Z",
+            "2026-03-29T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-03-26",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "track_id": 585,
+        "track_name": "Barber Motorsports Park"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 0,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 2261588587715549,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 100,
+        "simulated_start_time": "2026-03-29T12:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 3,
+        "temp_units": 0,
+        "temp_value": 67,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 30,
+          "skies_high": 3,
+          "skies_low": 2,
+          "temp_high": 19.9,
+          "temp_low": 19.3,
+          "temp_units": 1,
+          "wind_dir": 7,
+          "wind_high": 23.5,
+          "wind_low": 22.1,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw3_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=1baaeae62d67378c25c7112dc6f44585d92b47ab89f783d58e9e65576fad9480",
+        "wind_dir": 7,
+        "wind_units": 0,
+        "wind_value": 14
+      },
+      "week_end_time": "2026-03-30T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 4,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 85,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 131,
+          "session_times": [
+            "2026-04-16T01:00:00Z",
+            "2026-04-17T20:00:00Z",
+            "2026-04-18T18:00:00Z",
+            "2026-04-19T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-04-16",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "track_id": 179,
+        "track_name": "Long Beach Street Circuit"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 1287222311851884,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 22,
+        "simulated_start_time": "2026-04-19T14:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 0,
+        "temp_units": 0,
+        "temp_value": 80,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 26.8,
+          "temp_low": 24.6,
+          "temp_units": 1,
+          "wind_dir": 4,
+          "wind_high": 11.1,
+          "wind_low": 10.5,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw4_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=fc3862d9b777a09b886297aff20080859d1881fc58409ff12f389729c1d6b771",
+        "wind_dir": 3,
+        "wind_units": 0,
+        "wind_value": 6
+      },
+      "week_end_time": "2026-04-20T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 5,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 85,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 142,
+          "session_times": [
+            "2026-05-07T01:00:00Z",
+            "2026-05-08T20:00:00Z",
+            "2026-05-09T18:00:00Z",
+            "2026-05-10T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-05-07",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Road Course",
+        "track_id": 448,
+        "track_name": "Indianapolis Motor Speedway"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 638879891285359,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 35,
+        "simulated_start_time": "2026-05-09T16:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 0,
+        "temp_units": 0,
+        "temp_value": 77,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 26.1,
+          "temp_low": 24.7,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 9.8,
+          "wind_low": 7.7,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw5_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7ebecb5bd4daac5deb97a034a503811530e0cdeeb8fa37e8cb76b6ff87127c00",
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 6
+      },
+      "week_end_time": "2026-05-11T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 6,
+      "car_restrictions": [],
+      "category": "oval",
+      "category_id": 1,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": true,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 5,
+      "race_lap_limit": 125,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 193,
+          "session_times": [
+            "2026-05-21T01:00:00Z",
+            "2026-05-22T20:00:00Z",
+            "2026-05-23T18:00:00Z",
+            "2026-05-24T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Single-file Maintain",
+      "schedule_name": "IndyCar Series - Oval - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-05-21",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "oval",
+        "category_id": 1,
+        "config_name": "Open Wheel Oval",
+        "track_id": 453,
+        "track_name": "Indianapolis Motor Speedway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 1672114139611295,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 47,
+        "simulated_start_time": "2026-05-24T10:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 69,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 3,
+          "skies_low": 0,
+          "temp_high": 23.4,
+          "temp_low": 20.6,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 19.1,
+          "wind_low": 15.5,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw6_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=6f2e85ad4d5f79c04fcbdc3d60b71ca76712e21560b7cf253077c9c4b2354d20",
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2026-05-25T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 7,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 70,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 127,
+          "session_times": [
+            "2026-05-28T01:00:00Z",
+            "2026-05-29T20:00:00Z",
+            "2026-05-30T18:00:00Z",
+            "2026-05-31T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-05-28",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Belle Isle",
+        "track_id": 319,
+        "track_name": "Detroit Grand Prix at Belle Isle"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -2279491310357961,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 53,
+        "simulated_start_time": "2026-05-31T12:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 66,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 1,
+          "temp_high": 25.6,
+          "temp_low": 23.5,
+          "temp_units": 1,
+          "wind_dir": 2,
+          "wind_high": 17.7,
+          "wind_low": 16.5,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw7_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e6293f647548f66716ba170c15bf274c716a9dd9941edca999477862282ed5fc",
+        "wind_dir": 1,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-06-01T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 8,
+      "car_restrictions": [],
+      "category": "oval",
+      "category_id": 1,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": true,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 5,
+      "race_lap_limit": 260,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 249,
+          "session_times": [
+            "2026-06-04T01:00:00Z",
+            "2026-06-05T20:00:00Z",
+            "2026-06-06T18:00:00Z",
+            "2026-06-07T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Single-file Maintain",
+      "schedule_name": "IndyCar Series - Oval - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-06-04",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "oval",
+        "category_id": 1,
+        "config_name": "Oval",
+        "track_id": 560,
+        "track_name": "World Wide Technology Raceway (Gateway)"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 4478423418758161,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 57,
+        "simulated_start_time": "2026-06-07T20:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 70,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 0,
+          "temp_high": 24.3,
+          "temp_low": 21.1,
+          "temp_units": 1,
+          "wind_dir": 3,
+          "wind_high": 12.3,
+          "wind_low": 10.1,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw8_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=f7d72c3cfcb3ff1fc9437be99f292f17d7b8e58be04bfa64a51dd457859dca09",
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-06-08T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 9,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 55,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 139,
+          "session_times": [
+            "2026-06-18T01:00:00Z",
+            "2026-06-19T20:00:00Z",
+            "2026-06-20T18:00:00Z",
+            "2026-06-21T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-06-18",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Full Course",
+        "track_id": 18,
+        "track_name": "Road America"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -1644108565916431,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 57,
+        "simulated_start_time": "2026-06-21T13:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 67,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 0,
+          "skies_low": 0,
+          "temp_high": 25.8,
+          "temp_low": 25.7,
+          "temp_units": 1,
+          "wind_dir": 5,
+          "wind_high": 15.1,
+          "wind_low": 13.6,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw9_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=9795619fa5b3143fac064186c0e7678f76089465060c6e93e04d553241bae8ca",
+        "wind_dir": 2,
+        "wind_units": 0,
+        "wind_value": 13
+      },
+      "week_end_time": "2026-06-22T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 10,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 90,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 149,
+          "session_times": [
+            "2026-07-02T01:00:00Z",
+            "2026-07-03T20:00:00Z",
+            "2026-07-04T18:00:00Z",
+            "2026-07-05T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-07-02",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Full Course",
+        "track_id": 153,
+        "track_name": "Mid-Ohio Sports Car Course"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -2848475694193933,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 51,
+        "simulated_start_time": "2026-07-05T12:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 72,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 2,
+          "skies_low": 1,
+          "temp_high": 27.2,
+          "temp_low": 26.6,
+          "temp_units": 1,
+          "wind_dir": 3,
+          "wind_high": 12.8,
+          "wind_low": 12.2,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw10_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e44a6505d29060226e24a0e35c6d51080f6118d517627f29532b8d4d297f29f2",
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2026-07-06T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 11,
+      "car_restrictions": [],
+      "category": "oval",
+      "category_id": 1,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": true,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 5,
+      "race_lap_limit": 300,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 261,
+          "session_times": [
+            "2026-07-16T01:00:00Z",
+            "2026-07-17T20:00:00Z",
+            "2026-07-18T18:00:00Z",
+            "2026-07-19T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Single-file Maintain",
+      "schedule_name": "IndyCar Series - Oval - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-07-16",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "oval",
+        "category_id": 1,
+        "track_id": 400,
+        "track_name": "Nashville Superspeedway"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -2707559733774387,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 77,
+        "simulated_start_time": "2026-07-19T15:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 81,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 0,
+          "temp_high": 27.1,
+          "temp_low": 23.9,
+          "temp_units": 1,
+          "wind_dir": 6,
+          "wind_high": 19.6,
+          "wind_low": 14.2,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw11_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=c51aa1c53276e6a9fc095d1f3d775594cf5f88345e26864870f0ef8696633431",
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 12
+      },
+      "week_end_time": "2026-07-20T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 12,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 110,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 150,
+          "session_times": [
+            "2026-08-06T01:00:00Z",
+            "2026-08-07T20:00:00Z",
+            "2026-08-08T18:00:00Z",
+            "2026-08-09T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-08-06",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "Full Circuit",
+        "track_id": 536,
+        "track_name": "Portland International Raceway"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -467526419871913,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 78,
+        "simulated_start_time": "2026-08-09T13:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 70,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 1,
+          "skies_low": 0,
+          "temp_high": 22.1,
+          "temp_low": 21,
+          "temp_units": 1,
+          "wind_dir": 7,
+          "wind_high": 20.3,
+          "wind_low": 16.2,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw12_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=340328688bdcc7ecedce06849277a84818be88e671ef00d26925a1a8b9d177cf",
+        "wind_dir": 7,
+        "wind_units": 0,
+        "wind_value": 10
+      },
+      "week_end_time": "2026-08-10T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 13,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 65,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 126,
+          "session_times": [
+            "2026-08-13T01:00:00Z",
+            "2026-08-14T20:00:00Z",
+            "2026-08-15T18:00:00Z",
+            "2026-08-16T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-08-13",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "track_id": 218,
+        "track_name": "Circuit Gilles Villeneuve"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 0,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -1893494670605036,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 8,
+        "rel_humidity": 49,
+        "simulated_start_time": "2026-08-16T12:00:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 72,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 28,
+          "skies_high": 2,
+          "skies_low": 2,
+          "temp_high": 21.7,
+          "temp_low": 21.2,
+          "temp_units": 1,
+          "wind_dir": 4,
+          "wind_high": 24.6,
+          "wind_low": 22.3,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw13_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=e0a5121111afea3735f7ce0b97d0b8bec1c3c58864434a81ce44740eaa95bbe3",
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2026-08-17T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 14,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 65,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 110,
+          "session_times": [
+            "2026-08-20T01:00:00Z",
+            "2026-08-21T20:00:00Z",
+            "2026-08-22T18:00:00Z",
+            "2026-08-23T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-08-20",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "2023 Cup",
+        "track_id": 483,
+        "track_name": "Chicago Street Course"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -1107447153398848,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 40,
+        "simulated_start_time": "2026-08-23T13:35:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 77,
+        "time_of_day": 0,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 3,
+          "skies_low": 3,
+          "temp_high": 26.6,
+          "temp_low": 25.6,
+          "temp_units": 1,
+          "wind_dir": 3,
+          "wind_high": 9.2,
+          "wind_low": 8.5,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw14_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=b8554e850286fe9dd70b1f35772db682a30f5eb89329ba61bc8506d5daabc668",
+        "wind_dir": 4,
+        "wind_units": 0,
+        "wind_value": 12
+      },
+      "week_end_time": "2026-08-24T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 15,
+      "car_restrictions": [],
+      "category": "oval",
+      "category_id": 1,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": true,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 5,
+      "race_lap_limit": 250,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 215,
+          "session_times": [
+            "2026-08-27T01:00:00Z",
+            "2026-08-28T20:00:00Z",
+            "2026-08-29T18:00:00Z",
+            "2026-08-30T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Single-file Maintain",
+      "schedule_name": "IndyCar Series - Oval - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-08-27",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "oval",
+        "category_id": 1,
+        "track_id": 94,
+        "track_name": "The Milwaukee Mile"
+      },
+      "track_state": {
+        "leave_marbles": false
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": 1194226909334652,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 53,
+        "simulated_start_time": "2026-08-29T13:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          30
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 74,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 3,
+          "skies_low": 2,
+          "temp_high": 21.9,
+          "temp_low": 19.8,
+          "temp_units": 1,
+          "wind_dir": 1,
+          "wind_high": 25.6,
+          "wind_low": 24.5,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw15_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=265144a94153baa08b93b15ab9da946d979e478e3b993367168aaa499840db4e",
+        "wind_dir": 5,
+        "wind_units": 0,
+        "wind_value": 11
+      },
+      "week_end_time": "2026-08-31T23:58:00Z"
+    },
+    {
+      "season_id": 6216,
+      "race_week_num": 16,
+      "car_restrictions": [],
+      "category": "formula_car",
+      "category_id": 6,
+      "enable_pitlane_collisions": false,
+      "full_course_cautions": false,
+      "practice_length": 3,
+      "qual_attached": true,
+      "qual_time_descriptors": [],
+      "qualify_laps": 2,
+      "qualify_length": 8,
+      "race_lap_limit": 95,
+      "race_time_descriptors": [
+        {
+          "repeating": false,
+          "session_minutes": 154,
+          "session_times": [
+            "2026-09-03T01:00:00Z",
+            "2026-09-04T20:00:00Z",
+            "2026-09-05T18:00:00Z",
+            "2026-09-06T02:00:00Z"
+          ],
+          "super_session": false
+        }
+      ],
+      "race_time_limit": null,
+      "race_week_car_class_ids": [],
+      "race_week_cars": [],
+      "restart_type": "Double-file Back",
+      "schedule_name": "IndyCar Series - Road - 01:00 GMT",
+      "season_name": "INDYCAR iRacing Series - 2026 Season",
+      "series_id": 374,
+      "series_name": "INDYCAR iRacing Series",
+      "short_parade_lap": false,
+      "special_event_type": null,
+      "start_date": "2026-09-03",
+      "start_type": "Rolling",
+      "start_zone": false,
+      "track": {
+        "category": "road",
+        "category_id": 2,
+        "config_name": "2026",
+        "track_id": 586,
+        "track_name": "WeatherTech Raceway at Laguna Seca"
+      },
+      "track_state": {
+        "leave_marbles": true
+      },
+      "warmup_length": 0,
+      "weather": {
+        "allow_fog": false,
+        "forecast_options": {
+          "allow_fog": false,
+          "forecast_type": 1,
+          "precipitation": 1,
+          "skies": 0,
+          "stop_precip": 0,
+          "temperature": 0,
+          "weather_seed": -3407408727372677,
+          "wind_dir": 0,
+          "wind_speed": 0
+        },
+        "precip_option": 0,
+        "rel_humidity": 75,
+        "simulated_start_time": "2026-09-06T11:30:00",
+        "simulated_time_multiplier": 1,
+        "simulated_time_offsets": [
+          15,
+          35
+        ],
+        "skies": 1,
+        "temp_units": 0,
+        "temp_value": 68,
+        "time_of_day": 4,
+        "track_water": 0,
+        "version": 1,
+        "weather_summary": {
+          "max_precip_rate": 0,
+          "max_precip_rate_desc": "None",
+          "precip_chance": 0,
+          "skies_high": 2,
+          "skies_low": 1,
+          "temp_high": 19.9,
+          "temp_low": 19.5,
+          "temp_units": 1,
+          "wind_dir": 7,
+          "wind_high": 19.8,
+          "wind_low": 13.5,
+          "wind_units": 1
+        },
+        "weather_url": "https://scorpio-assets.s3.amazonaws.com/members/messaging-services/non_expiring/weather-forecast/season/6216/rw16_evt5_display.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260705T193151Z&X-Amz-SignedHeaders=host&X-Amz-Credential=AKIAUO6OO4A3WX3RTXUZ%2F20260705%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Expires=604800&X-Amz-Signature=7585e6fe31228a458b85bb24c2badb7d3dcc895899e97fcc0994bd968633cfed",
+        "wind_dir": 6,
+        "wind_units": 0,
+        "wind_value": 7
+      },
+      "week_end_time": "2026-09-07T23:58:00Z"
+    }
+  ]
+}

@@ -230,12 +230,13 @@ function hasObjectStructureMatch(existing: unknown, candidate: unknown): boolean
 
 function mergeSampleData(base: any, additional: any): any {
   if (Array.isArray(base) && Array.isArray(additional)) {
-    // For arrays, combine all unique items by structure
+    // For arrays, merge matching object shapes so nested optional fields are not lost.
     const merged = [...base];
     for (const item of additional) {
-      // Add items that have different structures (more fields, etc.)
-      const hasMatchingStructure = merged.some((existing) => hasObjectStructureMatch(existing, item));
-      if (!hasMatchingStructure) {
+      const matchingIndex = merged.findIndex((existing) => hasObjectStructureMatch(existing, item));
+      if (matchingIndex >= 0) {
+        merged[matchingIndex] = mergeSampleData(merged[matchingIndex], item);
+      } else {
         merged.push(item);
       }
     }

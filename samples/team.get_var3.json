@@ -1,0 +1,75 @@
+{
+  "team_id": -322598,
+  "owner_id": 627922,
+  "team_name": "Team Kyle Reid3",
+  "created": "2023-07-21T19:27:44Z",
+  "hidden": false,
+  "about": "",
+  "url": "",
+  "roster_count": 2,
+  "recruiting": true,
+  "private_wall": true,
+  "is_default": true,
+  "is_owner": false,
+  "is_admin": true,
+  "suit": {
+    "pattern": 13,
+    "color1": "0011f6",
+    "color2": "f7f7f7",
+    "color3": "ff8a00"
+  },
+  "owner": {
+    "cust_id": 627922,
+    "display_name": "Kyle Reid3",
+    "helmet": {
+      "pattern": 28,
+      "color1": "0143eb",
+      "color2": "ffffff",
+      "color3": "ff8a00",
+      "face_type": 0,
+      "helmet_type": 0
+    },
+    "owner": true,
+    "admin": true
+  },
+  "tags": {
+    "categorized": [],
+    "not_categorized": []
+  },
+  "team_applications": [],
+  "pending_requests": [],
+  "is_member": true,
+  "is_applicant": false,
+  "is_invite": false,
+  "is_ignored": false,
+  "roster": [
+    {
+      "cust_id": 627922,
+      "display_name": "Kyle Reid3",
+      "helmet": {
+        "pattern": 28,
+        "color1": "0143eb",
+        "color2": "ffffff",
+        "color3": "ff8a00",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": true,
+      "admin": true
+    },
+    {
+      "cust_id": 926270,
+      "display_name": "Alistair Murray",
+      "helmet": {
+        "pattern": 12,
+        "color1": "0018f0",
+        "color2": "e2f222",
+        "color3": "0a0a0a",
+        "face_type": 0,
+        "helmet_type": 0
+      },
+      "owner": false,
+      "admin": true
+    }
+  ]
+}
