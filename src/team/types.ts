@@ -8,7 +8,7 @@ const TeamGet = z.object({
   teamName: z.string(),
   created: z.string(),
   hidden: z.boolean(),
-  message: z.string(),
+  message: z.optional(z.string()),
   about: z.string(),
   url: z.string(),
   rosterCount: z.number(),

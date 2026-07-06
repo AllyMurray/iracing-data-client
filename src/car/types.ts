@@ -4,7 +4,10 @@ import * as z from "zod/mini";
 
 const CarAssets = z.record(z.string(), z.object({
   carId: z.optional(z.nullable(z.number())),
-  carRules: z.optional(z.nullable(z.array(z.unknown()))),
+  carRules: z.optional(z.nullable(z.array(z.object({
+    ruleCategory: z.string(),
+    text: z.string()
+  })))),
   detailCopy: z.optional(z.nullable(z.string())),
   detailScreenShotImages: z.optional(z.nullable(z.string())),
   detailTechspecsCopy: z.optional(z.nullable(z.string())),
@@ -35,8 +38,8 @@ const CarGet = z.array(z.object({
   })),
   carConfigs: z.array(z.object({
     carcfg: z.number(),
-    trackId: z.optional(z.number()),
-    trackType: z.optional(z.number())
+    trackType: z.optional(z.number()),
+    trackId: z.optional(z.number())
   })),
   carDirpath: z.string(),
   carId: z.number(),
@@ -73,7 +76,27 @@ const CarGet = z.array(z.object({
   sponsorLogo: z.nullable(z.string()),
   carMake: z.optional(z.string()),
   carModel: z.optional(z.string()),
-  paintRules: z.optional(z.record(z.string(), z.unknown())),
+  paintRules: z.optional(z.record(z.string(), z.union([z.object({
+      PaintCarAvailable: z.boolean(),
+      Color1: z.string(),
+      Color2: z.string(),
+      Color3: z.string(),
+      Sponsor1Available: z.boolean(),
+      Sponsor2Available: z.boolean(),
+      Sponsor1: z.string(),
+      Sponsor2: z.string(),
+      RulesExplanation: z.string(),
+      AllowNumberFontChanges: z.optional(z.boolean()),
+      NumberFont: z.optional(z.string()),
+      AllowNumberColorChanges: z.optional(z.boolean()),
+      NumberColor1: z.optional(z.string()),
+      NumberColor2: z.optional(z.string()),
+      NumberColor3: z.optional(z.string()),
+      PaintWheelAvailable: z.optional(z.boolean()),
+      WheelColor: z.optional(z.string()),
+      RimTypeAvailable: z.optional(z.boolean()),
+      RimType: z.optional(z.string())
+    }), z.boolean()]))),
   siteUrl: z.optional(z.string())
 }));
 

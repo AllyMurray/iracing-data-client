@@ -1,7 +1,11 @@
-import { toCamelCase } from "./utils";
-
 /** ---- Generate Zod schema from JSON sample ---- */
 export function generateZodSchemaFromSample(sample: any, schemaName: string): string {
+  function toResponseKey(key: string): string {
+    return key
+      .replace(/_([a-z0-9])/g, (_, char) => char.toUpperCase())
+      .replace(/-([a-z0-9])/g, (_, char) => char.toUpperCase());
+  }
+
   function getZodTypeForValue(value: any, depth: number = 0): string {
     if (value === null) return "z.null()";
     if (value === undefined) return "z.undefined()";
@@ -134,6 +138,37 @@ export function generateZodSchemaFromSample(sample: any, schemaName: string): st
     return generateZodObjectSchema(mergedObject, depth);
   }
 
+  function getRecordValueSchemaFromValues(values: any[], depth: number = 0): string {
+    const schemas: string[] = [];
+    const seenSchemas = new Set<string>();
+    const addSchema = (schema: string) => {
+      if (!seenSchemas.has(schema)) {
+        seenSchemas.add(schema);
+        schemas.push(schema);
+      }
+    };
+
+    const objectValues = values.filter(value => value && typeof value === 'object' && !Array.isArray(value));
+    if (objectValues.length > 0) {
+      addSchema(mergeArrayOfObjects(objectValues, depth + 1));
+    }
+
+    for (const value of values) {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        continue;
+      }
+      addSchema(getZodTypeForValue(value, depth + 1));
+    }
+
+    if (schemas.length === 0) {
+      return "z.unknown()";
+    }
+    if (schemas.length === 1) {
+      return schemas[0];
+    }
+    return `z.union([${schemas.join(', ')}])`;
+  }
+
   function generateZodObjectSchema(obj: any, depth: number = 0): string {
     if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
       return "z.unknown()";
@@ -260,7 +295,7 @@ ${objIndent}})`;
       }
 
       // CSV properties need special handling - client transforms _contentType -> ContentType
-      let camelKey = toCamelCase(key);
+      let camelKey = toResponseKey(key);
       if (key === '_contentType' && value === 'csv') {
         camelKey = 'ContentType';
       } else if (key === '_rawData' && typeof value === 'string') {
@@ -271,7 +306,9 @@ ${objIndent}})`;
 
       // Handle special merged schema markers
       let zodType: string;
-      if (value && typeof value === 'object' && '__mergedSchema' in value) {
+      if (value && typeof value === 'object' && '__recordSchema' in value) {
+        zodType = String(value.__recordSchema);
+      } else if (value && typeof value === 'object' && '__mergedSchema' in value) {
         zodType = String(value.__mergedSchema);
       } else if (value && typeof value === 'object' && '__mergedArraySchema' in value) {
         zodType = `z.array(${String(value.__mergedArraySchema)})`;
@@ -395,10 +432,15 @@ ${objIndent}})`;
             // Collect all keys and values across all variations
             const allKeys = new Set<string>();
             const allValueTypes = new Set<string>();
+            const allEntryValues: any[] = [];
             
             for (const dict of variations) {
               for (const [k, v] of Object.entries(dict)) {
+                if (k.startsWith('__')) {
+                  continue;
+                }
                 allKeys.add(k);
+                allEntryValues.push(v);
                 if (v && typeof v === 'object' && !Array.isArray(v)) {
                   allValueTypes.add('object');
                 } else {
@@ -410,11 +452,12 @@ ${objIndent}})`;
             // Check if this looks like a dictionary with mixed types
             const numericKeys = Array.from(allKeys).filter(k => /^\d+$/.test(k));
             const hasNumericKeys = numericKeys.length > 0;
+            const isMostlyNumeric = hasNumericKeys && numericKeys.length >= allKeys.size * 0.7;
             const hasMixedValueTypes = allValueTypes.size > 1;
             
-            if (hasNumericKeys && hasMixedValueTypes) {
-              // This is a dictionary with mixed value types - use z.unknown()
-              mergedObject[fieldKey] = { __dictionary_unknown: true };
+            if (isMostlyNumeric && hasMixedValueTypes) {
+              const valueSchema = getRecordValueSchemaFromValues(allEntryValues, 1);
+              mergedObject[fieldKey] = { __recordSchema: `z.record(z.string(), ${valueSchema})` };
             }
           }
         }
@@ -425,7 +468,7 @@ ${objIndent}})`;
           const nonNullObjects = objects.filter(obj => obj !== null);
           const hasNulls = objects.some(obj => obj === null);
           
-          if (nonNullObjects.length > 0 && !mergedObject[fieldKey]?.__dictionary_unknown) {
+          if (nonNullObjects.length > 0 && !mergedObject[fieldKey]?.__dictionary_unknown && !mergedObject[fieldKey]?.__recordSchema) {
             // Recursively merge non-null nested objects
             const mergedNestedSchema = mergeArrayOfObjects(nonNullObjects, 0);
             // Extract just the object schema part (remove the const and z.array wrapper)
@@ -506,6 +549,7 @@ ${objIndent}})`;
         // Merge all objects to detect field variations
         const mergedObject: any = {};
         const fieldValues: Record<string, Set<any>> = {};
+        const nestedArrays: Record<string, any[]> = {};
         
         // Collect all field values to detect variations
         for (const value of allValues) {
@@ -517,6 +561,19 @@ ${objIndent}})`;
               fieldValues[fieldKey] = new Set();
             }
             fieldValues[fieldKey].add(fieldValue);
+
+            if (Array.isArray(fieldValue) && fieldValue.length > 0) {
+              if (!(fieldKey in nestedArrays)) {
+                nestedArrays[fieldKey] = [];
+              }
+              nestedArrays[fieldKey] = nestedArrays[fieldKey].concat(fieldValue);
+            }
+          }
+        }
+
+        for (const [fieldKey, allItems] of Object.entries(nestedArrays)) {
+          if (allItems.length > 0) {
+            mergedObject[fieldKey] = allItems;
           }
         }
         
