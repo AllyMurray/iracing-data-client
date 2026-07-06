@@ -1,5 +1,11 @@
 # iracing-data-client
 
+## 0.2.3
+
+### Patch Changes
+
+- 1c19a29: Improve generated iRacing Data API response types with richer sample merging and dictionary schema inference.
+
 ## 0.2.2
 
 ### Patch Changes
