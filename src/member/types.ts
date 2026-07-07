@@ -341,58 +341,51 @@ export type MemberInfoResponse = z.infer<typeof MemberInfo>;
 export type MemberParticipationCreditsResponse = z.infer<typeof MemberParticipationCredits>;
 export type MemberProfileResponse = z.infer<typeof MemberProfile>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const MemberAwardsParamsSchema = z.object({
+const memberAwardsParams = z.object({
   custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
-const MemberAwardInstancesParamsSchema = z.object({
+const memberAwardInstancesParams = z.object({
   custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
   awardId: z.number(), // maps to: award_id
 });
 
-const MemberChartDataParamsSchema = z.object({
+const memberChartDataParams = z.object({
   custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
   categoryId: z.number(), // 1 - Oval; 2 - Road; 3 - Dirt oval; 4 - Dirt road // maps to: category_id
   chartType: z.number(), // 1 - iRating; 2 - TT Rating; 3 - License/SR // maps to: chart_type
 });
 
-const MemberGetParamsSchema = z.object({
+const memberGetParams = z.object({
   custIds: z.array(z.number()), // ?cust_ids=2,3,4 // maps to: cust_ids
   includeLicenses: z.optional(z.boolean()), // maps to: include_licenses
 });
 
-const MemberInfoParamsSchema = z.object({
+const memberInfoParams = z.object({
 });
 
-const MemberParticipationCreditsParamsSchema = z.object({
+const memberParticipationCreditsParams = z.object({
 });
 
-const MemberProfileParamsSchema = z.object({
+const memberProfileParams = z.object({
   custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
 });
 
 // ---- Exported Parameter Types ----
 
-export type MemberAwardsParams = z.infer<typeof MemberAwardsParamsSchema>;
-export type MemberAwardInstancesParams = z.infer<typeof MemberAwardInstancesParamsSchema>;
-export type MemberChartDataParams = z.infer<typeof MemberChartDataParamsSchema>;
-export type MemberGetParams = z.infer<typeof MemberGetParamsSchema>;
-export type MemberInfoParams = z.infer<typeof MemberInfoParamsSchema>;
-export type MemberParticipationCreditsParams = z.infer<typeof MemberParticipationCreditsParamsSchema>;
-export type MemberProfileParams = z.infer<typeof MemberProfileParamsSchema>;
+export type MemberAwardsParams = z.infer<typeof memberAwardsParams>;
+export type MemberAwardInstancesParams = z.infer<typeof memberAwardInstancesParams>;
+export type MemberChartDataParams = z.infer<typeof memberChartDataParams>;
+export type MemberGetParams = z.infer<typeof memberGetParams>;
+export type MemberInfoParams = z.infer<typeof memberInfoParams>;
+export type MemberParticipationCreditsParams = z.infer<typeof memberParticipationCreditsParams>;
+export type MemberProfileParams = z.infer<typeof memberProfileParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  MemberAwardsParamsSchema,
-  MemberAwardInstancesParamsSchema,
-  MemberChartDataParamsSchema,
-  MemberGetParamsSchema,
-  MemberInfoParamsSchema,
-  MemberParticipationCreditsParamsSchema,
-  MemberProfileParamsSchema,
   MemberAwards,
   MemberAwardInstances,
   MemberChartData,

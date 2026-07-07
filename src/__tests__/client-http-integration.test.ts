@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import * as z from 'zod/mini';
 import { type FetchLike } from '../auth/types';
 import { IRacingClient, IRacingError } from '../client';
 import { createMockResponse } from "./test-utils";
@@ -249,6 +250,19 @@ describe('HttpClient Integration', () => {
       const url = apiCall[0] as string;
       expect(url).toContain('season_year=2024');
       expect(url).toContain('race_week_num=5');
+    });
+
+    it('should validate params before making network requests', async () => {
+      await expect(
+        client.get('/data/test/params', {
+          params: { custIds: 'not-an-array' },
+          paramsValidator: z.object({
+            custIds: z.array(z.number()),
+          }),
+        })
+      ).rejects.toThrow();
+
+      expect(mockFetch).not.toHaveBeenCalled();
     });
   });
 

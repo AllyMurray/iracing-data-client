@@ -124,8 +124,8 @@ Get detailed spectator subsession information.
       seasonIds: [3456, 7890]
     });
 
-    details.forEach(session => {
-      console.log(`${session.seriesName} at ${session.trackName}`);
+    details.subsessions.forEach(session => {
+      console.log(`${session.subsessionId} starts at ${session.startTime}`);
     });
     ```
   </TabItem>

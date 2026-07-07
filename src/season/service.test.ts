@@ -71,14 +71,10 @@ describe("SeasonService", () => {
         json: () => Promise.resolve(seasonraceguideSample)
       });
 
-      const testParams = {
-  from: "test",
-  includeEndAfterFrom: true
-      };
-      const result = await seasonService.raceGuide(testParams);
+      const result = await seasonService.raceGuide();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/season/race_guide"),
+        "https://members-ng.iracing.com/data/season/race_guide",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -99,13 +95,10 @@ describe("SeasonService", () => {
         json: () => Promise.resolve(seasonspectatorsubsessionidsSample)
       });
 
-      const testParams = {
-  eventTypes: [123, 456]
-      };
-      const result = await seasonService.spectatorSubsessionids(testParams);
+      const result = await seasonService.spectatorSubsessionids();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/season/spectator_subsessionids"),
+        "https://members-ng.iracing.com/data/season/spectator_subsessionids",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -126,14 +119,10 @@ describe("SeasonService", () => {
         json: () => Promise.resolve(seasonspectatorsubsessionidsdetailSample)
       });
 
-      const testParams = {
-  eventTypes: [123, 456],
-  seasonIds: [123, 456]
-      };
-      const result = await seasonService.spectatorSubsessionidsDetail(testParams);
+      const result = await seasonService.spectatorSubsessionidsDetail();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/season/spectator_subsessionids_detail"),
+        "https://members-ng.iracing.com/data/season/spectator_subsessionids_detail",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"

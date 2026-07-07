@@ -160,25 +160,10 @@ describe("ResultsService", () => {
         json: () => Promise.resolve(resultssearchhostedSample)
       });
 
-      const testParams = {
-  startRangeBegin: "test",
-  startRangeEnd: "test",
-  finishRangeBegin: "test",
-  finishRangeEnd: "test",
-  custId: 123,
-  teamId: 123,
-  hostCustId: 123,
-  sessionName: "test",
-  leagueId: 123,
-  leagueSeasonId: 123,
-  carId: 123,
-  trackId: 123,
-  categoryIds: [123, 456]
-      };
-      const result = await resultsService.searchHosted(testParams);
+      const result = await resultsService.searchHosted();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/results/search_hosted"),
+        "https://members-ng.iracing.com/data/results/search_hosted",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -199,25 +184,10 @@ describe("ResultsService", () => {
         json: () => Promise.resolve(resultssearchseriesSample)
       });
 
-      const testParams = {
-  seasonYear: 123,
-  seasonQuarter: 123,
-  startRangeBegin: "test",
-  startRangeEnd: "test",
-  finishRangeBegin: "test",
-  finishRangeEnd: "test",
-  custId: 123,
-  teamId: 123,
-  seriesId: 123,
-  raceWeekNum: 123,
-  officialOnly: true,
-  eventTypes: [123, 456],
-  categoryIds: [123, 456]
-      };
-      const result = await resultsService.searchSeries(testParams);
+      const result = await resultsService.searchSeries();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/results/search_series"),
+        "https://members-ng.iracing.com/data/results/search_series",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"

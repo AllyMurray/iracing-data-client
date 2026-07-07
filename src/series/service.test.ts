@@ -121,15 +121,10 @@ describe("SeriesService", () => {
         json: () => Promise.resolve(seriesseasonsSample)
       });
 
-      const testParams = {
-  includeSeries: true,
-  seasonYear: 123,
-  seasonQuarter: 123
-      };
-      const result = await seriesService.seasons(testParams);
+      const result = await seriesService.seasons();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/series/seasons"),
+        "https://members-ng.iracing.com/data/series/seasons",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -150,15 +145,10 @@ describe("SeriesService", () => {
         json: () => Promise.resolve(seriesseasonlistSample)
       });
 
-      const testParams = {
-  includeSeries: true,
-  seasonYear: 123,
-  seasonQuarter: 123
-      };
-      const result = await seriesService.seasonList(testParams);
+      const result = await seriesService.seasonList();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/series/season_list"),
+        "https://members-ng.iracing.com/data/series/season_list",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"

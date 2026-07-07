@@ -158,9 +158,9 @@ Get a member's recent race results.
     });
 
     recentRaces.races.forEach(race => {
-      console.log(`${race.seriesName} at ${race.trackName}`);
+      console.log(`${race.seriesName} at ${race.track.trackName}`);
       console.log(`  Finished: P${race.finishPosition}`);
-      console.log(`  iRating change: ${race.newIrating - race.oldIrating}`);
+      console.log(`  iRating change: ${race.newiRating - race.oldiRating}`);
     });
     ```
   </TabItem>

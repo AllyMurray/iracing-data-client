@@ -91,7 +91,7 @@ A simple Node.js application that:
        });
        
        recentRaces.races.slice(0, 5).forEach(race => {
-         console.log(`  • ${race.seriesName} at ${race.trackName}`);
+         console.log(`  • ${race.seriesName} at ${race.track.trackName}`);
          console.log(`    Finished P${race.finishPosition} (Started P${race.startPosition})`);
          console.log(`    SOF: ${race.strengthOfField}\n`);
        });
@@ -130,7 +130,7 @@ A simple Node.js application that:
 </Steps>
 
 <Aside type="note">
-  You can optionally pass pluggable `stores` for caching, rate limiting, and request deduplication via the `stores` option on `IRacingDataClient`. See the [Caching Guide](/guides/caching/) and [Rate Limiting Guide](/guides/rate-limiting/) for details.
+  You can optionally pass pluggable `stores` for caching, rate limiting, and request deduplication via the `stores` option on `IRacingDataClient`. See the [Caching Guide](/iracing-data-client/guides/caching/) and [Rate Limiting Guide](/iracing-data-client/guides/rate-limiting/) for details.
 </Aside>
 
 ## Expected Output

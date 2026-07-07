@@ -61,41 +61,37 @@ export type SeasonRaceGuideResponse = z.infer<typeof SeasonRaceGuide>;
 export type SeasonSpectatorSubsessionidsResponse = z.infer<typeof SeasonSpectatorSubsessionids>;
 export type SeasonSpectatorSubsessionidsDetailResponse = z.infer<typeof SeasonSpectatorSubsessionidsDetail>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const SeasonListParamsSchema = z.object({
+const seasonListParams = z.object({
   seasonYear: z.number(), // maps to: season_year
   seasonQuarter: z.number(), // maps to: season_quarter
 });
 
-const SeasonRaceGuideParamsSchema = z.object({
+const seasonRaceGuideParams = z.object({
   from: z.optional(z.string()), // ISO-8601 offset format. Defaults to the current time. Include sessions with start times up to 3 hours after this time. Times in the past will be rewritten to the current time.
   includeEndAfterFrom: z.optional(z.boolean()), // Include sessions which start before 'from' but end after. // maps to: include_end_after_from
 });
 
-const SeasonSpectatorSubsessionidsParamsSchema = z.object({
+const seasonSpectatorSubsessionidsParams = z.object({
   eventTypes: z.optional(z.array(z.number())), // Types of events to include in the search. Defaults to all. ?event_types=2,3,4,5 // maps to: event_types
 });
 
-const SeasonSpectatorSubsessionidsDetailParamsSchema = z.object({
+const seasonSpectatorSubsessionidsDetailParams = z.object({
   eventTypes: z.optional(z.array(z.number())), // Types of events to include in the search. Defaults to all. ?event_types=2,3,4,5 // maps to: event_types
   seasonIds: z.optional(z.array(z.number())), // Seasons to include in the search. Defaults to all. ?season_ids=513,937 // maps to: season_ids
 });
 
 // ---- Exported Parameter Types ----
 
-export type SeasonListParams = z.infer<typeof SeasonListParamsSchema>;
-export type SeasonRaceGuideParams = z.infer<typeof SeasonRaceGuideParamsSchema>;
-export type SeasonSpectatorSubsessionidsParams = z.infer<typeof SeasonSpectatorSubsessionidsParamsSchema>;
-export type SeasonSpectatorSubsessionidsDetailParams = z.infer<typeof SeasonSpectatorSubsessionidsDetailParamsSchema>;
+export type SeasonListParams = z.infer<typeof seasonListParams>;
+export type SeasonRaceGuideParams = z.infer<typeof seasonRaceGuideParams>;
+export type SeasonSpectatorSubsessionidsParams = z.infer<typeof seasonSpectatorSubsessionidsParams>;
+export type SeasonSpectatorSubsessionidsDetailParams = z.infer<typeof seasonSpectatorSubsessionidsDetailParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  SeasonListParamsSchema,
-  SeasonRaceGuideParamsSchema,
-  SeasonSpectatorSubsessionidsParamsSchema,
-  SeasonSpectatorSubsessionidsDetailParamsSchema,
   SeasonList,
   SeasonRaceGuide,
   SeasonSpectatorSubsessionids,

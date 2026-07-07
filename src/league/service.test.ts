@@ -48,14 +48,10 @@ describe("LeagueService", () => {
         json: () => Promise.resolve(leaguecustleaguesessionsSample)
       });
 
-      const testParams = {
-  mine: true,
-  packageId: 123
-      };
-      const result = await leagueService.custLeagueSessions(testParams);
+      const result = await leagueService.custLeagueSessions();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/league/cust_league_sessions"),
+        "https://members-ng.iracing.com/data/league/cust_league_sessions",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -76,24 +72,10 @@ describe("LeagueService", () => {
         json: () => Promise.resolve(leaguedirectorySample)
       });
 
-      const testParams = {
-  search: "test",
-  tag: "test",
-  restrictToMember: true,
-  restrictToRecruiting: true,
-  restrictToFriends: true,
-  restrictToWatched: true,
-  minimumRosterCount: 123,
-  maximumRosterCount: 123,
-  lowerbound: 123,
-  upperbound: 123,
-  sort: "test",
-  order: "test"
-      };
-      const result = await leagueService.directory(testParams);
+      const result = await leagueService.directory();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/league/directory"),
+        "https://members-ng.iracing.com/data/league/directory",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -170,14 +152,10 @@ describe("LeagueService", () => {
         json: () => Promise.resolve(leaguemembershipSample)
       });
 
-      const testParams = {
-  custId: 123,
-  includeLeague: true
-      };
-      const result = await leagueService.membership(testParams);
+      const result = await leagueService.membership();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/league/membership"),
+        "https://members-ng.iracing.com/data/league/membership",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"

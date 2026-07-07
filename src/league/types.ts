@@ -489,14 +489,14 @@ export type LeagueSeasonsResponse = z.infer<typeof LeagueSeasons>;
 export type LeagueSeasonStandingsResponse = z.infer<typeof LeagueSeasonStandings>;
 export type LeagueSeasonSessionsResponse = z.infer<typeof LeagueSeasonSessions>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const LeagueCustLeagueSessionsParamsSchema = z.object({
+const leagueCustLeagueSessionsParams = z.object({
   mine: z.optional(z.boolean()), // If true, return only sessions created by this user.
   packageId: z.optional(z.number()), // If set, return only sessions using this car or track package ID. // maps to: package_id
 });
 
-const LeagueDirectoryParamsSchema = z.object({
+const leagueDirectoryParams = z.object({
   search: z.optional(z.string()), // Will search against league name, description, owner, and league ID.
   tag: z.optional(z.string()), // One or more tags, comma-separated.
   restrictToMember: z.optional(z.boolean()), // If true include only leagues for which customer is a member. // maps to: restrict_to_member
@@ -511,39 +511,39 @@ const LeagueDirectoryParamsSchema = z.object({
   order: z.optional(z.string()), // One of asc or desc.  Defaults to asc.
 });
 
-const LeagueGetParamsSchema = z.object({
+const leagueGetParams = z.object({
   leagueId: z.number(), // maps to: league_id
   includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
-const LeagueGetPointsSystemsParamsSchema = z.object({
+const leagueGetPointsSystemsParams = z.object({
   leagueId: z.number(), // maps to: league_id
   seasonId: z.optional(z.number()), // If included and the season is using custom points (points_system_id:2) then the custom points option is included in the returned list. Otherwise the custom points option is not returned. // maps to: season_id
 });
 
-const LeagueMembershipParamsSchema = z.object({
+const leagueMembershipParams = z.object({
   custId: z.optional(z.number()), // If different from the authenticated member, the following restrictions apply: - Caller cannot be on requested customer's block list or an empty list will result; - Requested customer cannot have their online activity preference set to hidden or an empty list will result; - Only leagues for which the requested customer is an admin and the league roster is not private are returned. // maps to: cust_id
   includeLeague: z.optional(z.boolean()), // maps to: include_league
 });
 
-const LeagueRosterParamsSchema = z.object({
+const leagueRosterParams = z.object({
   leagueId: z.number(), // maps to: league_id
   includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
-const LeagueSeasonsParamsSchema = z.object({
+const leagueSeasonsParams = z.object({
   leagueId: z.number(), // maps to: league_id
   retired: z.optional(z.boolean()), // If true include seasons which are no longer active.
 });
 
-const LeagueSeasonStandingsParamsSchema = z.object({
+const leagueSeasonStandingsParams = z.object({
   leagueId: z.number(), // maps to: league_id
   seasonId: z.number(), // maps to: season_id
   carClassId: z.optional(z.number()), // maps to: car_class_id
   carId: z.optional(z.number()), // If car_class_id is included then the standings are for the car in that car class, otherwise they are for the car across car classes. // maps to: car_id
 });
 
-const LeagueSeasonSessionsParamsSchema = z.object({
+const leagueSeasonSessionsParams = z.object({
   leagueId: z.number(), // maps to: league_id
   seasonId: z.number(), // maps to: season_id
   resultsOnly: z.optional(z.boolean()), // If true include only sessions for which results are available. // maps to: results_only
@@ -551,28 +551,19 @@ const LeagueSeasonSessionsParamsSchema = z.object({
 
 // ---- Exported Parameter Types ----
 
-export type LeagueCustLeagueSessionsParams = z.infer<typeof LeagueCustLeagueSessionsParamsSchema>;
-export type LeagueDirectoryParams = z.infer<typeof LeagueDirectoryParamsSchema>;
-export type LeagueGetParams = z.infer<typeof LeagueGetParamsSchema>;
-export type LeagueGetPointsSystemsParams = z.infer<typeof LeagueGetPointsSystemsParamsSchema>;
-export type LeagueMembershipParams = z.infer<typeof LeagueMembershipParamsSchema>;
-export type LeagueRosterParams = z.infer<typeof LeagueRosterParamsSchema>;
-export type LeagueSeasonsParams = z.infer<typeof LeagueSeasonsParamsSchema>;
-export type LeagueSeasonStandingsParams = z.infer<typeof LeagueSeasonStandingsParamsSchema>;
-export type LeagueSeasonSessionsParams = z.infer<typeof LeagueSeasonSessionsParamsSchema>;
+export type LeagueCustLeagueSessionsParams = z.infer<typeof leagueCustLeagueSessionsParams>;
+export type LeagueDirectoryParams = z.infer<typeof leagueDirectoryParams>;
+export type LeagueGetParams = z.infer<typeof leagueGetParams>;
+export type LeagueGetPointsSystemsParams = z.infer<typeof leagueGetPointsSystemsParams>;
+export type LeagueMembershipParams = z.infer<typeof leagueMembershipParams>;
+export type LeagueRosterParams = z.infer<typeof leagueRosterParams>;
+export type LeagueSeasonsParams = z.infer<typeof leagueSeasonsParams>;
+export type LeagueSeasonStandingsParams = z.infer<typeof leagueSeasonStandingsParams>;
+export type LeagueSeasonSessionsParams = z.infer<typeof leagueSeasonSessionsParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  LeagueCustLeagueSessionsParamsSchema,
-  LeagueDirectoryParamsSchema,
-  LeagueGetParamsSchema,
-  LeagueGetPointsSystemsParamsSchema,
-  LeagueMembershipParamsSchema,
-  LeagueRosterParamsSchema,
-  LeagueSeasonsParamsSchema,
-  LeagueSeasonStandingsParamsSchema,
-  LeagueSeasonSessionsParamsSchema,
   LeagueCustLeagueSessions,
   LeagueDirectory,
   LeagueGet,

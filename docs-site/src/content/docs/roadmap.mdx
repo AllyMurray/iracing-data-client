@@ -9,13 +9,12 @@ This page outlines planned features and improvements for the iRacing Data Client
 
 ## Upcoming Features
 
-### Response Caching (High Priority)
+### Built-in Cache Store Utilities (High Priority)
 **Status:** Planned
 
-Intelligent response caching to reduce API calls and improve performance.
+Convenience cache store implementations and observability on top of the existing `stores.cache` integration.
 
 **Features:**
-- Automatic caching based on API expiration headers
 - Memory-efficient cache with configurable size limits
 - Cache statistics and debugging tools
 - Per-endpoint cache control
@@ -52,6 +51,10 @@ Command-line interface for quick data access.
 - Shell completion
 
 ## Recently Completed
+
+### v0.2.x
+- Opt-in pluggable stores for caching, rate limiting, and request deduplication
+- Automatic cache TTL derivation from iRacing presigned URL expiry when `stores.cache` is provided
 
 ### v0.1.0
 - OAuth2 authentication (Password Limited and Authorization Code with PKCE)

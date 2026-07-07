@@ -1,6 +1,12 @@
 import type { IRacingClient } from "../client";
 import type { LookupDriversParams, LookupCountriesResponse, LookupDriversResponse, LookupFlairsResponse, LookupGetResponse, LookupLicensesResponse } from "./types";
+import * as z from "zod/mini";
 import { LookupCountries, LookupDrivers, LookupFlairs, LookupGet, LookupLicenses } from "./types";
+
+const driversParams = z.object({
+  searchTerm: z.string(), // A cust_id or partial name for which to search. // maps to: search_term
+  leagueId: z.optional(z.number()), // Narrow the search to the roster of the given league. // maps to: league_id
+});
 
 export class LookupService {
   constructor(private client: IRacingClient) {}
@@ -20,7 +26,7 @@ export class LookupService {
    * @sample lookup.drivers.json
    */
   async drivers(params: LookupDriversParams): Promise<LookupDriversResponse> {
-    return this.client.get<LookupDriversResponse>("https://members-ng.iracing.com/data/lookup/drivers", { params, schema: LookupDrivers });
+    return this.client.get<LookupDriversResponse>("https://members-ng.iracing.com/data/lookup/drivers", { params, paramsValidator: driversParams, schema: LookupDrivers });
   }
 
   /**

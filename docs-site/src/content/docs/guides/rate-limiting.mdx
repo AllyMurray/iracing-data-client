@@ -7,10 +7,10 @@ import { Tabs, TabItem, Card, CardGrid, Aside } from '@astrojs/starlight/compone
 
 # Rate Limiting
 
-The iRacing API enforces rate limits to ensure fair usage and system stability. The SDK detects rate limit responses and throws an `IRacingError` with `isRateLimited = true`, but does not automatically retry or throttle requests.
+The iRacing API enforces rate limits to ensure fair usage and system stability. The SDK detects rate limit responses and throws an `IRacingError` with `isRateLimited = true`. By default it does not retry or throttle requests, but you can opt in to automatic throttling with a pluggable `stores.rateLimit` implementation.
 
 <Aside type="note">
-  Built-in rate limit handling (automatic retry with backoff, request queuing, concurrency control) is planned for a future release. See our [roadmap](/iracing-data-client/roadmap/) for details. In the meantime, this guide covers strategies you can implement yourself.
+  Automatic retry with backoff and request queue helpers are still planned. The current built-in integration is the `stores.rateLimit` hook described below.
 </Aside>
 
 ## Pluggable Rate Limit Store
@@ -96,9 +96,9 @@ async function withExponentialBackoff<T>(
 const data = await withExponentialBackoff(() => iracing.track.get());
 ```
 
-### Strategy 2: Rate Limiter *(coming soon)*
+### Strategy 2: Manual Rate Limiter
 
-Proactive concurrency control will be built into the SDK. Until then, you can implement your own:
+If you do not provide a `stores.rateLimit` implementation, you can wrap calls with your own concurrency control:
 
 ```typescript
 class RateLimiter {
@@ -157,9 +157,9 @@ const results = await Promise.all([
 ]);
 ```
 
-### Strategy 3: Token Bucket *(coming soon)*
+### Strategy 3: Token Bucket
 
-A token bucket algorithm will be available as a built-in option. Here's a reference implementation:
+For more explicit request pacing, use a token bucket wrapper:
 
 ```typescript
 class TokenBucket {
@@ -254,9 +254,9 @@ Reduce API calls by batching requests:
   </TabItem>
 </Tabs>
 
-## Queue Management *(coming soon)*
+## Queue Management
 
-A built-in request queue with rate limiting is planned. Until then, implement your own:
+If you need queue semantics in addition to throttling, implement them at the application layer:
 
 ```typescript
 class RequestQueue {

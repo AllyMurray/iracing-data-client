@@ -78,13 +78,13 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
   }
   lines.push(``);
 
-  lines.push(`// ---- Parameter Schemas ----`);
+  lines.push(`// ---- Parameter Validators ----`);
   lines.push(``);
 
-  // Generate parameter schemas
+  // Generate private parameter validators for type inference.
   for (const ep of endpoints) {
-    const schemaName = `${toPascal(ep.method)}ParamsSchema`;
-    lines.push(`const ${schemaName} = z.object({`);
+    const validatorName = `${ep.method}Params`;
+    lines.push(`const ${validatorName} = z.object({`);
 
     for (const [paramName, paramDef] of Object.entries(ep.params)) {
       let zodType = "z.unknown()";
@@ -130,20 +130,14 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
   // Export parameter types
   for (const ep of endpoints) {
     const typeName = `${toPascal(ep.method)}Params`;
-    const schemaName = `${toPascal(ep.method)}ParamsSchema`;
-    lines.push(`export type ${typeName} = z.infer<typeof ${schemaName}>;`);
+    const validatorName = `${ep.method}Params`;
+    lines.push(`export type ${typeName} = z.infer<typeof ${validatorName}>;`);
   }
 
   lines.push(``);
   lines.push(`// ---- Exported Schemas ----`);
   lines.push(``);
   lines.push(`export {`);
-
-  // Export parameter schemas
-  for (const ep of endpoints) {
-    const schemaName = `${toPascal(ep.method)}ParamsSchema`;
-    lines.push(`  ${schemaName},`);
-  }
 
   // Export response schemas
   for (const ep of endpoints) {
@@ -161,6 +155,14 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 function applyResponseSchemaOverrides(endpoint: Flat, schema: string): string {
   const endpointName = `${endpoint.section}.${endpoint.name}`;
 
+  if (endpointName === "results.search_hosted") {
+    return schema
+      .replace("      custId: z.number(),", "      custId: z.optional(z.number()),")
+      .replace("      teamId: z.number(),", "      teamId: z.optional(z.number()),")
+      .replace("      startRangeBegin: z.string(),", "      startRangeBegin: z.optional(z.string()),")
+      .replace("      categoryIds: z.array(z.number()),", "      categoryIds: z.optional(z.array(z.number())),");
+  }
+
   if (endpointName !== "results.search_series") {
     return schema;
   }
@@ -175,12 +177,20 @@ function applyResponseSchemaOverrides(endpoint: Flat, schema: string): string {
   ].join("\n");
 
   const requiredParticipantFilters = "      custId: z.number(),\n      teamId: z.number(),";
+  let updatedSchema = schema;
   if (schema.includes(requiredParticipantFilters)) {
-    return schema.replace(requiredParticipantFilters, optionalParticipantFilters);
+    updatedSchema = schema.replace(requiredParticipantFilters, optionalParticipantFilters);
+  } else {
+    const undocumentedOptionalParticipantFilters = "      custId: z.optional(z.number()),\n      teamId: z.optional(z.number()),";
+    updatedSchema = schema.replace(undocumentedOptionalParticipantFilters, optionalParticipantFilters);
   }
 
-  const undocumentedOptionalParticipantFilters = "      custId: z.optional(z.number()),\n      teamId: z.optional(z.number()),";
-  return schema.replace(undocumentedOptionalParticipantFilters, optionalParticipantFilters);
+  return updatedSchema
+    .replace("      categoryIds: z.array(z.number()),", "      categoryIds: z.optional(z.array(z.number())),")
+    .replace("      raceWeekNum: z.number(),", "      raceWeekNum: z.optional(z.number()),")
+    .replace("      officialOnly: z.boolean(),", "      officialOnly: z.optional(z.boolean()),")
+    .replace("      eventTypes: z.array(z.number()),", "      eventTypes: z.optional(z.array(z.number())),")
+    .replace("      seasonLicenseGroups: z.array(z.number())", "      seasonLicenseGroups: z.optional(z.array(z.number()))");
 }
 
 /** ---- Helper to find sample variation files ---- */

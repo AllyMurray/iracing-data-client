@@ -107,24 +107,22 @@ const TrackGet = z.array(z.object({
 export type TrackAssetsResponse = z.infer<typeof TrackAssets>;
 export type TrackGetResponse = z.infer<typeof TrackGet>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const TrackAssetsParamsSchema = z.object({
+const trackAssetsParams = z.object({
 });
 
-const TrackGetParamsSchema = z.object({
+const trackGetParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type TrackAssetsParams = z.infer<typeof TrackAssetsParamsSchema>;
-export type TrackGetParams = z.infer<typeof TrackGetParamsSchema>;
+export type TrackAssetsParams = z.infer<typeof trackAssetsParams>;
+export type TrackGetParams = z.infer<typeof trackGetParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  TrackAssetsParamsSchema,
-  TrackGetParamsSchema,
   TrackAssets,
   TrackGet,
 };

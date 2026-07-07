@@ -677,57 +677,50 @@ export type SeriesSeasonListResponse = z.infer<typeof SeriesSeasonList>;
 export type SeriesSeasonScheduleResponse = z.infer<typeof SeriesSeasonSchedule>;
 export type SeriesStatsSeriesResponse = z.infer<typeof SeriesStatsSeries>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const SeriesAssetsParamsSchema = z.object({
+const seriesAssetsParams = z.object({
 });
 
-const SeriesGetParamsSchema = z.object({
+const seriesGetParams = z.object({
 });
 
-const SeriesPastSeasonsParamsSchema = z.object({
+const seriesPastSeasonsParams = z.object({
   seriesId: z.number(), // maps to: series_id
 });
 
-const SeriesSeasonsParamsSchema = z.object({
+const seriesSeasonsParams = z.object({
   includeSeries: z.optional(z.boolean()), // maps to: include_series
   seasonYear: z.optional(z.number()), // To look up past seasons use both a season_year and season_quarter.  Without both, the active seasons are returned. // maps to: season_year
   seasonQuarter: z.optional(z.number()), // To look up past seasons use both a season_year and season_quarter.  Without both, the active seasons are returned. // maps to: season_quarter
 });
 
-const SeriesSeasonListParamsSchema = z.object({
+const seriesSeasonListParams = z.object({
   includeSeries: z.optional(z.boolean()), // maps to: include_series
   seasonYear: z.optional(z.number()), // maps to: season_year
   seasonQuarter: z.optional(z.number()), // maps to: season_quarter
 });
 
-const SeriesSeasonScheduleParamsSchema = z.object({
+const seriesSeasonScheduleParams = z.object({
   seasonId: z.number(), // maps to: season_id
 });
 
-const SeriesStatsSeriesParamsSchema = z.object({
+const seriesStatsSeriesParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type SeriesAssetsParams = z.infer<typeof SeriesAssetsParamsSchema>;
-export type SeriesGetParams = z.infer<typeof SeriesGetParamsSchema>;
-export type SeriesPastSeasonsParams = z.infer<typeof SeriesPastSeasonsParamsSchema>;
-export type SeriesSeasonsParams = z.infer<typeof SeriesSeasonsParamsSchema>;
-export type SeriesSeasonListParams = z.infer<typeof SeriesSeasonListParamsSchema>;
-export type SeriesSeasonScheduleParams = z.infer<typeof SeriesSeasonScheduleParamsSchema>;
-export type SeriesStatsSeriesParams = z.infer<typeof SeriesStatsSeriesParamsSchema>;
+export type SeriesAssetsParams = z.infer<typeof seriesAssetsParams>;
+export type SeriesGetParams = z.infer<typeof seriesGetParams>;
+export type SeriesPastSeasonsParams = z.infer<typeof seriesPastSeasonsParams>;
+export type SeriesSeasonsParams = z.infer<typeof seriesSeasonsParams>;
+export type SeriesSeasonListParams = z.infer<typeof seriesSeasonListParams>;
+export type SeriesSeasonScheduleParams = z.infer<typeof seriesSeasonScheduleParams>;
+export type SeriesStatsSeriesParams = z.infer<typeof seriesStatsSeriesParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  SeriesAssetsParamsSchema,
-  SeriesGetParamsSchema,
-  SeriesPastSeasonsParamsSchema,
-  SeriesSeasonsParamsSchema,
-  SeriesSeasonListParamsSchema,
-  SeriesSeasonScheduleParamsSchema,
-  SeriesStatsSeriesParamsSchema,
   SeriesAssets,
   SeriesGet,
   SeriesPastSeasons,

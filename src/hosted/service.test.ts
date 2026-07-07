@@ -41,13 +41,10 @@ describe("HostedService", () => {
         json: () => Promise.resolve(hostedcombinedsessionsSample)
       });
 
-      const testParams = {
-  packageId: 123
-      };
-      const result = await hostedService.combinedSessions(testParams);
+      const result = await hostedService.combinedSessions();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/hosted/combined_sessions"),
+        "https://members-ng.iracing.com/data/hosted/combined_sessions",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"

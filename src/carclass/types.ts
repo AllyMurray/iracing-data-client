@@ -30,18 +30,17 @@ const CarclassGet = z.array(z.object({
 
 export type CarclassGetResponse = z.infer<typeof CarclassGet>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const CarclassGetParamsSchema = z.object({
+const carclassGetParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type CarclassGetParams = z.infer<typeof CarclassGetParamsSchema>;
+export type CarclassGetParams = z.infer<typeof carclassGetParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  CarclassGetParamsSchema,
   CarclassGet,
 };

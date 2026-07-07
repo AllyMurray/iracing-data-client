@@ -42,44 +42,38 @@ export type DriverStatsByCategoryRoadResponse = z.infer<typeof DriverStatsByCate
 export type DriverStatsByCategoryDirtOvalResponse = z.infer<typeof DriverStatsByCategoryDirtOval>;
 export type DriverStatsByCategoryDirtRoadResponse = z.infer<typeof DriverStatsByCategoryDirtRoad>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const DriverStatsByCategoryOvalParamsSchema = z.object({
+const driverStatsByCategoryOvalParams = z.object({
 });
 
-const DriverStatsByCategorySportsCarParamsSchema = z.object({
+const driverStatsByCategorySportsCarParams = z.object({
 });
 
-const DriverStatsByCategoryFormulaCarParamsSchema = z.object({
+const driverStatsByCategoryFormulaCarParams = z.object({
 });
 
-const DriverStatsByCategoryRoadParamsSchema = z.object({
+const driverStatsByCategoryRoadParams = z.object({
 });
 
-const DriverStatsByCategoryDirtOvalParamsSchema = z.object({
+const driverStatsByCategoryDirtOvalParams = z.object({
 });
 
-const DriverStatsByCategoryDirtRoadParamsSchema = z.object({
+const driverStatsByCategoryDirtRoadParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type DriverStatsByCategoryOvalParams = z.infer<typeof DriverStatsByCategoryOvalParamsSchema>;
-export type DriverStatsByCategorySportsCarParams = z.infer<typeof DriverStatsByCategorySportsCarParamsSchema>;
-export type DriverStatsByCategoryFormulaCarParams = z.infer<typeof DriverStatsByCategoryFormulaCarParamsSchema>;
-export type DriverStatsByCategoryRoadParams = z.infer<typeof DriverStatsByCategoryRoadParamsSchema>;
-export type DriverStatsByCategoryDirtOvalParams = z.infer<typeof DriverStatsByCategoryDirtOvalParamsSchema>;
-export type DriverStatsByCategoryDirtRoadParams = z.infer<typeof DriverStatsByCategoryDirtRoadParamsSchema>;
+export type DriverStatsByCategoryOvalParams = z.infer<typeof driverStatsByCategoryOvalParams>;
+export type DriverStatsByCategorySportsCarParams = z.infer<typeof driverStatsByCategorySportsCarParams>;
+export type DriverStatsByCategoryFormulaCarParams = z.infer<typeof driverStatsByCategoryFormulaCarParams>;
+export type DriverStatsByCategoryRoadParams = z.infer<typeof driverStatsByCategoryRoadParams>;
+export type DriverStatsByCategoryDirtOvalParams = z.infer<typeof driverStatsByCategoryDirtOvalParams>;
+export type DriverStatsByCategoryDirtRoadParams = z.infer<typeof driverStatsByCategoryDirtRoadParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  DriverStatsByCategoryOvalParamsSchema,
-  DriverStatsByCategorySportsCarParamsSchema,
-  DriverStatsByCategoryFormulaCarParamsSchema,
-  DriverStatsByCategoryRoadParamsSchema,
-  DriverStatsByCategoryDirtOvalParamsSchema,
-  DriverStatsByCategoryDirtRoadParamsSchema,
   DriverStatsByCategoryOval,
   DriverStatsByCategorySportsCar,
   DriverStatsByCategoryFormulaCar,

@@ -21,29 +21,26 @@ export type ConstantsCategoriesResponse = z.infer<typeof ConstantsCategories>;
 export type ConstantsDivisionsResponse = z.infer<typeof ConstantsDivisions>;
 export type ConstantsEventTypesResponse = z.infer<typeof ConstantsEventTypes>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const ConstantsCategoriesParamsSchema = z.object({
+const constantsCategoriesParams = z.object({
 });
 
-const ConstantsDivisionsParamsSchema = z.object({
+const constantsDivisionsParams = z.object({
 });
 
-const ConstantsEventTypesParamsSchema = z.object({
+const constantsEventTypesParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type ConstantsCategoriesParams = z.infer<typeof ConstantsCategoriesParamsSchema>;
-export type ConstantsDivisionsParams = z.infer<typeof ConstantsDivisionsParamsSchema>;
-export type ConstantsEventTypesParams = z.infer<typeof ConstantsEventTypesParamsSchema>;
+export type ConstantsCategoriesParams = z.infer<typeof constantsCategoriesParams>;
+export type ConstantsDivisionsParams = z.infer<typeof constantsDivisionsParams>;
+export type ConstantsEventTypesParams = z.infer<typeof constantsEventTypesParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  ConstantsCategoriesParamsSchema,
-  ConstantsDivisionsParamsSchema,
-  ConstantsEventTypesParamsSchema,
   ConstantsCategories,
   ConstantsDivisions,
   ConstantsEventTypes,

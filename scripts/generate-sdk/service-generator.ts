@@ -1,5 +1,49 @@
 import { toCamelCase, toPascal } from "./utils";
-import type { Flat } from "./types";
+import type { Flat, ParamDef } from "./types";
+
+function hasRequiredParams(params: Record<string, ParamDef>): boolean {
+  return Object.values(params).some((param) => param.required === true);
+}
+
+function getZodTypeForParam(paramDef: ParamDef): string {
+  let zodType = "z.unknown()";
+
+  switch (paramDef.type) {
+    case "string":
+      zodType = "z.string()";
+      break;
+    case "number":
+      zodType = "z.number()";
+      break;
+    case "boolean":
+      zodType = "z.boolean()";
+      break;
+    case "numbers":
+      zodType = "z.array(z.number())";
+      break;
+  }
+
+  return paramDef.required ? zodType : `z.optional(${zodType})`;
+}
+
+function generateParamValidator(name: string, params: Record<string, ParamDef>): string[] {
+  const lines: string[] = [];
+  lines.push(`const ${name} = z.object({`);
+
+  for (const [paramName, paramDef] of Object.entries(params)) {
+    const camelParamName = toCamelCase(paramName);
+    const comment = paramDef.note ? ` // ${paramDef.note}` : "";
+
+    if (camelParamName !== paramName) {
+      lines.push(`  ${camelParamName}: ${getZodTypeForParam(paramDef)},${comment} // maps to: ${paramName}`);
+    } else {
+      lines.push(`  ${paramName}: ${getZodTypeForParam(paramDef)},${comment}`);
+    }
+  }
+
+  lines.push("});");
+  return lines;
+}
 
 /** ---- Generate mock test parameters from parameter definitions ---- */
 export function generateMockParams(params: Record<string, any>): string {
@@ -88,6 +132,7 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
     const methodName = toCamelCase(endpoint.name.replace(/\./g, "_"));
     const sampleName = toCamelCase(endpoint.method) + "Sample";
     const mockParams = generateMockParams(endpoint.params);
+    const shouldPassParams = hasRequiredParams(endpoint.params);
 
     lines.push(`  describe("${methodName}()", () => {`);
 
@@ -100,7 +145,7 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
       lines.push("      });");
       lines.push("");
 
-      if (mockParams !== "{}") {
+      if (shouldPassParams) {
         lines.push("      const testParams = " + mockParams + ";");
         lines.push(`      const result = await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
       } else {
@@ -109,7 +154,7 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
 
       lines.push("");
       lines.push("      expect(mockFetch).toHaveBeenCalledWith(");
-      if (mockParams !== "{}") {
+      if (shouldPassParams) {
         lines.push(`        expect.stringContaining("${endpoint.url}"),`);
       } else {
         lines.push(`        "${endpoint.url}",`);
@@ -133,7 +178,7 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
       lines.push("      });");
       lines.push("");
 
-      if (mockParams !== "{}") {
+      if (shouldPassParams) {
         lines.push("      const testParams = " + mockParams + ";");
         lines.push(`      await ${toCamelCase(sectionName)}Service.${methodName}(testParams);`);
       } else {
@@ -141,7 +186,7 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
       }
 
       lines.push("      expect(mockFetch).toHaveBeenCalledWith(");
-      if (mockParams !== "{}") {
+      if (shouldPassParams) {
         lines.push(`        expect.stringContaining("${endpoint.url}"),`);
       } else {
         lines.push(`        "${endpoint.url}",`);
@@ -180,12 +225,14 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
   const paramImports: string[] = [];
   const responseImports: string[] = [];
   const schemaImports: string[] = [];
+  let hasAnyParams = false;
   for (const endpoint of endpoints) {
     const methodName = toCamelCase(endpoint.name.split(".").pop() || "");
     const pascalMethodName = toPascal(methodName);
     const hasParams = Object.keys(endpoint.params).length > 0;
 
     if (hasParams) {
+      hasAnyParams = true;
       paramImports.push(`${toPascal(sectionName)}${pascalMethodName}Params`);
     }
 
@@ -203,8 +250,24 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
   if (typeImports.length > 0) {
     lines.push(`import type { ${typeImports.join(", ")} } from "./types";`);
   }
+  if (hasAnyParams) {
+    lines.push(`import * as z from "zod/mini";`);
+  }
   if (schemaImports.length > 0) {
     lines.push(`import { ${schemaImports.join(", ")} } from "./types";`);
+  }
+
+  const paramValidatorBlocks: string[] = [];
+  for (const endpoint of endpoints) {
+    if (Object.keys(endpoint.params).length === 0) continue;
+    const methodName = toCamelCase(endpoint.name.split(".").pop() || "");
+    const validatorName = `${methodName}Params`;
+    paramValidatorBlocks.push(generateParamValidator(validatorName, endpoint.params).join("\n"));
+  }
+
+  if (paramValidatorBlocks.length > 0) {
+    lines.push("");
+    lines.push(paramValidatorBlocks.join("\n\n"));
   }
 
   lines.push("");
@@ -216,8 +279,10 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
     const methodName = toCamelCase(endpoint.name.split(".").pop() || "");
     const pascalMethodName = toPascal(methodName);
     const paramsType = `${toPascal(sectionName)}${pascalMethodName}Params`;
+    const paramsValidator = `${methodName}Params`;
     const responseType = endpoint.responseType || "unknown";
     const hasParams = Object.keys(endpoint.params).length > 0;
+    const paramsAreRequired = hasRequiredParams(endpoint.params);
     const schemaName = endpoint.responseType && endpoint.samplePath ? endpoint.responseType.replace("Response", "") : null;
 
     lines.push(`  /**`);
@@ -230,7 +295,7 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
     lines.push(`   */`);
 
     if (hasParams) {
-      lines.push(`  async ${methodName}(params: ${paramsType}): Promise<${responseType}> {`);
+      lines.push(`  async ${methodName}(params${paramsAreRequired ? "" : "?"}: ${paramsType}): Promise<${responseType}> {`);
     } else {
       lines.push(`  async ${methodName}(): Promise<${responseType}> {`);
     }
@@ -240,9 +305,9 @@ export function generateSectionService(sectionName: string, endpoints: Flat[]): 
         lines.push(`    await this.client.ensureSeasonCarClassPair('stats.${endpoint.name.split(".").pop()}', params.seasonId, params.carClassId);`);
       }
       if (schemaName) {
-        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { params, schema: ${schemaName} });`);
+        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { params, paramsValidator: ${paramsValidator}, schema: ${schemaName} });`);
       } else {
-        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { params });`);
+        lines.push(`    return this.client.get<${responseType}>("${endpoint.url}", { params, paramsValidator: ${paramsValidator} });`);
       }
     } else {
       if (schemaName) {
