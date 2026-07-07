@@ -1,5 +1,11 @@
 # iracing-data-client
 
+## 0.4.0
+
+### Minor Changes
+
+- fa4c718: Upgrade `@http-client-toolkit/core` to v4.2 and expose opt-in retry/backoff, rate-limit wait configuration, observability events, and pending request counts on the iRacing client. Adds `DEFAULT_RETRY_OPTIONS` as the recommended retry preset for transient iRacing API failures.
+
 ## 0.3.0
 
 ### Minor Changes
