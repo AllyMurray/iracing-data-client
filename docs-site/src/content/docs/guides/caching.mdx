@@ -3,9 +3,9 @@ title: Caching
 description: Configuring caching for the iRacing Data Client SDK
 ---
 
-import { Tabs, TabItem, Card, CardGrid, Aside } from '@astrojs/starlight/components';
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-The iRacing Data Client SDK supports opt-in caching via pluggable stores powered by `@http-client-toolkit/core`. When a `CacheStore` is provided, S3 responses are cached automatically with TTL derived from the presigned URL's expiry — no manual TTL management needed.
+The iRacing Data Client SDK supports opt-in caching via pluggable stores powered by `@http-client-toolkit/core`. When a `CacheStore` is provided, resolved GET results are cached automatically. For iRacing's usual presigned S3 responses, TTL is derived from the presigned URL's expiry.
 
 <Aside type="note">
   Caching is **not enabled by default**. Without a `stores.cache`, every API call makes a network request. This matches the behaviour of previous SDK versions.
@@ -37,9 +37,10 @@ const cars2 = await iracing.car.get();
 When caching is enabled:
 
 1. **S3 Link Resolution** — The SDK follows presigned S3 URLs returned by the iRacing API
-2. **TTL Derivation** — Cache TTL is automatically calculated from the S3 link's `expires` field
-3. **Cache Key** — Generated from the full request URL including query parameters
-4. **Transparent** — Cached responses are returned automatically; no code changes needed per-call
+2. **TTL Derivation** — S3-link responses get `Cache-Control: max-age` from the API `expires` field; direct responses use normal HTTP cache headers, or the toolkit fallback TTL when no cache headers are present
+3. **Cache Entry** — The toolkit stores the parsed, transformed SDK result together with cache metadata
+4. **Cache Key** — Generated from the full request URL including query parameters
+5. **Transparent** — Cached results are returned automatically; no code changes needed per-call
 
 ### Cache Key Generation
 
@@ -51,95 +52,162 @@ await iracing.member.get({ custIds: [789012] });  // Cache key 2
 await iracing.member.get({ custIds: [123456] });  // Hits cache key 1
 ```
 
-## Cache Behaviour by Endpoint
+## Cache Lifetime
 
-Different endpoints have different cache durations, determined by the iRacing API's presigned URL expiry times:
+The SDK does not hard-code per-endpoint cache durations. Cache lifetime is determined by the response metadata that reaches `@http-client-toolkit/core`:
 
 <CardGrid>
-  <Card title="Static Data (Long Cache)">
-    **24 hours typical**
-    - Car data
-    - Track information
-    - Series details
-    - Constants
+  <Card title="S3 Link Responses">
+    TTL is calculated from the iRacing API's presigned URL `expires` field
   </Card>
-  <Card title="Dynamic Data (Short Cache)">
-    **5-15 minutes typical**
-    - Session results
-    - Current standings
-    - Member stats
-    - Recent races
+  <Card title="Direct HTTP Responses">
+    Standard HTTP cache headers such as `Cache-Control`, `Expires`, and `Last-Modified` are respected
   </Card>
-  <Card title="Real-time Data (No Cache)">
-    **Not cached**
-    - Live timing
-    - Active sessions
-    - Current races
+  <Card title="No Cache Headers">
+    The toolkit uses its fallback TTL for cacheable responses. In `@http-client-toolkit/core@4.2.0`, that fallback is 3600 seconds.
   </Card>
 </CardGrid>
+
+If you need endpoint-specific freshness rules, layer an application cache on top of the SDK or implement them inside your chosen store.
 
 ## Store Implementations
 
 ### Using a Package
 
-Check the [`@http-client-toolkit`](https://github.com/http-client-toolkit) organisation for available store packages:
+Install a store package separately. Published toolkit stores include `@http-client-toolkit/store-memory`, `@http-client-toolkit/store-sqlite`, and `@http-client-toolkit/store-dynamodb`.
 
 ```typescript
 import { IRacingDataClient } from 'iracing-data-client';
-import { RedisCacheStore } from '@http-client-toolkit/store-redis'; // example
+import { InMemoryCacheStore } from '@http-client-toolkit/store-memory';
 
 const iracing = new IRacingDataClient({
   auth: { /* ... */ },
   stores: {
-    cache: new RedisCacheStore({ url: 'redis://localhost:6379' }),
+    cache: new InMemoryCacheStore({
+      maxItems: 1000,
+      maxMemoryBytes: 50_000_000,
+    }),
   },
 });
 ```
 
+See the [`http-client-toolkit` repository](https://github.com/AllyMurray/http-client-toolkit) for the latest store package list and options.
+
 ### Implementing Your Own
 
-A `CacheStore` implements the following interface:
+Prefer a published store package where possible. If you implement your own, use the `CacheStore` contract from `@http-client-toolkit/core`. The value is toolkit-managed cache data, not a raw `Response`, so store and return it unchanged.
 
 ```typescript
-interface CacheStore {
-  get(key: string): Promise<Response | undefined> | Response | undefined;
-  set(key: string, value: Response, ttl?: number): Promise<void> | void;
-  delete(key: string): Promise<void> | void;
+interface CacheStore<T = unknown> {
+  get(hash: string): Promise<T | undefined>;
+  set(hash: string, value: T, ttlSeconds: number): Promise<void>;
+  delete(hash: string): Promise<void>;
+  clear(scope?: string): Promise<void>;
+  setWithTags(
+    hash: string,
+    value: T,
+    ttlSeconds: number,
+    tags: string[]
+  ): Promise<void>;
+  invalidateByTag(tag: string): Promise<number>;
+  invalidateByTags(tags: string[]): Promise<number>;
 }
 ```
 
 Simple in-memory example:
 
 ```typescript
-class InMemoryCacheStore {
-  private cache = new Map<string, { response: Response; expires: number }>();
+import type { CacheStore } from '@http-client-toolkit/core';
 
-  get(key: string): Response | undefined {
-    const entry = this.cache.get(key);
+class SimpleCacheStore<T = unknown> implements CacheStore<T> {
+  private entries = new Map<string, {
+    value: T;
+    expiresAt: number;
+    tags: Set<string>;
+  }>();
+  private tagIndex = new Map<string, Set<string>>();
+
+  async get(hash: string): Promise<T | undefined> {
+    const entry = this.entries.get(hash);
     if (!entry) return undefined;
-    if (entry.expires < Date.now()) {
-      this.cache.delete(key);
+    if (entry.expiresAt <= Date.now()) {
+      await this.delete(hash);
       return undefined;
     }
-    return entry.response.clone();
+    return entry.value;
   }
 
-  set(key: string, value: Response, ttl?: number): void {
-    this.cache.set(key, {
-      response: value.clone(),
-      expires: Date.now() + (ttl ?? 300) * 1000,
+  async set(hash: string, value: T, ttlSeconds: number): Promise<void> {
+    await this.setWithTags(hash, value, ttlSeconds, []);
+  }
+
+  async setWithTags(
+    hash: string,
+    value: T,
+    ttlSeconds: number,
+    tags: string[]
+  ): Promise<void> {
+    await this.delete(hash);
+
+    const tagSet = new Set(tags);
+    this.entries.set(hash, {
+      value,
+      expiresAt: Date.now() + ttlSeconds * 1000,
+      tags: tagSet,
     });
+
+    for (const tag of tagSet) {
+      const hashes = this.tagIndex.get(tag) ?? new Set<string>();
+      hashes.add(hash);
+      this.tagIndex.set(tag, hashes);
+    }
   }
 
-  delete(key: string): void {
-    this.cache.delete(key);
+  async delete(hash: string): Promise<void> {
+    const entry = this.entries.get(hash);
+    if (!entry) return;
+
+    this.entries.delete(hash);
+    for (const tag of entry.tags) {
+      const hashes = this.tagIndex.get(tag);
+      hashes?.delete(hash);
+      if (hashes?.size === 0) {
+        this.tagIndex.delete(tag);
+      }
+    }
+  }
+
+  async clear(scope?: string): Promise<void> {
+    for (const hash of [...this.entries.keys()]) {
+      if (!scope || hash.startsWith(scope)) {
+        await this.delete(hash);
+      }
+    }
+  }
+
+  async invalidateByTag(tag: string): Promise<number> {
+    const hashes = [...(this.tagIndex.get(tag) ?? [])];
+    await Promise.all(hashes.map((hash) => this.delete(hash)));
+    return hashes.length;
+  }
+
+  async invalidateByTags(tags: string[]): Promise<number> {
+    const hashes = new Set<string>();
+    for (const tag of tags) {
+      for (const hash of this.tagIndex.get(tag) ?? []) {
+        hashes.add(hash);
+      }
+    }
+
+    await Promise.all([...hashes].map((hash) => this.delete(hash)));
+    return hashes.size;
   }
 }
 
 const iracing = new IRacingDataClient({
   auth: { /* ... */ },
   stores: {
-    cache: new InMemoryCacheStore(),
+    cache: new SimpleCacheStore(),
   },
 });
 ```
