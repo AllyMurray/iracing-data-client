@@ -1,6 +1,7 @@
 import * as z from 'zod/mini';
 import {
   HttpClient,
+  type HttpClientObservabilityOptions,
   type HttpClientRateLimitOptions,
   type HttpClientStores,
   type HttpErrorContext,
@@ -78,6 +79,12 @@ export interface IRacingClientOptions {
    * indicates that a request should pause.
    */
   rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
+
+  /**
+   * Optional lifecycle event handler for request, cache, dedupe, rate-limit,
+   * server cooldown, and retry observability.
+   */
+  observability?: HttpClientObservabilityOptions;
 }
 
 /**
@@ -198,6 +205,7 @@ export class IRacingClient {
       responseTransformer: (data) => this.mapResponseFromApi(data),
       errorHandler: (context) => this.classifyHttpError(context),
       resourceKeyResolver: (url) => new URL(url).origin,
+      observability: options.observability,
     });
   }
 
@@ -656,5 +664,13 @@ export class IRacingClient {
    */
   clearTokens(): void {
     this.tokenManager.clearTokens();
+  }
+
+  /**
+   * Returns the number of currently in-flight requests.
+   * Pass a resource key to scope the count to a single rate-limit bucket.
+   */
+  getPendingRequestCount(resourceKey?: string): number {
+    return this.httpClient.getPendingRequestCount(resourceKey);
   }
 }

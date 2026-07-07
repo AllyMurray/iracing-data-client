@@ -22,8 +22,12 @@ export { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientO
 
 // Re-export http-client-toolkit types
 export type {
+  HttpClientEvent,
+  HttpClientEventType,
+  HttpClientObservabilityOptions,
   HttpClientRateLimitOptions,
   HttpClientStores,
+  PerRequestCacheOptions,
   RetryContext,
   RetryOptions,
 } from '@http-client-toolkit/core';
@@ -98,5 +102,13 @@ export class IRacingDataClient {
     this.team = new TeamService(this.client);
     this.timeAttack = new TimeAttackService(this.client);
     this.track = new TrackService(this.client);
+  }
+
+  /**
+   * Returns the number of currently in-flight requests.
+   * Pass a resource key to scope the count to a single rate-limit bucket.
+   */
+  getPendingRequestCount(resourceKey?: string): number {
+    return this.client.getPendingRequestCount(resourceKey);
   }
 }

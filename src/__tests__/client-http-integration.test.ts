@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import * as z from 'zod/mini';
 import { type FetchLike } from '../auth/types';
 import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError } from '../client';
+import type { HttpClientEvent } from '@http-client-toolkit/core';
 import { createMockResponse } from "./test-utils";
 
 describe('HttpClient Integration', () => {
@@ -304,6 +305,60 @@ describe('HttpClient Integration', () => {
 
       const result = await client.get('/data/test/no-stores');
       expect(result).toBeDefined();
+    });
+  });
+
+  describe('observability and pending requests', () => {
+    it('should forward HttpClient observability events', async () => {
+      const events: HttpClientEvent[] = [];
+      client = new IRacingClient({
+        auth: {
+          type: 'password-limited',
+          clientId: 'test-client-id',
+          clientSecret: 'test-client-secret',
+          username: 'test@example.com',
+          password: 'password',
+        },
+        fetchFn: mockFetch,
+        observability: {
+          onEvent: (event) => {
+            events.push(event);
+          },
+        },
+      });
+
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
+      mockFetch.mockResolvedValueOnce(createMockResponse({ observed: true }));
+
+      await client.get('/data/test/observability');
+
+      expect(events.map((event) => event.type)).toContain('request:start');
+      expect(events.map((event) => event.type)).toContain('request:success');
+      expect(events.every((event) => event.clientName === 'iracing-data-client')).toBe(true);
+      expect(events.every((event) => event.resourceKey === 'https://members-ng.iracing.com')).toBe(true);
+    });
+
+    it('should expose pending request counts', async () => {
+      let resolveApiResponse!: (response: Response) => void;
+      const apiResponse = new Promise<Response>((resolve) => {
+        resolveApiResponse = resolve;
+      });
+
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
+      mockFetch.mockReturnValueOnce(apiResponse);
+
+      const pending = client.get('/data/test/pending');
+
+      await vi.waitFor(() => {
+        expect(mockFetch).toHaveBeenCalledTimes(2);
+        expect(client.getPendingRequestCount()).toBe(1);
+        expect(client.getPendingRequestCount('https://members-ng.iracing.com')).toBe(1);
+      });
+
+      resolveApiResponse(createMockResponse({ pending_done: true }));
+
+      await expect(pending).resolves.toEqual({ pendingDone: true });
+      expect(client.getPendingRequestCount()).toBe(0);
     });
   });
 });

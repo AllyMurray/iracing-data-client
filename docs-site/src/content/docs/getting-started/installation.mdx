@@ -76,6 +76,7 @@ interface IRacingClientOptions {
   stores?: HttpClientStores;
   retry?: RetryOptions | false;
   rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
+  observability?: HttpClientObservabilityOptions;
 }
 ```
 

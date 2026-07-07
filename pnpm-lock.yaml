@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@http-client-toolkit/core':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^4.2.0
+        version: 4.2.0
       zod:
         specifier: 4.1.5
         version: 4.1.5
@@ -273,8 +273,8 @@ packages:
   '@glideapps/ts-necessities@2.2.3':
     resolution: {integrity: sha512-gXi0awOZLHk3TbW55GZLCPP6O+y/b5X1pBXKBVckFONSwF1z1E5ND2BGJsghQFah+pW7pkkyFb2VhUQI2qhL5w==}
 
-  '@http-client-toolkit/core@4.0.0':
-    resolution: {integrity: sha512-7H8Dqkefi/0RLL4NYWVRZoOpzw0IFk3yiZ6/zVb8KbiWQeTyXcVYh4syEZ7dWjWKDU3ppDrPUmBi5rJf9Y/3XQ==}
+  '@http-client-toolkit/core@4.2.0':
+    resolution: {integrity: sha512-YwS7cjm9Yd5Zus70VI9PLameCNGvZ0nF0Bs1e4n9xmIoytUVHqhToDCMykVRjFnJ7RG+SBZ0UUgJ0A6lKcpGZA==}
     engines: {node: '>= 20.0.0'}
 
   '@inquirer/external-editor@1.0.1':
@@ -1651,7 +1651,7 @@ snapshots:
 
   '@glideapps/ts-necessities@2.2.3': {}
 
-  '@http-client-toolkit/core@4.0.0':
+  '@http-client-toolkit/core@4.2.0':
     dependencies:
       zod: 3.25.71
 

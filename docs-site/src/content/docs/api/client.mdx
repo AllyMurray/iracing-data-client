@@ -28,6 +28,7 @@ interface IRacingClientOptions {
   stores?: HttpClientStores;
   retry?: RetryOptions | false;
   rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
+  observability?: HttpClientObservabilityOptions;
 }
 ```
 
@@ -141,6 +142,24 @@ interface IRacingClientOptions {
       rateLimit: {
         throw: false,
         maxWaitTime: 60_000,
+      },
+    });
+    ```
+  </TabItem>
+  <TabItem label="observability">
+    **Type:** `HttpClientObservabilityOptions` (optional)
+
+    Subscribe to structured lifecycle events from the underlying HTTP client, including request outcomes, cache behavior, dedupe joins, rate-limit waits, server cooldowns, and retry scheduling.
+
+    ```typescript
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      observability: {
+        onEvent(event) {
+          if (event.type === 'request:success') {
+            console.log(event.url, event.durationMs);
+          }
+        },
       },
     });
     ```
@@ -470,9 +489,13 @@ import type {
   FetchLike,
 
   // Client types
+  HttpClientEvent,
+  HttpClientEventType,
+  HttpClientObservabilityOptions,
   IRacingClientOptions,
   HttpClientRateLimitOptions,
   HttpClientStores,
+  PerRequestCacheOptions,
   RetryContext,
   RetryOptions,
 
@@ -630,6 +653,15 @@ const iracing = new IRacingDataClient(options);
 await iracing.member.info();
 await iracing.car.get();
 await iracing.track.assets();
+```
+
+### Pending Requests
+
+Use `getPendingRequestCount()` to inspect in-flight request pressure. Pass a resource key to scope the count to a single rate-limit bucket.
+
+```typescript
+const totalPending = iracing.getPendingRequestCount();
+const apiPending = iracing.getPendingRequestCount('https://members-ng.iracing.com');
 ```
 
 ## See Also
