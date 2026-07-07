@@ -8,19 +8,18 @@ const TimeAttackMemberSeasonResults = z.array(z.unknown());
 
 export type TimeAttackMemberSeasonResultsResponse = z.infer<typeof TimeAttackMemberSeasonResults>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const TimeAttackMemberSeasonResultsParamsSchema = z.object({
+const timeAttackMemberSeasonResultsParams = z.object({
   taCompSeasonId: z.number(), // maps to: ta_comp_season_id
 });
 
 // ---- Exported Parameter Types ----
 
-export type TimeAttackMemberSeasonResultsParams = z.infer<typeof TimeAttackMemberSeasonResultsParamsSchema>;
+export type TimeAttackMemberSeasonResultsParams = z.infer<typeof timeAttackMemberSeasonResultsParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  TimeAttackMemberSeasonResultsParamsSchema,
   TimeAttackMemberSeasonResults,
 };

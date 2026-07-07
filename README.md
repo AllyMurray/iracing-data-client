@@ -9,6 +9,7 @@ A TypeScript client for the iRacing Data API with full type safety and automatic
 - 📝 Full TypeScript support with generated types
 - 🔄 Automatic camelCase conversion for JavaScript conventions
 - 🎯 Runtime parameter validation using Zod schemas
+- ⚡ Opt-in response caching, request deduplication, and rate limiting via pluggable stores
 - 🛡️ Maintenance mode and rate limit detection
 
 **[Documentation](https://allymurray.github.io/iracing-data-client)**

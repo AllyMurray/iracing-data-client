@@ -351,13 +351,13 @@ const ResultsSearchHosted = z.object({
       chunkFileNames: z.array(z.unknown())
     }),
     params: z.object({
-      custId: z.number(),
-      teamId: z.number(),
+      custId: z.optional(z.number()),
+      teamId: z.optional(z.number()),
       finishRangeBegin: z.optional(z.string()),
       finishRangeEnd: z.optional(z.string()),
-      startRangeBegin: z.string(),
+      startRangeBegin: z.optional(z.string()),
       startRangeEnd: z.optional(z.string()),
-      categoryIds: z.array(z.number()),
+      categoryIds: z.optional(z.array(z.number())),
       hostCustId: z.optional(z.number()),
       sessionName: z.optional(z.string()),
       carId: z.optional(z.number()),
@@ -386,14 +386,14 @@ const ResultsSearchSeries = z.object({
       finishRangeEnd: z.optional(z.string()),
       startRangeBegin: z.optional(z.string()),
       startRangeEnd: z.optional(z.string()),
-      categoryIds: z.array(z.number()),
+      categoryIds: z.optional(z.array(z.number())),
       seriesId: z.optional(z.number()),
       seasonYear: z.optional(z.number()),
       seasonQuarter: z.optional(z.number()),
-      raceWeekNum: z.number(),
-      officialOnly: z.boolean(),
-      eventTypes: z.array(z.number()),
-      seasonLicenseGroups: z.array(z.number())
+      raceWeekNum: z.optional(z.number()),
+      officialOnly: z.optional(z.boolean()),
+      eventTypes: z.optional(z.array(z.number())),
+      seasonLicenseGroups: z.optional(z.array(z.number()))
     })
   })
 });
@@ -458,31 +458,31 @@ export type ResultsSearchHostedResponse = z.infer<typeof ResultsSearchHosted>;
 export type ResultsSearchSeriesResponse = z.infer<typeof ResultsSearchSeries>;
 export type ResultsSeasonResultsResponse = z.infer<typeof ResultsSeasonResults>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const ResultsGetParamsSchema = z.object({
+const resultsGetParams = z.object({
   subsessionId: z.number(), // maps to: subsession_id
   includeLicenses: z.optional(z.boolean()), // maps to: include_licenses
 });
 
-const ResultsEventLogParamsSchema = z.object({
+const resultsEventLogParams = z.object({
   subsessionId: z.number(), // maps to: subsession_id
   simsessionNumber: z.number(), // The main event is 0; the preceding event is -1, and so on. // maps to: simsession_number
 });
 
-const ResultsLapChartDataParamsSchema = z.object({
+const resultsLapChartDataParams = z.object({
   subsessionId: z.number(), // maps to: subsession_id
   simsessionNumber: z.number(), // The main event is 0; the preceding event is -1, and so on. // maps to: simsession_number
 });
 
-const ResultsLapDataParamsSchema = z.object({
+const resultsLapDataParams = z.object({
   subsessionId: z.number(), // maps to: subsession_id
   simsessionNumber: z.number(), // The main event is 0; the preceding event is -1, and so on. // maps to: simsession_number
   custId: z.optional(z.number()), // Required if the subsession was a single-driver event. Optional for team events. If omitted for a team event then the laps driven by all the team's drivers will be included. // maps to: cust_id
   teamId: z.optional(z.number()), // Required if the subsession was a team event. // maps to: team_id
 });
 
-const ResultsSearchHostedParamsSchema = z.object({
+const resultsSearchHostedParams = z.object({
   startRangeBegin: z.optional(z.string()), // Session start times. ISO-8601 UTC time zero offset: "2022-04-01T15:45Z". // maps to: start_range_begin
   startRangeEnd: z.optional(z.string()), // ISO-8601 UTC time zero offset: "2022-04-01T15:45Z". Exclusive. May be omitted if start_range_begin is less than 90 days in the past. // maps to: start_range_end
   finishRangeBegin: z.optional(z.string()), // Session finish times. ISO-8601 UTC time zero offset: "2022-04-01T15:45Z". // maps to: finish_range_begin
@@ -498,7 +498,7 @@ const ResultsSearchHostedParamsSchema = z.object({
   categoryIds: z.optional(z.array(z.number())), // Track categories to include in the search.  Defaults to all. ?category_ids=1,2,3,4 // maps to: category_ids
 });
 
-const ResultsSearchSeriesParamsSchema = z.object({
+const resultsSearchSeriesParams = z.object({
   seasonYear: z.optional(z.number()), // Required when using season_quarter. // maps to: season_year
   seasonQuarter: z.optional(z.number()), // Required when using season_year. // maps to: season_quarter
   startRangeBegin: z.optional(z.string()), // Session start times. ISO-8601 UTC time zero offset: "2022-04-01T15:45Z". // maps to: start_range_begin
@@ -514,7 +514,7 @@ const ResultsSearchSeriesParamsSchema = z.object({
   categoryIds: z.optional(z.array(z.number())), // License categories to include in the search.  Defaults to all. ?category_ids=1,2,3,4 // maps to: category_ids
 });
 
-const ResultsSeasonResultsParamsSchema = z.object({
+const resultsSeasonResultsParams = z.object({
   seasonId: z.number(), // maps to: season_id
   eventType: z.optional(z.number()), // Retrict to one event type: 2 - Practice; 3 - Qualify; 4 - Time Trial; 5 - Race // maps to: event_type
   raceWeekNum: z.optional(z.number()), // The first race week of a season is 0. // maps to: race_week_num
@@ -522,24 +522,17 @@ const ResultsSeasonResultsParamsSchema = z.object({
 
 // ---- Exported Parameter Types ----
 
-export type ResultsGetParams = z.infer<typeof ResultsGetParamsSchema>;
-export type ResultsEventLogParams = z.infer<typeof ResultsEventLogParamsSchema>;
-export type ResultsLapChartDataParams = z.infer<typeof ResultsLapChartDataParamsSchema>;
-export type ResultsLapDataParams = z.infer<typeof ResultsLapDataParamsSchema>;
-export type ResultsSearchHostedParams = z.infer<typeof ResultsSearchHostedParamsSchema>;
-export type ResultsSearchSeriesParams = z.infer<typeof ResultsSearchSeriesParamsSchema>;
-export type ResultsSeasonResultsParams = z.infer<typeof ResultsSeasonResultsParamsSchema>;
+export type ResultsGetParams = z.infer<typeof resultsGetParams>;
+export type ResultsEventLogParams = z.infer<typeof resultsEventLogParams>;
+export type ResultsLapChartDataParams = z.infer<typeof resultsLapChartDataParams>;
+export type ResultsLapDataParams = z.infer<typeof resultsLapDataParams>;
+export type ResultsSearchHostedParams = z.infer<typeof resultsSearchHostedParams>;
+export type ResultsSearchSeriesParams = z.infer<typeof resultsSearchSeriesParams>;
+export type ResultsSeasonResultsParams = z.infer<typeof resultsSeasonResultsParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  ResultsGetParamsSchema,
-  ResultsEventLogParamsSchema,
-  ResultsLapChartDataParamsSchema,
-  ResultsLapDataParamsSchema,
-  ResultsSearchHostedParamsSchema,
-  ResultsSearchSeriesParamsSchema,
-  ResultsSeasonResultsParamsSchema,
   ResultsGet,
   ResultsEventLog,
   ResultsLapChartData,

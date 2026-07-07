@@ -121,9 +121,10 @@ await iracing.member.get({
 
 // Optional parameters
 await iracing.results.searchSeries({
-  seasonId: 3456,        // Required
-  raceWeekNum: 5,       // Optional
-  official: true        // Optional
+  seasonYear: 2024,     // Optional season filter
+  seasonQuarter: 3,     // Optional season filter
+  raceWeekNum: 5,       // Optional week filter
+  officialOnly: true    // Optional official-session filter
 });
 ```
 

@@ -289,7 +289,7 @@ const members = await iracing.member.get({
 // Search for league
 const leagues = await iracing.league.directory({
   search: 'League Name',
-  active: true
+  restrictToRecruiting: true
 });
 
 // Get season standings
@@ -306,15 +306,18 @@ Many methods support optional filtering:
 ```typescript
 // Basic call
 const results = await iracing.results.searchSeries({
-  seasonId: 3456
+  seasonYear: 2024,
+  seasonQuarter: 3
 });
 
 // With optional filters
 const filteredResults = await iracing.results.searchSeries({
-  seasonId: 3456,
+  seriesId: 234,
+  seasonYear: 2024,
+  seasonQuarter: 3,
   raceWeekNum: 5,
-  official: true,
-  eventType: 5
+  officialOnly: true,
+  eventTypes: [5]
 });
 ```
 
@@ -359,7 +362,7 @@ try {
 
 <CardGrid>
   <Card title="Cache Data" icon="rocket">
-    Response caching is coming in a future release. For now, see the [Caching guide](/iracing-data-client/guides/caching/) for strategies you can implement yourself.
+    Enable `stores.cache` for automatic TTL-aware response caching. See the [Caching guide](/iracing-data-client/guides/caching/) for setup.
   </Card>
   
   <Card title="Batch Requests" icon="stack">

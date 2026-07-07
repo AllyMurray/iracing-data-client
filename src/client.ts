@@ -578,8 +578,16 @@ export class IRacingClient {
    */
   async get<T = unknown>(
     url: string,
-    options?: { params?: Record<string, unknown>; schema?: z.ZodMiniType<T> }
+    options?: {
+      params?: Record<string, unknown>;
+      paramsValidator?: z.ZodMiniType<unknown>;
+      schema?: z.ZodMiniType<T>;
+    }
   ): Promise<T> {
+    if (this.validateParams && options?.paramsValidator) {
+      options.paramsValidator.parse(options.params ?? {});
+    }
+
     // Convert camelCase params to snake_case for the API
     const apiParams = this.mapParamsToApi(options?.params);
     const fullUrl = this.buildUrl(url, apiParams);
@@ -587,7 +595,7 @@ export class IRacingClient {
     // Delegate to HttpClient (handles auth, S3 resolution, caching, case mapping, errors)
     const data = await this.httpClient.get<T>(fullUrl);
 
-    // Per-request Zod validation (not an HttpClient concern)
+    // Per-request Zod response validation (not an HttpClient concern)
     if (this.validateParams && options?.schema) {
       return options.schema.parse(data);
     }

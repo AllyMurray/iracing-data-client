@@ -661,25 +661,23 @@ const HostedSessions = z.object({
 export type HostedCombinedSessionsResponse = z.infer<typeof HostedCombinedSessions>;
 export type HostedSessionsResponse = z.infer<typeof HostedSessions>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const HostedCombinedSessionsParamsSchema = z.object({
+const hostedCombinedSessionsParams = z.object({
   packageId: z.optional(z.number()), // If set, return only sessions using this car or track package ID. // maps to: package_id
 });
 
-const HostedSessionsParamsSchema = z.object({
+const hostedSessionsParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type HostedCombinedSessionsParams = z.infer<typeof HostedCombinedSessionsParamsSchema>;
-export type HostedSessionsParams = z.infer<typeof HostedSessionsParamsSchema>;
+export type HostedCombinedSessionsParams = z.infer<typeof hostedCombinedSessionsParams>;
+export type HostedSessionsParams = z.infer<typeof hostedSessionsParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  HostedCombinedSessionsParamsSchema,
-  HostedSessionsParamsSchema,
   HostedCombinedSessions,
   HostedSessions,
 };

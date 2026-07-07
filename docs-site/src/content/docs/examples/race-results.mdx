@@ -29,8 +29,8 @@ const iracing = new IRacingDataClient({
 async function getSessionResults(subsessionId: number) {
   const results = await iracing.results.get({ subsessionId });
   
-  console.log(`Session: ${results.sessionName}`);
-  console.log(`Track: ${results.trackName}`);
+  console.log(`Season: ${results.seasonName}`);
+  console.log(`Track: ${results.track.trackName}`);
   console.log(`Series: ${results.seriesName}`);
   
   // Process each session (practice, qualify, race)
@@ -51,21 +51,25 @@ async function getSessionResults(subsessionId: number) {
 ### Search Series Results
 
 ```typescript
-async function searchSeriesResults(seasonId: number, weekNum?: number) {
+async function searchSeriesResults(
+  seriesId: number,
+  seasonYear: number,
+  seasonQuarter: number,
+  weekNum?: number
+) {
   const results = await iracing.results.searchSeries({
-    seasonId,
+    seriesId,
+    seasonYear,
+    seasonQuarter,
     raceWeekNum: weekNum,
-    official: true
+    officialOnly: true
   });
-  
-  return results.map(session => ({
-    sessionId: session.subsessionId,
-    startTime: session.startTime,
-    trackName: session.trackName,
-    strengthOfField: session.strengthOfField,
-    winnerName: session.winnerName,
-    winnerTime: session.winnerLapsComplete
-  }));
+
+  return {
+    rows: results.data.chunkInfo.rows,
+    chunkFiles: results.data.chunkInfo.chunkFileNames,
+    baseDownloadUrl: results.data.chunkInfo.baseDownloadUrl,
+  };
 }
 ```
 

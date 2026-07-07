@@ -46,13 +46,10 @@ describe("MemberService", () => {
         json: () => Promise.resolve(memberawardsSample)
       });
 
-      const testParams = {
-  custId: 123
-      };
-      const result = await memberService.awards(testParams);
+      const result = await memberService.awards();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/member/awards"),
+        "https://members-ng.iracing.com/data/member/awards",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -206,13 +203,10 @@ describe("MemberService", () => {
         json: () => Promise.resolve(memberprofileSample)
       });
 
-      const testParams = {
-  custId: 123
-      };
-      const result = await memberService.profile(testParams);
+      const result = await memberService.profile();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/member/profile"),
+        "https://members-ng.iracing.com/data/member/profile",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"

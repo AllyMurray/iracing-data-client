@@ -75,26 +75,24 @@ const TeamMembership = z.array(z.object({
 export type TeamGetResponse = z.infer<typeof TeamGet>;
 export type TeamMembershipResponse = z.infer<typeof TeamMembership>;
 
-// ---- Parameter Schemas ----
+// ---- Parameter Validators ----
 
-const TeamGetParamsSchema = z.object({
+const teamGetParams = z.object({
   teamId: z.number(), // maps to: team_id
   includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
-const TeamMembershipParamsSchema = z.object({
+const teamMembershipParams = z.object({
 });
 
 // ---- Exported Parameter Types ----
 
-export type TeamGetParams = z.infer<typeof TeamGetParamsSchema>;
-export type TeamMembershipParams = z.infer<typeof TeamMembershipParamsSchema>;
+export type TeamGetParams = z.infer<typeof teamGetParams>;
+export type TeamMembershipParams = z.infer<typeof teamMembershipParams>;
 
 // ---- Exported Schemas ----
 
 export {
-  TeamGetParamsSchema,
-  TeamMembershipParamsSchema,
   TeamGet,
   TeamMembership,
 };

@@ -36,7 +36,7 @@ Get results for a specific subsession.
       includeLicenses: true
     });
 
-    console.log(`Session: ${results.sessionName}`);
+    console.log(`Season: ${results.seasonName}`);
     console.log(`Track: ${results.track.trackName}`);
     ```
   </TabItem>
@@ -62,7 +62,7 @@ Get the event log for a session.
     ```typescript
     const eventLog = await iracing.results.eventLog({
       subsessionId: 12345678,
-      simsessionNumber: 2  // Race session
+      simsessionNumber: 0  // Main event
     });
 
     eventLog.forEach(event => {
@@ -92,7 +92,7 @@ Get lap chart data for a session.
     ```typescript
     const lapChart = await iracing.results.lapChartData({
       subsessionId: 12345678,
-      simsessionNumber: 2
+      simsessionNumber: 0
     });
 
     console.log('Lap chart data:', lapChart);
@@ -123,13 +123,13 @@ Get detailed lap data for a session.
     // Get all lap data for a race
     const allLaps = await iracing.results.lapData({
       subsessionId: 12345678,
-      simsessionNumber: 2
+      simsessionNumber: 0
     });
 
     // Get lap data for a specific driver
     const driverLaps = await iracing.results.lapData({
       subsessionId: 12345678,
-      simsessionNumber: 2,
+      simsessionNumber: 0,
       custId: 123456
     });
     ```
@@ -144,7 +144,7 @@ Search for official series results.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<ResultsSearchHostedResponse>`
+    **Returns:** `Promise<ResultsSearchSeriesResponse>`
 
     **Parameters:**
     - `seasonYear?: number` - Season year
@@ -172,12 +172,18 @@ Search for official series results.
       seasonQuarter: 3
     });
 
+    console.log(`Matching rows: ${results.data.chunkInfo.rows}`);
+
     // Search a specific series
     const seriesResults = await iracing.results.searchSeries({
       seriesId: 234,
+      seasonYear: 2024,
+      seasonQuarter: 3,
       raceWeekNum: 5,
       officialOnly: true
     });
+
+    console.log(seriesResults.data.chunkInfo.chunkFileNames);
     ```
   </TabItem>
 </Tabs>
@@ -190,7 +196,7 @@ Search for hosted session results.
 
 <Tabs>
   <TabItem label="Details">
-    **Returns:** `Promise<ResultsSearchSeriesResponse>`
+    **Returns:** `Promise<ResultsSearchHostedResponse>`
 
     **Parameters:**
     - `startRangeBegin?: string` - Start of date range (ISO format)
@@ -217,11 +223,15 @@ Search for hosted session results.
       leagueSeasonId: 5678
     });
 
+    console.log(`Matching rows: ${leagueResults.data.chunkInfo.rows}`);
+
     // Search by host
     const hostedResults = await iracing.results.searchHosted({
       hostCustId: 123456,
       startRangeBegin: '2024-01-01T00:00:00Z'
     });
+
+    console.log(hostedResults.data.chunkInfo.chunkFileNames);
     ```
   </TabItem>
 </Tabs>
@@ -267,8 +277,8 @@ Get results for an entire season.
 async function analyzeRace(subsessionId: number) {
   const [results, laps, eventLog] = await Promise.all([
     iracing.results.get({ subsessionId }),
-    iracing.results.lapData({ subsessionId, simsessionNumber: 2 }),
-    iracing.results.eventLog({ subsessionId, simsessionNumber: 2 }),
+    iracing.results.lapData({ subsessionId, simsessionNumber: 0 }),
+    iracing.results.eventLog({ subsessionId, simsessionNumber: 0 }),
   ]);
 
   return { results, laps, eventLog };

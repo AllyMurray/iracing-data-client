@@ -53,14 +53,10 @@ describe("StatsService", () => {
         json: () => Promise.resolve(statsmemberbestsSample)
       });
 
-      const testParams = {
-  custId: 123,
-  carId: 123
-      };
-      const result = await statsService.memberBests(testParams);
+      const result = await statsService.memberBests();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_bests"),
+        "https://members-ng.iracing.com/data/stats/member_bests",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -81,13 +77,10 @@ describe("StatsService", () => {
         json: () => Promise.resolve(statsmembercareerSample)
       });
 
-      const testParams = {
-  custId: 123
-      };
-      const result = await statsService.memberCareer(testParams);
+      const result = await statsService.memberCareer();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_career"),
+        "https://members-ng.iracing.com/data/stats/member_career",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -136,15 +129,10 @@ describe("StatsService", () => {
         json: () => Promise.resolve(statsmemberrecapSample)
       });
 
-      const testParams = {
-  custId: 123,
-  year: 123,
-  season: 123
-      };
-      const result = await statsService.memberRecap(testParams);
+      const result = await statsService.memberRecap();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_recap"),
+        "https://members-ng.iracing.com/data/stats/member_recap",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -165,13 +153,10 @@ describe("StatsService", () => {
         json: () => Promise.resolve(statsmemberrecentracesSample)
       });
 
-      const testParams = {
-  custId: 123
-      };
-      const result = await statsService.memberRecentRaces(testParams);
+      const result = await statsService.memberRecentRaces();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_recent_races"),
+        "https://members-ng.iracing.com/data/stats/member_recent_races",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -192,13 +177,10 @@ describe("StatsService", () => {
         json: () => Promise.resolve(statsmembersummarySample)
       });
 
-      const testParams = {
-  custId: 123
-      };
-      const result = await statsService.memberSummary(testParams);
+      const result = await statsService.memberSummary();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_summary"),
+        "https://members-ng.iracing.com/data/stats/member_summary",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
@@ -219,13 +201,10 @@ describe("StatsService", () => {
         json: () => Promise.resolve(statsmemberyearlySample)
       });
 
-      const testParams = {
-  custId: 123
-      };
-      const result = await statsService.memberYearly(testParams);
+      const result = await statsService.memberYearly();
 
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("https://members-ng.iracing.com/data/stats/member_yearly"),
+        "https://members-ng.iracing.com/data/stats/member_yearly",
         expect.objectContaining({
           headers: expect.objectContaining({
             Authorization: "Bearer test-access-token"
