@@ -74,6 +74,9 @@ interface IRacingClientOptions {
   validateParams?: boolean;
   validateSemanticParams?: boolean;
   stores?: HttpClientStores;
+  retry?: RetryOptions | false;
+  rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
+  observability?: HttpClientObservabilityOptions;
 }
 ```
 
@@ -96,7 +99,7 @@ const iracing = new IRacingDataClient({
 ```
 
 Create a `.env` file (don't commit to git):
-```env
+```bash
 IRACING_CLIENT_ID=your-client-id
 IRACING_CLIENT_SECRET=your-client-secret
 IRACING_USERNAME=your-iracing-email

@@ -26,6 +26,9 @@ interface IRacingClientOptions {
   validateParams?: boolean;
   validateSemanticParams?: boolean;
   stores?: HttpClientStores;
+  retry?: RetryOptions | false;
+  rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
+  observability?: HttpClientObservabilityOptions;
 }
 ```
 
@@ -95,7 +98,7 @@ interface IRacingClientOptions {
 
     Available store keys:
     - **`cache`** — A `CacheStore` for caching S3 responses. TTL is automatically derived from presigned URL expiry.
-    - **`rateLimit`** — A `RateLimitStore` or `AdaptiveRateLimitStore` for automatic request throttling.
+    - **`rateLimit`** — A `RateLimitStore` or `AdaptiveRateLimitStore` for local request throttling.
     - **`dedupe`** — A `DedupeStore` for deduplicating concurrent identical requests.
 
     ```typescript
@@ -110,6 +113,56 @@ interface IRacingClientOptions {
     ```
 
     See the [Caching Guide](/iracing-data-client/guides/caching/) and [Rate Limiting Guide](/iracing-data-client/guides/rate-limiting/) for detailed examples.
+  </TabItem>
+  <TabItem label="retry">
+    **Type:** `RetryOptions | false` (optional, default: `false`)
+
+    Enables built-in retry with exponential backoff for transient failures, including network errors, 429 responses, and 5xx responses. Retries are disabled by default.
+
+    ```typescript
+    import { DEFAULT_RETRY_OPTIONS, IRacingDataClient } from 'iracing-data-client';
+
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      retry: DEFAULT_RETRY_OPTIONS,
+    });
+    ```
+  </TabItem>
+  <TabItem label="rateLimit">
+    **Type:** `Omit<HttpClientRateLimitOptions, 'store'>` (optional)
+
+    Configures rate-limit behavior for the underlying HTTP client. Pair this with `stores.rateLimit` when you want local throttling to wait instead of throw.
+
+    ```typescript
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      stores: {
+        rateLimit: myRateLimitStore,
+      },
+      rateLimit: {
+        throw: false,
+        maxWaitTime: 60_000,
+      },
+    });
+    ```
+  </TabItem>
+  <TabItem label="observability">
+    **Type:** `HttpClientObservabilityOptions` (optional)
+
+    Subscribe to structured lifecycle events from the underlying HTTP client, including request outcomes, cache behavior, dedupe joins, rate-limit waits, server cooldowns, and retry scheduling.
+
+    ```typescript
+    const iracing = new IRacingDataClient({
+      auth: { /* ... */ },
+      observability: {
+        onEvent(event) {
+          if (event.type === 'request:success') {
+            console.log(event.url, event.durationMs);
+          }
+        },
+      },
+    });
+    ```
   </TabItem>
 </Tabs>
 
@@ -436,8 +489,15 @@ import type {
   FetchLike,
 
   // Client types
+  HttpClientEvent,
+  HttpClientEventType,
+  HttpClientObservabilityOptions,
   IRacingClientOptions,
+  HttpClientRateLimitOptions,
   HttpClientStores,
+  PerRequestCacheOptions,
+  RetryContext,
+  RetryOptions,
 
   // Response types
   MemberInfoResponse,
@@ -452,6 +512,7 @@ import type {
 
 // Classes — use value imports for instanceof checks
 import {
+  DEFAULT_RETRY_OPTIONS,
   IRacingError,
   OAuthError,
   TokenRefreshError,
@@ -577,8 +638,8 @@ See the [Caching Guide](/iracing-data-client/guides/caching/) for setup and stor
 </Aside>
 
 Best practices:
-- Provide a `RateLimitStore` via `stores.rateLimit` for automatic throttling
-- Implement exponential backoff for retries
+- Provide a `RateLimitStore` via `stores.rateLimit` for local throttling
+- Enable built-in retry with `retry` when you want automatic backoff for transient failures
 - Batch requests where the API supports it
 
 ### Connection Pooling
@@ -592,6 +653,15 @@ const iracing = new IRacingDataClient(options);
 await iracing.member.info();
 await iracing.car.get();
 await iracing.track.assets();
+```
+
+### Pending Requests
+
+Use `getPendingRequestCount()` to inspect in-flight request pressure. Pass a resource key to scope the count to a single rate-limit bucket.
+
+```typescript
+const totalPending = iracing.getPendingRequestCount();
+const apiPending = iracing.getPendingRequestCount('https://members-ng.iracing.com');
 ```
 
 ## See Also
