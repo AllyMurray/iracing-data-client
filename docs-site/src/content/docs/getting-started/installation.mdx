@@ -74,6 +74,8 @@ interface IRacingClientOptions {
   validateParams?: boolean;
   validateSemanticParams?: boolean;
   stores?: HttpClientStores;
+  retry?: RetryOptions | false;
+  rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
 }
 ```
 

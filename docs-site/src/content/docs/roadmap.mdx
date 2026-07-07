@@ -17,13 +17,12 @@ Convenience cache store implementations and observability on top of the existing
 - Cache statistics and debugging tools
 - Per-endpoint cache control
 
-### Built-in Rate Limit Handling (Medium Priority)
+### Request Queue Helpers (Medium Priority)
 **Status:** Planned
 
-Automatic retry and request throttling when rate limits are hit.
+Convenience helpers for queueing and observing high-volume request workflows. Built-in retry with backoff is available through the `retry` client option, and local throttling is available through `stores.rateLimit`.
 
 **Features:**
-- Automatic retry with exponential backoff on 429 responses
 - Request queue with configurable concurrency
 - Rate limit statistics
 
@@ -49,6 +48,11 @@ Command-line interface for quick data access.
 - Shell completion
 
 ## Recently Completed
+
+### v0.4.x
+- Upgrade to `@http-client-toolkit/core` v4
+- Opt-in automatic retry with exponential backoff for transient failures
+- Configurable rate-limit wait behavior for pluggable rate limit stores
 
 ### v0.2.x
 - Opt-in pluggable stores for caching, rate limiting, and request deduplication

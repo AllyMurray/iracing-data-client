@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import * as z from 'zod/mini';
 import { type FetchLike } from '../auth/types';
-import { IRacingClient, IRacingError } from '../client';
+import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError } from '../client';
 import { createMockResponse } from "./test-utils";
 
 describe('HttpClient Integration', () => {
@@ -178,6 +178,34 @@ describe('HttpClient Integration', () => {
         expect(err.url).toBe('https://members-ng.iracing.com/data/test/rate-limit');
         expect(err.headers).toBeInstanceOf(Headers);
       }
+    });
+
+    it('should retry 429 responses when retry is configured', async () => {
+      client = new IRacingClient({
+        auth: {
+          type: 'password-limited',
+          clientId: 'test-client-id',
+          clientSecret: 'test-client-secret',
+          username: 'test@example.com',
+          password: 'password',
+        },
+        fetchFn: mockFetch,
+        retry: {
+          ...DEFAULT_RETRY_OPTIONS,
+          maxRetries: 1,
+          baseDelay: 1,
+          jitter: 'none',
+        },
+      });
+
+      mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
+      mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }));
+      mockFetch.mockResolvedValueOnce(createMockResponse({ retry_ok: true }));
+
+      const result = await client.get('/data/test/rate-limit-retry');
+
+      expect(result).toEqual({ retryOk: true });
+      expect(mockFetch).toHaveBeenCalledTimes(3);
     });
 
     it('should distinguish maintenance mode from generic 503', async () => {

@@ -1,5 +1,11 @@
 import * as z from 'zod/mini';
-import { HttpClient, type HttpClientStores, type HttpErrorContext } from '@http-client-toolkit/core';
+import {
+  HttpClient,
+  type HttpClientRateLimitOptions,
+  type HttpClientStores,
+  type HttpErrorContext,
+  type RetryOptions,
+} from '@http-client-toolkit/core';
 import {
   type AuthConfig,
   type FetchLike,
@@ -11,6 +17,17 @@ import {
   DEFAULT_ACCESS_TOKEN_LIFETIME_SECONDS,
   DATA_API_BASE_URL,
 } from './auth';
+
+/**
+ * Recommended retry settings for transient iRacing API failures.
+ * Retries remain opt-in; pass this value as `retry` when constructing a client.
+ */
+export const DEFAULT_RETRY_OPTIONS = {
+  maxRetries: 3,
+  baseDelay: 1000,
+  maxDelay: 30_000,
+  jitter: 'full',
+} satisfies RetryOptions;
 
 /**
  * Configuration options for the iRacing Data Client.
@@ -46,6 +63,21 @@ export interface IRacingClientOptions {
    * When omitted, HttpClient operates without stores (same as current behaviour).
    */
   stores?: HttpClientStores;
+
+  /**
+   * Optional retry configuration for transient failures.
+   * Pass an object to enable retries for network errors, 429s, and 5xx responses,
+   * or false to disable retries explicitly.
+   * @default false
+   */
+  retry?: RetryOptions | false;
+
+  /**
+   * Optional rate-limit behaviour for the underlying HTTP client.
+   * Use this to wait instead of throw when a rate limit store or server cooldown
+   * indicates that a request should pause.
+   */
+  rateLimit?: Omit<HttpClientRateLimitOptions, 'store'>;
 }
 
 /**
@@ -149,15 +181,24 @@ export class IRacingClient {
     }
 
     // Create HttpClient with iRacing-specific hooks
-    this.httpClient = new HttpClient(
-      options.stores,
-      {
-        fetchFn: this.createFetchFn(),
-        requestInterceptor: this.createRequestInterceptor(),
-        responseTransformer: (data) => this.mapResponseFromApi(data),
-        errorHandler: (context) => this.classifyHttpError(context),
-      },
-    );
+    this.httpClient = new HttpClient({
+      name: 'iracing-data-client',
+      cache: options.stores?.cache ? { store: options.stores.cache } : undefined,
+      dedupe: options.stores?.dedupe,
+      rateLimit:
+        options.stores?.rateLimit || options.rateLimit
+          ? {
+              ...options.rateLimit,
+              store: options.stores?.rateLimit,
+            }
+          : undefined,
+      retry: options.retry ?? false,
+      fetchFn: this.createFetchFn(),
+      requestInterceptor: this.createRequestInterceptor(),
+      responseTransformer: (data) => this.mapResponseFromApi(data),
+      errorHandler: (context) => this.classifyHttpError(context),
+      resourceKeyResolver: (url) => new URL(url).origin,
+    });
   }
 
   /**

@@ -5,32 +5,38 @@ description: Understanding and handling API rate limits effectively
 
 import { Tabs, TabItem, Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-The iRacing API enforces rate limits to ensure fair usage and system stability. The SDK detects rate limit responses and throws an `IRacingError` with `isRateLimited = true`. By default it does not retry or throttle requests, but you can opt in to automatic throttling with a pluggable `stores.rateLimit` implementation.
+The iRacing API enforces rate limits to ensure fair usage and system stability. The SDK detects rate limit responses and throws an `IRacingError` with `isRateLimited = true`. By default it does not retry failed requests. You can opt in to automatic retry with backoff using the `retry` option, and you can opt in to local request throttling with a pluggable `stores.rateLimit` implementation.
 
 <Aside type="note">
-  Automatic retry with backoff and request queue helpers are still planned. The current built-in integration is the `stores.rateLimit` hook described below.
+  Request queue helpers are still planned. The current built-in integrations are `retry` for transient failures and `stores.rateLimit` for local request throttling.
 </Aside>
 
 ## Pluggable Rate Limit Store
 
 <Aside type="tip">
-  New in the latest release: you can now pass a `RateLimitStore` or `AdaptiveRateLimitStore` via the `stores` option for automatic, built-in rate limiting.
+  Install `@http-client-toolkit/store-memory` or another toolkit store package separately if you want a ready-made rate limit store.
 </Aside>
 
 Instead of building your own rate limiter, you can provide a store that the SDK's underlying `HttpClient` will use to throttle requests automatically:
 
 ```typescript
 import { IRacingDataClient } from 'iracing-data-client';
-import { MemoryRateLimitStore } from '@http-client-toolkit/store-memory'; // example
+import { InMemoryRateLimitStore } from '@http-client-toolkit/store-memory';
 
 const iracing = new IRacingDataClient({
   auth: { /* ... */ },
   stores: {
-    rateLimit: new MemoryRateLimitStore({ maxRequests: 100, windowMs: 60_000 })
+    rateLimit: new InMemoryRateLimitStore({
+      defaultConfig: { limit: 100, windowMs: 60_000 }
+    })
+  },
+  rateLimit: {
+    throw: false,
+    maxWaitTime: 60_000
   }
 });
 
-// Requests are now automatically throttled — no wrapper needed
+// Requests now wait locally when the configured store is exhausted
 const data = await iracing.member.info();
 ```
 
@@ -55,43 +61,21 @@ try {
 }
 ```
 
-## Rate Limit Strategies
+## Retry and Rate Limit Strategies
 
-### Strategy 1: Exponential Backoff
+### Strategy 1: Built-In Retry with Backoff
 
-Gradually increase wait time between retries:
+Enable built-in retry for transient failures, including 429 and 5xx responses:
 
 ```typescript
-async function withExponentialBackoff<T>(
-  fn: () => Promise<T>,
-  maxRetries = 5,
-  baseDelay = 1000
-): Promise<T> {
-  let lastError: Error;
+import { DEFAULT_RETRY_OPTIONS, IRacingDataClient } from 'iracing-data-client';
 
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await fn();
-    } catch (error) {
-      lastError = error as Error;
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ },
+  retry: DEFAULT_RETRY_OPTIONS
+});
 
-      if (error instanceof IRacingError && error.isRateLimited) {
-        const delay = baseDelay * Math.pow(2, i);
-        const jitter = Math.random() * 1000;
-
-        console.log(`Rate limited. Retry ${i + 1}/${maxRetries} in ${delay}ms`);
-        await new Promise((r) => setTimeout(r, delay + jitter));
-      } else {
-        throw error;
-      }
-    }
-  }
-
-  throw lastError!;
-}
-
-// Usage
-const data = await withExponentialBackoff(() => iracing.track.get());
+const data = await iracing.track.get();
 ```
 
 ### Strategy 2: Manual Rate Limiter
@@ -296,12 +280,11 @@ class RequestQueue {
         item.resolve(result);
         this.requestCount++;
       } catch (error) {
-        item.reject(error);
-
-        // If rate limited, put back in queue
         if (error instanceof IRacingError && error.isRateLimited) {
           this.queue.unshift(item);
           await this.waitForReset();
+        } else {
+          item.reject(error);
         }
       }
 
