@@ -1,6 +1,6 @@
 {
   "name": "iracing-data-client",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Fully-typed HTTP Client for the iRacing Data API with automatic code generation, opt-in caching, smart authentication, and comprehensive error handling.",
   "homepage": "https://allymurray.github.io/iracing-data-client/",
   "main": "lib/index.js",
