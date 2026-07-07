@@ -6,7 +6,7 @@ export function generateMainDataClient(sections: string[]): string {
 
   lines.push(`/* AUTO-GENERATED — do not edit */`);
   lines.push(``);
-  lines.push(`import { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";`);
+  lines.push(`import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";`);
 
   // Import all service classes
   for (const section of sections) {
@@ -17,10 +17,19 @@ export function generateMainDataClient(sections: string[]): string {
 
   lines.push(``);
   lines.push(`// Re-export client`);
-  lines.push(`export { IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };`);
+  lines.push(`export { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };`);
   lines.push(``);
   lines.push(`// Re-export http-client-toolkit types`);
-  lines.push(`export type { HttpClientStores } from '@http-client-toolkit/core';`);
+  lines.push(`export type {`);
+  lines.push(`  HttpClientEvent,`);
+  lines.push(`  HttpClientEventType,`);
+  lines.push(`  HttpClientObservabilityOptions,`);
+  lines.push(`  HttpClientRateLimitOptions,`);
+  lines.push(`  HttpClientStores,`);
+  lines.push(`  PerRequestCacheOptions,`);
+  lines.push(`  RetryContext,`);
+  lines.push(`  RetryOptions,`);
+  lines.push(`} from '@http-client-toolkit/core';`);
   lines.push(``);
   lines.push(`// Re-export auth types and helpers`);
   lines.push(`export type {`);
@@ -71,7 +80,15 @@ export function generateMainDataClient(sections: string[]): string {
   }
 
   lines.push(`  }`);
+  lines.push(``);
+  lines.push(`  /**`);
+  lines.push(`   * Returns the number of currently in-flight requests.`);
+  lines.push(`   * Pass a resource key to scope the count to a single rate-limit bucket.`);
+  lines.push(`   */`);
+  lines.push(`  getPendingRequestCount(resourceKey?: string): number {`);
+  lines.push(`    return this.client.getPendingRequestCount(resourceKey);`);
+  lines.push(`  }`);
   lines.push(`}`);
 
-  return lines.join("\n");
+  return lines.join("\n") + "\n";
 }
