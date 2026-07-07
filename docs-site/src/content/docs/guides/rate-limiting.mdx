@@ -14,7 +14,7 @@ The iRacing API enforces rate limits to ensure fair usage and system stability. 
 ## Pluggable Rate Limit Store
 
 <Aside type="tip">
-  Install `@http-client-toolkit/store-memory` or another toolkit store package separately if you want a ready-made rate limit store.
+  Install `@http-client-toolkit/store-memory`, `@http-client-toolkit/store-sqlite`, `@http-client-toolkit/store-dynamodb`, or another compatible toolkit store package separately if you want a ready-made rate limit store.
 </Aside>
 
 Instead of building your own rate limiter, you can provide a store that the SDK's underlying `HttpClient` will use to throttle requests automatically:
@@ -40,9 +40,11 @@ const iracing = new IRacingDataClient({
 const data = await iracing.member.info();
 ```
 
+The SDK scopes toolkit rate-limit buckets by request URL origin. For normal iRacing Data API calls, the resource key is `https://members-ng.iracing.com`.
+
 The `stores` option is completely optional. When omitted, the SDK behaves exactly as before.
 
-Check the [`@http-client-toolkit`](https://github.com/http-client-toolkit) organisation for available store packages, or implement the `RateLimitStore` interface yourself.
+Check the [`http-client-toolkit` repository](https://github.com/AllyMurray/http-client-toolkit) for available store packages, or implement the `RateLimitStore` interface yourself.
 
 ## Detecting Rate Limits
 

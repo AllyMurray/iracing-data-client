@@ -97,7 +97,7 @@ interface IRacingClientOptions {
     Pluggable stores for caching, deduplication, and rate limiting, powered by `@http-client-toolkit/core`. When omitted, the SDK operates without external stores.
 
     Available store keys:
-    - **`cache`** — A `CacheStore` for caching S3 responses. TTL is automatically derived from presigned URL expiry.
+    - **`cache`** — A `CacheStore` for caching resolved GET results. For presigned S3 responses, TTL is automatically derived from the URL expiry.
     - **`rateLimit`** — A `RateLimitStore` or `AdaptiveRateLimitStore` for local request throttling.
     - **`dedupe`** — A `DedupeStore` for deduplicating concurrent identical requests.
 
@@ -623,10 +623,11 @@ const altAccount = new IRacingDataClient({
 
 ### Caching
 
-When a `CacheStore` is provided via the `stores` option, the client caches S3 responses with TTL derived from the presigned URL expiry:
+When a `CacheStore` is provided via the `stores` option, the client caches resolved GET results through `@http-client-toolkit/core`:
 
-- Cached responses are returned immediately without making a new request
-- Cache TTL is automatically calculated from the S3 link's `expires` field
+- Cached results are returned immediately without making a new request when the entry is fresh
+- For iRacing presigned S3 responses, cache TTL is calculated from the S3 link's `expires` field
+- Direct responses use normal HTTP cache headers, or the toolkit fallback TTL when no cache headers are present
 - Without a `stores.cache`, no caching is performed
 
 See the [Caching Guide](/iracing-data-client/guides/caching/) for setup and store implementations.
