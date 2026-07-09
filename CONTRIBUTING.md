@@ -65,6 +65,7 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 - `pnpm run typecheck` - Run TypeScript type checking
 - `pnpm run sdk:generate` - Generate the client from API documentation
 - `pnpm run sdk:test` - Test the client with live API calls
+- `pnpm run credentials:keepalive` - Make one authenticated Data API request per enabled OAuth client pair
 
 ## Code Generation
 
@@ -90,6 +91,20 @@ Two repository secrets are required:
 - **`DOTENV_ENV_FILE`** — the full content of your encrypted `.env` file
 
 To update `DOTENV_ENV_FILE`, copy the content of your local `.env` and paste it as the secret value in GitHub Settings > Secrets > Actions.
+
+### Credential keepalive
+
+The weekly `iRacing Credential Keepalive` workflow runs `pnpm run credentials:keepalive` to prevent unused OAuth credentials from expiring.
+
+Add shared account credentials and keepalive client pairs to the encrypted `.env` file:
+
+```bash
+IRACING_USERNAME=your-email@example.com
+IRACING_PASSWORD=your-password
+IRACING_KEEPALIVE_CLIENTS='[{"name":"project-a","clientId":"client-id-a","clientSecret":"client-secret-a","enabled":true},{"name":"project-b","clientId":"client-id-b","clientSecret":"client-secret-b","enabled":false}]'
+```
+
+Each enabled pair requests an OAuth token and makes one authenticated request to `/data/member/info`. Omit `enabled` or set it to `true` to run a pair; set it to `false` to keep a pair configured but skipped.
 
 ## Pull Requests
 
