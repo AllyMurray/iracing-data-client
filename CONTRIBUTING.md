@@ -61,10 +61,20 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 
 - `pnpm run build` - Build the library
 - `pnpm run test` - Run unit tests
+- `pnpm run test:package` - Build, pack, and check the installed package's ESM/CommonJS exports and TypeScript declarations
 - `pnpm run test:integration` - Run integration tests against the live API
 - `pnpm run typecheck` - Run TypeScript type checking
 - `pnpm run sdk:generate` - Generate the client from API documentation
 - `pnpm run sdk:test` - Test the client with live API calls
+
+The package check installs the tarball into a temporary project outside the
+checkout, so it requires registry access to install runtime dependencies. Its
+client requests use a mock fetch and do not need iRacing credentials. The temporary
+project is removed when the check finishes.
+
+To validate documentation locally, run `pnpm --dir docs-site install --frozen-lockfile`
+followed by `pnpm docs:build`. PR CI runs this docs build separately from the
+library checks, using the documentation project's own lockfile.
 
 ## Code Generation
 
@@ -95,6 +105,6 @@ To update `DOTENV_ENV_FILE`, copy the content of your local `.env` and paste it 
 
 1. Create a feature branch from `main`
 2. Make your changes
-3. Run `pnpm run typecheck` and `pnpm run test`
+3. Run `pnpm run typecheck`, `pnpm test run`, and `pnpm run test:package`; build the docs when changing documentation
 4. Add a changeset: `npx changeset`
 5. Open a Pull Request
