@@ -14,7 +14,7 @@ jobs:
       CI: 'true'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -28,11 +28,11 @@ jobs:
           git config user.name "$AUTHOR_NAME"
           git config user.email "$AUTHOR_EMAIL"
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6.1.0
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7.0.0
         with:
-          node-version: 22.x
+          node-version: 24.x
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
@@ -77,7 +77,10 @@ jobs:
         run: npm install -g npm@latest
       - name: Publish packages
         if: steps.changesets.outputs.has_changesets == 'true'
-        run: pnpm publish --provenance --access public
+        # pnpm 12 no longer delegates publishing to npm; retain npm's trusted publishing.
+        run: |
+          pnpm pack --out "$RUNNER_TEMP/iracing-data-client.tgz"
+          npm publish "$RUNNER_TEMP/iracing-data-client.tgz" --provenance --access public
       - name: Push tags
         if: steps.changesets.outputs.has_changesets == 'true'
         run: git push origin --tags

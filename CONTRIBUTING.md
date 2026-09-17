@@ -3,9 +3,32 @@
 ## Getting Started
 
 1. Fork and clone the repository
-2. Install dependencies: `pnpm install`
+2. Use Node.js 24 (`nvm use` reads `.nvmrc`) and pnpm 12.4.2, then install dependencies: `pnpm install --frozen-lockfile`
 3. Copy the example env file: `cp .env.example .env`
 4. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
+
+Both `package.json` files pin the same pnpm version. The library and `docs-site`
+remain separate pnpm projects with independent lockfiles. Install docs dependencies
+with `pnpm --dir docs-site install --frozen-lockfile`.
+
+Library consumers are supported on Node.js 22 and 24. CI installs dependencies,
+generates code, typechecks, and builds on Node.js 24 before switching to each
+consumer runtime for unit tests and installed-package checks. Docs and releases
+also use Node.js 24. The consumer support range in `engines.node` is a deliberate
+compatibility policy, separate from the development runtime.
+
+Dependency installation settings live in each project's `pnpm-workspace.yaml`.
+Both projects wait 24 hours before accepting third-party package releases,
+including transitive dependencies, exact versions, and frozen lockfile installs.
+Missing publication timestamps are rejected. Packages under the repository
+owner's `@http-client-toolkit/*` scope are exempt from the delay; their third-party
+dependencies are still checked. The library permits the esbuild install script;
+docs additionally permits sharp. Review other dependency build scripts before
+adding them to `allowBuilds`.
+
+Run `pnpm test:dependency-policy` to exercise these settings against a local test
+registry. It checks ranges, exact versions, missing timestamps, frozen installs,
+and the toolkit exception in both projects without contacting the iRacing API.
 
 ## Environment Variables
 
@@ -62,6 +85,8 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 - `pnpm run build` - Build the library
 - `pnpm run test` - Run unit tests
 - `pnpm run test:package` - Build, pack, and check the installed package's ESM/CommonJS exports and TypeScript declarations
+- `pnpm run test:package:artifacts` - Check the existing build on the current Node.js runtime without rebuilding
+- `pnpm run test:dependency-policy` - Verify both projects enforce the dependency release-age policy
 - `pnpm run test:integration` - Run integration tests against the live API
 - `pnpm run typecheck` - Run TypeScript type checking
 - `pnpm run sdk:generate` - Generate the client from API documentation
@@ -91,6 +116,9 @@ This creates:
 - HTTP client with authentication in `src/client.ts`
 
 ## CI / GitHub Actions
+
+Publishing packs an explicit tarball with pnpm and publishes that tarball with
+npm, retaining npm's trusted publishing and provenance flow when using pnpm 12.
 
 In CI, the encrypted `.env` file is restored from a GitHub secret and decrypted by dotenvx at runtime. This means adding or changing env vars only requires updating a single secret — the workflow YAML never needs to change.
 

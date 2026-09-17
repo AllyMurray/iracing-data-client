@@ -33,10 +33,12 @@
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
     "test": "vitest",
-    "test:package": "pnpm run build && node build-tests/check-package.cjs",
+    "test:package": "pnpm run build && pnpm run test:package:artifacts",
     "test:integration": "npx @dotenvx/dotenvx run -- vitest run --config vitest.config.integration.ts",
     "test:oauth": "npx @dotenvx/dotenvx run -- npx tsx test-oauth.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:package:artifacts": "node build-tests/check-package.cjs",
+    "test:dependency-policy": "node build-tests/dependency-policy.cjs"
   },
   "keywords": [
     "iracing",
@@ -58,7 +60,7 @@
     "type": "git",
     "url": "https://github.com/AllyMurray/iracing-data-client"
   },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "packageManager": "pnpm@12.4.2+sha512.08adc6613180275c7c9edada39dcf08c9c61ad4e7eaf330a4f3461f102b0f907423454d117f98e72d47fef0616070644d7bffc973a6a57f5090a6d7c368b07c9",
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
     "@dotenvx/dotenvx": "^1.55.1",
@@ -73,5 +75,8 @@
   "dependencies": {
     "@http-client-toolkit/core": "^4.2.0",
     "zod": "4.1.5"
+  },
+  "engines": {
+    "node": "^22.0.0 || ^24.0.0"
   }
 }

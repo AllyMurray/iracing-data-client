@@ -18,6 +18,9 @@ A TypeScript client for the iRacing Data API with full type safety and automatic
 
 ## Installation
 
+Requires Node.js 22 or 24, or a modern browser environment. For repository
+development, use Node.js 24 and the pinned pnpm 12.4.2 version.
+
 ```bash
 npm install iracing-data-client
 # or

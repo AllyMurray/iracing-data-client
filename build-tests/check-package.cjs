@@ -1,6 +1,6 @@
 const assert = require('node:assert/strict');
 const { execFileSync } = require('node:child_process');
-const { copyFileSync, mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } = require('node:fs');
+const { copyFileSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } = require('node:fs');
 const { tmpdir } = require('node:os');
 const { join, resolve } = require('node:path');
 
@@ -16,16 +16,34 @@ function run(command, args, cwd = consumer) {
 try {
   // Packing and installing outside the checkout prevents repository files and
   // development dependencies from hiding missing exports or package contents.
-  run('pnpm', ['pack', '--pack-destination', temporary], root);
-  const tarballs = readdirSync(temporary).filter((name) => name.endsWith('.tgz'));
-  assert.equal(tarballs.length, 1, 'Expected exactly one package tarball');
+  const tarball = join(temporary, 'iracing-data-client.tgz');
+  run('pnpm', ['pack', '--out', tarball], root);
 
   mkdirSync(consumer);
   writeFileSync(join(consumer, 'package.json'), JSON.stringify({
     private: true,
     packageManager: pkg.packageManager,
-    dependencies: { [pkg.name]: `file:${join(temporary, tarballs[0])}` },
+    dependencies: { [pkg.name]: `file:${tarball}` },
   }, null, 2));
+  // Consumer resolution must use the same release-age policy as the repository.
+  const agePolicy = [
+    'minimumReleaseAge',
+    'minimumReleaseAgeStrict',
+    'minimumReleaseAgeIgnoreMissingTime',
+  ].map((setting) => {
+    const value = execFileSync('pnpm', ['config', 'get', setting], {
+      cwd: root, encoding: 'utf8',
+    }).trim();
+    assert.match(value, setting === 'minimumReleaseAge' ? /^\d+$/ : /^(true|false)$/);
+    return `${setting}: ${value}`;
+  });
+  const exclusions = JSON.parse(execFileSync('pnpm', [
+    'config', 'get', 'minimumReleaseAgeExclude', '--json',
+  ], { cwd: root, encoding: 'utf8' }));
+  assert.ok(Array.isArray(exclusions) && exclusions.every((entry) => typeof entry === 'string'));
+  agePolicy.push(`minimumReleaseAgeExclude: ${JSON.stringify(exclusions)}`);
+  writeFileSync(join(consumer, 'pnpm-workspace.yaml'),
+    `packages:\n  - '.'\n${agePolicy.join('\n')}\n`);
   run('pnpm', ['install', '--ignore-scripts', '--no-frozen-lockfile']);
 
   copyFileSync(join(__dirname, 'fixtures/runtime.cjs'), join(consumer, 'runtime.cjs'));
