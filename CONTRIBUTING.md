@@ -11,11 +11,14 @@ Both `package.json` files pin the same pnpm version. The library and `docs-site`
 remain separate pnpm projects with independent lockfiles. Install docs dependencies
 with `pnpm --dir docs-site install --frozen-lockfile`.
 
-Library consumers are supported on Node.js 22 and 24. CI installs dependencies,
-generates code, typechecks, and builds on Node.js 24 before switching to each
-consumer runtime for unit tests and installed-package checks. Docs and releases
-also use Node.js 24. The consumer support range in `engines.node` is a deliberate
-compatibility policy, separate from the development runtime.
+Library consumers are supported on Node.js 22 and newer (`>=22.0.0`), including
+odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; the
+test matrix is a subset of the supported consumer runtimes. CI installs
+dependencies, generates code, typechecks, and builds on Node.js 24 before
+switching to each tested runtime for unit tests and installed-package checks.
+Repository development, docs, and releases also use Node.js 24 and pnpm 12.4.2.
+The consumer support range in `engines.node` does not lower the requirements of
+development, build, or release tooling.
 
 Dependency installation settings live in each project's `pnpm-workspace.yaml`.
 Both projects wait 24 hours before accepting third-party package releases,
