@@ -1,0 +1,6 @@
+{
+  "description": "Synthetic fixture encrypted by dotenvx 1.55.1; the key is public test data, never a real credential.",
+  "encryptedEnv": "#/-------------------[DOTENV_PUBLIC_KEY]--------------------/\n#/            public-key encryption for .env files          /\n#/       [how it works](https://dotenvx.com/encryption)     /\n#/----------------------------------------------------------/\nDOTENV_PUBLIC_KEY=\"0375d04d2173415716dd48c364592254db38a31fb9f896f2f7693f1b32e52afca6\"\n\n# .env\nDOTENVX_SMOKE_VALUE=encrypted:BMMiQZ+QGHZw9UuA22FJQHtO4SKUN2r5JY9Z4a8GqlNBzQ+LMQT92S1uKUz0wZe2XZBnnddGF/E4StxcAnqMPW2Pn89Kd40msWhQr5OhWp989GxnsbHtPxa4QW38DkRH8wGO7IHBFk5vYVeFOQT8LpzUya74rKIY3Grkxm4=\n",
+  "privateKey": "8dc191fb30f16e54219189f1d4b3a944390aa0f97af87ba3d86755b989067ab6",
+  "expected": "synthetic-iracing-test-value"
+}
