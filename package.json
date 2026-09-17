@@ -33,6 +33,7 @@
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
     "test": "vitest",
+    "test:package": "pnpm run build && node build-tests/check-package.cjs",
     "test:integration": "npx @dotenvx/dotenvx run -- vitest run --config vitest.config.integration.ts",
     "test:oauth": "npx @dotenvx/dotenvx run -- npx tsx test-oauth.ts",
     "typecheck": "tsc --noEmit"
