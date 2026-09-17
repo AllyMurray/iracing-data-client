@@ -11,11 +11,14 @@ Both `package.json` files pin the same pnpm version. The library and `docs-site`
 remain separate pnpm projects with independent lockfiles. Install docs dependencies
 with `pnpm --dir docs-site install --frozen-lockfile`.
 
-Library consumers are supported on Node.js 22 and 24. CI installs dependencies,
-generates code, typechecks, and builds on Node.js 24 before switching to each
-consumer runtime for unit tests and installed-package checks. Docs and releases
-also use Node.js 24. The consumer support range in `engines.node` is a deliberate
-compatibility policy, separate from the development runtime.
+Library consumers are supported on Node.js 22 and newer (`>=22.0.0`), including
+odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; the
+test matrix is a subset of the supported consumer runtimes. CI installs
+dependencies, generates code, typechecks, and builds on Node.js 24 before
+switching to each tested runtime for unit tests and installed-package checks.
+Repository development, docs, and releases also use Node.js 24 and pnpm 12.4.2.
+The consumer support range in `engines.node` does not lower the requirements of
+development, build, or release tooling.
 
 Dependency installation settings live in each project's `pnpm-workspace.yaml`.
 Both projects wait 24 hours before accepting third-party package releases,
@@ -87,6 +90,7 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 - `pnpm run test:package` - Build, pack, and check the installed package's ESM/CommonJS exports and TypeScript declarations
 - `pnpm run test:package:artifacts` - Check the existing build on the current Node.js runtime without rebuilding
 - `pnpm run test:dependency-policy` - Verify both projects enforce the dependency release-age policy
+- `pnpm run test:env` - Verify dotenvx v1 encrypted-file compatibility and v2 encryption using synthetic credentials
 - `pnpm run test:integration` - Run integration tests against the live API
 - `pnpm run typecheck` - Run TypeScript type checking
 - `pnpm run sdk:generate` - Generate the client from API documentation
@@ -100,6 +104,16 @@ project is removed when the check finishes.
 To validate documentation locally, run `pnpm --dir docs-site install --frozen-lockfile`
 followed by `pnpm docs:build`. PR CI runs this docs build separately from the
 library checks, using the documentation project's own lockfile.
+
+CI also runs `pnpm audit` for the library (including development dependencies)
+and `pnpm --dir docs-site audit` for documentation. Resolve new findings before
+merging dependency updates; narrowly scoped overrides should explain the
+affected parent package and the patched version.
+
+The dotenvx v2 compatibility check uses a public synthetic v1 fixture and a fresh
+v2 encryption round trip in a temporary directory. It never loads repository
+credentials or connects to the live API. The credential-dependent integration
+tests remain a separate release gate.
 
 ## Code Generation
 

@@ -13,3 +13,8 @@ minimumReleaseAgeExclude:
 
 allowBuilds:
   esbuild: true
+
+overrides:
+  # tsup 8.5.1 pins esbuild 0.27; 0.28.1 fixes the Windows dev-server
+  # file-read advisory. Keep this scoped to tsup until its replacement in #22.
+  tsup>esbuild: ^0.28.2

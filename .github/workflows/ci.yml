@@ -31,6 +31,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Audit library and development dependencies
+        if: matrix.node-version == '24.x'
+        run: pnpm audit
+
       - name: Verify dependency release-age policy
         if: matrix.node-version == '24.x'
         run: pnpm test:dependency-policy
@@ -57,6 +61,9 @@ jobs:
 
       - name: Unit tests
         run: pnpm test run
+
+      - name: Check encrypted environment compatibility
+        run: pnpm test:env
 
       - name: Test installed package on consumer runtime
         run: pnpm run test:package:artifacts
@@ -85,3 +92,6 @@ jobs:
 
       - name: Build documentation
         run: pnpm build
+
+      - name: Audit documentation dependencies
+        run: pnpm audit
