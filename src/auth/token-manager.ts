@@ -89,7 +89,7 @@ export class TokenManager {
     if (!this.canRefresh()) {
       throw new TokenRefreshError(
         'invalid_grant',
-        'Access token expired and no refresh token available.'
+        'Access token expired and no refresh token available.',
       );
     }
 

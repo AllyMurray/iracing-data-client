@@ -1,104 +1,129 @@
-import * as z from "zod/mini";
+import * as z from 'zod/mini';
 
 // ---- Response Schemas ----
 
-const CarAssets = z.record(z.string(), z.object({
-  carId: z.optional(z.nullable(z.number())),
-  carRules: z.optional(z.nullable(z.array(z.object({
-    ruleCategory: z.string(),
-    text: z.string()
-  })))),
-  detailCopy: z.optional(z.nullable(z.string())),
-  detailScreenShotImages: z.optional(z.nullable(z.string())),
-  detailTechspecsCopy: z.optional(z.nullable(z.string())),
-  folder: z.optional(z.nullable(z.string())),
-  galleryImages: z.optional(z.nullable(z.string())),
-  galleryPrefix: z.optional(z.nullable(z.string())),
-  groupImage: z.optional(z.nullable(z.string())),
-  groupName: z.optional(z.nullable(z.string())),
-  largeImage: z.optional(z.nullable(z.string())),
-  logo: z.optional(z.nullable(z.string())),
-  smallImage: z.optional(z.nullable(z.string())),
-  sponsorLogo: z.optional(z.nullable(z.string())),
-  templatePath: z.optional(z.nullable(z.string()))
-}));
-const CarGet = z.array(z.object({
-  aiEnabled: z.boolean(),
-  allowNumberColors: z.boolean(),
-  allowNumberFont: z.boolean(),
-  allowSponsor1: z.boolean(),
-  allowSponsor2: z.boolean(),
-  allowWheelColor: z.boolean(),
-  awardExempt: z.boolean(),
-  carConfigDefs: z.array(z.object({
-    carcfg: z.number(),
-    cfgSubdir: z.nullable(z.string()),
-    customPaintExt: z.nullable(z.string()),
-    name: z.string()
-  })),
-  carConfigs: z.array(z.object({
-    carcfg: z.number(),
-    trackType: z.optional(z.number()),
-    trackId: z.optional(z.number())
-  })),
-  carDirpath: z.string(),
-  carId: z.number(),
-  carName: z.string(),
-  carNameAbbreviated: z.string(),
-  carTypes: z.array(z.object({
-    carType: z.string()
-  })),
-  carWeight: z.number(),
-  categories: z.array(z.string()),
-  created: z.string(),
-  firstSale: z.string(),
-  folder: z.string(),
-  forumUrl: z.optional(z.string()),
-  freeWithSubscription: z.boolean(),
-  hasHeadlights: z.boolean(),
-  hasMultipleDryTireTypes: z.boolean(),
-  hasRainCapableTireTypes: z.boolean(),
-  hp: z.number(),
-  isPsPurchasable: z.boolean(),
-  logo: z.nullable(z.string()),
-  maxPowerAdjustPct: z.number(),
-  maxWeightPenaltyKg: z.number(),
-  minPowerAdjustPct: z.number(),
-  packageId: z.number(),
-  patterns: z.number(),
-  price: z.number(),
-  priceDisplay: z.optional(z.string()),
-  rainEnabled: z.boolean(),
-  retired: z.boolean(),
-  searchFilters: z.string(),
-  sku: z.number(),
-  smallImage: z.string(),
-  sponsorLogo: z.nullable(z.string()),
-  carMake: z.optional(z.string()),
-  carModel: z.optional(z.string()),
-  paintRules: z.optional(z.record(z.string(), z.union([z.object({
-      PaintCarAvailable: z.boolean(),
-      Color1: z.string(),
-      Color2: z.string(),
-      Color3: z.string(),
-      Sponsor1Available: z.boolean(),
-      Sponsor2Available: z.boolean(),
-      Sponsor1: z.string(),
-      Sponsor2: z.string(),
-      RulesExplanation: z.string(),
-      AllowNumberFontChanges: z.optional(z.boolean()),
-      NumberFont: z.optional(z.string()),
-      AllowNumberColorChanges: z.optional(z.boolean()),
-      NumberColor1: z.optional(z.string()),
-      NumberColor2: z.optional(z.string()),
-      NumberColor3: z.optional(z.string()),
-      PaintWheelAvailable: z.optional(z.boolean()),
-      WheelColor: z.optional(z.string()),
-      RimTypeAvailable: z.optional(z.boolean()),
-      RimType: z.optional(z.string())
-    }), z.boolean()]))),
-  siteUrl: z.optional(z.string())
-}));
+const CarAssets = z.record(
+  z.string(),
+  z.object({
+    carId: z.optional(z.nullable(z.number())),
+    carRules: z.optional(
+      z.nullable(
+        z.array(
+          z.object({
+            ruleCategory: z.string(),
+            text: z.string(),
+          }),
+        ),
+      ),
+    ),
+    detailCopy: z.optional(z.nullable(z.string())),
+    detailScreenShotImages: z.optional(z.nullable(z.string())),
+    detailTechspecsCopy: z.optional(z.nullable(z.string())),
+    folder: z.optional(z.nullable(z.string())),
+    galleryImages: z.optional(z.nullable(z.string())),
+    galleryPrefix: z.optional(z.nullable(z.string())),
+    groupImage: z.optional(z.nullable(z.string())),
+    groupName: z.optional(z.nullable(z.string())),
+    largeImage: z.optional(z.nullable(z.string())),
+    logo: z.optional(z.nullable(z.string())),
+    smallImage: z.optional(z.nullable(z.string())),
+    sponsorLogo: z.optional(z.nullable(z.string())),
+    templatePath: z.optional(z.nullable(z.string())),
+  }),
+);
+const CarGet = z.array(
+  z.object({
+    aiEnabled: z.boolean(),
+    allowNumberColors: z.boolean(),
+    allowNumberFont: z.boolean(),
+    allowSponsor1: z.boolean(),
+    allowSponsor2: z.boolean(),
+    allowWheelColor: z.boolean(),
+    awardExempt: z.boolean(),
+    carConfigDefs: z.array(
+      z.object({
+        carcfg: z.number(),
+        cfgSubdir: z.nullable(z.string()),
+        customPaintExt: z.nullable(z.string()),
+        name: z.string(),
+      }),
+    ),
+    carConfigs: z.array(
+      z.object({
+        carcfg: z.number(),
+        trackType: z.optional(z.number()),
+        trackId: z.optional(z.number()),
+      }),
+    ),
+    carDirpath: z.string(),
+    carId: z.number(),
+    carName: z.string(),
+    carNameAbbreviated: z.string(),
+    carTypes: z.array(
+      z.object({
+        carType: z.string(),
+      }),
+    ),
+    carWeight: z.number(),
+    categories: z.array(z.string()),
+    created: z.string(),
+    firstSale: z.string(),
+    folder: z.string(),
+    forumUrl: z.optional(z.string()),
+    freeWithSubscription: z.boolean(),
+    hasHeadlights: z.boolean(),
+    hasMultipleDryTireTypes: z.boolean(),
+    hasRainCapableTireTypes: z.boolean(),
+    hp: z.number(),
+    isPsPurchasable: z.boolean(),
+    logo: z.nullable(z.string()),
+    maxPowerAdjustPct: z.number(),
+    maxWeightPenaltyKg: z.number(),
+    minPowerAdjustPct: z.number(),
+    packageId: z.number(),
+    patterns: z.number(),
+    price: z.number(),
+    priceDisplay: z.optional(z.string()),
+    rainEnabled: z.boolean(),
+    retired: z.boolean(),
+    searchFilters: z.string(),
+    sku: z.number(),
+    smallImage: z.string(),
+    sponsorLogo: z.nullable(z.string()),
+    carMake: z.optional(z.string()),
+    carModel: z.optional(z.string()),
+    paintRules: z.optional(
+      z.record(
+        z.string(),
+        z.union([
+          z.object({
+            PaintCarAvailable: z.boolean(),
+            Color1: z.string(),
+            Color2: z.string(),
+            Color3: z.string(),
+            Sponsor1Available: z.boolean(),
+            Sponsor2Available: z.boolean(),
+            Sponsor1: z.string(),
+            Sponsor2: z.string(),
+            RulesExplanation: z.string(),
+            AllowNumberFontChanges: z.optional(z.boolean()),
+            NumberFont: z.optional(z.string()),
+            AllowNumberColorChanges: z.optional(z.boolean()),
+            NumberColor1: z.optional(z.string()),
+            NumberColor2: z.optional(z.string()),
+            NumberColor3: z.optional(z.string()),
+            PaintWheelAvailable: z.optional(z.boolean()),
+            WheelColor: z.optional(z.string()),
+            RimTypeAvailable: z.optional(z.boolean()),
+            RimType: z.optional(z.string()),
+          }),
+          z.boolean(),
+        ]),
+      ),
+    ),
+    siteUrl: z.optional(z.string()),
+  }),
+);
 
 // ---- Response Types (inferred from schemas) ----
 
@@ -107,11 +132,9 @@ export type CarGetResponse = z.infer<typeof CarGet>;
 
 // ---- Parameter Validators ----
 
-const carAssetsParams = z.object({
-});
+const carAssetsParams = z.object({});
 
-const carGetParams = z.object({
-});
+const carGetParams = z.object({});
 
 // ---- Exported Parameter Types ----
 
@@ -120,7 +143,4 @@ export type CarGetParams = z.infer<typeof carGetParams>;
 
 // ---- Exported Schemas ----
 
-export {
-  CarAssets,
-  CarGet,
-};
+export { CarAssets, CarGet };

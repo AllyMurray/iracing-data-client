@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vite-plus/test';
 import * as z from 'zod/mini';
 import { type FetchLike } from '../auth/types';
 import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError } from '../client';
 import type { HttpClientEvent } from '@http-client-toolkit/core';
-import { createMockResponse } from "./test-utils";
+import { createMockResponse } from './test-utils';
 
 describe('HttpClient Integration', () => {
   let mockFetch: Mock<FetchLike>;
@@ -48,7 +48,7 @@ describe('HttpClient Integration', () => {
           headers: expect.objectContaining({
             Authorization: 'Bearer test-access-token',
           }),
-        })
+        }),
       );
     });
   });
@@ -61,7 +61,9 @@ describe('HttpClient Integration', () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with S3 link
-      mockFetch.mockResolvedValueOnce(createMockResponse({ link: 'https://s3.example.com/data', expires: futureDate }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse({ link: 'https://s3.example.com/data', expires: futureDate }),
+      );
 
       // Mock S3 response
       mockFetch.mockResolvedValueOnce(createMockResponse({ car_id: 123, car_name: 'Test Car' }));
@@ -82,10 +84,14 @@ describe('HttpClient Integration', () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with S3 link
-      mockFetch.mockResolvedValueOnce(createMockResponse({ link: 'https://s3.example.com/csv', expires: futureDate }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse({ link: 'https://s3.example.com/csv', expires: futureDate }),
+      );
 
       // Mock S3 CSV response
-      mockFetch.mockResolvedValueOnce(createMockResponse(csvData, { headers: { "content-type": "text/csv" } }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse(csvData, { headers: { 'content-type': 'text/csv' } }),
+      );
 
       const result = await client.get('/data/results/lap_data');
 
@@ -120,15 +126,17 @@ describe('HttpClient Integration', () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       // Mock API response with nested snake_case
-      mockFetch.mockResolvedValueOnce(createMockResponse({
-            car_id: 1,
-            car_name: 'Test',
-            nested_object: {
-              inner_key: 'value',
-              deep_nested: { deep_key: 'deep' },
-            },
-            array_field: [{ item_id: 1 }, { item_id: 2 }],
-          }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse({
+          car_id: 1,
+          car_name: 'Test',
+          nested_object: {
+            inner_key: 'value',
+            deep_nested: { deep_key: 'deep' },
+          },
+          array_field: [{ item_id: 1 }, { item_id: 2 }],
+        }),
+      );
 
       const result = await client.get('/data/test/nested');
 
@@ -149,7 +157,9 @@ describe('HttpClient Integration', () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
 
       const errorBody = { error: 'unauthorized', message: 'Token expired' };
-      mockFetch.mockResolvedValueOnce(createMockResponse(errorBody, { ok: false, status: 401, statusText: 'Unauthorized' }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse(errorBody, { ok: false, status: 401, statusText: 'Unauthorized' }),
+      );
 
       try {
         await client.get('/data/test/auth');
@@ -167,7 +177,9 @@ describe('HttpClient Integration', () => {
 
     it('should throw IRacingError for 429 responses', async () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-      mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }),
+      );
 
       try {
         await client.get('/data/test/rate-limit');
@@ -200,7 +212,9 @@ describe('HttpClient Integration', () => {
       });
 
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-      mockFetch.mockResolvedValueOnce(createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse('', { ok: false, status: 429, statusText: 'Too Many Requests' }),
+      );
       mockFetch.mockResolvedValueOnce(createMockResponse({ retry_ok: true }));
 
       const result = await client.get('/data/test/rate-limit-retry');
@@ -212,10 +226,12 @@ describe('HttpClient Integration', () => {
     it('should distinguish maintenance mode from generic 503', async () => {
       // Maintenance mode: 503 with specific error body
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-      mockFetch.mockResolvedValueOnce(createMockResponse(
-        { error: 'Site Maintenance' },
-        { ok: false, status: 503, statusText: 'Service Unavailable' },
-      ));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse(
+          { error: 'Site Maintenance' },
+          { ok: false, status: 503, statusText: 'Service Unavailable' },
+        ),
+      );
 
       try {
         await client.get('/data/test/maintenance');
@@ -232,10 +248,9 @@ describe('HttpClient Integration', () => {
 
     it('should flag generic 503 as service unavailable, not maintenance', async () => {
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-      mockFetch.mockResolvedValueOnce(createMockResponse(
-        '',
-        { ok: false, status: 503, statusText: 'Service Unavailable' },
-      ));
+      mockFetch.mockResolvedValueOnce(
+        createMockResponse('', { ok: false, status: 503, statusText: 'Service Unavailable' }),
+      );
 
       try {
         await client.get('/data/test/unavailable');
@@ -288,7 +303,7 @@ describe('HttpClient Integration', () => {
           paramsValidator: z.object({
             custIds: z.array(z.number()),
           }),
-        })
+        }),
       ).rejects.toThrow();
 
       expect(mockFetch).not.toHaveBeenCalled();
@@ -335,7 +350,9 @@ describe('HttpClient Integration', () => {
       expect(events.map((event) => event.type)).toContain('request:start');
       expect(events.map((event) => event.type)).toContain('request:success');
       expect(events.every((event) => event.clientName === 'iracing-data-client')).toBe(true);
-      expect(events.every((event) => event.resourceKey === 'https://members-ng.iracing.com')).toBe(true);
+      expect(events.every((event) => event.resourceKey === 'https://members-ng.iracing.com')).toBe(
+        true,
+      );
     });
 
     it('should expose pending request counts', async () => {

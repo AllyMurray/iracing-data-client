@@ -1,4 +1,4 @@
-import { toPascal, toCamelCase, toKebab } from "./utils";
+import { toPascal, toCamelCase, toKebab } from './utils';
 
 /** ---- Generate main Data Client class ---- */
 export function generateMainDataClient(sections: string[]): string {
@@ -6,18 +6,22 @@ export function generateMainDataClient(sections: string[]): string {
 
   lines.push(`/* AUTO-GENERATED — do not edit */`);
   lines.push(``);
-  lines.push(`import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";`);
+  lines.push(
+    `import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions } from "./client";`,
+  );
 
   // Import all service classes
   for (const section of sections) {
-    const className = toPascal(section) + "Service";
+    const className = toPascal(section) + 'Service';
     const dirName = toKebab(section);
     lines.push(`import { ${className} } from "./${dirName}/service";`);
   }
 
   lines.push(``);
   lines.push(`// Re-export client`);
-  lines.push(`export { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };`);
+  lines.push(
+    `export { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError, type IRacingClientOptions, type IRacingErrorOptions };`,
+  );
   lines.push(``);
   lines.push(`// Re-export http-client-toolkit types`);
   lines.push(`export type {`);
@@ -63,7 +67,7 @@ export function generateMainDataClient(sections: string[]): string {
   // Declare service properties
   for (const section of sections) {
     const propName = toCamelCase(section);
-    const className = toPascal(section) + "Service";
+    const className = toPascal(section) + 'Service';
     lines.push(`  public ${propName}: ${className};`);
   }
 
@@ -75,7 +79,7 @@ export function generateMainDataClient(sections: string[]): string {
   // Initialize services
   for (const section of sections) {
     const propName = toCamelCase(section);
-    const className = toPascal(section) + "Service";
+    const className = toPascal(section) + 'Service';
     lines.push(`    this.${propName} = new ${className}(this.client);`);
   }
 
@@ -90,5 +94,5 @@ export function generateMainDataClient(sections: string[]): string {
   lines.push(`  }`);
   lines.push(`}`);
 
-  return lines.join("\n") + "\n";
+  return lines.join('\n') + '\n';
 }

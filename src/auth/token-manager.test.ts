@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vite-plus/test';
 import { TokenManager } from './token-manager';
 import { TokenRefreshError } from './errors';
 
@@ -169,7 +169,7 @@ describe('TokenManager', () => {
       expect.objectContaining({
         access_token: 'new-access-token',
         refresh_token: 'new-refresh-token',
-      })
+      }),
     );
   });
 

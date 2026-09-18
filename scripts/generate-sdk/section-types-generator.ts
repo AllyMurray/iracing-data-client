@@ -1,25 +1,18 @@
-import * as fs from "node:fs";
-import * as path from "node:path";
-import { toPascal, toCamelCase } from "./utils";
-import { type Flat } from "./types";
-import { generateZodSchemaFromSample } from "./schema-generator";
-import { getCommonSchemasForSection } from "./type-generator";
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { toPascal, toCamelCase } from './utils';
+import { type Flat } from './types';
+import { generateZodSchemaFromSample } from './schema-generator';
 
 /** ---- Generate section types file ---- */
-export async function generateSectionTypes(sectionName: string, endpoints: Flat[]): Promise<string> {
+export async function generateSectionTypes(
+  sectionName: string,
+  endpoints: Flat[],
+): Promise<string> {
   const lines: string[] = [];
 
   lines.push(`import * as z from "zod/mini";`);
   lines.push(``);
-
-  // Add common schema definitions based on section
-  const commonSchemas = getCommonSchemasForSection(sectionName);
-  if (commonSchemas.length > 0) {
-    lines.push("// ---- Common Schemas ----");
-    lines.push("");
-    lines.push(...commonSchemas);
-    lines.push("");
-  }
 
   // Generate schemas from samples (primary source of truth)
   const responseSchemas: string[] = [];
@@ -32,7 +25,7 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 
         for (const sampleFile of sampleFiles) {
           try {
-            const sampleData = JSON.parse(fs.readFileSync(sampleFile, "utf8"));
+            const sampleData = JSON.parse(fs.readFileSync(sampleFile, 'utf8'));
             if (mergedSampleData === null) {
               mergedSampleData = sampleData;
             } else {
@@ -46,10 +39,13 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 
         if (mergedSampleData !== null) {
           const schemaName = `${toPascal(ep.method)}`;
-          const zodSchema = applyResponseSchemaOverrides(ep, generateZodSchemaFromSample(mergedSampleData, schemaName));
+          const zodSchema = applyResponseSchemaOverrides(
+            ep,
+            generateZodSchemaFromSample(mergedSampleData, schemaName),
+          );
           responseSchemas.push(zodSchema);
         } else {
-          throw new Error("No valid sample data found");
+          throw new Error('No valid sample data found');
         }
       } catch (error) {
         console.warn(`Failed to generate schema from ${ep.samplePath}:`, error);
@@ -87,20 +83,20 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
     lines.push(`const ${validatorName} = z.object({`);
 
     for (const [paramName, paramDef] of Object.entries(ep.params)) {
-      let zodType = "z.unknown()";
+      let zodType = 'z.unknown()';
 
       switch (paramDef.type) {
-        case "string":
-          zodType = "z.string()";
+        case 'string':
+          zodType = 'z.string()';
           break;
-        case "number":
-          zodType = "z.number()";
+        case 'number':
+          zodType = 'z.number()';
           break;
-        case "boolean":
-          zodType = "z.boolean()";
+        case 'boolean':
+          zodType = 'z.boolean()';
           break;
-        case "numbers":
-          zodType = "z.array(z.number())";
+        case 'numbers':
+          zodType = 'z.array(z.number())';
           break;
       }
 
@@ -110,7 +106,7 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 
       // Convert param name to camelCase for the schema
       const camelParamName = toCamelCase(paramName);
-      const comment = paramDef.note ? ` // ${paramDef.note}` : "";
+      const comment = paramDef.note ? ` // ${paramDef.note}` : '';
 
       // If the param name differs from original, we need to map it
       if (camelParamName !== paramName) {
@@ -149,21 +145,27 @@ export async function generateSectionTypes(sectionName: string, endpoints: Flat[
 
   lines.push(`};`);
 
-  return lines.join("\n");
+  return lines.join('\n');
 }
 
 function applyResponseSchemaOverrides(endpoint: Flat, schema: string): string {
   const endpointName = `${endpoint.section}.${endpoint.name}`;
 
-  if (endpointName === "results.search_hosted") {
+  if (endpointName === 'results.search_hosted') {
     return schema
-      .replace("      custId: z.number(),", "      custId: z.optional(z.number()),")
-      .replace("      teamId: z.number(),", "      teamId: z.optional(z.number()),")
-      .replace("      startRangeBegin: z.string(),", "      startRangeBegin: z.optional(z.string()),")
-      .replace("      categoryIds: z.array(z.number()),", "      categoryIds: z.optional(z.array(z.number())),");
+      .replace('      custId: z.number(),', '      custId: z.optional(z.number()),')
+      .replace('      teamId: z.number(),', '      teamId: z.optional(z.number()),')
+      .replace(
+        '      startRangeBegin: z.string(),',
+        '      startRangeBegin: z.optional(z.string()),',
+      )
+      .replace(
+        '      categoryIds: z.array(z.number()),',
+        '      categoryIds: z.optional(z.array(z.number())),',
+      );
   }
 
-  if (endpointName !== "results.search_series") {
+  if (endpointName !== 'results.search_series') {
     return schema;
   }
 
@@ -171,26 +173,39 @@ function applyResponseSchemaOverrides(endpoint: Flat, schema: string): string {
   // The response echoes only supplied query params, so cust_id/team_id may be absent
   // even though our current account-bound samples include both fields.
   const optionalParticipantFilters = [
-    "      // Omitted when search_series is called without participant filters.",
-    "      custId: z.optional(z.number()),",
-    "      teamId: z.optional(z.number()),",
-  ].join("\n");
+    '      // Omitted when search_series is called without participant filters.',
+    '      custId: z.optional(z.number()),',
+    '      teamId: z.optional(z.number()),',
+  ].join('\n');
 
-  const requiredParticipantFilters = "      custId: z.number(),\n      teamId: z.number(),";
+  const requiredParticipantFilters = '      custId: z.number(),\n      teamId: z.number(),';
   let updatedSchema = schema;
   if (schema.includes(requiredParticipantFilters)) {
     updatedSchema = schema.replace(requiredParticipantFilters, optionalParticipantFilters);
   } else {
-    const undocumentedOptionalParticipantFilters = "      custId: z.optional(z.number()),\n      teamId: z.optional(z.number()),";
-    updatedSchema = schema.replace(undocumentedOptionalParticipantFilters, optionalParticipantFilters);
+    const undocumentedOptionalParticipantFilters =
+      '      custId: z.optional(z.number()),\n      teamId: z.optional(z.number()),';
+    updatedSchema = schema.replace(
+      undocumentedOptionalParticipantFilters,
+      optionalParticipantFilters,
+    );
   }
 
   return updatedSchema
-    .replace("      categoryIds: z.array(z.number()),", "      categoryIds: z.optional(z.array(z.number())),")
-    .replace("      raceWeekNum: z.number(),", "      raceWeekNum: z.optional(z.number()),")
-    .replace("      officialOnly: z.boolean(),", "      officialOnly: z.optional(z.boolean()),")
-    .replace("      eventTypes: z.array(z.number()),", "      eventTypes: z.optional(z.array(z.number())),")
-    .replace("      seasonLicenseGroups: z.array(z.number())", "      seasonLicenseGroups: z.optional(z.array(z.number()))");
+    .replace(
+      '      categoryIds: z.array(z.number()),',
+      '      categoryIds: z.optional(z.array(z.number())),',
+    )
+    .replace('      raceWeekNum: z.number(),', '      raceWeekNum: z.optional(z.number()),')
+    .replace('      officialOnly: z.boolean(),', '      officialOnly: z.optional(z.boolean()),')
+    .replace(
+      '      eventTypes: z.array(z.number()),',
+      '      eventTypes: z.optional(z.array(z.number())),',
+    )
+    .replace(
+      '      seasonLicenseGroups: z.array(z.number())',
+      '      seasonLicenseGroups: z.optional(z.array(z.number()))',
+    );
 }
 
 /** ---- Helper to find sample variation files ---- */
@@ -213,7 +228,7 @@ function findSampleVariations(baseSamplePath: string): string[] {
         sampleFiles.push(path.join(baseDir, file));
       }
     }
-  } catch (error) {
+  } catch {
     // Directory doesn't exist or can't be read
   }
 
@@ -222,8 +237,10 @@ function findSampleVariations(baseSamplePath: string): string[] {
 
 /** ---- Helper to merge sample data for richer schemas ---- */
 function hasObjectStructureMatch(existing: unknown, candidate: unknown): boolean {
-  const existingIsObject = typeof existing === 'object' && existing !== null && !Array.isArray(existing);
-  const candidateIsObject = typeof candidate === 'object' && candidate !== null && !Array.isArray(candidate);
+  const existingIsObject =
+    typeof existing === 'object' && existing !== null && !Array.isArray(existing);
+  const candidateIsObject =
+    typeof candidate === 'object' && candidate !== null && !Array.isArray(candidate);
 
   if (!existingIsObject || !candidateIsObject) {
     return existing === candidate;
@@ -251,10 +268,15 @@ function mergeSampleData(base: any, additional: any): any {
       }
     }
     return merged;
-  } else if (typeof base === 'object' && base !== null && typeof additional === 'object' && additional !== null) {
+  } else if (
+    typeof base === 'object' &&
+    base !== null &&
+    typeof additional === 'object' &&
+    additional !== null
+  ) {
     // For objects, merge all properties and track type variations
     const merged = { ...base };
-    
+
     // First, mark fields that exist in additional but not in base as optional
     for (const key of Object.keys(additional)) {
       if (!(key in base)) {
@@ -262,18 +284,23 @@ function mergeSampleData(base: any, additional: any): any {
         merged[key] = additional[key];
       }
     }
-    
+
     // Then mark fields that exist in base but not in additional as optional
     for (const key of Object.keys(base)) {
       if (!(key in additional)) {
         merged[`__optional_${key}`] = true;
       }
     }
-    
+
     // Process fields that exist in both
     for (const [key, value] of Object.entries(additional)) {
       if (key in base) {
-        if (typeof merged[key] === 'object' && typeof value === 'object' && merged[key] !== null && value !== null) {
+        if (
+          typeof merged[key] === 'object' &&
+          typeof value === 'object' &&
+          merged[key] !== null &&
+          value !== null
+        ) {
           merged[key] = mergeSampleData(merged[key], value);
         } else if (merged[key] !== value) {
           // Different values for same key - this field can vary!

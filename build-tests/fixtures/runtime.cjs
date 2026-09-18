@@ -7,12 +7,22 @@ globalThis.fetch = async () => {
 async function main() {
   const commonjs = require('iracing-data-client');
   const esm = await import('iracing-data-client');
-  assert.deepEqual(Object.keys(esm).sort(), Object.keys(commonjs).sort(),
-    'ESM and CommonJS must expose the same public exports');
+  assert.deepEqual(
+    Object.keys(esm).sort(),
+    Object.keys(commonjs).sort(),
+    'ESM and CommonJS must expose the same public exports',
+  );
 
   for (const sdk of [commonjs, esm]) {
-    for (const name of ['IRacingDataClient', 'IRacingClient', 'IRacingError',
-      'OAuthError', 'TokenRefreshError', 'buildAuthorizationUrl', 'exchangeAuthorizationCode']) {
+    for (const name of [
+      'IRacingDataClient',
+      'IRacingClient',
+      'IRacingError',
+      'OAuthError',
+      'TokenRefreshError',
+      'buildAuthorizationUrl',
+      'exchangeAuthorizationCode',
+    ]) {
       assert.equal(typeof sdk[name], 'function', `Missing public export: ${name}`);
     }
     assert.equal(typeof sdk.DEFAULT_RETRY_OPTIONS, 'object');
@@ -36,9 +46,23 @@ async function main() {
       },
     });
 
-    for (const service of ['car', 'carclass', 'constants', 'driverStatsByCategory',
-      'hosted', 'league', 'lookup', 'member', 'results', 'season', 'series',
-      'stats', 'team', 'timeAttack', 'track']) {
+    for (const service of [
+      'car',
+      'carclass',
+      'constants',
+      'driverStatsByCategory',
+      'hosted',
+      'league',
+      'lookup',
+      'member',
+      'results',
+      'season',
+      'series',
+      'stats',
+      'team',
+      'timeAttack',
+      'track',
+    ]) {
       assert.ok(client[service], `Missing service: ${service}`);
     }
     assert.equal(requests, 0, 'Constructing a client must not make a request');

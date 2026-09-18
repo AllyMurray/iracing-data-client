@@ -1,19 +1,26 @@
 #!/usr/bin/env tsx
-import * as fs from "node:fs";
-import * as path from "node:path";
-import { toCamelCase, toPascal, toKebab } from "./generate-sdk/utils";
-import { type Root, type Flat, type Endpoint, isEndpoint } from "./generate-sdk/types";
-import { generateSectionService, generateSectionTest } from "./generate-sdk/service-generator";
-import { generateClientBase } from "./generate-sdk/client-generator";
-import { generateSectionTypes } from "./generate-sdk/section-types-generator";
-import { generateMainDataClient } from "./generate-sdk/main-generator";
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { toCamelCase, toPascal, toKebab } from './generate-sdk/utils';
+import { type Root, type Flat, type Endpoint, isEndpoint } from './generate-sdk/types';
+import { generateSectionService, generateSectionTest } from './generate-sdk/service-generator';
+import { generateClientBase } from './generate-sdk/client-generator';
+import { generateSectionTypes } from './generate-sdk/section-types-generator';
+import { generateMainDataClient } from './generate-sdk/main-generator';
 
 /** ---- CLI args ---- */
-const INPUT = process.argv[2] ?? "docs/api/index.json";
-const OUT_DIR = process.argv[3] ?? "src";
-const SAMPLES_DIR = process.argv[4] ?? "samples";
+const INPUT = process.argv[2] ?? 'docs/api/index.json';
+const OUT_DIR = process.argv[3] ?? 'src';
+const SAMPLES_DIR = process.argv[4] ?? 'samples';
+const generatedFiles: string[] = [];
 
-const index: Root = JSON.parse(fs.readFileSync(INPUT, "utf8"));
+function writeGenerated(file: string, content: string) {
+  fs.writeFileSync(file, content, 'utf8');
+  generatedFiles.push(file);
+}
+
+const index: Root = JSON.parse(fs.readFileSync(INPUT, 'utf8'));
 
 function flatten(root: Root): Flat[] {
   const out: Flat[] = [];
@@ -21,7 +28,7 @@ function flatten(root: Root): Flat[] {
     for (const [key, val] of Object.entries(section)) {
       if (isEndpoint(val)) {
         out.push(mk(sectionName, key, val));
-      } else if (val && typeof val === "object") {
+      } else if (val && typeof val === 'object') {
         for (const [k2, v2] of Object.entries(val)) {
           if (isEndpoint(v2)) out.push(mk(sectionName, `${key}.${k2}`, v2));
         }
@@ -32,7 +39,7 @@ function flatten(root: Root): Flat[] {
 
   function mk(section: string, name: string, ep: Endpoint): Flat {
     const base = `${section}.${name}`;
-    const method = toCamelCase(base.replace(/[^\w]/g, "_"));
+    const method = toCamelCase(base.replace(/[^\w]/g, '_'));
     const sampleFile = `${SAMPLES_DIR}/${base}.json`;
     const samplePath = resolveSamplePath(sampleFile);
     return {
@@ -42,7 +49,7 @@ function flatten(root: Root): Flat[] {
       url: ep.link,
       params: ep.parameters || {},
       samplePath,
-      responseType: `${toPascal(base.replace(/[^\w]/g, "_"))}Response`,
+      responseType: `${toPascal(base.replace(/[^\w]/g, '_'))}Response`,
     };
   }
 }
@@ -53,7 +60,7 @@ function resolveSamplePath(baseSamplePath: string): string | undefined {
   }
 
   const baseDir = path.dirname(baseSamplePath);
-  const baseName = path.basename(baseSamplePath, ".json");
+  const baseName = path.basename(baseSamplePath, '.json');
 
   if (!fs.existsSync(baseDir)) {
     return undefined;
@@ -61,7 +68,7 @@ function resolveSamplePath(baseSamplePath: string): string | undefined {
 
   const variationFiles = fs
     .readdirSync(baseDir)
-    .filter((file) => file.startsWith(`${baseName}_var`) && file.endsWith(".json"))
+    .filter((file) => file.startsWith(`${baseName}_var`) && file.endsWith('.json'))
     .sort();
 
   if (variationFiles.length > 0) {
@@ -79,13 +86,13 @@ async function generateDataClient() {
   if (missingSamples.length > 0) {
     const missingList = missingSamples
       .map((ep) => `- ${ep.section}.${ep.name} (${ep.url})`)
-      .join("\n");
+      .join('\n');
 
     throw new Error(
       `Missing sample data for ${missingSamples.length} endpoint(s).\n` +
-      `Every endpoint must have concrete sample-backed response types.\n\n` +
-      `${missingList}\n\n` +
-      `Run sample collection and try again.`
+        `Every endpoint must have concrete sample-backed response types.\n\n` +
+        `${missingList}\n\n` +
+        `Run sample collection and try again.`,
     );
   }
 
@@ -101,7 +108,7 @@ async function generateDataClient() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   // Generate client base
-  fs.writeFileSync(path.join(OUT_DIR, "client.ts"), generateClientBase(), "utf8");
+  writeGenerated(path.join(OUT_DIR, 'client.ts'), generateClientBase());
   console.log(`Generated ${OUT_DIR}/client.ts`);
 
   // Generate files for each section
@@ -116,31 +123,36 @@ async function generateDataClient() {
     fs.mkdirSync(sectionDir, { recursive: true });
 
     // Generate types file
-    const typesFile = path.join(sectionDir, "types.ts");
+    const typesFile = path.join(sectionDir, 'types.ts');
     const typesContent = await generateSectionTypes(section, eps);
-    fs.writeFileSync(typesFile, typesContent, "utf8");
+    writeGenerated(typesFile, typesContent);
     console.log(`Generated ${typesFile} with ${eps.length} endpoints`);
 
     // Generate service file
-    const serviceFile = path.join(sectionDir, "service.ts");
-    fs.writeFileSync(serviceFile, generateSectionService(section, eps), "utf8");
+    const serviceFile = path.join(sectionDir, 'service.ts');
+    writeGenerated(serviceFile, generateSectionService(section, eps));
     console.log(`Generated ${serviceFile}`);
 
     // Generate test file
-    const testFile = path.join(sectionDir, "service.test.ts");
-    fs.writeFileSync(testFile, generateSectionTest(section, eps), "utf8");
+    const testFile = path.join(sectionDir, 'service.test.ts');
+    writeGenerated(testFile, generateSectionTest(section, eps));
     console.log(`Generated ${testFile}`);
   }
 
   // Generate main Data Client file
-  fs.writeFileSync(path.join(OUT_DIR, "index.ts"), generateMainDataClient(sections), "utf8");
+  writeGenerated(path.join(OUT_DIR, 'index.ts'), generateMainDataClient(sections));
   console.log(`Generated ${OUT_DIR}/index.ts`);
 
-  console.log(`\nSuccessfully generated typed Data Client with ${endpoints.length} endpoints across ${sections.length} sections!`);
+  // Use the pinned formatter from pnpm's script PATH, only on generated files.
+  execFileSync('vp', ['fmt', ...generatedFiles], { stdio: 'inherit' });
+
+  console.log(
+    `\nSuccessfully generated typed Data Client with ${endpoints.length} endpoints across ${sections.length} sections!`,
+  );
 }
 
 // Run the generator
-generateDataClient().catch(error => {
-  console.error("Fatal error:", error);
+generateDataClient().catch((error) => {
+  console.error('Fatal error:', error);
   process.exit(1);
 });

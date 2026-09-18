@@ -20,7 +20,7 @@ export class OAuthError extends Error {
   constructor(
     public readonly code: OAuthErrorCode | string,
     public readonly description?: string,
-    public readonly uri?: string
+    public readonly uri?: string,
   ) {
     super(description || code);
   }
@@ -51,7 +51,7 @@ export class TokenRefreshError extends OAuthError {
   constructor(
     code: OAuthErrorCode | string,
     description?: string,
-    public readonly cause?: Error
+    public readonly cause?: Error,
   ) {
     super(code, description);
   }
