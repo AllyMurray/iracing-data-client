@@ -157,6 +157,9 @@ and hand-written code; the few scoped exceptions in `vite.config.mts` preserve
 existing query coercion, diagnostic fallbacks, and public OAuth code types.
 Samples, build outputs, and the independent docs project are excluded from root
 linting and formatting.
+The packed consumer TypeScript fixture is formatted here but typechecked only
+after installation into its temporary project, so `pnpm check` also works before
+the first library build.
 
 ## CI / GitHub Actions
 

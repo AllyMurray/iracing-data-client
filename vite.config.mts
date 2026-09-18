@@ -36,7 +36,16 @@ export default defineConfig({
         rules: { 'typescript/no-redundant-type-constituents': 'off' },
       },
     ],
-    ignorePatterns: ['lib/**', 'dist/**', 'docs-site/**', 'samples/**', 'node_modules/**'],
+    ignorePatterns: [
+      'lib/**',
+      'dist/**',
+      'docs-site/**',
+      'samples/**',
+      'node_modules/**',
+      // Compiled with TS6/TS7 only after installation into the isolated consumer;
+      // it must not resolve against a stale local build during source checks.
+      'build-tests/fixtures/consumer.ts',
+    ],
   },
   fmt: {
     singleQuote: true,
