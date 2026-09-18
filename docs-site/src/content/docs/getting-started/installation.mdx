@@ -11,7 +11,7 @@ Get started with the iRacing Data Client SDK in your project.
 
 Before installing the Data Client, ensure you have:
 
-- **Node.js 18+** or a modern browser environment with fetch support
+- **Node.js 22 or newer**, including odd-numbered releases such as 23 and 25, or a modern browser environment with fetch support
 - **npm**, **yarn**, or **pnpm** package manager
 - An active **iRacing subscription** with valid credentials
 - **TypeScript 5.0+** (optional, but recommended for the best experience)
@@ -151,34 +151,23 @@ The SDK includes TypeScript definitions out of the box. For the best experience:
 
 ## Node.js Compatibility
 
-<Tabs>
-  <TabItem label="Node.js 18+">
-    Works out of the box with native fetch support:
+Node.js 22 and newer (`>=22.0.0`) are supported, including odd-numbered releases
+such as 23 and 25. These versions provide native fetch and Web Crypto support.
+CI tests ESM and CommonJS on Node.js 22 and 24 LTS only; other supported releases
+are not part of the CI matrix.
 
-    ```typescript
-    const iracing = new IRacingDataClient({
-      auth: { /* ... */ },
-    });
-    ```
-  </TabItem>
+Repository development, builds, documentation, and releases use Node.js 24 and
+the pinned pnpm 12.4.2 version. These tooling requirements are separate from the
+supported consumer runtimes.
 
-  <TabItem label="Node.js < 18">
-    Requires a fetch polyfill:
+```typescript
+const iracing = new IRacingDataClient({
+  auth: { /* ... */ },
+});
+```
 
-    ```bash
-    npm install node-fetch
-    ```
-
-    ```typescript
-    import fetch from 'node-fetch';
-
-    const iracing = new IRacingDataClient({
-      auth: { /* ... */ },
-      fetchFn: fetch as any,
-    });
-    ```
-  </TabItem>
-</Tabs>
+Node.js versions below 22 are not supported. Upgrade to Node.js 22 or newer; adding a
+fetch polyfill does not restore support for older Node releases.
 
 ## Browser Usage
 

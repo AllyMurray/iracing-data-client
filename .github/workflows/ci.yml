@@ -9,23 +9,35 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22.x, 24.x]
     env:
       CI: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7.0.0
         with:
-          node-version: 22.x
+          node-version: 24.x
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Audit library and development dependencies
+        if: matrix.node-version == '24.x'
+        run: pnpm audit
+
+      - name: Verify dependency release-age policy
+        if: matrix.node-version == '24.x'
+        run: pnpm test:dependency-policy
 
       - name: Regenerate SDK
         run: pnpm run sdk:generate
@@ -39,11 +51,22 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
+      - name: Build library on Node 24
+        run: pnpm run build
+
+      - name: Setup consumer runtime
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: Unit tests
         run: pnpm test run
 
-      - name: Build and test installed package
-        run: pnpm run test:package
+      - name: Check encrypted environment compatibility
+        run: pnpm test:env
+
+      - name: Test installed package on consumer runtime
+        run: pnpm run test:package:artifacts
 
   docs:
     runs-on: ubuntu-latest
@@ -52,15 +75,15 @@ jobs:
         working-directory: docs-site
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7.0.0
         with:
-          node-version: 22.x
+          node-version: 24.x
           cache: pnpm
           cache-dependency-path: docs-site/pnpm-lock.yaml
 
@@ -69,3 +92,6 @@ jobs:
 
       - name: Build documentation
         run: pnpm build
+
+      - name: Audit documentation dependencies
+        run: pnpm audit
