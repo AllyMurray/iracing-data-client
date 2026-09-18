@@ -1,57 +1,63 @@
-import * as z from "zod/mini";
+import * as z from 'zod/mini';
 
 // ---- Response Schemas ----
 
 const SeasonList = z.object({
   seasonQuarter: z.number(),
-  seasons: z.array(z.object({
-    seasonId: z.number(),
-    seriesId: z.number(),
-    seasonName: z.string(),
-    seriesName: z.string(),
-    official: z.boolean(),
-    seasonYear: z.number(),
-    seasonQuarter: z.number(),
-    licenseGroup: z.number(),
-    fixedSetup: z.boolean(),
-    driverChanges: z.boolean(),
-    rookieSeason: z.optional(z.string())
-  })),
-  seasonYear: z.number()
+  seasons: z.array(
+    z.object({
+      seasonId: z.number(),
+      seriesId: z.number(),
+      seasonName: z.string(),
+      seriesName: z.string(),
+      official: z.boolean(),
+      seasonYear: z.number(),
+      seasonQuarter: z.number(),
+      licenseGroup: z.number(),
+      fixedSetup: z.boolean(),
+      driverChanges: z.boolean(),
+      rookieSeason: z.optional(z.string()),
+    }),
+  ),
+  seasonYear: z.number(),
 });
 const SeasonRaceGuide = z.object({
   subscribed: z.boolean(),
-  sessions: z.array(z.object({
-    seasonId: z.number(),
-    startTime: z.string(),
-    superSession: z.boolean(),
-    seriesId: z.number(),
-    raceWeekNum: z.number(),
-    endTime: z.string(),
-    sessionId: z.optional(z.number()),
-    entryCount: z.number()
-  })),
+  sessions: z.array(
+    z.object({
+      seasonId: z.number(),
+      startTime: z.string(),
+      superSession: z.boolean(),
+      seriesId: z.number(),
+      raceWeekNum: z.number(),
+      endTime: z.string(),
+      sessionId: z.optional(z.number()),
+      entryCount: z.number(),
+    }),
+  ),
   blockBeginTime: z.string(),
   blockEndTime: z.string(),
-  success: z.boolean()
+  success: z.boolean(),
 });
 const SeasonSpectatorSubsessionids = z.object({
   eventTypes: z.array(z.number()),
   success: z.boolean(),
-  subsessionIds: z.array(z.number())
+  subsessionIds: z.array(z.number()),
 });
 const SeasonSpectatorSubsessionidsDetail = z.object({
   success: z.boolean(),
   seasonIds: z.array(z.number()),
   eventTypes: z.array(z.number()),
-  subsessions: z.array(z.object({
-    subsessionId: z.number(),
-    sessionId: z.number(),
-    seasonId: z.number(),
-    startTime: z.string(),
-    raceWeekNum: z.number(),
-    eventType: z.number()
-  }))
+  subsessions: z.array(
+    z.object({
+      subsessionId: z.number(),
+      sessionId: z.number(),
+      seasonId: z.number(),
+      startTime: z.string(),
+      raceWeekNum: z.number(),
+      eventType: z.number(),
+    }),
+  ),
 });
 
 // ---- Response Types (inferred from schemas) ----
@@ -59,7 +65,9 @@ const SeasonSpectatorSubsessionidsDetail = z.object({
 export type SeasonListResponse = z.infer<typeof SeasonList>;
 export type SeasonRaceGuideResponse = z.infer<typeof SeasonRaceGuide>;
 export type SeasonSpectatorSubsessionidsResponse = z.infer<typeof SeasonSpectatorSubsessionids>;
-export type SeasonSpectatorSubsessionidsDetailResponse = z.infer<typeof SeasonSpectatorSubsessionidsDetail>;
+export type SeasonSpectatorSubsessionidsDetailResponse = z.infer<
+  typeof SeasonSpectatorSubsessionidsDetail
+>;
 
 // ---- Parameter Validators ----
 
@@ -87,7 +95,9 @@ const seasonSpectatorSubsessionidsDetailParams = z.object({
 export type SeasonListParams = z.infer<typeof seasonListParams>;
 export type SeasonRaceGuideParams = z.infer<typeof seasonRaceGuideParams>;
 export type SeasonSpectatorSubsessionidsParams = z.infer<typeof seasonSpectatorSubsessionidsParams>;
-export type SeasonSpectatorSubsessionidsDetailParams = z.infer<typeof seasonSpectatorSubsessionidsDetailParams>;
+export type SeasonSpectatorSubsessionidsDetailParams = z.infer<
+  typeof seasonSpectatorSubsessionidsDetailParams
+>;
 
 // ---- Exported Schemas ----
 

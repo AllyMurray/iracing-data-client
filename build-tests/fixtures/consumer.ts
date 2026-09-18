@@ -40,6 +40,6 @@ accepts<boolean>(error.isRateLimited);
 // @ts-expect-error Authentication options are required.
 new IRacingDataClient({});
 // @ts-expect-error Customer IDs must be numbers.
-client.member.get({ custIds: ['invalid'] });
+void client.member.get({ custIds: ['invalid'] });
 // @ts-expect-error Generated car IDs must retain their numeric type.
 accepts<string>(cars[0].carId);

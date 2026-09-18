@@ -1,6 +1,6 @@
-import type { IRacingClient } from "../client";
-import type { CarclassGetResponse } from "./types";
-import { CarclassGet } from "./types";
+import type { IRacingClient } from '../client';
+import type { CarclassGetResponse } from './types';
+import { CarclassGet } from './types';
 
 export class CarclassService {
   constructor(private client: IRacingClient) {}
@@ -11,7 +11,9 @@ export class CarclassService {
    * @sample carclass.get.json
    */
   async get(): Promise<CarclassGetResponse> {
-    return this.client.get<CarclassGetResponse>("https://members-ng.iracing.com/data/carclass/get", { schema: CarclassGet });
+    return this.client.get<CarclassGetResponse>(
+      'https://members-ng.iracing.com/data/carclass/get',
+      { schema: CarclassGet },
+    );
   }
-
 }

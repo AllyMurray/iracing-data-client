@@ -19,11 +19,11 @@
     "package.json"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "pnpm run check:toolchain && vp pack",
+    "dev": "vp pack --watch",
     "prepublishOnly": "npm run build",
-    "sdk:generate": "npx tsx scripts/generate-sdk.ts",
-    "sdk:check-no-unknown": "npx tsx scripts/check-no-unknown-service-returns.ts",
+    "sdk:generate": "tsx scripts/generate-sdk.ts",
+    "sdk:check-no-unknown": "tsx scripts/check-no-unknown-service-returns.ts",
     "sdk:test": "npx @dotenvx/dotenvx run -- npx tsx test-sdk.ts",
     "samples:scrape": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts",
     "samples:scrape-force": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
@@ -32,14 +32,18 @@
     "docs:dev": "cd docs-site && pnpm dev",
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
-    "test": "vitest",
+    "test": "vp test",
     "test:package": "pnpm run build && pnpm run test:package:artifacts",
-    "test:integration": "npx @dotenvx/dotenvx run -- vitest run --config vitest.config.integration.ts",
+    "test:integration": "dotenvx run -- vp test run --config vite.config.integration.mts",
     "test:oauth": "npx @dotenvx/dotenvx run -- npx tsx test-oauth.ts",
     "typecheck": "tsc --noEmit",
     "test:package:artifacts": "node build-tests/check-package.cjs",
     "test:dependency-policy": "node build-tests/dependency-policy.cjs",
-    "test:env": "node build-tests/check-env.cjs"
+    "test:env": "node build-tests/check-env.cjs",
+    "check:toolchain": "node scripts/check-toolchain.mjs",
+    "check": "vp check src scripts build-tests vite.config.mts vite.config.integration.mts",
+    "lint": "vp check --no-fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
+    "format": "vp fmt src scripts build-tests vite.config.mts vite.config.integration.mts"
   },
   "keywords": [
     "iracing",
@@ -66,10 +70,11 @@
     "@changesets/cli": "^2.31.1",
     "@dotenvx/dotenvx": "^2.26.1",
     "@types/node": "^24.13.5",
-    "tsup": "^8.5.1",
+    "@typescript/native": "npm:typescript@7.0.2",
     "tsx": "^4.23.13",
-    "typescript": "^5.9.3",
-    "vitest": "^4.1.11"
+    "typescript": "npm:@typescript/typescript6@6.0.2",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   },
   "dependencies": {
     "@http-client-toolkit/core": "^4.2.0",

@@ -1,13 +1,13 @@
 // Exercise pnpm's actual resolver against a local registry with dated releases.
 const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
-const { once } = require('node:events');
+const events = require('node:events');
 const fs = require('node:fs/promises');
 const http = require('node:http');
 const { tmpdir } = require('node:os');
-const { join, resolve } = require('node:path');
+const nodePath = require('node:path');
 
-const root = resolve(__dirname, '..');
+const root = nodePath.resolve(__dirname, '..');
 const packageManager = require('../package.json').packageManager;
 
 function run(args, cwd) {
@@ -22,7 +22,7 @@ function run(args, cwd) {
 }
 
 async function main() {
-  const temporary = await fs.mkdtemp(join(tmpdir(), 'iracing-age-policy-'));
+  const temporary = await fs.mkdtemp(nodePath.join(tmpdir(), 'iracing-age-policy-'));
   const now = Date.now();
   const server = http.createServer((request, response) => {
     const url = new URL(request.url, 'http://localhost');
@@ -51,9 +51,7 @@ async function main() {
         ...(name !== 'age-policy-transitive'
           ? {
               dependencies: {
-                'age-policy-transitive': url.pathname.startsWith(
-                  '/fresh-transitive/',
-                )
+                'age-policy-transitive': url.pathname.startsWith('/fresh-transitive/')
                   ? '1.0.1'
                   : '*',
               },
@@ -71,7 +69,7 @@ async function main() {
     response.end(JSON.stringify(metadata));
   });
   server.listen(0, '127.0.0.1');
-  await once(server, 'listening');
+  await events.once(server, 'listening');
   try {
     for (const project of ['.', 'docs-site']) {
       for (const scenario of [
@@ -82,24 +80,21 @@ async function main() {
         'toolkit',
         'fresh-transitive',
       ]) {
-        const isToolkit =
-          scenario === 'toolkit' || scenario === 'fresh-transitive';
-        const cwd = join(temporary, project, scenario);
+        const isToolkit = scenario === 'toolkit' || scenario === 'fresh-transitive';
+        const cwd = nodePath.join(temporary, project, scenario);
         await fs.mkdir(cwd, { recursive: true });
         await fs.copyFile(
-          join(root, project, 'pnpm-workspace.yaml'),
-          join(cwd, 'pnpm-workspace.yaml'),
+          nodePath.join(root, project, 'pnpm-workspace.yaml'),
+          nodePath.join(cwd, 'pnpm-workspace.yaml'),
         );
         await fs.writeFile(
-          join(cwd, 'package.json'),
+          nodePath.join(cwd, 'package.json'),
           JSON.stringify({
             name: 'age-policy-consumer',
             private: true,
             packageManager,
             dependencies: {
-              [isToolkit
-                ? '@http-client-toolkit/age-policy-probe'
-                : 'age-policy-probe']:
+              [isToolkit ? '@http-client-toolkit/age-policy-probe' : 'age-policy-probe']:
                 isToolkit || scenario === 'exact' ? '1.0.1' : '*',
             },
           }),
@@ -109,15 +104,12 @@ async function main() {
           '--ignore-scripts',
           `--registry=http://127.0.0.1:${server.address().port}/${['missing-time', 'fresh-transitive'].includes(scenario) ? `${scenario}/` : ''}`,
           '--store-dir',
-          join(cwd, 'store'),
+          nodePath.join(cwd, 'store'),
         ];
-        let result = await run(
-          ['install', '--no-frozen-lockfile', ...options],
-          cwd,
-        );
+        let result = await run(['install', '--no-frozen-lockfile', ...options], cwd);
         if (scenario === 'range' || scenario === 'frozen') {
           assert.equal(result.code, 0, result.output);
-          const lockPath = join(cwd, 'pnpm-lock.yaml');
+          const lockPath = nodePath.join(cwd, 'pnpm-lock.yaml');
           const lock = await fs.readFile(lockPath, 'utf8');
           for (const name of ['age-policy-probe', 'age-policy-transitive']) {
             assert.ok(lock.includes(`${name}@1.0.0:`), lock);
@@ -126,19 +118,13 @@ async function main() {
           if (scenario === 'frozen') {
             // Simulate a lockfile contributed under a weaker release-age policy.
             await fs.writeFile(lockPath, lock.replaceAll('1.0.0', '1.0.1'));
-            result = await run(
-              ['install', '--frozen-lockfile', ...options],
-              cwd,
-            );
+            result = await run(['install', '--frozen-lockfile', ...options], cwd);
           }
         }
         if (scenario === 'toolkit') {
           assert.equal(result.code, 0, result.output);
-          const lock = await fs.readFile(join(cwd, 'pnpm-lock.yaml'), 'utf8');
-          assert.ok(
-            lock.includes('@http-client-toolkit/age-policy-probe@1.0.1'),
-            lock,
-          );
+          const lock = await fs.readFile(nodePath.join(cwd, 'pnpm-lock.yaml'), 'utf8');
+          assert.ok(lock.includes('@http-client-toolkit/age-policy-probe@1.0.1'), lock);
           assert.ok(lock.includes('age-policy-transitive@1.0.0:'), lock);
           assert.ok(!lock.includes('age-policy-transitive@1.0.1:'), lock);
           result = await run(['install', '--frozen-lockfile', ...options], cwd);

@@ -56,7 +56,7 @@ export function generateRandomString(length: number = 64): string {
   const randomValues = new Uint8Array(length);
   crypto.getRandomValues(randomValues);
   return Array.from(randomValues, (byte) => unreservedChars[byte % unreservedChars.length]).join(
-    ''
+    '',
   );
 }
 

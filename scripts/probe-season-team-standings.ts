@@ -1,17 +1,17 @@
 #!/usr/bin/env tsx
-import * as fs from "node:fs";
-import * as path from "node:path";
-import { requestPasswordLimitedToken } from "../src/auth/flows/password-limited";
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { requestPasswordLimitedToken } from '../src/auth/flows/password-limited';
 
 type Pair = { seasonId: number; carClassId: number; source: string };
 
-const DOCS_ENDPOINT = "https://members-ng.iracing.com/data/stats/season_team_standings";
-const DEFAULT_SAMPLE_PATH = "samples/stats.season_team_standings.json";
+const DOCS_ENDPOINT = 'https://members-ng.iracing.com/data/stats/season_team_standings';
+const DEFAULT_SAMPLE_PATH = 'samples/stats.season_team_standings.json';
 
 function parseNumberList(raw: string | undefined): number[] {
   if (!raw) return [];
   return raw
-    .split(",")
+    .split(',')
     .map((part) => Number(part.trim()))
     .filter((value) => Number.isFinite(value));
 }
@@ -24,7 +24,7 @@ function getArg(name: string): string | undefined {
   }
 
   const index = args.indexOf(`--${name}`);
-  if (index >= 0 && args[index + 1] && !args[index + 1].startsWith("--")) {
+  if (index >= 0 && args[index + 1] && !args[index + 1].startsWith('--')) {
     return args[index + 1];
   }
 
@@ -36,8 +36,14 @@ function hasFlag(name: string): boolean {
   return args.includes(`--${name}`);
 }
 
-function addPair(pairs: Pair[], seen: Set<string>, seasonId: unknown, carClassId: unknown, source: string): void {
-  if (typeof seasonId !== "number" || typeof carClassId !== "number") return;
+function addPair(
+  pairs: Pair[],
+  seen: Set<string>,
+  seasonId: unknown,
+  carClassId: unknown,
+  source: string,
+): void {
+  if (typeof seasonId !== 'number' || typeof carClassId !== 'number') return;
   if (!Number.isFinite(seasonId) || !Number.isFinite(carClassId)) return;
   if (seasonId <= 0 || carClassId <= 0) return;
 
@@ -48,7 +54,13 @@ function addPair(pairs: Pair[], seen: Set<string>, seasonId: unknown, carClassId
   pairs.push({ seasonId, carClassId, source });
 }
 
-function collectPairsFromValue(value: unknown, pairs: Pair[], seen: Set<string>, source: string, inheritedSeasonId?: number): void {
+function collectPairsFromValue(
+  value: unknown,
+  pairs: Pair[],
+  seen: Set<string>,
+  source: string,
+  inheritedSeasonId?: number,
+): void {
   if (value === null || value === undefined) return;
   if (Array.isArray(value)) {
     for (const item of value) {
@@ -56,13 +68,13 @@ function collectPairsFromValue(value: unknown, pairs: Pair[], seen: Set<string>,
     }
     return;
   }
-  if (typeof value !== "object") return;
+  if (typeof value !== 'object') return;
 
   const record = value as Record<string, unknown>;
-  const seasonId = typeof record.season_id === "number" ? record.season_id : inheritedSeasonId;
+  const seasonId = typeof record.season_id === 'number' ? record.season_id : inheritedSeasonId;
 
   if (seasonId !== undefined) {
-    if (typeof record.car_class_id === "number") {
+    if (typeof record.car_class_id === 'number') {
       addPair(pairs, seen, seasonId, record.car_class_id, source);
     }
     if (Array.isArray(record.car_class_ids)) {
@@ -87,11 +99,11 @@ function collectPairsFromSamples(samplesDir: string): Pair[] {
   const seen = new Set<string>();
   if (!fs.existsSync(samplesDir)) return pairs;
 
-  const files = fs.readdirSync(samplesDir).filter((file) => file.endsWith(".json"));
+  const files = fs.readdirSync(samplesDir).filter((file) => file.endsWith('.json'));
   for (const file of files) {
     const fullPath = path.join(samplesDir, file);
     try {
-      const parsed = JSON.parse(fs.readFileSync(fullPath, "utf8"));
+      const parsed = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
       collectPairsFromValue(parsed, pairs, seen, file);
     } catch {
       // Ignore malformed sample files
@@ -102,7 +114,10 @@ function collectPairsFromSamples(samplesDir: string): Pair[] {
 }
 
 function rankPairs(pairs: Pair[]): Pair[] {
-  const counts = new Map<string, { seasonId: number; carClassId: number; count: number; source: string }>();
+  const counts = new Map<
+    string,
+    { seasonId: number; carClassId: number; count: number; source: string }
+  >();
 
   for (const pair of pairs) {
     const key = `${pair.seasonId}|${pair.carClassId}`;
@@ -110,21 +125,30 @@ function rankPairs(pairs: Pair[]): Pair[] {
     if (existing) {
       existing.count += 1;
     } else {
-      counts.set(key, { seasonId: pair.seasonId, carClassId: pair.carClassId, count: 1, source: pair.source });
+      counts.set(key, {
+        seasonId: pair.seasonId,
+        carClassId: pair.carClassId,
+        count: 1,
+        source: pair.source,
+      });
     }
   }
 
   return [...counts.values()]
-    .sort((a, b) => (b.count - a.count) || (b.seasonId - a.seasonId))
-    .map((item) => ({ seasonId: item.seasonId, carClassId: item.carClassId, source: `${item.source} (x${item.count})` }));
+    .sort((a, b) => b.count - a.count || b.seasonId - a.seasonId)
+    .map((item) => ({
+      seasonId: item.seasonId,
+      carClassId: item.carClassId,
+      source: `${item.source} (x${item.count})`,
+    }));
 }
 
 function summarizePayload(payload: unknown): string {
-  if (payload === null || payload === undefined) return "empty payload";
+  if (payload === null || payload === undefined) return 'empty payload';
   if (Array.isArray(payload)) return `array(${payload.length})`;
-  if (typeof payload === "object") {
+  if (typeof payload === 'object') {
     const keys = Object.keys(payload as Record<string, unknown>).slice(0, 12);
-    return `object keys: ${keys.join(", ")}`;
+    return `object keys: ${keys.join(', ')}`;
   }
   return `primitive: ${String(payload)}`;
 }
@@ -133,13 +157,13 @@ async function fetchEndpoint(
   accessToken: string,
   seasonId: number,
   carClassId: number,
-  raceWeekNum?: number
+  raceWeekNum?: number,
 ): Promise<{ ok: boolean; status: number; body: string; payload?: unknown }> {
   const url = new URL(DOCS_ENDPOINT);
-  url.searchParams.set("season_id", String(seasonId));
-  url.searchParams.set("car_class_id", String(carClassId));
+  url.searchParams.set('season_id', String(seasonId));
+  url.searchParams.set('car_class_id', String(carClassId));
   if (raceWeekNum !== undefined) {
-    url.searchParams.set("race_week_num", String(raceWeekNum));
+    url.searchParams.set('race_week_num', String(raceWeekNum));
   }
 
   const response = await fetch(url, {
@@ -158,7 +182,7 @@ async function fetchEndpoint(
     return { ok: true, status: response.status, body: rawText };
   }
 
-  if (json && typeof json === "object" && typeof json.link === "string") {
+  if (json && typeof json === 'object' && typeof json.link === 'string') {
     const s3Response = await fetch(json.link);
     const s3Text = await s3Response.text();
     if (!s3Response.ok) {
@@ -187,24 +211,27 @@ async function main(): Promise<void> {
   const password = process.env.IRACING_PASSWORD;
 
   if (!clientId || !clientSecret || !username || !password) {
-    throw new Error("IRACING_CLIENT_ID, IRACING_CLIENT_SECRET, IRACING_USERNAME, and IRACING_PASSWORD are required");
+    throw new Error(
+      'IRACING_CLIENT_ID, IRACING_CLIENT_SECRET, IRACING_USERNAME, and IRACING_PASSWORD are required',
+    );
   }
 
-  const seasonIds = parseNumberList(getArg("season-ids"));
-  const carClassIds = parseNumberList(getArg("car-class-ids"));
-  const raceWeekNumsArg = parseNumberList(getArg("race-week-nums"));
-  const raceWeekNums = raceWeekNumsArg.length > 0 ? raceWeekNumsArg : [undefined as unknown as number, -1, 0, 1];
-  const samplesDir = getArg("samples-dir") || "samples";
-  const limit = Number(getArg("limit") || "12");
-  const saveSample = hasFlag("save-sample");
-  const outputPath = getArg("output") || DEFAULT_SAMPLE_PATH;
+  const seasonIds = parseNumberList(getArg('season-ids'));
+  const carClassIds = parseNumberList(getArg('car-class-ids'));
+  const raceWeekNumsArg = parseNumberList(getArg('race-week-nums'));
+  const raceWeekNums =
+    raceWeekNumsArg.length > 0 ? raceWeekNumsArg : [undefined as unknown as number, -1, 0, 1];
+  const samplesDir = getArg('samples-dir') || 'samples';
+  const limit = Number(getArg('limit') || '12');
+  const saveSample = hasFlag('save-sample');
+  const outputPath = getArg('output') || DEFAULT_SAMPLE_PATH;
 
   const explicitPairs: Pair[] = [];
   const explicitSeen = new Set<string>();
   if (seasonIds.length > 0 && carClassIds.length > 0) {
     for (const seasonId of seasonIds) {
       for (const carClassId of carClassIds) {
-        addPair(explicitPairs, explicitSeen, seasonId, carClassId, "cli");
+        addPair(explicitPairs, explicitSeen, seasonId, carClassId, 'cli');
       }
     }
   }
@@ -212,12 +239,16 @@ async function main(): Promise<void> {
   const samplePairs = rankPairs(collectPairsFromSamples(samplesDir));
   const probePairs = [...explicitPairs, ...samplePairs].slice(0, Math.max(1, limit));
   if (probePairs.length === 0) {
-    throw new Error("No candidate season/car_class pairs found. Pass --season-ids and --car-class-ids.");
+    throw new Error(
+      'No candidate season/car_class pairs found. Pass --season-ids and --car-class-ids.',
+    );
   }
 
   console.log(`Docs endpoint: ${DOCS_ENDPOINT}`);
   console.log(`Trying ${probePairs.length} season/car_class pair(s)`);
-  console.log(`Race week candidates: ${raceWeekNums.map((n) => (n === undefined ? "omitted" : String(n))).join(", ")}`);
+  console.log(
+    `Race week candidates: ${raceWeekNums.map((n) => (n === undefined ? 'omitted' : String(n))).join(', ')}`,
+  );
 
   const token = await requestPasswordLimitedToken({
     clientId,
@@ -229,12 +260,17 @@ async function main(): Promise<void> {
 
   for (const pair of probePairs) {
     for (const raceWeekNum of raceWeekNums) {
-      const descriptor = `season_id=${pair.seasonId}, car_class_id=${pair.carClassId}, race_week_num=${raceWeekNum === undefined ? "<omitted>" : raceWeekNum}`;
+      const descriptor = `season_id=${pair.seasonId}, car_class_id=${pair.carClassId}, race_week_num=${raceWeekNum === undefined ? '<omitted>' : raceWeekNum}`;
       try {
-        const result = await fetchEndpoint(token.access_token, pair.seasonId, pair.carClassId, raceWeekNum);
+        const result = await fetchEndpoint(
+          token.access_token,
+          pair.seasonId,
+          pair.carClassId,
+          raceWeekNum,
+        );
         if (!result.ok) {
           console.log(`FAIL  [${result.status}] ${descriptor}`);
-          console.log(`      ${result.body.slice(0, 300).replace(/\s+/g, " ")}`);
+          console.log(`      ${result.body.slice(0, 300).replace(/\s+/g, ' ')}`);
           continue;
         }
 
@@ -245,7 +281,7 @@ async function main(): Promise<void> {
 
         if (saveSample && result.payload !== undefined) {
           fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-          fs.writeFileSync(outputPath, JSON.stringify(result.payload, null, 2), "utf8");
+          fs.writeFileSync(outputPath, JSON.stringify(result.payload, null, 2), 'utf8');
           console.log(`      Saved sample to ${outputPath}`);
         }
         return;
@@ -257,7 +293,7 @@ async function main(): Promise<void> {
     }
   }
 
-  console.log("No successful payload found.");
+  console.log('No successful payload found.');
 }
 
 main().catch((error) => {

@@ -1,55 +1,61 @@
-import * as z from "zod/mini";
+import * as z from 'zod/mini';
 
 // ---- Response Schemas ----
 
 const StatsMemberBests = z.object({
-  carsDriven: z.array(z.object({
-    carId: z.number(),
-    carName: z.string()
-  })),
-  bests: z.array(z.object({
-    track: z.object({
-      configName: z.string(),
-      trackId: z.number(),
-      trackName: z.string()
+  carsDriven: z.array(
+    z.object({
+      carId: z.number(),
+      carName: z.string(),
     }),
-    eventType: z.string(),
-    bestLapTime: z.number(),
-    subsessionId: z.number(),
-    endTime: z.string(),
-    seasonYear: z.number(),
-    seasonQuarter: z.number()
-  })),
+  ),
+  bests: z.array(
+    z.object({
+      track: z.object({
+        configName: z.string(),
+        trackId: z.number(),
+        trackName: z.string(),
+      }),
+      eventType: z.string(),
+      bestLapTime: z.number(),
+      subsessionId: z.number(),
+      endTime: z.string(),
+      seasonYear: z.number(),
+      seasonQuarter: z.number(),
+    }),
+  ),
   custId: z.number(),
-  carId: z.number()
+  carId: z.number(),
 });
 const StatsMemberCareer = z.object({
-  stats: z.array(z.object({
-    categoryId: z.number(),
-    category: z.string(),
-    starts: z.number(),
-    wins: z.number(),
-    top5: z.number(),
-    poles: z.number(),
-    avgStartPosition: z.number(),
-    avgFinishPosition: z.number(),
-    laps: z.number(),
-    lapsLed: z.number(),
-    avgIncidents: z.number(),
-    avgPoints: z.number(),
-    winPercentage: z.number(),
-    top5Percentage: z.number(),
-    lapsLedPercentage: z.number(),
-    polesPercentage: z.number()
-  })),
-  custId: z.number()
+  stats: z.array(
+    z.object({
+      categoryId: z.number(),
+      category: z.string(),
+      starts: z.number(),
+      wins: z.number(),
+      top5: z.number(),
+      poles: z.number(),
+      avgStartPosition: z.number(),
+      avgFinishPosition: z.number(),
+      laps: z.number(),
+      lapsLed: z.number(),
+      avgIncidents: z.number(),
+      avgPoints: z.number(),
+      winPercentage: z.number(),
+      top5Percentage: z.number(),
+      lapsLedPercentage: z.number(),
+      polesPercentage: z.number(),
+    }),
+  ),
+  custId: z.number(),
 });
 const StatsMemberDivision = z.object({
   division: z.number(),
   projected: z.boolean(),
   eventType: z.number(),
   success: z.boolean(),
-  seasonId: z.number()
+  seasonId: z.number(),
 });
 const StatsMemberRecap = z.object({
   year: z.number(),
@@ -61,103 +67,111 @@ const StatsMemberRecap = z.object({
     avgFinishPosition: z.number(),
     laps: z.number(),
     lapsLed: z.number(),
-    favoriteCar: z.nullable(z.object({
-      carId: z.number(),
-      carName: z.string(),
-      carImage: z.string()
-    })),
-    favoriteTrack: z.nullable(z.object({
-      configName: z.string(),
-      trackId: z.number(),
-      trackLogo: z.string(),
-      trackName: z.string()
-    }))
+    favoriteCar: z.nullable(
+      z.object({
+        carId: z.number(),
+        carName: z.string(),
+        carImage: z.string(),
+      }),
+    ),
+    favoriteTrack: z.nullable(
+      z.object({
+        configName: z.string(),
+        trackId: z.number(),
+        trackLogo: z.string(),
+        trackName: z.string(),
+      }),
+    ),
   }),
   success: z.boolean(),
   season: z.nullable(z.number()),
-  custId: z.number()
+  custId: z.number(),
 });
 const StatsMemberRecentRaces = z.object({
-  races: z.array(z.object({
-    seasonId: z.number(),
-    seriesId: z.number(),
-    seriesName: z.string(),
-    carId: z.number(),
-    carClassId: z.number(),
-    livery: z.object({
+  races: z.array(
+    z.object({
+      seasonId: z.number(),
+      seriesId: z.number(),
+      seriesName: z.string(),
       carId: z.number(),
-      pattern: z.number(),
-      color1: z.string(),
-      color2: z.string(),
-      color3: z.string()
+      carClassId: z.number(),
+      livery: z.object({
+        carId: z.number(),
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+      }),
+      licenseLevel: z.number(),
+      sessionStartTime: z.string(),
+      winnerGroupId: z.number(),
+      winnerName: z.string(),
+      winnerHelmet: z.object({
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+        faceType: z.number(),
+        helmetType: z.number(),
+      }),
+      winnerLicenseLevel: z.number(),
+      startPosition: z.number(),
+      finishPosition: z.number(),
+      qualifyingTime: z.number(),
+      laps: z.number(),
+      lapsLed: z.number(),
+      incidents: z.number(),
+      points: z.number(),
+      strengthOfField: z.number(),
+      subsessionId: z.number(),
+      oldSubLevel: z.number(),
+      newSubLevel: z.number(),
+      oldiRating: z.number(),
+      newiRating: z.number(),
+      track: z.object({
+        trackId: z.number(),
+        trackName: z.string(),
+      }),
+      dropRace: z.boolean(),
+      seasonYear: z.number(),
+      seasonQuarter: z.number(),
+      raceWeekNum: z.number(),
     }),
-    licenseLevel: z.number(),
-    sessionStartTime: z.string(),
-    winnerGroupId: z.number(),
-    winnerName: z.string(),
-    winnerHelmet: z.object({
-      pattern: z.number(),
-      color1: z.string(),
-      color2: z.string(),
-      color3: z.string(),
-      faceType: z.number(),
-      helmetType: z.number()
-    }),
-    winnerLicenseLevel: z.number(),
-    startPosition: z.number(),
-    finishPosition: z.number(),
-    qualifyingTime: z.number(),
-    laps: z.number(),
-    lapsLed: z.number(),
-    incidents: z.number(),
-    points: z.number(),
-    strengthOfField: z.number(),
-    subsessionId: z.number(),
-    oldSubLevel: z.number(),
-    newSubLevel: z.number(),
-    oldiRating: z.number(),
-    newiRating: z.number(),
-    track: z.object({
-      trackId: z.number(),
-      trackName: z.string()
-    }),
-    dropRace: z.boolean(),
-    seasonYear: z.number(),
-    seasonQuarter: z.number(),
-    raceWeekNum: z.number()
-  })),
-  custId: z.number()
+  ),
+  custId: z.number(),
 });
 const StatsMemberSummary = z.object({
   thisYear: z.object({
     numOfficialSessions: z.number(),
     numLeagueSessions: z.number(),
     numOfficialWins: z.number(),
-    numLeagueWins: z.number()
+    numLeagueWins: z.number(),
   }),
-  custId: z.number()
+  custId: z.number(),
 });
 const StatsMemberYearly = z.object({
-  stats: z.array(z.object({
-    categoryId: z.number(),
-    category: z.string(),
-    starts: z.number(),
-    wins: z.number(),
-    top5: z.number(),
-    poles: z.number(),
-    avgStartPosition: z.number(),
-    avgFinishPosition: z.number(),
-    laps: z.number(),
-    lapsLed: z.number(),
-    avgIncidents: z.number(),
-    avgPoints: z.number(),
-    winPercentage: z.number(),
-    top5Percentage: z.number(),
-    lapsLedPercentage: z.number(),
-    year: z.number(),
-    polesPercentage: z.number()
-  })),
-  custId: z.number()
+  stats: z.array(
+    z.object({
+      categoryId: z.number(),
+      category: z.string(),
+      starts: z.number(),
+      wins: z.number(),
+      top5: z.number(),
+      poles: z.number(),
+      avgStartPosition: z.number(),
+      avgFinishPosition: z.number(),
+      laps: z.number(),
+      lapsLed: z.number(),
+      avgIncidents: z.number(),
+      avgPoints: z.number(),
+      winPercentage: z.number(),
+      top5Percentage: z.number(),
+      lapsLedPercentage: z.number(),
+      year: z.number(),
+      polesPercentage: z.number(),
+    }),
+  ),
+  custId: z.number(),
 });
 const StatsSeasonDriverStandings = z.object({
   success: z.boolean(),
@@ -175,10 +189,10 @@ const StatsSeasonDriverStandings = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.string(),
-    chunkFileNames: z.array(z.string())
+    chunkFileNames: z.array(z.string()),
   }),
   lastUpdated: z.string(),
-  csvUrl: z.string()
+  csvUrl: z.string(),
 });
 const StatsSeasonSupersessionStandings = z.object({
   success: z.boolean(),
@@ -196,10 +210,10 @@ const StatsSeasonSupersessionStandings = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.nullable(z.unknown()),
-    chunkFileNames: z.array(z.unknown())
+    chunkFileNames: z.array(z.unknown()),
   }),
   lastUpdated: z.string(),
-  csvUrl: z.string()
+  csvUrl: z.string(),
 });
 const StatsSeasonTeamStandings = z.object({
   success: z.boolean(),
@@ -217,10 +231,10 @@ const StatsSeasonTeamStandings = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.string(),
-    chunkFileNames: z.array(z.string())
+    chunkFileNames: z.array(z.string()),
   }),
   lastUpdated: z.string(),
-  csvUrl: z.string()
+  csvUrl: z.string(),
 });
 const StatsSeasonTtStandings = z.object({
   success: z.boolean(),
@@ -238,10 +252,10 @@ const StatsSeasonTtStandings = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.nullable(z.string()),
-    chunkFileNames: z.array(z.string())
+    chunkFileNames: z.array(z.string()),
   }),
   lastUpdated: z.string(),
-  csvUrl: z.string()
+  csvUrl: z.string(),
 });
 const StatsSeasonTtResults = z.object({
   success: z.boolean(),
@@ -259,10 +273,10 @@ const StatsSeasonTtResults = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.nullable(z.string()),
-    chunkFileNames: z.array(z.string())
+    chunkFileNames: z.array(z.string()),
   }),
   lastUpdated: z.string(),
-  csvUrl: z.string()
+  csvUrl: z.string(),
 });
 const StatsSeasonQualifyResults = z.object({
   success: z.boolean(),
@@ -280,10 +294,10 @@ const StatsSeasonQualifyResults = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.nullable(z.unknown()),
-    chunkFileNames: z.array(z.unknown())
+    chunkFileNames: z.array(z.unknown()),
   }),
   lastUpdated: z.string(),
-  csvUrl: z.string()
+  csvUrl: z.string(),
 });
 const StatsWorldRecords = z.object({
   type: z.string(),
@@ -291,17 +305,19 @@ const StatsWorldRecords = z.object({
     success: z.boolean(),
     carId: z.number(),
     trackId: z.number(),
-    chunkInfo: z.nullable(z.object({
-      chunkSize: z.number(),
-      numChunks: z.number(),
-      rows: z.number(),
-      baseDownloadUrl: z.string(),
-      chunkFileNames: z.array(z.string())
-    })),
+    chunkInfo: z.nullable(
+      z.object({
+        chunkSize: z.number(),
+        numChunks: z.number(),
+        rows: z.number(),
+        baseDownloadUrl: z.string(),
+        chunkFileNames: z.array(z.string()),
+      }),
+    ),
     lastUpdated: z.string(),
     seasonYear: z.optional(z.number()),
-    seasonQuarter: z.optional(z.number())
-  })
+    seasonQuarter: z.optional(z.number()),
+  }),
 });
 
 // ---- Response Types (inferred from schemas) ----
@@ -314,7 +330,9 @@ export type StatsMemberRecentRacesResponse = z.infer<typeof StatsMemberRecentRac
 export type StatsMemberSummaryResponse = z.infer<typeof StatsMemberSummary>;
 export type StatsMemberYearlyResponse = z.infer<typeof StatsMemberYearly>;
 export type StatsSeasonDriverStandingsResponse = z.infer<typeof StatsSeasonDriverStandings>;
-export type StatsSeasonSupersessionStandingsResponse = z.infer<typeof StatsSeasonSupersessionStandings>;
+export type StatsSeasonSupersessionStandingsResponse = z.infer<
+  typeof StatsSeasonSupersessionStandings
+>;
 export type StatsSeasonTeamStandingsResponse = z.infer<typeof StatsSeasonTeamStandings>;
 export type StatsSeasonTtStandingsResponse = z.infer<typeof StatsSeasonTtStandings>;
 export type StatsSeasonTtResultsResponse = z.infer<typeof StatsSeasonTtResults>;
@@ -413,7 +431,9 @@ export type StatsMemberRecentRacesParams = z.infer<typeof statsMemberRecentRaces
 export type StatsMemberSummaryParams = z.infer<typeof statsMemberSummaryParams>;
 export type StatsMemberYearlyParams = z.infer<typeof statsMemberYearlyParams>;
 export type StatsSeasonDriverStandingsParams = z.infer<typeof statsSeasonDriverStandingsParams>;
-export type StatsSeasonSupersessionStandingsParams = z.infer<typeof statsSeasonSupersessionStandingsParams>;
+export type StatsSeasonSupersessionStandingsParams = z.infer<
+  typeof statsSeasonSupersessionStandingsParams
+>;
 export type StatsSeasonTeamStandingsParams = z.infer<typeof statsSeasonTeamStandingsParams>;
 export type StatsSeasonTtStandingsParams = z.infer<typeof statsSeasonTtStandingsParams>;
 export type StatsSeasonTtResultsParams = z.infer<typeof statsSeasonTtResultsParams>;

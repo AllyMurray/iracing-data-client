@@ -48,6 +48,10 @@ jobs:
       - name: No unknown service return types
         run: pnpm run sdk:check-no-unknown
 
+      - name: Check formatting and lint
+        if: matrix.node-version == '24.x'
+        run: pnpm run check
+
       - name: Typecheck
         run: pnpm run typecheck
 

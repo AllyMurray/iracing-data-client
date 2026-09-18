@@ -1,6 +1,10 @@
-import type { IRacingClient } from "../client";
-import type { ConstantsCategoriesResponse, ConstantsDivisionsResponse, ConstantsEventTypesResponse } from "./types";
-import { ConstantsCategories, ConstantsDivisions, ConstantsEventTypes } from "./types";
+import type { IRacingClient } from '../client';
+import type {
+  ConstantsCategoriesResponse,
+  ConstantsDivisionsResponse,
+  ConstantsEventTypesResponse,
+} from './types';
+import { ConstantsCategories, ConstantsDivisions, ConstantsEventTypes } from './types';
 
 export class ConstantsService {
   constructor(private client: IRacingClient) {}
@@ -11,7 +15,10 @@ export class ConstantsService {
    * @sample constants.categories.json
    */
   async categories(): Promise<ConstantsCategoriesResponse> {
-    return this.client.get<ConstantsCategoriesResponse>("https://members-ng.iracing.com/data/constants/categories", { schema: ConstantsCategories });
+    return this.client.get<ConstantsCategoriesResponse>(
+      'https://members-ng.iracing.com/data/constants/categories',
+      { schema: ConstantsCategories },
+    );
   }
 
   /**
@@ -20,7 +27,10 @@ export class ConstantsService {
    * @sample constants.divisions.json
    */
   async divisions(): Promise<ConstantsDivisionsResponse> {
-    return this.client.get<ConstantsDivisionsResponse>("https://members-ng.iracing.com/data/constants/divisions", { schema: ConstantsDivisions });
+    return this.client.get<ConstantsDivisionsResponse>(
+      'https://members-ng.iracing.com/data/constants/divisions',
+      { schema: ConstantsDivisions },
+    );
   }
 
   /**
@@ -29,7 +39,9 @@ export class ConstantsService {
    * @sample constants.event_types.json
    */
   async eventTypes(): Promise<ConstantsEventTypesResponse> {
-    return this.client.get<ConstantsEventTypesResponse>("https://members-ng.iracing.com/data/constants/event_types", { schema: ConstantsEventTypes });
+    return this.client.get<ConstantsEventTypesResponse>(
+      'https://members-ng.iracing.com/data/constants/event_types',
+      { schema: ConstantsEventTypes },
+    );
   }
-
 }

@@ -1,4 +1,4 @@
-import * as z from "zod/mini";
+import * as z from 'zod/mini';
 
 // ---- Response Schemas ----
 
@@ -21,7 +21,7 @@ const TeamGet = z.object({
     pattern: z.number(),
     color1: z.string(),
     color2: z.string(),
-    color3: z.string()
+    color3: z.string(),
   }),
   owner: z.object({
     custId: z.number(),
@@ -32,14 +32,14 @@ const TeamGet = z.object({
       color2: z.string(),
       color3: z.string(),
       faceType: z.number(),
-      helmetType: z.number()
+      helmetType: z.number(),
     }),
     owner: z.boolean(),
-    admin: z.boolean()
+    admin: z.boolean(),
   }),
   tags: z.object({
     categorized: z.array(z.unknown()),
-    notCategorized: z.array(z.unknown())
+    notCategorized: z.array(z.unknown()),
   }),
   teamApplications: z.array(z.unknown()),
   pendingRequests: z.array(z.unknown()),
@@ -47,28 +47,32 @@ const TeamGet = z.object({
   isApplicant: z.boolean(),
   isInvite: z.boolean(),
   isIgnored: z.boolean(),
-  roster: z.array(z.object({
-    custId: z.number(),
-    displayName: z.string(),
-    helmet: z.object({
-      pattern: z.number(),
-      color1: z.string(),
-      color2: z.string(),
-      color3: z.string(),
-      faceType: z.number(),
-      helmetType: z.number()
+  roster: z.array(
+    z.object({
+      custId: z.number(),
+      displayName: z.string(),
+      helmet: z.object({
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+        faceType: z.number(),
+        helmetType: z.number(),
+      }),
+      owner: z.boolean(),
+      admin: z.boolean(),
     }),
-    owner: z.boolean(),
-    admin: z.boolean()
-  }))
+  ),
 });
-const TeamMembership = z.array(z.object({
-  teamId: z.number(),
-  teamName: z.string(),
-  owner: z.boolean(),
-  admin: z.boolean(),
-  defaultTeam: z.boolean()
-}));
+const TeamMembership = z.array(
+  z.object({
+    teamId: z.number(),
+    teamName: z.string(),
+    owner: z.boolean(),
+    admin: z.boolean(),
+    defaultTeam: z.boolean(),
+  }),
+);
 
 // ---- Response Types (inferred from schemas) ----
 
@@ -82,8 +86,7 @@ const teamGetParams = z.object({
   includeLicenses: z.optional(z.boolean()), // For faster responses, only request when necessary. // maps to: include_licenses
 });
 
-const teamMembershipParams = z.object({
-});
+const teamMembershipParams = z.object({});
 
 // ---- Exported Parameter Types ----
 
@@ -92,7 +95,4 @@ export type TeamMembershipParams = z.infer<typeof teamMembershipParams>;
 
 // ---- Exported Schemas ----
 
-export {
-  TeamGet,
-  TeamMembership,
-};
+export { TeamGet, TeamMembership };

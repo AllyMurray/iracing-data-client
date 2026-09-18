@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll } from "vitest";
-import { IRacingDataClient } from "../index";
+import { describe, it, expect, beforeAll } from 'vite-plus/test';
+import { IRacingDataClient } from '../index';
 
-describe("CarService Integration Tests", () => {
+describe('CarService Integration Tests', () => {
   let dataClient: IRacingDataClient;
 
   beforeAll(() => {
@@ -12,7 +12,7 @@ describe("CarService Integration Tests", () => {
 
     if (!clientId || !clientSecret || !username || !password) {
       throw new Error(
-        "Missing OAuth credentials. Set IRACING_CLIENT_ID, IRACING_CLIENT_SECRET, IRACING_USERNAME, IRACING_PASSWORD in .env file"
+        'Missing OAuth credentials. Set IRACING_CLIENT_ID, IRACING_CLIENT_SECRET, IRACING_USERNAME, IRACING_PASSWORD in .env file',
       );
     }
 
@@ -27,8 +27,8 @@ describe("CarService Integration Tests", () => {
     });
   });
 
-  describe("car.get()", () => {
-    it("should return an array of cars with required fields", async () => {
+  describe('car.get()', () => {
+    it('should return an array of cars with required fields', async () => {
       const cars = await dataClient.car.get();
 
       expect(Array.isArray(cars)).toBe(true);
@@ -51,8 +51,8 @@ describe("CarService Integration Tests", () => {
     }, 30000); // 30 second timeout for API call
   });
 
-  describe("car.assets()", () => {
-    it("should return an object of car assets with required fields", async () => {
+  describe('car.assets()', () => {
+    it('should return an object of car assets with required fields', async () => {
       const assets = await dataClient.car.assets();
 
       expect(typeof assets).toBe('object');
@@ -83,8 +83,8 @@ describe("CarService Integration Tests", () => {
     }, 30000); // 30 second timeout for API call
   });
 
-  describe("cross-validation", () => {
-    it("should be able to call both methods successfully", async () => {
+  describe('cross-validation', () => {
+    it('should be able to call both methods successfully', async () => {
       // Just test that both calls work without timing out
       // We'll get the actual data structure from the individual tests above
       const carsPromise = dataClient.car.get();

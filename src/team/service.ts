@@ -1,7 +1,7 @@
-import type { IRacingClient } from "../client";
-import type { TeamGetParams, TeamGetResponse, TeamMembershipResponse } from "./types";
-import * as z from "zod/mini";
-import { TeamGet, TeamMembership } from "./types";
+import type { IRacingClient } from '../client';
+import type { TeamGetParams, TeamGetResponse, TeamMembershipResponse } from './types';
+import * as z from 'zod/mini';
+import { TeamGet, TeamMembership } from './types';
 
 const getParams = z.object({
   teamId: z.number(), // maps to: team_id
@@ -17,7 +17,11 @@ export class TeamService {
    * @sample team.get.json
    */
   async get(params: TeamGetParams): Promise<TeamGetResponse> {
-    return this.client.get<TeamGetResponse>("https://members-ng.iracing.com/data/team/get", { params, paramsValidator: getParams, schema: TeamGet });
+    return this.client.get<TeamGetResponse>('https://members-ng.iracing.com/data/team/get', {
+      params,
+      paramsValidator: getParams,
+      schema: TeamGet,
+    });
   }
 
   /**
@@ -26,7 +30,9 @@ export class TeamService {
    * @sample team.membership.json
    */
   async membership(): Promise<TeamMembershipResponse> {
-    return this.client.get<TeamMembershipResponse>("https://members-ng.iracing.com/data/team/membership", { schema: TeamMembership });
+    return this.client.get<TeamMembershipResponse>(
+      'https://members-ng.iracing.com/data/team/membership',
+      { schema: TeamMembership },
+    );
   }
-
 }
