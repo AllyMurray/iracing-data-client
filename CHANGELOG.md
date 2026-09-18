@@ -1,5 +1,24 @@
 # iracing-data-client
 
+## 0.5.0
+
+### Minor Changes
+
+- d0adb21: Support Node.js 22 and newer and remove support for older Node releases.
+  Consumers on Node.js 18 or 20 must upgrade to Node.js 22 or newer. Modern browser
+  support is unchanged. Repository development, builds, documentation, and releases
+  now use Node.js 24 and pnpm 12, with package compatibility checked in CI on
+  Node.js 22 and 24 LTS.
+
+### Patch Changes
+
+- 1c23461: Widen the published Node.js engine range to `>=22.0.0`, including odd-numbered
+  releases such as Node.js 23 and 25. CI continues to test Node.js 22 and 24 LTS;
+  repository development, builds, documentation, and releases continue to use
+  Node.js 24.
+- b3ce16e: Update Zod to 4.6.5 and verify the generated schemas and published TypeScript
+  declarations against the updated runtime dependency.
+
 ## 0.4.0
 
 ### Minor Changes
