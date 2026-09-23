@@ -1,5 +1,13 @@
 # iracing-data-client
 
+## 0.5.1
+
+### Patch Changes
+
+- 8ea27c6: Build the published ESM and CommonJS packages with Vite+ and TypeScript 7.
+  Preserve existing exports, runtime dependencies, and browser syntax compatibility,
+  with packed-package validation against TypeScript 6 and 7 consumers.
+
 ## 0.5.0
 
 ### Minor Changes
