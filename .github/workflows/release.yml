@@ -1,97 +1,124 @@
 name: release
+
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch: {}
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      recovery_run_id:
+        description: Original release run ID whose saved candidate should be resumed
+        required: false
+        type: string
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read
       id-token: write
     env:
       CI: 'true'
+      RECOVERY_RUN_ID: ${{ inputs.recovery_run_id }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Configure git
         run: |
-          # Get author info from the most recent commit
-          AUTHOR_NAME=$(git log -1 --pretty=format:'%an')
-          AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+          echo "RELEASE_DIR=$RUNNER_TEMP/release-candidate" >> "$GITHUB_ENV"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-          echo "Setting git config to: $AUTHOR_NAME <$AUTHOR_EMAIL>"
-          git config user.name "$AUTHOR_NAME"
-          git config user.email "$AUTHOR_EMAIL"
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0
+
       - name: Setup Node.js
         uses: actions/setup-node@v7.0.0
         with:
           node-version: 24.x
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Check for changesets
+        id: changesets
+        if: env.RECOVERY_RUN_ID == ''
+        run: node scripts/release.mjs pending
+
+      - name: Restore saved release candidate
+        if: env.RECOVERY_RUN_ID != ''
+        run: node scripts/release.mjs recover
+
       - name: Install dependencies
+        if: steps.changesets.outputs.has_changesets == 'true' || env.RELEASE_ACTIVE == 'true'
         run: pnpm install --frozen-lockfile
-      - name: Build packages
+
+      - name: Version packages and create local tag
+        if: steps.changesets.outputs.has_changesets == 'true'
+        run: node scripts/release.mjs prepare
+
+      - name: Build versioned package
+        if: env.RELEASE_ACTIVE == 'true'
         run: pnpm run build
+
       - name: No unknown service return types
+        if: env.RELEASE_ACTIVE == 'true'
         run: pnpm run sdk:check-no-unknown
+
       - name: Unit tests
+        if: env.RELEASE_ACTIVE == 'true'
         run: pnpm test run
+
+      - name: Pack release and save exact commit
+        if: env.RELEASE_ACTIVE == 'true' && env.RECOVERY_RUN_ID == ''
+        run: node scripts/release.mjs stage
+
+      - name: Test the exact release tarball
+        if: env.RELEASE_ACTIVE == 'true'
+        run: pnpm run test:package:artifacts --tarball "$RELEASE_DIR/package.tgz"
+
       - name: Restore encrypted .env
-        run: echo "$DOTENV_ENV_FILE" > .env
+        if: env.RELEASE_ACTIVE == 'true'
+        run: printf '%s\n' "$DOTENV_ENV_FILE" > .env
         env:
           DOTENV_ENV_FILE: ${{ secrets.DOTENV_ENV_FILE }}
+
       - name: Integration tests
+        if: env.RELEASE_ACTIVE == 'true'
         run: pnpm test:integration
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
-      - name: Check for changesets
-        id: changesets
-        run: |
-          # Check if there are any changeset files (excluding config and README)
-          CHANGESET_COUNT=$(ls .changeset/*.md 2>/dev/null | grep -v README.md | wc -l | tr -d ' ')
-          echo "count=$CHANGESET_COUNT"
-          if [ "$CHANGESET_COUNT" -gt 0 ]; then
-            echo "has_changesets=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_changesets=false" >> "$GITHUB_OUTPUT"
-            echo "No changesets found, skipping publish"
-          fi
-      - name: Version packages
-        if: steps.changesets.outputs.has_changesets == 'true'
-        run: |
-          npx changeset version
-          git add .
-          git commit -m "chore: release packages"
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove restored environment file
+        if: always()
+        run: rm -f .env
+
+      # This must succeed before npm publishing. Recovery downloads the original
+      # artifact; it never overwrites it or repacks the version being recovered.
+      - name: Save recovery artifact
+        if: env.RELEASE_ACTIVE == 'true' && env.RECOVERY_RUN_ID == ''
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: release-candidate
+          path: |
+            ${{ env.RELEASE_DIR }}/package.tgz
+            ${{ env.RELEASE_DIR }}/release.bundle
+            ${{ env.RELEASE_DIR }}/release.json
+          if-no-files-found: error
+          retention-days: 90
+
       - name: Update npm for trusted publishing
-        if: steps.changesets.outputs.has_changesets == 'true'
+        if: env.RELEASE_ACTIVE == 'true'
         run: npm install -g npm@latest
-      - name: Publish packages
-        if: steps.changesets.outputs.has_changesets == 'true'
-        # pnpm 12 no longer delegates publishing to npm; retain npm's trusted publishing.
-        run: |
-          pnpm pack --out "$RUNNER_TEMP/iracing-data-client.tgz"
-          npm publish "$RUNNER_TEMP/iracing-data-client.tgz" --provenance --access public
-      - name: Push tags
-        if: steps.changesets.outputs.has_changesets == 'true'
-        run: git push origin --tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create GitHub Release
-        if: steps.changesets.outputs.has_changesets == 'true'
-        run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          echo "Creating GitHub release for $PACKAGE_NAME@$PACKAGE_VERSION"
-          gh release create "$PACKAGE_NAME@$PACKAGE_VERSION" --title "$PACKAGE_NAME@$PACKAGE_VERSION" --generate-notes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish and finalize release
+        if: env.RELEASE_ACTIVE == 'true'
+        run: node scripts/release.mjs publish

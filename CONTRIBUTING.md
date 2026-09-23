@@ -235,8 +235,83 @@ the first library build.
 
 ## CI / GitHub Actions
 
-Publishing packs an explicit tarball with pnpm and publishes that tarball with
-npm, retaining npm's trusted publishing and provenance flow when using pnpm 12.
+### Releases
+
+Changesets v3 runs on the Node 24 development/release runtime. Consumer support
+remains Node `>=22.0.0`; CI tests Node 22 and 24. Add a Changeset with
+`pnpm exec changeset` for consumer-facing changes, including runtime dependency
+updates. Tooling, CI, and contributor-documentation changes do not need a
+publishing Changeset. The workflow skips publication when there are no pending
+Changesets (or only empty Changesets); it does not invoke `changeset version`
+without a release plan because v3 treats that as an error.
+
+The `release.yml` workflow runs on `main` and serializes release runs without
+cancelling an active release. It:
+
+1. Runs the locally installed Changesets CLI, refreshes the pnpm lockfile, and
+   creates a local version commit and `iracing-data-client@<version>` tag.
+2. Builds the versioned package, checks service return types, runs unit tests,
+   packs with `pnpm pack`, tests that exact tarball in an isolated consumer, and
+   runs the credential-dependent live API integration tests.
+3. Saves a `release-candidate` Actions artifact **before publishing**. It contains
+   only the tarball, an incremental Git bundle containing the release commit/tag,
+   and metadata with the tarball's SHA-512 integrity, source run, and base commit.
+   The encrypted environment file and credentials are not included.
+4. Checks npm and GitHub for the version/release. Only HTTP 404 means missing;
+   authentication, network, and server failures stop the run. An existing npm
+   version must have exactly the saved tarball's integrity to be reused.
+5. Publishes the explicit tarball with `npm publish --provenance --access public`
+   using the existing GitHub OIDC trusted publisher, then pushes the version
+   commit and its tag atomically. Finally it creates a GitHub release using the
+   verified existing tag, or skips an existing completed release.
+
+pnpm 12 publishes natively, so npm performs publication to retain its trusted
+publishing support. The workflow keeps its existing filename and `id-token:
+write` permission, and removes an inherited `NODE_AUTH_TOKEN` from the publish
+process. It never adds a registry token. Both normal and recovery runs must pass
+the live API gate before publication/finalization. Restored `.env` files are
+removed even when a test fails.
+
+### Recovering an interrupted release
+
+If a run fails **before** uploading `release-candidate`, it has not published
+anything. Fix the cause and run the release workflow on `main` again. If the
+artifact exists, use **Actions → release → Run workflow**, select `main`, and
+set `recovery_run_id` to the original run's numeric ID (from its URL). Use this
+explicit recovery input instead of GitHub's ordinary “Re-run jobs” button after
+publication may have started. A rerun cannot overwrite the original artifact.
+Recovery does not require pending Changesets.
+
+Recovery verifies that the artifact belongs to this repository's completed
+`release.yml` run on `main`, restores its exact commit/tag, verifies the tarball
+integrity and package metadata, and reruns the test gates. It publishes the saved
+archive only if npm still lacks that version. If npm already has the matching
+archive, it finishes the Git push and/or GitHub release without publishing
+again. If the Git commit/tag were already pushed and only the GitHub release is
+missing, recovery works even after later commits have reached `main`.
+
+If `main` advanced **before the release commit/tag were pushed**, recovery stops
+for manual reconciliation; it never force-pushes or silently assigns a different
+archive to an existing version. Download the original artifact, fetch its bundle
+into a clean checkout, inspect the saved commit and current `main`, and merge the
+saved release commit into `main` while preserving that commit and its tag. Resolve
+conflicts deliberately, retain later work/Changesets, and push the merge and saved
+tag atomically. Then dispatch recovery with the original run ID. Do not cherry-pick
+the release into a different commit and move its tag, or republish/bump past a
+partial release without reconciling the recorded version first.
+
+Artifacts are retained for 90 days. Keep the original candidate when investigating
+an interrupted release. If it has expired, a tag conflicts, or npm's integrity
+differs, stop and inspect the published package and Git history manually; the
+workflow deliberately refuses to guess a replacement. Runs made by the previous
+workflow have no recovery artifact and also require manual inspection.
+
+Run `pnpm run build && pnpm run test:release` to validate preparation and recovery
+without publishing. This uses real Changesets, tarballs, tags, bundles, and local
+bare Git remotes, and substitutes npm/GitHub writes. CI runs it on Node 24. The
+suite covers no-change releases, publication/push/release failures, matching and
+conflicting existing versions, later commits, and lookup outages. It does not use
+live credentials or alter this checkout's version/tags.
 
 In CI, the encrypted `.env` file is restored from a GitHub secret and decrypted by dotenvx at runtime. This means adding or changing env vars only requires updating a single secret — the workflow YAML never needs to change.
 
@@ -252,5 +327,5 @@ To update `DOTENV_ENV_FILE`, copy the content of your local `.env` and paste it 
 1. Create a feature branch from `main`
 2. Make your changes
 3. Run `pnpm run check`, `pnpm run typecheck`, `pnpm test run`, and `pnpm run test:package`; regenerate the SDK when changing templates and build the docs when changing documentation
-4. Add a changeset: `npx changeset`
+4. For consumer-facing changes, add a Changeset: `pnpm exec changeset`
 5. Open a Pull Request
