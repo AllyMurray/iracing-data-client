@@ -20,11 +20,11 @@ export function createMockResponse(
   const {
     ok = true,
     status = ok ? 200 : 500,
-    statusText = ok ? "OK" : "Internal Server Error",
-    headers = { "content-type": "application/json" },
+    statusText = ok ? 'OK' : 'Internal Server Error',
+    headers = { 'content-type': 'application/json' },
   } = options;
 
-  const responseBody = typeof body === "string" ? body : JSON.stringify(body);
+  const responseBody = typeof body === 'string' ? body : JSON.stringify(body);
 
   return new Response(responseBody, {
     status,

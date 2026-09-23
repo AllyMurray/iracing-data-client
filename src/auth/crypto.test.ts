@@ -1,5 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { maskSecret, maskPassword, maskClientSecret, generatePKCE, generateRandomString } from './crypto';
+import { describe, it, expect } from 'vite-plus/test';
+import {
+  maskSecret,
+  maskPassword,
+  maskClientSecret,
+  generatePKCE,
+  generateRandomString,
+} from './crypto';
 
 describe('maskSecret', () => {
   it('should produce consistent hash for same inputs', async () => {

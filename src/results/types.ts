@@ -1,28 +1,34 @@
-import * as z from "zod/mini";
+import * as z from 'zod/mini';
 
 // ---- Response Schemas ----
 
 const ResultsGet = z.object({
   subsessionId: z.number(),
-  allowedLicenses: z.array(z.object({
-    groupName: z.string(),
-    licenseGroup: z.number(),
-    maxLicenseLevel: z.number(),
-    minLicenseLevel: z.number(),
-    parentId: z.number()
-  })),
+  allowedLicenses: z.array(
+    z.object({
+      groupName: z.string(),
+      licenseGroup: z.number(),
+      maxLicenseLevel: z.number(),
+      minLicenseLevel: z.number(),
+      parentId: z.number(),
+    }),
+  ),
   associatedSubsessionIds: z.array(z.number()),
   canProtest: z.boolean(),
-  carClasses: z.array(z.object({
-    carClassId: z.number(),
-    shortName: z.string(),
-    name: z.string(),
-    strengthOfField: z.number(),
-    numEntries: z.number(),
-    carsInClass: z.array(z.object({
-      carId: z.number()
-    }))
-  })),
+  carClasses: z.array(
+    z.object({
+      carClassId: z.number(),
+      shortName: z.string(),
+      name: z.string(),
+      strengthOfField: z.number(),
+      numEntries: z.number(),
+      carsInClass: z.array(
+        z.object({
+          carId: z.number(),
+        }),
+      ),
+    }),
+  ),
   cautionType: z.number(),
   cooldownMinutes: z.number(),
   cornersPerLap: z.number(),
@@ -66,108 +72,114 @@ const ResultsGet = z.object({
   seriesName: z.string(),
   seriesShortName: z.string(),
   sessionId: z.number(),
-  sessionResults: z.array(z.object({
-    simsessionNumber: z.number(),
-    simsessionName: z.string(),
-    simsessionType: z.number(),
-    simsessionTypeName: z.string(),
-    simsessionSubtype: z.number(),
-    results: z.array(z.object({
-      custId: z.number(),
-      displayName: z.string(),
-      aggregateChampPoints: z.number(),
-      ai: z.boolean(),
-      averageLap: z.number(),
-      bestLapNum: z.number(),
-      bestLapTime: z.number(),
-      bestNlapsNum: z.number(),
-      bestNlapsTime: z.number(),
-      bestQualLapAt: z.string(),
-      bestQualLapNum: z.number(),
-      bestQualLapTime: z.number(),
-      carClassId: z.number(),
-      carClassName: z.string(),
-      carClassShortName: z.string(),
-      carId: z.number(),
-      carName: z.string(),
-      carcfg: z.number(),
-      champPoints: z.number(),
-      classInterval: z.number(),
-      countryCode: z.string(),
-      division: z.number(),
-      divisionName: z.string(),
-      dropRace: z.boolean(),
-      finishPosition: z.number(),
-      finishPositionInClass: z.number(),
-      flairId: z.number(),
-      flairName: z.string(),
-      flairShortname: z.string(),
-      friend: z.boolean(),
-      helmet: z.object({
-        pattern: z.number(),
-        color1: z.string(),
-        color2: z.string(),
-        color3: z.string(),
-        faceType: z.number(),
-        helmetType: z.number()
-      }),
-      incidents: z.number(),
-      interval: z.number(),
-      lapsComplete: z.number(),
-      lapsLead: z.number(),
-      leagueAggPoints: z.number(),
-      leaguePoints: z.number(),
-      licenseChangeOval: z.number(),
-      licenseChangeRoad: z.number(),
-      livery: z.object({
-        carId: z.number(),
-        pattern: z.number(),
-        color1: z.string(),
-        color2: z.string(),
-        color3: z.string(),
-        numberFont: z.number(),
-        numberColor1: z.string(),
-        numberColor2: z.string(),
-        numberColor3: z.string(),
-        numberSlant: z.number(),
-        sponsor1: z.number(),
-        sponsor2: z.number(),
-        carNumber: z.string(),
-        wheelColor: z.nullable(z.string()),
-        rimType: z.number()
-      }),
-      maxPctFuelFill: z.number(),
-      newCpi: z.number(),
-      newLicenseLevel: z.number(),
-      newSubLevel: z.number(),
-      newTtrating: z.number(),
-      newiRating: z.number(),
-      oldCpi: z.number(),
-      oldLicenseLevel: z.number(),
-      oldSubLevel: z.number(),
-      oldTtrating: z.number(),
-      oldiRating: z.number(),
-      optLapsComplete: z.number(),
-      position: z.number(),
-      qualLapTime: z.number(),
-      reasonOut: z.string(),
-      reasonOutId: z.number(),
-      startingPosition: z.number(),
-      startingPositionInClass: z.number(),
-      suit: z.object({
-        pattern: z.number(),
-        color1: z.string(),
-        color2: z.string(),
-        color3: z.string()
-      }),
-      watched: z.boolean(),
-      weightPenaltyKg: z.number()
-    }))
-  })),
-  sessionSplits: z.array(z.object({
-    subsessionId: z.number(),
-    eventStrengthOfField: z.number()
-  })),
+  sessionResults: z.array(
+    z.object({
+      simsessionNumber: z.number(),
+      simsessionName: z.string(),
+      simsessionType: z.number(),
+      simsessionTypeName: z.string(),
+      simsessionSubtype: z.number(),
+      results: z.array(
+        z.object({
+          custId: z.number(),
+          displayName: z.string(),
+          aggregateChampPoints: z.number(),
+          ai: z.boolean(),
+          averageLap: z.number(),
+          bestLapNum: z.number(),
+          bestLapTime: z.number(),
+          bestNlapsNum: z.number(),
+          bestNlapsTime: z.number(),
+          bestQualLapAt: z.string(),
+          bestQualLapNum: z.number(),
+          bestQualLapTime: z.number(),
+          carClassId: z.number(),
+          carClassName: z.string(),
+          carClassShortName: z.string(),
+          carId: z.number(),
+          carName: z.string(),
+          carcfg: z.number(),
+          champPoints: z.number(),
+          classInterval: z.number(),
+          countryCode: z.string(),
+          division: z.number(),
+          divisionName: z.string(),
+          dropRace: z.boolean(),
+          finishPosition: z.number(),
+          finishPositionInClass: z.number(),
+          flairId: z.number(),
+          flairName: z.string(),
+          flairShortname: z.string(),
+          friend: z.boolean(),
+          helmet: z.object({
+            pattern: z.number(),
+            color1: z.string(),
+            color2: z.string(),
+            color3: z.string(),
+            faceType: z.number(),
+            helmetType: z.number(),
+          }),
+          incidents: z.number(),
+          interval: z.number(),
+          lapsComplete: z.number(),
+          lapsLead: z.number(),
+          leagueAggPoints: z.number(),
+          leaguePoints: z.number(),
+          licenseChangeOval: z.number(),
+          licenseChangeRoad: z.number(),
+          livery: z.object({
+            carId: z.number(),
+            pattern: z.number(),
+            color1: z.string(),
+            color2: z.string(),
+            color3: z.string(),
+            numberFont: z.number(),
+            numberColor1: z.string(),
+            numberColor2: z.string(),
+            numberColor3: z.string(),
+            numberSlant: z.number(),
+            sponsor1: z.number(),
+            sponsor2: z.number(),
+            carNumber: z.string(),
+            wheelColor: z.nullable(z.string()),
+            rimType: z.number(),
+          }),
+          maxPctFuelFill: z.number(),
+          newCpi: z.number(),
+          newLicenseLevel: z.number(),
+          newSubLevel: z.number(),
+          newTtrating: z.number(),
+          newiRating: z.number(),
+          oldCpi: z.number(),
+          oldLicenseLevel: z.number(),
+          oldSubLevel: z.number(),
+          oldTtrating: z.number(),
+          oldiRating: z.number(),
+          optLapsComplete: z.number(),
+          position: z.number(),
+          qualLapTime: z.number(),
+          reasonOut: z.string(),
+          reasonOutId: z.number(),
+          startingPosition: z.number(),
+          startingPositionInClass: z.number(),
+          suit: z.object({
+            pattern: z.number(),
+            color1: z.string(),
+            color2: z.string(),
+            color3: z.string(),
+          }),
+          watched: z.boolean(),
+          weightPenaltyKg: z.number(),
+        }),
+      ),
+    }),
+  ),
+  sessionSplits: z.array(
+    z.object({
+      subsessionId: z.number(),
+      eventStrengthOfField: z.number(),
+    }),
+  ),
   specialEventType: z.number(),
   startTime: z.string(),
   track: z.object({
@@ -175,14 +187,14 @@ const ResultsGet = z.object({
     categoryId: z.number(),
     configName: z.string(),
     trackId: z.number(),
-    trackName: z.string()
+    trackName: z.string(),
   }),
   trackState: z.object({
     leaveMarbles: z.boolean(),
     practiceRubber: z.number(),
     qualifyRubber: z.number(),
     raceRubber: z.number(),
-    warmupRubber: z.number()
+    warmupRubber: z.number(),
   }),
   weather: z.object({
     allowFog: z.boolean(),
@@ -204,8 +216,8 @@ const ResultsGet = z.object({
     weatherVarOngoing: z.number(),
     windDir: z.number(),
     windUnits: z.number(),
-    windValue: z.number()
-  })
+    windValue: z.number(),
+  }),
 });
 const ResultsEventLog = z.object({
   success: z.boolean(),
@@ -226,16 +238,16 @@ const ResultsEventLog = z.object({
     track: z.object({
       configName: z.string(),
       trackId: z.number(),
-      trackName: z.string()
-    })
+      trackName: z.string(),
+    }),
   }),
   chunkInfo: z.object({
     chunkSize: z.number(),
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.nullable(z.string()),
-    chunkFileNames: z.array(z.string())
-  })
+    chunkFileNames: z.array(z.string()),
+  }),
 });
 const ResultsLapChartData = z.object({
   success: z.boolean(),
@@ -258,8 +270,8 @@ const ResultsLapChartData = z.object({
     track: z.object({
       configName: z.string(),
       trackId: z.number(),
-      trackName: z.string()
-    })
+      trackName: z.string(),
+    }),
   }),
   bestLapNum: z.number(),
   bestLapTime: z.number(),
@@ -273,9 +285,9 @@ const ResultsLapChartData = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.string(),
-    chunkFileNames: z.array(z.string())
+    chunkFileNames: z.array(z.string()),
   }),
-  lastUpdated: z.string()
+  lastUpdated: z.string(),
 });
 const ResultsLapData = z.object({
   success: z.boolean(),
@@ -298,8 +310,8 @@ const ResultsLapData = z.object({
     track: z.object({
       configName: z.string(),
       trackId: z.number(),
-      trackName: z.string()
-    })
+      trackName: z.string(),
+    }),
   }),
   bestLapNum: z.number(),
   bestLapTime: z.number(),
@@ -313,7 +325,7 @@ const ResultsLapData = z.object({
     numChunks: z.number(),
     rows: z.number(),
     baseDownloadUrl: z.string(),
-    chunkFileNames: z.array(z.string())
+    chunkFileNames: z.array(z.string()),
   }),
   lastUpdated: z.string(),
   groupId: z.number(),
@@ -336,8 +348,8 @@ const ResultsLapData = z.object({
     sponsor2: z.number(),
     carNumber: z.string(),
     wheelColor: z.nullable(z.unknown()),
-    rimType: z.number()
-  })
+    rimType: z.number(),
+  }),
 });
 const ResultsSearchHosted = z.object({
   type: z.string(),
@@ -348,7 +360,7 @@ const ResultsSearchHosted = z.object({
       numChunks: z.number(),
       rows: z.number(),
       baseDownloadUrl: z.nullable(z.unknown()),
-      chunkFileNames: z.array(z.unknown())
+      chunkFileNames: z.array(z.unknown()),
     }),
     params: z.object({
       custId: z.optional(z.number()),
@@ -363,9 +375,9 @@ const ResultsSearchHosted = z.object({
       carId: z.optional(z.number()),
       trackId: z.optional(z.number()),
       leagueId: z.optional(z.number()),
-      leagueSeasonId: z.optional(z.number())
-    })
-  })
+      leagueSeasonId: z.optional(z.number()),
+    }),
+  }),
 });
 const ResultsSearchSeries = z.object({
   type: z.string(),
@@ -376,7 +388,7 @@ const ResultsSearchSeries = z.object({
       numChunks: z.number(),
       rows: z.number(),
       baseDownloadUrl: z.nullable(z.unknown()),
-      chunkFileNames: z.array(z.unknown())
+      chunkFileNames: z.array(z.unknown()),
     }),
     params: z.object({
       // Omitted when search_series is called without participant filters.
@@ -393,59 +405,63 @@ const ResultsSearchSeries = z.object({
       raceWeekNum: z.optional(z.number()),
       officialOnly: z.optional(z.boolean()),
       eventTypes: z.optional(z.array(z.number())),
-      seasonLicenseGroups: z.optional(z.array(z.number()))
-    })
-  })
+      seasonLicenseGroups: z.optional(z.array(z.number())),
+    }),
+  }),
 });
 const ResultsSeasonResults = z.object({
   success: z.boolean(),
   seasonId: z.number(),
   raceWeekNum: z.number(),
   eventType: z.nullable(z.number()),
-  resultsList: z.array(z.object({
-    sessionId: z.number(),
-    subsessionId: z.number(),
-    raceWeekNum: z.number(),
-    carClasses: z.array(z.object({
-      carClassId: z.number(),
-      shortName: z.string(),
-      name: z.string(),
-      numEntries: z.number(),
-      strengthOfField: z.number()
-    })),
-    driverChanges: z.boolean(),
-    eventBestLapTime: z.number(),
-    eventStrengthOfField: z.number(),
-    eventType: z.number(),
-    eventTypeName: z.string(),
-    farm: z.object({
-      farmId: z.number(),
-      displayName: z.string(),
-      imagePath: z.string(),
-      displayed: z.boolean()
+  resultsList: z.array(
+    z.object({
+      sessionId: z.number(),
+      subsessionId: z.number(),
+      raceWeekNum: z.number(),
+      carClasses: z.array(
+        z.object({
+          carClassId: z.number(),
+          shortName: z.string(),
+          name: z.string(),
+          numEntries: z.number(),
+          strengthOfField: z.number(),
+        }),
+      ),
+      driverChanges: z.boolean(),
+      eventBestLapTime: z.number(),
+      eventStrengthOfField: z.number(),
+      eventType: z.number(),
+      eventTypeName: z.string(),
+      farm: z.object({
+        farmId: z.number(),
+        displayName: z.string(),
+        imagePath: z.string(),
+        displayed: z.boolean(),
+      }),
+      numCautionLaps: z.number(),
+      numCautions: z.number(),
+      numDrivers: z.number(),
+      numLeadChanges: z.number(),
+      officialSession: z.boolean(),
+      startTime: z.string(),
+      track: z.object({
+        trackId: z.number(),
+        trackName: z.string(),
+      }),
+      winnerHelmet: z.object({
+        pattern: z.number(),
+        color1: z.string(),
+        color2: z.string(),
+        color3: z.string(),
+        faceType: z.number(),
+        helmetType: z.number(),
+      }),
+      winnerId: z.number(),
+      winnerLicenseLevel: z.number(),
+      winnerName: z.string(),
     }),
-    numCautionLaps: z.number(),
-    numCautions: z.number(),
-    numDrivers: z.number(),
-    numLeadChanges: z.number(),
-    officialSession: z.boolean(),
-    startTime: z.string(),
-    track: z.object({
-      trackId: z.number(),
-      trackName: z.string()
-    }),
-    winnerHelmet: z.object({
-      pattern: z.number(),
-      color1: z.string(),
-      color2: z.string(),
-      color3: z.string(),
-      faceType: z.number(),
-      helmetType: z.number()
-    }),
-    winnerId: z.number(),
-    winnerLicenseLevel: z.number(),
-    winnerName: z.string()
-  }))
+  ),
 });
 
 // ---- Response Types (inferred from schemas) ----

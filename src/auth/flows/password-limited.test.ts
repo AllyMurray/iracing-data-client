@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
 import { requestPasswordLimitedToken } from './password-limited';
 import { OAuthError } from '../errors';
 
@@ -38,7 +38,7 @@ describe('requestPasswordLimitedToken', () => {
       expect.objectContaining({
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      })
+      }),
     );
 
     // Verify body contains masked credentials (not raw)
@@ -68,7 +68,7 @@ describe('requestPasswordLimitedToken', () => {
         username: 'user@example.com',
         password: 'wrong-password',
         fetchFn: mockFetch,
-      })
+      }),
     ).rejects.toThrow(OAuthError);
   });
 

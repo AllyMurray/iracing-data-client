@@ -20,7 +20,7 @@ export interface PasswordLimitedTokenRequest {
  * - client_secret: masked with client_id as identifier
  */
 export async function requestPasswordLimitedToken(
-  options: PasswordLimitedTokenRequest
+  options: PasswordLimitedTokenRequest,
 ): Promise<TokenResponse> {
   const { clientId, clientSecret, username, password, fetchFn } = options;
 

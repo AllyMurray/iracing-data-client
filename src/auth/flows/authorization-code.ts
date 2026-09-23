@@ -22,7 +22,7 @@ export interface AuthorizationUrlResult {
  * Builds the authorization URL for the Authorization Code flow.
  */
 export async function buildAuthorizationUrl(
-  options: AuthorizationUrlOptions
+  options: AuthorizationUrlOptions,
 ): Promise<AuthorizationUrlResult> {
   const { clientId, redirectUri, scope, usePKCE = true } = options;
   const state = options.state ?? crypto.randomUUID();
@@ -66,7 +66,7 @@ export interface CodeExchangeOptions {
  * The client_secret is masked with the client_id before transmission.
  */
 export async function exchangeAuthorizationCode(
-  options: CodeExchangeOptions
+  options: CodeExchangeOptions,
 ): Promise<TokenResponse> {
   const { clientId, clientSecret, code, redirectUri, codeVerifier } = options;
   const fetchFn = options.fetchFn ?? globalThis.fetch;

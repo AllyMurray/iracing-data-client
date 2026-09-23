@@ -1,4 +1,4 @@
-import * as z from "zod/mini";
+import * as z from 'zod/mini';
 
 // ---- Response Schemas ----
 
@@ -16,10 +16,10 @@ const timeAttackMemberSeasonResultsParams = z.object({
 
 // ---- Exported Parameter Types ----
 
-export type TimeAttackMemberSeasonResultsParams = z.infer<typeof timeAttackMemberSeasonResultsParams>;
+export type TimeAttackMemberSeasonResultsParams = z.infer<
+  typeof timeAttackMemberSeasonResultsParams
+>;
 
 // ---- Exported Schemas ----
 
-export {
-  TimeAttackMemberSeasonResults,
-};
+export { TimeAttackMemberSeasonResults };

@@ -1,7 +1,30 @@
-import type { IRacingClient } from "../client";
-import type { ResultsGetParams, ResultsEventLogParams, ResultsLapChartDataParams, ResultsLapDataParams, ResultsSearchHostedParams, ResultsSearchSeriesParams, ResultsSeasonResultsParams, ResultsGetResponse, ResultsEventLogResponse, ResultsLapChartDataResponse, ResultsLapDataResponse, ResultsSearchHostedResponse, ResultsSearchSeriesResponse, ResultsSeasonResultsResponse } from "./types";
-import * as z from "zod/mini";
-import { ResultsGet, ResultsEventLog, ResultsLapChartData, ResultsLapData, ResultsSearchHosted, ResultsSearchSeries, ResultsSeasonResults } from "./types";
+import type { IRacingClient } from '../client';
+import type {
+  ResultsGetParams,
+  ResultsEventLogParams,
+  ResultsLapChartDataParams,
+  ResultsLapDataParams,
+  ResultsSearchHostedParams,
+  ResultsSearchSeriesParams,
+  ResultsSeasonResultsParams,
+  ResultsGetResponse,
+  ResultsEventLogResponse,
+  ResultsLapChartDataResponse,
+  ResultsLapDataResponse,
+  ResultsSearchHostedResponse,
+  ResultsSearchSeriesResponse,
+  ResultsSeasonResultsResponse,
+} from './types';
+import * as z from 'zod/mini';
+import {
+  ResultsGet,
+  ResultsEventLog,
+  ResultsLapChartData,
+  ResultsLapData,
+  ResultsSearchHosted,
+  ResultsSearchSeries,
+  ResultsSeasonResults,
+} from './types';
 
 const getParams = z.object({
   subsessionId: z.number(), // maps to: subsession_id
@@ -72,7 +95,11 @@ export class ResultsService {
    * @sample results.get.json
    */
   async get(params: ResultsGetParams): Promise<ResultsGetResponse> {
-    return this.client.get<ResultsGetResponse>("https://members-ng.iracing.com/data/results/get", { params, paramsValidator: getParams, schema: ResultsGet });
+    return this.client.get<ResultsGetResponse>('https://members-ng.iracing.com/data/results/get', {
+      params,
+      paramsValidator: getParams,
+      schema: ResultsGet,
+    });
   }
 
   /**
@@ -81,7 +108,10 @@ export class ResultsService {
    * @sample results.event_log.json
    */
   async eventLog(params: ResultsEventLogParams): Promise<ResultsEventLogResponse> {
-    return this.client.get<ResultsEventLogResponse>("https://members-ng.iracing.com/data/results/event_log", { params, paramsValidator: eventLogParams, schema: ResultsEventLog });
+    return this.client.get<ResultsEventLogResponse>(
+      'https://members-ng.iracing.com/data/results/event_log',
+      { params, paramsValidator: eventLogParams, schema: ResultsEventLog },
+    );
   }
 
   /**
@@ -90,7 +120,10 @@ export class ResultsService {
    * @sample results.lap_chart_data.json
    */
   async lapChartData(params: ResultsLapChartDataParams): Promise<ResultsLapChartDataResponse> {
-    return this.client.get<ResultsLapChartDataResponse>("https://members-ng.iracing.com/data/results/lap_chart_data", { params, paramsValidator: lapChartDataParams, schema: ResultsLapChartData });
+    return this.client.get<ResultsLapChartDataResponse>(
+      'https://members-ng.iracing.com/data/results/lap_chart_data',
+      { params, paramsValidator: lapChartDataParams, schema: ResultsLapChartData },
+    );
   }
 
   /**
@@ -99,7 +132,10 @@ export class ResultsService {
    * @sample results.lap_data_var3.json
    */
   async lapData(params: ResultsLapDataParams): Promise<ResultsLapDataResponse> {
-    return this.client.get<ResultsLapDataResponse>("https://members-ng.iracing.com/data/results/lap_data", { params, paramsValidator: lapDataParams, schema: ResultsLapData });
+    return this.client.get<ResultsLapDataResponse>(
+      'https://members-ng.iracing.com/data/results/lap_data',
+      { params, paramsValidator: lapDataParams, schema: ResultsLapData },
+    );
   }
 
   /**
@@ -108,7 +144,10 @@ export class ResultsService {
    * @sample results.search_hosted.json
    */
   async searchHosted(params?: ResultsSearchHostedParams): Promise<ResultsSearchHostedResponse> {
-    return this.client.get<ResultsSearchHostedResponse>("https://members-ng.iracing.com/data/results/search_hosted", { params, paramsValidator: searchHostedParams, schema: ResultsSearchHosted });
+    return this.client.get<ResultsSearchHostedResponse>(
+      'https://members-ng.iracing.com/data/results/search_hosted',
+      { params, paramsValidator: searchHostedParams, schema: ResultsSearchHosted },
+    );
   }
 
   /**
@@ -117,7 +156,10 @@ export class ResultsService {
    * @sample results.search_series.json
    */
   async searchSeries(params?: ResultsSearchSeriesParams): Promise<ResultsSearchSeriesResponse> {
-    return this.client.get<ResultsSearchSeriesResponse>("https://members-ng.iracing.com/data/results/search_series", { params, paramsValidator: searchSeriesParams, schema: ResultsSearchSeries });
+    return this.client.get<ResultsSearchSeriesResponse>(
+      'https://members-ng.iracing.com/data/results/search_series',
+      { params, paramsValidator: searchSeriesParams, schema: ResultsSearchSeries },
+    );
   }
 
   /**
@@ -126,7 +168,9 @@ export class ResultsService {
    * @sample results.season_results.json
    */
   async seasonResults(params: ResultsSeasonResultsParams): Promise<ResultsSeasonResultsResponse> {
-    return this.client.get<ResultsSeasonResultsResponse>("https://members-ng.iracing.com/data/results/season_results", { params, paramsValidator: seasonResultsParams, schema: ResultsSeasonResults });
+    return this.client.get<ResultsSeasonResultsResponse>(
+      'https://members-ng.iracing.com/data/results/season_results',
+      { params, paramsValidator: seasonResultsParams, schema: ResultsSeasonResults },
+    );
   }
-
 }

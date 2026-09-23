@@ -1,6 +1,20 @@
-import type { IRacingClient } from "../client";
-import type { DriverStatsByCategoryOvalResponse, DriverStatsByCategorySportsCarResponse, DriverStatsByCategoryFormulaCarResponse, DriverStatsByCategoryRoadResponse, DriverStatsByCategoryDirtOvalResponse, DriverStatsByCategoryDirtRoadResponse } from "./types";
-import { DriverStatsByCategoryOval, DriverStatsByCategorySportsCar, DriverStatsByCategoryFormulaCar, DriverStatsByCategoryRoad, DriverStatsByCategoryDirtOval, DriverStatsByCategoryDirtRoad } from "./types";
+import type { IRacingClient } from '../client';
+import type {
+  DriverStatsByCategoryOvalResponse,
+  DriverStatsByCategorySportsCarResponse,
+  DriverStatsByCategoryFormulaCarResponse,
+  DriverStatsByCategoryRoadResponse,
+  DriverStatsByCategoryDirtOvalResponse,
+  DriverStatsByCategoryDirtRoadResponse,
+} from './types';
+import {
+  DriverStatsByCategoryOval,
+  DriverStatsByCategorySportsCar,
+  DriverStatsByCategoryFormulaCar,
+  DriverStatsByCategoryRoad,
+  DriverStatsByCategoryDirtOval,
+  DriverStatsByCategoryDirtRoad,
+} from './types';
 
 export class DriverStatsByCategoryService {
   constructor(private client: IRacingClient) {}
@@ -11,7 +25,10 @@ export class DriverStatsByCategoryService {
    * @sample driver_stats_by_category.oval.json
    */
   async oval(): Promise<DriverStatsByCategoryOvalResponse> {
-    return this.client.get<DriverStatsByCategoryOvalResponse>("https://members-ng.iracing.com/data/driver_stats_by_category/oval", { schema: DriverStatsByCategoryOval });
+    return this.client.get<DriverStatsByCategoryOvalResponse>(
+      'https://members-ng.iracing.com/data/driver_stats_by_category/oval',
+      { schema: DriverStatsByCategoryOval },
+    );
   }
 
   /**
@@ -20,7 +37,10 @@ export class DriverStatsByCategoryService {
    * @sample driver_stats_by_category.sports_car.json
    */
   async sportsCar(): Promise<DriverStatsByCategorySportsCarResponse> {
-    return this.client.get<DriverStatsByCategorySportsCarResponse>("https://members-ng.iracing.com/data/driver_stats_by_category/sports_car", { schema: DriverStatsByCategorySportsCar });
+    return this.client.get<DriverStatsByCategorySportsCarResponse>(
+      'https://members-ng.iracing.com/data/driver_stats_by_category/sports_car',
+      { schema: DriverStatsByCategorySportsCar },
+    );
   }
 
   /**
@@ -29,7 +49,10 @@ export class DriverStatsByCategoryService {
    * @sample driver_stats_by_category.formula_car.json
    */
   async formulaCar(): Promise<DriverStatsByCategoryFormulaCarResponse> {
-    return this.client.get<DriverStatsByCategoryFormulaCarResponse>("https://members-ng.iracing.com/data/driver_stats_by_category/formula_car", { schema: DriverStatsByCategoryFormulaCar });
+    return this.client.get<DriverStatsByCategoryFormulaCarResponse>(
+      'https://members-ng.iracing.com/data/driver_stats_by_category/formula_car',
+      { schema: DriverStatsByCategoryFormulaCar },
+    );
   }
 
   /**
@@ -38,7 +61,10 @@ export class DriverStatsByCategoryService {
    * @sample driver_stats_by_category.road.json
    */
   async road(): Promise<DriverStatsByCategoryRoadResponse> {
-    return this.client.get<DriverStatsByCategoryRoadResponse>("https://members-ng.iracing.com/data/driver_stats_by_category/road", { schema: DriverStatsByCategoryRoad });
+    return this.client.get<DriverStatsByCategoryRoadResponse>(
+      'https://members-ng.iracing.com/data/driver_stats_by_category/road',
+      { schema: DriverStatsByCategoryRoad },
+    );
   }
 
   /**
@@ -47,7 +73,10 @@ export class DriverStatsByCategoryService {
    * @sample driver_stats_by_category.dirt_oval.json
    */
   async dirtOval(): Promise<DriverStatsByCategoryDirtOvalResponse> {
-    return this.client.get<DriverStatsByCategoryDirtOvalResponse>("https://members-ng.iracing.com/data/driver_stats_by_category/dirt_oval", { schema: DriverStatsByCategoryDirtOval });
+    return this.client.get<DriverStatsByCategoryDirtOvalResponse>(
+      'https://members-ng.iracing.com/data/driver_stats_by_category/dirt_oval',
+      { schema: DriverStatsByCategoryDirtOval },
+    );
   }
 
   /**
@@ -56,7 +85,9 @@ export class DriverStatsByCategoryService {
    * @sample driver_stats_by_category.dirt_road.json
    */
   async dirtRoad(): Promise<DriverStatsByCategoryDirtRoadResponse> {
-    return this.client.get<DriverStatsByCategoryDirtRoadResponse>("https://members-ng.iracing.com/data/driver_stats_by_category/dirt_road", { schema: DriverStatsByCategoryDirtRoad });
+    return this.client.get<DriverStatsByCategoryDirtRoadResponse>(
+      'https://members-ng.iracing.com/data/driver_stats_by_category/dirt_road',
+      { schema: DriverStatsByCategoryDirtRoad },
+    );
   }
-
 }

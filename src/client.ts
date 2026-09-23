@@ -363,17 +363,17 @@ export class IRacingClient {
         typeof data === 'object' &&
         (data as Record<string, unknown>).error === 'Site Maintenance';
       return new IRacingError(
-        isMaintenance
-          ? 'iRacing is currently in maintenance mode'
-          : 'Service unavailable',
+        isMaintenance ? 'iRacing is currently in maintenance mode' : 'Service unavailable',
         { status: 503, url: context.url, responseData: data, headers },
       );
     }
     if (status === 429) {
-      return new IRacingError(
-        'Rate limit exceeded. Please wait before making more requests.',
-        { status: 429, url: context.url, responseData: data, headers },
-      );
+      return new IRacingError('Rate limit exceeded. Please wait before making more requests.', {
+        status: 429,
+        url: context.url,
+        responseData: data,
+        headers,
+      });
     }
     if (status === 401) {
       return new IRacingError(
@@ -382,10 +382,12 @@ export class IRacingClient {
       );
     }
 
-    return new IRacingError(
-      context.message,
-      { status, url: context.url, responseData: data, headers },
-    );
+    return new IRacingError(context.message, {
+      status,
+      url: context.url,
+      responseData: data,
+      headers,
+    });
   }
 
   /**
@@ -400,7 +402,7 @@ export class IRacingClient {
       throw new OAuthError(
         'invalid_grant',
         'Authorization Code flow requires tokens. Use buildAuthorizationUrl() and ' +
-          'exchangeAuthorizationCode() to obtain tokens first.'
+          'exchangeAuthorizationCode() to obtain tokens first.',
       );
     }
 
@@ -446,9 +448,7 @@ export class IRacingClient {
   }
 
   private buildUrl(endpoint: string, params?: Record<string, unknown>): string {
-    const url = new URL(
-      endpoint.startsWith('http') ? endpoint : `${DATA_API_BASE_URL}${endpoint}`
-    );
+    const url = new URL(endpoint.startsWith('http') ? endpoint : `${DATA_API_BASE_URL}${endpoint}`);
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
@@ -507,7 +507,7 @@ export class IRacingClient {
     allPairs: Set<string>,
     teamPairs: Set<string>,
     inheritedSeasonId?: number,
-    inheritedTeamSeries?: boolean
+    inheritedTeamSeries?: boolean,
   ): void {
     if (data === null || data === undefined) return;
 
@@ -518,7 +518,7 @@ export class IRacingClient {
           allPairs,
           teamPairs,
           inheritedSeasonId,
-          inheritedTeamSeries
+          inheritedTeamSeries,
         );
       }
       return;
@@ -557,7 +557,8 @@ export class IRacingClient {
       if (Array.isArray(record.carClassIds)) classArrays.push(record.carClassIds);
       if (Array.isArray(record.car_class_ids)) classArrays.push(record.car_class_ids);
       if (Array.isArray(record.raceWeekCarClassIds)) classArrays.push(record.raceWeekCarClassIds);
-      if (Array.isArray(record.race_week_car_class_ids)) classArrays.push(record.race_week_car_class_ids);
+      if (Array.isArray(record.race_week_car_class_ids))
+        classArrays.push(record.race_week_car_class_ids);
 
       for (const classArray of classArrays) {
         for (const value of classArray as unknown[]) {
@@ -588,7 +589,7 @@ export class IRacingClient {
   async ensureSeasonCarClassPair(
     endpointId: string,
     seasonId: number,
-    carClassId: number
+    carClassId: number,
   ): Promise<void> {
     if (!this.validateSemanticParams) return;
     if (!Number.isFinite(seasonId) || !Number.isFinite(carClassId)) return;
@@ -631,7 +632,7 @@ export class IRacingClient {
       params?: Record<string, unknown>;
       paramsValidator?: z.ZodMiniType<unknown>;
       schema?: z.ZodMiniType<T>;
-    }
+    },
   ): Promise<T> {
     if (this.validateParams && options?.paramsValidator) {
       options.paramsValidator.parse(options.params ?? {});

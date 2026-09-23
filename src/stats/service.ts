@@ -1,7 +1,51 @@
-import type { IRacingClient } from "../client";
-import type { StatsMemberBestsParams, StatsMemberCareerParams, StatsMemberDivisionParams, StatsMemberRecapParams, StatsMemberRecentRacesParams, StatsMemberSummaryParams, StatsMemberYearlyParams, StatsSeasonDriverStandingsParams, StatsSeasonSupersessionStandingsParams, StatsSeasonTeamStandingsParams, StatsSeasonTtStandingsParams, StatsSeasonTtResultsParams, StatsSeasonQualifyResultsParams, StatsWorldRecordsParams, StatsMemberBestsResponse, StatsMemberCareerResponse, StatsMemberDivisionResponse, StatsMemberRecapResponse, StatsMemberRecentRacesResponse, StatsMemberSummaryResponse, StatsMemberYearlyResponse, StatsSeasonDriverStandingsResponse, StatsSeasonSupersessionStandingsResponse, StatsSeasonTeamStandingsResponse, StatsSeasonTtStandingsResponse, StatsSeasonTtResultsResponse, StatsSeasonQualifyResultsResponse, StatsWorldRecordsResponse } from "./types";
-import * as z from "zod/mini";
-import { StatsMemberBests, StatsMemberCareer, StatsMemberDivision, StatsMemberRecap, StatsMemberRecentRaces, StatsMemberSummary, StatsMemberYearly, StatsSeasonDriverStandings, StatsSeasonSupersessionStandings, StatsSeasonTeamStandings, StatsSeasonTtStandings, StatsSeasonTtResults, StatsSeasonQualifyResults, StatsWorldRecords } from "./types";
+import type { IRacingClient } from '../client';
+import type {
+  StatsMemberBestsParams,
+  StatsMemberCareerParams,
+  StatsMemberDivisionParams,
+  StatsMemberRecapParams,
+  StatsMemberRecentRacesParams,
+  StatsMemberSummaryParams,
+  StatsMemberYearlyParams,
+  StatsSeasonDriverStandingsParams,
+  StatsSeasonSupersessionStandingsParams,
+  StatsSeasonTeamStandingsParams,
+  StatsSeasonTtStandingsParams,
+  StatsSeasonTtResultsParams,
+  StatsSeasonQualifyResultsParams,
+  StatsWorldRecordsParams,
+  StatsMemberBestsResponse,
+  StatsMemberCareerResponse,
+  StatsMemberDivisionResponse,
+  StatsMemberRecapResponse,
+  StatsMemberRecentRacesResponse,
+  StatsMemberSummaryResponse,
+  StatsMemberYearlyResponse,
+  StatsSeasonDriverStandingsResponse,
+  StatsSeasonSupersessionStandingsResponse,
+  StatsSeasonTeamStandingsResponse,
+  StatsSeasonTtStandingsResponse,
+  StatsSeasonTtResultsResponse,
+  StatsSeasonQualifyResultsResponse,
+  StatsWorldRecordsResponse,
+} from './types';
+import * as z from 'zod/mini';
+import {
+  StatsMemberBests,
+  StatsMemberCareer,
+  StatsMemberDivision,
+  StatsMemberRecap,
+  StatsMemberRecentRaces,
+  StatsMemberSummary,
+  StatsMemberYearly,
+  StatsSeasonDriverStandings,
+  StatsSeasonSupersessionStandings,
+  StatsSeasonTeamStandings,
+  StatsSeasonTtStandings,
+  StatsSeasonTtResults,
+  StatsSeasonQualifyResults,
+  StatsWorldRecords,
+} from './types';
 
 const memberBestsParams = z.object({
   custId: z.optional(z.number()), // Defaults to the authenticated member. // maps to: cust_id
@@ -92,7 +136,10 @@ export class StatsService {
    * @sample stats.member_bests.json
    */
   async memberBests(params?: StatsMemberBestsParams): Promise<StatsMemberBestsResponse> {
-    return this.client.get<StatsMemberBestsResponse>("https://members-ng.iracing.com/data/stats/member_bests", { params, paramsValidator: memberBestsParams, schema: StatsMemberBests });
+    return this.client.get<StatsMemberBestsResponse>(
+      'https://members-ng.iracing.com/data/stats/member_bests',
+      { params, paramsValidator: memberBestsParams, schema: StatsMemberBests },
+    );
   }
 
   /**
@@ -101,7 +148,10 @@ export class StatsService {
    * @sample stats.member_career.json
    */
   async memberCareer(params?: StatsMemberCareerParams): Promise<StatsMemberCareerResponse> {
-    return this.client.get<StatsMemberCareerResponse>("https://members-ng.iracing.com/data/stats/member_career", { params, paramsValidator: memberCareerParams, schema: StatsMemberCareer });
+    return this.client.get<StatsMemberCareerResponse>(
+      'https://members-ng.iracing.com/data/stats/member_career',
+      { params, paramsValidator: memberCareerParams, schema: StatsMemberCareer },
+    );
   }
 
   /**
@@ -110,7 +160,10 @@ export class StatsService {
    * @sample stats.member_division.json
    */
   async memberDivision(params: StatsMemberDivisionParams): Promise<StatsMemberDivisionResponse> {
-    return this.client.get<StatsMemberDivisionResponse>("https://members-ng.iracing.com/data/stats/member_division", { params, paramsValidator: memberDivisionParams, schema: StatsMemberDivision });
+    return this.client.get<StatsMemberDivisionResponse>(
+      'https://members-ng.iracing.com/data/stats/member_division',
+      { params, paramsValidator: memberDivisionParams, schema: StatsMemberDivision },
+    );
   }
 
   /**
@@ -119,7 +172,10 @@ export class StatsService {
    * @sample stats.member_recap.json
    */
   async memberRecap(params?: StatsMemberRecapParams): Promise<StatsMemberRecapResponse> {
-    return this.client.get<StatsMemberRecapResponse>("https://members-ng.iracing.com/data/stats/member_recap", { params, paramsValidator: memberRecapParams, schema: StatsMemberRecap });
+    return this.client.get<StatsMemberRecapResponse>(
+      'https://members-ng.iracing.com/data/stats/member_recap',
+      { params, paramsValidator: memberRecapParams, schema: StatsMemberRecap },
+    );
   }
 
   /**
@@ -127,8 +183,13 @@ export class StatsService {
    * @see https://members-ng.iracing.com/data/stats/member_recent_races
    * @sample stats.member_recent_races.json
    */
-  async memberRecentRaces(params?: StatsMemberRecentRacesParams): Promise<StatsMemberRecentRacesResponse> {
-    return this.client.get<StatsMemberRecentRacesResponse>("https://members-ng.iracing.com/data/stats/member_recent_races", { params, paramsValidator: memberRecentRacesParams, schema: StatsMemberRecentRaces });
+  async memberRecentRaces(
+    params?: StatsMemberRecentRacesParams,
+  ): Promise<StatsMemberRecentRacesResponse> {
+    return this.client.get<StatsMemberRecentRacesResponse>(
+      'https://members-ng.iracing.com/data/stats/member_recent_races',
+      { params, paramsValidator: memberRecentRacesParams, schema: StatsMemberRecentRaces },
+    );
   }
 
   /**
@@ -137,7 +198,10 @@ export class StatsService {
    * @sample stats.member_summary.json
    */
   async memberSummary(params?: StatsMemberSummaryParams): Promise<StatsMemberSummaryResponse> {
-    return this.client.get<StatsMemberSummaryResponse>("https://members-ng.iracing.com/data/stats/member_summary", { params, paramsValidator: memberSummaryParams, schema: StatsMemberSummary });
+    return this.client.get<StatsMemberSummaryResponse>(
+      'https://members-ng.iracing.com/data/stats/member_summary',
+      { params, paramsValidator: memberSummaryParams, schema: StatsMemberSummary },
+    );
   }
 
   /**
@@ -146,7 +210,10 @@ export class StatsService {
    * @sample stats.member_yearly.json
    */
   async memberYearly(params?: StatsMemberYearlyParams): Promise<StatsMemberYearlyResponse> {
-    return this.client.get<StatsMemberYearlyResponse>("https://members-ng.iracing.com/data/stats/member_yearly", { params, paramsValidator: memberYearlyParams, schema: StatsMemberYearly });
+    return this.client.get<StatsMemberYearlyResponse>(
+      'https://members-ng.iracing.com/data/stats/member_yearly',
+      { params, paramsValidator: memberYearlyParams, schema: StatsMemberYearly },
+    );
   }
 
   /**
@@ -154,9 +221,18 @@ export class StatsService {
    * @see https://members-ng.iracing.com/data/stats/season_driver_standings
    * @sample stats.season_driver_standings.json
    */
-  async seasonDriverStandings(params: StatsSeasonDriverStandingsParams): Promise<StatsSeasonDriverStandingsResponse> {
-    await this.client.ensureSeasonCarClassPair('stats.season_driver_standings', params.seasonId, params.carClassId);
-    return this.client.get<StatsSeasonDriverStandingsResponse>("https://members-ng.iracing.com/data/stats/season_driver_standings", { params, paramsValidator: seasonDriverStandingsParams, schema: StatsSeasonDriverStandings });
+  async seasonDriverStandings(
+    params: StatsSeasonDriverStandingsParams,
+  ): Promise<StatsSeasonDriverStandingsResponse> {
+    await this.client.ensureSeasonCarClassPair(
+      'stats.season_driver_standings',
+      params.seasonId,
+      params.carClassId,
+    );
+    return this.client.get<StatsSeasonDriverStandingsResponse>(
+      'https://members-ng.iracing.com/data/stats/season_driver_standings',
+      { params, paramsValidator: seasonDriverStandingsParams, schema: StatsSeasonDriverStandings },
+    );
   }
 
   /**
@@ -164,9 +240,22 @@ export class StatsService {
    * @see https://members-ng.iracing.com/data/stats/season_supersession_standings
    * @sample stats.season_supersession_standings.json
    */
-  async seasonSupersessionStandings(params: StatsSeasonSupersessionStandingsParams): Promise<StatsSeasonSupersessionStandingsResponse> {
-    await this.client.ensureSeasonCarClassPair('stats.season_supersession_standings', params.seasonId, params.carClassId);
-    return this.client.get<StatsSeasonSupersessionStandingsResponse>("https://members-ng.iracing.com/data/stats/season_supersession_standings", { params, paramsValidator: seasonSupersessionStandingsParams, schema: StatsSeasonSupersessionStandings });
+  async seasonSupersessionStandings(
+    params: StatsSeasonSupersessionStandingsParams,
+  ): Promise<StatsSeasonSupersessionStandingsResponse> {
+    await this.client.ensureSeasonCarClassPair(
+      'stats.season_supersession_standings',
+      params.seasonId,
+      params.carClassId,
+    );
+    return this.client.get<StatsSeasonSupersessionStandingsResponse>(
+      'https://members-ng.iracing.com/data/stats/season_supersession_standings',
+      {
+        params,
+        paramsValidator: seasonSupersessionStandingsParams,
+        schema: StatsSeasonSupersessionStandings,
+      },
+    );
   }
 
   /**
@@ -174,9 +263,18 @@ export class StatsService {
    * @see https://members-ng.iracing.com/data/stats/season_team_standings
    * @sample stats.season_team_standings.json
    */
-  async seasonTeamStandings(params: StatsSeasonTeamStandingsParams): Promise<StatsSeasonTeamStandingsResponse> {
-    await this.client.ensureSeasonCarClassPair('stats.season_team_standings', params.seasonId, params.carClassId);
-    return this.client.get<StatsSeasonTeamStandingsResponse>("https://members-ng.iracing.com/data/stats/season_team_standings", { params, paramsValidator: seasonTeamStandingsParams, schema: StatsSeasonTeamStandings });
+  async seasonTeamStandings(
+    params: StatsSeasonTeamStandingsParams,
+  ): Promise<StatsSeasonTeamStandingsResponse> {
+    await this.client.ensureSeasonCarClassPair(
+      'stats.season_team_standings',
+      params.seasonId,
+      params.carClassId,
+    );
+    return this.client.get<StatsSeasonTeamStandingsResponse>(
+      'https://members-ng.iracing.com/data/stats/season_team_standings',
+      { params, paramsValidator: seasonTeamStandingsParams, schema: StatsSeasonTeamStandings },
+    );
   }
 
   /**
@@ -184,9 +282,18 @@ export class StatsService {
    * @see https://members-ng.iracing.com/data/stats/season_tt_standings
    * @sample stats.season_tt_standings.json
    */
-  async seasonTtStandings(params: StatsSeasonTtStandingsParams): Promise<StatsSeasonTtStandingsResponse> {
-    await this.client.ensureSeasonCarClassPair('stats.season_tt_standings', params.seasonId, params.carClassId);
-    return this.client.get<StatsSeasonTtStandingsResponse>("https://members-ng.iracing.com/data/stats/season_tt_standings", { params, paramsValidator: seasonTtStandingsParams, schema: StatsSeasonTtStandings });
+  async seasonTtStandings(
+    params: StatsSeasonTtStandingsParams,
+  ): Promise<StatsSeasonTtStandingsResponse> {
+    await this.client.ensureSeasonCarClassPair(
+      'stats.season_tt_standings',
+      params.seasonId,
+      params.carClassId,
+    );
+    return this.client.get<StatsSeasonTtStandingsResponse>(
+      'https://members-ng.iracing.com/data/stats/season_tt_standings',
+      { params, paramsValidator: seasonTtStandingsParams, schema: StatsSeasonTtStandings },
+    );
   }
 
   /**
@@ -195,8 +302,15 @@ export class StatsService {
    * @sample stats.season_tt_results.json
    */
   async seasonTtResults(params: StatsSeasonTtResultsParams): Promise<StatsSeasonTtResultsResponse> {
-    await this.client.ensureSeasonCarClassPair('stats.season_tt_results', params.seasonId, params.carClassId);
-    return this.client.get<StatsSeasonTtResultsResponse>("https://members-ng.iracing.com/data/stats/season_tt_results", { params, paramsValidator: seasonTtResultsParams, schema: StatsSeasonTtResults });
+    await this.client.ensureSeasonCarClassPair(
+      'stats.season_tt_results',
+      params.seasonId,
+      params.carClassId,
+    );
+    return this.client.get<StatsSeasonTtResultsResponse>(
+      'https://members-ng.iracing.com/data/stats/season_tt_results',
+      { params, paramsValidator: seasonTtResultsParams, schema: StatsSeasonTtResults },
+    );
   }
 
   /**
@@ -204,9 +318,18 @@ export class StatsService {
    * @see https://members-ng.iracing.com/data/stats/season_qualify_results
    * @sample stats.season_qualify_results.json
    */
-  async seasonQualifyResults(params: StatsSeasonQualifyResultsParams): Promise<StatsSeasonQualifyResultsResponse> {
-    await this.client.ensureSeasonCarClassPair('stats.season_qualify_results', params.seasonId, params.carClassId);
-    return this.client.get<StatsSeasonQualifyResultsResponse>("https://members-ng.iracing.com/data/stats/season_qualify_results", { params, paramsValidator: seasonQualifyResultsParams, schema: StatsSeasonQualifyResults });
+  async seasonQualifyResults(
+    params: StatsSeasonQualifyResultsParams,
+  ): Promise<StatsSeasonQualifyResultsResponse> {
+    await this.client.ensureSeasonCarClassPair(
+      'stats.season_qualify_results',
+      params.seasonId,
+      params.carClassId,
+    );
+    return this.client.get<StatsSeasonQualifyResultsResponse>(
+      'https://members-ng.iracing.com/data/stats/season_qualify_results',
+      { params, paramsValidator: seasonQualifyResultsParams, schema: StatsSeasonQualifyResults },
+    );
   }
 
   /**
@@ -215,7 +338,9 @@ export class StatsService {
    * @sample stats.world_records.json
    */
   async worldRecords(params: StatsWorldRecordsParams): Promise<StatsWorldRecordsResponse> {
-    return this.client.get<StatsWorldRecordsResponse>("https://members-ng.iracing.com/data/stats/world_records", { params, paramsValidator: worldRecordsParams, schema: StatsWorldRecords });
+    return this.client.get<StatsWorldRecordsResponse>(
+      'https://members-ng.iracing.com/data/stats/world_records',
+      { params, paramsValidator: worldRecordsParams, schema: StatsWorldRecords },
+    );
   }
-
 }
