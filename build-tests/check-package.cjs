@@ -16,8 +16,12 @@ function run(command, args, cwd = consumer) {
 try {
   // Packing and installing outside the checkout prevents repository files and
   // development dependencies from hiding missing exports or package contents.
-  const tarball = nodePath.join(temporary, 'iracing-data-client.tgz');
-  run('pnpm', ['pack', '--out', tarball], root);
+  const args = process.argv.slice(2);
+  assert.ok(args.length === 0 || (args.length === 2 && args[0] === '--tarball'));
+  const tarball = args.length
+    ? nodePath.resolve(args[1])
+    : nodePath.join(temporary, 'iracing-data-client.tgz');
+  if (!args.length) run('pnpm', ['pack', '--out', tarball], root);
 
   mkdirSync(consumer);
   writeFileSync(

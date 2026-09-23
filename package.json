@@ -21,7 +21,7 @@
   "scripts": {
     "build": "pnpm run check:toolchain && vp pack",
     "dev": "vp pack --watch",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "pnpm run build",
     "sdk:generate": "tsx scripts/generate-sdk.ts",
     "sdk:check-no-unknown": "tsx scripts/check-no-unknown-service-returns.ts",
     "sdk:test": "npx @dotenvx/dotenvx run -- npx tsx test-sdk.ts",
@@ -43,7 +43,8 @@
     "check:toolchain": "node scripts/check-toolchain.mjs",
     "check": "vp check src scripts build-tests vite.config.mts vite.config.integration.mts",
     "lint": "vp check --no-fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
-    "format": "vp fmt src scripts build-tests vite.config.mts vite.config.integration.mts"
+    "format": "vp fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
+    "test:release": "node --test build-tests/release.test.mjs"
   },
   "keywords": [
     "iracing",
@@ -67,7 +68,7 @@
   },
   "packageManager": "pnpm@12.4.2+sha512.08adc6613180275c7c9edada39dcf08c9c61ad4e7eaf330a4f3461f102b0f907423454d117f98e72d47fef0616070644d7bffc973a6a57f5090a6d7c368b07c9",
   "devDependencies": {
-    "@changesets/cli": "^2.31.1",
+    "@changesets/cli": "^3.0.3",
     "@dotenvx/dotenvx": "^2.26.1",
     "@types/node": "^24.13.5",
     "@typescript/native": "npm:typescript@7.0.2",
