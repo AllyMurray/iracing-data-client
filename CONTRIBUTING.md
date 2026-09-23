@@ -136,6 +136,68 @@ v2 encryption round trip in a temporary directory. It never loads repository
 credentials or connects to the live API. The credential-dependent integration
 tests remain a separate release gate.
 
+## Dependency maintenance with Renovate
+
+`renovate.json` manages the root and docs manifests and their independent pnpm
+lockfiles, the root pnpm catalog, both package-manager pins, and GitHub Actions.
+Ordinary branches are scheduled between midnight and 06:00 Europe/London, with
+at most five concurrent PRs and two new PRs per hour. The schedule is a permitted
+window for Renovate runs, not a promise that an update appears at midnight.
+
+Third-party npm releases must be at least one day old and have a publication
+timestamp, matching pnpm's install policy. Owned `@http-client-toolkit/*` releases
+skip this delay, but their third-party dependencies still wait at installation.
+Vite+ and its core alias update together at exact versions; GitHub Actions,
+pnpm pins, and compatible HTTP toolkit updates have separate groups. Runtime
+and docs dependencies, major upgrades, and pre-1.0 tools require manual review.
+Node types stay on 24.x, the compatibility compiler stays on TS6, and the native
+compiler stays on TS7.0.x. A native compiler update also requires reviewing its
+explicit version check in `scripts/check-toolchain.mjs`.
+
+Renovate does not change the consumer `engines.node` range, the Node 22/24 CI
+matrix, or the Node 24 development runtime. Those remain deliberate decisions.
+
+Automerge is disabled for every update. Before enabling it, confirm the Renovate
+GitHub App has access to this repository and its Dependency Dashboard is active,
+and protect `main` with required `validate (22.x)`, `validate (24.x)`, and `docs`
+checks. The current candidate group is stable `tsx` patch updates only, with a
+three-day release delay; change only that rule's `automerge` flag in a reviewed
+follow-up after verifying the checks block a failing update. Keep runtime,
+release/credential tooling, major, and pre-1.0 updates manual. The path-filtered
+Renovate validation workflow should not be a required check on all PRs.
+
+After merging the config, confirm this repo is enabled in the
+[Renovate App settings](https://github.com/apps/renovate), then review its
+Dependency Dashboard and first update PRs. Adding the config does not install or
+grant access to the App. Keep automerge disabled until onboarding and required
+status checks have been confirmed.
+
+Security alerts may create PRs outside the overnight schedule without waiting
+for Renovate's release-age check. They still require review and successful CI.
+They do not bypass pnpm's strict one-day install policy: a brand-new fix can
+produce an artifact/install failure until it ages. Wait and retry the update,
+or explicitly review a temporary package-specific exception in the affected
+`pnpm-workspace.yaml`, remove it once the fix has aged, and keep all other
+packages covered. Renovate lockfile refreshes are also subject to pnpm's policy.
+Do not treat an ungenerated lockfile or a failed audit as ready to merge.
+
+Validate configuration changes with the same pinned validator used in CI:
+
+```bash
+pnpm --package=renovate@44.93.4 dlx renovate-config-validator --strict renovate.json
+```
+
+For read-only dependency discovery, stage the config and run:
+
+```bash
+LOG_LEVEL=debug pnpm --package=renovate@44.93.4 dlx renovate --platform=local --dry-run=extract
+```
+
+Inspect both pnpm lockfile associations, the two Vite+ catalog entries, and the
+workflow dependencies. A local dry run does not create branches or prove App
+onboarding; GitHub dependency lookups may be skipped without an App/token.
+Update the validator pin deliberately when adopting new Renovate options.
+
 ## Code Generation
 
 The client is auto-generated from iRacing's API documentation:
