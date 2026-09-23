@@ -184,13 +184,23 @@ Do not treat an ungenerated lockfile or a failed audit as ready to merge.
 Validate configuration changes with the same pinned validator used in CI:
 
 ```bash
-pnpm --package=renovate@44.93.4 dlx renovate-config-validator --strict renovate.json
+pnpm dlx --package=renovate@44.93.4 \
+  --allow-build=core-js-pure --allow-build=dtrace-provider \
+  --allow-build=protobufjs --allow-build=re2 \
+  renovate-config-validator --strict renovate.json
 ```
+
+The explicit build allowances apply to this temporary Renovate installation;
+they do not change the workspaces' build-script policies. They let pnpm 12 run
+Renovate's transitive setup scripts, including its native RE2 dependency.
 
 For read-only dependency discovery, stage the config and run:
 
 ```bash
-LOG_LEVEL=debug pnpm --package=renovate@44.93.4 dlx renovate --platform=local --dry-run=extract
+LOG_LEVEL=debug pnpm dlx --package=renovate@44.93.4 \
+  --allow-build=core-js-pure --allow-build=dtrace-provider \
+  --allow-build=protobufjs --allow-build=re2 \
+  renovate --platform=local --dry-run=extract
 ```
 
 Inspect both pnpm lockfile associations, the two Vite+ catalog entries, and the
