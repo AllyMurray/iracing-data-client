@@ -1,0 +1,31 @@
+name: Renovate configuration
+
+on:
+  pull_request:
+    paths:
+      - renovate.json
+      - .github/workflows/renovate-config.yml
+  push:
+    branches: [main]
+    paths:
+      - renovate.json
+      - .github/workflows/renovate-config.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate-renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 24.x
+      - name: Validate Renovate configuration
+        run: >-
+          pnpm dlx --package=renovate@44.93.4
+          --allow-build=core-js-pure --allow-build=dtrace-provider
+          --allow-build=protobufjs --allow-build=re2
+          renovate-config-validator --strict renovate.json

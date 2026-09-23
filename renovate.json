@@ -1,0 +1,236 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": [
+    "npm",
+    "github-actions"
+  ],
+  "dependencyDashboard": true,
+  "timezone": "Europe/London",
+  "schedule": [
+    "* 0-5 * * *"
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": [
+    "dependencies"
+  ],
+  "separateMajorMinor": true,
+  "automerge": false,
+  "automergeType": "pr",
+  "platformAutomerge": false,
+  "ignoreTests": false,
+  "rebaseWhen": "behind-base-branch",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": [],
+    "prCreation": "immediate",
+    "dependencyDashboardApproval": false,
+    "minimumReleaseAge": null,
+    "automerge": false
+  },
+  "packageRules": [
+    {
+      "description": "Match pnpm's 24-hour delay and reject releases with missing timestamps.",
+      "matchDatasources": [
+        "npm"
+      ],
+      "minimumReleaseAge": "1 day",
+      "minimumReleaseAgeBehaviour": "timestamp-required",
+      "internalChecksFilter": "strict"
+    },
+    {
+      "description": "Owned toolkit releases skip the delay but still require review and CI.",
+      "matchDatasources": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "@http-client-toolkit/*"
+      ],
+      "minimumReleaseAge": null,
+      "automerge": false
+    },
+    {
+      "description": "Keep the TS6 compiler API and TS7 native declaration compiler on reviewed compatibility lines.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "@typescript/typescript6"
+      ],
+      "allowedVersions": ">=6.0.0 <7.0.0",
+      "automerge": false
+    },
+    {
+      "description": "Review native compiler patches together with scripts/check-toolchain.mjs; broader TS upgrades need declaration-generator review.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepNames": [
+        "@typescript/native"
+      ],
+      "allowedVersions": ">=7.0.0 <7.1.0",
+      "automerge": false
+    },
+    {
+      "description": "Keep Node types on the Node 24 development line without changing consumer support.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "@types/node"
+      ],
+      "allowedVersions": ">=24.0.0 <25.0.0",
+      "automerge": false
+    },
+    {
+      "description": "Prepare a narrow stable development patch group; automerge stays off until onboarding and required CI checks are confirmed.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchPackageNames": [
+        "tsx"
+      ],
+      "matchCurrentVersion": ">=1.0.0",
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Stable tsx patches wait three days and still require manual review for now.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchPackageNames": [
+        "tsx"
+      ],
+      "matchCurrentVersion": ">=1.0.0",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "groupName": "development tooling patches",
+      "minimumReleaseAge": "3 days",
+      "automerge": false
+    },
+    {
+      "description": "Consumer-facing and documentation dependencies require manual review.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "dependencies",
+        "optionalDependencies"
+      ],
+      "automerge": false
+    },
+    {
+      "description": "Node support is a deliberate compatibility decision: preserve engines.node >=22.0.0.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "engines"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Keep the Node 22/24 test matrix and Node 24 tooling runtime deliberate; update action versions separately.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDepNames": [
+        "node"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Pre-1.0 upgrades may break compatibility even in patches; keep unrelated packages separate.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchCurrentVersion": "<1.0.0",
+      "groupName": null,
+      "groupSlug": null,
+      "automerge": false
+    },
+    {
+      "description": "Unrelated major upgrades stay separate and require review.",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": null,
+      "groupSlug": null,
+      "automerge": false
+    },
+    {
+      "description": "Group owned HTTP toolkit updates within the current major when additional toolkit packages are added.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "@http-client-toolkit/*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "http client toolkit",
+      "groupSlug": "http-client-toolkit",
+      "automerge": false
+    },
+    {
+      "description": "Review GitHub Actions updates together, including majors.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDatasources": [
+        "github-tags"
+      ],
+      "groupName": "github actions",
+      "groupSlug": "github-actions",
+      "separateMajorMinor": false,
+      "separateMinorPatch": false,
+      "automerge": false
+    },
+    {
+      "description": "Both manifests must use the same pinned pnpm release.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "packageManager"
+      ],
+      "matchPackageNames": [
+        "pnpm"
+      ],
+      "groupName": "pnpm",
+      "groupSlug": "pnpm",
+      "automerge": false
+    },
+    {
+      "description": "Keep Vite+ and its aliased core at the same exact version, overriding the pre-1.0/major separation rules. Bundled Vitest belongs to Vite+.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchFileNames": [
+        "pnpm-workspace.yaml"
+      ],
+      "matchPackageNames": [
+        "vite-plus",
+        "@voidzero-dev/vite-plus-core"
+      ],
+      "groupName": "vite plus toolchain",
+      "groupSlug": "vite-plus-toolchain",
+      "separateMajorMinor": false,
+      "separateMinorPatch": false,
+      "rangeStrategy": "pin",
+      "automerge": false
+    }
+  ]
+}
