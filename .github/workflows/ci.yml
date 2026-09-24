@@ -2,9 +2,13 @@ name: ci
 
 on:
   pull_request:
+  workflow_dispatch:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
 
 jobs:
   validate:
@@ -15,6 +19,7 @@ jobs:
         node-version: [22.x, 24.x]
     env:
       CI: "true"
+      HUSKY: "0"
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
@@ -57,6 +62,9 @@ jobs:
 
       - name: Build library on Node 24
         run: pnpm run build
+
+      - name: Check package size budgets
+        run: pnpm run test:build:size
 
       - name: Test release preparation and recovery without publishing
         if: matrix.node-version == '24.x'
