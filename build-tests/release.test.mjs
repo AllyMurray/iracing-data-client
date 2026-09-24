@@ -24,6 +24,7 @@ import {
   restore,
   stage,
   verify,
+  validateCandidateCi,
 } from '../scripts/release.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -313,6 +314,89 @@ await test('release preparation and recovery', async (t) => {
     );
     await recover(recoveryCtx, repository, '123', {}, fetchRun());
     assert.equal(ctx.run('git', ['rev-parse', 'HEAD']), candidate.commit);
+  });
+
+  await t.test('candidate CI must validate the exact commit and all required jobs', async () => {
+    const { ctx, state, options } = scenario();
+    let polls = 0;
+    const branch = `release-candidate/${candidate.version}`;
+    const oldRun = {
+      id: 1,
+      head_sha: candidate.commit,
+      head_branch: branch,
+      event: 'workflow_dispatch',
+      status: 'completed',
+      conclusion: 'success',
+    };
+    const ci = context(ctx.cwd, artifactDir, (cwd, exe, args) => {
+      if (exe !== 'gh') return command(cwd, exe, args);
+      if (args[0] === 'workflow') {
+        assert.deepEqual(args, [
+          'workflow',
+          'run',
+          'ci.yml',
+          '--repo',
+          repository,
+          '--ref',
+          branch,
+        ]);
+        return '';
+      }
+      if (args[1].includes('/jobs?'))
+        return JSON.stringify({
+          jobs: ['validate (22.x)', 'validate (24.x)', 'docs'].map((name) => ({
+            name,
+            conclusion: 'success',
+          })),
+        });
+      polls++;
+      return JSON.stringify({
+        workflow_runs:
+          polls === 1 ? [oldRun] : [{ ...oldRun, id: 2, html_url: 'https://example.invalid/ci/2' }],
+      });
+    });
+    await validateCandidateCi(ci, { repository, wait: async () => {}, attempts: 2 });
+    assert.equal(polls, 2, 'Do not accept an older CI run as the new dispatch');
+    assert.ok(
+      ctx.run('git', ['ls-remote', 'origin', `refs/heads/${branch}`]).startsWith(candidate.commit),
+    );
+    await publish(ctx, options);
+    assert.equal(ctx.run('git', ['ls-remote', 'origin', `refs/heads/${branch}`]), '');
+    assert.equal(state.mutations.filter(([exe]) => exe === 'npm').length, 1);
+  });
+
+  await t.test('failed, incomplete, or wrong-commit candidate CI stops finalization', async () => {
+    const { ctx, state } = scenario();
+    for (const mode of ['failure', 'missing-job', 'wrong-commit']) {
+      let polls = 0;
+      const ci = context(ctx.cwd, artifactDir, (cwd, exe, args) => {
+        if (exe !== 'gh') return command(cwd, exe, args);
+        if (args[0] === 'workflow') return '';
+        if (args[1].includes('/jobs?'))
+          return JSON.stringify({ jobs: [{ name: 'docs', conclusion: 'success' }] });
+        return JSON.stringify({
+          workflow_runs:
+            polls++ === 0
+              ? []
+              : [
+                  {
+                    id: 3,
+                    head_sha: mode === 'wrong-commit' ? candidate.base : candidate.commit,
+                    head_branch: `release-candidate/${candidate.version}`,
+                    event: 'workflow_dispatch',
+                    status: 'completed',
+                    conclusion: mode === 'failure' ? 'failure' : 'success',
+                    html_url: 'https://example.invalid/ci/3',
+                  },
+                ],
+        });
+      });
+      await assert.rejects(
+        validateCandidateCi(ci, { repository, wait: async () => {}, attempts: 1 }),
+        /Candidate CI failed|must pass|Timed out/,
+      );
+    }
+    assert.equal(state.mutations.length, 0);
   });
 
   await t.test('tampered recovery tarball is rejected', () => {

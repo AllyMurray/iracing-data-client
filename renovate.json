@@ -86,7 +86,7 @@
       "automerge": false
     },
     {
-      "description": "Prepare a narrow stable development patch group; automerge stays off until onboarding and required CI checks are confirmed.",
+      "description": "Separate stable size-tool patches from minor updates, matching comic-vine.",
       "matchManagers": [
         "npm"
       ],
@@ -94,13 +94,14 @@
         "devDependencies"
       ],
       "matchPackageNames": [
-        "tsx"
+        "size-limit",
+        "@size-limit/file"
       ],
       "matchCurrentVersion": ">=1.0.0",
       "separateMinorPatch": true
     },
     {
-      "description": "Stable tsx patches wait three days and still require manual review for now.",
+      "description": "Selected stable size-tool patches wait three days; enable automerge once App onboarding and required checks are active.",
       "matchManagers": [
         "npm"
       ],
@@ -108,7 +109,8 @@
         "devDependencies"
       ],
       "matchPackageNames": [
-        "tsx"
+        "size-limit",
+        "@size-limit/file"
       ],
       "matchCurrentVersion": ">=1.0.0",
       "matchUpdateTypes": [
@@ -116,7 +118,8 @@
       ],
       "groupName": "development tooling patches",
       "minimumReleaseAge": "3 days",
-      "automerge": false
+      "automerge": false,
+      "constraintsFiltering": "strict"
     },
     {
       "description": "Consumer-facing and documentation dependencies require manual review.",
@@ -127,7 +130,8 @@
         "dependencies",
         "optionalDependencies"
       ],
-      "automerge": false
+      "automerge": false,
+      "constraintsFiltering": "strict"
     },
     {
       "description": "Node support is a deliberate compatibility decision: preserve engines.node >=22.0.0.",
@@ -231,6 +235,59 @@
       "separateMinorPatch": false,
       "rangeStrategy": "pin",
       "automerge": false
+    },
+    {
+      "description": "Keep size-limit and its exact-version peer plugin together, including coordinated major upgrades. Majors remain manual.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchPackageNames": [
+        "size-limit",
+        "@size-limit/file"
+      ],
+      "groupName": "size limit",
+      "groupSlug": "size-limit"
+    },
+    {
+      "description": "Review TypeScript and execution-tool patches/minors together; preserve compiler compatibility bounds.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchPackageNames": [
+        "typescript",
+        "@typescript/typescript6",
+        "tsx"
+      ],
+      "groupName": "typescript and build tooling",
+      "automerge": false
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchPackageNames": [
+        "@types/**"
+      ],
+      "groupName": "type definitions",
+      "automerge": false
     }
-  ]
+  ],
+  "separateMinorPatch": false
 }

@@ -20,10 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: read
+      actions: write
       id-token: write
     env:
       CI: 'true'
+      HUSKY: '0'
       RECOVERY_RUN_ID: ${{ inputs.recovery_run_id }}
       GH_TOKEN: ${{ github.token }}
     steps:
@@ -68,6 +69,10 @@ jobs:
       - name: Build versioned package
         if: env.RELEASE_ACTIVE == 'true'
         run: pnpm run build
+
+      - name: Check package size budgets
+        if: env.RELEASE_ACTIVE == 'true'
+        run: pnpm run test:build:size
 
       - name: No unknown service return types
         if: env.RELEASE_ACTIVE == 'true'
@@ -114,6 +119,10 @@ jobs:
             ${{ env.RELEASE_DIR }}/release.json
           if-no-files-found: error
           retention-days: 90
+
+      - name: Validate saved candidate in required CI
+        if: env.RELEASE_ACTIVE == 'true'
+        run: node scripts/release.mjs validate-ci
 
       - name: Update npm for trusted publishing
         if: env.RELEASE_ACTIVE == 'true'

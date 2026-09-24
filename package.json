@@ -24,18 +24,18 @@
     "prepublishOnly": "pnpm run build",
     "sdk:generate": "tsx scripts/generate-sdk.ts",
     "sdk:check-no-unknown": "tsx scripts/check-no-unknown-service-returns.ts",
-    "sdk:test": "npx @dotenvx/dotenvx run -- npx tsx test-sdk.ts",
-    "samples:scrape": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts",
-    "samples:scrape-force": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
-    "samples:scrape-missing": "npx @dotenvx/dotenvx run -- npx tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force --missing-only",
-    "probe:season-team-standings": "npx @dotenvx/dotenvx run -- npx tsx scripts/probe-season-team-standings.ts",
+    "sdk:test": "dotenvx run -- tsx test-sdk.ts",
+    "samples:scrape": "dotenvx run -- tsx scripts/scrape-api-samples.ts",
+    "samples:scrape-force": "dotenvx run -- tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
+    "samples:scrape-missing": "dotenvx run -- tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force --missing-only",
+    "probe:season-team-standings": "dotenvx run -- tsx scripts/probe-season-team-standings.ts",
     "docs:dev": "cd docs-site && pnpm dev",
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
     "test": "vp test",
-    "test:package": "pnpm run build && pnpm run test:package:artifacts",
+    "test:package": "pnpm run build && pnpm run test:build:size && pnpm run test:package:artifacts",
     "test:integration": "dotenvx run -- vp test run --config vite.config.integration.mts",
-    "test:oauth": "npx @dotenvx/dotenvx run -- npx tsx test-oauth.ts",
+    "test:oauth": "dotenvx run -- tsx test-oauth.ts",
     "typecheck": "tsc --noEmit",
     "test:package:artifacts": "node build-tests/check-package.cjs",
     "test:dependency-policy": "node build-tests/dependency-policy.cjs",
@@ -44,7 +44,10 @@
     "check": "vp check src scripts build-tests vite.config.mts vite.config.integration.mts",
     "lint": "vp check --no-fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
     "format": "vp fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
-    "test:release": "node --test build-tests/release.test.mjs"
+    "test:release": "node --test build-tests/release.test.mjs",
+    "prepare": "husky",
+    "pre-commit": "pnpm run check && pnpm test run",
+    "test:build:size": "size-limit"
   },
   "keywords": [
     "iracing",
@@ -70,18 +73,48 @@
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "@dotenvx/dotenvx": "^2.26.1",
-    "@types/node": "^24.13.5",
+    "@size-limit/file": "^14.0.0",
+    "@types/node": "24.13.6",
     "@typescript/native": "npm:typescript@7.0.2",
+    "husky": "9.1.7",
+    "size-limit": "^14.0.0",
     "tsx": "^4.23.13",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
   "dependencies": {
-    "@http-client-toolkit/core": "^4.2.0",
+    "@http-client-toolkit/core": "4.2.0",
     "zod": "4.6.5"
   },
   "engines": {
     "node": ">=22.0.0"
-  }
+  },
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "ESM (raw)",
+      "path": "lib/index.mjs",
+      "brotli": false,
+      "limit": "185 kB"
+    },
+    {
+      "name": "CommonJS (raw)",
+      "path": "lib/index.js",
+      "brotli": false,
+      "limit": "225 kB"
+    },
+    {
+      "name": "ESM (gzip)",
+      "path": "lib/index.mjs",
+      "gzip": true,
+      "limit": "28 kB"
+    },
+    {
+      "name": "CommonJS (gzip)",
+      "path": "lib/index.js",
+      "gzip": true,
+      "limit": "30 kB"
+    }
+  ]
 }

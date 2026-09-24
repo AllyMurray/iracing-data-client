@@ -14,6 +14,7 @@ import {
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { setTimeout as delay } from 'node:timers/promises';
 
 const registry = 'https://registry.npmjs.org';
 const artifactName = 'release-candidate';
@@ -241,6 +242,63 @@ export function checkRemote(ctx, candidate) {
   return false;
 }
 
+// GitHub's built-in Actions app cannot bypass a personal-repository ruleset.
+// Run the normal CI workflow against the exact version commit before publishing.
+export async function validateCandidateCi(ctx, { repository, wait = delay, attempts = 80 }) {
+  clean(ctx);
+  const candidate = verify(ctx);
+  assert.equal(candidate.repository, repository);
+  assert.equal(git(ctx, 'rev-parse', 'HEAD'), candidate.commit);
+  checkRemote(ctx, candidate);
+  const branch = `release-candidate/${candidate.version}`;
+  git(ctx, 'push', 'origin', `${candidate.commit}:refs/heads/${branch}`);
+  const endpoint = `repos/${repository}/actions/workflows/ci.yml/runs?branch=${encodeURIComponent(branch)}&event=workflow_dispatch&per_page=100`;
+  const runs = () => JSON.parse(ctx.run('gh', ['api', endpoint])).workflow_runs;
+  const previous = new Set(runs().map((run) => run.id));
+  ctx.run('gh', ['workflow', 'run', 'ci.yml', '--repo', repository, '--ref', branch]);
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const run = runs().find(
+      (item) =>
+        !previous.has(item.id) &&
+        item.head_sha === candidate.commit &&
+        item.head_branch === branch &&
+        item.event === 'workflow_dispatch',
+    );
+    if (run?.status === 'completed') {
+      assert.equal(run.conclusion, 'success', `Candidate CI failed: ${run.html_url}`);
+      const { jobs } = JSON.parse(
+        ctx.run('gh', ['api', `repos/${repository}/actions/runs/${run.id}/jobs?per_page=100`]),
+      );
+      for (const name of ['validate (22.x)', 'validate (24.x)', 'docs']) {
+        assert.ok(
+          jobs.some((job) => job.name === name && job.conclusion === 'success'),
+          `Candidate CI must pass ${name}`,
+        );
+      }
+      console.log(`Required candidate CI passed: ${run.html_url}`);
+      return;
+    }
+    await wait(15_000);
+  }
+  throw new Error(
+    'Timed out waiting for candidate CI; nothing was published. Retry recovery with the original run ID.',
+  );
+}
+
+function removeCandidateBranch(ctx, candidate) {
+  const ref = `refs/heads/release-candidate/${candidate.version}`;
+  const remote = git(ctx, 'ls-remote', 'origin', ref);
+  if (!remote) return;
+  assert.equal(
+    remote.split(/\s/)[0],
+    candidate.commit,
+    'Candidate branch changed; leave it for manual cleanup',
+  );
+  // The lease protects any work added since the check; it only deletes our
+  // temporary candidate branch and never permits rewriting main or release tags.
+  git(ctx, 'push', `--force-with-lease=${ref}:${candidate.commit}`, 'origin', `:${ref}`);
+}
+
 export async function publish(ctx, { repository, packageLookup, releaseLookup }) {
   clean(ctx);
   const candidate = verify(ctx);
@@ -291,6 +349,7 @@ export async function publish(ctx, { repository, packageLookup, releaseLookup })
       candidate.tag,
       '--generate-notes',
     ]);
+  removeCandidateBranch(ctx, candidate);
 }
 
 function active(value) {
@@ -326,6 +385,11 @@ async function main() {
       await recover(ctx, repository, process.env.RECOVERY_RUN_ID, githubHeaders);
       active(true);
       break;
+    case 'validate-ci':
+      assert.equal(process.env.GITHUB_ACTIONS, 'true');
+      assert.equal(process.env.GITHUB_REF, 'refs/heads/main');
+      await validateCandidateCi(ctx, { repository });
+      break;
     case 'publish':
       assert.equal(
         process.env.GITHUB_ACTIONS,
@@ -345,7 +409,7 @@ async function main() {
       });
       break;
     default:
-      throw new Error('Use pending, prepare, stage, recover, or publish');
+      throw new Error('Use pending, prepare, stage, recover, validate-ci, or publish');
   }
 }
 

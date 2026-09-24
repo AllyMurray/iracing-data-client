@@ -20,7 +20,7 @@ Repository development, docs, and releases also use Node.js 24 and pnpm 12.4.2.
 The consumer support range in `engines.node` does not lower the requirements of
 development, build, or release tooling.
 
-Vite+ 0.3.2 provides packaging, tests, linting, and formatting. Its `vite` core
+Vite+ 0.3.3 provides packaging, tests, linting, and formatting. Its `vite` core
 alias and `vite-plus` version are pinned together in the pnpm catalog; update both
 and run `pnpm check:toolchain` when upgrading.
 
@@ -40,6 +40,16 @@ dependencies are still checked. The library permits the esbuild install script;
 docs additionally permits sharp. Review other dependency build scripts before
 adding them to `allowBuilds`.
 
+The library uses `saveExact: true`, matching comic-vine, so newly added dependencies
+are saved at exact versions. Existing reviewed ranges remain where intentional;
+the HTTP toolkit runtime and Node 24 types are pinned explicitly. Update both
+Vite+ catalog entries together and keep the library/docs package-manager pins equal.
+
+`pnpm install` installs the Husky pre-commit hook. Each commit checks formatting,
+lint/types, and offline unit tests through `pnpm pre-commit`. Fix formatting with
+`pnpm format` and stage the result before retrying. CI runs the same checks and
+sets `HUSKY=0` to avoid duplicate hooks during automated release commits.
+
 Run `pnpm test:dependency-policy` to exercise these settings against a local test
 registry. It checks ranges, exact versions, missing timestamps, frozen installs,
 and the toolkit exception in both projects without contacting the iRacing API.
@@ -52,7 +62,7 @@ We use [dotenvx](https://dotenvx.com) to encrypt `.env` files so secrets never e
 
 ```bash
 # Encrypt your .env file
-npx @dotenvx/dotenvx encrypt
+pnpm exec dotenvx encrypt
 
 # Store the private key in your macOS Keychain
 security add-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w "$(grep '^DOTENV_PRIVATE_KEY=' .env.keys | cut -d'=' -f2)"
@@ -85,7 +95,7 @@ If your private key is compromised, rotate it and update your keychain and GitHu
 
 ```bash
 # Generate a new key pair and re-encrypt all values
-npx @dotenvx/dotenvx rotate
+pnpm exec dotenvx rotate
 
 # Update the keychain entry
 security delete-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY"
@@ -103,7 +113,8 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 - `pnpm run lint` - Run the same static checks without the formatting check
 - `pnpm run format` - Format source, generator scripts, package checks, and Vite+ configs with `vp fmt`
 - `pnpm run check:toolchain` - Check the coordinated Vite+/core/Vitest and compiler setup
-- `pnpm run test:package` - Build, pack, and check installed ESM/CommonJS exports, browser bundling, and TS6/TS7 declarations
+- `pnpm run test:build:size` - Check raw and gzip ESM/CommonJS size budgets against the existing build
+- `pnpm run test:package` - Build, enforce size budgets, pack, and check installed ESM/CommonJS exports, browser bundling, and TS6/TS7 declarations
 - `pnpm run test:package:artifacts` - Check the existing build on the current Node.js runtime without rebuilding
 - `pnpm run test:dependency-policy` - Verify both projects enforce the dependency release-age policy
 - `pnpm run test:env` - Verify dotenvx v1 encrypted-file compatibility and v2 encryption using synthetic credentials
@@ -118,7 +129,19 @@ client requests use a mock fetch and do not need iRacing credentials. The tempor
 project is removed when the check finishes.
 
 The browser check bundles the installed package and fails on unresolved imports
-or Node builtin shims. It does not call the live API. `pnpm test run` excludes
+or Node builtin shims. It also verifies the package's `sideEffects: false`
+metadata: unused SDK imports disappear and used exports still execute correctly.
+Public modules must not perform network requests, register global handlers, or
+mutate consumer state at import time. These package checks do not call the live API.
+
+Size Limit checks the emitted SDK code, excluding source maps and external runtime
+dependencies: ESM is limited to 185 kB raw / 28 kB gzip, and CommonJS to 225 kB raw /
+30 kB gzip. These budgets allow modest growth from the measured 168.1/200.84 kB
+raw and 24.66/26 kB gzip baselines. CI checks both builds, and release/recovery
+runs check sizes before publication. Review the cause of a size regression before
+raising a budget.
+
+`pnpm test run` excludes
 credential-dependent integration tests; `pnpm test:integration` loads credentials
 through dotenvx and uses the separate `vite.config.integration.mts` configuration.
 
@@ -160,9 +183,10 @@ matrix, or the Node 24 development runtime. Those remain deliberate decisions.
 Automerge is disabled for every update. Before enabling it, confirm the Renovate
 GitHub App has access to this repository and its Dependency Dashboard is active,
 and protect `main` with required `validate (22.x)`, `validate (24.x)`, and `docs`
-checks. The current candidate group is stable `tsx` patch updates only, with a
-three-day release delay; change only that rule's `automerge` flag in a reviewed
-follow-up after verifying the checks block a failing update. Keep runtime,
+checks. The candidate group is stable `size-limit` / `@size-limit/file` patches,
+matching comic-vine, with a three-day release delay; change only that rule's
+`automerge` flag in a reviewed follow-up after verifying the checks block a failing
+update. Keep runtime,
 release/credential tooling, major, and pre-1.0 updates manual. The path-filtered
 Renovate validation workflow should not be a required check on all PRs.
 
@@ -235,6 +259,13 @@ the first library build.
 
 ## CI / GitHub Actions
 
+Main history is protected against deletion and force-pushes. The required-check
+ruleset requires `validate (22.x)`, `validate (24.x)`, and `docs` from GitHub Actions,
+with the branch up to date and no bypass actors. Activate that ruleset only after
+the candidate-CI release flow below has been merged; the earlier release workflow
+cannot push its version commit through required checks. The path-filtered
+Renovate config check is not required on unrelated PRs.
+
 ### Releases
 
 Changesets v3 runs on the Node 24 development/release runtime. Consumer support
@@ -257,13 +288,20 @@ cancelling an active release. It:
    only the tarball, an incremental Git bundle containing the release commit/tag,
    and metadata with the tarball's SHA-512 integrity, source run, and base commit.
    The encrypted environment file and credentials are not included.
-4. Checks npm and GitHub for the version/release. Only HTTP 404 means missing;
+4. Pushes `release-candidate/<version>` and explicitly dispatches `ci.yml` on that
+   branch. It waits for a new successful run on the exact version commit, including
+   Node 22, Node 24, and docs. This is necessary because a branch pushed using
+   `GITHUB_TOKEN` does not itself trigger another push workflow. Release permissions
+   include `actions: write` for this dispatch. A failed or incomplete run stops
+   publication; use recovery after fixing a transient failure.
+5. Checks npm and GitHub for the version/release. Only HTTP 404 means missing;
    authentication, network, and server failures stop the run. An existing npm
    version must have exactly the saved tarball's integrity to be reused.
-5. Publishes the explicit tarball with `npm publish --provenance --access public`
+6. Publishes the explicit tarball with `npm publish --provenance --access public`
    using the existing GitHub OIDC trusted publisher, then pushes the version
    commit and its tag atomically. Finally it creates a GitHub release using the
-   verified existing tag, or skips an existing completed release.
+   verified existing tag, or skips an existing completed release. It removes the
+   temporary candidate branch only if it still points to the saved commit.
 
 pnpm 12 publishes natively, so npm performs publication to retain its trusted
 publishing support. The workflow keeps its existing filename and `id-token:
@@ -284,9 +322,9 @@ Recovery does not require pending Changesets.
 
 Recovery verifies that the artifact belongs to this repository's completed
 `release.yml` run on `main`, restores its exact commit/tag, verifies the tarball
-integrity and package metadata, and reruns the test gates. It publishes the saved
-archive only if npm still lacks that version. If npm already has the matching
-archive, it finishes the Git push and/or GitHub release without publishing
+integrity and package metadata, and reruns the test gates and candidate CI. It
+publishes the saved archive only if npm still lacks that version. If npm already
+has the matching archive, it finishes the Git push and/or GitHub release without publishing
 again. If the Git commit/tag were already pushed and only the GitHub release is
 missing, recovery works even after later commits have reached `main`.
 
@@ -300,6 +338,13 @@ tag atomically. Then dispatch recovery with the original run ID. Do not cherry-p
 the release into a different commit and move its tag, or republish/bump past a
 partial release without reconciling the recorded version first.
 
+A failed candidate CI run retains its temporary branch and artifact for diagnosis.
+If the failure requires code changes, first verify that npm never accepted the
+version and no release tag/main version commit was pushed. Then deliberately
+remove the abandoned candidate branch and start a new release from the corrected
+`main`. If publication may have succeeded, use recovery or manual reconciliation
+instead of discarding that candidate.
+
 Artifacts are retained for 90 days. Keep the original candidate when investigating
 an interrupted release. If it has expired, a tag conflicts, or npm's integrity
 differs, stop and inspect the published package and Git history manually; the
@@ -310,8 +355,9 @@ Run `pnpm run build && pnpm run test:release` to validate preparation and recove
 without publishing. This uses real Changesets, tarballs, tags, bundles, and local
 bare Git remotes, and substitutes npm/GitHub writes. CI runs it on Node 24. The
 suite covers no-change releases, publication/push/release failures, matching and
-conflicting existing versions, later commits, and lookup outages. It does not use
-live credentials or alter this checkout's version/tags.
+conflicting existing versions, later commits, lookup outages, candidate CI failures,
+and candidate branch cleanup. It does not use live credentials or alter this
+checkout's version/tags.
 
 In CI, the encrypted `.env` file is restored from a GitHub secret and decrypted by dotenvx at runtime. This means adding or changing env vars only requires updating a single secret — the workflow YAML never needs to change.
 
