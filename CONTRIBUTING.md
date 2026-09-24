@@ -261,9 +261,9 @@ the first library build.
 
 Main history is protected against deletion and force-pushes. The required-check
 ruleset requires `validate (22.x)`, `validate (24.x)`, and `docs` from GitHub Actions,
-with the branch up to date and no bypass actors. Activate that ruleset only after
-the candidate-CI release flow below has been merged; the earlier release workflow
-cannot push its version commit through required checks. The path-filtered
+with the branch up to date and no bypass actors. Both rulesets are active.
+The candidate-CI release flow below supplies checks for version commits before
+they are pushed to main. The path-filtered
 Renovate config check is not required on unrelated PRs.
 
 ### Releases
@@ -294,6 +294,11 @@ cancelling an active release. It:
    `GITHUB_TOKEN` does not itself trigger another push workflow. Release permissions
    include `actions: write` for this dispatch. A failed or incomplete run stops
    publication; use recovery after fixing a transient failure.
+   GitHub does not count `workflow_dispatch` job checks toward branch rulesets,
+   so a final CI job reports matching commit statuses using `statuses: write`.
+   It reports success only for a single completed successful job with the expected
+   name and exact commit SHA; missing, skipped, or failed jobs report failure.
+   Ordinary PR and push runs continue to use their native job checks.
 5. Checks npm and GitHub for the version/release. Only HTTP 404 means missing;
    authentication, network, and server failures stop the run. An existing npm
    version must have exactly the saved tarball's integrity to be reused.
