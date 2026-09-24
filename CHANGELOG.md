@@ -1,5 +1,11 @@
 # iracing-data-client
 
+## 0.5.2
+
+### Patch Changes
+
+- 4ab4a41: Mark the package as free of import-time side effects so bundlers can remove unused imports, and pin the HTTP toolkit runtime dependency to the reviewed 4.2.0 release. Preserve support for every Node.js version from 22 onward.
+
 ## 0.5.1
 
 ### Patch Changes
