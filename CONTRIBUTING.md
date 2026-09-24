@@ -3,7 +3,7 @@
 ## Getting Started
 
 1. Fork and clone the repository
-2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.4.2, then install dependencies: `pnpm install --frozen-lockfile`
+2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.6.0, then install dependencies: `pnpm install --frozen-lockfile`
 3. Copy the example env file: `cp .env.example .env`
 4. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
 
@@ -16,7 +16,7 @@ odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; th
 test matrix is a subset of the supported consumer runtimes. CI installs
 dependencies, generates code, typechecks, and builds on Node.js 24 before
 switching to each tested runtime for unit tests and installed-package checks.
-Repository development, docs, and releases also use Node.js 24 and pnpm 12.4.2.
+Repository development, docs, and releases also use Node.js 24 and pnpm 12.6.0.
 The consumer support range in `engines.node` does not lower the requirements of
 development, build, or release tooling.
 
@@ -180,21 +180,15 @@ explicit version check in `scripts/check-toolchain.mjs`.
 Renovate does not change the consumer `engines.node` range, the Node 22/24 CI
 matrix, or the Node 24 development runtime. Those remain deliberate decisions.
 
-Automerge is disabled for every update. Before enabling it, confirm the Renovate
-GitHub App has access to this repository and its Dependency Dashboard is active,
-and protect `main` with required `validate (22.x)`, `validate (24.x)`, and `docs`
-checks. The candidate group is stable `size-limit` / `@size-limit/file` patches,
-matching comic-vine, with a three-day release delay; change only that rule's
-`automerge` flag in a reviewed follow-up after verifying the checks block a failing
-update. Keep runtime,
-release/credential tooling, major, and pre-1.0 updates manual. The path-filtered
-Renovate validation workflow should not be a required check on all PRs.
-
-After merging the config, confirm this repo is enabled in the
-[Renovate App settings](https://github.com/apps/renovate), then review its
-Dependency Dashboard and first update PRs. Adding the config does not install or
-grant access to the App. Keep automerge disabled until onboarding and required
-status checks have been confirmed.
+The Renovate App is active; track updates in the
+[Dependency Dashboard](https://github.com/AllyMurray/iracing-data-client/issues/35).
+Stable `size-limit` / `@size-limit/file` patch updates may automerge after a
+three-day release delay, matching comic-vine. Main requires successful
+`validate (22.x)`, `validate (24.x)`, and `docs` checks with no bypass actors;
+protected-branch tests verified rejection of unchecked commits and acceptance
+after successful CI. All other updates remain manual, including runtime and
+docs dependencies, release/credential tooling, minors, majors, and pre-1.0 tools.
+The path-filtered Renovate validation workflow is not a required check on all PRs.
 
 Security alerts may create PRs outside the overnight schedule without waiting
 for Renovate's release-age check. They still require review and successful CI.

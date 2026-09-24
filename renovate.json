@@ -101,7 +101,7 @@
       "separateMinorPatch": true
     },
     {
-      "description": "Selected stable size-tool patches wait three days; enable automerge once App onboarding and required checks are active.",
+      "description": "Automerge selected stable size-tool patches after three days and successful required CI.",
       "matchManagers": [
         "npm"
       ],
@@ -118,7 +118,7 @@
       ],
       "groupName": "development tooling patches",
       "minimumReleaseAge": "3 days",
-      "automerge": false,
+      "automerge": true,
       "constraintsFiltering": "strict"
     },
     {
