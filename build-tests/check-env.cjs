@@ -70,7 +70,15 @@ try {
   assert.ok(privateKey, 'Encryption must generate a portable private key');
   rmSync(nodePath.join(temporary, '.env.keys'));
   expectSuccess(run(assertion, privateKey));
+  const proxy = spawnSync(
+    process.execPath,
+    [nodePath.join(__dirname, 'fixtures/proxy.cjs'), manifestPath],
+    { env: environment, encoding: 'utf8', timeout: 10_000 },
+  );
+  assert.equal(proxy.status, 0, proxy.error?.message || proxy.stderr || proxy.stdout);
+  assert.match(proxy.stdout, /Proxy bootstrap compatibility passed/);
   console.log('dotenvx v1 compatibility, v2 encryption, and child exit checks passed');
+  console.log('dotenvx proxy dependency bootstrap compatibility passed');
 } finally {
   rmSync(temporary, { recursive: true, force: true });
 }

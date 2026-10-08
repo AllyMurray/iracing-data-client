@@ -14,3 +14,8 @@ minimumReleaseAgeExclude:
 allowBuilds:
   esbuild: true
   sharp: true
+
+overrides:
+  # Expressive Code's postcss-nested still selects the vulnerable parser v6.
+  # v7.1.6 fixes GHSA-rj75-hqrm-r3gf; validate generated docs when updating.
+  'postcss-nested>postcss-selector-parser': ^7.1.6

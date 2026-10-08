@@ -16,15 +16,24 @@ allowBuilds:
 
 # Vite+ and its core alias must move together; checked by check:toolchain.
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@0.3.3
-  vite-plus: 0.3.3
+  vite: npm:@voidzero-dev/vite-plus-core@1.1.0
+  vite-plus: 1.1.0
+  vitest: 5.0.3
 
 overrides:
   vite@*: 'catalog:'
+  vitest@*: 'catalog:'
+  # dotenvx's v3 proxy agent pulls unpatched sprintf-js through roarr.
+  # v4.1 removes roarr; test:env checks its proxy bootstrap API locally.
+  '@dotenvx/dotenvx>global-agent': ^4.1.3
 
 peerDependencyRules:
   allowedVersions:
     vite: '*'
+    vitest: '*'
+  allowAny:
+    - vite
+    - vitest
 
 # Match comic-vine: save exact versions when adding dependencies.
 saveExact: true
