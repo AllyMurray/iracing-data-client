@@ -3,7 +3,7 @@
 ## Getting Started
 
 1. Fork and clone the repository
-2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.6.0, then install dependencies: `pnpm install --frozen-lockfile`
+2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.10.1, then install dependencies: `pnpm install --frozen-lockfile`
 3. Copy the example env file: `cp .env.example .env`
 4. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
 
@@ -16,13 +16,14 @@ odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; th
 test matrix is a subset of the supported consumer runtimes. CI installs
 dependencies, generates code, typechecks, and builds on Node.js 24 before
 switching to each tested runtime for unit tests and installed-package checks.
-Repository development, docs, and releases also use Node.js 24 and pnpm 12.6.0.
+Repository development, docs, and releases also use Node.js 24 and pnpm 12.10.1.
 The consumer support range in `engines.node` does not lower the requirements of
 development, build, or release tooling.
 
-Vite+ 0.3.3 provides packaging, tests, linting, and formatting. Its `vite` core
-alias and `vite-plus` version are pinned together in the pnpm catalog; update both
-and run `pnpm check:toolchain` when upgrading.
+Vite+ 1.1.0 provides packaging, tests, linting, and formatting. Its `vite` core
+alias and `vite-plus` version are pinned together in the pnpm catalog, alongside
+the exact bundled Vitest version. Update the group together and run
+`pnpm check:toolchain` when upgrading. Tests import from `vite-plus/test`.
 
 TypeScript 7.0.2 is installed as `@typescript/native` and supplies `tsc` for
 typechecking and the native compiler used explicitly by `vp pack`. The
@@ -154,6 +155,13 @@ and `pnpm --dir docs-site audit` for documentation. Resolve new findings before
 merging dependency updates; narrowly scoped overrides should explain the
 affected parent package and the patched version.
 
+Two scoped overrides currently remove audit findings: dotenvx uses global-agent
+4.1.3 or newer to avoid the unpatched `sprintf-js` dependency in its older logger,
+and docs' `postcss-nested` uses `postcss-selector-parser` 7.1.6 or newer.
+`pnpm test:env` verifies proxy bootstrap against a local HTTP proxy, alongside
+the encrypted-environment checks; the docs build validates the parser override.
+Remove these overrides when the parent packages adopt safe versions themselves.
+
 The dotenvx v2 compatibility check uses a public synthetic v1 fixture and a fresh
 v2 encryption round trip in a temporary directory. It never loads repository
 credentials or connects to the live API. The credential-dependent integration
@@ -202,7 +210,7 @@ Do not treat an ungenerated lockfile or a failed audit as ready to merge.
 Validate configuration changes with the same pinned validator used in CI:
 
 ```bash
-pnpm dlx --package=renovate@44.93.4 \
+pnpm dlx --package=renovate@44.145.1 \
   --allow-build=core-js-pure --allow-build=dtrace-provider \
   --allow-build=protobufjs --allow-build=re2 \
   renovate-config-validator --strict renovate.json
@@ -215,13 +223,13 @@ Renovate's transitive setup scripts, including its native RE2 dependency.
 For read-only dependency discovery, stage the config and run:
 
 ```bash
-LOG_LEVEL=debug pnpm dlx --package=renovate@44.93.4 \
+LOG_LEVEL=debug pnpm dlx --package=renovate@44.145.1 \
   --allow-build=core-js-pure --allow-build=dtrace-provider \
   --allow-build=protobufjs --allow-build=re2 \
   renovate --platform=local --dry-run=extract
 ```
 
-Inspect both pnpm lockfile associations, the two Vite+ catalog entries, and the
+Inspect both pnpm lockfile associations, the Vite+/core/Vitest catalog entries, and the
 workflow dependencies. A local dry run does not create branches or prove App
 onboarding; GitHub dependency lookups may be skipped without an App/token.
 Update the validator pin deliberately when adopting new Renovate options.

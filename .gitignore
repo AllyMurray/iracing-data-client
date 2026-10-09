@@ -82,3 +82,4 @@ docs/api/generated/
 *.ibp
 session_data/
 telemetry/
+.vitest/

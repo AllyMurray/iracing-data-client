@@ -43,7 +43,7 @@ jobs:
         uses: pnpm/action-setup@v6.1.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: 24.x
           cache: pnpm
@@ -110,7 +110,7 @@ jobs:
       # artifact; it never overwrites it or repacks the version being recovered.
       - name: Save recovery artifact
         if: env.RELEASE_ACTIVE == 'true' && env.RECOVERY_RUN_ID == ''
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: release-candidate
           path: |

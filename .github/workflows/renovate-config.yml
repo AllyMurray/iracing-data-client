@@ -20,12 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: pnpm/action-setup@v6.1.0
-      - uses: actions/setup-node@v7.0.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: 24.x
       - name: Validate Renovate configuration
         run: >-
-          pnpm dlx --package=renovate@44.93.4
+          pnpm dlx --package=renovate@44.145.1
           --allow-build=core-js-pure --allow-build=dtrace-provider
           --allow-build=protobufjs --allow-build=re2
           renovate-config-validator --strict renovate.json
