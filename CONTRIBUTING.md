@@ -155,12 +155,10 @@ and `pnpm --dir docs-site audit` for documentation. Resolve new findings before
 merging dependency updates; narrowly scoped overrides should explain the
 affected parent package and the patched version.
 
-Two scoped overrides currently remove audit findings: dotenvx uses global-agent
-4.1.3 or newer to avoid the unpatched `sprintf-js` dependency in its older logger,
-and docs' `postcss-nested` uses `postcss-selector-parser` 7.1.6 or newer.
-`pnpm test:env` verifies proxy bootstrap against a local HTTP proxy, alongside
-the encrypted-environment checks; the docs build validates the parser override.
-Remove these overrides when the parent packages adopt safe versions themselves.
+A scoped override currently removes a documentation audit finding:
+`postcss-nested` uses `postcss-selector-parser` 7.1.6 or newer. The docs build
+validates the parser override. Remove it when the parent package adopts a safe
+version itself.
 
 The dotenvx v2 compatibility check uses a public synthetic v1 fixture and a fresh
 v2 encryption round trip in a temporary directory. It never loads repository
