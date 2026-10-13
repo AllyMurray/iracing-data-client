@@ -12,7 +12,7 @@
   "schedule": [
     "* 0-5 * * *"
   ],
-  "prConcurrentLimit": 5,
+  "prConcurrentLimit": 0,
   "prHourlyLimit": 2,
   "labels": [
     "dependencies"
@@ -25,13 +25,24 @@
   "rebaseWhen": "behind-base-branch",
   "vulnerabilityAlerts": {
     "enabled": true,
+    "addLabels": [
+      "security"
+    ],
     "schedule": [],
+    "prConcurrentLimit": 0,
     "prCreation": "immediate",
     "dependencyDashboardApproval": false,
     "minimumReleaseAge": null,
     "automerge": false
   },
   "packageRules": [
+    {
+      "description": "Prioritize transitive refreshes over ordinary version bumps.",
+      "matchUpdateTypes": [
+        "lockFileMaintenance"
+      ],
+      "prPriority": 10
+    },
     {
       "description": "Match pnpm's 24-hour delay and reject releases with missing timestamps.",
       "matchDatasources": [
@@ -142,6 +153,19 @@
         "engines"
       ],
       "enabled": false
+    },
+    {
+      "description": "Preserve existing consumer support when proposing peer range extensions.",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "peerDependencies"
+      ],
+      "rangeStrategy": "widen",
+      "groupName": null,
+      "groupSlug": null,
+      "automerge": false
     },
     {
       "description": "Keep the Node 22/24 test matrix and Node 24 tooling runtime deliberate; update action versions separately.",
@@ -290,5 +314,12 @@
       "automerge": false
     }
   ],
-  "separateMinorPatch": false
+  "separateMinorPatch": false,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "* 0-5 * * *"
+    ],
+    "automerge": false
+  }
 }

@@ -53,6 +53,11 @@ await test('release preparation and recovery', async (t) => {
     cpSync(join(root, file), join(seed, file), { recursive: true });
   }
   symlinkSync(join(root, 'node_modules'), join(seed, 'node_modules'), 'dir');
+  // A directory-only ignore does not cover the fixture's node_modules symlink.
+  writeFileSync(
+    join(seed, '.gitignore'),
+    `${readFileSync(join(seed, '.gitignore'), 'utf8')}\nnode_modules\n`,
+  );
   const seedCtx = context(seed, artifactDir);
   const seedGit = (...args) => seedCtx.run('git', args);
   seedGit('init', '--initial-branch=main');
@@ -60,19 +65,20 @@ await test('release preparation and recovery', async (t) => {
   seedGit('config', 'user.email', 'release-test@example.invalid');
   seedGit('add', '.');
   seedGit('commit', '-m', 'fixture');
+  const original = JSON.parse(readFileSync(join(seed, 'package.json'), 'utf8'));
+  seedGit('tag', `${original.name}@${original.version}`);
 
-  await t.test('no changesets skips versioning, including empty changesets', () => {
+  await t.test('no changesets skips versioning, including empty changesets', async () => {
     assert.equal(pending(seed), false);
-    assert.equal(prepare(seedCtx), false);
+    assert.equal(await prepare(seedCtx), false);
     writeFileSync(join(seed, '.changeset/empty.md'), '---\n{}\n---\n');
     seedGit('add', '.changeset');
     seedGit('commit', '-m', 'empty changeset');
     const before = seedGit('rev-parse', 'HEAD');
-    assert.equal(prepare(seedCtx), false);
+    assert.equal(await prepare(seedCtx), false);
     assert.equal(seedGit('rev-parse', 'HEAD'), before);
   });
 
-  const original = JSON.parse(readFileSync(join(seed, 'package.json'), 'utf8'));
   writeFileSync(
     join(seed, '.changeset/release-test.md'),
     '---\n"iracing-data-client": patch\n---\n\nRelease test fixture.\n',
@@ -80,8 +86,8 @@ await test('release preparation and recovery', async (t) => {
   seedGit('add', '.changeset');
   seedGit('commit', '-m', 'patch changeset');
   let candidate;
-  await t.test('Changesets v3 produces a versioned tarball, commit and explicit tag', () => {
-    assert.equal(prepare(seedCtx), true);
+  await t.test('Changesets v3 produces a versioned tarball, commit and explicit tag', async () => {
+    assert.equal(await prepare(seedCtx), true);
     candidate = stage(seedCtx, { repository, runId: '123' });
     const parts = original.version.split('.').map(Number);
     assert.equal(candidate.version, `${parts[0]}.${parts[1]}.${parts[2] + 1}`);
@@ -97,6 +103,39 @@ await test('release preparation and recovery', async (t) => {
     assert.ok(entries.includes('package/lib/index.d.ts'));
     assert.ok(!entries.includes('.env'));
   });
+
+  await t.test(
+    'automatic runtime changes use one recoverable version commit and do not repeat',
+    async () => {
+      const checkout = join(temporary, 'automatic');
+      seedGit('clone', seed, checkout);
+      symlinkSync(join(root, 'node_modules'), join(checkout, 'node_modules'), 'dir');
+      cpSync(join(root, 'lib'), join(checkout, 'lib'), { recursive: true });
+      const ctx = context(checkout, join(temporary, 'automatic-candidate'));
+      const git = (...args) => ctx.run('git', args);
+      git('config', 'user.name', 'Release test');
+      git('config', 'user.email', 'release-test@example.invalid');
+      const manifest = JSON.parse(readFileSync(join(checkout, 'package.json'), 'utf8'));
+      manifest.dependencies.zod = `^${manifest.dependencies.zod}`;
+      writeFileSync(join(checkout, 'package.json'), `${JSON.stringify(manifest, null, 2)}\n`);
+      git('add', 'package.json');
+      git('commit', '-m', 'Update runtime dependency range without a manual Changeset');
+      const base = git('rev-parse', 'HEAD');
+      assert.equal(pending(checkout), false);
+      assert.equal(await prepare(ctx), true);
+      const automatic = stage(ctx, { repository, runId: '456' });
+      assert.equal(automatic.base, base, 'Recovery must retain the original triggering commit');
+      assert.equal(pending(checkout), false, 'Versioning consumes the generated Changeset');
+      assert.match(
+        readFileSync(join(checkout, 'CHANGELOG.md'), 'utf8'),
+        /Update runtime dependencies/,
+      );
+      assert.equal(await prepare(ctx), false, 'The new release tag becomes the baseline');
+      assert.equal(git('status', '--porcelain'), '');
+      writeFileSync(join(checkout, 'README.md'), 'Uncommitted work');
+      await assert.rejects(prepare(ctx), /Release checkout must be clean/);
+    },
+  );
 
   let index = 0;
   function scenario() {

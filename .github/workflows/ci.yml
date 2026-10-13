@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0
@@ -36,9 +38,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Audit library and development dependencies
+      - name: Test dependency audit policy
         if: matrix.node-version == '24.x'
-        run: pnpm audit
+        run: pnpm run test:audit-policy
+
+      - name: Check dependency audit regressions
+        if: matrix.node-version == '24.x' && github.event_name == 'pull_request'
+        env:
+          AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/audit-dependencies.mjs . "$AUDIT_BASE_SHA"
 
       - name: Verify dependency release-age policy
         if: matrix.node-version == '24.x'
@@ -92,6 +100,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0
@@ -109,8 +119,11 @@ jobs:
       - name: Build documentation
         run: pnpm build
 
-      - name: Audit documentation dependencies
-        run: pnpm audit
+      - name: Check dependency audit regressions
+        if: github.event_name == 'pull_request'
+        env:
+          AUDIT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: node ../scripts/audit-dependencies.mjs docs-site "$AUDIT_BASE_SHA"
 
   report-candidate-status:
     # GitHub excludes workflow_dispatch job checks from ruleset enforcement.

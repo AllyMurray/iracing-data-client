@@ -44,10 +44,11 @@
     "check": "vp check src scripts build-tests vite.config.mts vite.config.integration.mts",
     "lint": "vp check --no-fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
     "format": "vp fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
-    "test:release": "node --test build-tests/release.test.mjs",
+    "test:release": "node --test build-tests/release.test.mjs build-tests/runtime-release.test.mjs",
     "prepare": "husky",
     "pre-commit": "pnpm run check && pnpm test run",
-    "test:build:size": "size-limit"
+    "test:build:size": "size-limit",
+    "test:audit-policy": "node --test build-tests/audit-dependencies.test.mjs"
   },
   "keywords": [
     "iracing",
