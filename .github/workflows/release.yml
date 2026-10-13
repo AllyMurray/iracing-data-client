@@ -14,10 +14,20 @@ concurrency:
   group: release-main
   cancel-in-progress: false
 
+permissions:
+  contents: read
+
 jobs:
+  security:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/dependency-security.yml
+
   release:
     if: github.ref == 'refs/heads/main'
+    needs: security
     runs-on: ubuntu-latest
+    outputs:
+      docs_ref: ${{ steps.docs.outputs.ref }}
     permissions:
       contents: write
       actions: write
@@ -49,22 +59,26 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
-      - name: Check for changesets
-        id: changesets
-        if: env.RECOVERY_RUN_ID == ''
-        run: node scripts/release.mjs pending
-
       - name: Restore saved release candidate
         if: env.RECOVERY_RUN_ID != ''
         run: node scripts/release.mjs recover
 
+      - name: Audit restored release candidate
+        if: env.RECOVERY_RUN_ID != ''
+        run: |
+          pnpm audit
+          pnpm --dir docs-site audit
+
       - name: Install dependencies
-        if: steps.changesets.outputs.has_changesets == 'true' || env.RELEASE_ACTIVE == 'true'
         run: pnpm install --frozen-lockfile
 
-      - name: Version packages and create local tag
-        if: steps.changesets.outputs.has_changesets == 'true'
+      - name: Prepare runtime Changeset, version packages and create local tag
+        if: env.RECOVERY_RUN_ID == ''
         run: node scripts/release.mjs prepare
+
+      - name: Audit versioned release candidate
+        if: env.RELEASE_ACTIVE == 'true' && env.RECOVERY_RUN_ID == ''
+        run: pnpm audit
 
       - name: Build versioned package
         if: env.RELEASE_ACTIVE == 'true'
@@ -131,3 +145,31 @@ jobs:
       - name: Publish and finalize release
         if: env.RELEASE_ACTIVE == 'true'
         run: node scripts/release.mjs publish
+
+      - name: Select documentation deployment
+        id: docs
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          # Recovery may finalize an older release after main has advanced.
+          # Deploy current main in that case, rather than roll Pages back.
+          if [ -n "$RECOVERY_RUN_ID" ]; then
+            git fetch origin main
+            echo "ref=$(git rev-parse FETCH_HEAD)" >> "$GITHUB_OUTPUT"
+          elif [ "$RELEASE_ACTIVE" = 'true' ] || [ "$EVENT_NAME" = 'workflow_dispatch' ] \
+            || [ -z "$BEFORE_SHA" ] || [[ "$BEFORE_SHA" =~ ^0+$ ]] \
+            || ! git diff --quiet "$BEFORE_SHA" HEAD -- docs-site/ .github/workflows/deploy-docs.yml; then
+            echo "ref=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+
+  docs:
+    needs: release
+    if: needs.release.outputs.docs_ref != ''
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy-docs.yml
+    with:
+      ref: ${{ needs.release.outputs.docs_ref }}

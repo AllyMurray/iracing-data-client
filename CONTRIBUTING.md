@@ -3,7 +3,7 @@
 ## Getting Started
 
 1. Fork and clone the repository
-2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.10.1, then install dependencies: `pnpm install --frozen-lockfile`
+2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.11.2, then install dependencies: `pnpm install --frozen-lockfile`
 3. Copy the example env file: `cp .env.example .env`
 4. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
 
@@ -16,7 +16,7 @@ odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; th
 test matrix is a subset of the supported consumer runtimes. CI installs
 dependencies, generates code, typechecks, and builds on Node.js 24 before
 switching to each tested runtime for unit tests and installed-package checks.
-Repository development, docs, and releases also use Node.js 24 and pnpm 12.10.1.
+Repository development, docs, and releases also use Node.js 24 and pnpm 12.11.2.
 The consumer support range in `engines.node` does not lower the requirements of
 development, build, or release tooling.
 
@@ -118,6 +118,8 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 - `pnpm run test:package` - Build, enforce size budgets, pack, and check installed ESM/CommonJS exports, browser bundling, and TS6/TS7 declarations
 - `pnpm run test:package:artifacts` - Check the existing build on the current Node.js runtime without rebuilding
 - `pnpm run test:dependency-policy` - Verify both projects enforce the dependency release-age policy
+- `pnpm run test:audit-policy` - Test audit regression detection and error handling
+- `pnpm run test:release` - Test automatic runtime Changesets, release preparation, and recovery without publishing
 - `pnpm run test:env` - Verify dotenvx v1 encrypted-file compatibility and v2 encryption using synthetic credentials
 - `pnpm run test:integration` - Run integration tests against the live API
 - `pnpm run typecheck` - Run TypeScript 7 type checking directly
@@ -150,10 +152,24 @@ To validate documentation locally, run `pnpm --dir docs-site install --frozen-lo
 followed by `pnpm docs:build`. PR CI runs this docs build separately from the
 library checks, using the documentation project's own lockfile.
 
-CI also runs `pnpm audit` for the library (including development dependencies)
-and `pnpm --dir docs-site audit` for documentation. Resolve new findings before
-merging dependency updates; narrowly scoped overrides should explain the
-affected parent package and the patched version.
+PR CI audits the library and docs lockfiles against the exact PR base commit,
+using current registry advisories for both. Existing findings remain visible in
+the job summary, so incremental fixes can merge while other findings remain.
+New advisories, newly affected versions, increased severity, or new runtime
+exposure fail CI. Registry errors, malformed reports, and missing baseline data
+also fail. The comparison uses temporary lockfile copies without installing
+packages or running hooks. Reproduce it with
+`node scripts/audit-dependencies.mjs . <base-commit-sha>` and
+`node scripts/audit-dependencies.mjs docs-site <base-commit-sha>`.
+
+The separate `dependency security` workflow runs full `pnpm audit` checks for
+both projects on main pushes, daily at 07:17 UTC, and on manual dispatch. It
+includes development and transitive dependencies. Release and docs deployment
+call this workflow and require both audits to pass before starting. Recovery
+also audits the restored candidate, and normal release preparation audits the
+versioned lockfile before publishing. Keep these full audits out of required
+PR checks; the PR regression checks allow incremental security fixes to land.
+Narrowly scoped overrides should explain the affected parent and patched version.
 
 A scoped override currently removes a documentation audit finding:
 `postcss-nested` uses `postcss-selector-parser` 7.1.6 or newer. The docs build
@@ -170,8 +186,11 @@ tests remain a separate release gate.
 `renovate.json` manages the root and docs manifests and their independent pnpm
 lockfiles, the root pnpm catalog, both package-manager pins, and GitHub Actions.
 Ordinary branches are scheduled between midnight and 06:00 Europe/London, with
-at most five concurrent PRs and two new PRs per hour. The schedule is a permitted
-window for Renovate runs, not a promise that an update appears at midnight.
+two new PRs per hour and no concurrent PR cap, matching comic-vine. Nightly
+lockfile maintenance has higher priority than ordinary version updates so
+transitive fixes can proceed while other PRs remain open. Maintenance PRs
+require review and successful CI. The schedule is a permitted window for
+Renovate runs, not a promise that an update appears at midnight.
 
 Third-party npm releases must be at least one day old and have a publication
 timestamp, matching pnpm's install policy. Owned `@http-client-toolkit/*` releases
@@ -196,14 +215,29 @@ after successful CI. All other updates remain manual, including runtime and
 docs dependencies, release/credential tooling, minors, majors, and pre-1.0 tools.
 The path-filtered Renovate validation workflow is not a required check on all PRs.
 
-Security alerts may create PRs outside the overnight schedule without waiting
-for Renovate's release-age check. They still require review and successful CI.
+Security alerts create PRs with an additional `security` label outside the
+overnight schedule and ordinary PR limits, without waiting for Renovate's
+release-age check. They still require review and successful CI.
 They do not bypass pnpm's strict one-day install policy: a brand-new fix can
 produce an artifact/install failure until it ages. Wait and retry the update,
 or explicitly review a temporary package-specific exception in the affected
 `pnpm-workspace.yaml`, remove it once the fix has aged, and keep all other
 packages covered. Renovate lockfile refreshes are also subject to pnpm's policy.
-Do not treat an ungenerated lockfile or a failed audit as ready to merge.
+Do not merge an ungenerated lockfile or a PR with an audit regression. Existing
+audit findings may remain while incremental fixes merge; publication and docs
+deployment wait until both projects have clean full audits.
+
+The `dependency graph` workflow generates an SPDX inventory from each committed
+lockfile on PRs and main pushes, without installing dependencies. Main runs
+submit both inventories to GitHub using distinct manifest paths and correlators;
+PRs only upload artifacts. This covers pnpm 12's multi-document lockfiles and
+includes development and transitive dependencies. Enable the GitHub dependency
+graph and Dependabot alerts, and grant Renovate read access to those alerts for
+security PRs. Repository workflow files do not change those settings.
+
+Future peer dependency updates widen supported ranges and require manual review.
+The Vite+/core/Vitest catalog remains a coordinated, manually reviewed group.
+Only the stable size tooling patches listed above are eligible for automerge.
 
 Validate configuration changes with the same pinned validator used in CI:
 
@@ -270,16 +304,35 @@ Renovate config check is not required on unrelated PRs.
 
 Changesets v3 runs on the Node 24 development/release runtime. Consumer support
 remains Node `>=22.0.0`; CI tests Node 22 and 24. Add a Changeset with
-`pnpm exec changeset` for consumer-facing changes, including runtime dependency
-updates. Tooling, CI, and contributor-documentation changes do not need a
-publishing Changeset. The workflow skips publication when there are no pending
-Changesets (or only empty Changesets); it does not invoke `changeset version`
-without a release plan because v3 treats that as an error.
+`pnpm exec changeset` for consumer-facing code changes. Runtime dependency
+updates automatically receive a patch Changeset during release preparation.
+Add a manual minor or major Changeset when the SDK change needs a larger bump;
+an upstream major version alone does not determine the SDK's version. Tooling,
+CI, and contributor-documentation changes do not need a publishing Changeset.
+The workflow skips publication when there are no releasing Changesets after
+runtime comparison, including when only empty Changesets remain.
+
+`scripts/prepare-runtime-release.mjs`, adapted from comic-vine, compares root
+runtime/optional dependencies, peer requirements, and the locked runtime graph
+with the latest reachable `iracing-data-client@*` release tag. It uses
+`pnpm list --lockfile-only --prod --depth Infinity --json` in temporary projects,
+without installing historical packages. Transitive runtime lockfile updates are
+included; development tooling, package-manager, docs, and Actions changes alone
+do not publish the SDK. Missing release history or an incomplete graph fails
+the workflow. All runtime changes since the tag are covered, including updates
+merged while audits prevented publishing.
+
+The generated `.changeset/auto-runtime-dependencies.md` is consumed alongside
+manual Changesets in the same version commit. A manual minor or major bump takes
+precedence. This retains the original workflow commit as the recovery base and
+the new release tag becomes the next comparison baseline. Recovery reuses the
+saved candidate without generating a fresh Changeset or changing its archive.
 
 The `release.yml` workflow runs on `main` and serializes release runs without
-cancelling an active release. It:
+cancelling an active release. After both full dependency audits pass, it:
 
-1. Runs the locally installed Changesets CLI, refreshes the pnpm lockfile, and
+1. Prepares an automatic runtime dependency Changeset when needed, runs the
+   locally installed Changesets CLI, refreshes the pnpm lockfile, and
    creates a local version commit and `iracing-data-client@<version>` tag.
 2. Builds the versioned package, checks service return types, runs unit tests,
    packs with `pnpm pack`, tests that exact tarball in an isolated consumer, and
@@ -315,6 +368,21 @@ process. It never adds a registry token. Both normal and recovery runs must pass
 the live API gate before publication/finalization. Restored `.env` files are
 removed even when a test fails.
 
+### Documentation deployment
+
+After the release job succeeds, it calls the reusable `Deploy Documentation`
+workflow. Every package release deploys docs from the exact version commit.
+Docs-only changes under `docs-site/` or changes to the docs deployment workflow
+also deploy without a package bump. Other development-only changes deploy
+neither a package nor docs. Manual release runs refresh docs after success.
+Failed audits, builds, tests, or publication block that run's automatic deployment.
+
+The docs workflow audits both projects at its selected commit before building
+and deploying. It is called directly because writes using `GITHUB_TOKEN` do not
+trigger downstream release events. To retry only Pages, manually run
+`Deploy Documentation` on main. Successful recovery deploys the current main
+commit, which may be newer than the restored release, to avoid rolling docs back.
+
 ### Recovering an interrupted release
 
 If a run fails **before** uploading `release-candidate`, it has not published
@@ -327,8 +395,9 @@ Recovery does not require pending Changesets.
 
 Recovery verifies that the artifact belongs to this repository's completed
 `release.yml` run on `main`, restores its exact commit/tag, verifies the tarball
-integrity and package metadata, and reruns the test gates and candidate CI. It
-publishes the saved archive only if npm still lacks that version. If npm already
+integrity and package metadata, and reruns the test gates, full dependency audits,
+and candidate CI. It publishes the saved archive only if npm still lacks that
+version. If npm already
 has the matching archive, it finishes the Git push and/or GitHub release without publishing
 again. If the Git commit/tag were already pushed and only the GitHub release is
 missing, recovery works even after later commits have reached `main`.
@@ -359,10 +428,11 @@ workflow have no recovery artifact and also require manual inspection.
 Run `pnpm run build && pnpm run test:release` to validate preparation and recovery
 without publishing. This uses real Changesets, tarballs, tags, bundles, and local
 bare Git remotes, and substitutes npm/GitHub writes. CI runs it on Node 24. The
-suite covers no-change releases, publication/push/release failures, matching and
-conflicting existing versions, later commits, lookup outages, candidate CI failures,
-and candidate branch cleanup. It does not use live credentials or alter this
-checkout's version/tags.
+suite covers automatic runtime and transitive changes, development-only no-ops,
+manual bump precedence, no-change releases, publication/push/release failures,
+matching and conflicting existing versions, later commits, lookup outages,
+candidate CI failures, and candidate branch cleanup. It does not use live
+credentials or alter this checkout's version/tags.
 
 In CI, the encrypted `.env` file is restored from a GitHub secret and decrypted by dotenvx at runtime. This means adding or changing env vars only requires updating a single secret — the workflow YAML never needs to change.
 
@@ -378,5 +448,5 @@ To update `DOTENV_ENV_FILE`, copy the content of your local `.env` and paste it 
 1. Create a feature branch from `main`
 2. Make your changes
 3. Run `pnpm run check`, `pnpm run typecheck`, `pnpm test run`, and `pnpm run test:package`; regenerate the SDK when changing templates and build the docs when changing documentation
-4. For consumer-facing changes, add a Changeset: `pnpm exec changeset`
+4. For consumer-facing code changes or dependency changes requiring more than an automatic patch, add a Changeset: `pnpm exec changeset`
 5. Open a Pull Request

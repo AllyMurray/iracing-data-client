@@ -15,6 +15,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
+import { prepareRuntimeRelease } from './prepare-runtime-release.mjs';
 
 const registry = 'https://registry.npmjs.org';
 const artifactName = 'release-candidate';
@@ -54,8 +55,11 @@ export function pending(cwd) {
   );
 }
 
-export function prepare(ctx) {
+export async function prepare(ctx) {
   clean(ctx);
+  // Generate and consume the automatic Changeset in the same version commit.
+  // Keeping HEAD unchanged until versioning preserves the recovery artifact's base.
+  await prepareRuntimeRelease(ctx.cwd);
   if (!pending(ctx.cwd)) return false;
   const temporary = mkdtempSync(join(tmpdir(), 'iracing-release-plan-'));
   try {
@@ -374,7 +378,7 @@ async function main() {
       break;
     }
     case 'prepare':
-      active(prepare(ctx));
+      active(await prepare(ctx));
       break;
     case 'stage':
       if (process.env.GITHUB_SHA)
