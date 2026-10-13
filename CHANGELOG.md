@@ -1,5 +1,14 @@
 # iracing-data-client
 
+## 0.5.3
+
+### Patch Changes
+
+- Update runtime dependencies since iracing-data-client@0.5.2.
+  
+  - `zod` (dependencies): `4.6.5` → `4.6.7`.
+  - Refresh locked runtime dependencies, including transitive resolutions.
+
 ## 0.5.2
 
 ### Patch Changes
