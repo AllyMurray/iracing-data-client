@@ -16,17 +16,12 @@ assert.equal(core.version, vitePlus.version, 'Update both Vite+ catalog entries 
 assert.equal(
   vitest.version,
   vitePlus.dependencies.vitest,
-  'Use the Vitest version bundled by Vite+.',
+  'Use the exact Vitest version bundled by Vite+; remove independent overrides.',
 );
 assert.equal(
   manifest.devDependencies.vitest,
-  'catalog:',
-  'Keep Vitest in the coordinated catalog.',
-);
-assert.equal(
-  require('vitest/package.json').version,
-  vitest.version,
-  'The root Vitest pin must match the runner bundled by Vite+.',
+  undefined,
+  'Vitest is supplied by Vite+; import tests from vite-plus/test instead of adding it directly.',
 );
 assert.equal(native.version, '7.0.2', 'Review the explicit TS7 compiler when updating it.');
 assert.equal(compatibility.name, '@typescript/typescript6');

@@ -21,9 +21,10 @@ The consumer support range in `engines.node` does not lower the requirements of
 development, build, or release tooling.
 
 Vite+ 1.1.0 provides packaging, tests, linting, and formatting. Its `vite` core
-alias and `vite-plus` version are pinned together in the pnpm catalog, alongside
-the exact bundled Vitest version. Update the group together and run
-`pnpm check:toolchain` when upgrading. Tests import from `vite-plus/test`.
+alias and `vite-plus` version are pinned together in the pnpm catalog. Vitest is
+an exact transitive dependency of Vite+; do not add a direct dependency, catalog
+entry, or override for it. Tests import from `vite-plus/test`. Update the Vite+
+pair together and run `pnpm check:toolchain` when upgrading.
 
 TypeScript 7.0.2 is installed as `@typescript/native` and supplies `tsc` for
 typechecking and the native compiler used explicitly by `vp pack`. The
@@ -236,7 +237,12 @@ graph and Dependabot alerts, and grant Renovate read access to those alerts for
 security PRs. Repository workflow files do not change those settings.
 
 Future peer dependency updates widen supported ranges and require manual review.
-The Vite+/core/Vitest catalog remains a coordinated, manually reviewed group.
+The Vite+/core catalog remains a coordinated, manually reviewed group. Renovate
+groups available updates but does not enforce compatibility between packages in
+a group. Vitest is therefore managed only through Vite+'s exact dependency, so
+Renovate cannot propose an independent Vitest bump. Lockfile maintenance also
+retains that declared exact version. CI checks that the installed runner matches
+Vite+'s declaration and rejects reintroducing a direct Vitest dependency.
 Only the stable size tooling patches listed above are eligible for automerge.
 
 Validate configuration changes with the same pinned validator used in CI:
@@ -261,8 +267,9 @@ LOG_LEVEL=debug pnpm dlx --package=renovate@44.145.1 \
   renovate --platform=local --dry-run=extract
 ```
 
-Inspect both pnpm lockfile associations, the Vite+/core/Vitest catalog entries, and the
-workflow dependencies. A local dry run does not create branches or prove App
+Inspect both pnpm lockfile associations, the Vite+/core catalog entries, and the
+workflow dependencies; Vitest must not be extracted as a direct update target.
+A local dry run does not create branches or prove App
 onboarding; GitHub dependency lookups may be skipped without an App/token.
 Update the validator pin deliberately when adopting new Renovate options.
 

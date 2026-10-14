@@ -170,13 +170,9 @@ catalogs:
     vite-plus:
       specifier: 1.1.0
       version: 1.1.0
-    vitest:
-      specifier: 5.0.3
-      version: 5.0.3
 
 overrides:
   vite@*: npm:@voidzero-dev/vite-plus-core@1.1.0
-  vitest@*: 5.0.3
 
 importers:
 
@@ -222,9 +218,6 @@ importers:
       vite-plus:
         specifier: 'catalog:'
         version: 1.1.0(@types/node@24.19.2)(@typescript/typescript6@6.0.2)(@vitest/ui@5.0.3)(esbuild@0.28.2)(tsx@4.23.15)(yaml@2.9.1)
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.3(@types/node@24.19.2)(@vitest/browser-preview@5.0.3)(@vitest/ui@5.0.3)(@voidzero-dev/vite-plus-core@1.1.0(@types/node@24.19.2)(@typescript/typescript6@6.0.2)(esbuild@0.28.2)(tsx@4.23.15)(yaml@2.9.1))
 
 packages:
 
