@@ -242,7 +242,7 @@
       "automerge": false
     },
     {
-      "description": "Keep Vite+ and its aliased core at the same release, with the exact Vitest version bundled by Vite+. Review coordinated updates; CI rejects mismatches.",
+      "description": "Keep Vite+ and its aliased core at the same release. Vitest is owned by Vite+ and updates through its exact transitive dependency; CI rejects mismatches.",
       "matchManagers": [
         "npm"
       ],
@@ -251,8 +251,7 @@
       ],
       "matchPackageNames": [
         "vite-plus",
-        "@voidzero-dev/vite-plus-core",
-        "vitest"
+        "@voidzero-dev/vite-plus-core"
       ],
       "groupName": "vite plus toolchain",
       "groupSlug": "vite-plus-toolchain",

@@ -82,8 +82,7 @@
     "tsx": "^4.23.15",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "vite": "catalog:",
-    "vite-plus": "catalog:",
-    "vitest": "catalog:"
+    "vite-plus": "catalog:"
   },
   "dependencies": {
     "@http-client-toolkit/core": "4.2.0",
