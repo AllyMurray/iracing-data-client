@@ -20,7 +20,7 @@
   "separateMajorMinor": true,
   "automerge": false,
   "automergeType": "pr",
-  "platformAutomerge": false,
+  "platformAutomerge": true,
   "ignoreTests": false,
   "rebaseWhen": "behind-base-branch",
   "vulnerabilityAlerts": {
@@ -32,10 +32,17 @@
     "prConcurrentLimit": 0,
     "prCreation": "immediate",
     "dependencyDashboardApproval": false,
-    "minimumReleaseAge": null,
-    "automerge": false
+    "minimumReleaseAge": null
   },
   "packageRules": [
+    {
+      "description": "Automatically merge minor and patch updates after required CI passes.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
+    },
     {
       "description": "Prioritize transitive refreshes over ordinary version bumps.",
       "matchUpdateTypes": [
@@ -53,26 +60,24 @@
       "internalChecksFilter": "strict"
     },
     {
-      "description": "Owned toolkit releases skip the delay but still require review and CI.",
+      "description": "Owned toolkit releases skip the delay but still require successful CI.",
       "matchDatasources": [
         "npm"
       ],
       "matchPackageNames": [
         "@http-client-toolkit/*"
       ],
-      "minimumReleaseAge": null,
-      "automerge": false
+      "minimumReleaseAge": null
     },
     {
-      "description": "Keep the TS6 compiler API and TS7 native declaration compiler on reviewed compatibility lines.",
+      "description": "Keep the TS6 compiler API on its compatible major version.",
       "matchManagers": [
         "npm"
       ],
       "matchPackageNames": [
         "@typescript/typescript6"
       ],
-      "allowedVersions": ">=6.0.0 <7.0.0",
-      "automerge": false
+      "allowedVersions": ">=6.0.0 <7.0.0"
     },
     {
       "description": "Review native compiler patches together with scripts/check-toolchain.mjs; broader TS upgrades need declaration-generator review.",
@@ -82,8 +87,7 @@
       "matchDepNames": [
         "@typescript/native"
       ],
-      "allowedVersions": ">=7.0.0 <7.1.0",
-      "automerge": false
+      "allowedVersions": ">=7.0.0 <7.1.0"
     },
     {
       "description": "Keep Node types on the Node 24 development line without changing consumer support.",
@@ -93,8 +97,7 @@
       "matchPackageNames": [
         "@types/node"
       ],
-      "allowedVersions": ">=24.0.0 <25.0.0",
-      "automerge": false
+      "allowedVersions": ">=24.0.0 <25.0.0"
     },
     {
       "description": "Separate stable size-tool patches from minor updates, matching comic-vine.",
@@ -112,7 +115,7 @@
       "separateMinorPatch": true
     },
     {
-      "description": "Automerge selected stable size-tool patches after three days and successful required CI.",
+      "description": "Wait three days before merging stable size-tool patches.",
       "matchManagers": [
         "npm"
       ],
@@ -129,11 +132,10 @@
       ],
       "groupName": "development tooling patches",
       "minimumReleaseAge": "3 days",
-      "automerge": true,
       "constraintsFiltering": "strict"
     },
     {
-      "description": "Consumer-facing and documentation dependencies require manual review.",
+      "description": "Preserve runtime constraints for consumer-facing and documentation dependencies.",
       "matchManagers": [
         "npm"
       ],
@@ -141,7 +143,6 @@
         "dependencies",
         "optionalDependencies"
       ],
-      "automerge": false,
       "constraintsFiltering": "strict"
     },
     {
@@ -164,8 +165,7 @@
       ],
       "rangeStrategy": "widen",
       "groupName": null,
-      "groupSlug": null,
-      "automerge": false
+      "groupSlug": null
     },
     {
       "description": "Keep the Node 22/24 test matrix and Node 24 tooling runtime deliberate; update action versions separately.",
@@ -178,14 +178,13 @@
       "enabled": false
     },
     {
-      "description": "Pre-1.0 upgrades may break compatibility even in patches; keep unrelated packages separate.",
+      "description": "Keep unrelated pre-1.0 packages separate so CI checks each upgrade independently.",
       "matchManagers": [
         "npm"
       ],
       "matchCurrentVersion": "<1.0.0",
       "groupName": null,
-      "groupSlug": null,
-      "automerge": false
+      "groupSlug": null
     },
     {
       "description": "Unrelated major upgrades stay separate and require review.",
@@ -209,11 +208,10 @@
         "patch"
       ],
       "groupName": "http client toolkit",
-      "groupSlug": "http-client-toolkit",
-      "automerge": false
+      "groupSlug": "http-client-toolkit"
     },
     {
-      "description": "Review GitHub Actions updates together, including majors.",
+      "description": "Group GitHub Actions updates, keeping majors separate from minor and patch updates.",
       "matchManagers": [
         "github-actions"
       ],
@@ -222,9 +220,8 @@
       ],
       "groupName": "github actions",
       "groupSlug": "github-actions",
-      "separateMajorMinor": false,
-      "separateMinorPatch": false,
-      "automerge": false
+      "separateMajorMinor": true,
+      "separateMinorPatch": false
     },
     {
       "description": "Both manifests must use the same pinned pnpm release.",
@@ -238,8 +235,7 @@
         "pnpm"
       ],
       "groupName": "pnpm",
-      "groupSlug": "pnpm",
-      "automerge": false
+      "groupSlug": "pnpm"
     },
     {
       "description": "Keep Vite+ and its aliased core at the same release. Vitest is owned by Vite+ and updates through its exact transitive dependency; CI rejects mismatches.",
@@ -255,10 +251,9 @@
       ],
       "groupName": "vite plus toolchain",
       "groupSlug": "vite-plus-toolchain",
-      "separateMajorMinor": false,
+      "separateMajorMinor": true,
       "separateMinorPatch": false,
-      "rangeStrategy": "pin",
-      "automerge": false
+      "rangeStrategy": "pin"
     },
     {
       "description": "Keep size-limit and its exact-version peer plugin together, including coordinated major upgrades. Majors remain manual.",
@@ -276,7 +271,7 @@
       "groupSlug": "size-limit"
     },
     {
-      "description": "Review TypeScript and execution-tool patches/minors together; preserve compiler compatibility bounds.",
+      "description": "Group TypeScript and execution-tool patches/minors; preserve compiler compatibility bounds.",
       "matchManagers": [
         "npm"
       ],
@@ -292,8 +287,7 @@
         "@typescript/typescript6",
         "tsx"
       ],
-      "groupName": "typescript and build tooling",
-      "automerge": false
+      "groupName": "typescript and build tooling"
     },
     {
       "matchManagers": [
@@ -309,8 +303,7 @@
       "matchPackageNames": [
         "@types/**"
       ],
-      "groupName": "type definitions",
-      "automerge": false
+      "groupName": "type definitions"
     }
   ],
   "separateMinorPatch": false,

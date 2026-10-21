@@ -1,3 +1,4 @@
+# Keep the library and docs as separate projects with separate lockfiles.
 packages:
   - '.'
 

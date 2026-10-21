@@ -9,10 +9,12 @@ const nodePath = require('node:path');
 
 const root = nodePath.resolve(__dirname, '..');
 const packageManager = require('../package.json').packageManager;
+// Reuse the pnpm binary that launched this script, including any version switch.
+const pnpm = process.env.npm_execpath || 'pnpm';
 
 function run(args, cwd) {
   return new Promise((resolveRun, reject) => {
-    const child = spawn('pnpm', args, { cwd });
+    const child = spawn(pnpm, args, { cwd });
     let output = '';
     child.stdout.on('data', (data) => (output += data));
     child.stderr.on('data', (data) => (output += data));
@@ -71,6 +73,9 @@ async function main() {
   server.listen(0, '127.0.0.1');
   await events.once(server, 'listening');
   try {
+    const version = await run(['--version'], temporary);
+    assert.equal(version.code, 0, version.output);
+    assert.equal(version.output.trim(), packageManager.split('@')[1].split('+')[0]);
     for (const project of ['.', 'docs-site']) {
       for (const scenario of [
         'range',
@@ -92,7 +97,8 @@ async function main() {
           JSON.stringify({
             name: 'age-policy-consumer',
             private: true,
-            packageManager,
+            // The fixture registry serves only test packages. Declaring pnpm
+            // here makes fresh runners try to resolve pnpm from that registry.
             dependencies: {
               [isToolkit ? '@http-client-toolkit/age-policy-probe' : 'age-policy-probe']:
                 isToolkit || scenario === 'exact' ? '1.0.1' : '*',

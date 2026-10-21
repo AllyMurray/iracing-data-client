@@ -1,10 +1,10 @@
 #!/usr/bin/env tsx
 
-import { DATA_API_BASE_URL } from "../src/auth/constants";
-import { OAuthError } from "../src/auth/errors";
-import { requestPasswordLimitedToken } from "../src/auth/flows/password-limited";
+import { DATA_API_BASE_URL } from '../src/auth/constants';
+import { OAuthError } from '../src/auth/errors';
+import { requestPasswordLimitedToken } from '../src/auth/flows/password-limited';
 
-const CLIENTS_ENV_VAR = "IRACING_KEEPALIVE_CLIENTS";
+const CLIENTS_ENV_VAR = 'IRACING_KEEPALIVE_CLIENTS';
 
 interface KeepaliveClient {
   name: string;
@@ -16,13 +16,13 @@ interface KeepaliveClient {
 class ConfigError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = "ConfigError";
+    this.name = 'ConfigError';
   }
 }
 
 async function main(): Promise<void> {
-  const username = getRequiredEnv("IRACING_USERNAME");
-  const password = getRequiredEnv("IRACING_PASSWORD");
+  const username = getRequiredEnv('IRACING_USERNAME');
+  const password = getRequiredEnv('IRACING_PASSWORD');
   const clients = parseClientConfig(getRequiredEnv(CLIENTS_ENV_VAR));
   const enabledClients = clients.filter((client) => client.enabled);
 
@@ -31,7 +31,7 @@ async function main(): Promise<void> {
   }
 
   console.log(
-    `Loaded ${clients.length} configured client pair(s); ${enabledClients.length} enabled.`
+    `Loaded ${clients.length} configured client pair(s); ${enabledClients.length} enabled.`,
   );
   console.log(`Using iRacing username ${maskIdentifier(username)}.`);
 
@@ -61,7 +61,7 @@ async function main(): Promise<void> {
 
 function getRequiredEnv(name: string): string {
   const value = process.env[name];
-  if (!value || value.trim() === "") {
+  if (!value || value.trim() === '') {
     throw new ConfigError(`${name} must be set`);
   }
   return value;
@@ -72,10 +72,9 @@ function parseClientConfig(rawJson: string): KeepaliveClient[] {
 
   try {
     parsed = JSON.parse(rawJson);
-  } catch (error) {
-    throw new ConfigError(
-      `${CLIENTS_ENV_VAR} must be valid JSON: ${describeError(error)}`
-    );
+  } catch {
+    // JSON parse errors may include the input, which contains client secrets.
+    throw new ConfigError(`${CLIENTS_ENV_VAR} must be valid JSON`);
   }
 
   if (!Array.isArray(parsed)) {
@@ -90,16 +89,16 @@ function normalizeClient(entry: unknown, index: number): KeepaliveClient {
     throw new ConfigError(`${CLIENTS_ENV_VAR}[${index}] must be an object`);
   }
 
-  const name = optionalStringField(entry, "name", index)?.trim() || `client-${index + 1}`;
-  const enabled = optionalBooleanField(entry, "enabled", index) !== false;
-  const clientId = optionalStringField(entry, "clientId", index)?.trim();
-  const clientSecret = optionalStringField(entry, "clientSecret", index)?.trim();
+  const name = optionalStringField(entry, 'name', index)?.trim() || `client-${index + 1}`;
+  const enabled = optionalBooleanField(entry, 'enabled', index) !== false;
+  const clientId = optionalStringField(entry, 'clientId', index)?.trim();
+  const clientSecret = optionalStringField(entry, 'clientSecret', index)?.trim();
 
   if (!enabled) {
     return {
       name,
-      clientId: clientId || "disabled",
-      clientSecret: clientSecret || "disabled",
+      clientId: clientId || 'disabled',
+      clientSecret: clientSecret || 'disabled',
       enabled,
     };
   }
@@ -118,11 +117,11 @@ function normalizeClient(entry: unknown, index: number): KeepaliveClient {
 function optionalStringField(
   entry: Record<string, unknown>,
   field: string,
-  index: number
+  index: number,
 ): string | undefined {
   const value = entry[field];
   if (value === undefined) return undefined;
-  if (typeof value !== "string") {
+  if (typeof value !== 'string') {
     throw new ConfigError(`${CLIENTS_ENV_VAR}[${index}].${field} must be a string`);
   }
   return value;
@@ -131,24 +130,24 @@ function optionalStringField(
 function optionalBooleanField(
   entry: Record<string, unknown>,
   field: string,
-  index: number
+  index: number,
 ): boolean | undefined {
   const value = entry[field];
   if (value === undefined) return undefined;
-  if (typeof value !== "boolean") {
+  if (typeof value !== 'boolean') {
     throw new ConfigError(`${CLIENTS_ENV_VAR}[${index}].${field} must be a boolean`);
   }
   return value;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 
 async function keepClientAlive(
   client: KeepaliveClient,
   username: string,
-  password: string
+  password: string,
 ): Promise<void> {
   const tokens = await requestPasswordLimitedToken({
     clientId: client.clientId,
@@ -165,15 +164,15 @@ async function keepClientAlive(
   });
 
   if (!response.ok) {
-    throw new Error(`Data API returned ${response.status} ${response.statusText || "Unknown"}`);
+    throw new Error(`Data API returned ${response.status} ${response.statusText || 'Unknown'}`);
   }
 
   await response.arrayBuffer();
 }
 
 function maskIdentifier(value: string): string {
-  if (value.includes("@")) {
-    const [localPart, domain] = value.split("@", 2);
+  if (value.includes('@')) {
+    const [localPart, domain] = value.split('@', 2);
     return `${localPart.slice(0, 2)}***@${domain}`;
   }
 
@@ -186,7 +185,7 @@ function maskIdentifier(value: string): string {
 
 function describeError(error: unknown): string {
   if (error instanceof OAuthError) {
-    return `${error.code}${error.description ? `: ${error.description}` : ""}`;
+    return `${error.code}${error.description ? `: ${error.description}` : ''}`;
   }
 
   if (error instanceof Error) {
