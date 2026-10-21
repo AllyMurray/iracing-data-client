@@ -29,6 +29,7 @@
     "samples:scrape-force": "dotenvx run -- tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force",
     "samples:scrape-missing": "dotenvx run -- tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force --missing-only",
     "probe:season-team-standings": "dotenvx run -- tsx scripts/probe-season-team-standings.ts",
+    "credentials:keepalive": "dotenvx run -- tsx scripts/keepalive-oauth-clients.ts",
     "docs:dev": "cd docs-site && pnpm dev",
     "docs:build": "cd docs-site && pnpm build",
     "docs:preview": "cd docs-site && pnpm preview",
