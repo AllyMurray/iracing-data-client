@@ -17,8 +17,8 @@ allowBuilds:
 # Vite+ and its core alias must move together; checked by check:toolchain.
 # Vitest is an exact dependency of Vite+; do not pin or override it independently.
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@1.1.0
-  vite-plus: 1.1.0
+  vite: npm:@voidzero-dev/vite-plus-core@1.3.0
+  vite-plus: 1.3.0
 
 overrides:
   vite@*: 'catalog:'
