@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, type Mock } from 'bun:test';
 import { LookupService } from './service';
 import { IRacingClient } from '../client';
 
@@ -10,12 +10,12 @@ import lookupgetSample from '../../samples/lookup.get.json';
 import lookuplicensesSample from '../../samples/lookup.licenses.json';
 
 describe('LookupService', () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<any>;
   let client: IRacingClient;
   let lookupService: LookupService;
 
   beforeEach(() => {
-    mockFetch = vi.fn();
+    mockFetch = mock<any>();
 
     client = new IRacingClient({
       auth: {

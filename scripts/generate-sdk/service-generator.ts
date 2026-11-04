@@ -82,9 +82,7 @@ export function generateMockParams(params: Record<string, any>): string {
 export function generateSectionTest(sectionName: string, endpoints: Flat[]): string {
   const lines: string[] = [];
 
-  lines.push(
-    `import { describe, it, expect, vi, beforeEach, type MockInstance } from "vite-plus/test";`,
-  );
+  lines.push(`import { describe, it, expect, mock, beforeEach, type Mock } from "bun:test";`);
   lines.push(`import { ${toPascal(sectionName)}Service } from "./service";`);
   lines.push(`import { IRacingClient } from "../client";`);
   lines.push('');
@@ -105,12 +103,12 @@ export function generateSectionTest(sectionName: string, endpoints: Flat[]): str
   }
 
   lines.push(`describe("${toPascal(sectionName)}Service", () => {`);
-  lines.push('  let mockFetch: MockInstance;');
+  lines.push('  let mockFetch: Mock<any>;');
   lines.push('  let client: IRacingClient;');
   lines.push(`  let ${toCamelCase(sectionName)}Service: ${toPascal(sectionName)}Service;`);
   lines.push('');
   lines.push('  beforeEach(() => {');
-  lines.push('    mockFetch = vi.fn();');
+  lines.push('    mockFetch = mock<any>();');
   lines.push('');
   lines.push('    client = new IRacingClient({');
   lines.push('      auth: {');

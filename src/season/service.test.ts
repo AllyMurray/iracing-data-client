@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, type Mock } from 'bun:test';
 import { SeasonService } from './service';
 import { IRacingClient } from '../client';
 
@@ -9,12 +9,12 @@ import seasonspectatorsubsessionidsSample from '../../samples/season.spectator_s
 import seasonspectatorsubsessionidsdetailSample from '../../samples/season.spectator_subsessionids_detail.json';
 
 describe('SeasonService', () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<any>;
   let client: IRacingClient;
   let seasonService: SeasonService;
 
   beforeEach(() => {
-    mockFetch = vi.fn();
+    mockFetch = mock<any>();
 
     client = new IRacingClient({
       auth: {

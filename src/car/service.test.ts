@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, type Mock } from 'bun:test';
 import { CarService } from './service';
 import { IRacingClient } from '../client';
 
@@ -7,12 +7,12 @@ import carassetsSample from '../../samples/car.assets.json';
 import cargetSample from '../../samples/car.get.json';
 
 describe('CarService', () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<any>;
   let client: IRacingClient;
   let carService: CarService;
 
   beforeEach(() => {
-    mockFetch = vi.fn();
+    mockFetch = mock<any>();
 
     client = new IRacingClient({
       auth: {

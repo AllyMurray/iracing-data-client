@@ -64,14 +64,14 @@ export async function prepare(ctx) {
   const temporary = mkdtempSync(join(tmpdir(), 'iracing-release-plan-'));
   try {
     const plan = join(temporary, 'plan.json');
-    ctx.run('pnpm', ['exec', 'changeset', 'status', '--output', plan]);
+    ctx.run('bun', ['x', '--no-install', 'changeset', 'status', '--output', plan]);
     const releases = json(plan).releases.filter((release) => release.type !== 'none');
     if (releases.length === 0) return false;
     const pkg = json(join(ctx.cwd, 'package.json'));
     assert.equal(releases.length, 1, 'Only the root package may be released');
     assert.equal(releases[0].name, pkg.name);
-    ctx.run('pnpm', ['exec', 'changeset', 'version']);
-    ctx.run('pnpm', ['install', '--lockfile-only', '--ignore-scripts']);
+    ctx.run('bun', ['x', '--no-install', 'changeset', 'version']);
+    ctx.run('bun', ['install', '--lockfile-only', '--ignore-scripts']);
     const next = json(join(ctx.cwd, 'package.json'));
     assert.notEqual(next.version, pkg.version);
     const tag = `${next.name}@${next.version}`;
@@ -81,12 +81,12 @@ export async function prepare(ctx) {
     assert.ok(
       changed.every(
         (file) =>
-          ['package.json', 'pnpm-lock.yaml', 'CHANGELOG.md'].includes(file) ||
+          ['package.json', 'bun.lock', 'CHANGELOG.md'].includes(file) ||
           file.startsWith('.changeset/'),
       ),
       'Versioning changed unexpected files',
     );
-    git(ctx, 'add', '--', 'package.json', 'pnpm-lock.yaml', 'CHANGELOG.md', '.changeset');
+    git(ctx, 'add', '--', 'package.json', 'bun.lock', 'CHANGELOG.md', '.changeset');
     git(ctx, 'commit', '-m', `chore: release ${tag}`);
     git(ctx, 'tag', tag);
     return true;
@@ -108,7 +108,7 @@ export function stage(ctx, { repository, runId }) {
   assert.equal(git(ctx, 'rev-parse', `refs/tags/${tag}`), commit);
   mkdirSync(ctx.artifactDir, { recursive: true });
   const tarball = join(ctx.artifactDir, 'package.tgz');
-  ctx.run('pnpm', ['pack', '--out', tarball]);
+  ctx.run('bun', ['pm', 'pack', '--filename', tarball]);
   git(
     ctx,
     'bundle',

@@ -143,8 +143,8 @@ async function generateDataClient() {
   writeGenerated(path.join(OUT_DIR, 'index.ts'), generateMainDataClient(sections));
   console.log(`Generated ${OUT_DIR}/index.ts`);
 
-  // Use the pinned formatter from pnpm's script PATH, only on generated files.
-  execFileSync('vp', ['fmt', ...generatedFiles], { stdio: 'inherit' });
+  // Use the pinned formatter from Bun's script PATH, only on generated files.
+  execFileSync('bun', ['fmt', ...generatedFiles], { stdio: 'inherit' });
 
   console.log(
     `\nSuccessfully generated typed Data Client with ${endpoints.length} endpoints across ${sections.length} sections!`,

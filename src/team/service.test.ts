@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, type Mock } from 'bun:test';
 import { TeamService } from './service';
 import { IRacingClient } from '../client';
 
@@ -7,12 +7,12 @@ import teamgetSample from '../../samples/team.get.json';
 import teammembershipSample from '../../samples/team.membership.json';
 
 describe('TeamService', () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<any>;
   let client: IRacingClient;
   let teamService: TeamService;
 
   beforeEach(() => {
-    mockFetch = vi.fn();
+    mockFetch = mock<any>();
 
     client = new IRacingClient({
       auth: {

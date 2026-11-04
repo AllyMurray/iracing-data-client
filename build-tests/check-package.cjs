@@ -21,7 +21,7 @@ try {
   const tarball = args.length
     ? nodePath.resolve(args[1])
     : nodePath.join(temporary, 'iracing-data-client.tgz');
-  if (!args.length) run('pnpm', ['pack', '--out', tarball], root);
+  if (!args.length) run('bun', ['pm', 'pack', '--filename', tarball], root);
 
   mkdirSync(consumer);
   writeFileSync(
@@ -37,31 +37,13 @@ try {
     ),
   );
   // Consumer resolution must use the same release-age policy as the repository.
-  const agePolicy = [
-    'minimumReleaseAge',
-    'minimumReleaseAgeStrict',
-    'minimumReleaseAgeIgnoreMissingTime',
-  ].map((setting) => {
-    const value = execFileSync('pnpm', ['config', 'get', setting], {
-      cwd: root,
-      encoding: 'utf8',
-    }).trim();
-    assert.match(value, setting === 'minimumReleaseAge' ? /^\d+$/ : /^(true|false)$/);
-    return `${setting}: ${value}`;
-  });
-  const exclusions = JSON.parse(
-    execFileSync('pnpm', ['config', 'get', 'minimumReleaseAgeExclude', '--json'], {
-      cwd: root,
-      encoding: 'utf8',
-    }),
+  copyFileSync(nodePath.join(root, 'bunfig.toml'), nodePath.join(consumer, 'bunfig.toml'));
+  mkdirSync(nodePath.join(consumer, 'scripts'));
+  copyFileSync(
+    nodePath.join(root, 'scripts/release-age-scanner.mjs'),
+    nodePath.join(consumer, 'scripts/release-age-scanner.mjs'),
   );
-  assert.ok(Array.isArray(exclusions) && exclusions.every((entry) => typeof entry === 'string'));
-  agePolicy.push(`minimumReleaseAgeExclude: ${JSON.stringify(exclusions)}`);
-  writeFileSync(
-    nodePath.join(consumer, 'pnpm-workspace.yaml'),
-    `packages:\n  - '.'\n${agePolicy.join('\n')}\n`,
-  );
-  run('pnpm', ['install', '--ignore-scripts', '--no-frozen-lockfile']);
+  run('bun', ['install', '--ignore-scripts']);
 
   copyFileSync(
     nodePath.join(__dirname, 'fixtures/runtime.cjs'),

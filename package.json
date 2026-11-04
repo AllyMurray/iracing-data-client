@@ -19,9 +19,9 @@
     "package.json"
   ],
   "scripts": {
-    "build": "pnpm run check:toolchain && vp pack",
-    "dev": "vp pack --watch",
-    "prepublishOnly": "pnpm run build",
+    "build": "bun run check:toolchain && tsdown",
+    "dev": "tsdown --watch",
+    "prepublishOnly": "bun run build",
     "sdk:generate": "tsx scripts/generate-sdk.ts",
     "sdk:check-no-unknown": "tsx scripts/check-no-unknown-service-returns.ts",
     "sdk:test": "dotenvx run -- tsx test-sdk.ts",
@@ -30,26 +30,27 @@
     "samples:scrape-missing": "dotenvx run -- tsx scripts/scrape-api-samples.ts docs/api/index.json samples --force --missing-only",
     "probe:season-team-standings": "dotenvx run -- tsx scripts/probe-season-team-standings.ts",
     "credentials:keepalive": "dotenvx run -- tsx scripts/keepalive-oauth-clients.ts",
-    "docs:dev": "cd docs-site && pnpm dev",
-    "docs:build": "cd docs-site && pnpm build",
-    "docs:preview": "cd docs-site && pnpm preview",
-    "test": "vp test",
-    "test:package": "pnpm run build && pnpm run test:build:size && pnpm run test:package:artifacts",
-    "test:integration": "dotenvx run -- vp test run --config vite.config.integration.mts",
+    "docs:dev": "cd docs-site && bun run dev",
+    "docs:build": "cd docs-site && bun run build",
+    "docs:preview": "cd docs-site && bun run preview",
+    "test": "bun test --path-ignore-patterns=\"**/*.integration.test.ts\"",
+    "test:package": "bun run build && bun run test:build:size && bun run test:package:artifacts",
+    "test:integration": "dotenvx run -- bun test .integration.test.ts",
     "test:oauth": "dotenvx run -- tsx test-oauth.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "bun check --no-script",
     "test:package:artifacts": "node build-tests/check-package.cjs",
     "test:dependency-policy": "node build-tests/dependency-policy.cjs",
     "test:env": "node build-tests/check-env.cjs",
     "check:toolchain": "node scripts/check-toolchain.mjs",
-    "check": "vp check src scripts build-tests vite.config.mts vite.config.integration.mts",
-    "lint": "vp check --no-fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
-    "format": "vp fmt src scripts build-tests vite.config.mts vite.config.integration.mts",
+    "check": "bun run format:check && bun run lint",
+    "lint": "bun lint --no-script --type-aware --type-check src scripts build-tests tsdown.config.ts",
+    "format": "bun fmt src scripts build-tests tsdown.config.ts",
     "test:release": "node --test build-tests/release.test.mjs build-tests/runtime-release.test.mjs",
     "prepare": "husky",
-    "pre-commit": "pnpm run check && pnpm test run",
+    "pre-commit": "bun run check && bun run test",
     "test:build:size": "size-limit",
-    "test:audit-policy": "node --test build-tests/audit-dependencies.test.mjs"
+    "test:audit-policy": "node --test build-tests/audit-dependencies.test.mjs",
+    "format:check": "bun fmt --check src scripts build-tests tsdown.config.ts"
   },
   "keywords": [
     "iracing",
@@ -71,7 +72,7 @@
     "type": "git",
     "url": "https://github.com/AllyMurray/iracing-data-client"
   },
-  "packageManager": "pnpm@12.16.1+sha512.091d1dee7927575661b25dab3c2ae31cafc1c54d6b71ed6a6600cf0c1cb10434a447eae14015f1b23e2e6bedeed79df94a932e2164d2832280dce3fb32f656d1",
+  "packageManager": "bun@1.4.4-canary.20261104.1",
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
     "@dotenvx/dotenvx": "^2.38.2",
@@ -82,8 +83,9 @@
     "size-limit": "^14.3.0",
     "tsx": "^4.23.15",
     "typescript": "npm:@typescript/typescript6@6.0.2",
-    "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "vite": "8.3.5",
+    "tsdown": "0.23.1",
+    "@types/bun": "1.4.4"
   },
   "dependencies": {
     "@http-client-toolkit/core": "5.0.0",
@@ -118,5 +120,11 @@
       "gzip": true,
       "limit": "30 kB"
     }
-  ]
+  ],
+  "trustedDependencies": [
+    "esbuild"
+  ],
+  "patchedDependencies": {
+    "size-limit@14.3.0": "patches/size-limit@14.3.0.patch"
+  }
 }

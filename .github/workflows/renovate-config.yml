@@ -19,13 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: pnpm/action-setup@v6.1.1
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: 24.x
+      - name: Set up pinned Bun
+        run: npm install --global "bun@$(cat "$GITHUB_WORKSPACE/.bun-version")"
       - name: Validate Renovate configuration
         run: >-
-          pnpm dlx --package=renovate@44.209.0
-          --allow-build=core-js-pure --allow-build=dtrace-provider
-          --allow-build=protobufjs --allow-build=re2
-          renovate-config-validator --strict renovate.json
+          bunx --package=renovate@44.209.0 renovate-config-validator --strict renovate.json

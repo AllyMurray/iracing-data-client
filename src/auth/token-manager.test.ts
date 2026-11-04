@@ -1,17 +1,17 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, afterEach, setSystemTime } from 'bun:test';
 import { TokenManager } from './token-manager';
 import { TokenRefreshError } from './errors';
 
 describe('TokenManager', () => {
-  const mockFetch = vi.fn();
+  const mockFetch = mock<any>();
 
   beforeEach(() => {
-    vi.clearAllMocks();
-    vi.useFakeTimers();
+    mockFetch.mockReset();
+    setSystemTime(new Date('2026-01-01T00:00:00Z'));
   });
 
   afterEach(() => {
-    vi.useRealTimers();
+    setSystemTime();
   });
 
   it('should return valid token without refresh', async () => {
@@ -136,7 +136,7 @@ describe('TokenManager', () => {
   });
 
   it('should call onTokenRefresh callback when tokens are refreshed', async () => {
-    const onTokenRefresh = vi.fn();
+    const onTokenRefresh = mock<any>();
 
     mockFetch.mockResolvedValueOnce({
       ok: true,

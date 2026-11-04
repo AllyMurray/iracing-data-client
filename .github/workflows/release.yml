@@ -49,15 +49,14 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6.1.1
-
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
           node-version: 24.x
-          cache: pnpm
           registry-url: https://registry.npmjs.org
+
+      - name: Set up pinned Bun
+        run: npm install --global "bun@$(cat "$GITHUB_WORKSPACE/.bun-version")"
 
       - name: Restore saved release candidate
         if: env.RECOVERY_RUN_ID != ''
@@ -66,11 +65,11 @@ jobs:
       - name: Audit restored release candidate
         if: env.RECOVERY_RUN_ID != ''
         run: |
-          pnpm audit
-          pnpm --dir docs-site audit
+          bun audit
+          bun audit --cwd docs-site
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Prepare runtime Changeset, version packages and create local tag
         if: env.RECOVERY_RUN_ID == ''
@@ -78,23 +77,23 @@ jobs:
 
       - name: Audit versioned release candidate
         if: env.RELEASE_ACTIVE == 'true' && env.RECOVERY_RUN_ID == ''
-        run: pnpm audit
+        run: bun audit
 
       - name: Build versioned package
         if: env.RELEASE_ACTIVE == 'true'
-        run: pnpm run build
+        run: bun run build
 
       - name: Check package size budgets
         if: env.RELEASE_ACTIVE == 'true'
-        run: pnpm run test:build:size
+        run: bun run test:build:size
 
       - name: No unknown service return types
         if: env.RELEASE_ACTIVE == 'true'
-        run: pnpm run sdk:check-no-unknown
+        run: bun run sdk:check-no-unknown
 
       - name: Unit tests
         if: env.RELEASE_ACTIVE == 'true'
-        run: pnpm test run
+        run: bun run test
 
       - name: Pack release and save exact commit
         if: env.RELEASE_ACTIVE == 'true' && env.RECOVERY_RUN_ID == ''
@@ -102,7 +101,7 @@ jobs:
 
       - name: Test the exact release tarball
         if: env.RELEASE_ACTIVE == 'true'
-        run: pnpm run test:package:artifacts --tarball "$RELEASE_DIR/package.tgz"
+        run: bun run test:package:artifacts --tarball "$RELEASE_DIR/package.tgz"
 
       - name: Restore encrypted .env
         if: env.RELEASE_ACTIVE == 'true'
@@ -112,7 +111,7 @@ jobs:
 
       - name: Integration tests
         if: env.RELEASE_ACTIVE == 'true'
-        run: pnpm test:integration
+        run: bun run test:integration
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
 
