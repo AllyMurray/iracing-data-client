@@ -27,6 +27,10 @@ its CLI is `tsc6`. Packed consumer fixtures compile with both versions. Standard
 Vite remains for the installed-package browser compatibility checks. Size Limit
 has a local patch to resolve plugins from the declaring manifest under isolated
 installs; commit that patch with its lockfile entry until upstream adopts the fix.
+The tsdown override keeps `rolldown-plugin-dts` on 0.28.8 because 0.29.0's TS7.0
+CLI detection requires the native compiler to be named `typescript`, which this
+project uses for the TS6 compatibility alias. Remove the override when the plugin
+supports the explicit native compiler path with this alias setup.
 
 Dependency installation settings live in each project's `bunfig.toml`. Both
 projects wait 24 hours before accepting third-party releases, including transitive
@@ -197,7 +201,7 @@ timestamp, matching Bun's install policy. Owned `@http-client-toolkit/*` release
 skip this delay, but their third-party dependencies still wait at installation.
 GitHub Actions, Bun pins and compatible HTTP toolkit updates have separate groups. Runtime
 and docs dependencies, major upgrades, and pre-1.0 tools require manual review.
-Node types stay on 24.x, the compatibility compiler stays on TS6, and the native
+Node types stay on 26.x, the compatibility compiler stays on TS6, and the native
 compiler stays on TS7.0.x. A native compiler update also requires reviewing its
 explicit version check in `scripts/check-toolchain.mjs`.
 
