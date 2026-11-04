@@ -1,5 +1,14 @@
 # iracing-data-client
 
+## 0.5.4
+
+### Patch Changes
+
+- Update runtime dependencies since iracing-data-client@0.5.3.
+  
+  - `@http-client-toolkit/core` (dependencies): `4.2.0` → `5.0.0`.
+  - Refresh locked runtime dependencies, including transitive resolutions.
+
 ## 0.5.3
 
 ### Patch Changes
