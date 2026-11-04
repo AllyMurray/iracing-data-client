@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, type Mock } from 'bun:test';
 import * as z from 'zod/mini';
 import { type FetchLike } from '../auth/types';
 import { DEFAULT_RETRY_OPTIONS, IRacingClient, IRacingError } from '../client';
@@ -17,7 +17,7 @@ describe('HttpClient Integration', () => {
   };
 
   beforeEach(() => {
-    mockFetch = vi.fn();
+    mockFetch = mock<any>();
     client = new IRacingClient({
       auth: {
         type: 'password-limited',
@@ -362,15 +362,21 @@ describe('HttpClient Integration', () => {
       });
 
       mockFetch.mockResolvedValueOnce(createMockResponse(mockTokenResponse));
-      mockFetch.mockReturnValueOnce(apiResponse);
+      let notifyApiRequest!: () => void;
+      const apiRequestStarted = new Promise<void>((resolve) => {
+        notifyApiRequest = resolve;
+      });
+      mockFetch.mockImplementationOnce(() => {
+        notifyApiRequest();
+        return apiResponse;
+      });
 
       const pending = client.get('/data/test/pending');
 
-      await vi.waitFor(() => {
-        expect(mockFetch).toHaveBeenCalledTimes(2);
-        expect(client.getPendingRequestCount()).toBe(1);
-        expect(client.getPendingRequestCount('https://members-ng.iracing.com')).toBe(1);
-      });
+      await apiRequestStarted;
+      expect(mockFetch).toHaveBeenCalledTimes(2);
+      expect(client.getPendingRequestCount()).toBe(1);
+      expect(client.getPendingRequestCount('https://members-ng.iracing.com')).toBe(1);
 
       resolveApiResponse(createMockResponse({ pending_done: true }));
 

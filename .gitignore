@@ -3,7 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+bun-debug.log*
 lerna-debug.log*
 
 # Build outputs
@@ -62,7 +62,7 @@ Thumbs.db
 Desktop.ini
 
 # Package manager files
-.pnpm-store/
+.bun/
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -82,4 +82,3 @@ docs/api/generated/
 *.ibp
 session_data/
 telemetry/
-.vitest/

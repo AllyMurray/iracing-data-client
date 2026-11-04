@@ -3,58 +3,55 @@
 ## Getting Started
 
 1. Fork and clone the repository
-2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.16.1, then install dependencies: `pnpm install --frozen-lockfile`
-3. Copy the example env file: `cp .env.example .env`
-4. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
+2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and install the pinned Bun build: `npm install --global "bun@$(cat .bun-version)"`
+3. Install dependencies: `bun install --frozen-lockfile`
+4. Copy the example env file: `cp .env.example .env`
+5. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
 
-Both `package.json` files pin the same pnpm version. The library and `docs-site`
-remain separate pnpm projects with independent lockfiles. Install docs dependencies
-with `pnpm --dir docs-site install --frozen-lockfile`.
+`.bun-version` and both manifests pin Bun 1.4.4-canary.20261104.1. Install this
+exact npm build; a moving `canary` tag can change native tooling behavior.
+The library and `docs-site` remain separate projects with independent `bun.lock`
+files. Install docs dependencies with `cd docs-site && bun install --frozen-lockfile`.
 
 Library consumers are supported on Node.js 22 and newer (`>=22.0.0`), including
-odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; the
-test matrix is a subset of the supported consumer runtimes. CI installs
-dependencies, generates code, typechecks, and builds on Node.js 24 before
-switching to each tested runtime for unit tests and installed-package checks.
-Repository development, docs, and releases also use Node.js 24 and pnpm 12.16.1.
-The consumer support range in `engines.node` does not lower the requirements of
-development, build, or release tooling.
+odd-numbered releases such as 23 and 25. CI runs offline unit tests on Bun and
+builds on Node.js 24, then validates installed packages and encrypted environment
+compatibility on Node.js 22 and 24 LTS. The matrix is a subset of supported
+consumer runtimes. Build, docs and release tools also require Node.js 24.
 
-Vite+ 1.4.0 provides packaging, tests, linting, and formatting. Its `vite` core
-alias and `vite-plus` version are pinned together in the pnpm catalog. Vitest is
-an exact transitive dependency of Vite+; do not add a direct dependency, catalog
-entry, or override for it. Tests import from `vite-plus/test`. Update the Vite+
-pair together and run `pnpm check:toolchain` when upgrading.
+Bun supplies native linting, formatting, source typechecking and `bun:test`.
+Standalone tsdown builds ESM/CommonJS and declarations with the explicit TS7
+native compiler (`@typescript/native`, 7.0.2). The `typescript` dependency is a
+TypeScript 6 compatibility alias for tools needing the JavaScript compiler API;
+its CLI is `tsc6`. Packed consumer fixtures compile with both versions. Standard
+Vite remains for the installed-package browser compatibility checks. Size Limit
+has a local patch to resolve plugins from the declaring manifest under isolated
+installs; commit that patch with its lockfile entry until upstream adopts the fix.
 
-TypeScript 7.0.2 is installed as `@typescript/native` and supplies `tsc` for
-typechecking and the native compiler used explicitly by `vp pack`. The
-`typescript` dependency is a TypeScript 6 compatibility alias for tools that
-still need the JavaScript compiler API; its CLI is `tsc6`. The packed consumer
-fixtures compile with both versions. The independent Astro docs project keeps
-its own compatible toolchain.
+Dependency installation settings live in each project's `bunfig.toml`. Both
+projects wait 24 hours before accepting third-party releases, including transitive
+dependencies, exact versions and frozen installs. The installation security scanner
+also rejects missing publication timestamps. Packages under the owner's
+`@http-client-toolkit/*` scope are exempt; their third-party dependencies still wait.
+Bun requires explicit package names for this exception. Add new owned packages to
+both `minimumReleaseAgeExcludes` arrays before installing them.
+The library trusts only the esbuild install script; docs additionally trusts sharp.
+Review other scripts before adding them to `trustedDependencies` in the manifest.
+Both projects save new dependencies at exact versions. Existing reviewed ranges
+remain intentional. Keep both package-manager pins and `.bun-version` equal.
 
-Dependency installation settings live in each project's `pnpm-workspace.yaml`.
-Both projects wait 24 hours before accepting third-party package releases,
-including transitive dependencies, exact versions, and frozen lockfile installs.
-Missing publication timestamps are rejected. Packages under the repository
-owner's `@http-client-toolkit/*` scope are exempt from the delay; their third-party
-dependencies are still checked. The library permits the esbuild install script;
-docs additionally permits sharp. Review other dependency build scripts before
-adding them to `allowBuilds`.
+`bun install` installs the Husky pre-commit hook. Each commit checks formatting,
+lint/types and offline tests through `bun run pre-commit`. Formatting and its
+read-only check use identical file scopes. Native lint preserves the existing
+Oxlint rules, overrides and type-aware checks in `.oxlintrc.json`; the script uses
+`--no-script` to avoid recursion. Formatting preserves existing style, disables
+import/manifest sorting and excludes Changesets changelogs and generated assets.
+Run `bun run format:check` before making formatting changes; use targeted
+`bun fmt <files>` to avoid unrelated changes. CI sets `HUSKY=0` during releases.
 
-The library uses `saveExact: true`, matching comic-vine, so newly added dependencies
-are saved at exact versions. Existing reviewed ranges remain where intentional;
-the HTTP toolkit runtime and Node 24 types are pinned explicitly. Update both
-Vite+ catalog entries together and keep the library/docs package-manager pins equal.
-
-`pnpm install` installs the Husky pre-commit hook. Each commit checks formatting,
-lint/types, and offline unit tests through `pnpm pre-commit`. Fix formatting with
-`pnpm format` and stage the result before retrying. CI runs the same checks and
-sets `HUSKY=0` to avoid duplicate hooks during automated release commits.
-
-Run `pnpm test:dependency-policy` to exercise these settings against a local test
-registry. It checks ranges, exact versions, missing timestamps, frozen installs,
-and the toolkit exception in both projects without contacting the iRacing API.
+Run `bun run test:dependency-policy` to exercise ranges, exact versions, missing
+timestamps, frozen installs and the toolkit exception in both projects against
+a local registry, without contacting the iRacing API.
 
 ## Environment Variables
 
@@ -64,7 +61,7 @@ We use [dotenvx](https://dotenvx.com) to encrypt `.env` files so secrets never e
 
 ```bash
 # Encrypt your .env file
-pnpm exec dotenvx encrypt
+bunx dotenvx encrypt
 
 # Store the private key in your macOS Keychain
 security add-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w "$(grep '^DOTENV_PRIVATE_KEY=' .env.keys | cut -d'=' -f2)"
@@ -75,7 +72,7 @@ Once the key is in your keychain, you can delete `.env.keys` from disk.
 To run commands that need env vars, prefix with the key from keychain:
 
 ```bash
-DOTENV_PRIVATE_KEY=$(security find-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w) pnpm test:integration
+DOTENV_PRIVATE_KEY=$(security find-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY" -w) bun run test:integration
 ```
 
 To avoid typing the prefix every time, add an alias to your `~/.zshrc`:
@@ -87,8 +84,8 @@ alias iracing-env='DOTENV_PRIVATE_KEY=$(security find-generic-password -a "iraci
 Then just:
 
 ```bash
-iracing-env pnpm test:integration
-iracing-env pnpm sdk:test
+iracing-env bun run test:integration
+iracing-env bun run sdk:test
 ```
 
 ### Rotating keys
@@ -97,7 +94,7 @@ If your private key is compromised, rotate it and update your keychain and GitHu
 
 ```bash
 # Generate a new key pair and re-encrypt all values
-pnpm exec dotenvx rotate
+bunx dotenvx rotate
 
 # Update the keychain entry
 security delete-generic-password -a "iracing-data-client" -s "DOTENV_PRIVATE_KEY"
@@ -108,25 +105,26 @@ After rotating, update the `DOTENV_PRIVATE_KEY` and `DOTENV_ENV_FILE` GitHub rep
 
 ## Scripts
 
-- `pnpm run build` - Check toolchain consistency and build ESM/CommonJS plus TS7 declarations with `vp pack`
-- `pnpm run dev` - Rebuild the library in watch mode with `vp pack --watch`
-- `pnpm run test` - Run offline unit tests with `vp test`; append `run` for a single run
-- `pnpm run check` - Check formatting, lint, and types with `vp check`
-- `pnpm run lint` - Run the same static checks without the formatting check
-- `pnpm run format` - Format source, generator scripts, package checks, and Vite+ configs with `vp fmt`
-- `pnpm run check:toolchain` - Check the coordinated Vite+/core/Vitest and compiler setup
-- `pnpm run test:build:size` - Check raw and gzip ESM/CommonJS size budgets against the existing build
-- `pnpm run test:package` - Build, enforce size budgets, pack, and check installed ESM/CommonJS exports, browser bundling, and TS6/TS7 declarations
-- `pnpm run test:package:artifacts` - Check the existing build on the current Node.js runtime without rebuilding
-- `pnpm run test:dependency-policy` - Verify both projects enforce the dependency release-age policy
-- `pnpm run test:audit-policy` - Test audit regression detection and error handling
-- `pnpm run test:release` - Test automatic runtime Changesets, release preparation, and recovery without publishing
-- `pnpm run test:env` - Verify dotenvx v1 encrypted-file compatibility and v2 encryption using synthetic credentials
-- `pnpm run test:integration` - Run integration tests against the live API
-- `pnpm run typecheck` - Run TypeScript 7 type checking directly
-- `pnpm run sdk:generate` - Generate the client from API documentation
-- `pnpm run sdk:test` - Test the client with live API calls
-- `pnpm run credentials:keepalive` - Make one authenticated Data API request per enabled OAuth client pair
+- `bun run build` - Check toolchain consistency and build ESM/CommonJS plus TS7 declarations with `tsdown`
+- `bun run dev` - Rebuild the library in watch mode with `tsdown --watch`
+- `bun run test` - Run offline unit tests with `bun:test`; append `--watch` for watch mode
+- `bun run check` - Check formatting, lint, and types with native `bun fmt` and `bun lint`
+- `bun run lint` - Run the same static checks without the formatting check
+- `bun run format:check` - Read-only formatting check using the same scope as `format`
+- `bun run format` - Format source, generator scripts, package checks, and tsdown config with `bun fmt`
+- `bun run check:toolchain` - Check the Bun pins and TS7/TS6 compiler setup
+- `bun run test:build:size` - Check raw and gzip ESM/CommonJS size budgets against the existing build
+- `bun run test:package` - Build, enforce size budgets, pack, and check installed ESM/CommonJS exports, browser bundling, and TS6/TS7 declarations
+- `bun run test:package:artifacts` - Check the existing build on the current Node.js runtime without rebuilding
+- `bun run test:dependency-policy` - Verify both projects enforce the dependency release-age policy
+- `bun run test:audit-policy` - Test audit regression detection and error handling
+- `bun run test:release` - Test automatic runtime Changesets, release preparation, and recovery without publishing
+- `bun run test:env` - Verify dotenvx v1 encrypted-file compatibility and v2 encryption using synthetic credentials
+- `bun run test:integration` - Run integration tests against the live API
+- `bun run typecheck` - Run native Bun source typechecking
+- `bun run sdk:generate` - Generate the client from API documentation
+- `bun run sdk:test` - Test the client with live API calls
+- `bun run credentials:keepalive` - Make one authenticated Data API request per enabled OAuth client pair
 
 The package check installs the tarball into a temporary project outside the
 checkout, so it requires registry access to install runtime dependencies. Its
@@ -146,12 +144,12 @@ raw and 24.66/26 kB gzip baselines. CI checks both builds, and release/recovery
 runs check sizes before publication. Review the cause of a size regression before
 raising a budget.
 
-`pnpm test run` excludes
-credential-dependent integration tests; `pnpm test:integration` loads credentials
-through dotenvx and uses the separate `vite.config.integration.mts` configuration.
+`bun run test` excludes
+credential-dependent integration tests; `bun run test:integration` loads credentials
+through dotenvx and selects the live `*.integration.test.ts` files.
 
-To validate documentation locally, run `pnpm --dir docs-site install --frozen-lockfile`
-followed by `pnpm docs:build`. PR CI runs this docs build separately from the
+To validate documentation locally, run `bun install --cwd docs-site --frozen-lockfile`
+followed by `bun run docs:build`. PR CI runs this docs build separately from the
 library checks, using the documentation project's own lockfile.
 
 PR CI audits the library and docs lockfiles against the exact PR base commit,
@@ -164,7 +162,7 @@ packages or running hooks. Reproduce it with
 `node scripts/audit-dependencies.mjs . <base-commit-sha>` and
 `node scripts/audit-dependencies.mjs docs-site <base-commit-sha>`.
 
-The separate `dependency security` workflow runs full `pnpm audit` checks for
+The separate `dependency security` workflow runs full `bun audit` checks for
 both projects on main pushes, daily at 07:17 UTC, and on manual dispatch. It
 includes development and transitive dependencies. Release and docs deployment
 call this workflow and require both audits to pass before starting. Recovery
@@ -185,8 +183,8 @@ tests remain a separate release gate.
 
 ## Dependency maintenance with Renovate
 
-`renovate.json` manages the root and docs manifests and their independent pnpm
-lockfiles, the root pnpm catalog, both package-manager pins, and GitHub Actions.
+`renovate.json` manages the root and docs manifests and their independent Bun
+lockfiles, both package-manager pins, and GitHub Actions.
 Ordinary branches are scheduled between midnight and 06:00 Europe/London, with
 two new PRs per hour and no concurrent PR cap, matching comic-vine. Nightly
 lockfile maintenance has higher priority than ordinary version updates so
@@ -195,10 +193,9 @@ require review and successful CI. The schedule is a permitted window for
 Renovate runs, not a promise that an update appears at midnight.
 
 Third-party npm releases must be at least one day old and have a publication
-timestamp, matching pnpm's install policy. Owned `@http-client-toolkit/*` releases
+timestamp, matching Bun's install policy. Owned `@http-client-toolkit/*` releases
 skip this delay, but their third-party dependencies still wait at installation.
-Vite+ and its core alias update together at exact versions; GitHub Actions,
-pnpm pins, and compatible HTTP toolkit updates have separate groups. Runtime
+GitHub Actions, Bun pins and compatible HTTP toolkit updates have separate groups. Runtime
 and docs dependencies, major upgrades, and pre-1.0 tools require manual review.
 Node types stay on 24.x, the compatibility compiler stays on TS6, and the native
 compiler stays on TS7.0.x. A native compiler update also requires reviewing its
@@ -220,11 +217,11 @@ The path-filtered Renovate validation workflow is not a required check on all PR
 Security alerts create PRs with an additional `security` label outside the
 overnight schedule and ordinary PR limits, without waiting for Renovate's
 release-age check. They still require review and successful CI.
-They do not bypass pnpm's strict one-day install policy: a brand-new fix can
+They do not bypass Bun's strict one-day install policy: a brand-new fix can
 produce an artifact/install failure until it ages. Wait and retry the update,
 or explicitly review a temporary package-specific exception in the affected
-`pnpm-workspace.yaml`, remove it once the fix has aged, and keep all other
-packages covered. Renovate lockfile refreshes are also subject to pnpm's policy.
+`bunfig.toml`, remove it once the fix has aged, and keep all other
+packages covered. Renovate lockfile refreshes are also subject to Bun's policy.
 Do not merge an ungenerated lockfile or a PR with an audit regression. Existing
 audit findings may remain while incremental fixes merge; publication and docs
 deployment wait until both projects have clean full audits.
@@ -232,44 +229,34 @@ deployment wait until both projects have clean full audits.
 The `dependency graph` workflow generates an SPDX inventory from each committed
 lockfile on PRs and main pushes, without installing dependencies. Main runs
 submit both inventories to GitHub using distinct manifest paths and correlators;
-PRs only upload artifacts. This covers pnpm 12's multi-document lockfiles and
+PRs only upload artifacts. The inventory reads the committed Bun locks and
 includes development and transitive dependencies. Enable the GitHub dependency
 graph and Dependabot alerts, and grant Renovate read access to those alerts for
 security PRs. Repository workflow files do not change those settings.
 
 Future peer dependency updates widen supported ranges and require manual review.
-The Vite+/core catalog remains a coordinated, manually reviewed group. Renovate
-groups available updates but does not enforce compatibility between packages in
-a group. Vitest is therefore managed only through Vite+'s exact dependency, so
-Renovate cannot propose an independent Vitest bump. Lockfile maintenance also
-retains that declared exact version. CI checks that the installed runner matches
-Vite+'s declaration and rejects reintroducing a direct Vitest dependency.
+The Bun version pins are reviewed together, including `.bun-version`. Standalone
+tsdown updates join the reviewed build tooling group. Vite is retained for
+browser compatibility checks. Unit tests use `bun:test` without Vitest.
 Only the stable size tooling patches listed above are eligible for automerge.
 
 Validate configuration changes with the same pinned validator used in CI:
 
 ```bash
-pnpm dlx --package=renovate@44.209.0 \
-  --allow-build=core-js-pure --allow-build=dtrace-provider \
-  --allow-build=protobufjs --allow-build=re2 \
-  renovate-config-validator --strict renovate.json
+bunx --package=renovate@44.209.0 renovate-config-validator --strict renovate.json
 ```
 
-The explicit build allowances apply to this temporary Renovate installation;
-they do not change the workspaces' build-script policies. They let pnpm 12 run
-Renovate's transitive setup scripts, including its native RE2 dependency.
+The validator runs in a temporary Bun installation. Keep the repository's
+trusted dependency policies unchanged when running it.
 
 For read-only dependency discovery, stage the config and run:
 
 ```bash
-LOG_LEVEL=debug pnpm dlx --package=renovate@44.209.0 \
-  --allow-build=core-js-pure --allow-build=dtrace-provider \
-  --allow-build=protobufjs --allow-build=re2 \
-  renovate --platform=local --dry-run=extract
+LOG_LEVEL=debug bunx --package=renovate@44.209.0 renovate --platform=local --dry-run=extract
 ```
 
-Inspect both pnpm lockfile associations, the Vite+/core catalog entries, and the
-workflow dependencies; Vitest must not be extracted as a direct update target.
+Inspect both Bun lockfile associations, the package-manager pins, and the
+workflow dependencies.
 A local dry run does not create branches or prove App
 onboarding; GitHub dependency lookups may be skipped without an App/token.
 Update the validator pin deliberately when adopting new Renovate options.
@@ -279,7 +266,7 @@ Update the validator pin deliberately when adopting new Renovate options.
 The client is auto-generated from iRacing's API documentation:
 
 ```bash
-pnpm run sdk:generate
+bun run sdk:generate
 ```
 
 This creates:
@@ -289,14 +276,14 @@ This creates:
 - HTTP client with authentication in `src/client.ts`
 
 Change generator templates alongside generated code. The generator formats only
-the files it writes using the pinned Vite+ formatter, so a second generation must
-produce no diff. Tests import from `vite-plus/test`. Linting covers both generated
-and hand-written code; the few scoped exceptions in `vite.config.mts` preserve
+the files it writes using the pinned native Bun formatter, so a second generation must
+produce no diff. Tests import from `bun:test`. Linting covers both generated
+and hand-written code; the few scoped exceptions in `.oxlintrc.json` preserve
 existing query coercion, diagnostic fallbacks, and public OAuth code types.
 Samples, build outputs, and the independent docs project are excluded from root
 linting and formatting.
 The packed consumer TypeScript fixture is formatted here but typechecked only
-after installation into its temporary project, so `pnpm check` also works before
+after installation into its temporary project, so `bun run check` also works before
 the first library build.
 
 ## CI / GitHub Actions
@@ -312,7 +299,7 @@ Renovate config check is not required on unrelated PRs.
 
 Changesets v3 runs on the Node 24 development/release runtime. Consumer support
 remains Node `>=22.0.0`; CI tests Node 22 and 24. Add a Changeset with
-`pnpm exec changeset` for consumer-facing code changes. Runtime dependency
+`bunx changeset` for consumer-facing code changes. Runtime dependency
 updates automatically receive a patch Changeset during release preparation.
 Add a manual minor or major Changeset when the SDK change needs a larger bump;
 an upstream major version alone does not determine the SDK's version. Tooling,
@@ -323,7 +310,7 @@ runtime comparison, including when only empty Changesets remain.
 `scripts/prepare-runtime-release.mjs`, adapted from comic-vine, compares root
 runtime/optional dependencies, peer requirements, and the locked runtime graph
 with the latest reachable `iracing-data-client@*` release tag. It uses
-`pnpm list --lockfile-only --prod --depth Infinity --json` in temporary projects,
+a shared lockfile graph reader that supports Bun and historical pnpm locks,
 without installing historical packages. Transitive runtime lockfile updates are
 included; development tooling, package-manager, docs, and Actions changes alone
 do not publish the SDK. Missing release history or an incomplete graph fails
@@ -340,10 +327,10 @@ The `release.yml` workflow runs on `main` and serializes release runs without
 cancelling an active release. After both full dependency audits pass, it:
 
 1. Prepares an automatic runtime dependency Changeset when needed, runs the
-   locally installed Changesets CLI, refreshes the pnpm lockfile, and
+   locally installed Changesets CLI, refreshes the Bun lockfile, and
    creates a local version commit and `iracing-data-client@<version>` tag.
 2. Builds the versioned package, checks service return types, runs unit tests,
-   packs with `pnpm pack`, tests that exact tarball in an isolated consumer, and
+   packs with `bun pm pack`, tests that exact tarball in an isolated consumer, and
    runs the credential-dependent live API integration tests.
 3. Saves a `release-candidate` Actions artifact **before publishing**. It contains
    only the tarball, an incremental Git bundle containing the release commit/tag,
@@ -369,8 +356,7 @@ cancelling an active release. After both full dependency audits pass, it:
    verified existing tag, or skips an existing completed release. It removes the
    temporary candidate branch only if it still points to the saved commit.
 
-pnpm 12 publishes natively, so npm performs publication to retain its trusted
-publishing support. The workflow keeps its existing filename and `id-token:
+npm performs publication to retain the existing trusted publishing behavior. The workflow keeps its existing filename and `id-token:
 write` permission, and removes an inherited `NODE_AUTH_TOKEN` from the publish
 process. It never adds a registry token. Both normal and recovery runs must pass
 the live API gate before publication/finalization. Restored `.env` files are
@@ -433,7 +419,7 @@ differs, stop and inspect the published package and Git history manually; the
 workflow deliberately refuses to guess a replacement. Runs made by the previous
 workflow have no recovery artifact and also require manual inspection.
 
-Run `pnpm run build && pnpm run test:release` to validate preparation and recovery
+Run `bun run build && bun run test:release` to validate preparation and recovery
 without publishing. This uses real Changesets, tarballs, tags, bundles, and local
 bare Git remotes, and substitutes npm/GitHub writes. CI runs it on Node 24. The
 suite covers automatic runtime and transitive changes, development-only no-ops,
@@ -453,7 +439,7 @@ To update `DOTENV_ENV_FILE`, copy the content of your local `.env` and paste it 
 
 ### Credential keepalive
 
-The weekly `iRacing Credential Keepalive` workflow runs `pnpm run credentials:keepalive` to prevent unused OAuth credentials from expiring.
+The weekly `iRacing Credential Keepalive` workflow runs `bun run credentials:keepalive` to prevent unused OAuth credentials from expiring.
 
 Add shared account credentials and keepalive client pairs to the encrypted `.env` file:
 
@@ -469,6 +455,6 @@ Each enabled pair requests an OAuth token and makes one authenticated request to
 
 1. Create a feature branch from `main`
 2. Make your changes
-3. Run `pnpm run check`, `pnpm run typecheck`, `pnpm test run`, and `pnpm run test:package`; regenerate the SDK when changing templates and build the docs when changing documentation
-4. For consumer-facing code changes or dependency changes requiring more than an automatic patch, add a Changeset: `pnpm exec changeset`
+3. Run `bun run check`, `bun run typecheck`, `bun run test`, and `bun run test:package`; regenerate the SDK when changing templates and build the docs when changing documentation
+4. For consumer-facing code changes or dependency changes requiring more than an automatic patch, add a Changeset: `bunx changeset`
 5. Open a Pull Request

@@ -1,12 +1,12 @@
-import { describe, it, expect, vi, beforeEach } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach } from 'bun:test';
 import { requestPasswordLimitedToken } from './password-limited';
 import { OAuthError } from '../errors';
 
 describe('requestPasswordLimitedToken', () => {
-  const mockFetch = vi.fn();
+  const mockFetch = mock<(...args: any[]) => Promise<any>>();
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    mockFetch.mockReset();
   });
 
   it('should request token with masked credentials', async () => {
@@ -90,7 +90,7 @@ describe('requestPasswordLimitedToken', () => {
         password: 'password',
         fetchFn: mockFetch,
       });
-      expect.fail('Should have thrown');
+      throw new Error('Should have thrown');
     } catch (error) {
       expect(error).toBeInstanceOf(OAuthError);
       const oauthError = error as OAuthError;

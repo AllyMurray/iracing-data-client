@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from 'vite-plus/test';
+import { describe, it, expect, beforeAll } from 'bun:test';
 import { IRacingDataClient } from '../index';
 
 describe('CarService Integration Tests', () => {

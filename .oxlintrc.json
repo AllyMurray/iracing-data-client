@@ -1,0 +1,48 @@
+{
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "oxc"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "builtin": true,
+    "es2024": true,
+    "node": true
+  },
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/client.ts",
+        "scripts/probe-season-team-standings.ts",
+        "scripts/scrape-api-samples.ts",
+        "build-tests/fixtures/runtime.cjs"
+      ],
+      "rules": {
+        "typescript/no-base-to-string": "off"
+      }
+    },
+    {
+      "files": [
+        "src/auth/errors.ts"
+      ],
+      "rules": {
+        "typescript/no-redundant-type-constituents": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "lib/**",
+    "dist/**",
+    "docs-site/**",
+    "samples/**",
+    "node_modules/**",
+    "build-tests/fixtures/consumer.ts"
+  ]
+}

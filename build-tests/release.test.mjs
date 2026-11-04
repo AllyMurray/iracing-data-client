@@ -30,7 +30,7 @@ import {
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const repository = 'AllyMurray/iracing-data-client';
 
-// Real Changesets, pnpm packing, Git bundles, tags and bare remotes; only npm
+// Real Changesets, Bun packing, Git bundles, tags and bare remotes; only npm
 // publication and GitHub release creation are replaced. No registry writes or
 // live iRacing credentials are used by this suite.
 await test('release preparation and recovery', async (t) => {
@@ -41,8 +41,10 @@ await test('release preparation and recovery', async (t) => {
   mkdirSync(seed);
   for (const file of [
     'package.json',
-    'pnpm-lock.yaml',
-    'pnpm-workspace.yaml',
+    'bun.lock',
+    'bunfig.toml',
+    'patches',
+    'scripts/release-age-scanner.mjs',
     '.gitignore',
     '.changeset/config.json',
     '.changeset/README.md',
@@ -97,7 +99,7 @@ await test('release preparation and recovery', async (t) => {
       seedCtx.run('tar', ['-xOf', join(artifactDir, 'package.tgz'), 'package/package.json']),
     );
     assert.equal(packed.engines.node, '>=22.0.0');
-    assert.ok(!JSON.stringify(packed).includes('catalog:'), 'pnpm must resolve catalog references');
+    assert.ok(!JSON.stringify(packed).includes('catalog:'), 'Bun must resolve catalog references');
     const entries = seedCtx.run('tar', ['-tf', join(artifactDir, 'package.tgz')]);
     assert.ok(entries.includes('package/lib/index.mjs'));
     assert.ok(entries.includes('package/lib/index.d.ts'));

@@ -51,7 +51,7 @@
       "prPriority": 10
     },
     {
-      "description": "Match pnpm's 24-hour delay and reject releases with missing timestamps.",
+      "description": "Match Bun's 24-hour delay and reject releases with missing timestamps.",
       "matchDatasources": [
         "npm"
       ],
@@ -224,7 +224,7 @@
       "separateMinorPatch": false
     },
     {
-      "description": "Both manifests must use the same pinned pnpm release.",
+      "description": "Keep both manifests on the same reviewed Bun build; update .bun-version alongside them.",
       "matchManagers": [
         "npm"
       ],
@@ -232,28 +232,10 @@
         "packageManager"
       ],
       "matchPackageNames": [
-        "pnpm"
+        "bun"
       ],
-      "groupName": "pnpm",
-      "groupSlug": "pnpm"
-    },
-    {
-      "description": "Keep Vite+ and its aliased core at the same release. Vitest is owned by Vite+ and updates through its exact transitive dependency; CI rejects mismatches.",
-      "matchManagers": [
-        "npm"
-      ],
-      "matchFileNames": [
-        "pnpm-workspace.yaml"
-      ],
-      "matchPackageNames": [
-        "vite-plus",
-        "@voidzero-dev/vite-plus-core"
-      ],
-      "groupName": "vite plus toolchain",
-      "groupSlug": "vite-plus-toolchain",
-      "separateMajorMinor": true,
-      "separateMinorPatch": false,
-      "rangeStrategy": "pin"
+      "groupName": "bun",
+      "groupSlug": "bun"
     },
     {
       "description": "Keep size-limit and its exact-version peer plugin together, including coordinated major upgrades. Majors remain manual.",
@@ -285,7 +267,8 @@
       "matchPackageNames": [
         "typescript",
         "@typescript/typescript6",
-        "tsx"
+        "tsx",
+        "tsdown"
       ],
       "groupName": "typescript and build tooling"
     },

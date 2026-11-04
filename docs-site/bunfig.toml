@@ -1,0 +1,18 @@
+[install]
+exact = true
+minimumReleaseAge = 86400
+# Bun's resolver requires explicit package names for the owned-scope exception.
+minimumReleaseAgeExcludes = [
+  "@http-client-toolkit/core",
+  "@http-client-toolkit/dashboard",
+  "@http-client-toolkit/store-dynamodb",
+  "@http-client-toolkit/store-memory",
+  "@http-client-toolkit/store-sqlite",
+]
+linker = "isolated"
+globalStore = true
+# Astro bundles the parser loader into prerendered output.
+publicHoistPattern = ["@bruits/satteri-*"]
+
+[install.security]
+scanner = "../scripts/release-age-scanner.mjs"

@@ -1,0 +1,33 @@
+[install]
+exact = true
+minimumReleaseAge = 86400
+# Bun's resolver requires explicit package names for the owned-scope exception.
+minimumReleaseAgeExcludes = [
+  "@http-client-toolkit/core",
+  "@http-client-toolkit/dashboard",
+  "@http-client-toolkit/store-dynamodb",
+  "@http-client-toolkit/store-memory",
+  "@http-client-toolkit/store-sqlite",
+]
+linker = "isolated"
+globalStore = true
+
+[install.security]
+scanner = "./scripts/release-age-scanner.mjs"
+
+[test]
+root = "src"
+
+# Preserve the existing style and file order.
+[fmt]
+singleQuote = true
+printWidth = 100
+semi = true
+tabWidth = 2
+useTabs = false
+trailingComma = "all"
+endOfLine = "lf"
+sortImports = false
+sortPackageJson = false
+# Changesets owns CHANGELOG.md; other generated assets stay outside the scope.
+ignorePatterns = ["lib/**", "dist/**", "docs-site/**", "samples/**", "node_modules/**", "CHANGELOG.md"]

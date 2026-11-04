@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type MockInstance } from 'vite-plus/test';
+import { describe, it, expect, mock, beforeEach, type Mock } from 'bun:test';
 import { TrackService } from './service';
 import { IRacingClient } from '../client';
 
@@ -7,12 +7,12 @@ import trackassetsSample from '../../samples/track.assets.json';
 import trackgetSample from '../../samples/track.get.json';
 
 describe('TrackService', () => {
-  let mockFetch: MockInstance;
+  let mockFetch: Mock<any>;
   let client: IRacingClient;
   let trackService: TrackService;
 
   beforeEach(() => {
-    mockFetch = vi.fn();
+    mockFetch = mock<any>();
 
     client = new IRacingClient({
       auth: {

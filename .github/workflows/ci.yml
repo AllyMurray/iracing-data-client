@@ -26,21 +26,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6.1.1
-
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
           node-version: 24.x
-          cache: pnpm
+
+      - name: Set up pinned Bun
+        run: npm install --global "bun@$(cat "$GITHUB_WORKSPACE/.bun-version")"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Test dependency audit policy
         if: matrix.node-version == '24.x'
-        run: pnpm run test:audit-policy
+        run: bun run test:audit-policy
 
       - name: Check dependency audit regressions
         if: matrix.node-version == '24.x' && github.event_name == 'pull_request'
@@ -50,47 +49,51 @@ jobs:
 
       - name: Verify dependency release-age policy
         if: matrix.node-version == '24.x'
-        run: pnpm test:dependency-policy
+        run: bun run test:dependency-policy
 
       - name: Regenerate SDK
-        run: pnpm run sdk:generate
+        run: bun run sdk:generate
 
       - name: Verify generated files are committed
         run: git diff --exit-code
 
       - name: No unknown service return types
-        run: pnpm run sdk:check-no-unknown
+        run: bun run sdk:check-no-unknown
 
       - name: Check formatting and lint
         if: matrix.node-version == '24.x'
-        run: pnpm run check
+        run: bun run check
 
       - name: Typecheck
-        run: pnpm run typecheck
+        run: bun run typecheck
 
       - name: Build library on Node 24
-        run: pnpm run build
+        run: bun run build
 
       - name: Check package size budgets
-        run: pnpm run test:build:size
+        run: bun run test:build:size
 
       - name: Test release preparation and recovery without publishing
         if: matrix.node-version == '24.x'
-        run: pnpm run test:release
+        run: bun run test:release
+
+      - name: Unit tests with Bun
+        if: matrix.node-version == '24.x'
+        run: bun run test
 
       - name: Setup consumer runtime
         uses: actions/setup-node@v7.1.0
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Unit tests
-        run: pnpm test run
+      - name: Set up pinned Bun
+        run: npm install --global "bun@$(cat "$GITHUB_WORKSPACE/.bun-version")"
 
       - name: Check encrypted environment compatibility
-        run: pnpm test:env
+        run: bun run test:env
 
       - name: Test installed package on consumer runtime
-        run: pnpm run test:package:artifacts
+        run: bun run test:package:artifacts
 
   docs:
     runs-on: ubuntu-latest
@@ -103,21 +106,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6.1.1
-
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
           node-version: 24.x
-          cache: pnpm
-          cache-dependency-path: docs-site/pnpm-lock.yaml
+
+      - name: Set up pinned Bun
+        run: npm install --global "bun@$(cat "$GITHUB_WORKSPACE/.bun-version")"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build documentation
-        run: pnpm build
+        run: bun run build
 
       - name: Check dependency audit regressions
         if: github.event_name == 'pull_request'
