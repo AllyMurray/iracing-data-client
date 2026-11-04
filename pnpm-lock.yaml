@@ -179,8 +179,8 @@ importers:
   .:
     dependencies:
       '@http-client-toolkit/core':
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 5.0.0
+        version: 5.0.0
       zod:
         specifier: 4.6.7
         version: 4.6.7
@@ -189,10 +189,10 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       '@dotenvx/dotenvx':
-        specifier: ^2.34.2
+        specifier: ^2.38.2
         version: 2.38.2
       '@size-limit/file':
-        specifier: ^14.2.0
+        specifier: ^14.3.0
         version: 14.3.0(size-limit@14.3.0)
       '@types/node':
         specifier: 24.19.2
@@ -204,7 +204,7 @@ importers:
         specifier: 9.1.7
         version: 9.1.7
       size-limit:
-        specifier: ^14.2.0
+        specifier: ^14.3.0
         version: 14.3.0
       tsx:
         specifier: ^4.23.15
@@ -477,9 +477,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@http-client-toolkit/core@4.2.0':
-    resolution: {integrity: sha512-YwS7cjm9Yd5Zus70VI9PLameCNGvZ0nF0Bs1e4n9xmIoytUVHqhToDCMykVRjFnJ7RG+SBZ0UUgJ0A6lKcpGZA==}
-    engines: {node: '>= 20.0.0'}
+  '@http-client-toolkit/core@5.0.0':
+    resolution: {integrity: sha512-bxku0oxLRvxRS9Do8/sXw2L4UHiprubrbmpBprN+1/XLnJQOMbM7k04AYvIWzj/PY+F4BEO0jWh/unOpN/3JRw==}
+    engines: {node: '>=22.0.0'}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -1626,9 +1626,6 @@ packages:
     resolution: {integrity: sha512-XrBh9ZiQK5mJVRxZBAvD6LwRyAYrK3MFtH3+onyuxFL5hFD44EC3QOmIC1FjTj6H2MMwq46/NAI+NZxLZPZgxg==}
     engines: {node: '>=14.18.0'}
 
-  zod@3.25.71:
-    resolution: {integrity: sha512-BsBc/NPk7h8WsUWYWYL+BajcJPY8YhjelaWu2NMLuzgraKAz4Lb4/6K11g9jpuDetjMiqhZ6YaexFLOC0Ogi3Q==}
-
   zod@4.6.7:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
@@ -1860,9 +1857,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@http-client-toolkit/core@4.2.0':
+  '@http-client-toolkit/core@5.0.0':
     dependencies:
-      zod: 3.25.71
+      zod: 4.6.7
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
@@ -2724,7 +2721,5 @@ snapshots:
     dependencies:
       '@yuku-toolchain/types': 0.19.0
       yuku-core: 0.19.0
-
-  zod@3.25.71: {}
 
   zod@4.6.7: {}
