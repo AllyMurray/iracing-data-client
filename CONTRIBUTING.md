@@ -3,7 +3,7 @@
 ## Getting Started
 
 1. Fork and clone the repository
-2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.11.2, then install dependencies: `pnpm install --frozen-lockfile`
+2. Use Node.js 24.11 or newer within the 24.x line (`nvm use` reads `.nvmrc`) and pnpm 12.16.1, then install dependencies: `pnpm install --frozen-lockfile`
 3. Copy the example env file: `cp .env.example .env`
 4. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
 
@@ -16,11 +16,11 @@ odd-numbered releases such as 23 and 25. CI tests only Node.js 22 and 24 LTS; th
 test matrix is a subset of the supported consumer runtimes. CI installs
 dependencies, generates code, typechecks, and builds on Node.js 24 before
 switching to each tested runtime for unit tests and installed-package checks.
-Repository development, docs, and releases also use Node.js 24 and pnpm 12.11.2.
+Repository development, docs, and releases also use Node.js 24 and pnpm 12.16.1.
 The consumer support range in `engines.node` does not lower the requirements of
 development, build, or release tooling.
 
-Vite+ 1.1.0 provides packaging, tests, linting, and formatting. Its `vite` core
+Vite+ 1.4.0 provides packaging, tests, linting, and formatting. Its `vite` core
 alias and `vite-plus` version are pinned together in the pnpm catalog. Vitest is
 an exact transitive dependency of Vite+; do not add a direct dependency, catalog
 entry, or override for it. Tests import from `vite-plus/test`. Update the Vite+
@@ -249,7 +249,7 @@ Only the stable size tooling patches listed above are eligible for automerge.
 Validate configuration changes with the same pinned validator used in CI:
 
 ```bash
-pnpm dlx --package=renovate@44.145.1 \
+pnpm dlx --package=renovate@44.209.0 \
   --allow-build=core-js-pure --allow-build=dtrace-provider \
   --allow-build=protobufjs --allow-build=re2 \
   renovate-config-validator --strict renovate.json
@@ -262,7 +262,7 @@ Renovate's transitive setup scripts, including its native RE2 dependency.
 For read-only dependency discovery, stage the config and run:
 
 ```bash
-LOG_LEVEL=debug pnpm dlx --package=renovate@44.145.1 \
+LOG_LEVEL=debug pnpm dlx --package=renovate@44.209.0 \
   --allow-build=core-js-pure --allow-build=dtrace-provider \
   --allow-build=protobufjs --allow-build=re2 \
   renovate --platform=local --dry-run=extract

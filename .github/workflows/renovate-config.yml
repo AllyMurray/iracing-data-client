@@ -25,7 +25,7 @@ jobs:
           node-version: 24.x
       - name: Validate Renovate configuration
         run: >-
-          pnpm dlx --package=renovate@44.145.1
+          pnpm dlx --package=renovate@44.209.0
           --allow-build=core-js-pure --allow-build=dtrace-provider
           --allow-build=protobufjs --allow-build=re2
           renovate-config-validator --strict renovate.json
