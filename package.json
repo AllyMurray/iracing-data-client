@@ -129,7 +129,7 @@
   },
   "overrides": {
     "tsdown": {
-      "rolldown-plugin-dts": "0.28.8"
+      "rolldown-plugin-dts": "0.30.0"
     }
   }
 }
