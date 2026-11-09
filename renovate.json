@@ -5,7 +5,9 @@
   ],
   "enabledManagers": [
     "npm",
-    "github-actions"
+    "github-actions",
+    "bun",
+    "bun-version"
   ],
   "dependencyDashboard": true,
   "timezone": "Europe/London",
@@ -72,7 +74,8 @@
     {
       "description": "Keep the TS6 compiler API on its compatible major version.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchPackageNames": [
         "@typescript/typescript6"
@@ -82,7 +85,8 @@
     {
       "description": "Review native compiler patches together with scripts/check-toolchain.mjs; broader TS upgrades need declaration-generator review.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepNames": [
         "@typescript/native"
@@ -92,7 +96,8 @@
     {
       "description": "Keep Node types on the reviewed 26.x line without changing consumer support.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchPackageNames": [
         "@types/node"
@@ -102,7 +107,8 @@
     {
       "description": "Separate stable size-tool patches from minor updates, matching comic-vine.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "devDependencies"
@@ -117,7 +123,8 @@
     {
       "description": "Wait three days before merging stable size-tool patches.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "devDependencies"
@@ -137,7 +144,8 @@
     {
       "description": "Preserve runtime constraints for consumer-facing and documentation dependencies.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "dependencies",
@@ -148,7 +156,8 @@
     {
       "description": "Node support is a deliberate compatibility decision: preserve engines.node >=22.0.0.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "engines"
@@ -158,7 +167,8 @@
     {
       "description": "Preserve existing consumer support when proposing peer range extensions.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "peerDependencies"
@@ -180,7 +190,8 @@
     {
       "description": "Keep unrelated pre-1.0 packages separate so CI checks each upgrade independently.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchCurrentVersion": "<1.0.0",
       "groupName": null,
@@ -198,7 +209,8 @@
     {
       "description": "Group owned HTTP toolkit updates within the current major when additional toolkit packages are added.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchPackageNames": [
         "@http-client-toolkit/*"
@@ -224,23 +236,25 @@
       "separateMinorPatch": false
     },
     {
-      "description": "Keep both manifests on the same reviewed Bun build; update .bun-version alongside them.",
+      "description": "Keep .bun-version and both packageManager declarations on one Bun release.",
       "matchManagers": [
-        "npm"
-      ],
-      "matchDepTypes": [
-        "packageManager"
+        "npm",
+        "bun",
+        "bun-version"
       ],
       "matchPackageNames": [
         "bun"
       ],
       "groupName": "bun",
-      "groupSlug": "bun"
+      "groupSlug": "bun",
+      "separateMajorMinor": false,
+      "separateMinorPatch": false
     },
     {
       "description": "Keep size-limit and its exact-version peer plugin together, including coordinated major upgrades. Majors remain manual.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "devDependencies"
@@ -255,7 +269,8 @@
     {
       "description": "Group TypeScript and execution-tool patches/minors; preserve compiler compatibility bounds.",
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "devDependencies"
@@ -274,7 +289,8 @@
     },
     {
       "matchManagers": [
-        "npm"
+        "npm",
+        "bun"
       ],
       "matchDepTypes": [
         "devDependencies"

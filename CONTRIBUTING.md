@@ -43,6 +43,9 @@ The library trusts only the esbuild install script; docs additionally trusts sha
 Review other scripts before adding them to `trustedDependencies` in the manifest.
 Both projects save new dependencies at exact versions. Existing reviewed ranges
 remain intentional. Keep both package-manager pins and `.bun-version` equal.
+Renovate groups all three Bun declarations and maintains each project’s lockfile.
+Run `bun run check:bun-version` and `bun run test:bun-version` when changing pins;
+CI checks them before installing dependencies, including release candidates.
 
 `bun install` installs the Husky pre-commit hook. Each commit checks formatting,
 lint/types and offline tests through `bun run pre-commit`. Formatting and its

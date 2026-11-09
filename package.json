@@ -50,7 +50,9 @@
     "pre-commit": "bun run check && bun run test",
     "test:build:size": "size-limit",
     "test:audit-policy": "node --test build-tests/audit-dependencies.test.mjs",
-    "format:check": "bun fmt --check src scripts build-tests tsdown.config.ts"
+    "format:check": "bun fmt --check src scripts build-tests tsdown.config.ts",
+    "check:bun-version": "node scripts/check-bun-version.mjs",
+    "test:bun-version": "node --test build-tests/bun-version.test.mjs"
   },
   "keywords": [
     "iracing",

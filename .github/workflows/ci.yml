@@ -31,6 +31,13 @@ jobs:
         with:
           node-version: 24.x
 
+      - name: Verify Bun version declarations
+        run: node scripts/check-bun-version.mjs
+
+      - name: Test Bun version guard
+        if: matrix.node-version == '24.x'
+        run: node --test build-tests/bun-version.test.mjs
+
       - name: Set up pinned Bun
         run: npm install --global "bun@$(cat "$GITHUB_WORKSPACE/.bun-version")"
 
