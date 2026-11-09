@@ -132,6 +132,8 @@ describe('TokenManager', () => {
       tokenType: 'Bearer',
     });
 
+    // Bun async matchers are typed as void but must be awaited.
+    // oxlint-disable-next-line typescript/await-thenable
     await expect(manager.getAccessToken()).rejects.toThrow(TokenRefreshError);
   });
 

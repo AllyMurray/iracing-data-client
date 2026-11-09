@@ -297,6 +297,8 @@ describe('HttpClient Integration', () => {
     });
 
     it('should validate params before making network requests', async () => {
+      // Bun async matchers are typed as void but must be awaited.
+      // oxlint-disable-next-line typescript/await-thenable
       await expect(
         client.get('/data/test/params', {
           params: { custIds: 'not-an-array' },
@@ -380,6 +382,8 @@ describe('HttpClient Integration', () => {
 
       resolveApiResponse(createMockResponse({ pending_done: true }));
 
+      // Bun async matchers are typed as void but must be awaited.
+      // oxlint-disable-next-line typescript/await-thenable
       await expect(pending).resolves.toEqual({ pendingDone: true });
       expect(client.getPendingRequestCount()).toBe(0);
     });
