@@ -8,7 +8,7 @@
 4. Copy the example env file: `cp .env.example .env`
 5. Fill in your iRacing OAuth credentials (see [OAuth Client Credentials](https://support.iracing.com/support/solutions/articles/31000177790-oauth-client-credentials))
 
-`.bun-version` and both manifests pin Bun 1.4.4-canary.20261104.1. Install this
+`.bun-version` and both manifests pin the same exact Bun release. Install this
 exact npm build; a moving `canary` tag can change native tooling behavior.
 The library and `docs-site` remain separate projects with independent `bun.lock`
 files. Install docs dependencies with `cd docs-site && bun install --frozen-lockfile`.
@@ -19,18 +19,21 @@ builds on Node.js 24, then validates installed packages and encrypted environmen
 compatibility on Node.js 22 and 24 LTS. The matrix is a subset of supported
 consumer runtimes. Build, docs and release tools also require Node.js 24.
 
-Bun supplies native linting, formatting, source typechecking and `bun:test`.
-Standalone tsdown builds ESM/CommonJS and declarations with the explicit TS7
-native compiler (`@typescript/native`, 7.0.2). The `typescript` dependency is a
+Bun supplies formatting, source typechecking and `bun:test`. Standalone Oxlint
+with oxlint-tsgolint supplies linting on stable Bun.
+Standalone tsdown builds ESM/CommonJS and declarations with the TypeScript 6
+compiler API. The explicit TS7 native compiler (`@typescript/native`, 7.0.2)
+remains available for compatibility checks. The `typescript` dependency is a
 TypeScript 6 compatibility alias for tools needing the JavaScript compiler API;
 its CLI is `tsc6`. Packed consumer fixtures compile with both versions. Standard
 Vite remains for the installed-package browser compatibility checks. Size Limit
 has a local patch to resolve plugins from the declaring manifest under isolated
 installs; commit that patch with its lockfile entry until upstream adopts the fix.
-The tsdown override keeps `rolldown-plugin-dts` on 0.28.8 because 0.29.0's TS7.0
-CLI detection requires the native compiler to be named `typescript`, which this
-project uses for the TS6 compatibility alias. Remove the override when the plugin
-supports the explicit native compiler path with this alias setup.
+The tsdown override selects `rolldown-plugin-dts` 0.30.0. Its native generator
+requires the TypeScript 7.1 API; the reviewed TS7.0 compiler is CLI-only and
+installed under an alias. Use the TS6 `tsc` declaration generator until a reviewed
+compiler upgrade can supply the new API. Installed-package tests compile the
+resulting declarations with both TS6 and TS7.
 
 Dependency installation settings live in each project's `bunfig.toml`. Both
 projects wait 24 hours before accepting third-party releases, including transitive
@@ -49,9 +52,9 @@ CI checks them before installing dependencies, including release candidates.
 
 `bun install` installs the Husky pre-commit hook. Each commit checks formatting,
 lint/types and offline tests through `bun run pre-commit`. Formatting and its
-read-only check use identical file scopes. Native lint preserves the existing
-Oxlint rules, overrides and type-aware checks in `.oxlintrc.json`; the script uses
-`--no-script` to avoid recursion. Formatting preserves existing style, disables
+read-only check use identical file scopes. Oxlint preserves the existing
+rules, overrides and type-aware checks in `.oxlintrc.json`. Calling its binary
+directly avoids recursive script fallback on Bun releases without native lint. Formatting preserves existing style, disables
 import/manifest sorting and excludes Changesets changelogs and generated assets.
 Run `bun run format:check` before making formatting changes; use targeted
 `bun fmt <files>` to avoid unrelated changes. CI sets `HUSKY=0` during releases.

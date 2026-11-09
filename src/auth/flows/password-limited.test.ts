@@ -61,6 +61,8 @@ describe('requestPasswordLimitedToken', () => {
       }),
     });
 
+    // Bun async matchers are typed as void but must be awaited.
+    // oxlint-disable-next-line typescript/await-thenable
     await expect(
       requestPasswordLimitedToken({
         clientId: 'test-client-id',
