@@ -84,7 +84,7 @@
     "@typescript/native": "npm:typescript@7.0.2",
     "husky": "9.1.7",
     "oxlint": "1.94.0",
-    "oxlint-tsgolint": "7.0.2007",
+    "oxlint-tsgolint": "7.0.2008",
     "size-limit": "^14.3.0",
     "tsdown": "0.23.7",
     "tsx": "^4.23.15",
