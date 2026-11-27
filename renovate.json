@@ -311,6 +311,6 @@
     "schedule": [
       "* 0-5 * * *"
     ],
-    "automerge": false
+    "automerge": true
   }
 }
