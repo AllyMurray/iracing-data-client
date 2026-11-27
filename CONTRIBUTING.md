@@ -199,14 +199,14 @@ Ordinary branches are scheduled between midnight and 06:00 Europe/London, with
 two new PRs per hour and no concurrent PR cap, matching comic-vine. Nightly
 lockfile maintenance has higher priority than ordinary version updates so
 transitive fixes can proceed while other PRs remain open. Maintenance PRs
-require review and successful CI. The schedule is a permitted window for
-Renovate runs, not a promise that an update appears at midnight.
+auto-merge after the required CI checks pass. The schedule gives Renovate a
+window for creating update branches.
 
 Third-party npm releases must be at least one day old and have a publication
 timestamp, matching Bun's install policy. Owned `@http-client-toolkit/*` releases
 skip this delay, but their third-party dependencies still wait at installation.
-GitHub Actions, Bun pins and compatible HTTP toolkit updates have separate groups. Runtime
-and docs dependencies, major upgrades, and pre-1.0 tools require manual review.
+GitHub Actions, Bun pins, and compatible HTTP toolkit updates have separate
+groups. Major upgrades require manual review.
 Node types stay on 26.x, the compatibility compiler stays on TS6, and the native
 compiler stays on TS7.0.x. A native compiler update also requires reviewing its
 explicit version check in `scripts/check-toolchain.mjs`.
@@ -216,12 +216,10 @@ matrix, or the Node 24 development runtime. Those remain deliberate decisions.
 
 The Renovate App is active; track updates in the
 [Dependency Dashboard](https://github.com/AllyMurray/iracing-data-client/issues/35).
-Stable `size-limit` / `@size-limit/file` patch updates may automerge after a
-three-day release delay, matching comic-vine. Main requires successful
-`validate (22.x)`, `validate (24.x)`, and `docs` checks with no bypass actors;
-protected-branch tests verified rejection of unchecked commits and acceptance
-after successful CI. All other updates remain manual, including runtime and
-docs dependencies, release/credential tooling, minors, majors, and pre-1.0 tools.
+Eligible minor and patch updates auto-merge after required CI passes. Stable
+`size-limit` and `@size-limit/file` patches also have a three-day release delay.
+Main requires successful `validate (22.x)`, `validate (24.x)`, and `docs` checks
+with no bypass actors.
 The path-filtered Renovate validation workflow is not a required check on all PRs.
 
 Security alerts create PRs with an additional `security` label outside the
@@ -248,7 +246,6 @@ Future peer dependency updates widen supported ranges and require manual review.
 The Bun version pins are reviewed together, including `.bun-version`. Standalone
 tsdown updates join the reviewed build tooling group. Vite is retained for
 browser compatibility checks. Unit tests use `bun:test` without Vitest.
-Only the stable size tooling patches listed above are eligible for automerge.
 
 Validate configuration changes with the same pinned validator used in CI:
 
